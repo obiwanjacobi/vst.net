@@ -53,27 +53,46 @@ AEffect* VSTMain (audioMasterCallback hostCallback)
 
 VstIntPtr DispatcherProc(AEffect* pluginInfo, VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
 {
-	return _pluginCommandProxy->Dispatch(opcode, index, value, prt, opt);
+	if(_pluginCommandProxy)
+	{
+		return _pluginCommandProxy->Dispatch(opcode, index, value, ptr, opt);
+	}
+
+	return 0;
 }
 
 void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt32 sampleFrames)
 {
-	_pluginCommandProxy->Process(inputs, outputs, sampleFrames);
+	if(_pluginCommandProxy)
+	{
+		_pluginCommandProxy->Process(inputs, outputs, sampleFrames);
+	}
 }
 
 void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstInt32 sampleFrames)
 {
-	_pluginCommandProxy->Process(inputs, outputs, sampleFrames);
+	if(_pluginCommandProxy)
+	{
+		_pluginCommandProxy->Process(inputs, outputs, sampleFrames);
+	}
 }
 
 void SetParameterProc(AEffect* pluginInfo, VstInt32 index, float value)
 {
-	_pluginCommandProxy->SetParameter(index, value);
+	if(_pluginCommandProxy)
+	{
+		_pluginCommandProxy->SetParameter(index, value);
+	}
 }
 
 float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 {
-	return _pluginCommandProxy->GetParameter(index);
+	if(_pluginCommandProxy)
+	{
+		return _pluginCommandProxy->GetParameter(index);
+	}
+
+	return 0.0;
 }
 
 AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
