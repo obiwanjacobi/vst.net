@@ -105,7 +105,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->GetOutputProperties(index, TypeConverter::ToPinProperties((::VstPinProperties*)ptr)) ? 1 : 0;
 		break;
 	case effGetPlugCategory:
-		result = _commandStub->GetCategory();
+		result = (VstInt32)_commandStub->GetCategory();
 		break;
 	case effOfflineNotify:
 		// ptr -> VstAudioFile*
@@ -168,10 +168,14 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->GetVstVersion();
 		break;
 	case effEditKeyDown:
-		result = _commandStub->EditorKeyDown((System::Byte)index, (System::Byte)value, (System::Byte)opt) ? 1 : 0;
+		result = _commandStub->EditorKeyDown((System::Byte)index, 
+			(Jacobi::Vst::Core::VstVirtualKey)value, 
+			(Jacobi::Vst::Core::VstModifierKeys)(VstInt32)opt) ? 1 : 0;
 		break;
 	case effEditKeyUp:
-		result = _commandStub->EditorKeyUp((System::Byte)index, (System::Byte)value, (System::Byte)opt) ? 1 : 0;
+		result = _commandStub->EditorKeyUp((System::Byte)index, 
+			(Jacobi::Vst::Core::VstVirtualKey)value, 
+			(Jacobi::Vst::Core::VstModifierKeys)(VstInt32)opt) ? 1 : 0;
 		break;
 	case effSetEditKnobMode:
 		result = _commandStub->SetEditorKnobMode(value) ? 1 : 0;

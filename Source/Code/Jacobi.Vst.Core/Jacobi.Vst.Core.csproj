@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="VstAudioBuffer.cs" />
+    <Compile Include="VstAutomationStates.cs" />
+    <Compile Include="VstHostLanguage.cs" />
+    <Compile Include="VstOfflineTask.cs" />
     <Compile Include="VstPluginInfo.cs" />
     <Compile Include="IVstHostCommandStub.cs" />
     <Compile Include="IVstPluginCommandStub.cs" />
@@ -59,10 +62,13 @@
     <Compile Include="VstPatchChunkInfo.cs" />
     <Compile Include="VstPinProperties.cs" />
     <Compile Include="VstPluginCategory.cs" />
+    <Compile Include="VstProcessLevels.cs" />
     <Compile Include="VstProcessPrecision.cs" />
     <Compile Include="VstSpeakerArrangement.cs" />
     <Compile Include="VstSpeakerArrangementType.cs" />
     <Compile Include="VstSpeakerProperties.cs" />
+    <Compile Include="VstTimeInfo.cs" />
+    <Compile Include="VstVirtualKey.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
