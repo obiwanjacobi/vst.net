@@ -3,7 +3,7 @@
 #include "TypeConverter.h"
 #include<vcclr.h>
 
-PluginCommandProxy::PluginCommandProxy(IVstPluginCommandStub^ cmdStub)
+PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub)
 {
 	_commandStub = cmdStub;
 }
@@ -259,8 +259,27 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		break;
 	default:
 		// unknown command
+		//System::Diagnostics::Trace::WriteLine("Unhandled dispatcher opcode:" + opcode, "VST.NET");
 		break;
 	}
 
 	return result;
+}
+
+void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampleFrames)
+{
+}
+
+void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sampleFrames)
+{
+}
+
+void PluginCommandProxy::SetParameter(VstInt32 index, float value)
+{
+	_commandStub->SetParameter(index, value);
+}
+
+float PluginCommandProxy::GetParameter(VstInt32 index)
+{
+	return _commandStub->GetParameter(index);
 }

@@ -5,10 +5,12 @@
 
     public interface IVstPluginCommandStubBase
     {
-        int ProcessReplacing(float[] input);
-        int ProcessReplacing(double[] input);
-        int SetParameter();
-        int GetParameter();
+        VstPluginInfo GetPluginInfo();
+
+        void ProcessReplacing(VstAudioBuffer[] input);
+        void ProcessReplacing(VstPrecisionAudioBuffer[] input);
+        void SetParameter(int index, float value);
+        float GetParameter(int index);
     }
 
     public interface IVstPluginCommandStub10 : IVstPluginCommandStubBase

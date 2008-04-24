@@ -9,12 +9,12 @@
     /// </summary>
     /// <remarks>
     /// The problem of what CLR assembly to load can be solved with a convention.
-    /// The interop dll that is needed for each managed plugin is renamed to the same name of the plugin assembly with a .Interop postfix.
-    /// The plugin class is decorated with an attribute.
+    /// The interop dll that is needed for each managed plugin is renamed to the name of the plugin. 
+    /// The managed plugin assembly must have the same name but with a .net postfix (asside from the.dll file extension).
+    /// The managed assembly should expose a public class that implements the IVstPluginCommandStub interface.
     /// </remarks>
     public class ManagedPluginFactory
     {
-        private string _assemblyPath;
         private Assembly _assembly;
 
         public ManagedPluginFactory(string interopAssemblyPath)
@@ -22,18 +22,11 @@
             string dir = Path.GetDirectoryName(interopAssemblyPath);
             string file = Path.GetFileNameWithoutExtension(interopAssemblyPath);
 
-            int index = file.IndexOf(".Interop");
-            if (index == -1)
-            {
-                throw new ArgumentException(
-                    "The VST Interop assembly name should end with '.Interop' (not counting the .dll extension).", 
-                    "interopAssemblyPath");
-            }
+            file += ".net.dll";
 
-            file = file.Substring(index);
-            file += ".dll";
+            string assemblyPath = Path.Combine(dir, file);
 
-            _assemblyPath = Path.Combine(dir, file);
+            _assembly = Assembly.LoadFile(assemblyPath);
         }
 
         public IVstPluginCommandStub CreatePluginCommandStub()
@@ -42,48 +35,21 @@
 
             if (pluginType == null)
             {
-                // TODO: assign the standard plugin stub type (from Jacobi.Vst.Core)
-                //pluginType = typeof(Jacobi::Vst::Core::StdPluginCommandStub);
+                throw new InvalidOperationException(
+                    "\"" + _assembly.FullName + "\" does not expose a public class that implements the IVstPluginCommandStub interface.");
+
+                // TODO: assign the standard plugin stub type (from Jacobi.Vst.Framework) without introducing a hard dependency...?
+                //pluginType = typeof(Jacobi::Vst::Framework::StdPluginCommandStub);
             }
 
             return (IVstPluginCommandStub)Activator.CreateInstance(pluginType);
         }
 
-        private void LoadAssembly()
-        {
-            if (_assembly == null)
-            {
-                _assembly = Assembly.LoadFile(_assemblyPath);
-            }
-        }
-
-        private Type LocateTypeByAttribute(Type typeOfAttribute)
-        {
-            LoadAssembly();
-
-            if (_assembly != null)
-            {
-                foreach (Type type in _assembly.GetTypes())
-                {
-                    object[] attrs = type.GetCustomAttributes(typeOfAttribute, false);
-
-                    if (attrs != null && attrs.Length > 0)
-                    {
-                        return type;
-                    }
-                }
-            }
-
-            return null;
-        }
-
         private Type LocateTypeByInterface(Type typeOfInterface)
         {
-            LoadAssembly();
-
-            if (_assembly != null)
+            foreach (Type type in _assembly.GetTypes())
             {
-                foreach (Type type in _assembly.GetTypes())
+                if (type.IsPublic)
                 {
                     foreach (Type intfType in type.GetInterfaces())
                     {
