@@ -25,7 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,10 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VstAudioBuffer.cs" />
+    <Compile Include="VstPluginInfo.cs" />
     <Compile Include="IVstHostCommandStub.cs" />
     <Compile Include="IVstPluginCommandStub.cs" />
     <Compile Include="ManagedPluginFactory.cs" />
-    <Compile Include="PlugInCapabilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VstAudioFile.cs" />
     <Compile Include="VstEvent.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="VstParameterProperties.cs" />
     <Compile Include="VstPatchChunkInfo.cs" />
     <Compile Include="VstPinProperties.cs" />
-    <Compile Include="VstPluginAttribute.cs" />
     <Compile Include="VstPluginCategory.cs" />
     <Compile Include="VstProcessPrecision.cs" />
     <Compile Include="VstSpeakerArrangement.cs" />
