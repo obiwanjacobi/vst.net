@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jacobi.Vst.Interop", "Jacobi.Vst.Interop\Jacobi.Vst.Interop.vcproj", "{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Core", "Jacobi.Vst.Core\Jacobi.Vst.Core.csproj", "{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Framework", "Jacobi.Vst.Framework\Jacobi.Vst.Framework.csproj", "{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs06.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Jacobi.Vst.Core\\Jacobi.Vst.Core.csproj
+		SccProjectName1 = Jacobi.Vst.Core
+		SccLocalPath1 = Jacobi.Vst.Core
+		SccProjectUniqueName2 = Jacobi.Vst.Framework\\Jacobi.Vst.Framework.csproj
+		SccProjectName2 = Jacobi.Vst.Framework
+		SccLocalPath2 = Jacobi.Vst.Framework
+		SccProjectUniqueName3 = Jacobi.Vst.Interop\\Jacobi.Vst.Interop.vcproj
+		SccProjectName3 = Jacobi.Vst.Interop
+		SccLocalPath3 = Jacobi.Vst.Interop
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Win32.Build.0 = Debug|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Win32.ActiveCfg = Release|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Win32.Build.0 = Release|Win32
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}.Release|Win32.ActiveCfg = Release|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Win32.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
