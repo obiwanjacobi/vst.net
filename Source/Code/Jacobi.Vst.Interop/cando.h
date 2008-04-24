@@ -1,6 +1,4 @@
-//-------------------------------------------------------------------------------------------------------
-/*! hostCanDos strings Plug-in -> Host */
-namespace HostCanDos
+namespace VstHostCanDos
 {
 	const char* canDoSendVstEvents = "sendVstEvents"; ///< Host supports send of Vst events to plug-in
 	const char* canDoSendVstMidiEvent = "sendVstMidiEvent"; ///< Host supports send of MIDI events to plug-in
@@ -18,9 +16,7 @@ namespace HostCanDos
 	const char* canDoSendVstMidiEventFlagIsRealtime = "sendVstMidiEventFlagIsRealtime"; ///< Host supports flags for #VstMidiEvent
 }
 
-//-------------------------------------------------------------------------------------------------------
-/*! plugCanDos strings Host -> Plug-in */
-namespace PluginCanDos
+namespace VstPluginCanDos
 {
 	const char* canDoSendVstEvents = "sendVstEvents"; ///< plug-in will send Vst events to Host
 	const char* canDoSendVstMidiEvent = "sendVstMidiEvent"; ///< plug-in will send MIDI events to Host

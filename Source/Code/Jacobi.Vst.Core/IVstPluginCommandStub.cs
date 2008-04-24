@@ -5,7 +5,7 @@
 
     public interface IVstPluginCommandStubBase
     {
-        VstPluginInfo GetPluginInfo();
+        VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub);
 
         void ProcessReplacing(VstAudioBuffer[] input);
         void ProcessReplacing(VstPrecisionAudioBuffer[] input);
@@ -27,7 +27,7 @@
         void SetSampleRate(float sampleRate);
         void SetBlockSize(int blockSize);
         void MainsChanged(bool onoff);
-        bool EditorGetRect(ref Rectangle rect);
+        bool EditorGetRect(out Rectangle rect);
         bool EditorOpen(IntPtr hWnd);
         void EditorClose();
         void EditorIdle();
@@ -43,7 +43,7 @@
         bool GetProgramNameIndexed(int index, out string name);
         bool GetInputProperties(int index, VstPinProperties pinProps);
         bool GetOutputProperties(int index, VstPinProperties pinProps);
-        int GetCategory();
+        VstPluginCategory GetCategory();
         bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
         bool OfflinePrepare(/*VstOfflineTask[]*/ int count);
         bool OfflineRun(/*VstOfflineTask[]*/ int count);
@@ -62,8 +62,8 @@
 
     public interface IVstPluginCommandStub21 : IVstPluginCommandStub20
     {
-        bool EditorKeyDown(byte ascii, byte key, byte modifers);
-        bool EditorKeyUp(byte ascii, byte key, byte modifers);
+        bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
+        bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
         bool SetEditorKnobMode(int mode);
         int GetMidiProgramName(VstMidiProgramName midiProgram, int channel);
         int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel);

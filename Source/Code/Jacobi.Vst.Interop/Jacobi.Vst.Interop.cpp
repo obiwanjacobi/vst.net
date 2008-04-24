@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "PluginCommandProxy.h"
+#include "HostCommandStub.h"
 #include<vcclr.h>
 
 // fwd refs
@@ -17,6 +18,9 @@ AEffect* VSTMain (audioMasterCallback hostCallback)
 {
 	try
 	{
+		// create the host command stub (sends commands to host)
+		HostCommandStub^ hostStub = gcnew HostCommandStub(hostCallback);
+
 		// retrieve the current plugin file name
 		System::String^ interopAssemblyFileName = getPluginFileName();
 		
@@ -32,12 +36,15 @@ AEffect* VSTMain (audioMasterCallback hostCallback)
 			_pluginCommandProxy = gcnew PluginCommandProxy(commandStub);
 
 			// retrieve the plugin info
-			Jacobi::Vst::Core::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo();
+			Jacobi::Vst::Core::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
 
 			if(pluginInfo)
 			{
 				// create the native audio effect struct based on the plugin info
 				AEffect* pEffect = CreateAudioEffectInfo(pluginInfo);
+
+				// initialize host stub with plugin info
+				hostStub->Initialize(pEffect);
 
 				return pEffect;
 			}
