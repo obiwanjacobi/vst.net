@@ -1,0 +1,4 @@
+LIBRARY	"Jacobi.Vst.Interop"
+EXPORTS
+	VSTMain
+	main=VSTMain
