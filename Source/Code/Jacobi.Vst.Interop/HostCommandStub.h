@@ -29,21 +29,23 @@ public:
 	virtual System::String^ GetVendorString();
 	virtual System::String^ GetProductString();
 	virtual System::Int32 GetVendorVersion();
-	virtual System::Boolean CanDo(System::String^ cando);
+	virtual Jacobi::Vst::Core::VstCanDo CanDo(System::String^ cando);
 	virtual Jacobi::Vst::Core::VstHostLanguage GetLanguage();
 	virtual System::String^ GetDirectory();
 	virtual System::Boolean UpdateDisplay();
-	virtual System::Boolean BeginEdit();
-	virtual System::Boolean EndEdit();
+	virtual System::Boolean BeginEdit(System::Int32 index);
+	virtual System::Boolean EndEdit(System::Int32 index);
 	virtual System::Boolean OpenFileSelector(/*VstFileSelect*/);
 	virtual System::Boolean CloseFileSelector(/*VstFileSelect*/);
+
 internal:
 	HostCommandStub(::audioMasterCallback hostCallback);
-	void Initialize(AEffect* pluginInfo) { _pluginInfo = pluginInfo; }
+	void Initialize(AEffect* pluginInfo) { if(pluginInfo == NULL) { throw gcnew System::ArgumentNullException("pluginInfo"); } _pluginInfo = pluginInfo; }
 
 private:
 	AEffect* _pluginInfo;
 	audioMasterCallback _hostCallback;
 
 	void ThrowIfNotInitialized();
+	VstIntPtr CallHost(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt) { return _hostCallback(_pluginInfo, opcode, index, value, ptr, opt); }
 };

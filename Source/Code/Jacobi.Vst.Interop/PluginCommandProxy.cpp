@@ -155,7 +155,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->GetVendorVersion();
 		break;
 	case effCanDo:
-		result = _commandStub->CanDo(TypeConverter::CharToString((char*)ptr));
+		result = (VstInt32)_commandStub->CanDo(TypeConverter::CharToString((char*)ptr));
 		break;
 	case effGetTailSize:
 		result = _commandStub->GetTailSize();

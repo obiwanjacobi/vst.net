@@ -27,7 +27,7 @@ AEffect* VSTMain (audioMasterCallback hostCallback)
 		// create the plugin (command stub) factory
 		Jacobi::Vst::Core::ManagedPluginFactory^ factory = gcnew Jacobi::Vst::Core::ManagedPluginFactory(interopAssemblyFileName);
 		
-		// create the managed type that implements the Plugin Command Stub interface
+		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
 		Jacobi::Vst::Core::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
 		
 		if(commandStub)
@@ -129,7 +129,6 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
 
 System::String^ getPluginFileName()
 {
-	System::String^ pathAsUri = System::Reflection::Assembly::GetExecutingAssembly()->CodeBase;
-	System::Uri^ uri = gcnew System::Uri(pathAsUri);
-	return uri->AbsolutePath;
+	System::Reflection::Assembly^ ass = System::Reflection::Assembly::GetExecutingAssembly();
+	return ass->Location;
 }

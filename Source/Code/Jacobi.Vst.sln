@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Core", "Jacobi.V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Framework", "Jacobi.Vst.Framework\Jacobi.Vst.Framework.csproj", "{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Core.TestPlugin", "Jacobi.Vst.Core.TestPlugin\Jacobi.Vst.Core.TestPlugin.csproj", "{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs06.codeplex.com/
 		SccLocalPath0 = .
@@ -22,6 +24,9 @@ Global
 		SccProjectUniqueName3 = Jacobi.Vst.Interop\\Jacobi.Vst.Interop.vcproj
 		SccProjectName3 = Jacobi.Vst.Interop
 		SccLocalPath3 = Jacobi.Vst.Interop
+		SccProjectUniqueName4 = Jacobi.Vst.Core.TestPlugin\\Jacobi.Vst.Core.TestPlugin.csproj
+		SccProjectName4 = Jacobi.Vst.Core.TestPlugin
+		SccLocalPath4 = Jacobi.Vst.Core.TestPlugin
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +67,16 @@ Global
 		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}.Release|Win32.ActiveCfg = Release|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
