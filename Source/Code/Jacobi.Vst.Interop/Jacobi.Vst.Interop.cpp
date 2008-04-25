@@ -72,7 +72,7 @@ void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt3
 {
 	if(_pluginCommandProxy)
 	{
-		_pluginCommandProxy->Process(inputs, outputs, sampleFrames);
+		_pluginCommandProxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
 	}
 }
 
@@ -80,7 +80,7 @@ void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstIn
 {
 	if(_pluginCommandProxy)
 	{
-		_pluginCommandProxy->Process(inputs, outputs, sampleFrames);
+		_pluginCommandProxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
 	}
 }
 

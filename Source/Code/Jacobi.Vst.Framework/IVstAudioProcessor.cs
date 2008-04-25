@@ -4,10 +4,15 @@ namespace Jacobi.Vst.Framework
 
     public interface IVstAudioProcessor : IDisposable
     {
-        long SampleRate { get;set; }
-        long BlockSize { get;set; }
-        void Process(VstAudioChannelCollection inChannels, VstAudioChannelCollection outChannels, long sampleFrames);
+        int InputCount { get; }
+        int OutputCount { get; }
+        double SampleRate { get;set; }
+        int BlockSize { get;set; }
+        void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels);
     }
 
-    public interface IVstAudioPrecissionProcessor : IVstAudioProcessor { } // marker interface
+    public interface IVstAudioPrecissionProcessor : IVstAudioProcessor
+    {
+        void Process(VstAudioPrecisionChannel[] inChannels, VstAudioPrecisionChannel[] outChannels);
+    }
 }

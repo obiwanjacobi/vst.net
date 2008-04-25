@@ -5,13 +5,16 @@
 
 PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub)
 {
+	if(cmdStub == NULL)
+	{
+		throw gcnew System::ArgumentNullException("cmdStub");
+	}
+
 	_commandStub = cmdStub;
 }
 
 VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
 {
-	if(!_commandStub) return 0;
-
 	VstIntPtr result = 0;
 
 	switch(opcode)
@@ -270,12 +273,20 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	return result;
 }
 
-void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampleFrames)
+void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampleFrames, int numInputs, int numOutputs)
 {
+	array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs);
+	array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs);
+
+	_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 }
 
-void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sampleFrames)
+void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sampleFrames, int numInputs, int numOutputs)
 {
+	array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs);
+	array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs);
+
+	_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 }
 
 void PluginCommandProxy::SetParameter(VstInt32 index, float value)

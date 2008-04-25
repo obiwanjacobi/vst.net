@@ -1,8 +1,6 @@
 namespace Jacobi.Vst.Framework
 {
-    using System;
-
-    public interface IVstMidiProcessor : IDisposable
+    public interface IVstMidiProcessor
     {
         void Process(VstEventCollection events);
     }

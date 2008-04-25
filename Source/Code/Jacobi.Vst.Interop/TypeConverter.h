@@ -301,6 +301,30 @@ public:
 		return timeInfo;
 	}
 
+	static array<Jacobi::Vst::Core::VstAudioBuffer^>^ ToAudioBufferArray(float** buffer, int sampleFrames, int numberOfBuffers)
+	{
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstAudioBuffer^>(numberOfBuffers);
+
+		for(int n = 0; n < numberOfBuffers; n++)
+		{
+			bufferArray[n] = gcnew Jacobi::Vst::Core::VstAudioBuffer(buffer[n], sampleFrames);
+		}
+
+		return bufferArray;
+	}
+
+	static array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ ToAudioBufferArray(double** buffer, int sampleFrames, int numberOfBuffers)
+	{
+		array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>(numberOfBuffers);
+
+		for(int n = 0; n < numberOfBuffers; n++)
+		{
+			bufferArray[n] = gcnew Jacobi::Vst::Core::VstPrecisionAudioBuffer(buffer[n], sampleFrames);
+		}
+
+		return bufferArray;
+	}
+
 private:
 	TypeConverter(){}
 };

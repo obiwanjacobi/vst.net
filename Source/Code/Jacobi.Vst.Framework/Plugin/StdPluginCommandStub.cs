@@ -1,14 +1,10 @@
-﻿namespace Jacobi.Vst.Core.TestPlugin
+﻿namespace Jacobi.Vst.Framework.Plugin
 {
     using Jacobi.Vst.Core;
 
-    public class PluginCommandStub : IVstPluginCommandStub
+    public abstract class StdPluginCommandStub : IVstPluginCommandStub
     {
-        private VstPluginInfo _pluginInfo;
-        private IVstHostCommandStub _hostStub;
-        
-        private EditorForm _editor;
-        private EditorControl1 _editorCtrl;
+        private VstPluginContext _pluginCtx;
 
         #region IVstPluginCommandStub Members
 
@@ -35,7 +31,6 @@
         {
             input = null;
             output = null;
-
             return false;
         }
 
@@ -201,30 +196,30 @@
 
         public bool GetEffectName(out string name)
         {
-            name = "VST.NET TestPlugin";
+            name = null;
             return false;
         }
 
         public bool GetVendorString(out string vendor)
         {
-            vendor = "Jacobi Software (c) 2008";
+            vendor = null;
             return false;
         }
 
         public bool GetProductString(out string product)
         {
-            product = "VST.NET";
+            product = null;
             return false;
         }
 
         public int GetVendorVersion()
         {
-            return 1000;
+            return 0;
         }
 
         public VstCanDoResult CanDo(string cando)
         {
-            return VstCanDoResult.Unknown;
+            return VstCanDoResult.No;
         }
 
         public int GetTailSize()
@@ -239,7 +234,7 @@
 
         public int GetVstVersion()
         {
-            return 2400;
+            return 0;
         }
 
         #endregion
@@ -248,14 +243,19 @@
 
         public void Open()
         {
+            _pluginCtx.Plugin.Instance.Open(_pluginCtx.Host.Instance);
         }
 
         public void Close()
         {
+            _pluginCtx.Plugin.Instance.Dispose();
+            _pluginCtx.Host.Instance.Dispose();
+            _pluginCtx = null;
         }
 
         public void SetProgram(int programNumber)
         {
+            
         }
 
         public int GetProgram()
@@ -290,51 +290,33 @@
 
         public void SetSampleRate(float sampleRate)
         {
-
+            
         }
 
         public void SetBlockSize(int blockSize)
         {
+            
         }
 
         public void MainsChanged(bool onoff)
         {
+            
         }
 
         public bool EditorGetRect(out System.Drawing.Rectangle rect)
         {
-            if (_editorCtrl != null)
-            {
-                rect = _editorCtrl.Bounds;
-                return true;
-            }
-            else
-            {
-                rect = new System.Drawing.Rectangle();
-            }
-
+            rect = new System.Drawing.Rectangle();
             return false;
         }
 
         public bool EditorOpen(System.IntPtr hWnd)
         {
-            _editor = new EditorForm();
-            _editor.Show(new WindowWrapper(hWnd));
-
-            //_editorCtrl = new EditorControl1();
-            //_editorCtrl.Show();
-
-            return true;
+            return false;
         }
 
         public void EditorClose()
         {
-            if (_editor != null)
-            {
-                _editor.Close();
-                _editor = null;
-            }
-
+            
         }
 
         public void EditorIdle()
@@ -359,33 +341,153 @@
 
         public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
         {
-            _hostStub = hostCmdStub;
-            _pluginInfo = new VstPluginInfo();
-            
-            _pluginInfo.Flags = VstPluginInfoFlags.HasEditor;
-            _pluginInfo.PluginID = 1234;
-            _pluginInfo.PluginVersion = 1000;
+            IVstPlugin plugin = CreatePlugin();
 
-            return _pluginInfo;
+            if (plugin != null)
+            {
+                _pluginCtx = new VstPluginContext();
+                _pluginCtx.Host = new ExtensibleObjectRef<Host.VstHost>(new Host.VstHost(hostCmdStub));
+                _pluginCtx.Plugin = new ExtensibleObjectRef<IVstPlugin>(plugin);
+                _pluginCtx.PlginInfo = CreatePluginInfo(plugin);
+
+                return _pluginCtx.PlginInfo;
+            }
+
+            return null;
         }
 
-        public void ProcessReplacing(VstAudioBuffer[] input, VstAudioBuffer[] outputs)
+        public void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
         {
+            IVstAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioProcessor>();
+
+            if (audioProcessor != null)
+            {
+                VstAudioChannel[] audioInputs = new VstAudioChannel[inputs.Length];
+
+                int index = 0;
+                foreach (VstAudioBuffer audioBuffer in inputs)
+                {
+                    audioInputs[index] = new VstAudioChannel(audioBuffer, false);
+                    index++;
+                }
+
+                VstAudioChannel[] audioOutputs = new VstAudioChannel[outputs.Length];
+
+                index = 0;
+                foreach (VstAudioBuffer audioBuffer in outputs)
+                {
+                    audioOutputs[index] = new VstAudioChannel(audioBuffer, true);
+                    index++;
+                }
+
+                audioProcessor.Process(audioInputs, audioOutputs);
+            }
         }
 
-        public void ProcessReplacing(VstAudioPrecisionBuffer[] input, VstAudioPrecisionBuffer[] outputs)
+        public void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
+            IVstAudioPrecissionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioPrecissionProcessor>();
+
+            if (audioProcessor != null)
+            {
+                VstAudioPrecisionChannel[] audioInputs = new VstAudioPrecisionChannel[inputs.Length];
+
+                int index = 0;
+                foreach (VstAudioPrecisionBuffer audioBuffer in inputs)
+                {
+                    audioInputs[index] = new VstAudioPrecisionChannel(audioBuffer, false);
+                    index++;
+                }
+
+                VstAudioPrecisionChannel[] audioOutputs = new VstAudioPrecisionChannel[outputs.Length];
+
+                index = 0;
+                foreach (VstAudioPrecisionBuffer audioBuffer in outputs)
+                {
+                    audioOutputs[index] = new VstAudioPrecisionChannel(audioBuffer, true);
+                    index++;
+                }
+
+                audioProcessor.Process(audioInputs, audioOutputs);
+            }
         }
 
         public void SetParameter(int index, float value)
         {
+            IVstPluginParameters pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+
+            if (pluginParams != null)
+            {
+                VstParameter parameter = pluginParams.Parameters[index];
+                parameter.NormalizedValue = value;
+            }
         }
 
         public float GetParameter(int index)
         {
+            IVstPluginParameters pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+
+            if (pluginParams != null)
+            {
+                VstParameter parameter = pluginParams.Parameters[index];
+                return parameter.NormalizedValue;
+            }
+
             return 0.0f;
         }
 
         #endregion
+
+        /// <summary>
+        /// Derived class must override and create the plugin instance.
+        /// </summary>
+        /// <returns>Returning null will abort loading plugin.</returns>
+        protected abstract IVstPlugin CreatePlugin();
+
+        /// <summary>
+        /// Creates summery info based on the <paramref name="plugin"/>.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
+        /// <returns>Never returns null.</returns>
+        private VstPluginInfo CreatePluginInfo(IVstPlugin plugin)
+        {
+            VstPluginInfo pluginInfo = new VstPluginInfo();
+
+            // determine flags
+            if (plugin.Supports<IVstPluginEditor>(false))
+                pluginInfo.Flags |= VstPluginInfoFlags.HasEditor;
+            if (plugin.Supports<IVstAudioProcessor>(false))
+                pluginInfo.Flags |= VstPluginInfoFlags.CanReplacing;
+            if (plugin.Supports<IVstAudioPrecissionProcessor>(false))
+                pluginInfo.Flags |= VstPluginInfoFlags.CanDoubleReplacing;
+            if (plugin.Supports<IVstPluginPersistence>(false))
+                pluginInfo.Flags |= VstPluginInfoFlags.ProgramChunks;
+            if ((plugin.Capabilities & VstPluginCapabilities.IsSynth) > 0)
+                pluginInfo.Flags |= VstPluginInfoFlags.IsSynth;
+            if ((plugin.Capabilities & VstPluginCapabilities.NoSoundInStop) > 0)
+                pluginInfo.Flags |= VstPluginInfoFlags.NoSoundInStop;
+
+            // basic plugin info
+            pluginInfo.InitialDelay = plugin.InitialDelay;
+            pluginInfo.PluginID = plugin.PluginID;
+            pluginInfo.PluginVersion = plugin.ProductInfo.Version;
+            
+            // audio processing info
+            IVstAudioProcessor audioProcessor = plugin.GetInstance<IVstAudioProcessor>(false);
+            if(audioProcessor != null)
+            {
+                pluginInfo.NumberOfAudioInputs = audioProcessor.InputCount;
+                pluginInfo.NumberOfAudioOutputs = audioProcessor.OutputCount;
+            }
+
+            // program info
+            IVstPluginProgram pluginProgram = plugin.GetInstance<IVstPluginProgram>(false);
+            if(pluginProgram != null)
+            {
+                pluginInfo.NumberOfPrograms = pluginProgram.ProgramCount;
+            }
+
+            return pluginInfo;
+        }
     }
 }

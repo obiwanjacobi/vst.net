@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensibleObjectRef.cs" />
+    <Compile Include="Host\VstHost.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IExtensibleObject.cs" />
     <Compile Include="IVstAudioChannel.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />
     <Compile Include="IVstHostOfflineProcessor.cs" />
+    <Compile Include="IVstPluginParameters.cs" />
     <Compile Include="IVstPluginProcess.cs" />
     <Compile Include="IVstHostSequencer.cs" />
     <Compile Include="IVstHostShell.cs" />
@@ -62,13 +66,18 @@
     <Compile Include="IVstPluginMidiProgram.cs" />
     <Compile Include="IVstPluginOfflineProcessor.cs" />
     <Compile Include="IVstPluginPersistence.cs" />
+    <Compile Include="IVstPluginProgram.cs" />
+    <Compile Include="Plugin\VstPluginContext.cs" />
     <Compile Include="ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VstAudioChannelCollection.cs" />
+    <Compile Include="Plugin\StdPluginCommandStub.cs" />
+    <Compile Include="VstAudioChannel.cs" />
+    <Compile Include="VstAudioPrecisionChannel.cs" />
     <Compile Include="VstEventCollection.cs" />
     <Compile Include="VstParameter.cs" />
     <Compile Include="VstParameterCollection.cs" />
     <Compile Include="VstParameterInfo.cs" />
+    <Compile Include="VstPluginCapabilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
