@@ -1,6 +1,6 @@
 ﻿namespace Jacobi.Vst.Core
 {
-    public enum VstCanDo
+    public enum VstCanDoResult
     {
         No = -1,
         Unknown,

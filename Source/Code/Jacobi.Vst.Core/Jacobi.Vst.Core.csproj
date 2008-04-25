@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="VstAudioBuffer.cs" />
     <Compile Include="VstAutomationStates.cs" />
-    <Compile Include="VstCanDo.cs" />
+    <Compile Include="VstCanDoResult.cs" />
     <Compile Include="VstHostLanguage.cs" />
     <Compile Include="VstOfflineTask.cs" />
     <Compile Include="VstPluginInfo.cs" />

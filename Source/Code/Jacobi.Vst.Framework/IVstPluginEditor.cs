@@ -8,6 +8,6 @@ namespace Jacobi.Vst.Framework
         Rectangle Dimension {get;}
         void Open(IntPtr hWnd);
         void ProcessIdle();
-        void Close();
+        //void Close(); // call Dispose
     }
 }
