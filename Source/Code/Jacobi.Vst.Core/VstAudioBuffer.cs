@@ -9,18 +9,18 @@
         }
 
         public int Count { get; private set; }
-        protected float* Buffer { get; private set; }
+        public float* Buffer { get; private set; }
     }
 
-    public unsafe class VstPrecisionAudioBuffer
+    public unsafe class VstAudioPrecisionBuffer
     {
-        public VstPrecisionAudioBuffer(double* buffer, int length)
+        public VstAudioPrecisionBuffer(double* buffer, int length)
         {
             Buffer = buffer;
             Count = length;
         }
 
         public int Count { get; private set; }
-        protected double* Buffer { get; private set; }
+        public double* Buffer { get; private set; }
     }
 }

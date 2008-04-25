@@ -8,7 +8,7 @@
         VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub);
 
         void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs);
-        void ProcessReplacing(VstPrecisionAudioBuffer[] input, VstPrecisionAudioBuffer[] outputs);
+        void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs);
         void SetParameter(int index, float value);
         float GetParameter(int index);
     }
@@ -54,7 +54,7 @@
         bool GetVendorString(out string vendor);
         bool GetProductString(out string product);
         int GetVendorVersion();
-        VstCanDo CanDo(string cando);
+        VstCanDoResult CanDo(string cando);
         int GetTailSize();
         bool GetParameterProperties(int index, VstParameterProperties paramProps);
         int GetVstVersion();
