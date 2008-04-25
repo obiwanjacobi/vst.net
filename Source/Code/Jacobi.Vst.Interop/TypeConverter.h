@@ -104,6 +104,89 @@ public:
 		return eventArray;
 	}
 
+	// delete retval
+	static ::VstEvents* FromEventsArray(array<Jacobi::Vst::Core::VstEvent^>^ events)
+	{
+		int length = events->Length;
+		if(length > 2) length -= 2;
+
+		::VstEvents* pEvents = (::VstEvents*)new char[sizeof(VstEvent) + (length * sizeof(VstEvent*))];
+
+		pEvents->numEvents = events->Length;
+
+		int index = 0;
+		for each(Jacobi::Vst::Core::VstEvent^ evnt in events)
+		{
+			switch(evnt->EventType)
+			{
+			case Jacobi::Vst::Core::VstEventTypes::MidiEvent:
+				{
+				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiEvent^)evnt;
+				::VstMidiEvent* pMidiEvent = new ::VstMidiEvent();
+
+				pMidiEvent->byteSize = sizeof(::VstMidiEvent) - (2 * sizeof(VstInt32));
+				pMidiEvent->flags = midiEvent->Flags;
+				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
+				pMidiEvent->type = (VstInt32)midiEvent->EventType;
+
+				for(int i = 0; i < midiEvent->MidiData->Length && i < 4; i++)
+				{
+					pMidiEvent->midiData[i] = midiEvent->MidiData[i];
+				}
+
+				pMidiEvent->detune = (char)midiEvent->Detune;
+				pMidiEvent->noteLength = midiEvent->NoteLength;
+				pMidiEvent->noteOffset = midiEvent->NoteOffset;
+				pMidiEvent->noteOffVelocity = midiEvent->NoteOffVelocity;
+
+				pEvents->events[index] = (::VstEvent*)pMidiEvent;
+				}
+				break;
+			case Jacobi::Vst::Core::VstEventTypes::MidiSysExEvent:
+				{
+				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiSysExEvent^)evnt;
+				::VstMidiSysexEvent* pMidiEvent = new ::VstMidiSysexEvent();
+
+				pMidiEvent->byteSize = sizeof(::VstMidiSysexEvent) - (2 * sizeof(VstInt32));
+				pMidiEvent->flags = midiEvent->Flags;
+				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
+				pMidiEvent->type = (VstInt32)midiEvent->EventType;
+
+				pMidiEvent->dumpBytes = midiEvent->SysExData->Length;
+				pMidiEvent->sysexDump = new char[midiEvent->SysExData->Length];
+
+				for(int i = 0; i < midiEvent->SysExData->Length; i++)
+				{
+					pMidiEvent->sysexDump[i] = (char)midiEvent->SysExData[i];
+				}
+
+				pEvents->events[index] = (::VstEvent*)pMidiEvent;
+				}
+				break;
+			}
+
+			index++;
+		}
+
+		return pEvents;
+	}
+
+	static void DeleteVstEvents(::VstEvents* pEvents)
+	{
+		for(int n = 0 ; n < pEvents->numEvents; n++)
+		{
+			if(pEvents->events[n]->flags == kVstSysExType)
+			{
+				::VstMidiSysexEvent* pMidiEvent = (::VstMidiSysexEvent*)pEvents->events[n];
+				delete[] pMidiEvent->sysexDump;
+			}
+
+			delete pEvents->events[n];
+		}
+
+		delete pEvents;
+	}
+
 	static Jacobi::Vst::Core::VstPinProperties^ ToPinProperties(::VstPinProperties* pProps)
 	{
 		Jacobi::Vst::Core::VstPinProperties^ pinProperties = gcnew Jacobi::Vst::Core::VstPinProperties();
@@ -194,6 +277,28 @@ public:
 		patchChunkInfo->Version = pChunkInfo->version;
 
 		return patchChunkInfo;
+	}
+
+	static Jacobi::Vst::Core::VstTimeInfo^ ToTimeInfo(::VstTimeInfo* pTimeInfo)
+	{
+		Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
+
+		timeInfo->BarStartPosition = pTimeInfo->barStartPos;
+		timeInfo->CycleStartPosition = pTimeInfo->cycleEndPos;
+		timeInfo->CysleEndPosition = pTimeInfo->cycleStartPos;
+		timeInfo->Flags = (Jacobi::Vst::Core::VstTimeInfoFlags)pTimeInfo->flags;
+		timeInfo->NanoSeconds = pTimeInfo->nanoSeconds;
+		timeInfo->PpqPosition = pTimeInfo->ppqPos;
+		timeInfo->SamplePosition = pTimeInfo->samplePos;
+		timeInfo->SampleRate = pTimeInfo->sampleRate;
+		timeInfo->SamplesToNearestClock = pTimeInfo->samplesToNextClock;
+		timeInfo->SmpteFrameRate = (Jacobi::Vst::Core::VstSmpteFrameRate)pTimeInfo->smpteFrameRate;
+		timeInfo->SmpteOffset = pTimeInfo->smpteOffset;
+		timeInfo->Tempo = pTimeInfo->tempo;
+		timeInfo->TimeSignatureDenominator = pTimeInfo->timeSigDenominator;
+		timeInfo->TimeSignatureNumerator = pTimeInfo->timeSigNumerator;
+
+		return timeInfo;
 	}
 
 private:
