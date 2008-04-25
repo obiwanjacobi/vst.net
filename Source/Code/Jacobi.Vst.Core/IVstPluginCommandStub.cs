@@ -7,8 +7,8 @@
     {
         VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub);
 
-        void ProcessReplacing(VstAudioBuffer[] input);
-        void ProcessReplacing(VstPrecisionAudioBuffer[] input);
+        void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs);
+        void ProcessReplacing(VstPrecisionAudioBuffer[] input, VstPrecisionAudioBuffer[] outputs);
         void SetParameter(int index, float value);
         float GetParameter(int index);
     }
@@ -45,16 +45,16 @@
         bool GetOutputProperties(int index, VstPinProperties pinProps);
         VstPluginCategory GetCategory();
         bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
-        bool OfflinePrepare(/*VstOfflineTask[]*/ int count);
+        bool OfflinePrepare(/*VstOfflineTask*/ int count);
         bool OfflineRun(/*VstOfflineTask[]*/ int count);
-        bool ProcessVariableIO(/*VstVariableIO* pVarIO*/);
+        bool ProcessVariableIO(VstVariableIO variableIO);
         bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput);
         bool SetBypass(bool bypass);
         bool GetEffectName(out string name);
         bool GetVendorString(out string vendor);
         bool GetProductString(out string product);
         int GetVendorVersion();
-        int CanDo(string cando);
+        VstCanDo CanDo(string cando);
         int GetTailSize();
         bool GetParameterProperties(int index, VstParameterProperties paramProps);
         int GetVstVersion();

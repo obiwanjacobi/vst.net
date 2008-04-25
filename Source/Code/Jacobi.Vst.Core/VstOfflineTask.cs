@@ -4,7 +4,7 @@
 
     public class VstOfflineTask
     {
-        VstOfflineTaskFlags Flags;
+        public VstOfflineTaskFlags Flags;
 
         public string ProcessName;
         public double ReadPosition;

@@ -33,12 +33,12 @@
         string GetVendorString();
         string GetProductString();
         int GetVendorVersion();
-        bool CanDo(string cando);
+        VstCanDo CanDo(string cando);
         VstHostLanguage GetLanguage();
         string GetDirectory();
         bool UpdateDisplay();
-        bool BeginEdit();
-        bool EndEdit();
+        bool BeginEdit(int index);
+        bool EndEdit(int index);
         bool OpenFileSelector(/*VstFileSelect*/);
         bool CloseFileSelector(/*VstFileSelect*/);
     }
