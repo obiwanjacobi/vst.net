@@ -29,7 +29,7 @@ public:
 	virtual System::String^ GetVendorString();
 	virtual System::String^ GetProductString();
 	virtual System::Int32 GetVendorVersion();
-	virtual Jacobi::Vst::Core::VstCanDo CanDo(System::String^ cando);
+	virtual Jacobi::Vst::Core::VstCanDoResult CanDo(System::String^ cando);
 	virtual Jacobi::Vst::Core::VstHostLanguage GetLanguage();
 	virtual System::String^ GetDirectory();
 	virtual System::Boolean UpdateDisplay();
