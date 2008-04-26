@@ -5,7 +5,7 @@
 
 PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub)
 {
-	if(cmdStub == NULL)
+	if(cmdStub == nullptr)
 	{
 		throw gcnew System::ArgumentNullException("cmdStub");
 	}
@@ -283,8 +283,8 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 
 void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sampleFrames, int numInputs, int numOutputs)
 {
-	array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs);
-	array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs);
+	array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs);
+	array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs);
 
 	_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 }

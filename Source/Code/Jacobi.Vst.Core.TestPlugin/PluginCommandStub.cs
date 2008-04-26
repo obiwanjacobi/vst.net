@@ -7,7 +7,6 @@
         private VstPluginInfo _pluginInfo;
         private IVstHostCommandStub _hostStub;
         
-        private EditorForm _editor;
         private EditorControl1 _editorCtrl;
 
         #region IVstPluginCommandStub Members
@@ -318,23 +317,22 @@
 
         public bool EditorOpen(System.IntPtr hWnd)
         {
-            _editor = new EditorForm();
-            _editor.Show(new WindowWrapper(hWnd));
-
-            //_editorCtrl = new EditorControl1();
-            //_editorCtrl.Show();
+            _editorCtrl = new EditorControl1();
+            _editorCtrl.CreateControl();
+            NativeMethods.SetParent(_editorCtrl.Handle, hWnd);
+            _editorCtrl.Location = new System.Drawing.Point(0, 0);
+            _editorCtrl.Show();
 
             return true;
         }
 
         public void EditorClose()
         {
-            if (_editor != null)
+            if (_editorCtrl != null)
             {
-                _editor.Close();
-                _editor = null;
+                _editorCtrl.Dispose();
+                _editorCtrl = null;
             }
-
         }
 
         public void EditorIdle()
@@ -387,5 +385,6 @@
         }
 
         #endregion
+
     }
 }
