@@ -54,7 +54,7 @@
         bool GetVendorString(out string vendor);
         bool GetProductString(out string product);
         int GetVendorVersion();
-        VstCanDoResult CanDo(string cando);
+        VstCanDoResult CanDo(VstPluginCanDo cando);
         int GetTailSize();
         bool GetParameterProperties(int index, VstParameterProperties paramProps);
         int GetVstVersion();
@@ -64,7 +64,7 @@
     {
         bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
         bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
-        bool SetEditorKnobMode(int mode);
+        bool SetEditorKnobMode(VstKnobMode mode);
         int GetMidiProgramName(VstMidiProgramName midiProgram, int channel);
         int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel);
         int GetMidiProgramCategory(VstMidiProgramCategory midiCat, int channel);

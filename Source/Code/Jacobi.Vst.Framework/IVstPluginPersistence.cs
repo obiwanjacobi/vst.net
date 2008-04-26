@@ -4,11 +4,11 @@ namespace Jacobi.Vst.Framework
     {
     }
 
-    public struct VstBank
+    public struct VstBankChunk
     {
     }
 
-    public struct VstProgram
+    public struct VstProgramChunk
     {
     }
 

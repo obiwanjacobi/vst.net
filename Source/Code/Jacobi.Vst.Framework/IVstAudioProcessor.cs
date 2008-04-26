@@ -6,6 +6,7 @@ namespace Jacobi.Vst.Framework
     {
         int InputCount { get; }
         int OutputCount { get; }
+        int TailSize { get; }
         double SampleRate { get;set; }
         int BlockSize { get;set; }
         void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels);

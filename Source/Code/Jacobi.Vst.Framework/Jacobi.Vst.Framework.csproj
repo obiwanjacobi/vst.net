@@ -63,10 +63,10 @@
     <Compile Include="IVstPluginBypass.cs" />
     <Compile Include="IVstPluginEditor.cs" />
     <Compile Include="IVstPluginHost.cs" />
-    <Compile Include="IVstPluginMidiProgram.cs" />
+    <Compile Include="IVstPluginMidiPrograms.cs" />
     <Compile Include="IVstPluginOfflineProcessor.cs" />
     <Compile Include="IVstPluginPersistence.cs" />
-    <Compile Include="IVstPluginProgram.cs" />
+    <Compile Include="IVstPluginPrograms.cs" />
     <Compile Include="Plugin\VstPluginContext.cs" />
     <Compile Include="ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,10 +74,17 @@
     <Compile Include="VstAudioChannel.cs" />
     <Compile Include="VstAudioPrecisionChannel.cs" />
     <Compile Include="VstEventCollection.cs" />
+    <Compile Include="VstMidiCategory.cs" />
+    <Compile Include="VstMidiCategoryCollection.cs" />
+    <Compile Include="VstMidiChannelInfo.cs" />
+    <Compile Include="VstMidiChannelInfoCollection.cs" />
+    <Compile Include="VstMidiProgram.cs" />
+    <Compile Include="VstMidiProgramCollection.cs" />
     <Compile Include="VstParameter.cs" />
     <Compile Include="VstParameterCollection.cs" />
-    <Compile Include="VstParameterInfo.cs" />
     <Compile Include="VstPluginCapabilities.cs" />
+    <Compile Include="VstProgram.cs" />
+    <Compile Include="VstProgramCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
