@@ -158,7 +158,9 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->GetVendorVersion();
 		break;
 	case effCanDo:
-		result = (VstInt32)_commandStub->CanDo(TypeConverter::CharToString((char*)ptr));
+		result = (VstInt32)_commandStub->CanDo((Jacobi::Vst::Core::VstPluginCanDo)
+			System::Enum::Parse(Jacobi::Vst::Core::VstPluginCanDo::typeid, 
+				TypeConverter::CharToString((char*)ptr), true));
 		break;
 	case effGetTailSize:
 		result = _commandStub->GetTailSize();
@@ -181,7 +183,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			(Jacobi::Vst::Core::VstModifierKeys)(VstInt32)opt) ? 1 : 0;
 		break;
 	case effSetEditKnobMode:
-		result = _commandStub->SetEditorKnobMode(value) ? 1 : 0;
+		result = _commandStub->SetEditorKnobMode((Jacobi::Vst::Core::VstKnobMode)value) ? 1 : 0;
 		break;
 	case effGetMidiProgramName:
 		{

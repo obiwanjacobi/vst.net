@@ -88,7 +88,7 @@
             return false;
         }
 
-        public bool SetEditorKnobMode(int mode)
+        public bool SetEditorKnobMode(VstKnobMode mode)
         {
             return false;
         }
@@ -221,9 +221,9 @@
             return 1000;
         }
 
-        public VstCanDoResult CanDo(string cando)
+        public VstCanDoResult CanDo(VstPluginCanDo cando)
         {
-            return VstCanDoResult.Unknown;
+            return VstCanDoResult.No;
         }
 
         public int GetTailSize()
