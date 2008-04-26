@@ -4,7 +4,7 @@
     using System.Threading;
 
     public struct ExtensibleObjectRef<T>
-        where T : IExtensibleObject
+        where T : class, IExtensibleObject
     {
         private int _threadId;
 
@@ -19,17 +19,30 @@
         private T _instance;
         public T Instance
         {
-            get { return _instance; }
+            get
+            {
+                if (!IsConstructionThread)
+                {
+                    return _instance.GetInstance<T>(true);
+                }
+
+                return _instance;
+            }
         }
 
         public bool Supports<TIntf>() where TIntf : class
         {
-            return _instance.Supports<TIntf>(Thread.CurrentThread.ManagedThreadId == _threadId);
+            return _instance.Supports<TIntf>(!IsConstructionThread);
         }
 
         public TIntf GetInstance<TIntf>() where TIntf : class
         {
-            return _instance.GetInstance<TIntf>(Thread.CurrentThread.ManagedThreadId == _threadId);
+            return _instance.GetInstance<TIntf>(!IsConstructionThread);
+        }
+
+        public bool IsConstructionThread
+        {
+            get { return (Thread.CurrentThread.ManagedThreadId == _threadId); }
         }
     }
 }

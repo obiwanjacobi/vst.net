@@ -33,7 +33,7 @@
         string GetVendorString();
         string GetProductString();
         int GetVendorVersion();
-        VstCanDoResult CanDo(string cando);
+        VstCanDoResult CanDo(VstHostCanDo cando);
         VstHostLanguage GetLanguage();
         string GetDirectory();
         bool UpdateDisplay();
