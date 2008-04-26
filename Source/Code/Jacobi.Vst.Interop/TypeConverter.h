@@ -313,13 +313,13 @@ public:
 		return bufferArray;
 	}
 
-	static array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ ToAudioBufferArray(double** buffer, int sampleFrames, int numberOfBuffers)
+	static array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ ToAudioBufferArray(double** buffer, int sampleFrames, int numberOfBuffers)
 	{
-		array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstPrecisionAudioBuffer^>(numberOfBuffers);
+		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>(numberOfBuffers);
 
 		for(int n = 0; n < numberOfBuffers; n++)
 		{
-			bufferArray[n] = gcnew Jacobi::Vst::Core::VstPrecisionAudioBuffer(buffer[n], sampleFrames);
+			bufferArray[n] = gcnew Jacobi::Vst::Core::VstAudioPrecisionBuffer(buffer[n], sampleFrames);
 		}
 
 		return bufferArray;
