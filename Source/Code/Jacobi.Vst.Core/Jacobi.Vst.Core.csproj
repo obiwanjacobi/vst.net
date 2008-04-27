@@ -51,6 +51,7 @@
     <Compile Include="VstHostLanguage.cs" />
     <Compile Include="VstKnobMode.cs" />
     <Compile Include="VstOfflineTask.cs" />
+    <Compile Include="VstPanLaw.cs" />
     <Compile Include="VstPluginInfo.cs" />
     <Compile Include="IVstHostCommandStub.cs" />
     <Compile Include="IVstPluginCommandStub.cs" />

@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Framework.Common
 {
     using System;
     using System.Threading;

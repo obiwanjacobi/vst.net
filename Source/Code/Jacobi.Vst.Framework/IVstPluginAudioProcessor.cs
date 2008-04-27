@@ -2,7 +2,7 @@ namespace Jacobi.Vst.Framework
 {
     using System;
 
-    public interface IVstAudioProcessor : IDisposable
+    public interface IVstPluginAudioProcessor : IDisposable
     {
         int InputCount { get; }
         int OutputCount { get; }
@@ -12,7 +12,7 @@ namespace Jacobi.Vst.Framework
         void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels);
     }
 
-    public interface IVstAudioPrecissionProcessor : IVstAudioProcessor
+    public interface IVstPluginAudioPrecissionProcessor : IVstPluginAudioProcessor
     {
         void Process(VstAudioPrecisionChannel[] inChannels, VstAudioPrecisionChannel[] outChannels);
     }
