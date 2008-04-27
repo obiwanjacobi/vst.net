@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework.Plugin
 {
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
     using Jacobi.Vst.Framework.Host;
 
     internal class VstPluginContext

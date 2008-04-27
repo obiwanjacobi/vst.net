@@ -8,5 +8,10 @@
         public byte BankSelectLsb;
 
         public VstMidiCategory ParentCategory;
+
+        public string GetKeyName(int keyNumber)
+        {
+            return null;
+        }
     }
 }

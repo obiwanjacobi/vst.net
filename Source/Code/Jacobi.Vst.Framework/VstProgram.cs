@@ -2,7 +2,7 @@
 {
     public class VstProgram : IVstPluginParameters
     {
-        public string Name;
+        public string Name;        
 
         #region IVstPluginParameters Members
 

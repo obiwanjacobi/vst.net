@@ -30,7 +30,7 @@
         {
             get
             {
-                if(index < 0 || index > _audioBuffer.Count) throw new ArgumentOutOfRangeException("index", 
+                if (index < 0 || index > _audioBuffer.Count) throw new ArgumentOutOfRangeException("index", 
                     "The index must lie between 0 and the SampleCount property value.");
 
                 unsafe

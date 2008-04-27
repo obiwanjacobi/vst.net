@@ -34,5 +34,7 @@ namespace Jacobi.Vst.Framework
     public interface IVstHost : IExtensibleObject
     {
         ProductInfo ProductInfo { get; }
+
+        VstHostCapabilities Capabilities { get; }
     }
 }

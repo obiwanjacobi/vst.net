@@ -11,16 +11,42 @@
 
         public bool SetProcessPrecision(VstProcessPrecision precision)
         {
-            return false;
+            bool canDo = false;
+
+            switch(precision)
+            {
+                case VstProcessPrecision.Process32:
+                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioProcessor>();
+                    break;
+                case VstProcessPrecision.Process64:
+                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioPrecissionProcessor>();
+                    break;
+            }
+            
+            return canDo;
         }
 
         public int GetNumberOfMidiInputChannels()
         {
+            IVstMidiProcessor midiProcessor = _pluginCtx.Plugin.GetInstance<IVstMidiProcessor>();
+
+            if (midiProcessor != null)
+            {
+                return midiProcessor.ChannelCount;
+            }
+
             return 0;
         }
 
         public int GetNumberOfMidiOutputChannels()
         {
+            IVstPluginMidiSource midiSource = _pluginCtx.Plugin.GetInstance<IVstPluginMidiSource>();
+
+            if (midiSource != null)
+            {
+                return midiSource.ChannelCount;
+            }
+            
             return 0;
         }
 
@@ -55,27 +81,49 @@
 
         public int StartProcess()
         {
+            IVstPluginProcess pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
+
+            if (pluginProcess != null)
+            {
+                pluginProcess.Start();
+                
+                // TODO: what to return!?
+            }
+
             return 0;
         }
 
         public int StopProcess()
         {
+            IVstPluginProcess pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
+
+            if (pluginProcess != null)
+            {
+                pluginProcess.Stop();
+
+                // TODO: what to return!?
+            }
+
             return 0;
         }
 
-        public bool SetPanLaw(int type, float value)
+        public bool SetPanLaw(VstPanLaw type, float value)
         {
+            // TODO: where to put PanLaw?
+            // Plugin? Editor? AudioProcessor?
             return false;
         }
 
         public int BeginLoadBank(VstPatchChunkInfo chunkInfo)
         {
-            return 0;
+            // TODO: find out how this works
+            return -1;
         }
 
         public int BeginLoadProgram(VstPatchChunkInfo chunkInfo)
         {
-            return 0;
+            // TODO: find out how this works
+            return -1;
         }
 
         #endregion
@@ -217,9 +265,9 @@
 
         public bool HasMidiProgramsChanged(int channel)
         {
-            IVstPluginMidiPrograms midiProgram = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
 
-            if (midiProgram != null)
+            if (midiPrograms != null)
             {
                 //TODO: how do we know!?
             }
@@ -229,12 +277,14 @@
 
         public bool GetMidiKeyName(VstMidiKeyName midiKeyName, int channel)
         {
-            //???
-            IVstPluginMidiPrograms midiProgram = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
 
-            if (midiProgram != null)
+            if (midiPrograms != null)
             {
-                //TODO:
+                VstMidiChannelInfo channelInfo = midiPrograms.ChannelInfos[channel];
+                VstMidiProgram program = channelInfo.Programs[midiKeyName.CurrentProgramIndex];
+
+                midiKeyName.Name = program.GetKeyName(midiKeyName.CurrentKeyNumber);
             }
 
             return false;
@@ -417,17 +467,17 @@
             switch (cando)
             {
                 case VstPluginCanDo.Bypass:
-                    result = _pluginCtx.Plugin.GetInstance<IVstPluginBypass>() == null ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginBypass>() ? VstCanDoResult.No : VstCanDoResult.Yes;
                     break;
                 case VstPluginCanDo.MidiProgramNames:
-                    result = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>() == null ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.No : VstCanDoResult.Yes;
                     break;
                 case VstPluginCanDo.Offline:
-                    result = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>() == null ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.No : VstCanDoResult.Yes;
                     break;
                 case VstPluginCanDo.ReceiveVstEvents:
                 case VstPluginCanDo.ReceiveVstMidiEvent:
-                    result = _pluginCtx.Plugin.GetInstance<IVstMidiProcessor>() == null ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.No : VstCanDoResult.Yes;
                     break;
                 case VstPluginCanDo.ReceiveVstTimeInfo:
                     // TODO: define interface?
@@ -435,8 +485,7 @@
                     break;
                 case VstPluginCanDo.SendVstEvents:
                 case VstPluginCanDo.SendVstMidiEvent:
-                    // TODO: define new capability?
-                    result = VstCanDoResult.Unknown;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiSource>() ? VstCanDoResult.No : VstCanDoResult.Yes;
                     break;
             }
 
@@ -445,7 +494,7 @@
 
         public int GetTailSize()
         {
-            IVstAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioProcessor>();
+            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -581,7 +630,7 @@
 
         public void SetSampleRate(float sampleRate)
         {
-            IVstAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioProcessor>();
+            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -591,7 +640,7 @@
 
         public void SetBlockSize(int blockSize)
         {
-            IVstAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioProcessor>();
+            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -677,13 +726,13 @@
 
         public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
         {
-            IVstPlugin plugin = CreatePlugin();
+            IVstPlugin plugin = CreatePluginInstance();
 
             if (plugin != null)
             {
                 _pluginCtx = new VstPluginContext();
-                _pluginCtx.Host = new ExtensibleObjectRef<Host.VstHost>(new Host.VstHost(hostCmdStub));
-                _pluginCtx.Plugin = new ExtensibleObjectRef<IVstPlugin>(plugin);
+                _pluginCtx.Host = new Common.ExtensibleObjectRef<Host.VstHost>(new Host.VstHost(hostCmdStub));
+                _pluginCtx.Plugin = new Common.ExtensibleObjectRef<IVstPlugin>(plugin);
                 _pluginCtx.PlginInfo = CreatePluginInfo(plugin);
 
                 return _pluginCtx.PlginInfo;
@@ -694,7 +743,7 @@
 
         public void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
         {
-            IVstAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioProcessor>();
+            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -722,7 +771,7 @@
 
         public void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
-            IVstAudioPrecissionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstAudioPrecissionProcessor>();
+            IVstPluginAudioPrecissionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioPrecissionProcessor>();
 
             if (audioProcessor != null)
             {
@@ -778,7 +827,7 @@
         /// Derived class must override and create the plugin instance.
         /// </summary>
         /// <returns>Returning null will abort loading plugin.</returns>
-        protected abstract IVstPlugin CreatePlugin();
+        protected abstract IVstPlugin CreatePluginInstance();
 
         /// <summary>
         /// Creates summary info based on the <paramref name="plugin"/>.
@@ -792,9 +841,9 @@
             // determine flags
             if (plugin.Supports<IVstPluginEditor>(false))
                 pluginInfo.Flags |= VstPluginInfoFlags.HasEditor;
-            if (plugin.Supports<IVstAudioProcessor>(false))
+            if (plugin.Supports<IVstPluginAudioProcessor>(false))
                 pluginInfo.Flags |= VstPluginInfoFlags.CanReplacing;
-            if (plugin.Supports<IVstAudioPrecissionProcessor>(false))
+            if (plugin.Supports<IVstPluginAudioPrecissionProcessor>(false))
                 pluginInfo.Flags |= VstPluginInfoFlags.CanDoubleReplacing;
             if (plugin.Supports<IVstPluginPersistence>(false))
                 pluginInfo.Flags |= VstPluginInfoFlags.ProgramChunks;
@@ -809,7 +858,7 @@
             pluginInfo.PluginVersion = plugin.ProductInfo.Version;
             
             // audio processing info
-            IVstAudioProcessor audioProcessor = plugin.GetInstance<IVstAudioProcessor>(false);
+            IVstPluginAudioProcessor audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>(false);
             if(audioProcessor != null)
             {
                 pluginInfo.NumberOfAudioInputs = audioProcessor.InputCount;

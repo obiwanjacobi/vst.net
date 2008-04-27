@@ -59,7 +59,7 @@
             return 0;
         }
 
-        public bool SetPanLaw(int type, float value)
+        public bool SetPanLaw(VstPanLaw type, float value)
         {
             return false;
         }
