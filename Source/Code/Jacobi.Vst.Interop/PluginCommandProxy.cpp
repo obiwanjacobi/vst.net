@@ -249,7 +249,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->SetTotalSamplesToProcess(value);
 		break;
 	case effSetPanLaw:
-		result = _commandStub->SetPanLaw(value, opt) ? 1 : 0;
+		result = _commandStub->SetPanLaw((Jacobi::Vst::Core::VstPanLaw)value, opt) ? 1 : 0;
 		break;
 	case effBeginLoadBank:
 		result = _commandStub->BeginLoadBank(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr));

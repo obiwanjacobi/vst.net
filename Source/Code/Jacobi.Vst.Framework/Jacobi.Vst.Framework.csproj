@@ -44,16 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensibleObjectRef.cs" />
+    <Compile Include="Common\ExtensibleInterfaceRef.cs" />
+    <Compile Include="Common\ExtensibleObjectRef.cs" />
     <Compile Include="Host\VstHost.cs" />
+    <Compile Include="Host\VstHostAutomation.cs" />
+    <Compile Include="Host\VstHostInterfaceManager.cs" />
+    <Compile Include="Host\VstHostIO.cs" />
+    <Compile Include="Host\VstHostMidiProcessor.cs" />
+    <Compile Include="Host\VstHostOfflineProcessor.cs" />
+    <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IExtensibleObject.cs" />
     <Compile Include="IVstAudioChannel.cs" />
     <Compile Include="IVstAudioPrecisionChannel.cs" />
-    <Compile Include="IVstAudioProcessor.cs" />
+    <Compile Include="IVstHostIO.cs" />
+    <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />
     <Compile Include="IVstHostOfflineProcessor.cs" />
+    <Compile Include="IVstPluginConnections.cs" />
+    <Compile Include="IVstPluginMidiSource.cs" />
     <Compile Include="IVstPluginParameters.cs" />
     <Compile Include="IVstPluginProcess.cs" />
     <Compile Include="IVstHostSequencer.cs" />
@@ -74,6 +84,8 @@
     <Compile Include="VstAudioChannel.cs" />
     <Compile Include="VstAudioPrecisionChannel.cs" />
     <Compile Include="VstEventCollection.cs" />
+    <Compile Include="Host\VstHostSequencer.cs" />
+    <Compile Include="VstHostCapabilities.cs" />
     <Compile Include="VstMidiCategory.cs" />
     <Compile Include="VstMidiCategoryCollection.cs" />
     <Compile Include="VstMidiChannelInfo.cs" />

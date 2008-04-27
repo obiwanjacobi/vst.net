@@ -81,7 +81,7 @@
         int GetNextPlugin(out string name);
         int StartProcess();
         int StopProcess();
-        bool SetPanLaw(int type, float value);
+        bool SetPanLaw(VstPanLaw type, float value);
         int BeginLoadBank(VstPatchChunkInfo chunkInfo);
         int BeginLoadProgram(VstPatchChunkInfo chunkInfo);
     }

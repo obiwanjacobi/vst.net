@@ -5,11 +5,10 @@ namespace Jacobi.Vst.Framework
 
     public interface IVstHostShell
     {
-        void UpdateDisplay();
+        bool UpdateDisplay();
         bool SizeWindow(int width, int height);
-        CultureInfo Culture { get; } //getLanguage
+        CultureInfo Culture { get; }
         string BaseDirectory { get;}
         IDisposable OpenFileSelector(/*file selector struct*/);
-        IDisposable EditParameter(VstParameter parameter);
     }
 }
