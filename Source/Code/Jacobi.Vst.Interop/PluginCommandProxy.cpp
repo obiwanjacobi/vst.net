@@ -158,9 +158,16 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->GetVendorVersion();
 		break;
 	case effCanDo:
-		result = (VstInt32)_commandStub->CanDo((Jacobi::Vst::Core::VstPluginCanDo)
-			System::Enum::Parse(Jacobi::Vst::Core::VstPluginCanDo::typeid, 
-				TypeConverter::CharToString((char*)ptr), true));
+		try
+		{
+			result = (VstInt32)_commandStub->CanDo((Jacobi::Vst::Core::VstPluginCanDo)
+				System::Enum::Parse(Jacobi::Vst::Core::VstPluginCanDo::typeid, 
+					TypeConverter::CharToString((char*)ptr), true));
+		}
+		catch(System::ArgumentException^)
+		{
+			result = (VstInt32)Jacobi::Vst::Core::VstCanDoResult::No;
+		}
 		break;
 	case effGetTailSize:
 		result = _commandStub->GetTailSize();

@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
+      <Link>Properties\AssemblyInfo.General.cs</Link>
+    </Compile>
     <Compile Include="VstAudioBuffer.cs" />
     <Compile Include="VstAutomationStates.cs" />
     <Compile Include="VstCanDo.cs" />
@@ -81,6 +84,11 @@
     <Content Include="..\..\..\..\..\..\_keyfile\Jacobi.snk">
       <Link>Jacobi.snk</Link>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Enums.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Interfaces.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Types.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
