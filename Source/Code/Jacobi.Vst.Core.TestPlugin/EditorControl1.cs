@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Jacobi.Vst.Core.TestPlugin
@@ -15,9 +10,9 @@ namespace Jacobi.Vst.Core.TestPlugin
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void AddLine(string text)
         {
-            MessageBox.Show(this, "Hello World!");
+            listBox1.Items.Add(text);
         }
     }
 }

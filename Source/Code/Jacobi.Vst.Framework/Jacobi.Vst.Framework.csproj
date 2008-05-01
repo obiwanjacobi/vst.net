@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
+      <Link>Properties\AssemblyInfo.General.cs</Link>
+    </Compile>
     <Compile Include="Common\ExtensibleInterfaceRef.cs" />
     <Compile Include="Common\ExtensibleObjectRef.cs" />
     <Compile Include="Host\VstHost.cs" />
@@ -99,7 +102,8 @@
     <Compile Include="VstProgramCollection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.Interfaces.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.Types.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj">
