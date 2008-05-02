@@ -13,12 +13,13 @@
 
         public int ChannelCount
         {
+            // default number of channels for host
             get { return 16; }
         }
 
         public void Process(VstEventCollection events)
         {
-            throw new System.NotImplementedException();
+            _host.HostCommandStub.ProcessEvents(events.ToArray());
         }
 
         #endregion

@@ -26,6 +26,11 @@ namespace Jacobi.Vst.Framework
             _isReadOnly = true;
         }
 
+        public VstEvent[] ToArray()
+        {
+            return _list.ToArray();
+        }
+
         #region IList<VstEvent> Members
 
         public int IndexOf(VstEvent item)

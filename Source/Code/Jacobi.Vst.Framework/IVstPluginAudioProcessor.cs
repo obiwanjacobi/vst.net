@@ -1,8 +1,6 @@
 namespace Jacobi.Vst.Framework
 {
-    using System;
-
-    public interface IVstPluginAudioProcessor : IDisposable
+    public interface IVstPluginAudioProcessor
     {
         int InputCount { get; }
         int OutputCount { get; }

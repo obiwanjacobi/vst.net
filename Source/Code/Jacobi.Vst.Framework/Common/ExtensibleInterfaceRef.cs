@@ -3,7 +3,7 @@
     using System.Threading;
     using System;
 
-    public class ExtensibleInterfaceRef<T> where T : class
+    public class ExtensibleInterfaceRef<T> : IDisposable where T : class
     {
         private int _threadId;
         private T _instance;
@@ -43,5 +43,30 @@
         {
             return (typeof(TIntf).IsAssignableFrom(typeof(T)));
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            IDisposable disposableObject = Instance as IDisposable;
+            
+            if (disposableObject != null)
+            {
+                disposableObject.Dispose();
+            }
+
+            disposableObject = ThreadSafeInstance as IDisposable;
+
+            if (disposableObject != null)
+            {
+                disposableObject.Dispose();
+            }
+
+            ThreadSafeInstance = null;
+            _instance = null;
+            _threadId = 0;
+        }
+
+        #endregion
     }
 }

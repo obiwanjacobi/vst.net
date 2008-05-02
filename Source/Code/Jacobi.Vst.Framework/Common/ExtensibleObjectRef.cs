@@ -3,7 +3,7 @@
     using System;
     using System.Threading;
 
-    public struct ExtensibleObjectRef<T>
+    public class ExtensibleObjectRef<T> : IDisposable
         where T : class, IExtensibleObject
     {
         private int _threadId;
@@ -44,5 +44,22 @@
         {
             get { return (Thread.CurrentThread.ManagedThreadId == _threadId); }
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            IDisposable disposableObject = _instance as IDisposable;
+
+            if (disposableObject != null)
+            {
+                disposableObject.Dispose();
+            }
+
+            _instance = null;
+            _threadId = 0;
+        }
+
+        #endregion
     }
 }

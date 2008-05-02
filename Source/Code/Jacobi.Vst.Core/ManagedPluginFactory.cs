@@ -37,9 +37,6 @@
             {
                 throw new InvalidOperationException(
                     "\"" + _assembly.FullName + "\" does not expose a public class that implements the IVstPluginCommandStub interface.");
-
-                // TODO: assign the standard plugin stub type (from Jacobi.Vst.Framework) without introducing a hard dependency...?
-                //pluginType = typeof(Jacobi::Vst::Framework::StdPluginCommandStub);
             }
 
             return (IVstPluginCommandStub)Activator.CreateInstance(pluginType);
