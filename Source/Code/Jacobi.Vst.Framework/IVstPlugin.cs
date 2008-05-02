@@ -15,7 +15,6 @@ namespace Jacobi.Vst.Framework
         int PluginID { get; }
 
         void Open(IVstHost host);
-        //void Close(); // call Dispose
         void Suspend();
         void Resume();
     }

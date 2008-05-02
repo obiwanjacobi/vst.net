@@ -13,7 +13,7 @@
 
         public bool UpdatePluginIO()
         {
-            throw new System.NotImplementedException();
+            return _host.HostCommandStub.IoChanged();
         }
 
         #endregion

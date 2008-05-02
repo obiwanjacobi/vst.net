@@ -53,7 +53,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		_commandStub->SetBlockSize((VstInt32)value);
 		break;
 	case effMainsChanged:
-		_commandStub->MainsChanged(value == 1);
+		_commandStub->MainsChanged(value != 0);
 		break;
 	case effEditGetRect:
 		{
@@ -81,7 +81,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		break;
 	case effSetChunk:
 		{
-		array<System::Byte>^ buffer = TypeConverter::PtrToByteArray(ptr, value);
+		array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, value);
 		result = _commandStub->SetChunk(buffer, index == 1) ? 1 : 0;
 		}
 		break;
@@ -166,6 +166,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		}
 		catch(System::ArgumentException^)
 		{
+			// TODO: log unsupported cando string
 			result = (VstInt32)Jacobi::Vst::Core::VstCanDoResult::No;
 		}
 		break;
@@ -173,8 +174,8 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		result = _commandStub->GetTailSize();
 		break;
 	case effGetParameterProperties:
-		result = _commandStub->GetParameterProperties(index, 
-			TypeConverter::ToParameterProperties((::VstParameterProperties*)ptr)) ? 1 : 0;
+		result = TypeConverter::FromParameterProperties(
+			_commandStub->GetParameterProperties(index), (::VstParameterProperties*)ptr) ? 1 : 0;
 		break;
 	case effGetVstVersion:
 		result = _commandStub->GetVstVersion();

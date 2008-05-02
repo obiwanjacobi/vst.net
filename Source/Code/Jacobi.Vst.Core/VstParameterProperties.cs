@@ -2,6 +2,7 @@
 {
     using System;
 
+    // TODO: Add properties and implement auto-flags
     public class VstParameterProperties
     {
         public VstParameterPropertiesFlags Flags;

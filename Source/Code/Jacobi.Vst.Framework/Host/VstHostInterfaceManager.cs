@@ -1,16 +1,10 @@
 ﻿namespace Jacobi.Vst.Framework.Host
 {
+    using System;
     using Jacobi.Vst.Framework.Common;
 
-    internal class VstHostInterfaceManager : IExtensibleObject
+    internal class VstHostInterfaceManager : IExtensibleObject, IDisposable
     {
-        private ExtensibleInterfaceRef<IVstHostShell> _shell;
-        private ExtensibleInterfaceRef<IVstHostSequencer> _sequencer;
-        private ExtensibleInterfaceRef<IVstHostAutomation> _automation;
-        private ExtensibleInterfaceRef<IVstHostIO> _io;
-        private ExtensibleInterfaceRef<IVstHostOfflineProcessor> _offline;
-        private ExtensibleInterfaceRef<IVstMidiProcessor> _midiProcessor;
-
         private VstHost _host;
 
         public VstHostInterfaceManager(VstHost host)
@@ -18,8 +12,7 @@
             _host = host;
         }
 
-
-
+        private ExtensibleInterfaceRef<IVstHostShell> _shell;
         private ExtensibleInterfaceRef<IVstHostShell> GetShell<T>() where T : class
         {
             if (ExtensibleInterfaceRef<IVstHostShell>.IsMatch<T>())
@@ -37,6 +30,7 @@
             return null;
         }
 
+        private ExtensibleInterfaceRef<IVstHostSequencer> _sequencer;
         private ExtensibleInterfaceRef<IVstHostSequencer> GetSequencer<T>() where T : class
         {
             if (ExtensibleInterfaceRef<IVstHostSequencer>.IsMatch<T>())
@@ -54,6 +48,7 @@
             return null;
         }
 
+        private ExtensibleInterfaceRef<IVstHostAutomation> _automation;
         private ExtensibleInterfaceRef<IVstHostAutomation> GetAutomation<T>() where T : class
         {
             if (ExtensibleInterfaceRef<IVstHostAutomation>.IsMatch<T>())
@@ -71,6 +66,7 @@
             return null;
         }
 
+        private ExtensibleInterfaceRef<IVstHostIO> _io;
         private ExtensibleInterfaceRef<IVstHostIO> GetIO<T>() where T : class
         {
             if (ExtensibleInterfaceRef<IVstHostIO>.IsMatch<T>())
@@ -91,6 +87,7 @@
             return null;
         }
 
+        private ExtensibleInterfaceRef<IVstHostOfflineProcessor> _offline;
         private ExtensibleInterfaceRef<IVstHostOfflineProcessor> GetOffline<T>() where T : class
         {
             if (ExtensibleInterfaceRef<IVstHostOfflineProcessor>.IsMatch<T>())
@@ -111,6 +108,7 @@
             return null;
         }
 
+        private ExtensibleInterfaceRef<IVstMidiProcessor> _midiProcessor;
         private ExtensibleInterfaceRef<IVstMidiProcessor> GetMidiProcessor<T>() where T : class
         {
             if (ExtensibleInterfaceRef<IVstMidiProcessor>.IsMatch<T>())
@@ -209,10 +207,59 @@
             ExtensibleInterfaceRef<IVstMidiProcessor> midiProcessor = GetMidiProcessor<T>();
             if (midiProcessor != null)
             {
+                if (!_host.Plugin.Supports<IVstPluginMidiSource>())
+                {
+                    throw new InvalidOperationException(
+                        "A plugin cannot send events to the host when it does not implement IVstPluginMidiSource.");
+                }
+
                 return midiProcessor.Instance as T;
             }
 
             return null;
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            if (_automation != null)
+            {
+                _automation.Dispose();
+                _automation = null;
+            }
+            
+            if (_io != null)
+            {
+                _io.Dispose();
+                _io = null;
+            }
+
+            if (_midiProcessor != null)
+            {
+                _midiProcessor.Dispose();
+                _midiProcessor = null;
+            }
+
+            if (_offline != null)
+            {
+                _offline.Dispose();
+                _offline = null;
+            }
+
+            if (_sequencer != null)
+            {
+                _sequencer.Dispose();
+                _sequencer = null;
+            }
+
+            if (_shell != null)
+            {
+                _shell.Dispose();
+                _shell = null;
+            }
         }
 
         #endregion

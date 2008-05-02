@@ -31,6 +31,7 @@
         bool EditorOpen(IntPtr hWnd);
         void EditorClose();
         void EditorIdle();
+        //byte[] GetChunk(bool isPreset);
         int GetChunk(out byte[] data, bool isPreset);
         int SetChunk(byte[] data, bool isPreset);
     }
@@ -56,7 +57,7 @@
         int GetVendorVersion();
         VstCanDoResult CanDo(VstPluginCanDo cando);
         int GetTailSize();
-        bool GetParameterProperties(int index, VstParameterProperties paramProps);
+        VstParameterProperties GetParameterProperties(int index);
         int GetVstVersion();
     }
 

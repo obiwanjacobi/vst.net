@@ -8,9 +8,9 @@
 
         public VstMidiProgramNameFlags Flags;
         public string Name;
-        public char MidiProgram;
-        public char MidiBankLSB;
-        public char MidiBankMSB;
+        public byte MidiProgram;
+        public byte MidiBankLSB;
+        public byte MidiBankMSB;
         public int ParentCategoryIndex;
     }
 
