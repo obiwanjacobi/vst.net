@@ -272,10 +272,10 @@
             return 0;
         }
 
-        public bool GetParameterProperties(int index, VstParameterProperties paramProps)
+        public VstParameterProperties GetParameterProperties(int index)
         {
             _editorCtrl.Instance.AddLine("GetParameterProperties: " + index);
-            return false;
+            return null;
         }
 
         public int GetVstVersion()

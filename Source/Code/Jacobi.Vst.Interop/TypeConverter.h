@@ -42,11 +42,14 @@ public:
 		// TODO: implement
 	}
 
-	static array<System::Byte>^ PtrToByteArray(void *pBuffer, int length)
+	static array<System::Byte>^ PtrToByteArray(char *pBuffer, int length)
 	{
 		array<System::Byte>^ byteArray = gcnew array<System::Byte>(length);
 
-		// TODO: implement
+		for(int n = 0; n < length; n++)
+		{
+			byteArray[n] = pBuffer[n];
+		}
 
 		return byteArray;
 	}
@@ -223,7 +226,7 @@ public:
 		return spkArr;
 	}
 
-	static Jacobi::Vst::Core::VstParameterProperties^ ToParameterProperties(::VstParameterProperties* pProps)
+	/*static Jacobi::Vst::Core::VstParameterProperties^ ToParameterProperties(::VstParameterProperties* pProps)
 	{
 		Jacobi::Vst::Core::VstParameterProperties^ paramProps = gcnew Jacobi::Vst::Core::VstParameterProperties();
 
@@ -247,6 +250,34 @@ public:
 		paramProps->CategoryLabel = CharToString(pProps->categoryLabel);
 
 		return paramProps;
+	}*/
+
+	static bool FromParameterProperties(Jacobi::Vst::Core::VstParameterProperties^ paramProps, ::VstParameterProperties* pProps)
+	{
+		if(paramProps != nullptr && pProps != NULL)
+		{
+			pProps->flags = (int)paramProps->Flags;
+			pProps->stepFloat = paramProps->StepFloat;
+			pProps->smallStepFloat = paramProps->SmallStepFloat;
+			pProps->largeStepFloat = paramProps->LargeStepFloat;
+
+			pProps->stepInteger = paramProps->StepInteger;
+			pProps->largeStepInteger = paramProps->LargeStepInteger;
+			pProps->maxInteger = paramProps->MaxInteger;
+			pProps->minInteger = paramProps->MinInteger;
+
+			pProps->displayIndex = paramProps->DisplayIndex;
+			StringToChar(paramProps->Label, pProps->label, kVstMaxLabelLen);
+			StringToChar(paramProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
+
+			pProps->category = paramProps->Category;
+			StringToChar(paramProps->CategoryLabel, pProps->categoryLabel, kVstMaxCategLabelLen);
+			pProps->numParametersInCategory = paramProps->NumParametersInCategory;
+			
+			return true;
+		}
+
+		return false;
 	}
 
 	static void FromMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::MidiProgramName* pProgName)

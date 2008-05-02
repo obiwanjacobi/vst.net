@@ -56,6 +56,16 @@
 
         public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
         {
+            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+
+            if(pluginConnections != null)
+            {
+                input = pluginConnections.InputSpeakerArrangement;
+                output = pluginConnections.OutputSpeakerArrangement;
+                
+                return true;
+            }
+
             input = null;
             output = null;
             return false;
@@ -63,6 +73,15 @@
 
         public int SetTotalSamplesToProcess(int numberOfSamples)
         {
+            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+
+            if (pluginOffline != null)
+            {
+                pluginOffline.TotalSamplesToProcess = numberOfSamples;
+
+                // TODO: what to return?
+            }
+
             return 0;
         }
 
@@ -178,9 +197,9 @@
                 VstMidiChannelInfo channelInfo = midiPrograms.ChannelInfos[channel];
                 VstMidiProgram program = channelInfo.Programs[midiProgramName.CurrentProgramIndex];
                 midiProgramName.Name = program.Name;
-                midiProgramName.MidiProgram = (char)program.ProgramChange;
-                midiProgramName.MidiBankMSB = (char)program.BankSelectMsb;
-                midiProgramName.MidiBankLSB = (char)program.BankSelectLsb;
+                midiProgramName.MidiProgram = program.ProgramChange;
+                midiProgramName.MidiBankMSB = program.BankSelectMsb;
+                midiProgramName.MidiBankLSB = program.BankSelectLsb;
 
                 if (program.ParentCategory != null)
                 {
@@ -209,9 +228,9 @@
                 {
                     midiProgramName.CurrentProgramIndex = channelInfo.Programs.IndexOf(channelInfo.ActiveProgram);
                     midiProgramName.Name = channelInfo.ActiveProgram.Name;
-                    midiProgramName.MidiProgram = (char)channelInfo.ActiveProgram.ProgramChange;
-                    midiProgramName.MidiBankMSB = (char)channelInfo.ActiveProgram.BankSelectMsb;
-                    midiProgramName.MidiBankLSB = (char)channelInfo.ActiveProgram.BankSelectLsb;
+                    midiProgramName.MidiProgram = channelInfo.ActiveProgram.ProgramChange;
+                    midiProgramName.MidiBankMSB = channelInfo.ActiveProgram.BankSelectMsb;
+                    midiProgramName.MidiBankLSB = channelInfo.ActiveProgram.BankSelectLsb;
 
                     if (channelInfo.ActiveProgram.ParentCategory != null)
                     {
@@ -225,10 +244,9 @@
                 else
                 {
                     midiProgramName.CurrentProgramIndex = -1;
-                    //TODO: fix "cannot convert to char"
-                    //midiProgramName.MidiProgram = 0xFFFF;
-                    //midiProgramName.MidiBankMSB = -1;
-                    //midiProgramName.MidiBankLSB = -1;
+                    midiProgramName.MidiProgram = (byte)0xFF;
+                    midiProgramName.MidiBankMSB = (byte)0xFF;
+                    midiProgramName.MidiBankLSB = (byte)0xFF;
                     midiProgramName.ParentCategoryIndex = -1;
                 }
 
@@ -393,19 +411,40 @@
 
         public bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag)
         {
-            // TODO
+            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+
+            if (pluginOffline != null)
+            {
+                // TODO:
+                pluginOffline.Notify();
+            }
+
             return false;
         }
 
         public bool OfflinePrepare(int count)
         {
-            // TODO
+            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+
+            if (pluginOffline != null)
+            {
+                // TODO:
+                pluginOffline.Prepare();
+            }
+
             return false;
         }
 
         public bool OfflineRun(int count)
         {
-            // TODO
+            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+
+            if (pluginOffline != null)
+            {
+                // TODO:
+                pluginOffline.Run();
+            }
+
             return false;
         }
 
@@ -417,7 +456,15 @@
 
         public bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput)
         {
-            // TODO
+            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+
+            if (pluginConnections != null)
+            {
+                pluginConnections.InputSpeakerArrangement = saInput;
+                pluginConnections.OutputSpeakerArrangement = saOutput;
+                return true;
+            }
+
             return false;
         }
 
@@ -467,17 +514,17 @@
             switch (cando)
             {
                 case VstPluginCanDo.Bypass:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginBypass>() ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginBypass>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.MidiProgramNames:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.Offline:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.ReceiveVstEvents:
                 case VstPluginCanDo.ReceiveVstMidiEvent:
-                    result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.ReceiveVstTimeInfo:
                     // TODO: define interface?
@@ -485,7 +532,7 @@
                     break;
                 case VstPluginCanDo.SendVstEvents:
                 case VstPluginCanDo.SendVstMidiEvent:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiSource>() ? VstCanDoResult.No : VstCanDoResult.Yes;
+                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiSource>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
             }
 
@@ -504,20 +551,17 @@
             return 0;
         }
 
-        public bool GetParameterProperties(int index, VstParameterProperties paramProps)
+        public VstParameterProperties GetParameterProperties(int index)
         {
             IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                
-                // TODO: fill paramProps
-
-                //return true;
+                return parameter.Properties;
             }
 
-            return false;
+            return null;
         }
 
         public int GetVstVersion()
@@ -531,13 +575,17 @@
 
         public void Open()
         {
+            if (!_pluginCtx.Host.Instance.HostCommandStub.IsInitialized())
+            {
+                throw new InvalidOperationException("The HostCommandStub has not been initialized.");
+            }
+
             _pluginCtx.Plugin.Instance.Open(_pluginCtx.Host.Instance);
         }
 
         public void Close()
         {
-            _pluginCtx.Plugin.Instance.Dispose();
-            _pluginCtx.Host.Instance.Dispose();
+            _pluginCtx.Dispose();
             _pluginCtx = null;
         }
 
@@ -731,11 +779,11 @@
             if (plugin != null)
             {
                 _pluginCtx = new VstPluginContext();
-                _pluginCtx.Host = new Common.ExtensibleObjectRef<Host.VstHost>(new Host.VstHost(hostCmdStub));
+                _pluginCtx.Host = new Common.ExtensibleObjectRef<Host.VstHost>(new Host.VstHost(hostCmdStub, plugin));
                 _pluginCtx.Plugin = new Common.ExtensibleObjectRef<IVstPlugin>(plugin);
-                _pluginCtx.PlginInfo = CreatePluginInfo(plugin);
+                _pluginCtx.PluginInfo = CreatePluginInfo(plugin);
 
-                return _pluginCtx.PlginInfo;
+                return _pluginCtx.PluginInfo;
             }
 
             return null;
@@ -863,6 +911,13 @@
             {
                 pluginInfo.NumberOfAudioInputs = audioProcessor.InputCount;
                 pluginInfo.NumberOfAudioOutputs = audioProcessor.OutputCount;
+            }
+
+            // parameter info
+            IVstPluginParameters pluginParameters = plugin.GetInstance<IVstPluginParameters>(false);
+            if (pluginParameters != null)
+            {
+                pluginInfo.NumberOfParameters = pluginParameters.Parameters.Count;
             }
 
             // program info

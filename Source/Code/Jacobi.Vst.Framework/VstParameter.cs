@@ -5,7 +5,7 @@ namespace Jacobi.Vst.Framework
     public class VstParameter
     {
         private VstParameterProperties _props;
-        public VstParameterProperties Info
+        public VstParameterProperties Properties
         {
             get
             {

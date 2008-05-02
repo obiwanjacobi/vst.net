@@ -1,10 +1,11 @@
 namespace Jacobi.Vst.Framework
 {
     using System;
+    using Jacobi.Vst.Core;
 
     public interface IVstHostAutomation
     {
-        int AutomationState { get;} // return enum
-        IDisposable EditParemeter(VstParameter parameter);
+        VstAutomationStates AutomationState { get; }
+        IDisposable EditParameter(int parameterIndex);
     }
 }

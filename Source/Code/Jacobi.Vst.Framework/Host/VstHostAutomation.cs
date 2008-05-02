@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework.Host
 {
     using System;
+    using Jacobi.Vst.Core;
 
     internal class VstHostAutomation : IVstHostAutomation
     {
@@ -13,16 +14,46 @@
 
         #region IVstHostAutomation Members
 
-        public int AutomationState
+        public VstAutomationStates AutomationState
         {
-            get { throw new System.NotImplementedException(); }
+            get { return _host.HostCommandStub.GetAutomationState(); }
         }
 
-        public IDisposable EditParemeter(VstParameter parameter)
+        public IDisposable EditParameter(int parameterIndex)
         {
-            throw new System.NotImplementedException();
+            if (_host.HostCommandStub.BeginEdit(parameterIndex))
+            {
+                return new EditParameterScope(_host, parameterIndex);
+            }
+
+            return null;
         }
 
         #endregion
+
+        private class EditParameterScope : IDisposable
+        {
+            private VstHost _host;
+            private int _index;
+
+            public EditParameterScope(VstHost host, int index)
+            {
+                _host = host;
+                _index = index;
+            }
+
+            #region IDisposable Members
+
+            public void Dispose()
+            {
+                if (_host != null)
+                {
+                    _host.HostCommandStub.EndEdit(_index);
+                    _host = null;
+                }
+            }
+
+            #endregion
+        }
     }
 }
