@@ -55,12 +55,17 @@
             {
                 if (_paramters == null)
                 {
-                    ExtensibleInterfaceRef<IVstPluginPrograms> programs = GetPrograms<IVstPluginPrograms>();
-
                     _paramters = new ExtensibleInterfaceRef<IVstPluginParameters>();
-                    _paramters.Instance = programs.Instance.ActiveProgram;
-                    _paramters.ThreadSafeInstance = _paramters.Instance;
                 }
+
+                ExtensibleInterfaceRef<IVstPluginPrograms> programs = GetPrograms<IVstPluginPrograms>();
+                
+                // reset before setting new value (otherwise an exception is thrown)
+                _paramters.Instance = null;
+
+                // always initialize parameters with ActiveProgram
+                _paramters.Instance = programs.Instance.ActiveProgram;
+                _paramters.ThreadSafeInstance = programs.ThreadSafeInstance.ActiveProgram;
 
                 return _paramters;
             }
@@ -70,7 +75,7 @@
 
         #region IExtensibleObject Members
 
-        public bool Supports<T>(bool threadSafe) where T : class
+        public bool Supports<T>() where T : class
         {
             ExtensibleInterfaceRef<IVstPluginAudioProcessor> audio = GetAudio<T>();
             if (audio != null)
@@ -93,7 +98,7 @@
             return false;
         }
 
-        public T GetInstance<T>(bool threadSafe) where T : class
+        public T GetInstance<T>() where T : class
         {
             ExtensibleInterfaceRef<IVstPluginAudioProcessor> audio = GetAudio<T>();
             if (audio != null)

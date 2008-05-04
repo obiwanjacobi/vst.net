@@ -55,9 +55,20 @@
 
         private void FillPrograms(VstProgramCollection programs)
         {
-            VstProgram prog = new VstProgram();
+            VstProgram prog = new VstProgram(PluginParameterFactory.Categories);
             prog.Name = "Fx Program 1";
+            PluginParameterFactory.CreateParameters(prog.Parameters);
 
+            programs.Add(prog);
+
+            prog = new VstProgram(PluginParameterFactory.Categories);
+            prog.Name = "Fx Program 2";
+            PluginParameterFactory.CreateParameters(prog.Parameters);
+
+            programs.Add(prog);
+
+            prog = new VstProgram(PluginParameterFactory.Categories);
+            prog.Name = "Fx Program 3";
             PluginParameterFactory.CreateParameters(prog.Parameters);
 
             programs.Add(prog);

@@ -12,6 +12,22 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 	_hostCallback = hostCallback;
 }
 
+// IVstHostCommandStubBase
+System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
+{
+	if(pluginInfo)
+	{
+		// overwrite the AEffect values with the new values supplied by pluginInfo.
+		_pluginInfo->numInputs = pluginInfo->NumberOfAudioInputs;
+		_pluginInfo->numOutputs = pluginInfo->NumberOfAudioOutputs;
+		_pluginInfo->numParams = pluginInfo->NumberOfParameters;
+		_pluginInfo->numPrograms = pluginInfo->NumberOfPrograms;
+		return true;
+	}
+
+	return false;
+}
+
 // IVstHostCommandStub10
 void HostCommandStub::SetParameterAutomated(System::Int32 index, System::Single value)
 {
@@ -46,7 +62,7 @@ void HostCommandStub::ProcessIdle()
 	CallHost(audioMasterIdle, 0, 0, 0, 0);
 }
 
-// IVstHostCommandStub
+// IVstHostCommandStub20
 Jacobi::Vst::Core::VstTimeInfo^ HostCommandStub::GetTimeInfo(Jacobi::Vst::Core::VstTimeInfoFlags filterFlags)
 {
 	ThrowIfNotInitialized();
@@ -146,7 +162,7 @@ System::Boolean HostCommandStub::OfflineWrite(Jacobi::Vst::Core::VstOfflineTask^
 	return false;
 }
 
-System::Boolean HostCommandStub::OfflineStart(Jacobi::Vst::Core::VstAudioFile^ file, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles)
+System::Boolean HostCommandStub::OfflineStart(array<Jacobi::Vst::Core::VstAudioFile^>^ files, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles)
 {
 	ThrowIfNotInitialized();
 

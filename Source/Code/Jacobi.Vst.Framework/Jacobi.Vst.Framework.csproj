@@ -96,7 +96,10 @@
     <Compile Include="VstMidiProgram.cs" />
     <Compile Include="VstMidiProgramCollection.cs" />
     <Compile Include="VstParameter.cs" />
+    <Compile Include="VstParameterCategory.cs" />
+    <Compile Include="VstParameterCategoryCollection.cs" />
     <Compile Include="VstParameterCollection.cs" />
+    <Compile Include="VstParameterInfo.cs" />
     <Compile Include="VstPluginCapabilities.cs" />
     <Compile Include="VstProgram.cs" />
     <Compile Include="VstProgramCollection.cs" />

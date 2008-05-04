@@ -358,7 +358,7 @@
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                return parameter.CanBeAutomated;
+                return parameter.Info.CanBeAutomated;
             }
 
             return false;
@@ -422,7 +422,7 @@
             return false;
         }
 
-        public bool OfflinePrepare(int count)
+        public bool OfflinePrepare(VstOfflineTask[] tasks, int count)
         {
             IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
 
@@ -435,7 +435,7 @@
             return false;
         }
 
-        public bool OfflineRun(int count)
+        public bool OfflineRun(VstOfflineTask[] tasks, int count)
         {
             IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
 
@@ -481,25 +481,19 @@
             return false;
         }
 
-        public bool GetEffectName(out string name)
+        public string GetEffectName()
         {
-            name = _pluginCtx.Plugin.Instance.Name;
-
-            return !String.IsNullOrEmpty(name);
+            return _pluginCtx.Plugin.Instance.Name;
         }
 
-        public bool GetVendorString(out string vendor)
+        public string GetVendorString()
         {
-            vendor = _pluginCtx.Plugin.Instance.ProductInfo.Vendor;
-
-            return !String.IsNullOrEmpty(vendor);
+            return _pluginCtx.Plugin.Instance.ProductInfo.Vendor;
         }
 
-        public bool GetProductString(out string product)
+        public string GetProductString()
         {
-            product = _pluginCtx.Plugin.Instance.ProductInfo.Product;
-
-            return !String.IsNullOrEmpty(product);
+            return _pluginCtx.Plugin.Instance.ProductInfo.Product;
         }
 
         public int GetVendorVersion()
@@ -558,7 +552,54 @@
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                return parameter.Properties;
+                
+                VstParameterProperties paramProps = new VstParameterProperties();
+
+                if(parameter.Category != null)
+                {
+                    paramProps.Flags |= VstParameterPropertiesFlags.ParameterSupportsDisplayCategory;
+                    paramProps.CategoryLabel = parameter.Category.Name;
+                    paramProps.Category = (short)(pluginParameters.Categories.IndexOf(parameter.Category) + 1);
+                    paramProps.NumParametersInCategory = (short)pluginParameters.Parameters.CountParametersIn(parameter.Category);
+                }
+
+                if (parameter.Info.StepFloatIsValid)
+                {
+                    paramProps.Flags |= VstParameterPropertiesFlags.ParameterUsesFloatStep;
+                    paramProps.StepFloat = parameter.Info.StepFloat;
+                    paramProps.SmallStepFloat = parameter.Info.SmallStepFloat;
+                    paramProps.LargeStepFloat = parameter.Info.LargeStepFloat;
+                }
+
+                if (parameter.Info.MinMaxIntegerIsValid)
+                {
+                    paramProps.Flags |= VstParameterPropertiesFlags.ParameterUsesIntegerMinMax;
+                    paramProps.MinInteger = parameter.Info.MinInteger;
+                    paramProps.MaxInteger = parameter.Info.MaxInteger;
+                }
+
+                if (parameter.Info.StepIntegerIsValid)
+                {
+                    paramProps.Flags |= VstParameterPropertiesFlags.ParameterUsesIntStep;
+                    paramProps.StepInteger = parameter.Info.StepInteger;
+                    paramProps.LargeStepInteger = parameter.Info.LargeStepInteger;
+                }
+
+                if (parameter.Info.IsSwitch)
+                {
+                    paramProps.Flags |= VstParameterPropertiesFlags.ParameterIsSwitch;
+                }
+
+                if (parameter.Info.CanRamp)
+                {
+                    paramProps.Flags |= VstParameterPropertiesFlags.ParameterCanRamp;
+                }
+
+                // order of parameters is also display order
+                paramProps.Flags |= VstParameterPropertiesFlags.ParameterSupportsDisplayIndex;
+                paramProps.DisplayIndex = (short)index;
+
+                return paramProps;
             }
 
             return null;
@@ -644,7 +685,7 @@
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                return parameter.Label;
+                return parameter.Info.Label;
             }
 
             return null;
@@ -670,7 +711,8 @@
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                return parameter.Name;
+                // use short label; due to length constraints
+                return parameter.Info.ShortLabel;
             }
 
             return null;
@@ -887,13 +929,13 @@
             VstPluginInfo pluginInfo = new VstPluginInfo();
 
             // determine flags
-            if (plugin.Supports<IVstPluginEditor>(false))
+            if (plugin.Supports<IVstPluginEditor>())
                 pluginInfo.Flags |= VstPluginInfoFlags.HasEditor;
-            if (plugin.Supports<IVstPluginAudioProcessor>(false))
+            if (plugin.Supports<IVstPluginAudioProcessor>())
                 pluginInfo.Flags |= VstPluginInfoFlags.CanReplacing;
-            if (plugin.Supports<IVstPluginAudioPrecissionProcessor>(false))
+            if (plugin.Supports<IVstPluginAudioPrecissionProcessor>())
                 pluginInfo.Flags |= VstPluginInfoFlags.CanDoubleReplacing;
-            if (plugin.Supports<IVstPluginPersistence>(false))
+            if (plugin.Supports<IVstPluginPersistence>())
                 pluginInfo.Flags |= VstPluginInfoFlags.ProgramChunks;
             if ((plugin.Capabilities & VstPluginCapabilities.IsSynth) > 0)
                 pluginInfo.Flags |= VstPluginInfoFlags.IsSynth;
@@ -906,7 +948,7 @@
             pluginInfo.PluginVersion = plugin.ProductInfo.Version;
             
             // audio processing info
-            IVstPluginAudioProcessor audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>(false);
+            IVstPluginAudioProcessor audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>();
             if(audioProcessor != null)
             {
                 pluginInfo.NumberOfAudioInputs = audioProcessor.InputCount;
@@ -914,14 +956,14 @@
             }
 
             // parameter info
-            IVstPluginParameters pluginParameters = plugin.GetInstance<IVstPluginParameters>(false);
+            IVstPluginParameters pluginParameters = plugin.GetInstance<IVstPluginParameters>();
             if (pluginParameters != null)
             {
                 pluginInfo.NumberOfParameters = pluginParameters.Parameters.Count;
             }
 
             // program info
-            IVstPluginPrograms pluginPrograms = plugin.GetInstance<IVstPluginPrograms>(false);
+            IVstPluginPrograms pluginPrograms = plugin.GetInstance<IVstPluginPrograms>();
             if(pluginPrograms != null)
             {
                 pluginInfo.NumberOfPrograms = pluginPrograms.Programs.Count;

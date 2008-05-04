@@ -47,14 +47,14 @@
 
         #region IExtensibleObject Members
 
-        public bool Supports<T>(bool threadSafe) where T : class
+        public bool Supports<T>() where T : class
         {
-            return _host.Supports<T>(threadSafe);
+            return _host.Supports<T>();
         }
 
-        public T GetInstance<T>(bool threadSafe) where T : class
+        public T GetInstance<T>() where T : class
         {
-            return _host.GetInstance<T>(threadSafe);
+            return _host.GetInstance<T>();
         }
 
         #endregion

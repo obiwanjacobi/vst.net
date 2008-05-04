@@ -1,35 +1,44 @@
 namespace Jacobi.Vst.Framework
 {
     using Jacobi.Vst.Core;
+    using System;
 
     public class VstParameter
     {
-        private VstParameterProperties _props;
-        public VstParameterProperties Properties
+        public VstParameter(VstParameterInfo parameterInfo)
         {
-            get
+            if (parameterInfo == null)
             {
-                if (_props == null)
-                {
-                    _props = new VstParameterProperties();
-                }
+                throw new ArgumentNullException("parameterInfo");
+            }
 
-                return _props;
-            }
-            set
-            {
-                _props = value;
-            }
+            Info = parameterInfo;
         }
 
-        public bool CanBeAutomated { get; set; }
-        public float NormalizedValue { get; set; }
-        public string DisplayValue { get; private set; }
-        public string Name { get; private set; }
-        public string Label { get; private set; }
+        public VstParameterInfo Info
+        { get; private set; }
 
-        public virtual bool ParseValue(string str)
+        public VstParameterCategory Category
+        { get; set; }
+        
+        public float NormalizedValue 
+        { get; set; }
+
+        public virtual string DisplayValue 
+        { get; protected set; }
+        
+        public string Name
+        { get; set; }
+
+        public virtual bool ParseValue(string value)
         {
+            float fValue;
+            if (Single.TryParse(value, out fValue))
+            {
+                NormalizedValue = fValue;
+                return true;
+            }
+
             return false;
         }
     }
