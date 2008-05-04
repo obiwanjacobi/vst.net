@@ -131,7 +131,7 @@
 
         #region IExtensibleObject Members
 
-        public bool Supports<T>(bool threadSafe) where T : class
+        public bool Supports<T>() where T : class
         {
             ExtensibleInterfaceRef<IVstHostShell> shell = GetShell<T>();
             if (shell != null)
@@ -172,7 +172,7 @@
             return false;
         }
 
-        public T GetInstance<T>(bool threadSafe) where T : class
+        public T GetInstance<T>() where T : class
         {
             ExtensibleInterfaceRef<IVstHostShell> shell = GetShell<T>();
             if (shell != null)

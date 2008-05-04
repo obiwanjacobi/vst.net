@@ -1,11 +1,12 @@
 ﻿namespace Jacobi.Vst.Core
 {
-    public interface IVstHostCommandBase
+    public interface IVstHostCommandStubBase
     {
         bool IsInitialized();
+        bool UpdatePluginInfo(VstPluginInfo pluginInfo);
     }
 
-    public interface IVstHostCommand10 : IVstHostCommandBase
+    public interface IVstHostCommandStub10 : IVstHostCommandStubBase
     {
         void SetParameterAutomated(int index, float value);
         int GetVersion();
@@ -13,7 +14,7 @@
         void ProcessIdle();
     }
 
-    public interface IVstHostCommandStub : IVstHostCommand10
+    public interface IVstHostCommandStub20 : IVstHostCommandStub10
     {
         VstTimeInfo GetTimeInfo(VstTimeInfoFlags filterFlags);
         bool ProcessEvents(VstEvent[] events);
@@ -27,7 +28,7 @@
         VstAutomationStates GetAutomationState();
         bool OfflineRead(VstOfflineTask task, VstOfflineOption option, bool readSource);
         bool OfflineWrite(VstOfflineTask task, VstOfflineOption option);
-        bool OfflineStart(VstAudioFile file, int numberOfAudioFiles, int numberOfNewAudioFiles);
+        bool OfflineStart(VstAudioFile[] files, int numberOfAudioFiles, int numberOfNewAudioFiles);
         int OfflineGetCurrentPass();
         int OfflineGetCurrentMetaPass();
         string GetVendorString();
@@ -42,4 +43,8 @@
         bool OpenFileSelector(/*VstFileSelect*/);
         bool CloseFileSelector(/*VstFileSelect*/);
     }
+
+    // alias for latest version
+    public interface IVstHostCommandStub : IVstHostCommandStub20
+    { }
 }

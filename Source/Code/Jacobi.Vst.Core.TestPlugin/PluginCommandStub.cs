@@ -203,13 +203,13 @@
             return false;
         }
 
-        public bool OfflinePrepare(int count)
+        public bool OfflinePrepare(VstOfflineTask[] tasks, int count)
         {
             _editorCtrl.Instance.AddLine("OfflinePrepare");
             return false;
         }
 
-        public bool OfflineRun(int count)
+        public bool OfflineRun(VstOfflineTask[] tasks, int count)
         {
             _editorCtrl.Instance.AddLine("OfflineRun");
             return false;
@@ -233,25 +233,22 @@
             return false;
         }
 
-        public bool GetEffectName(out string name)
+        public string GetEffectName()
         {
             _editorCtrl.Instance.AddLine("GetEffectName");
-            name = "VST.NET TestPlugin";
-            return false;
+            return "VST.NET TestPlugin";
         }
 
-        public bool GetVendorString(out string vendor)
+        public string GetVendorString()
         {
             _editorCtrl.Instance.AddLine("GetVendorString");
-            vendor = "Jacobi Software (c) 2008";
-            return false;
+            return "Jacobi Software (c) 2008";
         }
 
-        public bool GetProductString(out string product)
+        public string GetProductString()
         {
             _editorCtrl.Instance.AddLine("GetProductString");
-            product = "VST.NET";
-            return false;
+            return "VST.NET";
         }
 
         public int GetVendorVersion()

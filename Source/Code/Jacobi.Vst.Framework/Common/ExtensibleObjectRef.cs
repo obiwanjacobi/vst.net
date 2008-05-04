@@ -23,7 +23,7 @@
             {
                 if (!IsConstructionThread)
                 {
-                    return _instance.GetInstance<T>(true);
+                    return _instance.GetInstance<T>();
                 }
 
                 return _instance;
@@ -32,12 +32,12 @@
 
         public bool Supports<TIntf>() where TIntf : class
         {
-            return _instance.Supports<TIntf>(!IsConstructionThread);
+            return _instance.Supports<TIntf>();
         }
 
         public TIntf GetInstance<TIntf>() where TIntf : class
         {
-            return _instance.GetInstance<TIntf>(!IsConstructionThread);
+            return _instance.GetInstance<TIntf>();
         }
 
         public bool IsConstructionThread

@@ -2,6 +2,7 @@
 {
     public interface IVstPluginParameters
     {
+        VstParameterCategoryCollection Categories { get; }
         VstParameterCollection Parameters { get; }
     }
 }
