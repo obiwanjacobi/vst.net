@@ -135,22 +135,22 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		break;
 	case effGetEffectName:
 		{
-		System::String^ name;
-		result = _commandStub->GetEffectName(name) ? 1 : 0;
+		System::String^ name = _commandStub->GetEffectName();
+		result =  name == nullptr ? 1 : 0;
 		TypeConverter::StringToChar(name, (char*)ptr, kVstMaxEffectNameLen);
 		}
 		break;
 	case effGetVendorString:
 		{
-		System::String^ str;
-		result = _commandStub->GetVendorString(str) ? 1 : 0;
+		System::String^ str = _commandStub->GetVendorString();
+		result = str == nullptr ? 1 : 0;
 		TypeConverter::StringToChar(str, (char*)ptr, kVstMaxEffectNameLen);
 		}
 		break;
 	case effGetProductString:
 		{
-		System::String^ str;
-		result = _commandStub->GetProductString(str) ? 1 : 0;
+		System::String^ str = _commandStub->GetProductString();
+		result = str == nullptr ? 1 : 0;
 		TypeConverter::StringToChar(str, (char*)ptr, kVstMaxEffectNameLen);
 		}
 		break;

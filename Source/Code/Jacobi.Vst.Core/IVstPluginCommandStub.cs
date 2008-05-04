@@ -46,14 +46,14 @@
         bool GetOutputProperties(int index, VstPinProperties pinProps);
         VstPluginCategory GetCategory();
         bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
-        bool OfflinePrepare(/*VstOfflineTask*/ int count);
-        bool OfflineRun(/*VstOfflineTask[]*/ int count);
+        bool OfflinePrepare(VstOfflineTask[] tasks, int count);
+        bool OfflineRun(VstOfflineTask[] tasks, int count);
         bool ProcessVariableIO(VstVariableIO variableIO);
         bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput);
         bool SetBypass(bool bypass);
-        bool GetEffectName(out string name);
-        bool GetVendorString(out string vendor);
-        bool GetProductString(out string product);
+        string GetEffectName();
+        string GetVendorString();
+        string GetProductString();
         int GetVendorVersion();
         VstCanDoResult CanDo(VstPluginCanDo cando);
         int GetTailSize();
@@ -87,10 +87,14 @@
         int BeginLoadProgram(VstPatchChunkInfo chunkInfo);
     }
 
-    public interface IVstPluginCommandStub : IVstPluginCommandStub23
+    public interface IVstPluginCommandStub24 : IVstPluginCommandStub23
     {
         bool SetProcessPrecision(VstProcessPrecision precision);
         int GetNumberOfMidiInputChannels();
         int GetNumberOfMidiOutputChannels();
     }
+
+    // alias for latest version
+    public interface IVstPluginCommandStub : IVstPluginCommandStub24
+    { }
 }

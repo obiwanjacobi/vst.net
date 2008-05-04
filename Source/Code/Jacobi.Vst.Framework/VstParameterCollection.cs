@@ -14,6 +14,21 @@ namespace Jacobi.Vst.Framework
             }
         }
 
+        public int CountParametersIn(VstParameterCategory category)
+        {
+            int count = 0;
+
+            foreach (VstParameter param in this.Items)
+            {
+                if (param.Category == category)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
         protected override string GetKeyForItem(VstParameter item)
         {
             return item.Name;

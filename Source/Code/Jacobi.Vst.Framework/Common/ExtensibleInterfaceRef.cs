@@ -20,10 +20,10 @@
             }
             set
             {
-                if (_instance != null) throw new InvalidOperationException("Instance is already set.");
+                if (_instance != null && value != null) throw new InvalidOperationException("Instance is already set.");
 
                 _instance = value;
-                _threadId = Thread.CurrentThread.ManagedThreadId;
+                _threadId = (value != null) ? Thread.CurrentThread.ManagedThreadId : 0;
             }
         }
 

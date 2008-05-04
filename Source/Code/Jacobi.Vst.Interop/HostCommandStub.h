@@ -5,12 +5,13 @@ ref class HostCommandStub : Jacobi::Vst::Core::IVstHostCommandStub
 public:
 	// IVstHostCommandStubBase
 	virtual System::Boolean IsInitialized() { return (_pluginInfo != NULL); }
+	virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo);
 	// IVstHostCommandStub10
 	virtual void SetParameterAutomated(System::Int32 index, System::Single value);
 	virtual System::Int32 GetVersion();
     virtual System::Int32 GetCurrentPluginID();
     virtual void ProcessIdle();
-	// IVstHostCommandStub
+	// IVstHostCommandStub20
 	virtual Jacobi::Vst::Core::VstTimeInfo^ GetTimeInfo(Jacobi::Vst::Core::VstTimeInfoFlags filterFlags);
 	virtual System::Boolean ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events);
 	virtual System::Boolean IoChanged();
@@ -23,7 +24,7 @@ public:
 	virtual Jacobi::Vst::Core::VstAutomationStates GetAutomationState();
 	virtual System::Boolean OfflineRead(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option, System::Boolean readSource);
 	virtual System::Boolean OfflineWrite(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option);
-	virtual System::Boolean OfflineStart(Jacobi::Vst::Core::VstAudioFile^ file, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles);
+	virtual System::Boolean OfflineStart(array<Jacobi::Vst::Core::VstAudioFile^>^ files, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles);
 	virtual System::Int32 OfflineGetCurrentPass();
 	virtual System::Int32 OfflineGetCurrentMetaPass();
 	virtual System::String^ GetVendorString();
