@@ -66,27 +66,6 @@
             return null;
         }
 
-        private ExtensibleInterfaceRef<IVstHostIO> _io;
-        private ExtensibleInterfaceRef<IVstHostIO> GetIO<T>() where T : class
-        {
-            if (ExtensibleInterfaceRef<IVstHostIO>.IsMatch<T>())
-            {
-                if (_io == null)
-                {
-                    _io = new ExtensibleInterfaceRef<IVstHostIO>();
-                    if ((_host.Capabilities & VstHostCapabilities.AcceptIoChanges) > 0)
-                    {
-                        _io.Instance = new VstHostIO(_host);
-                        _io.ThreadSafeInstance = _io.Instance;
-                    }
-                }
-
-                return _io;
-            }
-
-            return null;
-        }
-
         private ExtensibleInterfaceRef<IVstHostOfflineProcessor> _offline;
         private ExtensibleInterfaceRef<IVstHostOfflineProcessor> GetOffline<T>() where T : class
         {
@@ -151,12 +130,6 @@
                 return (automation.Instance != null);
             }
 
-            ExtensibleInterfaceRef<IVstHostIO> io = GetIO<T>();
-            if(io != null)
-            {
-                return (io.Instance != null);
-            }
-
             ExtensibleInterfaceRef<IVstHostOfflineProcessor> offline = GetOffline<T>();
             if (offline != null)
             {
@@ -192,12 +165,6 @@
                 return automation.Instance as T;
             }
 
-            ExtensibleInterfaceRef<IVstHostIO> io = GetIO<T>();
-            if (io != null)
-            {
-                return io.Instance as T;
-            }
-
             ExtensibleInterfaceRef<IVstHostOfflineProcessor> offline = GetOffline<T>();
             if (offline != null)
             {
@@ -231,12 +198,6 @@
                 _automation = null;
             }
             
-            if (_io != null)
-            {
-                _io.Dispose();
-                _io = null;
-            }
-
             if (_midiProcessor != null)
             {
                 _midiProcessor.Dispose();

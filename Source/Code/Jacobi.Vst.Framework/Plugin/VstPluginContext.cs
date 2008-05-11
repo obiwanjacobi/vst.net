@@ -1,15 +1,14 @@
 ﻿namespace Jacobi.Vst.Framework.Plugin
 {
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework.Common;
-    using Jacobi.Vst.Framework.Host;
     using System;
+    using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Host;
 
     internal class VstPluginContext : IDisposable
     {
         public VstPluginInfo PluginInfo;
-        public ExtensibleObjectRef<IVstPlugin> Plugin;
-        public ExtensibleObjectRef<VstHost> Host;
+        public IVstPlugin Plugin;
+        public VstHost Host;
 
         #region IDisposable Members
 

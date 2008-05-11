@@ -7,7 +7,7 @@
     {
         private VstPluginContext _pluginCtx;
 
-        #region IVstPluginCommandStub Members
+        #region IVstPluginCommandStub24 Members
 
         public bool SetProcessPrecision(VstProcessPrecision precision)
         {
@@ -377,36 +377,62 @@
             return false;
         }
 
-        public bool GetProgramNameIndexed(int index, out string name)
+        public string GetProgramNameIndexed(int index)
         {
             IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null)
             {
                 VstProgram program = pluginPrograms.Programs[index];
-                name = program.Name;
-                return true;
+                return program.Name;
             }
 
-            name = null;
-            return false;
+            return null;
         }
 
-        public bool GetInputProperties(int index, VstPinProperties pinProps)
+        public VstPinProperties GetInputProperties(int index)
         {
-            // TODO
-            return false;
+            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+
+            if (pluginConnections != null)
+            {
+                VstConnectionInfo connectionInfo = pluginConnections.InputConnectionInfos[index];
+
+                VstPinProperties pinProps = new VstPinProperties();
+                pinProps.Flags = VstPinPropertiesFlags.PinUseSpeaker;
+                pinProps.ArrangementType = connectionInfo.SpeakerArrangementType;
+                pinProps.Label = connectionInfo.Label;
+                pinProps.ShortLabel = connectionInfo.ShortLabel;
+
+                return pinProps;
+            }
+
+            return null;
         }
 
-        public bool GetOutputProperties(int index, VstPinProperties pinProps)
+        public VstPinProperties GetOutputProperties(int index)
         {
-            // TODO
-            return false;
+            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+
+            if (pluginConnections != null)
+            {
+                VstConnectionInfo connectionInfo = pluginConnections.OutputConnectionInfos[index];
+
+                VstPinProperties pinProps = new VstPinProperties();
+                pinProps.Flags = VstPinPropertiesFlags.PinUseSpeaker;
+                pinProps.ArrangementType = connectionInfo.SpeakerArrangementType;
+                pinProps.Label = connectionInfo.Label;
+                pinProps.ShortLabel = connectionInfo.ShortLabel;
+                
+                return pinProps;
+            }
+
+            return null;
         }
 
         public VstPluginCategory GetCategory()
         {
-            return _pluginCtx.Plugin.Instance.Category;
+            return _pluginCtx.Plugin.Category;
         }
 
         public bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag)
@@ -483,22 +509,22 @@
 
         public string GetEffectName()
         {
-            return _pluginCtx.Plugin.Instance.Name;
+            return _pluginCtx.Plugin.Name;
         }
 
         public string GetVendorString()
         {
-            return _pluginCtx.Plugin.Instance.ProductInfo.Vendor;
+            return _pluginCtx.Plugin.ProductInfo.Vendor;
         }
 
         public string GetProductString()
         {
-            return _pluginCtx.Plugin.Instance.ProductInfo.Product;
+            return _pluginCtx.Plugin.ProductInfo.Product;
         }
 
         public int GetVendorVersion()
         {
-            return _pluginCtx.Plugin.Instance.ProductInfo.Version;
+            return _pluginCtx.Plugin.ProductInfo.Version;
         }
 
         public VstCanDoResult CanDo(VstPluginCanDo cando)
@@ -616,12 +642,12 @@
 
         public void Open()
         {
-            if (!_pluginCtx.Host.Instance.HostCommandStub.IsInitialized())
+            if (!_pluginCtx.Host.HostCommandStub.IsInitialized())
             {
                 throw new InvalidOperationException("The HostCommandStub has not been initialized.");
             }
 
-            _pluginCtx.Plugin.Instance.Open(_pluginCtx.Host.Instance);
+            _pluginCtx.Plugin.Open(_pluginCtx.Host);
         }
 
         public void Close()
@@ -740,7 +766,7 @@
 
         public void MainsChanged(bool onoff)
         {
-            IVstPlugin plugin = _pluginCtx.Plugin.Instance;
+            IVstPlugin plugin = _pluginCtx.Plugin;
 
             if (onoff)
             {
@@ -821,8 +847,8 @@
             if (plugin != null)
             {
                 _pluginCtx = new VstPluginContext();
-                _pluginCtx.Host = new Common.ExtensibleObjectRef<Host.VstHost>(new Host.VstHost(hostCmdStub, plugin));
-                _pluginCtx.Plugin = new Common.ExtensibleObjectRef<IVstPlugin>(plugin);
+                _pluginCtx.Host = new Host.VstHost(hostCmdStub, plugin);
+                _pluginCtx.Plugin = plugin;
                 _pluginCtx.PluginInfo = CreatePluginInfo(plugin);
 
                 return _pluginCtx.PluginInfo;

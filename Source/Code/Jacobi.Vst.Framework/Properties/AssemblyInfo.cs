@@ -7,8 +7,8 @@ using System;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Jacobi.Vst.Framework")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyProduct("Jacobi.Vst.Framework")]
+[assembly: AssemblyDescription("Managed Plugin Framework.")]
+[assembly: AssemblyProduct("VST.NET")]
 [assembly: AssemblyCulture("")]
 
 [assembly: CLSCompliant(false)]

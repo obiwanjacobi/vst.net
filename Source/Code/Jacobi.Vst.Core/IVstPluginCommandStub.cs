@@ -41,9 +41,9 @@
         bool ProcessEvents(VstEvent[] events);
         bool CanParameterBeAutomated(int index);
         bool String2Parameter(int index, string str);
-        bool GetProgramNameIndexed(int index, out string name);
-        bool GetInputProperties(int index, VstPinProperties pinProps);
-        bool GetOutputProperties(int index, VstPinProperties pinProps);
+        string GetProgramNameIndexed(int index);
+        VstPinProperties GetInputProperties(int index);
+        VstPinProperties GetOutputProperties(int index);
         VstPluginCategory GetCategory();
         bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
         bool OfflinePrepare(VstOfflineTask[] tasks, int count);

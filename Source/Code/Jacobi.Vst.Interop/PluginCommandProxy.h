@@ -6,8 +6,8 @@ internal:
 	PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub);
 
 	VstIntPtr Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
-	void Process(float** inputs, float** outputs, VstInt32 sampleFrames, int numInputs, int numOutputs);
-	void Process(double** inputs, double** outputs, VstInt32 sampleFrames, int numInputs, int numOutputs);
+	void Process(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs);
+	void Process(double** inputs, double** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs);
 	void SetParameter(VstInt32 index, float value);
 	float GetParameter(VstInt32 index);
 

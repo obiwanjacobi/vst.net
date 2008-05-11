@@ -4,11 +4,13 @@ namespace Jacobi.Vst.Framework
 
     public interface IVstHostSequencer : IExtensibleObject
     {
-        VstTimeInfo GetTime(VstTimeInfoFlags filterFlags);
         double SampleRate { get;}
         int BlockSize { get;}
         int InputLatency { get;}
         int OutputLatency { get;}
         VstProcessLevels ProcessLevel { get; }
+
+        VstTimeInfo GetTime(VstTimeInfoFlags filterFlags);
+        bool UpdatePluginIO();
     }
 }

@@ -12,6 +12,22 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 	_hostCallback = hostCallback;
 }
 
+HostCommandStub::~HostCommandStub()
+{
+	this->!HostCommandStub();
+}
+
+HostCommandStub::!HostCommandStub()
+{
+	_hostCallback = NULL;
+	
+	if(_pluginInfo != NULL)
+	{
+		delete _pluginInfo;
+		_pluginInfo = NULL;
+	}
+}
+
 // IVstHostCommandStubBase
 System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
 {

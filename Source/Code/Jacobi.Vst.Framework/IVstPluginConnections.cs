@@ -6,5 +6,8 @@
     {
         VstSpeakerArrangement InputSpeakerArrangement {get; set;}
         VstSpeakerArrangement OutputSpeakerArrangement { get; set; }
+
+        VstConnectionInfoCollection InputConnectionInfos { get; }
+        VstConnectionInfoCollection OutputConnectionInfos { get; }
     }
 }

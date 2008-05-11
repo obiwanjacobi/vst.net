@@ -48,19 +48,14 @@
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
     <Compile Include="Common\ExtensibleInterfaceRef.cs" />
-    <Compile Include="Common\ExtensibleObjectRef.cs" />
     <Compile Include="Host\VstHost.cs" />
     <Compile Include="Host\VstHostAutomation.cs" />
     <Compile Include="Host\VstHostInterfaceManager.cs" />
-    <Compile Include="Host\VstHostIO.cs" />
     <Compile Include="Host\VstHostMidiProcessor.cs" />
     <Compile Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IExtensibleObject.cs" />
-    <Compile Include="IVstAudioChannel.cs" />
-    <Compile Include="IVstAudioPrecisionChannel.cs" />
-    <Compile Include="IVstHostIO.cs" />
     <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />
@@ -86,6 +81,7 @@
     <Compile Include="Plugin\StdPluginCommandStub.cs" />
     <Compile Include="VstAudioChannel.cs" />
     <Compile Include="VstAudioPrecisionChannel.cs" />
+    <Compile Include="VstConnectionInfo.cs" />
     <Compile Include="VstEventCollection.cs" />
     <Compile Include="Host\VstHostSequencer.cs" />
     <Compile Include="VstHostCapabilities.cs" />
@@ -103,6 +99,7 @@
     <Compile Include="VstPluginCapabilities.cs" />
     <Compile Include="VstProgram.cs" />
     <Compile Include="VstProgramCollection.cs" />
+    <Compile Include="VstConnectionInfoCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Class Diagrams\Jacobi.Vst.Framework.Interfaces.cd" />
@@ -128,6 +125,9 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\gacutil.exe" /if "$(TargetPath)"</PostBuildEvent>
+    <WindowsSdkDir>%WindowsSdkDir%</WindowsSdkDir>
+    <PostBuildEvent>CALL "c:\Program Files\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
+"$(WindowsSdkDir)\Bin\gacutil.exe" /if "$(TargetPath)"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

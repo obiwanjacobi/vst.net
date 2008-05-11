@@ -39,6 +39,9 @@ public:
 	virtual System::Boolean OpenFileSelector(/*VstFileSelect*/);
 	virtual System::Boolean CloseFileSelector(/*VstFileSelect*/);
 
+	~HostCommandStub();
+	!HostCommandStub();
+
 internal:
 	HostCommandStub(::audioMasterCallback hostCallback);
 	void Initialize(AEffect* pluginInfo) { if(pluginInfo == NULL) { throw gcnew System::ArgumentNullException("pluginInfo"); } _pluginInfo = pluginInfo; }
