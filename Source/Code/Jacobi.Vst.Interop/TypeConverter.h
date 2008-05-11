@@ -1,28 +1,25 @@
 #pragma once
 
-using namespace System;
-using namespace System::Runtime::InteropServices;
-
 class TypeConverter
 {
 public:
-	static void StringToChar(String^ source, char* dest, size_t maxLength)
+	static void StringToChar(System::String^ source, char* dest, size_t maxLength)
 	{
 		if(source)
 		{
-			const char* str = (const char*)(Marshal::StringToHGlobalAnsi(source)).ToPointer();
-			strcpy_s(dest, maxLength, str);
-			Marshal::FreeHGlobal(IntPtr((void*)str));
+			System::IntPtr mem = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(source);
+			strcpy_s(dest, maxLength, (const char*)mem.ToPointer());
+			System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
 		}
 	}
 
-	static String^ CharToString(char* source)
+	static System::String^ CharToString(char* source)
 	{
-		String^ str;
+		System::String^ str;
 
 		if(source)
 		{
-			str = gcnew String(source);
+			str = gcnew System::String(source);
 		}
 
 		return str;
@@ -190,7 +187,7 @@ public:
 		delete pEvents;
 	}
 
-	static Jacobi::Vst::Core::VstPinProperties^ ToPinProperties(::VstPinProperties* pProps)
+	/*static Jacobi::Vst::Core::VstPinProperties^ ToPinProperties(::VstPinProperties* pProps)
 	{
 		Jacobi::Vst::Core::VstPinProperties^ pinProperties = gcnew Jacobi::Vst::Core::VstPinProperties();
 		
@@ -200,13 +197,21 @@ public:
 		pinProperties->ArrangementType = (Jacobi::Vst::Core::VstSpeakerArrangementType)pProps->arrangementType;
 
 		return pinProperties;
+	}*/
+
+	static void FromPinProperties(Jacobi::Vst::Core::VstPinProperties^ pinProps, ::VstPinProperties* pProps)
+	{
+		pProps->flags = (int)pinProps->Flags;
+		StringToChar(pinProps->Label, pProps->label, kVstMaxLabelLen);
+		StringToChar(pinProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
+		pProps->arrangementType = (int)pinProps->ArrangementType;
 	}
 
 	static Jacobi::Vst::Core::VstSpeakerArrangement^ ToSpeakerArrangement(::VstSpeakerArrangement* pArrangement)
 	{
 		Jacobi::Vst::Core::VstSpeakerArrangement^ spkArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
 
-		spkArr->Type = (Jacobi::Vst::Core::VstSpeakerArrangementType)pArrangement->type;
+		spkArr->Type = safe_cast<Jacobi::Vst::Core::VstSpeakerArrangementType>(pArrangement->type);
 		spkArr->Speakers = gcnew array<Jacobi::Vst::Core::VstSpeakerProperties^>(pArrangement->numChannels);
 
 		for(int n = 0; n < pArrangement->numChannels; n++)
@@ -217,7 +222,7 @@ public:
 			spkProp->Azimath = propSrc.azimuth;
 			spkProp->Elevation = propSrc.elevation;
 			spkProp->Radius = propSrc.radius;
-			spkProp->SpeakerType = (Jacobi::Vst::Core::VstSpeakerTypes)propSrc.type;
+			spkProp->SpeakerType = safe_cast<Jacobi::Vst::Core::VstSpeakerTypes>(propSrc.type);
 			spkProp->Name = CharToString(propSrc.name);
 
 			spkArr->Speakers[n] = spkProp;
@@ -252,32 +257,25 @@ public:
 		return paramProps;
 	}*/
 
-	static bool FromParameterProperties(Jacobi::Vst::Core::VstParameterProperties^ paramProps, ::VstParameterProperties* pProps)
+	static void FromParameterProperties(Jacobi::Vst::Core::VstParameterProperties^ paramProps, ::VstParameterProperties* pProps)
 	{
-		if(paramProps != nullptr && pProps != NULL)
-		{
-			pProps->flags = (int)paramProps->Flags;
-			pProps->stepFloat = paramProps->StepFloat;
-			pProps->smallStepFloat = paramProps->SmallStepFloat;
-			pProps->largeStepFloat = paramProps->LargeStepFloat;
+		pProps->flags = (int)paramProps->Flags;
+		pProps->stepFloat = paramProps->StepFloat;
+		pProps->smallStepFloat = paramProps->SmallStepFloat;
+		pProps->largeStepFloat = paramProps->LargeStepFloat;
 
-			pProps->stepInteger = paramProps->StepInteger;
-			pProps->largeStepInteger = paramProps->LargeStepInteger;
-			pProps->maxInteger = paramProps->MaxInteger;
-			pProps->minInteger = paramProps->MinInteger;
+		pProps->stepInteger = paramProps->StepInteger;
+		pProps->largeStepInteger = paramProps->LargeStepInteger;
+		pProps->maxInteger = paramProps->MaxInteger;
+		pProps->minInteger = paramProps->MinInteger;
 
-			pProps->displayIndex = paramProps->DisplayIndex;
-			StringToChar(paramProps->Label, pProps->label, kVstMaxLabelLen);
-			StringToChar(paramProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
+		pProps->displayIndex = paramProps->DisplayIndex;
+		StringToChar(paramProps->Label, pProps->label, kVstMaxLabelLen);
+		StringToChar(paramProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
 
-			pProps->category = paramProps->Category;
-			StringToChar(paramProps->CategoryLabel, pProps->categoryLabel, kVstMaxCategLabelLen);
-			pProps->numParametersInCategory = paramProps->NumParametersInCategory;
-			
-			return true;
-		}
-
-		return false;
+		pProps->category = paramProps->Category;
+		StringToChar(paramProps->CategoryLabel, pProps->categoryLabel, kVstMaxCategLabelLen);
+		pProps->numParametersInCategory = paramProps->NumParametersInCategory;
 	}
 
 	static void FromMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::MidiProgramName* pProgName)
@@ -317,13 +315,13 @@ public:
 		timeInfo->BarStartPosition = pTimeInfo->barStartPos;
 		timeInfo->CycleStartPosition = pTimeInfo->cycleEndPos;
 		timeInfo->CysleEndPosition = pTimeInfo->cycleStartPos;
-		timeInfo->Flags = (Jacobi::Vst::Core::VstTimeInfoFlags)pTimeInfo->flags;
+		timeInfo->Flags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(pTimeInfo->flags);
 		timeInfo->NanoSeconds = pTimeInfo->nanoSeconds;
 		timeInfo->PpqPosition = pTimeInfo->ppqPos;
 		timeInfo->SamplePosition = pTimeInfo->samplePos;
 		timeInfo->SampleRate = pTimeInfo->sampleRate;
 		timeInfo->SamplesToNearestClock = pTimeInfo->samplesToNextClock;
-		timeInfo->SmpteFrameRate = (Jacobi::Vst::Core::VstSmpteFrameRate)pTimeInfo->smpteFrameRate;
+		timeInfo->SmpteFrameRate = safe_cast<Jacobi::Vst::Core::VstSmpteFrameRate>(pTimeInfo->smpteFrameRate);
 		timeInfo->SmpteOffset = pTimeInfo->smpteOffset;
 		timeInfo->Tempo = pTimeInfo->tempo;
 		timeInfo->TimeSignatureDenominator = pTimeInfo->timeSigDenominator;

@@ -19,14 +19,13 @@
             }
 
             HostCommandStub = hostCmdStub;
-            Plugin = new Common.ExtensibleObjectRef<IVstPlugin>(plugin);
+            Plugin = plugin;
 
             _intfMgr = new VstHostInterfaceManager(this);
         }
 
         public IVstHostCommandStub HostCommandStub { get; private set; }
-        internal Common.ExtensibleObjectRef<IVstPlugin> Plugin { get; private set; }
-
+        internal IVstPlugin Plugin { get; private set; }
 
         #region IVstHost Members
 
@@ -115,9 +114,18 @@
 
         public void Dispose()
         {
-            _intfMgr.Dispose();
-            
-            HostCommandStub = null;
+            if (_intfMgr != null)
+            {
+                _intfMgr.Dispose();
+                _intfMgr = null;
+            }
+
+            if (HostCommandStub != null)
+            {
+                HostCommandStub.Dispose();
+                HostCommandStub = null;
+            }
+
             Plugin = null;
         }
 

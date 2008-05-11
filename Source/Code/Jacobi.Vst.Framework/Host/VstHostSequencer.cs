@@ -13,11 +13,6 @@
 
         #region IVstHostSequencer Members
 
-        public VstTimeInfo GetTime(VstTimeInfoFlags filterFlags)
-        {
-            return _host.HostCommandStub.GetTimeInfo(filterFlags);
-        }
-
         public double SampleRate
         {
             get { return _host.HostCommandStub.GetSampleRate(); }
@@ -41,6 +36,16 @@
         public VstProcessLevels ProcessLevel
         {
             get { return _host.HostCommandStub.GetProcessLevel(); }
+        }
+
+        public VstTimeInfo GetTime(VstTimeInfoFlags filterFlags)
+        {
+            return _host.HostCommandStub.GetTimeInfo(filterFlags);
+        }
+
+        public bool UpdatePluginIO()
+        {
+            return _host.HostCommandStub.IoChanged();
         }
 
         #endregion

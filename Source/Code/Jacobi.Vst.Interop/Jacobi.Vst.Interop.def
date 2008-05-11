@@ -1,4 +1,3 @@
-LIBRARY	"Jacobi.Vst.Interop"
 EXPORTS
 	VSTPluginMain
 	main = VSTPluginMain

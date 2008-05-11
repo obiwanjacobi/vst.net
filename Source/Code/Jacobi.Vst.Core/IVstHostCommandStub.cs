@@ -1,6 +1,8 @@
 ﻿namespace Jacobi.Vst.Core
 {
-    public interface IVstHostCommandStubBase
+    using System;
+
+    public interface IVstHostCommandStubBase : IDisposable
     {
         bool IsInitialized();
         bool UpdatePluginInfo(VstPluginInfo pluginInfo);

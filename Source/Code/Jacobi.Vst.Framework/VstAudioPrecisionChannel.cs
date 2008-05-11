@@ -3,7 +3,7 @@
     using System;
     using Jacobi.Vst.Core;
 
-    public class VstAudioPrecisionChannel : IVstAudioPrecisionChannel, IDirectBufferAccess64
+    public sealed class VstAudioPrecisionChannel : IDirectBufferAccess64
     {
         private VstAudioPrecisionBuffer _audioBuffer;
 
@@ -55,7 +55,7 @@
 
         #region IDirectBufferAccess64 Members
 
-        public unsafe double* Buffer
+        unsafe double* IDirectBufferAccess64.Buffer
         {
             get { return _audioBuffer.Buffer; }
         }
