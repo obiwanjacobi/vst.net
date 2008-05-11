@@ -172,23 +172,22 @@
             return false;
         }
 
-        public bool GetProgramNameIndexed(int index, out string name)
+        public string GetProgramNameIndexed(int index)
         {
-            _editorCtrl.Instance.AddLine("GetProgramNameIndexed");
-            name = null;
-            return false;
+            _editorCtrl.Instance.AddLine("GetProgramNameIndexed: " + index);
+            return null;
         }
 
-        public bool GetInputProperties(int index, VstPinProperties pinProps)
+        public VstPinProperties GetInputProperties(int index)
         {
             _editorCtrl.Instance.AddLine("GetInputProperties: " + index);
-            return false;
+            return null;
         }
 
-        public bool GetOutputProperties(int index, VstPinProperties pinProps)
+        public VstPinProperties GetOutputProperties(int index)
         {
             _editorCtrl.Instance.AddLine("GetOutputProperties: " + index);
-            return false;
+            return null;
         }
 
         public VstPluginCategory GetCategory()

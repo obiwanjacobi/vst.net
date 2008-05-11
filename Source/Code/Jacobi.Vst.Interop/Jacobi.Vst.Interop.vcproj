@@ -74,6 +74,7 @@
 				AssemblyDebug="1"
 				SubSystem="2"
 				TargetMachine="1"
+				KeyFile="..\..\..\..\..\..\_keyfile\Jacobi.snk"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -202,6 +203,10 @@
 			>
 			<File
 				RelativePath=".\AssemblyInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cpp"
 				>
 			</File>
 			<File

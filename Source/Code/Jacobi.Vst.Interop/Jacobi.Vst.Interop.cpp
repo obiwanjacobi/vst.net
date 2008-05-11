@@ -17,11 +17,11 @@ gcroot<PluginCommandProxy^> _pluginCommandProxy;
 // main exported method called by host to create the plugin
 AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 {
+	// create the host command stub (sends commands to host)
+	HostCommandStub^ hostStub = gcnew HostCommandStub(hostCallback);
+
 	try
 	{
-		// create the host command stub (sends commands to host)
-		HostCommandStub^ hostStub = gcnew HostCommandStub(hostCallback);
-
 		// retrieve the current plugin file name
 		System::String^ interopAssemblyFileName = getPluginFileName();
 		
@@ -33,9 +33,6 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 		
 		if(commandStub)
 		{
-			// connect the plugin command stub to the command proxy
-			_pluginCommandProxy = gcnew PluginCommandProxy(commandStub);
-
 			// retrieve the plugin info
 			Jacobi::Vst::Core::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
 
@@ -47,12 +44,17 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 				// initialize host stub with plugin info
 				hostStub->Initialize(pEffect);
 
+				// connect the plugin command stub to the command proxy
+				_pluginCommandProxy = gcnew PluginCommandProxy(commandStub);
+
 				return pEffect;
 			}
 		}
 	}
 	catch(System::Exception^ exc)
 	{
+		delete hostStub;
+
 		ShowError(exc);
 	}
 
@@ -105,6 +107,7 @@ float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 
 AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
 {
+	// deleted in the Finalizer method of the HostCommandStub
 	AEffect* pEffect = new AEffect();
 	pEffect->magic = kEffectMagic;
 
