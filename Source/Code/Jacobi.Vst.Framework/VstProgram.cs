@@ -5,16 +5,25 @@ namespace Jacobi.Vst.Framework
     {
         public VstProgram(VstParameterCategoryCollection categories)
         {
-            if (categories == null)
-            {
-                throw new ArgumentNullException("categories");
-            }
+            Throw.IfArgumentIsNull(categories, "categories");
 
             _categories = categories;
         }
 
+        private string _name;
         public string Name
-        { get; set; }
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxProgramNameLength, "Name");
+
+                _name = value;
+            }
+        }
 
         #region IVstPluginParameters Members
 

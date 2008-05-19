@@ -509,7 +509,14 @@
 
         public string GetEffectName()
         {
-            return _pluginCtx.Plugin.Name;
+            string name = _pluginCtx.Plugin.Name;
+
+            if (name != null && name.Length > Core.Constants.MaxEffectNameLength)
+            {
+                throw new InvalidOperationException("The plugin returned a name that is too long.");
+            }
+
+            return name;
         }
 
         public string GetVendorString()
@@ -583,13 +590,16 @@
 
                 if(parameter.Category != null)
                 {
+                    // find parameters in current category
+                    VstParameterCollection catParams = pluginParameters.Parameters.FindParametersIn(parameter.Category);
+                    
                     paramProps.Flags |= VstParameterPropertiesFlags.ParameterSupportsDisplayCategory;
                     paramProps.CategoryLabel = parameter.Category.Name;
                     paramProps.Category = (short)(pluginParameters.Categories.IndexOf(parameter.Category) + 1);
-                    paramProps.NumParametersInCategory = (short)pluginParameters.Parameters.CountParametersIn(parameter.Category);
+                    paramProps.NumParametersInCategory = (short)catParams.Count;
                 }
 
-                if (parameter.Info.StepFloatIsValid)
+                if (parameter.Info.IsStepFloatValid)
                 {
                     paramProps.Flags |= VstParameterPropertiesFlags.ParameterUsesFloatStep;
                     paramProps.StepFloat = parameter.Info.StepFloat;
@@ -597,14 +607,14 @@
                     paramProps.LargeStepFloat = parameter.Info.LargeStepFloat;
                 }
 
-                if (parameter.Info.MinMaxIntegerIsValid)
+                if (parameter.Info.IsMinMaxIntegerValid)
                 {
                     paramProps.Flags |= VstParameterPropertiesFlags.ParameterUsesIntegerMinMax;
                     paramProps.MinInteger = parameter.Info.MinInteger;
                     paramProps.MaxInteger = parameter.Info.MaxInteger;
                 }
 
-                if (parameter.Info.StepIntegerIsValid)
+                if (parameter.Info.IsStepIntegerValid)
                 {
                     paramProps.Flags |= VstParameterPropertiesFlags.ParameterUsesIntStep;
                     paramProps.StepInteger = parameter.Info.StepInteger;
@@ -737,8 +747,7 @@
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                // use short label; due to length constraints
-                return parameter.Info.ShortLabel;
+                return parameter.Info.Name;
             }
 
             return null;
@@ -811,7 +820,7 @@
 
             if (pluginEditor != null)
             {
-                pluginEditor.Dispose();
+                pluginEditor.Close();
             }
         }
 

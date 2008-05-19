@@ -24,7 +24,8 @@
 
             VstParameterInfo paramInfo = new VstParameterInfo();
             paramInfo.CanBeAutomated = true;
-            paramInfo.Label = "Volume";
+            paramInfo.Name = "Volume";
+            paramInfo.Label = paramInfo.Name;
             paramInfo.ShortLabel = "Vol.";
 
             paramInfo.SmallStepFloat = 0.001f;
@@ -42,15 +43,18 @@
             {
                 VstParameter param = new VstParameter(paramInfo);
 
-                param.Category = Categories[0];
+                if (Categories.Count > 0)
+                {
+                    param.Category = Categories[0];
+                }
 
                 if (param.Category != null)
                 {
-                    param.Name = param.Category.Name + "-" + param.Info.Label;
+                    param.Key = param.Category.Name + "-" + param.Info.Label;
                 }
                 else
                 {
-                    param.Name = param.Info.Label;
+                    param.Key = param.Info.Label;
                 }
 
                 parameters.Add(param);

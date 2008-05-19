@@ -15,4 +15,3 @@
 // VST interface header files
 #include "_vst\aeffect.h"
 #include "_vst\aeffectx.h"
-#include "_vst\vstfxstore.h"

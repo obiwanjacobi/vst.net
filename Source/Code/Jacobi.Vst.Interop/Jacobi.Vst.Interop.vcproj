@@ -311,14 +311,6 @@
 				RelativePath=".\_vst\aeffectx.h"
 				>
 			</File>
-			<File
-				RelativePath=".\cando.h"
-				>
-			</File>
-			<File
-				RelativePath=".\_vst\vstfxstore.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -47,6 +47,7 @@
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="VstAudioBuffer.cs" />
     <Compile Include="VstAutomationStates.cs" />
     <Compile Include="VstCanDo.cs" />

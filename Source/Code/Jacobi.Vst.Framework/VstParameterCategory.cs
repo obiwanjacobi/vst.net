@@ -1,17 +1,16 @@
-﻿using System;
-namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Framework
 {
+    using System;
+
     public class VstParameterCategory
     {
-        public const int MaxParameterCategoryNameLength = 23;
-
         private string _name;
         public string Name
         {
             get { return _name; }
             set
             {
-                if (value != null && value.Length > MaxParameterCategoryNameLength)
+                if (value != null && value.Length > Core.Constants.MaxCategoryLabelLength)
                 {
                     throw new ArgumentException("Name too long.", "Name");
                 }
