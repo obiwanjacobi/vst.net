@@ -9,6 +9,8 @@
 
         public VstAudioChannel(VstAudioBuffer audioBuffer, bool canWrite)
         {
+            Throw.IfArgumentIsNull(audioBuffer, "audioBuffer");
+
             _audioBuffer = audioBuffer;
             _canWrite = canWrite;
         }
@@ -30,8 +32,7 @@
         {
             get
             {
-                if (index < 0 || index > _audioBuffer.Count) throw new ArgumentOutOfRangeException("index", 
-                    "The index must lie between 0 and the SampleCount property value.");
+                Throw.IfArgumentNotInRange(index, 0, _audioBuffer.Count, "index");
 
                 unsafe
                 {
@@ -41,8 +42,7 @@
             set
             {
                 if (!CanWrite) throw new InvalidOperationException("Cannot write to the channel.");
-                if (index < 0 || index > _audioBuffer.Count) throw new ArgumentOutOfRangeException("index",
-                     "The index must lie between 0 and the SampleCount property value.");
+                Throw.IfArgumentNotInRange(index, 0, _audioBuffer.Count, "index");
 
                 unsafe
                 {

@@ -6,7 +6,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAIQAA=</HashCode>
+      <HashCode>AAAAAAAASAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>VstAudioChannel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -17,7 +17,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAIQAA=</HashCode>
+      <HashCode>AAAAAAQAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>VstAudioPrecisionChannel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -85,21 +85,24 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAQAAAAAAAAAwAAAAAAIAAAAAAgEAACAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAgEAACAA=</HashCode>
       <FileName>VstParameter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Jacobi.Vst.Framework.VstParameterCollection" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>VstParameterCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Jacobi.Vst.Framework.VstProgram" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="1.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAQAAAAAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
       <FileName>VstProgram.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

@@ -2,8 +2,35 @@
 {
     public class VstMidiChannelInfo
     {
-        public VstMidiCategoryCollection Categories { get { return null; } }
-        public VstMidiProgramCollection Programs { get { return null; } }
-        public VstMidiProgram ActiveProgram { get; set; }
+        private VstMidiCategoryCollection _categories;
+        public VstMidiCategoryCollection Categories
+        {
+            get
+            {
+                if (_categories == null)
+                {
+                    _categories = new VstMidiCategoryCollection();
+                }
+
+                return _categories;
+            }
+        }
+
+        private VstMidiProgramCollection _programs;
+        public VstMidiProgramCollection Programs
+        {
+            get
+            {
+                if (_programs == null)
+                {
+                    _programs = new VstMidiProgramCollection();
+                }
+
+                return _programs;
+            }
+        }
+
+        public VstMidiProgram ActiveProgram
+        { get; set; }
     }
 }

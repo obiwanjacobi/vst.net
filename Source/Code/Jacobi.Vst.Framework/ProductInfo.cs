@@ -6,13 +6,15 @@
     {
         public ProductInfo(string product, string vendor, int version)
         {
+            Throw.IfArgumentTooLong(product, Core.Constants.MaxProductStringLength, "product");
+            Throw.IfArgumentTooLong(vendor, Core.Constants.MaxVendorStringLength, "vendor");
+
             _product = product;
             _vendor = vendor;
             _version = version;
-            _formattedVersion = FormatVersion(version);
         }
 
-        private string FormatVersion(int version)
+        protected virtual string FormatVersion(int version)
         {
             int major = version/1000;
             version -= major;
@@ -34,7 +36,17 @@
 
         private string _formattedVersion;
         public string FormattedVersion
-        { get { return _formattedVersion; } }
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_formattedVersion) && _version > 0)
+                {
+                    _formattedVersion = FormatVersion(_version);
+                }
+
+                return _formattedVersion;
+            }
+        }
 
         private int _version;
         public int Version

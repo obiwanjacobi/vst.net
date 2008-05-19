@@ -6,10 +6,6 @@ namespace Jacobi.Vst.Framework
     /// </summary>
     public class VstParameterInfo
     {
-        public const int MaxParameterLabelLength = 63;
-        public const int MaxParameterShortLabelLength = 7;
-        
-
         public bool CanBeAutomated
         { get; set; }
 
@@ -18,16 +14,25 @@ namespace Jacobi.Vst.Framework
         public bool CanRamp
         { get; set; }
 
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, "Name");
+
+                _name = value;
+            }
+        }
+
         private string _label;
         public string Label 
         {
             get { return _label; }
             set
             {
-                if (value != null && value.Length > MaxParameterLabelLength)
-                {
-                    throw new ArgumentException("Label too long.", "Label");
-                }
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, "Label");
 
                 _label = value;
             }
@@ -39,16 +44,13 @@ namespace Jacobi.Vst.Framework
             get { return _shortLabel; }
             set
             {
-                if (value != null && value.Length > MaxParameterShortLabelLength)
-                {
-                    throw new ArgumentException("ShortLabel too long.", "Label");
-                }
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, "ShortLabel");
 
                 _shortLabel = value;
             }
         }
 
-        public bool MinMaxIntegerIsValid
+        public bool IsMinMaxIntegerValid
         {
             get { return (MinInteger != 0 || MaxInteger != 0); }
         }
@@ -57,7 +59,7 @@ namespace Jacobi.Vst.Framework
         public int MaxInteger
         { get; set; }
 
-        public bool StepIntegerIsValid
+        public bool IsStepIntegerValid
         {
             get { return (StepInteger != 0 && LargeStepInteger != 0); }
         }
@@ -66,7 +68,7 @@ namespace Jacobi.Vst.Framework
         public int LargeStepInteger
         { get; set; }
 
-        public bool StepFloatIsValid
+        public bool IsStepFloatValid
         {
             get { return (StepFloat != 0.0f && SmallStepFloat != 0.0f && LargeStepFloat != 0.0f); }
         }

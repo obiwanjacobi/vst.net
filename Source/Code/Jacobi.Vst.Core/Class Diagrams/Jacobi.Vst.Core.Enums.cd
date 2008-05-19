@@ -84,8 +84,8 @@
       <FileName>VstOfflineTask.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Jacobi.Vst.Core.VstOfflineOption" Collapsed="true">
-    <Position X="12.25" Y="4.5" Width="1.5" />
+  <Enum Name="Jacobi.Vst.Core.VstOfflineOption">
+    <Position X="3" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAQAAAAAAAAEAAQAAACAQAAAAAAAAAAAAQAA=</HashCode>
       <FileName>VstOfflineTask.cs</FileName>
@@ -127,14 +127,14 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstProcessLevels">
-    <Position X="3" Y="10.75" Width="1.5" />
+    <Position X="4.75" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAAQAAAgAAAAAIAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>VstProcessLevels.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstProcessPrecision">
-    <Position X="6.75" Y="11" Width="1.75" />
+    <Position X="0.5" Y="12.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAI=</HashCode>
       <FileName>VstProcessPrecision.cs</FileName>
@@ -161,8 +161,8 @@
       <FileName>VstTimeInfo.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Jacobi.Vst.Core.VstSmpteFrameRate" Collapsed="true">
-    <Position X="12.25" Y="6" Width="1.5" />
+  <Enum Name="Jacobi.Vst.Core.VstSmpteFrameRate">
+    <Position X="6.75" Y="11" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAEAEAAAgABAAAAAAAAAABAAABCgAEAAAAAEAACAAAA=</HashCode>
       <FileName>VstTimeInfo.cs</FileName>
