@@ -24,10 +24,19 @@ namespace Jacobi.Vst.Framework
         public float NormalizedValue 
         { get; set; }
 
+        private string _displayValue;
         public virtual string DisplayValue 
-        { get; protected set; }
-        
-        public string Name
+        {
+            get { return _displayValue; }
+            protected set
+            {
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, "DisplayValue");
+
+                _displayValue = value;
+            }
+        }
+
+        public string Key
         { get; set; }
 
         public virtual bool ParseValue(string value)

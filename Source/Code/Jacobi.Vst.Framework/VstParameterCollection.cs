@@ -14,24 +14,24 @@ namespace Jacobi.Vst.Framework
             }
         }
 
-        public int CountParametersIn(VstParameterCategory category)
+        public VstParameterCollection FindParametersIn(VstParameterCategory category)
         {
-            int count = 0;
+            VstParameterCollection results = new VstParameterCollection();
 
             foreach (VstParameter param in this.Items)
             {
                 if (param.Category == category)
                 {
-                    count++;
+                    results.Add(param);
                 }
             }
 
-            return count;
+            return results;
         }
 
         protected override string GetKeyForItem(VstParameter item)
         {
-            return item.Name;
+            return item.Key;
         }
     }
 }
