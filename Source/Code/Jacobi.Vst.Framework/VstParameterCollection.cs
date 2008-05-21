@@ -4,7 +4,7 @@ namespace Jacobi.Vst.Framework
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public class VstParameterCollection : KeyedCollection<string, VstParameter>
+    public class VstParameterCollection : KeyedCollection<string, VstParameter>, IActivatable
     {
         public void AddRange(IEnumerable<VstParameter> parameters)
         {
@@ -31,7 +31,33 @@ namespace Jacobi.Vst.Framework
 
         protected override string GetKeyForItem(VstParameter item)
         {
-            return item.Key;
+            return item.Info.Name;
         }
+
+        #region IActivatable Members
+
+        public bool IsActive { get; private set; }
+
+        public void Activate()
+        {
+            foreach (VstParameter param in this.Items)
+            {
+                param.Activate();
+            }
+
+            IsActive = true;
+        }
+
+        public void Deactivate()
+        {
+            foreach (VstParameter param in this.Items)
+            {
+                param.Deactivate();
+            }
+
+            IsActive = false;
+        }
+
+        #endregion
     }
 }

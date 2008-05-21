@@ -9,18 +9,18 @@
             _plugin = plugin;
         }
 
-        protected override IVstPluginAudioProcessor CreateAudioProcessor(bool threadSafe)
+        protected override IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
         {
-            if(threadSafe == false) return new AudioProcessor(_plugin);
+            if(instance == null) return new AudioProcessor(_plugin);
 
-            return null;    // returning null for threadSafe implementations will reuse initial instance
+            return instance;    // reuse initial instance
         }
 
-        protected override IVstPluginPrograms CreatePrograms(bool threadSafe)
+        protected override IVstPluginPrograms CreatePrograms(IVstPluginPrograms instance)
         {
-            if (threadSafe == false) return new PluginPrograms(_plugin);
+            if (instance == null) return new PluginPrograms(_plugin);
 
-            return null;    // returning null for threadSafe implementations will reuse initial instance
+            return instance;    // reuse initial instance
         }
     }
 }

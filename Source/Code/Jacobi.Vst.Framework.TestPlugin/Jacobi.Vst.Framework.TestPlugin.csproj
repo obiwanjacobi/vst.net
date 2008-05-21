@@ -44,6 +44,7 @@
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
     <Compile Include="AudioProcessor.cs" />
+    <Compile Include="Delay.cs" />
     <Compile Include="FxPluginInterfaceManager.cs" />
     <Compile Include="FxTestPlugin.cs" />
     <Compile Include="PluginParameterFactory.cs" />

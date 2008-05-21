@@ -3,7 +3,7 @@
     using System;
     using Jacobi.Vst.Framework.Common;
 
-    public abstract class PluginInterfaceManagerBase : IExtensibleObject, IDisposable
+    public abstract class PluginInterfaceManagerBase : IExtensible, IDisposable
     {
         private InterfaceManager<IVstPluginAudioPrecissionProcessor> _audioPrecission;
         private InterfaceManager<IVstPluginAudioProcessor> _audioProcessor;
@@ -36,69 +36,69 @@
             _programs = new InterfaceManager<IVstPluginPrograms>(CreatePrograms);
         }
 
-        protected virtual IVstPluginAudioProcessor CreateAudioProcessor(bool threadSafe)
+        protected virtual IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginAudioPrecissionProcessor CreateAudioPrecissionProcessor(bool threadSafe)
+        protected virtual IVstPluginAudioPrecissionProcessor CreateAudioPrecissionProcessor(IVstPluginAudioPrecissionProcessor instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginBypass CreateBypass(bool threadSafe)
+        protected virtual IVstPluginBypass CreateBypass(IVstPluginBypass instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginConnections CreateConnections(bool threadSafe)
+        protected virtual IVstPluginConnections CreateConnections(IVstPluginConnections instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginEditor CreateEditor(bool threadSafe)
+        protected virtual IVstPluginEditor CreateEditor(IVstPluginEditor instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginHost CreateHost(bool threadSafe)
+        protected virtual IVstPluginHost CreateHost(IVstPluginHost instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginMidiPrograms CreateMidiPrograms(bool threadSafe)
+        protected virtual IVstPluginMidiPrograms CreateMidiPrograms(IVstPluginMidiPrograms instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginMidiSource CreateMidiSource(bool threadSafe)
+        protected virtual IVstPluginMidiSource CreateMidiSource(IVstPluginMidiSource instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginOfflineProcessor CreateOfflineProcessor(bool threadSafe)
+        protected virtual IVstPluginOfflineProcessor CreateOfflineProcessor(IVstPluginOfflineProcessor instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginParameters CreateParameters(bool threadSafe)
+        protected virtual IVstPluginParameters CreateParameters(IVstPluginParameters instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginPersistence CreatePersistence(bool threadSafe)
+        protected virtual IVstPluginPersistence CreatePersistence(IVstPluginPersistence instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginProcess CreateProcess(bool threadSafe)
+        protected virtual IVstPluginProcess CreateProcess(IVstPluginProcess instance)
         {
-            return null;
+            return instance;
         }
 
-        protected virtual IVstPluginPrograms CreatePrograms(bool threadSafe)
+        protected virtual IVstPluginPrograms CreatePrograms(IVstPluginPrograms instance)
         {
-            return null;
+            return instance;
         }
 
         #region IExtensibleObject Members
@@ -112,59 +112,68 @@
         {
             // interfaces are more or less ordered in priority
 
+            // special case for the AudioProcessor: IVstPluginAudioPrecissionProcessor could also provide the IVstPluginAudioProcessor.
             ExtensibleInterfaceRef<IVstPluginAudioPrecissionProcessor> audioPrecission = _audioPrecission.MatchInterface<T>();
-            if (audioPrecission != null) return audioPrecission.Instance as T;
+            ExtensibleInterfaceRef<IVstPluginAudioProcessor> audioProcessor = _audioProcessor.MatchInterface<T>();
+            if (audioProcessor != null)
+            {
+                if (audioProcessor.SafeInstance == null && audioPrecission != null)
+                {
+                    return audioPrecission.SafeInstance as T;
+                }
 
-            ExtensibleInterfaceRef<IVstPluginAudioProcessor> audioProcessor  = _audioProcessor.MatchInterface<T>();
-            if (audioProcessor != null) return audioProcessor.Instance as T;
+                return audioProcessor.SafeInstance as T;
+            }
+
+            if (audioPrecission != null) return audioPrecission.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginPrograms> programs = _programs.MatchInterface<T>();
-            if (programs != null) return programs.Instance as T;
+            if (programs != null) return programs.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginParameters> parameters = _parameters.MatchInterface<T>();
             if (parameters != null)
             {
                 // special case for parameters
-                if (parameters.Instance == null)
+                if (parameters.SafeInstance == null)
                 {
                     programs = _programs.GetInterface();
 
                     // return the parameters of the active program (if there is one)
-                    if (programs.Instance != null && programs.Instance.ActiveProgram != null)
+                    if (programs.SafeInstance != null && programs.SafeInstance.ActiveProgram != null)
                     {
-                        return programs.Instance.ActiveProgram as T;
+                        return programs.SafeInstance.ActiveProgram as T;
                     }
                 }
 
-                return parameters.Instance as T;
+                return parameters.SafeInstance as T;
             }
 
             ExtensibleInterfaceRef<IVstPluginMidiPrograms> midiPrograms = _midiPrograms.MatchInterface<T>();
-            if (midiPrograms != null) return midiPrograms.Instance as T;
+            if (midiPrograms != null) return midiPrograms.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginMidiSource> midiSource = _midiSource.MatchInterface<T>();
-            if (midiSource != null) return midiSource.Instance as T;
+            if (midiSource != null) return midiSource.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginProcess> process = _process.MatchInterface<T>();
-            if (process != null) return process.Instance as T;
+            if (process != null) return process.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginBypass> bypass = _bypass.MatchInterface<T>();
-            if (bypass != null) return bypass.Instance as T;
+            if (bypass != null) return bypass.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginConnections> connections = _connections.MatchInterface<T>();
-            if (connections != null) return connections.Instance as T;
+            if (connections != null) return connections.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginEditor> editor = _editor.MatchInterface<T>();
-            if (editor != null) return editor.Instance as T;
+            if (editor != null) return editor.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginHost> host = _host.MatchInterface<T>();
-            if (host != null) return host.Instance as T;
+            if (host != null) return host.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginOfflineProcessor> offlineProcessor = _offlineProcessor.MatchInterface<T>();
-            if (offlineProcessor != null) return offlineProcessor.Instance as T;
+            if (offlineProcessor != null) return offlineProcessor.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginPersistence> persistence = _persistence.MatchInterface<T>();
-            if (persistence != null) return persistence.Instance as T;
+            if (persistence != null) return persistence.SafeInstance as T;
 
             return null;
         }
@@ -191,68 +200,5 @@
         }
 
         #endregion
-
-        //---------------------------------------------------------------------
-
-        private class InterfaceManager<T> : IDisposable
-            where T : class
-        {
-            public delegate T CreateInterface(bool threadSafe);
-
-            private ExtensibleInterfaceRef<T> _interfaceRef;
-            private CreateInterface _createCallback;
-
-            public InterfaceManager(CreateInterface createCallback)
-            {
-                _createCallback = createCallback;
-            }
-
-            public ExtensibleInterfaceRef<T> MatchInterface<T_Intf>() where T_Intf : class
-            {
-                if (ExtensibleInterfaceRef<T>.IsMatch<T_Intf>())
-                {
-                    return GetInterface();
-                }
-
-                return null;
-            }
-
-            public ExtensibleInterfaceRef<T> GetInterface()
-            {
-                if (_interfaceRef == null)
-                {
-                    _interfaceRef = new ExtensibleInterfaceRef<T>();
-
-                    _interfaceRef.Instance = _createCallback(false);
-                }
-                else if (!_interfaceRef.IsConstructionThread && _interfaceRef.ThreadSafeInstance == null)
-                {
-                    _interfaceRef.ThreadSafeInstance = _createCallback(true);
-
-                    // use normal instance when no special thread safe instance was created.
-                    if (_interfaceRef.ThreadSafeInstance == null)
-                    {
-                        _interfaceRef.ThreadSafeInstance = _interfaceRef.Instance;
-                    }
-                }
-
-                return _interfaceRef;
-            }
-
-            #region IDisposable Members
-
-            public void Dispose()
-            {
-                if (_interfaceRef != null)
-                {
-                    _interfaceRef.Dispose();
-                    _interfaceRef = null;
-                }
-
-                _createCallback = null;
-            }
-
-            #endregion
-        }
     }
 }

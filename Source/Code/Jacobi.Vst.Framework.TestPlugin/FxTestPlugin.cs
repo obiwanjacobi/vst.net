@@ -4,31 +4,34 @@
     {
         private IVstHost _host;
         private FxPluginInterfaceManager _intfMgr;
-
+        
         public FxTestPlugin()
         {
             _intfMgr = new FxPluginInterfaceManager(this);
+            ParameterFactory = new PluginParameterFactory();
+
+            AudioProcessor audioProcessor = _intfMgr.GetInstance<AudioProcessor>();
+            // add delay parameters to factory
+            ParameterFactory.ParameterInfos.AddRange(audioProcessor.Delay.ParameterInfos);
         }
+
+        public PluginParameterFactory ParameterFactory { get; set; }
+
 
         #region IVstPlugin Members
 
-        private ProductInfo _productInfo;
-        public ProductInfo ProductInfo
+        private VstProductInfo _productInfo;
+        public VstProductInfo ProductInfo
         {
             get
             {
                 if (_productInfo == null)
                 {
-                    _productInfo = new ProductInfo("VST.NET Framework TestPlugin", "Jacobi Software", 1000);
+                    _productInfo = new VstProductInfo("VST.NET Framework TestPlugin", "Jacobi Software", 1000);
                 }
 
                 return _productInfo;
             }
-        }
-
-        public string BaseDirectory
-        {
-            get { return null; }
         }
 
         public string Name

@@ -3,16 +3,20 @@ namespace Jacobi.Vst.Framework
     using Jacobi.Vst.Core;
     using System;
 
-    public class VstParameter
+    public class VstParameter : IActivatable
     {
         public VstParameter(VstParameterInfo parameterInfo)
         {
-            if (parameterInfo == null)
-            {
-                throw new ArgumentNullException("parameterInfo");
-            }
+            Throw.IfArgumentIsNull(parameterInfo, "parameterInfo");
 
             Info = parameterInfo;
+
+            if (Info.ParameterManager != null)
+            {
+                Info.ParameterManager.SubscribeTo(this);
+            }
+
+            // TODO: set default value (raise a changed event?)
         }
 
         public VstParameterInfo Info
@@ -20,9 +24,18 @@ namespace Jacobi.Vst.Framework
 
         public VstParameterCategory Category
         { get; set; }
-        
-        public float NormalizedValue 
-        { get; set; }
+
+        private float _normalizedValue;
+        public float NormalizedValue
+        {
+            get { return _normalizedValue; }
+            set
+            {
+                _normalizedValue = value;
+
+                OnNormalizedValueChanged();
+            }
+        }
 
         private string _displayValue;
         public virtual string DisplayValue 
@@ -36,9 +49,6 @@ namespace Jacobi.Vst.Framework
             }
         }
 
-        public string Key
-        { get; set; }
-
         public virtual bool ParseValue(string value)
         {
             float fValue;
@@ -49,6 +59,49 @@ namespace Jacobi.Vst.Framework
             }
 
             return false;
+        }
+
+        public event EventHandler<EventArgs> NormalizedValueChanged;
+        public event EventHandler<EventArgs> ActivationChanged;
+
+        #region IActivatable Members
+
+        public bool IsActive { get; private set; }
+
+        public void Activate()
+        {
+            IsActive = true;
+
+            OnActivationChanged();
+        }
+
+        public void Deactivate()
+        {
+            IsActive = false;
+
+            OnActivationChanged();
+        }
+
+        #endregion
+
+        protected virtual void OnNormalizedValueChanged()
+        {
+            EventHandler<EventArgs> handler = NormalizedValueChanged;
+
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void OnActivationChanged()
+        {
+            EventHandler<EventArgs> handler = ActivationChanged;
+
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
         }
     }
 }

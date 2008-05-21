@@ -3,20 +3,14 @@
     using System;
     using Jacobi.Vst.Core;
 
-    internal class VstHost : IExtensibleObject, IVstHost, IDisposable
+    internal class VstHost : IExtensible, IVstHost, IDisposable
     {
         private VstHostInterfaceManager _intfMgr;
 
         public VstHost(IVstHostCommandStub hostCmdStub, IVstPlugin plugin)
         {
-            if (hostCmdStub == null)
-            {
-                throw new ArgumentNullException("hostCmdStub");
-            }
-            if (plugin == null)
-            {
-                throw new ArgumentNullException("plugin");
-            }
+            Throw.IfArgumentIsNull(hostCmdStub, "hostCmdStub");
+            Throw.IfArgumentIsNull(plugin, "plugin");
 
             HostCommandStub = hostCmdStub;
             Plugin = plugin;
@@ -29,14 +23,14 @@
 
         #region IVstHost Members
 
-        private ProductInfo _productInfo;
-        public ProductInfo ProductInfo
+        private VstProductInfo _productInfo;
+        public VstProductInfo ProductInfo
         {
             get
             {
                 if (_productInfo == null)
                 {
-                    _productInfo = new ProductInfo(
+                    _productInfo = new VstProductInfo(
                         HostCommandStub.GetProductString(),
                         HostCommandStub.GetVendorString(),
                         HostCommandStub.GetVendorVersion());

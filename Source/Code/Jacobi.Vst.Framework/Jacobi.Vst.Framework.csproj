@@ -49,6 +49,7 @@
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
     <Compile Include="Common\ExtensibleInterfaceRef.cs" />
+    <Compile Include="Common\InterfaceManager.cs" />
     <Compile Include="Common\NativeMethods.cs" />
     <Compile Include="Host\VstHost.cs" />
     <Compile Include="Host\VstHostAutomation.cs" />
@@ -56,8 +57,9 @@
     <Compile Include="Host\VstHostMidiProcessor.cs" />
     <Compile Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
+    <Compile Include="IActivatable.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
-    <Compile Include="IExtensibleObject.cs" />
+    <Compile Include="IExtensible.cs" />
     <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />
@@ -78,9 +80,11 @@
     <Compile Include="IVstPluginPersistence.cs" />
     <Compile Include="IVstPluginPrograms.cs" />
     <Compile Include="Plugin\PluginInterfaceManagerBase.cs" />
-    <Compile Include="Common\WinFormsWrapper.cs" />
+    <Compile Include="Common\WindowsFormsWrapper.cs" />
     <Compile Include="Plugin\VstPluginContext.cs" />
-    <Compile Include="ProductInfo.cs" />
+    <Compile Include="VstParameterInfoCollection.cs" />
+    <Compile Include="VstParameterManager.cs" />
+    <Compile Include="VstProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Plugin\StdPluginCommandStub.cs" />
     <Compile Include="Throw.cs" />

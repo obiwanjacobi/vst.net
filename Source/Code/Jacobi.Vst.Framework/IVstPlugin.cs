@@ -3,10 +3,9 @@ namespace Jacobi.Vst.Framework
     using System;
     using Jacobi.Vst.Core;
 
-    public interface IVstPlugin : IExtensibleObject, IDisposable
+    public interface IVstPlugin : IExtensible, IDisposable
     {
-        ProductInfo ProductInfo { get; }
-        string BaseDirectory { get;}
+        VstProductInfo ProductInfo { get; }
         string Name { get;}
 
         VstPluginCategory Category { get; }

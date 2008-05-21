@@ -13,10 +13,7 @@ namespace Jacobi.Vst.Framework
         private string _name;
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
             set
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxProgramNameLength, "Name");
