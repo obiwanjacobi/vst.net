@@ -4,7 +4,7 @@
     using System.Drawing;
     using System.Windows.Forms;
 
-    public class WinFormsWrapper<T> : IDisposable 
+    public class WindowsFormsWrapper<T> : IDisposable 
         where T : UserControl, new()
     {
         private T _instance;

@@ -2,7 +2,7 @@ namespace Jacobi.Vst.Framework
 {
     using Jacobi.Vst.Core;
 
-    public interface IVstHostSequencer : IExtensibleObject
+    public interface IVstHostSequencer : IExtensible
     {
         double SampleRate { get;}
         int BlockSize { get;}

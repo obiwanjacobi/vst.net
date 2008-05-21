@@ -10,6 +10,8 @@
 
         public VstHostShell(VstHost host)
         {
+            Throw.IfArgumentIsNull(host, "host");
+
             _host = host;
         }
 

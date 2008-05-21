@@ -1,13 +1,20 @@
 ﻿namespace Jacobi.Vst.Framework.TestPlugin
 {
-    class AudioProcessor : IVstPluginAudioProcessor
+    using System;
+
+    internal class AudioProcessor : IVstPluginAudioProcessor
     {
         private FxTestPlugin _plugin;
+        private Delay _delay;
 
         public AudioProcessor(FxTestPlugin plugin)
         {
             _plugin = plugin;
+            _delay = new Delay();
         }
+
+        public Delay Delay
+        { get { return _delay; } }
 
         #region IVstPluginAudioProcessor Members
 
@@ -26,11 +33,11 @@
             get { return 0; }
         }
 
-        private double _sampleRate;
+        //private double _sampleRate;
         public double SampleRate
         {
-            get { return _sampleRate; }
-            set { _sampleRate = value; }
+            get { return (Double)_delay.SampleRate; }
+            set { _delay.SampleRate = (Single)value; }
         }
 
         private int _blockSize;
@@ -42,13 +49,11 @@
 
         public void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels)
         {
-            // audio pass thru
-            foreach (VstAudioChannel audioChannel in outChannels)
+            VstAudioChannel audioChannel = outChannels[0];
+
+            for (int n = 0; n < audioChannel.SampleCount; n++)
             {
-                for (int n = 0; n < audioChannel.SampleCount; n++)
-                {
-                    audioChannel[n] = inChannels[0][n];
-                }
+                audioChannel[n] = Delay.ProcessSample(inChannels[0][n]);
             }
         }
 

@@ -9,6 +9,8 @@
 
         public VstHostAutomation(VstHost host)
         {
+            Throw.IfArgumentIsNull(host, "host");
+
             _host = host;
         }
 

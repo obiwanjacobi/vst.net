@@ -9,21 +9,26 @@
         private T _instance;
         public T Instance
         {
-            get
-            {
-                if (IsConstructionThread)
-                {
-                    return _instance;
-                }
-
-                return ThreadSafeInstance;
-            }
+            get { return _instance; }
             set
             {
                 if (_instance != null && value != null) throw new InvalidOperationException("Instance is already set.");
 
                 _instance = value;
                 _threadId = (value != null) ? Thread.CurrentThread.ManagedThreadId : 0;
+            }
+        }
+
+        public T SafeInstance
+        {
+            get
+            {
+                if (IsConstructionThread)
+                {
+                    return Instance;
+                }
+
+                return ThreadSafeInstance;
             }
         }
 
@@ -41,7 +46,7 @@
 
         public static bool IsMatch<TIntf>() where TIntf : class
         {
-            return (typeof(TIntf).IsAssignableFrom(typeof(T)));
+            return (typeof(T).IsAssignableFrom(typeof(TIntf)));
         }
 
         #region IDisposable Members

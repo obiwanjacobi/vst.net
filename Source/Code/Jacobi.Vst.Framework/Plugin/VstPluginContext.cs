@@ -15,12 +15,18 @@
         public void Dispose()
         {
             PluginInfo = null;
-            
-            Plugin.Dispose();
-            Plugin = null;
-            
-            Host.Dispose();
-            Host = null;
+
+            if (Plugin != null)
+            {
+                Plugin.Dispose();
+                Plugin = null;
+            }
+
+            if (Host != null)
+            {
+                Host.Dispose();
+                Host = null;
+            }
         }
 
         #endregion
