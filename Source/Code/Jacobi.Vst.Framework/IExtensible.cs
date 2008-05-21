@@ -3,7 +3,7 @@
     /// <summary>
     /// Allows a client to query for an interface (typically) that is dynamically implemented by the object.
     /// </summary>
-    public interface IExtensibleObject
+    public interface IExtensible
     {
         /// <summary>
         /// Indicates if the interface <typeparamref name="T"/> is supported by the object.

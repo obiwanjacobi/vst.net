@@ -303,6 +303,7 @@
                 VstMidiProgram program = channelInfo.Programs[midiKeyName.CurrentProgramIndex];
 
                 midiKeyName.Name = program.GetKeyName(midiKeyName.CurrentKeyNumber);
+                return true;
             }
 
             return false;
@@ -588,6 +589,10 @@
                 
                 VstParameterProperties paramProps = new VstParameterProperties();
 
+                // labels
+                paramProps.Label = parameter.Info.Label;
+                paramProps.ShortLabel = parameter.Info.ShortLabel;
+
                 if(parameter.Category != null)
                 {
                     // find parameters in current category
@@ -721,7 +726,7 @@
             if (pluginParameters != null)
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
-                return parameter.Info.Label;
+                return parameter.Info.ShortLabel;
             }
 
             return null;

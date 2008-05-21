@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class ProductInfo
+    public class VstProductInfo
     {
-        public ProductInfo(string product, string vendor, int version)
+        public VstProductInfo(string product, string vendor, int version)
         {
             Throw.IfArgumentTooLong(product, Core.Constants.MaxProductStringLength, "product");
             Throw.IfArgumentTooLong(vendor, Core.Constants.MaxVendorStringLength, "vendor");

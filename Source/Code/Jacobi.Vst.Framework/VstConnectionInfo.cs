@@ -7,10 +7,7 @@
         private string _label;
         public string Label
         {
-            get
-            {
-                return _label;
-            }
+            get { return _label; }
             set
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, "Label");
@@ -22,10 +19,7 @@
         private string _shortLabel;
         public string ShortLabel
         {
-            get
-            {
-                return _shortLabel;
-            }
+            get { return _shortLabel; }
             set
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, "ShortLabel");

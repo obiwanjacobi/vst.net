@@ -6,6 +6,21 @@ namespace Jacobi.Vst.Framework
     /// </summary>
     public class VstParameterInfo
     {
+        private VstParameterManager _paramMgr;
+        public VstParameterManager ParameterManager
+        {
+            get { return _paramMgr; }
+            set
+            {
+                if (value != null && value.ParameterInfo != this)
+                {
+                    throw new ArgumentException("Assigned VstParameterManager value is not linked to this VstParamaterInfo instance.", "ParameterManager");
+                }
+
+                _paramMgr = value;
+            }
+        }
+
         public bool CanBeAutomated
         { get; set; }
 

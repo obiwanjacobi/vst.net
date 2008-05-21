@@ -33,12 +33,25 @@
             {
                 if (_activeProgram == null && Programs.Count > 0)
                 {
-                    _activeProgram = Programs[0];
+                    ActiveProgram = Programs[0];
                 }
 
                 return _activeProgram;
             }
-            set { _activeProgram = value; }
+            set
+            {
+                if (_activeProgram != null)
+                {
+                    _activeProgram.Parameters.Deactivate();
+                }
+
+                _activeProgram = value;
+
+                if (_activeProgram != null)
+                {
+                    _activeProgram.Parameters.Activate();
+                }
+            }
         }
 
         public void BeginSetProgram()
@@ -55,21 +68,22 @@
 
         private void FillPrograms(VstProgramCollection programs)
         {
-            VstProgram prog = new VstProgram(PluginParameterFactory.Categories);
+            
+            VstProgram prog = new VstProgram(_plugin.ParameterFactory.Categories);
             prog.Name = "Fx Program 1";
-            PluginParameterFactory.CreateParameters(prog.Parameters);
+            _plugin.ParameterFactory.CreateParameters(prog.Parameters);
 
             programs.Add(prog);
 
-            prog = new VstProgram(PluginParameterFactory.Categories);
+            prog = new VstProgram(_plugin.ParameterFactory.Categories);
             prog.Name = "Fx Program 2";
-            PluginParameterFactory.CreateParameters(prog.Parameters);
+            _plugin.ParameterFactory.CreateParameters(prog.Parameters);
 
             programs.Add(prog);
 
-            prog = new VstProgram(PluginParameterFactory.Categories);
+            prog = new VstProgram(_plugin.ParameterFactory.Categories);
             prog.Name = "Fx Program 3";
-            PluginParameterFactory.CreateParameters(prog.Parameters);
+            _plugin.ParameterFactory.CreateParameters(prog.Parameters);
 
             programs.Add(prog);
         }
