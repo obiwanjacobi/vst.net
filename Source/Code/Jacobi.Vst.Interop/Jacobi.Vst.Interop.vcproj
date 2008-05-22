@@ -104,6 +104,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
+			ManagedExtensions="1"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -144,12 +145,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				ModuleDefinitionFile="Jacobi.Vst.Interop"
-				GenerateDebugInformation="true"
+				ModuleDefinitionFile="Jacobi.Vst.Interop.def"
+				GenerateDebugInformation="false"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
+				KeyFile="..\..\..\..\..\..\_keyfile\Jacobi.snk"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -210,6 +212,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\AssemblyInfo.Version.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\dllmain.cpp"
 				>
 				<FileConfiguration
@@ -267,6 +273,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\Utils.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -291,6 +301,10 @@
 			</File>
 			<File
 				RelativePath=".\TypeConverter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Utils.h"
 				>
 			</File>
 		</Filter>

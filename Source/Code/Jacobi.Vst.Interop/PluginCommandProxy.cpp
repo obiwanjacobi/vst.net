@@ -1,11 +1,8 @@
 #include "StdAfx.h"
 #include "PluginCommandProxy.h"
 #include "TypeConverter.h"
+#include "Utils.h"
 #include<vcclr.h>
-
-// TODO:
-// 1)	We need to program against the CommandStub interface at the lowest level (version 1) and 
-//		determine dynamically at runtime what the supported version is.
 
 PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub)
 {
@@ -318,6 +315,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	catch(System::Exception^ e)
 	{
 		// TODO: handle exception
+		Utils::ShowError(e);
 	}
 
 	return result;
@@ -335,6 +333,7 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 	catch(System::Exception^ e)
 	{
 		// TODO: handle exception
+		Utils::ShowError(e);
 	}
 }
 
@@ -350,6 +349,7 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sam
 	catch(System::Exception^ e)
 	{
 		// TODO: handle exception
+		Utils::ShowError(e);
 	}
 }
 
@@ -362,6 +362,7 @@ void PluginCommandProxy::SetParameter(VstInt32 index, float value)
 	catch(System::Exception^ e)
 	{
 		// TODO: handle exception
+		Utils::ShowError(e);
 	}
 
 }
@@ -375,5 +376,6 @@ float PluginCommandProxy::GetParameter(VstInt32 index)
 	catch(System::Exception^ e)
 	{
 		// TODO: handle exception
+		Utils::ShowError(e);
 	}
 }

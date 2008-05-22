@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "PluginCommandProxy.h"
 #include "HostCommandStub.h"
+#include "Utils.h"
 #include<vcclr.h>
 
 // fwd refs
@@ -55,7 +56,7 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 	{
 		delete hostStub;
 
-		ShowError(exc);
+		Utils::ShowError(exc);
 	}
 
 	return NULL;
@@ -135,15 +136,4 @@ System::String^ getPluginFileName()
 {
 	System::Reflection::Assembly^ ass = System::Reflection::Assembly::GetExecutingAssembly();
 	return ass->Location;
-}
-
-void ShowError(System::Exception^ e)
-{
-	System::String^ text = e->ToString();
-
-	System::IntPtr mem = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(text);
-
-	MessageBox(NULL, (LPCSTR)mem.ToPointer(), LPCSTR("VST.NET Error"), MB_ICONERROR | MB_OK);
-
-	System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
 }
