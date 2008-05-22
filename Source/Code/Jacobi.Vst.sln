@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Core.TestPlugin"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Framework.TestPlugin", "Jacobi.Vst.Framework.TestPlugin\Jacobi.Vst.Framework.TestPlugin.csproj", "{81956924-2C19-478E-9FCC-8532B871DCCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8750DF37-C0F1-4957-A891-38CD9043D2BF}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyInfo.Version.cpp = AssemblyInfo.Version.cpp
+		AssemblyInfo.Version.cs = AssemblyInfo.Version.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 6
