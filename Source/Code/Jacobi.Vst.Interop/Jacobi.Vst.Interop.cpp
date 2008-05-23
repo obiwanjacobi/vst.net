@@ -9,7 +9,7 @@
 
 // fwd refs
 System::String^ getPluginFileName();
-AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo);
+AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 void ShowError(System::Exception^ e);
 
 // global reference to the plugin cmd stub
@@ -27,15 +27,15 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 		System::String^ interopAssemblyFileName = getPluginFileName();
 		
 		// create the plugin (command stub) factory
-		Jacobi::Vst::Core::ManagedPluginFactory^ factory = gcnew Jacobi::Vst::Core::ManagedPluginFactory(interopAssemblyFileName);
+		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(interopAssemblyFileName);
 		
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
-		Jacobi::Vst::Core::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
 		
 		if(commandStub)
 		{
 			// retrieve the plugin info
-			Jacobi::Vst::Core::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
+			Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
 
 			if(pluginInfo)
 			{
@@ -106,7 +106,7 @@ float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 	return 0.0;
 }
 
-AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
+AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
 	// deleted in the Finalizer method of the HostCommandStub
 	AEffect* pEffect = new AEffect();

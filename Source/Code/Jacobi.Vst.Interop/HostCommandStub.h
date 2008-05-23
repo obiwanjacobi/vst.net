@@ -1,17 +1,17 @@
 #pragma once
 
-ref class HostCommandStub : Jacobi::Vst::Core::IVstHostCommandStub
+ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub
 {
 public:
-	// IVstHostCommandStubBase
+	// IVstHostCommandStub
 	virtual System::Boolean IsInitialized() { return (_pluginInfo != NULL); }
-	virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo);
-	// IVstHostCommandStub10
+	virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
+	// IVstHostCommands10
 	virtual void SetParameterAutomated(System::Int32 index, System::Single value);
 	virtual System::Int32 GetVersion();
     virtual System::Int32 GetCurrentPluginID();
     virtual void ProcessIdle();
-	// IVstHostCommandStub20
+	// IVstHostCommands20
 	virtual Jacobi::Vst::Core::VstTimeInfo^ GetTimeInfo(Jacobi::Vst::Core::VstTimeInfoFlags filterFlags);
 	virtual System::Boolean ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events);
 	virtual System::Boolean IoChanged();

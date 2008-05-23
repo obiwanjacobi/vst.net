@@ -2,6 +2,7 @@
 {
     using System;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Core.Plugin;
     using Jacobi.Vst.Framework.Host;
 
     internal class VstPluginContext : IDisposable

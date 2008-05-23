@@ -28,8 +28,8 @@ HostCommandStub::!HostCommandStub()
 	}
 }
 
-// IVstHostCommandStubBase
-System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::VstPluginInfo^ pluginInfo)
+// IVstHostCommandStub
+System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
 	if(pluginInfo)
 	{
@@ -44,7 +44,7 @@ System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::VstPluginIn
 	return false;
 }
 
-// IVstHostCommandStub10
+// IVstHostCommands10
 void HostCommandStub::SetParameterAutomated(System::Int32 index, System::Single value)
 {
 	ThrowIfNotInitialized();
@@ -78,7 +78,7 @@ void HostCommandStub::ProcessIdle()
 	CallHost(audioMasterIdle, 0, 0, 0, 0);
 }
 
-// IVstHostCommandStub20
+// IVstHostCommands20
 Jacobi::Vst::Core::VstTimeInfo^ HostCommandStub::GetTimeInfo(Jacobi::Vst::Core::VstTimeInfoFlags filterFlags)
 {
 	ThrowIfNotInitialized();
