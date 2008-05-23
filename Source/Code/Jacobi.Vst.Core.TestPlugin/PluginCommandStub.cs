@@ -1,7 +1,8 @@
 ﻿namespace Jacobi.Vst.Core.TestPlugin
 {
-    using Jacobi.Vst.Core;
     using System;
+    using Jacobi.Vst.Core;
+    using Jacobi.Vst.Core.Plugin;
 
     public class PluginCommandStub : IVstPluginCommandStub
     {
@@ -11,6 +12,25 @@
         private WinFormsWrapper<EditorControl1> _editorCtrl = new WinFormsWrapper<EditorControl1>();
 
         #region IVstPluginCommandStub Members
+
+        public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
+        {
+            _hostStub = hostCmdStub;
+            _pluginInfo = new VstPluginInfo();
+
+            _pluginInfo.NumberOfAudioInputs = 1;
+            _pluginInfo.NumberOfAudioOutputs = 2;
+            _pluginInfo.NumberOfPrograms = 1;
+            _pluginInfo.Flags = VstPluginFlags.HasEditor | VstPluginFlags.CanReplacing;
+            _pluginInfo.PluginID = 1234;
+            _pluginInfo.PluginVersion = 1000;
+
+            return _pluginInfo;
+        }
+
+        #endregion
+
+        #region IVstPluginCommands24 Members
 
         public bool SetProcessPrecision(VstProcessPrecision precision)
         {
@@ -32,7 +52,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub23 Members
+        #region IVstPluginCommands23 Members
 
         public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
         {
@@ -88,7 +108,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub21 Members
+        #region IVstPluginCommands21 Members
 
         public bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
@@ -152,7 +172,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub20 Members
+        #region IVstPluginCommands20 Members
 
         public bool ProcessEvents(VstEvent[] events)
         {
@@ -282,7 +302,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub10 Members
+        #region IVstPluginCommands10 Members
 
         public void Open()
         {
@@ -386,22 +406,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStubBase Members
-
-        public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
-        {
-            _hostStub = hostCmdStub;
-            _pluginInfo = new VstPluginInfo();
-
-            _pluginInfo.NumberOfAudioInputs = 1;
-            _pluginInfo.NumberOfAudioOutputs = 2;
-            _pluginInfo.NumberOfPrograms = 1;
-            _pluginInfo.Flags = VstPluginInfoFlags.HasEditor | VstPluginInfoFlags.CanReplacing;
-            _pluginInfo.PluginID = 1234;
-            _pluginInfo.PluginVersion = 1000;
-
-            return _pluginInfo;
-        }
+        #region IVstPluginCommandsBase Members
 
         public void ProcessReplacing(VstAudioBuffer[] input, VstAudioBuffer[] outputs)
         {

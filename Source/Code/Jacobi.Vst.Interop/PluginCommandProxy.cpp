@@ -4,7 +4,7 @@
 #include "Utils.h"
 #include<vcclr.h>
 
-PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub)
+PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ cmdStub)
 {
 	if(cmdStub == nullptr)
 	{
@@ -364,7 +364,6 @@ void PluginCommandProxy::SetParameter(VstInt32 index, float value)
 		// TODO: handle exception
 		Utils::ShowError(e);
 	}
-
 }
 
 float PluginCommandProxy::GetParameter(VstInt32 index)
@@ -378,4 +377,6 @@ float PluginCommandProxy::GetParameter(VstInt32 index)
 		// TODO: handle exception
 		Utils::ShowError(e);
 	}
+
+	return 0.0f;
 }

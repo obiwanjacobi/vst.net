@@ -3,17 +3,15 @@
     using System;
     using System.Drawing;
 
-    public interface IVstPluginCommandStubBase
+    public interface IVstPluginCommandsBase
     {
-        VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub);
-
         void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs);
         void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs);
         void SetParameter(int index, float value);
         float GetParameter(int index);
     }
-
-    public interface IVstPluginCommandStub10 : IVstPluginCommandStubBase
+    
+    public interface IVstPluginCommands10 : IVstPluginCommandsBase
     {
         void Open();
         void Close();
@@ -36,7 +34,7 @@
         int SetChunk(byte[] data, bool isPreset);
     }
 
-    public interface IVstPluginCommandStub20 : IVstPluginCommandStub10
+    public interface IVstPluginCommands20 : IVstPluginCommands10
     {
         bool ProcessEvents(VstEvent[] events);
         bool CanParameterBeAutomated(int index);
@@ -61,7 +59,7 @@
         int GetVstVersion();
     }
 
-    public interface IVstPluginCommandStub21 : IVstPluginCommandStub20
+    public interface IVstPluginCommands21 : IVstPluginCommands20
     {
         bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
         bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
@@ -75,7 +73,7 @@
         bool EndSetProgram();
     }
 
-    public interface IVstPluginCommandStub23 : IVstPluginCommandStub21
+    public interface IVstPluginCommands23 : IVstPluginCommands21
     {
         bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output);
         int SetTotalSamplesToProcess(int numberOfSamples);
@@ -87,14 +85,11 @@
         int BeginLoadProgram(VstPatchChunkInfo chunkInfo);
     }
 
-    public interface IVstPluginCommandStub24 : IVstPluginCommandStub23
+    public interface IVstPluginCommands24 : IVstPluginCommands23
     {
         bool SetProcessPrecision(VstProcessPrecision precision);
         int GetNumberOfMidiInputChannels();
         int GetNumberOfMidiOutputChannels();
     }
 
-    // alias for latest version
-    public interface IVstPluginCommandStub : IVstPluginCommandStub24
-    { }
 }

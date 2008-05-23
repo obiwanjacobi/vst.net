@@ -52,6 +52,8 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="IVstHostCommands.cs" />
+    <Compile Include="IVstPluginCommands.cs" />
     <Compile Include="VstAudioBuffer.cs" />
     <Compile Include="VstAutomationStates.cs" />
     <Compile Include="VstCanDo.cs" />
@@ -60,10 +62,10 @@
     <Compile Include="VstKnobMode.cs" />
     <Compile Include="VstOfflineTask.cs" />
     <Compile Include="VstPanLaw.cs" />
-    <Compile Include="VstPluginInfo.cs" />
-    <Compile Include="IVstHostCommandStub.cs" />
-    <Compile Include="IVstPluginCommandStub.cs" />
-    <Compile Include="ManagedPluginFactory.cs" />
+    <Compile Include="Plugin\VstPluginInfo.cs" />
+    <Compile Include="Plugin\IVstHostCommandStub.cs" />
+    <Compile Include="Plugin\IVstPluginCommandStub.cs" />
+    <Compile Include="Plugin\ManagedPluginFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VstAudioFile.cs" />
     <Compile Include="VstEvent.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="VstPatchChunkInfo.cs" />
     <Compile Include="VstPinProperties.cs" />
     <Compile Include="VstPluginCategory.cs" />
+    <Compile Include="VstPluginFlags.cs" />
     <Compile Include="VstProcessLevels.cs" />
     <Compile Include="VstProcessPrecision.cs" />
     <Compile Include="VstSpeakerArrangement.cs" />
