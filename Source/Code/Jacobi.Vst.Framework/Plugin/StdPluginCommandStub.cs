@@ -2,12 +2,34 @@
 {
     using System;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Core.Plugin;
 
     public abstract class StdPluginCommandStub : IVstPluginCommandStub
     {
         private VstPluginContext _pluginCtx;
 
-        #region IVstPluginCommandStub24 Members
+        #region IVstPluginCommandStub Members
+
+        public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
+        {
+            IVstPlugin plugin = CreatePluginInstance();
+
+            if (plugin != null)
+            {
+                _pluginCtx = new VstPluginContext();
+                _pluginCtx.Host = new Host.VstHost(hostCmdStub, plugin);
+                _pluginCtx.Plugin = plugin;
+                _pluginCtx.PluginInfo = CreatePluginInfo(plugin);
+
+                return _pluginCtx.PluginInfo;
+            }
+
+            return null;
+        }
+
+        #endregion
+
+        #region IVstPluginCommands24 Members
 
         public bool SetProcessPrecision(VstProcessPrecision precision)
         {
@@ -52,7 +74,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub23 Members
+        #region IVstPluginCommands23 Members
 
         public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
         {
@@ -147,7 +169,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub21 Members
+        #region IVstPluginCommands21 Members
 
         public bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
@@ -337,7 +359,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub20 Members
+        #region IVstPluginCommands20 Members
 
         public bool ProcessEvents(VstEvent[] events)
         {
@@ -653,7 +675,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStub10 Members
+        #region IVstPluginCommands10 Members
 
         public void Open()
         {
@@ -852,24 +874,7 @@
 
         #endregion
 
-        #region IVstPluginCommandStubBase Members
-
-        public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
-        {
-            IVstPlugin plugin = CreatePluginInstance();
-
-            if (plugin != null)
-            {
-                _pluginCtx = new VstPluginContext();
-                _pluginCtx.Host = new Host.VstHost(hostCmdStub, plugin);
-                _pluginCtx.Plugin = plugin;
-                _pluginCtx.PluginInfo = CreatePluginInfo(plugin);
-
-                return _pluginCtx.PluginInfo;
-            }
-
-            return null;
-        }
+        #region IVstPluginCommandsBase Members
 
         public void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
         {
@@ -970,17 +975,17 @@
 
             // determine flags
             if (plugin.Supports<IVstPluginEditor>())
-                pluginInfo.Flags |= VstPluginInfoFlags.HasEditor;
+                pluginInfo.Flags |= VstPluginFlags.HasEditor;
             if (plugin.Supports<IVstPluginAudioProcessor>())
-                pluginInfo.Flags |= VstPluginInfoFlags.CanReplacing;
+                pluginInfo.Flags |= VstPluginFlags.CanReplacing;
             if (plugin.Supports<IVstPluginAudioPrecissionProcessor>())
-                pluginInfo.Flags |= VstPluginInfoFlags.CanDoubleReplacing;
+                pluginInfo.Flags |= VstPluginFlags.CanDoubleReplacing;
             if (plugin.Supports<IVstPluginPersistence>())
-                pluginInfo.Flags |= VstPluginInfoFlags.ProgramChunks;
+                pluginInfo.Flags |= VstPluginFlags.ProgramChunks;
             if ((plugin.Capabilities & VstPluginCapabilities.IsSynth) > 0)
-                pluginInfo.Flags |= VstPluginInfoFlags.IsSynth;
+                pluginInfo.Flags |= VstPluginFlags.IsSynth;
             if ((plugin.Capabilities & VstPluginCapabilities.NoSoundInStop) > 0)
-                pluginInfo.Flags |= VstPluginInfoFlags.NoSoundInStop;
+                pluginInfo.Flags |= VstPluginFlags.NoSoundInStop;
 
             // basic plugin info
             pluginInfo.InitialDelay = plugin.InitialDelay;

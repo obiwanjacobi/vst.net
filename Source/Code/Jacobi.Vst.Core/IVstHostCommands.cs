@@ -1,14 +1,6 @@
 ﻿namespace Jacobi.Vst.Core
 {
-    using System;
-
-    public interface IVstHostCommandStubBase : IDisposable
-    {
-        bool IsInitialized();
-        bool UpdatePluginInfo(VstPluginInfo pluginInfo);
-    }
-
-    public interface IVstHostCommandStub10 : IVstHostCommandStubBase
+    public interface IVstHostCommands10
     {
         void SetParameterAutomated(int index, float value);
         int GetVersion();
@@ -16,7 +8,7 @@
         void ProcessIdle();
     }
 
-    public interface IVstHostCommandStub20 : IVstHostCommandStub10
+    public interface IVstHostCommands20 : IVstHostCommands10
     {
         VstTimeInfo GetTimeInfo(VstTimeInfoFlags filterFlags);
         bool ProcessEvents(VstEvent[] events);
@@ -45,8 +37,4 @@
         bool OpenFileSelector(/*VstFileSelect*/);
         bool CloseFileSelector(/*VstFileSelect*/);
     }
-
-    // alias for latest version
-    public interface IVstHostCommandStub : IVstHostCommandStub20
-    { }
 }

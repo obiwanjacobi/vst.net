@@ -2,7 +2,7 @@
 {
     using Jacobi.Vst.Framework;
 
-    public class TestPluginCommandStub : Plugin.StdPluginCommandStub, Core.IVstPluginCommandStub
+    public class TestPluginCommandStub : Plugin.StdPluginCommandStub, Core.Plugin.IVstPluginCommandStub
     {
         protected override IVstPlugin CreatePluginInstance()
         {

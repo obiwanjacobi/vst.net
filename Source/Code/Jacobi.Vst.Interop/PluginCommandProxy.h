@@ -3,7 +3,7 @@
 ref class PluginCommandProxy
 {
 internal:
-	PluginCommandProxy(Jacobi::Vst::Core::IVstPluginCommandStub^ cmdStub);
+	PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ cmdStub);
 
 	VstIntPtr Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
 	void Process(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs);
@@ -12,5 +12,5 @@ internal:
 	float GetParameter(VstInt32 index);
 
 private:
-	Jacobi::Vst::Core::IVstPluginCommandStub^ _commandStub;
+	Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
 };
