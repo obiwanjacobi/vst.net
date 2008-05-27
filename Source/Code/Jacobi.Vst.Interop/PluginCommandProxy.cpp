@@ -12,6 +12,7 @@ PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginComm
 	}
 
 	_commandStub = cmdStub;
+	_memTracker = gcnew MemoryTracker();
 }
 
 VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
@@ -27,7 +28,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effClose:
 			_commandStub->Close();
-			// TODO: clean up
+			Cleanup();
 			break;
 		case effSetProgram:
 			_commandStub->SetProgram(value);
@@ -57,6 +58,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			_commandStub->SetBlockSize(value);
 			break;
 		case effMainsChanged:
+			_memTracker->ClearAll(); // safe to delete allocate memory during suspend/resume
 			_commandStub->MainsChanged(value != 0);
 			break;
 		case effEditGetRect:
@@ -77,11 +79,12 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effGetChunk:
 			{
-			array<System::Byte>^ buffer;
-			result = _commandStub->GetChunk(buffer, index == 1) ? 1 : 0;
-			// mem alloc
-			TypeConverter::ByteArrayToPtr(buffer, (void**)ptr);
-			//result = buffer->Length;
+			array<System::Byte>^ buffer = _commandStub->GetChunk(index == 1);
+			*(void**)ptr = TypeConverter::ByteArrayToPtr(buffer);
+			
+			_memTracker->RegisterArray(*(void**)ptr);
+
+			result = buffer->Length;
 			}
 			break;
 		case effSetChunk:
@@ -292,9 +295,11 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;
 			break;
 		case effBeginLoadBank:
+			// TODO: how do we deal with VstPatchChunkInfo in PluginHost scenario?
 			result = _commandStub->BeginLoadBank(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr));
 			break;
 		case effBeginLoadProgram:
+			// TODO: how do we deal with VstPatchChunkInfo in PluginHost scenario?
 			result = _commandStub->BeginLoadProgram(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr));
 			break;
 		case effSetProcessPrecision:
@@ -379,4 +384,15 @@ float PluginCommandProxy::GetParameter(VstInt32 index)
 	}
 
 	return 0.0f;
+}
+
+void PluginCommandProxy::Cleanup()
+{
+	if(_memTracker != nullptr)
+	{
+		_memTracker->ClearAll();
+		_memTracker = nullptr;
+	}
+
+	_commandStub = nullptr;
 }

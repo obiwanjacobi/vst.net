@@ -250,6 +250,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MemoryTracker.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\PluginCommandProxy.cpp"
 				>
 			</File>
@@ -285,6 +289,10 @@
 			>
 			<File
 				RelativePath=".\HostCommandStub.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MemoryTracker.h"
 				>
 			</File>
 			<File

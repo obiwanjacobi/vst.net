@@ -51,6 +51,7 @@
     <Compile Include="FxPluginInterfaceManager.cs" />
     <Compile Include="FxTestPlugin.cs" />
     <Compile Include="PluginParameterFactory.cs" />
+    <Compile Include="PluginPersistence.cs" />
     <Compile Include="PluginPrograms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestPluginCommandStub.cs" />

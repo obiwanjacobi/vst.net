@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework.Plugin
 {
     using System;
+    using System.IO;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
 
@@ -861,14 +862,68 @@
             }
         }
 
-        public int GetChunk(out byte[] data, bool isPreset)
+        public byte[] GetChunk(bool isPreset)
         {
-            data = null;
-            return 0;
+            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+
+            if (pluginPersistence != null && pluginPrograms != null)
+            {
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    VstProgramCollection programs = null;
+
+                    if (isPreset && pluginPrograms.ActiveProgram != null)
+                    {
+                        programs = new VstProgramCollection();
+                        programs.Add(pluginPrograms.ActiveProgram);
+                    }
+                    else
+                    {
+                        programs = pluginPrograms.Programs;
+                    }
+
+                    pluginPersistence.WritePrograms(stream, programs);
+
+                    return stream.GetBuffer();
+                }
+            }
+
+            return null;
         }
 
         public int SetChunk(byte[] data, bool isPreset)
         {
+            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+
+            if (pluginPersistence != null && pluginPrograms != null)
+            {
+                using (MemoryStream stream = new MemoryStream(data, false))
+                {
+                    if (isPreset)
+                    {
+                        VstProgram prog = pluginPersistence.ReadProgram(stream);
+                        
+                        pluginPrograms.Programs.Add(prog);
+                        pluginPrograms.ActiveProgram = prog;
+                    }
+                    else
+                    {
+                        // use a temp collection to leave the real Programs 
+                        // collection in tact in case of an exception.
+                        VstProgramCollection programs = new VstProgramCollection();
+                        
+                        pluginPersistence.ReadPrograms(stream, programs);
+
+                        pluginPrograms.Programs.Clear();
+                        pluginPrograms.Programs.AddRange(programs);
+                    }
+
+                    return (int)stream.Position;
+                }
+            }
+
             return 0;
         }
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MemoryTracker.h"
+
 ref class PluginCommandProxy
 {
 internal:
@@ -12,5 +14,8 @@ internal:
 	float GetParameter(VstInt32 index);
 
 private:
+	void Cleanup();
+
 	Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
+	MemoryTracker^ _memTracker;
 };
