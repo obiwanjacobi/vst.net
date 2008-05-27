@@ -29,8 +29,7 @@
         bool EditorOpen(IntPtr hWnd);
         void EditorClose();
         void EditorIdle();
-        //byte[] GetChunk(bool isPreset);
-        int GetChunk(out byte[] data, bool isPreset);
+        byte[] GetChunk(bool isPreset);
         int SetChunk(byte[] data, bool isPreset);
     }
 
