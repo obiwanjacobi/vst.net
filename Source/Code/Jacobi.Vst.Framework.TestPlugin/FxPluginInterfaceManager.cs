@@ -22,5 +22,12 @@
 
             return instance;    // reuse initial instance
         }
+
+        protected override IVstPluginPersistence CreatePersistence(IVstPluginPersistence instance)
+        {
+            if (instance == null) return new PluginPersistence(_plugin);
+
+            return instance;
+        }
     }
 }

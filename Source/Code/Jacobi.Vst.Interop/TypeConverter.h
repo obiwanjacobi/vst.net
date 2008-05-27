@@ -34,9 +34,18 @@ public:
 		(*ppRect)->right = rect.Right;
 	}
 
-	static void ByteArrayToPtr(array<System::Byte>^ byteArray, void** ppBuffer)
+	// delete[] retval
+	static void* ByteArrayToPtr(array<System::Byte>^ byteArray)
 	{
-		// TODO: implement
+		int length = byteArray->Length;
+		char* buffer = new char[length];
+
+		for(int i = 0; i < length; i++)
+		{
+			buffer[i] = safe_cast<char>(byteArray[i]);
+		}
+
+		return buffer;
 	}
 
 	static array<System::Byte>^ PtrToByteArray(char *pBuffer, int length)

@@ -1,81 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Interface Name="Jacobi.Vst.Core.IVstHostCommandStubBase">
+  <Interface Name="Jacobi.Vst.Core.IVstHostCommands10">
     <Position X="3.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAA=</HashCode>
-      <FileName>IVstHostCommandStub.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstHostCommandStub10">
-    <Position X="3.5" Y="2" Width="2.25" />
-    <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAIgAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IVstHostCommandStub.cs</FileName>
+      <FileName>IVstHostCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstHostCommandStub" Collapsed="true">
-    <Position X="3.5" Y="9.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IVstHostCommandStub.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStubBase">
+  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandsBase">
     <Position X="0.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAEAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
+      <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStub10">
+  <Interface Name="Jacobi.Vst.Core.IVstPluginCommands10">
     <Position X="0.5" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>wBBAQAQEAAAAoAAIAAAAAAAAAAEAACABAAAQAACRAAA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
+      <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStub20">
+  <Interface Name="Jacobi.Vst.Core.IVstPluginCommands20">
     <Position X="0.5" Y="6.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>BAQIAIAAAABAAAIAAAQhAgAEAAFAgACAAAAIAigAAQA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
+      <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStub21">
+  <Interface Name="Jacobi.Vst.Core.IVstPluginCommands21">
     <Position X="0.5" Y="11.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgIAAAAgAAAKAAAAAAAAAQAACAAIAAAA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
+      <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStub23">
+  <Interface Name="Jacobi.Vst.Core.IVstPluginCommands23">
     <Position X="0.5" Y="14.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAQAAAAAAAAAAAAAgAAoAAABAAAAQEA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
+      <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStub" Collapsed="true">
-    <Position X="0.5" Y="18.75" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstPluginCommandStub24">
+  <Interface Name="Jacobi.Vst.Core.IVstPluginCommands24">
     <Position X="0.5" Y="17" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IVstPluginCommandStub.cs</FileName>
+      <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Core.IVstHostCommandStub20">
-    <Position X="3.5" Y="4" Width="2.25" />
+  <Interface Name="Jacobi.Vst.Core.IVstHostCommands20">
+    <Position X="3.5" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAIUAjABAAAAAAAABAgACAAEQAgAIMEADAwAEACA=</HashCode>
-      <FileName>IVstHostCommandStub.cs</FileName>
+      <FileName>IVstHostCommands.cs</FileName>
     </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Plugin.IVstHostCommandStub">
+    <Position X="4.5" Y="8" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAA=</HashCode>
+      <FileName>Plugin\IVstHostCommandStub.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub">
+    <Position X="0.5" Y="18.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plugin\IVstPluginCommandStub.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.IDisposable">
+    <Position X="6" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
   </Interface>
   <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>

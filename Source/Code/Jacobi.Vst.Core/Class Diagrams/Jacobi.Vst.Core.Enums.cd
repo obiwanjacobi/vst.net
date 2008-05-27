@@ -119,11 +119,11 @@
       <FileName>VstPluginCategory.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Jacobi.Vst.Core.VstPluginInfoFlags">
+  <Enum Name="Jacobi.Vst.Core.VstPluginFlags">
     <Position X="4.75" Y="9.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAgAAACACAACAAAAAAAAAAAAAAAAEAAAEAAAA=</HashCode>
-      <FileName>VstPluginInfo.cs</FileName>
+      <FileName>VstPluginFlags.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstProcessLevels">

@@ -391,11 +391,10 @@
             
         }
 
-        public int GetChunk(out byte[] data, bool isPreset)
+        public byte[] GetChunk(bool isPreset)
         {
             _editorCtrl.Instance.AddLine("GetChunk");
-            data = null;
-            return 0;
+            return null;
         }
 
         public int SetChunk(byte[] data, bool isPreset)
