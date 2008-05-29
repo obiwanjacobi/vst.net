@@ -1,4 +1,5 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿using System.Diagnostics;
+namespace Jacobi.Vst.Framework.TestPlugin
 {
     class PluginPrograms : IVstPluginPrograms
     {
@@ -56,12 +57,12 @@
 
         public void BeginSetProgram()
         {
-            
+            Trace.WriteLine("BeginSetProgram", "Jacobi.Vst.Framework.TestPlugin");
         }
 
         public void EndSetProgram()
         {
-            
+            Trace.WriteLine("EndSetProgram", "Jacobi.Vst.Framework.TestPlugin");
         }
 
         #endregion

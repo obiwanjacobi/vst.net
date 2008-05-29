@@ -1,9 +1,9 @@
 namespace Jacobi.Vst.Framework
 {
-    using Jacobi.Vst.Core;
     using System;
+    using Jacobi.Vst.Core;
 
-    public class VstParameter : IActivatable
+    public class VstParameter : IActivatable, IDisposable
     {
         public VstParameter(VstParameterInfo parameterInfo)
         {
@@ -16,7 +16,8 @@ namespace Jacobi.Vst.Framework
                 Info.ParameterManager.SubscribeTo(this);
             }
 
-            // TODO: set default value (raise a changed event?)
+            // set default value (raise a changed event?)
+            Value = Info.DefaultValue;
         }
 
         public VstParameterInfo Info
@@ -25,15 +26,18 @@ namespace Jacobi.Vst.Framework
         public VstParameterCategory Category
         { get; set; }
 
-        private float _normalizedValue;
-        public float NormalizedValue
+        private float _value;
+        public float Value
         {
-            get { return _normalizedValue; }
+            get { return _value; }
             set
             {
-                _normalizedValue = value;
+                if (_value != value)
+                {
+                    _value = value;
 
-                OnNormalizedValueChanged();
+                    OnValueChanged();
+                }
             }
         }
 
@@ -54,15 +58,15 @@ namespace Jacobi.Vst.Framework
             float fValue;
             if (Single.TryParse(value, out fValue))
             {
-                NormalizedValue = fValue;
+                Value = fValue;
                 return true;
             }
 
             return false;
         }
 
-        public event EventHandler<EventArgs> NormalizedValueChanged;
-        public event EventHandler<EventArgs> ActivationChanged;
+        public EventHandler<EventArgs> ValueChangedCallback { get; set; }
+        public EventHandler<EventArgs> ActivationChangedCallback { get; set; }
 
         #region IActivatable Members
 
@@ -84,9 +88,9 @@ namespace Jacobi.Vst.Framework
 
         #endregion
 
-        protected virtual void OnNormalizedValueChanged()
+        protected virtual void OnValueChanged()
         {
-            EventHandler<EventArgs> handler = NormalizedValueChanged;
+            EventHandler<EventArgs> handler = ValueChangedCallback;
 
             if (handler != null)
             {
@@ -96,12 +100,25 @@ namespace Jacobi.Vst.Framework
 
         protected virtual void OnActivationChanged()
         {
-            EventHandler<EventArgs> handler = ActivationChanged;
+            EventHandler<EventArgs> handler = ActivationChangedCallback;
 
             if (handler != null)
             {
                 handler(this, EventArgs.Empty);
             }
         }
+
+        #region IDisposable Members
+
+        public virtual void Dispose()
+        {
+            // clear all references
+            DisplayValue = null;
+            Info = null;
+            ValueChangedCallback = null;
+            ActivationChangedCallback = null;
+        }
+
+        #endregion
     }
 }

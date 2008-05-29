@@ -156,16 +156,28 @@
             return false;
         }
 
-        public int BeginLoadBank(VstPatchChunkInfo chunkInfo)
+        public VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
         {
-            // TODO: find out how this works
-            return -1;
+            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+
+            if (pluginPersistence != null)
+            {
+                return pluginPersistence.CanLoadChunk(chunkInfo) ? VstCanDoResult.Yes : VstCanDoResult.No;
+            }
+
+            return VstCanDoResult.No;
         }
 
-        public int BeginLoadProgram(VstPatchChunkInfo chunkInfo)
+        public VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo)
         {
-            // TODO: find out how this works
-            return -1;
+            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+
+            if (pluginPersistence != null)
+            {
+                return pluginPersistence.CanLoadChunk(chunkInfo) ? VstCanDoResult.Yes : VstCanDoResult.No;
+            }
+
+            return VstCanDoResult.No;
         }
 
         #endregion
@@ -904,9 +916,17 @@
                     if (isPreset)
                     {
                         VstProgram prog = pluginPersistence.ReadProgram(stream);
-                        
+
+                        VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
+
                         pluginPrograms.Programs.Add(prog);
                         pluginPrograms.ActiveProgram = prog;
+
+                        // remove the previously active program that has now been replaced
+                        if (formerActiveProg != null)
+                        {
+                            pluginPrograms.Programs.Remove(formerActiveProg);
+                        }
                     }
                     else
                     {
@@ -916,6 +936,7 @@
                         
                         pluginPersistence.ReadPrograms(stream, programs);
 
+                        pluginPrograms.ActiveProgram = null;
                         pluginPrograms.Programs.Clear();
                         pluginPrograms.Programs.AddRange(programs);
                     }
@@ -994,7 +1015,7 @@
             if (pluginParams != null)
             {
                 VstParameter parameter = pluginParams.Parameters[index];
-                parameter.NormalizedValue = value;
+                parameter.Value = value;
             }
         }
 
@@ -1005,7 +1026,7 @@
             if (pluginParams != null)
             {
                 VstParameter parameter = pluginParams.Parameters[index];
-                return parameter.NormalizedValue;
+                return parameter.Value;
             }
 
             return 0.0f;

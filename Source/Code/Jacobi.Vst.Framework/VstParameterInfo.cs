@@ -21,6 +21,9 @@ namespace Jacobi.Vst.Framework
             }
         }
 
+        public float DefaultValue
+        { get; set; }
+
         public bool CanBeAutomated
         { get; set; }
 
