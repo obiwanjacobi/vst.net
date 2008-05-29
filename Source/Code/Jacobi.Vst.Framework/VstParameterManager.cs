@@ -39,8 +39,8 @@
         {
             Throw.IfArgumentIsNull(parameter, "parameter");
 
-            parameter.NormalizedValueChanged += new EventHandler<EventArgs>(Parameter_NormalizedValueChanged);
-            parameter.ActivationChanged += new EventHandler<EventArgs>(Parameter_ActivationChanged);
+            parameter.ValueChangedCallback = new EventHandler<EventArgs>(Parameter_NormalizedValueChanged);
+            parameter.ActivationChangedCallback = new EventHandler<EventArgs>(Parameter_ActivationChanged);
         }
 
         public void ChangeValue(float newValue)
@@ -77,7 +77,7 @@
             // early exit when change is done on an inactive parameter
             if(currentParameter != ActiveParameter) return;
 
-            ChangeValue(currentParameter.NormalizedValue);
+            ChangeValue(currentParameter.Value);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@
             if (ActiveParameter == null && currentParameter.IsActive)
             {
                 ActiveParameter = currentParameter;
-                ChangeValue(currentParameter.NormalizedValue);
+                ChangeValue(currentParameter.Value);
             }
         }
     }

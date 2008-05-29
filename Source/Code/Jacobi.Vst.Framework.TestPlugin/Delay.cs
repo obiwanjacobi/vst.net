@@ -28,6 +28,7 @@
             paramInfo.LargeStepFloat = 100.0f;
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
+            paramInfo.DefaultValue = 200f;
             _delayTimeMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
 
             _paramInfos.Add(paramInfo);
@@ -41,6 +42,7 @@
             paramInfo.LargeStepFloat = 0.1f;
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
+            paramInfo.DefaultValue = 0.2f;
             _feedbackMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
 
             _paramInfos.Add(paramInfo);
@@ -54,6 +56,7 @@
             paramInfo.LargeStepFloat = 0.1f;
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
+            paramInfo.DefaultValue = 0.8f;
             _dryLevelMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
 
             _paramInfos.Add(paramInfo);
@@ -67,6 +70,7 @@
             paramInfo.LargeStepFloat = 0.1f;
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
+            paramInfo.DefaultValue = 0.4f;
             _wetLevelMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
 
             _paramInfos.Add(paramInfo);

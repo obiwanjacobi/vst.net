@@ -1,6 +1,7 @@
 namespace Jacobi.Vst.Framework
 {
     using System.IO;
+    using Jacobi.Vst.Core;
 
     public interface IVstPluginPersistence
     {
@@ -22,5 +23,12 @@ namespace Jacobi.Vst.Framework
         /// <param name="stream">Must not be null.</param>
         /// <param name="programs">Must not be null.</param>
         void WritePrograms(Stream stream, VstProgramCollection programs);
+
+        /// <summary>
+        /// Called to verify if specific data version is supported.
+        /// </summary>
+        /// <param name="chunkInfo">Version info for chunk.</param>
+        /// <returns>Returns true if data version is supported, otherwise false is returned.</returns>
+        bool CanLoadChunk(VstPatchChunkInfo chunkInfo);
     }
 }

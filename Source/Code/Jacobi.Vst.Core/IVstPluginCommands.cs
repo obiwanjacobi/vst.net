@@ -80,8 +80,8 @@
         int StartProcess();
         int StopProcess();
         bool SetPanLaw(VstPanLaw type, float value);
-        int BeginLoadBank(VstPatchChunkInfo chunkInfo);
-        int BeginLoadProgram(VstPatchChunkInfo chunkInfo);
+        VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo);
+        VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo);
     }
 
     public interface IVstPluginCommands24 : IVstPluginCommands23

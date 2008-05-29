@@ -2,6 +2,8 @@
 {
     using System.IO;
     using System.Text;
+    using Jacobi.Vst.Core;
+    using System.Diagnostics;
 
     internal class PluginPersistence : IVstPluginPersistence
     {
@@ -17,14 +19,21 @@
 
         public VstProgram ReadProgram(Stream stream)
         {
-            return ReadProgram(new BinaryReader(stream, _encoding));
+            BinaryReader reader = new BinaryReader(stream, _encoding);
+
+            int count = reader.ReadInt32();
+            Debug.Assert(count == 1);
+
+            return ReadProgram(reader);
         }
 
         public void ReadPrograms(Stream stream, VstProgramCollection programs)
         {
             BinaryReader reader = new BinaryReader(stream, _encoding);
 
-            while (stream.Position < stream.Length)
+            int count = reader.ReadInt32();
+
+            for(int i = 0; i < count; i++)
             {
                 VstProgram program = ReadProgram(reader);
 
@@ -36,10 +45,18 @@
         {
             BinaryWriter writer = new BinaryWriter(stream, _encoding);
 
+            writer.Write(programs.Count);
+
             foreach (VstProgram program in programs)
             {
                 WriteProgram(writer, program);
             }
+        }
+
+        public bool CanLoadChunk(VstPatchChunkInfo chunkInfo)
+        {
+            // TODO: determine version
+            return true;
         }
 
         #endregion
@@ -58,7 +75,7 @@
                 if (program.Parameters.Contains(paramName))
                 {
                     VstParameter parameter = program.Parameters[paramName];
-                    parameter.NormalizedValue = reader.ReadSingle();
+                    parameter.Value = reader.ReadSingle();
                 }
             }
 
@@ -73,7 +90,7 @@
             foreach (VstParameter parameter in program.Parameters)
             {
                 writer.Write(parameter.Info.Name);
-                writer.Write(parameter.NormalizedValue);
+                writer.Write(parameter.Value);
             }
         }
 

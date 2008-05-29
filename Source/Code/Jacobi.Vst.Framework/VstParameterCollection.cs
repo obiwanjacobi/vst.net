@@ -34,6 +34,37 @@ namespace Jacobi.Vst.Framework
             return item.Info.Name;
         }
 
+        protected override void ClearItems()
+        {
+            foreach (VstParameter parameter in this)
+            {
+                parameter.Dispose();
+            }
+
+            base.ClearItems();
+        }
+
+        protected override void RemoveItem(int index)
+        {
+            VstParameter parameter = this[index];
+
+            base.RemoveItem(index);
+
+            parameter.Dispose();
+        }
+
+        protected override void SetItem(int index, VstParameter item)
+        {
+            VstParameter parameter = this[index];
+
+            if (parameter != item)
+            {
+                parameter.Dispose();
+            }
+
+            base.SetItem(index, item);
+        }
+
         #region IActivatable Members
 
         public bool IsActive { get; private set; }

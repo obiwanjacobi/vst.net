@@ -307,12 +307,12 @@ public:
 
 	static Jacobi::Vst::Core::VstPatchChunkInfo^ ToPatchChunkInfo(::VstPatchChunkInfo* pChunkInfo)
 	{
-		Jacobi::Vst::Core::VstPatchChunkInfo^ patchChunkInfo = gcnew Jacobi::Vst::Core::VstPatchChunkInfo();
-
-		patchChunkInfo->NumberOfElements = pChunkInfo->numElements;
-		patchChunkInfo->PluginID = pChunkInfo->pluginUniqueID;
-		patchChunkInfo->PluginVersion = pChunkInfo->pluginVersion;
-		patchChunkInfo->Version = pChunkInfo->version;
+		Jacobi::Vst::Core::VstPatchChunkInfo^ patchChunkInfo = 
+			gcnew Jacobi::Vst::Core::VstPatchChunkInfo(
+				pChunkInfo->version,
+				pChunkInfo->pluginUniqueID,
+				pChunkInfo->pluginVersion,
+				pChunkInfo->numElements);
 
 		return patchChunkInfo;
 	}
