@@ -1,7 +1,8 @@
-﻿using System;
-namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Framework
 {
-    public class VstProgram : IVstPluginParameters
+    using System;
+
+    public class VstProgram : IVstPluginParameters, IDisposable
     {
         public VstProgram(VstParameterCategoryCollection categories)
         {
@@ -30,17 +31,33 @@ namespace Jacobi.Vst.Framework
             get { return _categories; }
         }
 
-        private VstParameterCollection _paramters;
+        private VstParameterCollection _parameters;
         public VstParameterCollection Parameters
         {
             get
             {
-                if (_paramters == null)
+                if (_parameters == null)
                 {
-                    _paramters = new VstParameterCollection();
+                    _parameters = new VstParameterCollection();
                 }
 
-                return _paramters;
+                return _parameters;
+            }
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public virtual void Dispose()
+        {
+            _name = null;
+            _categories = null;
+
+            if (_parameters != null)
+            {
+                _parameters.Clear();    // disposes VstParameter instances
+                _parameters = null;
             }
         }
 

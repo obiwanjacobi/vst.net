@@ -94,16 +94,16 @@
             return false;
         }
 
-        public int BeginLoadBank(VstPatchChunkInfo chunkInfo)
+        public VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
         {
             _editorCtrl.Instance.AddLine("BeginLoadBank");
-            return 0;
+            return VstCanDoResult.Unknown;
         }
 
-        public int BeginLoadProgram(VstPatchChunkInfo chunkInfo)
+        public VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo)
         {
             _editorCtrl.Instance.AddLine("BeginLoadProgram");
-            return 0;
+            return VstCanDoResult.Unknown;
         }
 
         #endregion

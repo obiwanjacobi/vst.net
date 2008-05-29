@@ -296,11 +296,11 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effBeginLoadBank:
 			// TODO: how do we deal with VstPatchChunkInfo in PluginHost scenario?
-			result = _commandStub->BeginLoadBank(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr));
+			result = safe_cast<VstInt32>(_commandStub->BeginLoadBank(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
 			break;
 		case effBeginLoadProgram:
 			// TODO: how do we deal with VstPatchChunkInfo in PluginHost scenario?
-			result = _commandStub->BeginLoadProgram(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr));
+			result = safe_cast<VstInt32>(_commandStub->BeginLoadProgram(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
 			break;
 		case effSetProcessPrecision:
 			result = _commandStub->SetProcessPrecision(safe_cast<Jacobi::Vst::Core::VstProcessPrecision>(value)) ? 1 : 0;
