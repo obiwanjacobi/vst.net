@@ -10,10 +10,6 @@
 // fwd refs
 System::String^ getPluginFileName();
 AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
-void ShowError(System::Exception^ e);
-
-// global reference to the plugin cmd stub
-gcroot<PluginCommandProxy^> _pluginCommandProxy;
 
 // main exported method called by host to create the plugin
 AEffect* VSTPluginMain (audioMasterCallback hostCallback)
@@ -45,8 +41,12 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 				// initialize host stub with plugin info
 				hostStub->Initialize(pEffect);
 
-				// connect the plugin command stub to the command proxy
-				_pluginCommandProxy = gcnew PluginCommandProxy(commandStub);
+				// connect the plugin command stub to the command proxy and construct a handle
+				System::Runtime::InteropServices::GCHandle proxyHandle = System::Runtime::InteropServices::GCHandle::Alloc(
+					gcnew PluginCommandProxy(commandStub), System::Runtime::InteropServices::GCHandleType::Normal);
+
+				// maintain the proxy reference as part of the effect struct
+				pEffect->user = System::Runtime::InteropServices::GCHandle::ToIntPtr(proxyHandle).ToPointer();
 
 				return pEffect;
 			}
@@ -64,9 +64,12 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 
 VstIntPtr DispatcherProc(AEffect* pluginInfo, VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
 {
-	if(_pluginCommandProxy)
+	if(pluginInfo && pluginInfo->user)
 	{
-		return _pluginCommandProxy->Dispatch(opcode, index, value, ptr, opt);
+		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
+
+		return proxy->Dispatch(opcode, index, value, ptr, opt);
 	}
 
 	return 0;
@@ -74,33 +77,45 @@ VstIntPtr DispatcherProc(AEffect* pluginInfo, VstInt32 opcode, VstInt32 index, V
 
 void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt32 sampleFrames)
 {
-	if(_pluginCommandProxy)
+	if(pluginInfo && pluginInfo->user)
 	{
-		_pluginCommandProxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
+		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
+
+		return proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
 	}
 }
 
 void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstInt32 sampleFrames)
 {
-	if(_pluginCommandProxy)
+	if(pluginInfo && pluginInfo->user)
 	{
-		_pluginCommandProxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
+		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
+
+		return proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
 	}
 }
 
 void SetParameterProc(AEffect* pluginInfo, VstInt32 index, float value)
 {
-	if(_pluginCommandProxy)
+	if(pluginInfo && pluginInfo->user)
 	{
-		_pluginCommandProxy->SetParameter(index, value);
+		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
+
+		return proxy->SetParameter(index, value);
 	}
 }
 
 float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 {
-	if(_pluginCommandProxy)
+	if(pluginInfo && pluginInfo->user)
 	{
-		return _pluginCommandProxy->GetParameter(index);
+		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
+
+		return proxy->GetParameter(index);
 	}
 
 	return 0.0;
