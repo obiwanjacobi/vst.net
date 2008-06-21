@@ -50,7 +50,7 @@
                 {
                     foreach (Type intfType in type.GetInterfaces())
                     {
-                        if (intfType.Equals(typeOfInterface))
+                        if (intfType.FullName.Equals(typeOfInterface.FullName))
                         {
                             return type;
                         }
