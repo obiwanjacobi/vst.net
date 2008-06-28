@@ -11,3 +11,13 @@ void Utils::ShowError(System::Exception^ e)
 
 	System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
 }
+
+void Utils::ShowWarning(System::String^ message)
+{
+	System::IntPtr mem = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(message);
+
+	::MessageBox(NULL, (LPCTSTR)mem.ToPointer(), LPCTSTR("VST.NET Warning"), MB_ICONEXCLAMATION | MB_OK);
+
+	System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
+}
+

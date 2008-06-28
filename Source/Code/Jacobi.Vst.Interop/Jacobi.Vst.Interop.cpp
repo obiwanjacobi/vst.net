@@ -2,28 +2,47 @@
 //
 
 #include "stdafx.h"
+#include "AssemblyLoader.h"
 #include "PluginCommandProxy.h"
 #include "HostCommandStub.h"
 #include "Utils.h"
 #include<vcclr.h>
 
 // fwd refs
-System::String^ getPluginFileName();
-AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
+AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback);
 
 // main exported method called by host to create the plugin
 AEffect* VSTPluginMain (audioMasterCallback hostCallback)
+{
+	// retrieve the current plugin file name (interop)
+	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+
+	// pass the assembly loader the vst plugin directory
+	AssemblyLoader::Initialize(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
+
+	//
+	// We have boostrapped the AssemblyLoader (above).
+	// Now call the actual VST main.
+	//
+	return VSTPluginMainInternal(hostCallback);
+}
+
+// fwd refs
+AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
+
+AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback)
 {
 	// create the host command stub (sends commands to host)
 	HostCommandStub^ hostStub = gcnew HostCommandStub(hostCallback);
 
 	try
 	{
-		// retrieve the current plugin file name
-		System::String^ interopAssemblyFileName = getPluginFileName();
-		
+		// retrieve the current plugin file name (interop)
+		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+
 		// create the plugin (command stub) factory
-		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(interopAssemblyFileName);
+		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
+			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(interopAssemblyFileName);
 		
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
@@ -42,14 +61,23 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 				hostStub->Initialize(pEffect);
 
 				// connect the plugin command stub to the command proxy and construct a handle
-				System::Runtime::InteropServices::GCHandle proxyHandle = System::Runtime::InteropServices::GCHandle::Alloc(
-					gcnew PluginCommandProxy(commandStub), System::Runtime::InteropServices::GCHandleType::Normal);
+				System::Runtime::InteropServices::GCHandle proxyHandle = 
+					System::Runtime::InteropServices::GCHandle::Alloc(
+						gcnew PluginCommandProxy(commandStub), System::Runtime::InteropServices::GCHandleType::Normal);
 
 				// maintain the proxy reference as part of the effect struct
 				pEffect->user = System::Runtime::InteropServices::GCHandle::ToIntPtr(proxyHandle).ToPointer();
 
 				return pEffect;
 			}
+			else
+			{
+				Utils::ShowWarning("The Plugin Command Stub did not return a Plugin Info instance. Loading will be cancelled.");
+			}
+		}
+		else
+		{
+			Utils::ShowWarning("The Plugin Factory was unable to create a Plugin Command Stub. Loading will be cancelled.");
 		}
 	}
 	catch(System::Exception^ exc)
@@ -82,7 +110,7 @@ void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt3
 		PluginCommandProxy^ proxy = (PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
-		return proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
+		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
 	}
 }
 
@@ -93,7 +121,7 @@ void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstIn
 		PluginCommandProxy^ proxy = (PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
-		return proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
+		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
 	}
 }
 
@@ -104,7 +132,7 @@ void SetParameterProc(AEffect* pluginInfo, VstInt32 index, float value)
 		PluginCommandProxy^ proxy = (PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
-		return proxy->SetParameter(index, value);
+		proxy->SetParameter(index, value);
 	}
 }
 
@@ -145,10 +173,4 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 	pEffect->version = pluginInfo->PluginVersion;
 
 	return pEffect;
-}
-
-System::String^ getPluginFileName()
-{
-	System::Reflection::Assembly^ ass = System::Reflection::Assembly::GetExecutingAssembly();
-	return ass->Location;
 }

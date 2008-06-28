@@ -12,7 +12,14 @@ namespace Jacobi.Vst.Core.TestPlugin
 
         public void AddLine(string text)
         {
-            listBox1.Items.Add(text);
+            if(this.InvokeRequired)
+            {
+                this.Invoke((EventHandler)delegate(object sender, EventArgs e) { listBox1.Items.Add(text); });
+            }
+            else
+            {
+                listBox1.Items.Add(text);
+            }
         }
     }
 }
