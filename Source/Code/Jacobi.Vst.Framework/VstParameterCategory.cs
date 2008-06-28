@@ -10,10 +10,7 @@
             get { return _name; }
             set
             {
-                if (value != null && value.Length > Core.Constants.MaxCategoryLabelLength)
-                {
-                    throw new ArgumentException("Name too long.", "Name");
-                }
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxCategoryLabelLength, "Name");
 
                 _name = value;
             }

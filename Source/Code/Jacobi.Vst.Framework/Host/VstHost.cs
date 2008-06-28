@@ -4,10 +4,20 @@
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
 
+    /// <summary>
+    /// Implements the proxy to the vst host.
+    /// </summary>
     internal class VstHost : IExtensible, IVstHost, IDisposable
     {
+        /// <summary>Interface manager for the host.</summary>
         private VstHostInterfaceManager _intfMgr;
 
+        /// <summary>
+        /// Constructs a new instance of the host class based on the <paramref name="hostCmdStub"/> 
+        /// (from Interop) and a reference to the current <paramref name="plugin"/>.
+        /// </summary>
+        /// <param name="hostCmdStub">Must not be null.</param>
+        /// <param name="plugin">Must not be null.</param>
         public VstHost(IVstHostCommandStub hostCmdStub, IVstPlugin plugin)
         {
             Throw.IfArgumentIsNull(hostCmdStub, "hostCmdStub");
@@ -19,12 +29,24 @@
             _intfMgr = new VstHostInterfaceManager(this);
         }
 
+        /// <summary>
+        /// Gets the Host Command Stub (Interop).
+        /// </summary>
         public IVstHostCommandStub HostCommandStub { get; private set; }
-        internal IVstPlugin Plugin { get; private set; }
+        /// <summary>
+        /// Gets the current Plugin instance.
+        /// </summary>
+        public IVstPlugin Plugin { get; private set; }
 
         #region IVstHost Members
 
         private VstProductInfo _productInfo;
+        /// <summary>
+        /// Gets the product information of the vst host.
+        /// </summary>
+        /// <remarks>
+        /// Implemented lazy with caching. First-time call will fire 3 callbacks to the host.
+        /// </remarks>
         public VstProductInfo ProductInfo
         {
             get
@@ -42,6 +64,12 @@
         }
 
         private VstHostCapabilities _hostCapabilities;
+        /// <summary>
+        /// Gets the vst host capabilities.
+        /// </summary>
+        /// <remarks>
+        /// Implemented lazy with caching. Fires multiple CanDo requests at the host.
+        /// </remarks>
         public VstHostCapabilities Capabilities
         {
             get
@@ -89,15 +117,33 @@
             }
         }
 
+        /// <summary>
+        /// Gets the vst host thread that is currently executing the plugin code (calling this property).
+        /// </summary>
+        public VstProcessLevels ProcessLevel
+        {
+            get { return HostCommandStub.GetProcessLevel(); }
+        }
+
         #endregion
 
         #region IExtensibleObject Members
 
+        /// <summary>
+        /// Indicates wheather a interface (or class) is supported by the host.
+        /// </summary>
+        /// <typeparam name="T">The type of interface or class.</typeparam>
+        /// <returns>Returns true when the type <typeparamref name="T"/> is supported.</returns>
         public bool Supports<T>() where T : class
         {
             return _intfMgr.Supports<T>();
         }
 
+        /// <summary>
+        /// Retrieves an instance (or null) for the specified type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of interface or class.</typeparam>
+        /// <returns>Returns null when <typeparamref name="T"/> is not supported.</returns>
         public T GetInstance<T>() where T : class
         {
             return _intfMgr.GetInstance<T>();
@@ -107,6 +153,9 @@
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Called to dispose of this host instance.
+        /// </summary>
         public void Dispose()
         {
             if (_intfMgr != null)

@@ -841,7 +841,7 @@
             return false;
         }
 
-        public bool EditorOpen(System.IntPtr hWnd)
+        public bool EditorOpen(IntPtr hWnd)
         {
             IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
 

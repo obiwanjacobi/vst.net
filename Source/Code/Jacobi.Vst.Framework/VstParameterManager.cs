@@ -39,7 +39,7 @@
         {
             Throw.IfArgumentIsNull(parameter, "parameter");
 
-            parameter.ValueChangedCallback = new EventHandler<EventArgs>(Parameter_NormalizedValueChanged);
+            parameter.ValueChangedCallback = new EventHandler<EventArgs>(Parameter_ValueChanged);
             parameter.ActivationChangedCallback = new EventHandler<EventArgs>(Parameter_ActivationChanged);
         }
 
@@ -68,7 +68,7 @@
         /// </summary>
         /// <param name="sender">A reference to VstParameter.</param>
         /// <param name="e"><see cref="EventArgs.Empty"/>.</param>
-        private void Parameter_NormalizedValueChanged(object sender, EventArgs e)
+        private void Parameter_ValueChanged(object sender, EventArgs e)
         {
             // TODO: smooth parameter value transitions
 
