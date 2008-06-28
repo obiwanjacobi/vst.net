@@ -21,6 +21,8 @@
 
         public void Process(VstEventCollection events)
         {
+            Throw.IfArgumentIsNull(events, "events");
+
             _host.HostCommandStub.ProcessEvents(events.ToArray());
         }
 
