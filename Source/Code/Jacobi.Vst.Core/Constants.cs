@@ -1,19 +1,32 @@
 ﻿namespace Jacobi.Vst.Core
 {
+    /// <summary>
+    /// Constants used in the VST interface
+    /// </summary>
     public class Constants
     {
         // VST 1.0 constants
-        public const int MaxProgramNameLength = 23;	    // used for #effGetProgramName; #effSetProgramName; #effGetProgramNameIndexed
-        public const int MaxParameterStringLength = 7;  // used for #effGetParamLabel; #effGetParamDisplay; #effGetParamName
-        public const int MaxVendorStringLength = 63;	// used for #effGetVendorString; #audioMasterGetVendorString
-        public const int MaxProductStringLength = 63;	// used for #effGetProductString; #audioMasterGetProductString
-        public const int MaxEffectNameLength = 31;	    // used for #effGetEffectName
+        /// <summary>used for #effGetProgramName; #effSetProgramName; #effGetProgramNameIndexed</summary>
+        public const int MaxProgramNameLength = 23;
+        /// <summary>used for #effGetParamLabel; #effGetParamDisplay; #effGetParamName</summary>
+        public const int MaxParameterStringLength = 7;
+        /// <summary>used for #effGetVendorString; #audioMasterGetVendorString</summary>
+        public const int MaxVendorStringLength = 63;
+        /// <summary>used for #effGetProductString; #audioMasterGetProductString</summary>
+        public const int MaxProductStringLength = 63;
+        /// <summary>used for #effGetEffectName</summary>
+        public const int MaxEffectNameLength = 31;
 
         // VST 2.0 constants
-        public const int MaxMidiNameLength = 63;        // used for #MidiProgramName; #MidiProgramCategory; #MidiKeyName; #VstSpeakerProperties; #VstPinProperties
-        public const int MaxLabelLength = 63;	        // used for #VstParameterProperties->label; #VstPinProperties->label
-        public const int MaxShortLabelLength = 7;	    // used for #VstParameterProperties->shortLabel; #VstPinProperties->shortLabel
-        public const int MaxCategoryLabelLength = 23;	// used for #VstParameterProperties->label
-        public const int MaxFileNameLength = 99;	    // used for #VstAudioFile->name
+        /// <summary>used for #MidiProgramName; #MidiProgramCategory; #MidiKeyName; #VstSpeakerProperties; #VstPinProperties</summary>
+        public const int MaxMidiNameLength = 63;
+        /// <summary>used for #VstParameterProperties->label; #VstPinProperties->label</summary>
+        public const int MaxLabelLength = 63;
+        /// <summary>used for #VstParameterProperties->shortLabel; #VstPinProperties->shortLabel</summary>
+        public const int MaxShortLabelLength = 7;
+        /// <summary>used for #VstParameterProperties->label</summary>
+        public const int MaxCategoryLabelLength = 23;
+        /// <summary>used for #VstAudioFile->name</summary>
+        public const int MaxFileNameLength = 99;
     }
 }

@@ -140,6 +140,7 @@
   <PropertyGroup>
     <WindowsSdkDir>%WindowsSdkDir%</WindowsSdkDir>
     <PostBuildEvent>CALL "c:\Program Files\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
-"$(WindowsSdkDir)\Bin\gacutil.exe" /if "$(TargetPath)"</PostBuildEvent>
+"$(WindowsSdkDir)\Bin\gacutil.exe" /if "$(TargetPath)"
+copy "$(TargetPath)" "$(SolutionDir)\..\_SharedAssemblies"</PostBuildEvent>
   </PropertyGroup>
 </Project>

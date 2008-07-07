@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Core.TestPlugin
+﻿namespace Jacobi.Vst.Samples.CorePlugin
 {
     partial class EditorControl1
     {

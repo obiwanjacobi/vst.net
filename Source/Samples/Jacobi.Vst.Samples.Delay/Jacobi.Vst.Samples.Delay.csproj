@@ -5,18 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}</ProjectGuid>
+    <ProjectGuid>{81956924-2C19-478E-9FCC-8532B871DCCD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jacobi.Vst.Core.TestPlugin</RootNamespace>
-    <AssemblyName>Jacobi.Vst.Core.TestPlugin</AssemblyName>
+    <RootNamespace>Jacobi.Vst.Samples.Delay</RootNamespace>
+    <AssemblyName>Jacobi.Vst.Samples.Delay</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,44 +33,31 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jacobi.Vst.Core, Version=0.3.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Jacobi.Vst.Framework, Version=0.3.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
-    <Compile Include="..\AssemblyInfo.Version.cs">
-      <Link>Properties\AssemblyInfo.Version.cs</Link>
-    </Compile>
-    <Compile Include="EditorControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="EditorControl1.Designer.cs">
-      <DependentUpon>EditorControl1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="PluginCommandStub.cs" />
+    <Compile Include="AudioProcessor.cs" />
+    <Compile Include="Delay.cs" />
+    <Compile Include="FxPluginInterfaceManager.cs" />
+    <Compile Include="FxTestPlugin.cs" />
+    <Compile Include="PluginParameterFactory.cs" />
+    <Compile Include="PluginPersistence.cs" />
+    <Compile Include="PluginPrograms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WinFormsWrapper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj">
-      <Project>{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}</Project>
-      <Name>Jacobi.Vst.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="EditorControl1.resx">
-      <DependentUpon>EditorControl1.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Compile Include="TestPluginCommandStub.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -83,7 +68,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)$(ConfigurationName)\$(TargetName).net$(TargetExt)"
-copy "$(SolutionDir)$(ConfigurationName)\Jacobi.Vst.Interop.dll" "$(SolutionDir)$(ConfigurationName)\$(TargetName)$(TargetExt)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(TargetDir)vstnet\$(TargetName).net$(TargetExt)"
+copy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(TargetDir)vstnet\$(TargetName)$(TargetExt)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

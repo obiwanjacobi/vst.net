@@ -1,6 +1,7 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
     using System;
+    using Jacobi.Vst.Framework;
 
     internal class AudioProcessor : IVstPluginAudioProcessor
     {

@@ -2,9 +2,9 @@ namespace Jacobi.Vst.Core
 {
     public class VstMidiEvent : VstEvent
     {
-        public VstMidiEvent(VstEventTypes eventType, int deltaFrames, int flags,
+        public VstMidiEvent(int deltaFrames, int flags,
             int noteLength, int noteOffset, byte[] midiData, char detune, byte noteOffVelocity)
-            : base(eventType, deltaFrames, flags)
+            : base(VstEventTypes.MidiEvent, deltaFrames, flags)
         {
             NoteLength = noteLength;
             NoteOffset = noteOffset;
@@ -13,10 +13,10 @@ namespace Jacobi.Vst.Core
             NoteOffVelocity = noteOffVelocity;
         }
 
-        public int NoteLength;
-        public int NoteOffset;
-        public byte[] MidiData;
-        public char Detune;
-        public byte NoteOffVelocity;
+        public int NoteLength { get; private set; }
+        public int NoteOffset { get; private set; }
+        public byte[] MidiData { get; private set; }
+        public char Detune { get; private set; }
+        public byte NoteOffVelocity { get; private set; }
     }
 }

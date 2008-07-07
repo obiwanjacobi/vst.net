@@ -1,5 +1,7 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
+    using Jacobi.Vst.Framework;
+
     internal class FxTestPlugin : IVstPlugin
     {
         private IVstHost _host;
@@ -46,7 +48,7 @@
 
         public VstPluginCapabilities Capabilities
         {
-            get { return VstPluginCapabilities.NoSoundInStop; }
+            get { return VstPluginCapabilities.None; }
         }
 
         public int InitialDelay
