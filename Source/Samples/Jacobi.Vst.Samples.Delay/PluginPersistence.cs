@@ -1,9 +1,10 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
+    using System.Diagnostics;
     using System.IO;
     using System.Text;
     using Jacobi.Vst.Core;
-    using System.Diagnostics;
+    using Jacobi.Vst.Framework;
 
     internal class PluginPersistence : IVstPluginPersistence
     {

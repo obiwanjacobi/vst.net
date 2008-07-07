@@ -1,6 +1,9 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
-    class FxPluginInterfaceManager : Plugin.PluginInterfaceManagerBase
+    using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Framework.Plugin;
+
+    class FxPluginInterfaceManager : PluginInterfaceManagerBase
     {
         private FxTestPlugin _plugin;
 

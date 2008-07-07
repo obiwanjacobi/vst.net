@@ -1,8 +1,9 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
     using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Framework.Plugin;
 
-    public class TestPluginCommandStub : Plugin.StdPluginCommandStub, Core.Plugin.IVstPluginCommandStub
+    public class TestPluginCommandStub : StdPluginCommandStub, Core.Plugin.IVstPluginCommandStub
     {
         protected override IVstPlugin CreatePluginInstance()
         {

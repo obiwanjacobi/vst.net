@@ -9,10 +9,9 @@ namespace Jacobi.Vst.Core
             Flags = flags;
         }
 
-        public VstEventTypes EventType;
-        //public int ByteSize;
-        public int DeltaFrames;
-        public int Flags;
+        public VstEventTypes EventType { get; private set; }
+        public int DeltaFrames { get; private set; }
+        public int Flags { get; private set; }
     }
 
     public enum VstEventTypes

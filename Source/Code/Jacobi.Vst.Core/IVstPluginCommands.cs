@@ -3,6 +3,9 @@
     using System;
     using System.Drawing;
 
+    /// <summary>
+    /// The Vst Plugin callback functions
+    /// </summary>
     public interface IVstPluginCommandsBase
     {
         void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs);
@@ -10,7 +13,10 @@
         void SetParameter(int index, float value);
         float GetParameter(int index);
     }
-    
+
+    /// <summary>
+    /// The Vst 1.0 Plugin commands
+    /// </summary>
     public interface IVstPluginCommands10 : IVstPluginCommandsBase
     {
         void Open();
@@ -33,6 +39,9 @@
         int SetChunk(byte[] data, bool isPreset);
     }
 
+    /// <summary>
+    /// The Vst 2.0 Plugin commands
+    /// </summary>
     public interface IVstPluginCommands20 : IVstPluginCommands10
     {
         bool ProcessEvents(VstEvent[] events);
@@ -58,6 +67,9 @@
         int GetVstVersion();
     }
 
+    /// <summary>
+    /// The Vst 2.1 Plugin commands
+    /// </summary>
     public interface IVstPluginCommands21 : IVstPluginCommands20
     {
         bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
@@ -72,6 +84,9 @@
         bool EndSetProgram();
     }
 
+    /// <summary>
+    /// The Vst 2.3 Plugin commands
+    /// </summary>
     public interface IVstPluginCommands23 : IVstPluginCommands21
     {
         bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output);
@@ -84,6 +99,9 @@
         VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo);
     }
 
+    /// <summary>
+    /// The Vst 2.4 Plugin commands
+    /// </summary>
     public interface IVstPluginCommands24 : IVstPluginCommands23
     {
         bool SetProcessPrecision(VstProcessPrecision precision);

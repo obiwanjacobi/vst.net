@@ -2,13 +2,13 @@ namespace Jacobi.Vst.Core
 {
     public class VstMidiSysExEvent : VstEvent
     {
-        public VstMidiSysExEvent(VstEventTypes eventType, int deltaFrames, int flags,
+        public VstMidiSysExEvent(int deltaFrames, int flags,
             byte[] sysexData)
-            : base(eventType, deltaFrames, flags)
+            : base(VstEventTypes.MidiSysExEvent, deltaFrames, flags)
         {
             SysExData = sysexData;
         }
 
-        public byte[] SysExData;
+        public byte[] SysExData { get; private set; }
     }
 }

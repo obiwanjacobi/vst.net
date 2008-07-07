@@ -80,7 +80,7 @@ public:
 				midiData[2] = pMidiEvent->midiData[2];
 
 				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = gcnew Jacobi::Vst::Core::VstMidiEvent(
-					Jacobi::Vst::Core::VstEventTypes::MidiEvent, pMidiEvent->deltaFrames, pMidiEvent->flags, 
+					pMidiEvent->deltaFrames, pMidiEvent->flags, 
 					pMidiEvent->noteLength, pMidiEvent->noteOffset, midiData, pMidiEvent->detune, pMidiEvent->noteOffVelocity);
 
 				eventArray[n] = midiEvent;
@@ -98,7 +98,7 @@ public:
 				}
 
 				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = gcnew Jacobi::Vst::Core::VstMidiSysExEvent(
-					Jacobi::Vst::Core::VstEventTypes::MidiEvent, pMidiEvent->deltaFrames, pMidiEvent->flags, 
+					pMidiEvent->deltaFrames, pMidiEvent->flags, 
 					midiData);
 
 				eventArray[n] = midiEvent;
