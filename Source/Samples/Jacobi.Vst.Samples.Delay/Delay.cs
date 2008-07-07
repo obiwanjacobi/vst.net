@@ -1,5 +1,7 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
+    using Jacobi.Vst.Framework;
+
     internal class Delay
     {
         private float[] _delayBuffer;

@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
-namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
+    using System.Diagnostics;
+    using Jacobi.Vst.Framework;
+
     class PluginPrograms : IVstPluginPrograms
     {
         FxTestPlugin _plugin;

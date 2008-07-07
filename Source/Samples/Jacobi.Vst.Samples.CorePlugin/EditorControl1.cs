@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace Jacobi.Vst.Core.TestPlugin
+﻿namespace Jacobi.Vst.Samples.CorePlugin
 {
+    using System;
+    using System.Windows.Forms;
+
     public partial class EditorControl1 : UserControl
     {
         public EditorControl1()

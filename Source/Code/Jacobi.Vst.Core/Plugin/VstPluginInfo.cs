@@ -1,5 +1,8 @@
 ﻿namespace Jacobi.Vst.Core.Plugin
 {
+    /// <summary>
+    /// Plugin information passed to the Host.
+    /// </summary>
     public class VstPluginInfo
     {
         public VstPluginFlags Flags;

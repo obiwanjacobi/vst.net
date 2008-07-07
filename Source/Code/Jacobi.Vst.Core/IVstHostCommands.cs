@@ -1,5 +1,8 @@
 ﻿namespace Jacobi.Vst.Core
 {
+    /// <summary>
+    /// The Vst 1.0 Host commands
+    /// </summary>
     public interface IVstHostCommands10
     {
         void SetParameterAutomated(int index, float value);
@@ -8,6 +11,9 @@
         void ProcessIdle();
     }
 
+    /// <summary>
+    /// The Vst 2.0 Host commands
+    /// </summary>
     public interface IVstHostCommands20 : IVstHostCommands10
     {
         VstTimeInfo GetTimeInfo(VstTimeInfoFlags filterFlags);

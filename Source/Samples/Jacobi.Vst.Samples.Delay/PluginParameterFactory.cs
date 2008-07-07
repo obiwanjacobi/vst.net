@@ -1,7 +1,8 @@
-﻿namespace Jacobi.Vst.Framework.TestPlugin
+﻿namespace Jacobi.Vst.Samples.Delay
 {
     using System.Collections.ObjectModel;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework;
     
     internal class PluginParameterFactory
     {

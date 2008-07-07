@@ -96,6 +96,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)\..\_SharedAssemblies&quot;"
 			/>
 		</Configuration>
 		<Configuration
