@@ -1,21 +1,17 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Jacobi.Vst.Samples.CorePlugin")]
+[assembly: AssemblyTitle("Jacobi.Vst.Samples.MidiNoteMapper")]
 [assembly: AssemblyDescription("VST.NET Sample")]
-[assembly: AssemblyProduct("Jacobi.Vst.Samples.CorePlugin")]
+[assembly: AssemblyProduct("Jacobi.Vst.Samples.MidiNoteMapper")]
 [assembly: AssemblyCulture("")]
 
-// plugins build against the Core are not CLS compliant.
-[assembly: CLSCompliant(false)]
-
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5b3661d6-2e54-4219-9344-094d99457695")]
+[assembly: Guid("9bfcaeb6-11f4-4372-ab29-ffc9dd9b6418")]
 
 // Version information for an assembly consists of the following four values:
 //

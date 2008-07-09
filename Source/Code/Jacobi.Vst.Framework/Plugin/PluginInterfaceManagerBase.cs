@@ -11,6 +11,7 @@
         private InterfaceManager<IVstPluginConnections> _connections;
         private InterfaceManager<IVstPluginEditor> _editor;
         private InterfaceManager<IVstPluginHost> _host;
+        private InterfaceManager<IVstMidiProcessor> _midiProcessor;
         private InterfaceManager<IVstPluginMidiPrograms> _midiPrograms;
         private InterfaceManager<IVstPluginMidiSource> _midiSource;
         private InterfaceManager<IVstPluginOfflineProcessor> _offlineProcessor;
@@ -22,18 +23,46 @@
         public PluginInterfaceManagerBase()
         {
             _audioPrecission = new InterfaceManager<IVstPluginAudioPrecissionProcessor>(CreateAudioPrecissionProcessor);
+            _audioPrecission.DisposeParent = this;
+            
             _audioProcessor = new InterfaceManager<IVstPluginAudioProcessor>(CreateAudioProcessor);
+            _audioProcessor.DisposeParent = this;
+            
             _bypass = new InterfaceManager<IVstPluginBypass>(CreateBypass);
+            _bypass.DisposeParent = this;
+            
             _connections = new InterfaceManager<IVstPluginConnections>(CreateConnections);
+            _connections.DisposeParent = this;
+            
             _editor = new InterfaceManager<IVstPluginEditor>(CreateEditor);
+            _editor.DisposeParent = this;
+            
             _host = new InterfaceManager<IVstPluginHost>(CreateHost);
+            _host.DisposeParent = this;
+            
+            _midiProcessor = new InterfaceManager<IVstMidiProcessor>(CreateMidiProcessor);
+            _midiProcessor.DisposeParent = this;
+            
             _midiPrograms = new InterfaceManager<IVstPluginMidiPrograms>(CreateMidiPrograms);
+            _midiPrograms.DisposeParent = this;
+            
             _midiSource = new InterfaceManager<IVstPluginMidiSource>(CreateMidiSource);
+            _midiSource.DisposeParent = this;
+            
             _offlineProcessor = new InterfaceManager<IVstPluginOfflineProcessor>(CreateOfflineProcessor);
+            _offlineProcessor.DisposeParent = this;
+            
             _parameters = new InterfaceManager<IVstPluginParameters>(CreateParameters);
+            _parameters.DisposeParent = this;
+            
             _persistence = new InterfaceManager<IVstPluginPersistence>(CreatePersistence);
+            _persistence.DisposeParent = this;
+            
             _process = new InterfaceManager<IVstPluginProcess>(CreateProcess);
+            _process.DisposeParent = this;
+            
             _programs = new InterfaceManager<IVstPluginPrograms>(CreatePrograms);
+            _programs.DisposeParent = this;
         }
 
         protected virtual IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
@@ -62,6 +91,11 @@
         }
 
         protected virtual IVstPluginHost CreateHost(IVstPluginHost instance)
+        {
+            return instance;
+        }
+
+        protected virtual IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
         {
             return instance;
         }
@@ -108,7 +142,7 @@
             return (GetInstance<T>() != null);
         }
 
-        public T GetInstance<T>() where T : class
+        public virtual T GetInstance<T>() where T : class
         {
             // interfaces are more or less ordered in priority
 
@@ -148,6 +182,9 @@
                 return parameters.SafeInstance as T;
             }
 
+            ExtensibleInterfaceRef<IVstMidiProcessor> midiProcessor = _midiProcessor.MatchInterface<T>();
+            if (midiProcessor != null) return midiProcessor.SafeInstance as T;
+
             ExtensibleInterfaceRef<IVstPluginMidiPrograms> midiPrograms = _midiPrograms.MatchInterface<T>();
             if (midiPrograms != null) return midiPrograms.SafeInstance as T;
 
@@ -184,19 +221,27 @@
 
         public void Dispose()
         {
-            _audioPrecission.Dispose();
-            _audioProcessor.Dispose();
-            _bypass.Dispose();
-            _connections.Dispose();
-            _editor.Dispose();
-            _host.Dispose();
-            _midiPrograms.Dispose();
-            _midiSource.Dispose();
-            _offlineProcessor.Dispose();
-            _parameters.Dispose();
-            _persistence.Dispose();
-            _process.Dispose();
-            _programs.Dispose();
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _audioPrecission.Dispose();
+                _audioProcessor.Dispose();
+                _bypass.Dispose();
+                _connections.Dispose();
+                _editor.Dispose();
+                _host.Dispose();
+                _midiPrograms.Dispose();
+                _midiSource.Dispose();
+                _offlineProcessor.Dispose();
+                _parameters.Dispose();
+                _persistence.Dispose();
+                _process.Dispose();
+                _programs.Dispose();
+            }
         }
 
         #endregion

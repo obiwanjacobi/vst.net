@@ -29,7 +29,7 @@
             {
                 if (_productInfo == null)
                 {
-                    _productInfo = new VstProductInfo("VST.NET Framework TestPlugin", "Jacobi Software", 1000);
+                    _productInfo = new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2008", 1000);
                 }
 
                 return _productInfo;
@@ -38,7 +38,7 @@
 
         public string Name
         {
-            get { return "VST.NET Fx Test Plugin"; }
+            get { return "VST.NET Delay Plugin"; }
         }
 
         public Jacobi.Vst.Core.VstPluginCategory Category

@@ -255,7 +255,7 @@
         public string GetEffectName()
         {
             _editorCtrl.Instance.AddLine("GetEffectName");
-            return "VST.NET TestPlugin";
+            return "VST.NET Core Plugin";
         }
 
         public string GetVendorString()
@@ -267,7 +267,7 @@
         public string GetProductString()
         {
             _editorCtrl.Instance.AddLine("GetProductString");
-            return "VST.NET";
+            return "VST.NET Code Samples";
         }
 
         public int GetVendorVersion()
