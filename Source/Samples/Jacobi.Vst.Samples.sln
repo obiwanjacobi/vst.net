@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.CorePlugin", "Jacobi.Vst.Samples.CorePlugin\Jacobi.Vst.Samples.CorePlugin.csproj", "{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.Delay", "Jacobi.Vst.Samples.Delay\Jacobi.Vst.Samples.Delay.csproj", "{81956924-2C19-478E-9FCC-8532B871DCCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.MidiNoteMapper", "Jacobi.Vst.Samples.MidiNoteMapper\Jacobi.Vst.Samples.MidiNoteMapper.csproj", "{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs06.codeplex.com/
+		SccProjectUniqueName0 = Jacobi.Vst.Samples.CorePlugin\\Jacobi.Vst.Samples.CorePlugin.csproj
+		SccProjectName0 = Jacobi.Vst.Samples.CorePlugin
+		SccLocalPath0 = Jacobi.Vst.Samples.CorePlugin
+		SccProjectUniqueName1 = Jacobi.Vst.Samples.Delay\\Jacobi.Vst.Samples.Delay.csproj
+		SccProjectName1 = Jacobi.Vst.Samples.Delay
+		SccLocalPath1 = Jacobi.Vst.Samples.Delay
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Jacobi.Vst.Samples.MidiNoteMapper\\Jacobi.Vst.Samples.MidiNoteMapper.csproj
+		SccProjectName3 = Jacobi.Vst.Samples.MidiNoteMapper
+		SccLocalPath3 = Jacobi.Vst.Samples.MidiNoteMapper
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4648A9E-8512-4D6B-BD5B-35FBF5D0EE80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81956924-2C19-478E-9FCC-8532B871DCCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81956924-2C19-478E-9FCC-8532B871DCCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81956924-2C19-478E-9FCC-8532B871DCCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81956924-2C19-478E-9FCC-8532B871DCCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

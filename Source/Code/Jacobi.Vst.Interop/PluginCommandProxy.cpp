@@ -23,6 +23,11 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	{
 		switch(opcode)
 		{
+		// Cubase 2.X SX asks for this and wont load otherwise
+		case DECLARE_VST_DEPRECATED (effIdentify):
+			result = CCONST ('N', 'v', 'E', 'f');
+			break;
+
 		case effOpen:
 			_commandStub->Open();
 			break;
@@ -192,6 +197,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->GetVendorVersion();
 			break;
 		case effCanDo:
+			// TODO: This has to change. A lot of host throw all kinds of strings at the plugin (not covered in the enum).
 			result = -1; // This means that a string was passed that was not part of the VstPluginCanDo enum.
 			result = safe_cast<VstInt32>(_commandStub->CanDo((Jacobi::Vst::Core::VstPluginCanDo)
 				System::Enum::Parse(Jacobi::Vst::Core::VstPluginCanDo::typeid, 

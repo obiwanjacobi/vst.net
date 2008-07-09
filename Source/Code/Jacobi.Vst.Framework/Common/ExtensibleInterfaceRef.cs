@@ -44,6 +44,20 @@
             get { return (_instance != null && ThreadSafeInstance != null); }
         }
 
+        private bool _disposeInstance = true;
+        public bool DisposeInstance
+        {
+            get { return _disposeInstance; }
+            set { _disposeInstance = value; }
+        }
+
+        private bool _disposeThreadSafeInstance = true;
+        public bool DisposeThreadSafeInstance
+        {
+            get { return _disposeThreadSafeInstance; }
+            set { _disposeThreadSafeInstance = value; }
+        }
+
         public static bool IsMatch<TIntf>() where TIntf : class
         {
             return (typeof(T).IsAssignableFrom(typeof(TIntf)));
@@ -53,18 +67,26 @@
 
         public void Dispose()
         {
-            IDisposable disposableObject = Instance as IDisposable;
-            
-            if (disposableObject != null)
+            IDisposable disposableObject = null;
+
+            if (DisposeInstance)
             {
-                disposableObject.Dispose();
+                disposableObject = Instance as IDisposable;
+
+                if (disposableObject != null)
+                {
+                    disposableObject.Dispose();
+                }
             }
 
-            disposableObject = ThreadSafeInstance as IDisposable;
-
-            if (disposableObject != null)
+            if (DisposeThreadSafeInstance)
             {
-                disposableObject.Dispose();
+                disposableObject = ThreadSafeInstance as IDisposable;
+
+                if (disposableObject != null)
+                {
+                    disposableObject.Dispose();
+                }
             }
 
             ThreadSafeInstance = null;

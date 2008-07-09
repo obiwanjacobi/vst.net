@@ -26,6 +26,14 @@ namespace Jacobi.Vst.Framework
             _isReadOnly = true;
         }
 
+        public void AddRange(IEnumerable<VstEvent> events)
+        {
+            foreach (VstEvent evnt in events)
+            {
+                Add(evnt);
+            }
+        }
+
         public VstEvent[] ToArray()
         {
             return _list.ToArray();
