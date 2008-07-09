@@ -68,7 +68,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(TargetDir)vstnet\$(TargetName).net$(TargetExt)"
-copy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(TargetDir)vstnet\$(TargetName)$(TargetExt)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).net$(TargetExt)"
+copy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

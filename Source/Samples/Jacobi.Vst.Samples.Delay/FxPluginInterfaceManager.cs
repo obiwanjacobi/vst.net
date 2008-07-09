@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
     using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Framework.Common;
     using Jacobi.Vst.Framework.Plugin;
 
     class FxPluginInterfaceManager : PluginInterfaceManagerBase
@@ -14,7 +15,7 @@
 
         protected override IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
         {
-            if(instance == null) return new AudioProcessor(_plugin);
+            if (instance == null) return new AudioProcessor(_plugin);
 
             return instance;    // reuse initial instance
         }
