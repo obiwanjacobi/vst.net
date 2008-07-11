@@ -7,8 +7,6 @@
     public class WindowsFormsWrapper<T> : IDisposable 
         where T : UserControl, new()
     {
-        private T _instance;
-
         private void EnsureInstance()
         {
             if (_instance == null)
@@ -18,7 +16,10 @@
             }
         }
 
-        public T Instance
+        private T _instance;
+        public T Instance { get { return _instance; } }
+
+        public T SafeInstance
         {
             get
             {

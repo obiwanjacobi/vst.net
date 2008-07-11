@@ -8,13 +8,12 @@
     class PluginEditor : IVstPluginEditor
     {
         private Plugin _plugin;
+        private WindowsFormsWrapper<MidiNoteMapperUI> _uiWrapper = new WindowsFormsWrapper<MidiNoteMapperUI>();
 
         public PluginEditor(Plugin plugin)
         {
             _plugin = plugin;
         }
-
-        private WindowsFormsWrapper<MidiNoteMapperUI> _uiWrapper = new WindowsFormsWrapper<MidiNoteMapperUI>();
 
         #region IVstPluginEditor Members
 
@@ -42,6 +41,7 @@
 
         public void Open(IntPtr hWnd)
         {
+            _uiWrapper.Instance.NoteMap = _plugin.NoteMap;
             _uiWrapper.Open(hWnd);
         }
 
