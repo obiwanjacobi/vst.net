@@ -18,16 +18,6 @@
 
         #region IVstPluginPersistence Members
 
-        public VstProgram ReadProgram(Stream stream)
-        {
-            BinaryReader reader = new BinaryReader(stream, _encoding);
-
-            int count = reader.ReadInt32();
-            Debug.Assert(count == 1);
-
-            return ReadProgram(reader);
-        }
-
         public void ReadPrograms(Stream stream, VstProgramCollection programs)
         {
             BinaryReader reader = new BinaryReader(stream, _encoding);
