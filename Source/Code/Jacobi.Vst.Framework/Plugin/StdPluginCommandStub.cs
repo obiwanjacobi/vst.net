@@ -913,29 +913,37 @@
             {
                 using (MemoryStream stream = new MemoryStream(data, false))
                 {
+                    // use a temp collection to leave the real Programs 
+                    // collection in tact in case of an exception.
+                    VstProgramCollection programs = new VstProgramCollection();
+                    
+                    pluginPersistence.ReadPrograms(stream, programs);
+
                     if (isPreset)
                     {
-                        VstProgram prog = pluginPersistence.ReadProgram(stream);
+                        VstProgram prog = null;
 
-                        VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
-
-                        pluginPrograms.Programs.Add(prog);
-                        pluginPrograms.ActiveProgram = prog;
-
-                        // remove the previously active program that has now been replaced
-                        if (formerActiveProg != null)
+                        if (programs.Count > 0)
                         {
-                            pluginPrograms.Programs.Remove(formerActiveProg);
+                            prog = programs[0];
+                        }
+
+                        if (prog != null)
+                        {
+                            VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
+
+                            pluginPrograms.Programs.Add(prog);
+                            pluginPrograms.ActiveProgram = prog;
+
+                            // remove the previously active program that has now been replaced
+                            if (formerActiveProg != null)
+                            {
+                                pluginPrograms.Programs.Remove(formerActiveProg);
+                            }
                         }
                     }
                     else
                     {
-                        // use a temp collection to leave the real Programs 
-                        // collection in tact in case of an exception.
-                        VstProgramCollection programs = new VstProgramCollection();
-                        
-                        pluginPersistence.ReadPrograms(stream, programs);
-
                         pluginPrograms.ActiveProgram = null;
                         pluginPrograms.Programs.Clear();
                         pluginPrograms.Programs.AddRange(programs);

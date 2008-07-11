@@ -6,12 +6,6 @@ namespace Jacobi.Vst.Framework
     public interface IVstPluginPersistence
     {
         /// <summary>
-        /// Reads chunks for a single, active program from the <paramref name="stream"/>.
-        /// </summary>
-        /// <param name="stream">Must not be null.</param>
-        /// <returns>Never returns null.</returns>
-        VstProgram ReadProgram(Stream stream);
-        /// <summary>
         /// Reads chunks for all programs from the <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">Must not be null.</param>
@@ -21,7 +15,7 @@ namespace Jacobi.Vst.Framework
         /// Writes chunks for all programs in <paramref name="programs"/> to the <paramref name="stream"/>.
         /// </summary>
         /// <param name="stream">Must not be null.</param>
-        /// <param name="programs">Must not be null.</param>
+        /// <param name="programs">Contains the <see cref="VstProgram"/>s that should be serialized into the <paramref name="stream"/>. Must not be null.</param>
         void WritePrograms(Stream stream, VstProgramCollection programs);
 
         /// <summary>
