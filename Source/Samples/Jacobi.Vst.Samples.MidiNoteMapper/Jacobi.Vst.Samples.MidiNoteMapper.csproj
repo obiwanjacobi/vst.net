@@ -54,6 +54,13 @@
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
     <Compile Include="AudioProcessor.cs" />
+    <Compile Include="MapNoteDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MapNoteDetails.Designer.cs">
+      <DependentUpon>MapNoteDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapNoteItem.cs" />
     <Compile Include="MidiNoteMapperUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,6 +74,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MapNoteDetails.resx">
+      <DependentUpon>MapNoteDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="MidiNoteMapperUI.resx">
       <DependentUpon>MidiNoteMapperUI.cs</DependentUpon>
     </EmbeddedResource>

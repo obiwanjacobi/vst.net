@@ -7,6 +7,11 @@
 
     class Plugin : PluginInterfaceManagerBase, IVstPlugin, IVstPluginMidiSource
     {
+        public Plugin()
+        {
+            NoteMap = new MapNoteItemList();
+        }
+
         private IVstHost _host;
         public IVstHost Host
         { get { return _host; } }
@@ -118,5 +123,8 @@
         }
 
         #endregion
+
+        public MapNoteItemList NoteMap { get; private set; }
+
     }
 }

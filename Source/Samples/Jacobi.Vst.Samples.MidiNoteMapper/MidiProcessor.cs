@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
+    using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
     class MidiProcessor : IVstMidiProcessor
@@ -14,6 +15,8 @@
 
         public VstEventCollection Events { get; private set; }
 
+        public bool MidiThru { get; set; }
+
         #region IVstMidiProcessor Members
 
         public int ChannelCount
@@ -23,7 +26,32 @@
 
         public void Process(VstEventCollection events)
         {
-            Events.AddRange(events);
+            foreach (VstEvent evnt in events)
+            {
+                if (evnt.EventType != VstEventTypes.MidiEvent) continue;
+
+                VstMidiEvent midiEvent = (VstMidiEvent)evnt;
+                VstMidiEvent mappedEvent = null;
+
+                if ( ((midiEvent.MidiData[0] & 0x80) == 0x80 || (midiEvent.MidiData[0] & 0x90) == 0x90) &&
+                    _plugin.NoteMap.Contains(midiEvent.MidiData[1]))
+                {
+                    byte[] midiData = new byte[4];
+                    midiData[0] = midiEvent.MidiData[0];
+                    midiData[1] = _plugin.NoteMap[midiEvent.MidiData[1]].OutputNoteNumber;
+                    midiData[2] = midiEvent.MidiData[2];
+
+                    mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames, 
+                        midiEvent.Flags, 
+                        midiEvent.NoteLength, 
+                        midiEvent.NoteOffset, 
+                        midiData, 
+                        midiEvent.Detune, 
+                        midiEvent.NoteOffVelocity);
+
+                    Events.Add(mappedEvent);
+                }
+            }
         }
 
         #endregion
