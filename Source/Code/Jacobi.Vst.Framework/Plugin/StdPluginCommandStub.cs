@@ -1049,16 +1049,18 @@
         {
             VstPluginInfo pluginInfo = new VstPluginInfo();
 
+            IVstPluginAudioProcessor audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>();
+
             // determine flags
             if (plugin.Supports<IVstPluginEditor>())
                 pluginInfo.Flags |= VstPluginFlags.HasEditor;
-            if (plugin.Supports<IVstPluginAudioProcessor>())
+            if (audioProcessor != null)
                 pluginInfo.Flags |= VstPluginFlags.CanReplacing;
             if (plugin.Supports<IVstPluginAudioPrecissionProcessor>())
                 pluginInfo.Flags |= VstPluginFlags.CanDoubleReplacing;
             if (plugin.Supports<IVstPluginPersistence>())
                 pluginInfo.Flags |= VstPluginFlags.ProgramChunks;
-            if ((plugin.Capabilities & VstPluginCapabilities.IsSynth) > 0)
+            if(audioProcessor != null && plugin.Supports<IVstMidiProcessor>())
                 pluginInfo.Flags |= VstPluginFlags.IsSynth;
             if ((plugin.Capabilities & VstPluginCapabilities.NoSoundInStop) > 0)
                 pluginInfo.Flags |= VstPluginFlags.NoSoundInStop;
@@ -1069,7 +1071,6 @@
             pluginInfo.PluginVersion = plugin.ProductInfo.Version;
             
             // audio processing info
-            IVstPluginAudioProcessor audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>();
             if(audioProcessor != null)
             {
                 pluginInfo.NumberOfAudioInputs = audioProcessor.InputCount;
