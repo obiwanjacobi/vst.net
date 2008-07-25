@@ -322,6 +322,7 @@
 
             if (midiPrograms != null)
             {
+                VstMidiChannelInfo channelInfo = midiPrograms.ChannelInfos[channel];
                 //TODO: how do we know!?
             }
 
@@ -570,11 +571,20 @@
             return _pluginCtx.Plugin.ProductInfo.Version;
         }
 
-        public VstCanDoResult CanDo(VstPluginCanDo cando)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cando"></param>
+        /// <returns></returns>
+        /// <remarks>Override in derived class to implement custom cando behavior.
+        /// <seealso cref="ParsePluginCanDo"/></remarks>
+        public virtual VstCanDoResult CanDo(string cando)
         {
             VstCanDoResult result = VstCanDoResult.No;
+            
+            VstPluginCanDo candoEnum = ParsePluginCanDo(cando);
 
-            switch (cando)
+            switch (candoEnum)
             {
                 case VstPluginCanDo.Bypass:
                     result = _pluginCtx.Plugin.Supports<IVstPluginBypass>() ? VstCanDoResult.Yes : VstCanDoResult.No;
@@ -1047,6 +1057,30 @@
         /// </summary>
         /// <returns>Returning null will abort loading plugin.</returns>
         protected abstract IVstPlugin CreatePluginInstance();
+
+        /// <summary>
+        /// Attempts to parse the <paramref name="cando"/> string.
+        /// </summary>
+        /// <param name="cando">Must not be null.</param>
+        /// <returns>Returns <see cref="VstPluginCanDo.Unknown"/> when string did not match an enum value.</returns>
+        protected VstPluginCanDo ParsePluginCanDo(string cando)
+        {
+            Throw.IfArgumentIsNull(cando, "cando");
+
+            VstPluginCanDo result = VstPluginCanDo.Unknown;
+            Type enumType = typeof(VstPluginCanDo);
+            
+            foreach(string name in Enum.GetNames(enumType))
+            {
+                if(name.Equals(cando, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    result = (VstPluginCanDo)Enum.Parse(enumType, cando, true);
+                    break;
+                }
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Creates summary info based on the <paramref name="plugin"/>.
