@@ -63,7 +63,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			_commandStub->SetBlockSize(value);
 			break;
 		case effMainsChanged:
-			_memTracker->ClearAll(); // safe to delete allocate memory during suspend/resume
+			_memTracker->ClearAll(); // safe to delete allocated memory during suspend/resume
 			_commandStub->MainsChanged(value != 0);
 			break;
 		case effEditGetRect:
@@ -84,7 +84,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effGetChunk:
 			{
-			array<System::Byte>^ buffer = _commandStub->GetChunk(index == 1);
+			array<System::Byte>^ buffer = _commandStub->GetChunk(index != 0);
 			*(void**)ptr = TypeConverter::ByteArrayToPtr(buffer);
 			
 			_memTracker->RegisterArray(*(void**)ptr);
@@ -95,7 +95,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		case effSetChunk:
 			{
 			array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, value);
-			result = _commandStub->SetChunk(buffer, index == 1) ? 1 : 0;
+			result = _commandStub->SetChunk(buffer, index != 0) ? 1 : 0;
 			}
 			break;
 		case effProcessEvents:
@@ -197,11 +197,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->GetVendorVersion();
 			break;
 		case effCanDo:
-			// TODO: This has to change. A lot of host throw all kinds of strings at the plugin (not covered in the enum).
-			result = -1; // This means that a string was passed that was not part of the VstPluginCanDo enum.
-			result = safe_cast<VstInt32>(_commandStub->CanDo((Jacobi::Vst::Core::VstPluginCanDo)
-				System::Enum::Parse(Jacobi::Vst::Core::VstPluginCanDo::typeid, 
-					TypeConverter::CharToString((char*)ptr), true)));
+			result = safe_cast<VstInt32>(_commandStub->CanDo(TypeConverter::CharToString((char*)ptr)));
 			break;
 		case effGetTailSize:
 			result = _commandStub->GetTailSize();

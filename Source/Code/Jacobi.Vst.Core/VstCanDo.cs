@@ -21,7 +21,7 @@
 
     public enum VstPluginCanDo
     {
-        None,
+        Unknown,
         SendVstEvents,
         SendVstMidiEvent,
         ReceiveVstEvents,
