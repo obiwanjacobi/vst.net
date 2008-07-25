@@ -210,10 +210,10 @@ public:
 
 	static void FromPinProperties(Jacobi::Vst::Core::VstPinProperties^ pinProps, ::VstPinProperties* pProps)
 	{
-		pProps->flags = (int)pinProps->Flags;
+		pProps->flags = safe_cast<VstInt32>(pinProps->Flags);
 		StringToChar(pinProps->Label, pProps->label, kVstMaxLabelLen);
 		StringToChar(pinProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
-		pProps->arrangementType = (int)pinProps->ArrangementType;
+		pProps->arrangementType = safe_cast<VstInt32>(pinProps->ArrangementType);
 	}
 
 	static Jacobi::Vst::Core::VstSpeakerArrangement^ ToSpeakerArrangement(::VstSpeakerArrangement* pArrangement)
@@ -268,7 +268,7 @@ public:
 
 	static void FromParameterProperties(Jacobi::Vst::Core::VstParameterProperties^ paramProps, ::VstParameterProperties* pProps)
 	{
-		pProps->flags = (int)paramProps->Flags;
+		pProps->flags = safe_cast<VstInt32>(paramProps->Flags);
 		pProps->stepFloat = paramProps->StepFloat;
 		pProps->smallStepFloat = paramProps->SmallStepFloat;
 		pProps->largeStepFloat = paramProps->LargeStepFloat;
@@ -291,9 +291,9 @@ public:
 	{
 		pProgName->thisProgramIndex = midiProgName->CurrentProgramIndex;
 		pProgName->flags = (VstInt32)midiProgName->Flags;
-		pProgName->midiBankLsb = (char)midiProgName->MidiBankLSB;
-		pProgName->midiBankMsb = (char)midiProgName->MidiBankMSB;
-		pProgName->midiProgram = (char)midiProgName->MidiProgram;
+		pProgName->midiBankLsb = safe_cast<char>(midiProgName->MidiBankLSB);
+		pProgName->midiBankMsb = safe_cast<char>(midiProgName->MidiBankMSB);
+		pProgName->midiProgram = safe_cast<char>(midiProgName->MidiProgram);
 		StringToChar(midiProgName->Name, pProgName->name, kVstMaxNameLen);
 		pProgName->parentCategoryIndex = midiProgName->ParentCategoryIndex;
 	}

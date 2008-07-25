@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}</ProjectGuid>
+    <ProjectGuid>{5E27B599-75F6-476B-89A2-8C140F94529A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jacobi.Vst.Samples.MidiNoteMapper</RootNamespace>
-    <AssemblyName>Jacobi.Vst.Samples.MidiNoteMapper</AssemblyName>
+    <RootNamespace>Jacobi.Vst.Samples.MidiNoteSampler</RootNamespace>
+    <AssemblyName>Jacobi.Vst.Samples.MidiNoteSampler</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -44,41 +44,16 @@
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
-      <Link>Properties\AssemblyInfo.General.cs</Link>
-    </Compile>
     <Compile Include="AudioProcessor.cs" />
-    <Compile Include="MapNoteDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MapNoteDetails.Designer.cs">
-      <DependentUpon>MapNoteDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MapNoteItem.cs" />
-    <Compile Include="MidiNoteMapperUI.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MidiNoteMapperUI.Designer.cs">
-      <DependentUpon>MidiNoteMapperUI.cs</DependentUpon>
-    </Compile>
     <Compile Include="MidiProcessor.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginCommandStub.cs" />
-    <Compile Include="PluginEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MapNoteDetails.resx">
-      <DependentUpon>MapNoteDetails.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MidiNoteMapperUI.resx">
-      <DependentUpon>MidiNoteMapperUI.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="SampleManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

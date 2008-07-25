@@ -61,7 +61,7 @@
         string GetVendorString();
         string GetProductString();
         int GetVendorVersion();
-        VstCanDoResult CanDo(VstPluginCanDo cando);
+        VstCanDoResult CanDo(string cando);
         int GetTailSize();
         VstParameterProperties GetParameterProperties(int index);
         int GetVstVersion();

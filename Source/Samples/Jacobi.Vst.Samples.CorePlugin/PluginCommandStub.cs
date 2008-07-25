@@ -276,7 +276,7 @@
             return 1000;
         }
 
-        public VstCanDoResult CanDo(VstPluginCanDo cando)
+        public VstCanDoResult CanDo(string cando)
         {
             _editorCtrl.Instance.AddLine("CanDo: " + cando);
             return VstCanDoResult.No;
