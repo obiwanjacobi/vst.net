@@ -33,7 +33,7 @@
                 VstMidiEvent midiEvent = (VstMidiEvent)evnt;
                 VstMidiEvent mappedEvent = null;
 
-                if ( ((midiEvent.MidiData[0] & 0x80) == 0x80 || (midiEvent.MidiData[0] & 0x90) == 0x90) &&
+                if ( ((midiEvent.MidiData[0] & 0xF0) == 0x80 || (midiEvent.MidiData[0] & 0xF0) == 0x90) &&
                     _plugin.NoteMap.Contains(midiEvent.MidiData[1]))
                 {
                     byte[] midiData = new byte[4];

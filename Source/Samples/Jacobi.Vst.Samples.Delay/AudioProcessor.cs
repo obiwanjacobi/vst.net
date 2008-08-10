@@ -1,6 +1,8 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
     using System;
+    
+    using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
     internal class AudioProcessor : IVstPluginAudioProcessor
@@ -48,9 +50,9 @@
             set { _blockSize = value; }
         }
 
-        public void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels)
+        public void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
-            VstAudioChannel audioChannel = outChannels[0];
+            VstAudioBuffer audioChannel = outChannels[0];
 
             for (int n = 0; n < audioChannel.SampleCount; n++)
             {

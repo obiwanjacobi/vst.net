@@ -54,7 +54,7 @@
             get { return _recorder != null; }
         }
 
-        public void RecordAudio(VstAudioChannel[] channels)
+        public void RecordAudio(VstAudioBuffer[] channels)
         {
             if (IsRecording)
             {
@@ -68,7 +68,7 @@
             get { return _player != null; }
         }
 
-        public void PlayAudio(VstAudioChannel[] channels)
+        public void PlayAudio(VstAudioBuffer[] channels)
         {
             if (IsPlaying)
             {
@@ -92,7 +92,7 @@
 
             public StereoBuffer Buffer { get; private set; }
 
-            public void Record(VstAudioChannel left, VstAudioChannel right)
+            public void Record(VstAudioBuffer left, VstAudioBuffer right)
             {
                 for (int index = 0; index < left.SampleCount; index++)
                 {
@@ -119,7 +119,7 @@
 
             public StereoBuffer Buffer { get; private set; }
 
-            public void Play(VstAudioChannel left, VstAudioChannel right)
+            public void Play(VstAudioBuffer left, VstAudioBuffer right)
             {
                 if (IsFinished) return;
 

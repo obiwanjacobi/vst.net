@@ -1,9 +1,15 @@
 ﻿namespace Jacobi.Vst.Framework.Host
 {
+    /// <summary>
+    /// Not implemented.
+    /// </summary>
     internal class VstHostOfflineProcessor : IVstHostOfflineProcessor
     {
         private VstHost _host;
-
+        /// <summary>
+        /// Constructs an instance on the host proxy.
+        /// </summary>
+        /// <param name="host">Must not be null.</param>
         public VstHostOfflineProcessor(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");

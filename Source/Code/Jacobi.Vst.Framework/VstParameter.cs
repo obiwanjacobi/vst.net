@@ -3,8 +3,15 @@ namespace Jacobi.Vst.Framework
     using System;
     using Jacobi.Vst.Core;
 
+    /// <summary>
+    /// The VstParameter represents a parameter value for one plugin parameter.
+    /// </summary>
     public class VstParameter : IActivatable, IDisposable
     {
+        /// <summary>
+        /// Constructs a new instance based on the parameter meta info.
+        /// </summary>
+        /// <param name="parameterInfo">Must not be null.</param>
         public VstParameter(VstParameterInfo parameterInfo)
         {
             Throw.IfArgumentIsNull(parameterInfo, "parameterInfo");
@@ -20,13 +27,21 @@ namespace Jacobi.Vst.Framework
             Value = Info.DefaultValue;
         }
 
-        public VstParameterInfo Info
-        { get; private set; }
+        /// <summary>
+        /// Gets the parameter meta info passed in at the constructor.
+        /// </summary>
+        public VstParameterInfo Info { get; private set; }
 
-        public VstParameterCategory Category
-        { get; set; }
+        /// <summary>
+        /// Gets or sets the parameter category.
+        /// </summary>
+        /// <remarks>TODO: Should this go to the VstParameterInfo?</remarks>
+        public VstParameterCategory Category { get; set; }
 
         private float _value;
+        /// <summary>
+        /// Gets or sets the numberical value of the parameter.
+        /// </summary>
         public float Value
         {
             get { return _value; }
@@ -42,6 +57,10 @@ namespace Jacobi.Vst.Framework
         }
 
         private string _displayValue;
+        /// <summary>
+        /// Gets the value of the parameter formatted for displaying.
+        /// </summary>
+        /// <remarks>Derived classes can set this property but the length should not exceed 7 characters.</remarks>
         public virtual string DisplayValue 
         {
             get { return _displayValue; }
@@ -53,6 +72,12 @@ namespace Jacobi.Vst.Framework
             }
         }
 
+        /// <summary>
+        /// Called when the parameter value is parsed from a string.
+        /// </summary>
+        /// <param name="value">The string containing the parameter value.</param>
+        /// <returns>Returns true when the <paramref name="value"/> was successfully parsed.</returns>
+        /// <remarks>The default implementation will try to parse to a <see cref="float"/> value.</remarks>
         public virtual bool ParseValue(string value)
         {
             float fValue;
@@ -65,13 +90,26 @@ namespace Jacobi.Vst.Framework
             return false;
         }
 
+        /// <summary>
+        /// Gets or sets the callback delegate that is called when the parameter value changes.
+        /// </summary>
         public EventHandler<EventArgs> ValueChangedCallback { get; set; }
+
+        /// <summary>
+        /// Gets or sets the callback delegate that is called when the parameter activation changes.
+        /// </summary>
         public EventHandler<EventArgs> ActivationChangedCallback { get; set; }
 
         #region IActivatable Members
 
+        /// <summary>
+        /// Gets the active state for this parameter.
+        /// </summary>
         public bool IsActive { get; private set; }
 
+        /// <summary>
+        /// Activates the parameter instance.
+        /// </summary>
         public void Activate()
         {
             IsActive = true;
@@ -79,6 +117,9 @@ namespace Jacobi.Vst.Framework
             OnActivationChanged();
         }
 
+        /// <summary>
+        /// deactivates the parameter instance.
+        /// </summary>
         public void Deactivate()
         {
             IsActive = false;
@@ -88,6 +129,9 @@ namespace Jacobi.Vst.Framework
 
         #endregion
 
+        /// <summary>
+        /// Called to raise the ValueChanged event.
+        /// </summary>
         protected virtual void OnValueChanged()
         {
             EventHandler<EventArgs> handler = ValueChangedCallback;
@@ -98,6 +142,9 @@ namespace Jacobi.Vst.Framework
             }
         }
 
+        /// <summary>
+        /// Called to raise the ActivationChanged event.
+        /// </summary>
         protected virtual void OnActivationChanged()
         {
             EventHandler<EventArgs> handler = ActivationChangedCallback;
@@ -110,6 +157,10 @@ namespace Jacobi.Vst.Framework
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Disposes the instance.
+        /// </summary>
+        /// <remarks>All references are cleared (null).</remarks>
         public virtual void Dispose()
         {
             // clear all references

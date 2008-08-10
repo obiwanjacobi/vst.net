@@ -3,6 +3,17 @@
     using System;
     using Jacobi.Vst.Framework.Common;
 
+    /// <summary>
+    /// This class manages all plugin interfaces instance on behalf of a plugin.
+    /// </summary>
+    /// <remarks>The following interfaces are supported:
+    /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioPrecissionProcessor"/>,
+    /// <see cref="IVstPluginBypass"/>, <see cref="IVstPluginConnections"/>,
+    /// <see cref="IVstPluginEditor"/>, <see cref="IVstPluginHost"/>, 
+    /// <see cref="IVstMidiProcessor"/>, <see cref="IVstPluginMidiPrograms"/>,
+    /// <see cref="IVstPluginMidiSource"/>, <see cref="IVstPluginOfflineProcessor"/>,
+    /// <see cref="IVstPluginParameters"/>, <see cref="IVstPluginPersistence"/>,
+    /// <see cref="IVstPluginProcess"/> and <see cref="IVstPluginPrograms"/>.</remarks>
     public abstract class PluginInterfaceManagerBase : IExtensible, IDisposable
     {
         private InterfaceManager<IVstPluginAudioPrecissionProcessor> _audioPrecission;
@@ -20,6 +31,9 @@
         private InterfaceManager<IVstPluginProcess> _process;
         private InterfaceManager<IVstPluginPrograms> _programs;
 
+        /// <summary>
+        /// Constructs a new instance and initializes all interfaces.
+        /// </summary>
         public PluginInterfaceManagerBase()
         {
             _audioPrecission = new InterfaceManager<IVstPluginAudioPrecissionProcessor>(CreateAudioPrecissionProcessor);
@@ -65,71 +79,189 @@
             _programs.DisposeParent = this;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginAudioProcessor"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginAudioProcessor"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginAudioPrecissionProcessor"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginAudioPrecissionProcessor"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.
+        /// Note that you do not need to override <see cref="CreateAudioProcessor"/> when you implement the precission audio processor interface.
+        /// The PluginInterfaceManagerBase will call this method when a request comes in for the <see cref="IVstPluginAudioProcessor"/>
+        /// and cast the result when the call to <see cref="CreateAudioProcessor"/> returns null.</remarks>
         protected virtual IVstPluginAudioPrecissionProcessor CreateAudioPrecissionProcessor(IVstPluginAudioPrecissionProcessor instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginBypass"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginBypass"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginBypass CreateBypass(IVstPluginBypass instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginConnections"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginConnections"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginConnections CreateConnections(IVstPluginConnections instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginEditor"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginEditor"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginEditor CreateEditor(IVstPluginEditor instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginHost"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginHost"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginHost CreateHost(IVstPluginHost instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstMidiProcessor"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstMidiProcessor"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginMidiPrograms"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginMidiPrograms"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginMidiPrograms CreateMidiPrograms(IVstPluginMidiPrograms instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginMidiSource"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginMidiSource"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginMidiSource CreateMidiSource(IVstPluginMidiSource instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginOfflineProcessor"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginOfflineProcessor"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginOfflineProcessor CreateOfflineProcessor(IVstPluginOfflineProcessor instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginParameters"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginParameters"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.
+        /// When the plugin also supports <see cref="IVstPluginPrograms"/> this method does not need to be overridden.
+        /// The PluginInterfaceManagerBase implementation will route the interface request for the <see cref="IVstPluginParameters"/>
+        /// to the <see cref="IVstPluginPrograms.ActiveProgram"/> where it is implemented by the <see cref="VstProgram"/>.</remarks>
         protected virtual IVstPluginParameters CreateParameters(IVstPluginParameters instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginPersistence"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginPersistence"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginPersistence CreatePersistence(IVstPluginPersistence instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginProcess"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginProcess"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginProcess CreateProcess(IVstPluginProcess instance)
         {
             return instance;
         }
 
+        /// <summary>
+        /// Called when an instance of the <see cref="IVstPluginPrograms"/> interface is requested.
+        /// </summary>
+        /// <param name="instance">The default instance or null.</param>
+        /// <returns>Returns <paramref name="instance"/>.</returns>
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginPrograms"/> interface. 
+        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         protected virtual IVstPluginPrograms CreatePrograms(IVstPluginPrograms instance)
         {
             return instance;
@@ -137,11 +269,21 @@
 
         #region IExtensibleObject Members
 
+        /// <summary>
+        /// Indicates if the interface <typeparamref name="T"/> is supported by the object.
+        /// </summary>
+        /// <typeparam name="T">The interface type.</typeparam>
+        /// <returns>Returns true if the interface <typeparamref name="T"/> is supported.</returns>
         public bool Supports<T>() where T : class
         {
             return (GetInstance<T>() != null);
         }
 
+        /// <summary>
+        /// Retrieves a reference to an implementation of the interface <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The interface type.</typeparam>
+        /// <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
         public virtual T GetInstance<T>() where T : class
         {
             // interfaces are more or less ordered in priority
@@ -218,12 +360,20 @@
         #endregion
 
         #region IDisposable Members
-
+        /// <summary>
+        /// Call this in the tear down sequence of your plugin.
+        /// </summary>
+        /// <remarks>The tear down sequence starts when <see cref="IDisposable.Dispose"/> is called on the <see cref="IVstPlugin"/> interface.
+        /// All interface instances will be disposed and this instance is no longer usable.</remarks>
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <summary>
+        /// Override this method to do additional cleanup and always call the base class.
+        /// </summary>
+        /// <param name="disposing">When true, release (dispose) both managed and unmanaged resource. When false, only release unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

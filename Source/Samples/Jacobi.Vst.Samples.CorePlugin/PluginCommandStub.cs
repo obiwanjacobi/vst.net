@@ -411,12 +411,9 @@
         {
             foreach (VstAudioBuffer audioBuffer in outputs)
             {
-                for (int n = 0; n < audioBuffer.Count; n++)
+                for (int n = 0; n < audioBuffer.SampleCount; n++)
                 {
-                    unsafe
-                    {
-                        audioBuffer.Buffer[n] = input[0].Buffer[n];
-                    }
+                    audioBuffer[n] = input[0][n];
                 }
             }
         }
@@ -425,12 +422,9 @@
         {
             foreach (VstAudioPrecisionBuffer audioBuffer in outputs)
             {
-                for (int n = 0; n < audioBuffer.Count; n++)
+                for (int n = 0; n < audioBuffer.SampleCount; n++)
                 {
-                    unsafe
-                    {
-                        audioBuffer.Buffer[n] = input[0].Buffer[n];
-                    }
+                    audioBuffer[n] = input[0][n];
                 }
             }
         }

@@ -332,8 +332,8 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 {
 	try
 	{
-		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs);
-		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs);
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs, false);
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
 		_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 	}
@@ -348,8 +348,8 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sam
 {
 	try
 	{
-		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs);
-		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs);
+		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs, false);
+		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
 		_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 	}

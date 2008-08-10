@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
+    using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
     class AudioProcessor : IVstPluginAudioProcessor
@@ -29,7 +30,7 @@
             get { return 0; }
         }
 
-        public void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels)
+        public void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
             if (_hostProcessor == null)
             {

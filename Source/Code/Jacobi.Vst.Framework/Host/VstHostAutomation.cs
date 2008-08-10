@@ -3,10 +3,17 @@
     using System;
     using Jacobi.Vst.Core;
 
+    /// <summary>
+    /// Forwards the <see cref="IVstHostAutomation"/> calls to the host stub.
+    /// </summary>
     internal class VstHostAutomation : IVstHostAutomation
     {
         private VstHost _host;
 
+        /// <summary>
+        /// Constructs an instance on the host proxy.
+        /// </summary>
+        /// <param name="host">Must not be null.</param>
         public VstHostAutomation(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");
@@ -33,6 +40,11 @@
 
         #endregion
 
+        //---------------------------------------------------------------------
+
+        /// <summary>
+        /// Implements the scope for <see cref="EditParameter"/>.
+        /// </summary>
         private class EditParameterScope : IDisposable
         {
             private VstHost _host;
@@ -46,6 +58,9 @@
 
             #region IDisposable Members
 
+            /// <summary>
+            /// Called by the client when done with edit.
+            /// </summary>
             public void Dispose()
             {
                 if (_host != null)
