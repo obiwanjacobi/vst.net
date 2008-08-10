@@ -61,7 +61,6 @@
     <Compile Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IActivatable.cs" />
-    <None Include="IDirectBufferAccess.cs" />
     <Compile Include="IExtensible.cs" />
     <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
@@ -93,8 +92,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Plugin\StdPluginCommandStub.cs" />
     <Compile Include="Throw.cs" />
-    <None Include="VstAudioChannel.cs" />
-    <None Include="VstAudioPrecisionChannel.cs" />
     <Compile Include="VstConnectionInfo.cs" />
     <Compile Include="VstEventCollection.cs" />
     <Compile Include="Host\VstHostSequencer.cs" />

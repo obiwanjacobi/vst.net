@@ -73,7 +73,7 @@
         public virtual void Dispose()
         {
             _name = null;
-            _categories = null;
+            Categories = null;
 
             if (_parameters != null)
             {

@@ -62,9 +62,9 @@
         {
             get
             {
-                if (String.IsNullOrEmpty(_formattedVersion) && _version > 0)
+                if (String.IsNullOrEmpty(_formattedVersion) && Version > 0)
                 {
-                    _formattedVersion = FormatVersion(_version);
+                    _formattedVersion = FormatVersion(Version);
                 }
 
                 return _formattedVersion;
