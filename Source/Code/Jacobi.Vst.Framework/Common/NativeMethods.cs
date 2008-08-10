@@ -3,6 +3,9 @@
     using System;
     using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// P/Invoke native methods.
+    /// </summary>
     internal static class NativeMethods
     {
         [DllImport("user32.dll")]

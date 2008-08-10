@@ -25,14 +25,15 @@ namespace Jacobi.Vst.Framework
         /// </summary>
         CultureInfo Culture { get; }
         /// <summary>
-        /// Gets the base directory of the host.
+        /// Gets the plugin base directory of the host.
         /// </summary>
         string BaseDirectory { get;}
         /// <summary>
         /// Opens the File Selector.
         /// </summary>
         /// <returns>Returns null if the host does not support the Open File Selector.</returns>
-        /// <remarks>Call <see cref="Dispose"/> on the return value to close the File Selector.</remarks>
+        /// <remarks>Call <see cref="IDisposable.Dispose"/> on the return value to close the File Selector.
+        /// This method is still under construction!</remarks>
         IDisposable OpenFileSelector(/*file selector struct*/);
     }
 }

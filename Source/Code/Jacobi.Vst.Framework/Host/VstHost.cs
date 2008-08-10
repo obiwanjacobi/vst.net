@@ -76,7 +76,7 @@
             {
                 if (_hostCapabilities == VstHostCapabilities.None)
                 {
-                    // IvstHostIO
+                    // IVstHostSequencer.UpdatePluginIO works
                     if (HostCommandStub.CanDo(VstHostCanDo.AcceptIOChanges) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.AcceptIoChanges;
                     // IVstHostOfflineProcessor

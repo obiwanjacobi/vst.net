@@ -4,10 +4,16 @@
     using System.Globalization;
     using Jacobi.Vst.Core;
 
+    /// <summary>
+    /// Forwards the <see cref="IVstHostShell"/> methods to the host stub.
+    /// </summary>
     internal class VstHostShell : IVstHostShell
     {
         private VstHost _host;
-
+        /// <summary>
+        /// Constructs an instance on the host proxy.
+        /// </summary>
+        /// <param name="host">Must not be null.</param>
         public VstHostShell(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");
@@ -28,6 +34,10 @@
         }
 
         public CultureInfo _culture;
+        /// <summary>
+        /// Gets the culture of the host.
+        /// </summary>
+        /// <remarks>If the host does not implement the call to getLanguage, the current UI culture is returned.</remarks>
         public CultureInfo Culture
         {
             get
@@ -80,6 +90,10 @@
             }
         }
 
+        /// <summary>
+        /// Under construction!
+        /// </summary>
+        /// <returns>Returns null when the host does not support opening a file selector.</returns>
         public IDisposable OpenFileSelector()
         {
             // check capability of the host
@@ -93,6 +107,11 @@
 
         #endregion
 
+        //---------------------------------------------------------------------
+
+        /// <summary>
+        /// Implements the scope for the file selector.
+        /// </summary>
         private class FileSelectorScope : IDisposable
         {
             private VstHost _host;
@@ -108,7 +127,10 @@
             }
 
             #region IDisposable Members
-
+            /// <summary>
+            /// Call by the client when it is done with the file selector.
+            /// </summary>
+            /// <remarks>We do not check wheter or not the host supports closing the file selector...</remarks>
             public void Dispose()
             {
                 if (_host != null)
