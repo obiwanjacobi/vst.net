@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteSampler
 {
+    using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
     internal class AudioProcessor : IVstPluginAudioProcessor
@@ -32,7 +33,7 @@
             get { return 0; }
         }
 
-        public void Process(VstAudioChannel[] inChannels, VstAudioChannel[] outChannels)
+        public void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
             if (_plugin.SampleManager.IsPlaying)
             {
@@ -40,8 +41,8 @@
             }
             else // audio thru
             {
-                VstAudioChannel input = inChannels[0];
-                VstAudioChannel output = outChannels[0];
+                VstAudioBuffer input = inChannels[0];
+                VstAudioBuffer output = outChannels[0];
 
                 for (int index = 0; index < output.SampleCount; index++)
                 {

@@ -1,8 +1,17 @@
 ﻿namespace Jacobi.Vst.Framework.Host
 {
     using System;
+
+    using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework.Common;
 
+    /// <summary>
+    /// This class manages the extensible interfaces for the host.
+    /// </summary>
+    /// <remarks>The supported host interfaces are:
+    /// <see cref="IVstHostAutomation"/>, <see cref="IVstHostOfflineProcessor"/>,
+    /// <see cref="IVstHostSequencer"/>, <see cref="IVstHostShell"/> and
+    /// <see cref="IVstMidiProcessor"/>.</remarks>
     internal class VstHostInterfaceManager : IExtensible, IDisposable
     {
         private VstHost _host;
@@ -13,6 +22,9 @@
         private InterfaceManager<IVstHostShell> _shell;
         private InterfaceManager<IVstMidiProcessor> _midiProcessor;
 
+        /// <summary>
+        /// Constructs all the interface managers.
+        /// </summary>
         private VstHostInterfaceManager()
         {
             _automation = new InterfaceManager<IVstHostAutomation>(CreateAutomation);
@@ -22,6 +34,10 @@
             _midiProcessor = new InterfaceManager<IVstMidiProcessor>(CreateMidiProcessor);
         }
 
+        /// <summary>
+        /// Constructs an instance based on the host proxy.
+        /// </summary>
+        /// <param name="host">Must not be null.</param>
         public VstHostInterfaceManager(VstHost host)
             : this()
         {
@@ -39,7 +55,11 @@
 
         private IVstHostOfflineProcessor CreateOffline(IVstHostOfflineProcessor instance)
         {
-            if (instance == null) return new VstHostOfflineProcessor(_host);
+            if (instance == null &&
+                _host.HostCommandStub.CanDo(VstHostCanDo.Offline) == VstCanDoResult.Yes)
+            {
+                return new VstHostOfflineProcessor(_host);
+            }
 
             return instance;
         }
@@ -60,7 +80,12 @@
 
         private IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
         {
-            if (instance == null) return new VstHostMidiProcessor(_host);
+            if (instance == null &&
+                _host.HostCommandStub.CanDo(VstHostCanDo.ReceiveVstEvents) == VstCanDoResult.Yes &&
+                _host.HostCommandStub.CanDo(VstHostCanDo.ReceiveVstMidiEvent) == VstCanDoResult.Yes)
+            {
+                return new VstHostMidiProcessor(_host);
+            }
 
             return instance;
         }

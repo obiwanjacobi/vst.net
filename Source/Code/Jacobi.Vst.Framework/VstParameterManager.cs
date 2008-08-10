@@ -7,11 +7,17 @@
     /// </summary>
     public class VstParameterManager
     {
+        /// <summary>
+        /// Constructs a new instance based on the parameter type information.
+        /// </summary>
+        /// <param name="parameterInfo">Must not be null.</param>
+        /// <remarks>The <see cref="VstParameterInfo.ParameterManager"/> property is set to <b>this</b> instance.</remarks>
         public VstParameterManager(VstParameterInfo parameterInfo)
         {
             Throw.IfArgumentIsNull(parameterInfo, "parameterInfo");
 
             ParameterInfo = parameterInfo;
+            ParameterInfo.ParameterManager = this;
         }
 
         /// <summary>
@@ -43,6 +49,10 @@
             parameter.ActivationChangedCallback = new EventHandler<EventArgs>(Parameter_ActivationChanged);
         }
 
+        /// <summary>
+        /// Changes the <see cref="CurrentValue"/> and <see cref="PreviousValue"/> properties.
+        /// </summary>
+        /// <param name="newValue">The new value of the parameter.</param>
         public void ChangeValue(float newValue)
         {
             PreviousValue = CurrentValue;
@@ -51,8 +61,14 @@
             OnValueChanged();
         }
 
+        /// <summary>
+        /// The ValueChanged event is raised after the parameter value has changed on the manager.
+        /// </summary>
         public event EventHandler<EventArgs> ValueChanged;
 
+        /// <summary>
+        /// Raises the <see cref="ValueChanged"/> event.
+        /// </summary>
         protected virtual void OnValueChanged()
         {
             EventHandler<EventArgs> handler = ValueChanged;

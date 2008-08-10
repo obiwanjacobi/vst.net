@@ -2,9 +2,9 @@
 {
     using System;
 
-    public unsafe class VstAudioBuffer : IDirectBufferAccess32
+    public unsafe class VstAudioPrecisionBuffer : IDirectBufferAccess64
     {
-        public VstAudioBuffer(float* buffer, int length, bool canWrite)
+        public VstAudioPrecisionBuffer(double* buffer, int length, bool canWrite)
         {
             Buffer = buffer;
             SampleCount = length;
@@ -13,9 +13,9 @@
 
         public int SampleCount { get; private set; }
         public bool CanWrite { get; private set; }
-        private float* Buffer { get; set; }
+        private double* Buffer { get; set; }
 
-        public float this[int index]
+        public double this[int index]
         {
             get
             {
@@ -46,9 +46,9 @@
             }
         }
 
-        #region IDirectBufferAccess32 Members
+        #region IDirectBufferAccess64 Members
 
-        unsafe float* IDirectBufferAccess32.Buffer
+        unsafe double* IDirectBufferAccess64.Buffer
         {
             get { return Buffer; }
         }

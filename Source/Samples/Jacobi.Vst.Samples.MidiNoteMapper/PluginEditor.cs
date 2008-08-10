@@ -41,7 +41,7 @@
 
         public void Open(IntPtr hWnd)
         {
-            _uiWrapper.Instance.NoteMap = _plugin.NoteMap;
+            _uiWrapper.SafeInstance.NoteMap = _plugin.NoteMap;
             _uiWrapper.Open(hWnd);
         }
 

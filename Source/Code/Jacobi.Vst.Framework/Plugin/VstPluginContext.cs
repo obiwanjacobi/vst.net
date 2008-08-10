@@ -5,6 +5,9 @@
     using Jacobi.Vst.Core.Plugin;
     using Jacobi.Vst.Framework.Host;
 
+    /// <summary>
+    /// Contains all root references in context of a plugin.
+    /// </summary>
     internal class VstPluginContext : IDisposable
     {
         public VstPluginInfo PluginInfo;
@@ -13,6 +16,9 @@
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Disposes all members, cascades the Dispose call.
+        /// </summary>
         public void Dispose()
         {
             PluginInfo = null;
