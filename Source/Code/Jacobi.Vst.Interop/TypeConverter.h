@@ -284,7 +284,7 @@ public:
 
 		pProps->category = paramProps->Category;
 		StringToChar(paramProps->CategoryLabel, pProps->categoryLabel, kVstMaxCategLabelLen);
-		pProps->numParametersInCategory = paramProps->NumParametersInCategory;
+		pProps->numParametersInCategory = paramProps->ParameterCountInCategory;
 	}
 
 	static void FromMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::MidiProgramName* pProgName)

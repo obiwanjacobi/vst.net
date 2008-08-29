@@ -165,10 +165,10 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 	// assign info data
 	pEffect->flags = (int)pluginInfo->Flags;
 	pEffect->initialDelay = pluginInfo->InitialDelay;
-	pEffect->numInputs = pluginInfo->NumberOfAudioInputs;
-	pEffect->numOutputs = pluginInfo->NumberOfAudioOutputs;
-	pEffect->numParams = pluginInfo->NumberOfParameters;
-	pEffect->numPrograms = pluginInfo->NumberOfPrograms;
+	pEffect->numInputs = pluginInfo->AudioInputCount;
+	pEffect->numOutputs = pluginInfo->AudioOutputCount;
+	pEffect->numParams = pluginInfo->ParameterCount;
+	pEffect->numPrograms = pluginInfo->ProgramCount;
 	pEffect->uniqueID = pluginInfo->PluginID;
 	pEffect->version = pluginInfo->PluginVersion;
 
