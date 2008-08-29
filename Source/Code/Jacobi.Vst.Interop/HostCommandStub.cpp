@@ -34,10 +34,10 @@ System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::Plugin::Vst
 	if(pluginInfo)
 	{
 		// overwrite the AEffect values with the new values supplied by pluginInfo.
-		_pluginInfo->numInputs = pluginInfo->NumberOfAudioInputs;
-		_pluginInfo->numOutputs = pluginInfo->NumberOfAudioOutputs;
-		_pluginInfo->numParams = pluginInfo->NumberOfParameters;
-		_pluginInfo->numPrograms = pluginInfo->NumberOfPrograms;
+		_pluginInfo->numInputs = pluginInfo->AudioInputCount;
+		_pluginInfo->numOutputs = pluginInfo->AudioOutputCount;
+		_pluginInfo->numParams = pluginInfo->ParameterCount;
+		_pluginInfo->numPrograms = pluginInfo->ProgramCount;
 		return true;
 	}
 
