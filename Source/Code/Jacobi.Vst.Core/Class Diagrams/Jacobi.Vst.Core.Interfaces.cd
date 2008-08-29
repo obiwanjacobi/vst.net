@@ -74,5 +74,19 @@
     <Position X="6" Y="6.5" Width="1.5" />
     <TypeIdentifier />
   </Interface>
+  <Interface Name="Jacobi.Vst.Core.IDirectBufferAccess32">
+    <Position X="7.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>IDirectBufferAccess.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.IDirectBufferAccess64">
+    <Position X="9.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>IDirectBufferAccess.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>

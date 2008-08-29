@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Platform-independent definition of Virtual Keys.
+    /// </summary>
     public enum VstVirtualKey
     {
         VKEY_NONE,
@@ -64,13 +67,20 @@
         VKEY_EQUALS
     }
 
+    /// <summary>
+    /// Platform-independent definition of modifier Keys
+    /// </summary>
     [Flags]
     public enum VstModifierKeys
     {
-        MODIFIER_SHIFT = 1 << 0,        // Shift
-        MODIFIER_ALTERNATE = 1 << 1,    // Alt
-        MODIFIER_COMMAND = 1 << 2,      // Control on Mac
-        MODIFIER_CONTROL = 1 << 3       // Ctrl on PC, Apple on Mac
+        /// <summary>Shift</summary>
+        MODIFIER_SHIFT = 1 << 0,
+        /// <summary>Alt</summary>
+        MODIFIER_ALTERNATE = 1 << 1,
+        /// <summary>Control on Mac</summary>
+        MODIFIER_COMMAND = 1 << 2,
+        /// <summary>Ctrl on PC, Apple on Mac</summary>
+        MODIFIER_CONTROL = 1 << 3
     }
 
 }

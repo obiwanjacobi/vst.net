@@ -266,7 +266,7 @@
         /// <param name="ascii">The identification of the key.</param>
         /// <param name="virtualKey">Virtual key information.</param>
         /// <param name="modifers">Additional keys pressed.</param>
-        /// <returns>Returns true when the plugin implements <see cref="IVstPluginEditor"/></returns>
+        /// <returns>Returns true when the plugin implements <see cref="IVstPluginEditor"/>.</returns>
         /// <remarks>The implementation calls the <see cref="IVstPluginEditor"/> interface. 
         /// Override to change this behavior.</remarks>
         public virtual bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
@@ -288,7 +288,7 @@
         /// <param name="ascii">The identification of the key.</param>
         /// <param name="virtualKey">Virtual key information.</param>
         /// <param name="modifers">Additional keys pressed.</param>
-        /// <returns>Returns true when the plugin implements <see cref="IVstPluginEditor"/></returns>
+        /// <returns>Returns true when the plugin implements <see cref="IVstPluginEditor"/>.</returns>
         /// <remarks>The implementation calls the <see cref="IVstPluginEditor"/> interface. 
         /// Override to change this behavior.</remarks>
         public virtual bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
@@ -361,7 +361,7 @@
         /// </summary>
         /// <param name="midiProgramName">Must not be null.</param>
         /// <param name="channel">The zero-based Midi channel.</param>
-        /// <returns>Returns the number of implemented Midi programs.</returns>        
+        /// <returns>Returns the number of implemented Midi programs.</returns>
         public virtual int GetCurrentMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
             IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
@@ -802,7 +802,7 @@
         /// Called by the host to query the plugin if a certain behavior or aspect is supported.
         /// </summary>
         /// <param name="cando">The string containing the can-do string, which can be host specific.</param>
-        /// <returns></returns>
+        /// <returns>Returns an indication if the capability is supported.</returns>
         /// <remarks>The implementation handles all options in the <see cref="VstPluginCanDo"/> enum.
         /// Override in derived class to implement custom cando behavior.
         /// <seealso cref="ParsePluginCanDo"/></remarks>
@@ -886,7 +886,7 @@
                     paramProps.Flags |= VstParameterPropertiesFlags.ParameterSupportsDisplayCategory;
                     paramProps.CategoryLabel = parameter.Category.Name;
                     paramProps.Category = (short)(pluginParameters.Categories.IndexOf(parameter.Category) + 1);
-                    paramProps.NumParametersInCategory = (short)catParams.Count;
+                    paramProps.ParameterCountInCategory = (short)catParams.Count;
                 }
 
                 if (parameter.Info.IsStepFloatValid)
@@ -1450,22 +1450,22 @@
             // audio processing info
             if(audioProcessor != null)
             {
-                pluginInfo.NumberOfAudioInputs = audioProcessor.InputCount;
-                pluginInfo.NumberOfAudioOutputs = audioProcessor.OutputCount;
+                pluginInfo.AudioInputCount = audioProcessor.InputCount;
+                pluginInfo.AudioOutputCount = audioProcessor.OutputCount;
             }
 
             // parameter info
             IVstPluginParameters pluginParameters = plugin.GetInstance<IVstPluginParameters>();
             if (pluginParameters != null)
             {
-                pluginInfo.NumberOfParameters = pluginParameters.Parameters.Count;
+                pluginInfo.ParameterCount = pluginParameters.Parameters.Count;
             }
 
             // program info
             IVstPluginPrograms pluginPrograms = plugin.GetInstance<IVstPluginPrograms>();
             if(pluginPrograms != null)
             {
-                pluginInfo.NumberOfPrograms = pluginPrograms.Programs.Count;
+                pluginInfo.ProgramCount = pluginPrograms.Programs.Count;
             }
 
             return pluginInfo;

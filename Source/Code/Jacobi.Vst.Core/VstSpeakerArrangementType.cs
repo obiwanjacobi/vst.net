@@ -1,38 +1,72 @@
 ﻿namespace Jacobi.Vst.Core
 {
+    /// <summary>
+    /// The speaker arrangement types.
+    /// </summary>
     public enum VstSpeakerArrangementType
     {
-        SpeakerArrUserDefined = -2, // user defined
-        SpeakerArrEmpty = -1,		// empty arrangement
-        
-        SpeakerArrMono = 0,		    // M
-        SpeakerArrStereo,			// L R
-        SpeakerArrStereoSurround,	// Ls Rs
-        SpeakerArrStereoCenter,	    // Lc Rc
-        SpeakerArrStereoSide,		// Sl Sr
-        SpeakerArrStereoCLfe,		// C Lfe
-        SpeakerArr30Cine,			// L R C
-        SpeakerArr30Music,			// L R S
-        SpeakerArr31Cine,			// L R C Lfe
-        SpeakerArr31Music,			// L R Lfe S
-        SpeakerArr40Cine,			// L R C   S (LCRS)
-        SpeakerArr40Music,			// L R Ls  Rs (Quadro)
-        SpeakerArr41Cine,			// L R C   Lfe S (LCRS+Lfe)
-        SpeakerArr41Music,			// L R Lfe Ls Rs (Quadro+Lfe)
-        SpeakerArr50,				// L R C Ls  Rs 
-        SpeakerArr51,				// L R C Lfe Ls Rs
-        SpeakerArr60Cine,			// L R C   Ls  Rs Cs
-        SpeakerArr60Music,			// L R Ls  Rs  Sl Sr 
-        SpeakerArr61Cine,			// L R C   Lfe Ls Rs Cs
-        SpeakerArr61Music,			// L R Lfe Ls  Rs Sl Sr 
-        SpeakerArr70Cine,			// L R C Ls  Rs Lc Rc 
-        SpeakerArr70Music,			// L R C Ls  Rs Sl Sr
-        SpeakerArr71Cine,			// L R C Lfe Ls Rs Lc Rc
-        SpeakerArr71Music,			// L R C Lfe Ls Rs Sl Sr
-        SpeakerArr80Cine,			// L R C Ls  Rs Lc Rc Cs
-        SpeakerArr80Music,			// L R C Ls  Rs Cs Sl Sr
-        SpeakerArr81Cine,			// L R C Lfe Ls Rs Lc Rc Cs
-        SpeakerArr81Music,			// L R C Lfe Ls Rs Cs Sl Sr 
-        SpeakerArr102,				// L R C Lfe Ls Rs Tfl Tfc Tfr Trl Trr Lfe2
+        /// <summary>User defined.</summary>
+        SpeakerArrUserDefined = -2,
+        /// <summary>An empty arrangement.</summary>
+        SpeakerArrEmpty = -1,
+
+        /// <summary>M</summary>
+        SpeakerArrMono = 0,
+        /// <summary>L R</summary>
+        SpeakerArrStereo,
+        /// <summary>Ls Rs</summary>
+        SpeakerArrStereoSurround,
+        /// <summary>Lc Rc</summary>
+        SpeakerArrStereoCenter,
+        /// <summary>Sl Sr</summary>
+        SpeakerArrStereoSide,
+        /// <summary>C Lfe</summary>
+        SpeakerArrStereoCLfe,
+        /// <summary>L R C</summary>
+        SpeakerArr30Cine,
+        /// <summary>L R S</summary>
+        SpeakerArr30Music,
+        /// <summary>L R C Lfe</summary>
+        SpeakerArr31Cine,
+        /// <summary>L R Lfe S</summary>
+        SpeakerArr31Music,
+        /// <summary>L R C   S (LCRS)</summary>
+        SpeakerArr40Cine,
+        /// <summary>L R Ls  Rs (Quadro)</summary>
+        SpeakerArr40Music,
+        /// <summary>L R C   Lfe S (LCRS+Lfe)</summary>
+        SpeakerArr41Cine,
+        /// <summary>L R Lfe Ls Rs (Quadro+Lfe)</summary>
+        SpeakerArr41Music,
+        /// <summary>L R C Ls  Rs</summary>
+        SpeakerArr50,
+        /// <summary>L R C Lfe Ls Rs</summary>
+        SpeakerArr51,
+        /// <summary>L R C   Ls  Rs Cs</summary>
+        SpeakerArr60Cine,
+        /// <summary>L R Ls  Rs  Sl Sr</summary>
+        SpeakerArr60Music,
+        /// <summary>L R C   Lfe Ls Rs Cs</summary>
+        SpeakerArr61Cine,
+        /// <summary>L R Lfe Ls  Rs Sl Sr</summary>
+        SpeakerArr61Music,
+        /// <summary>L R C Ls  Rs Lc Rc</summary>
+        SpeakerArr70Cine,
+        /// <summary>L R C Ls  Rs Sl Sr</summary>
+        SpeakerArr70Music,
+        /// <summary>L R C Lfe Ls Rs Lc Rc</summary>
+        SpeakerArr71Cine,
+        /// <summary>L R C Lfe Ls Rs Sl Sr</summary>
+        SpeakerArr71Music,
+        /// <summary>L R C Ls  Rs Lc Rc Cs</summary>
+        SpeakerArr80Cine,
+        /// <summary>L R C Ls  Rs Cs Sl Sr</summary>
+        SpeakerArr80Music,
+        /// <summary>L R C Lfe Ls Rs Lc Rc Cs</summary>
+        SpeakerArr81Cine,
+        /// <summary>L R C Lfe Ls Rs Cs Sl Sr</summary>
+        SpeakerArr81Music,
+        /// <summary>L R C Lfe Ls Rs Tfl Tfc Tfr Trl Trr Lfe2</summary>
+        SpeakerArr102,
     }
 }

@@ -2,6 +2,9 @@
 {
     using System;
     
+    /// <summary>
+    /// Information about an audio file.
+    /// </summary>
     public class VstAudioFile
     {
         public VstAudioFileFlags Flags;
@@ -28,16 +31,26 @@
     [Flags]
     public enum VstAudioFileFlags
     {
-        ReadOnly = 1 << 0,	            // set by Host (in call #offlineNotify)
-        NoRateConversion = 1 << 1,	    // set by Host (in call #offlineNotify)
-        NoChannelChange = 1 << 2,	    // set by Host (in call #offlineNotify)
+        /// <summary>set by Host (in call #offlineNotify).</summary>
+        ReadOnly = 1 << 0,
+        /// <summary>set by Host (in call #offlineNotify).</summary>
+        NoRateConversion = 1 << 1,
+        /// <summary>set by Host (in call #offlineNotify).</summary>
+        NoChannelChange = 1 << 2,
 
-        CanProcessSelection = 1 << 10,	// set by plug-in (in call #offlineStart)
-        NoCrossfade = 1 << 11,	        // set by plug-in (in call #offlineStart)
-        WantRead = 1 << 12,	            // set by plug-in (in call #offlineStart)
-        WantWrite = 1 << 13,	        // set by plug-in (in call #offlineStart)
-        WantWriteMarker = 1 << 14,	    // set by plug-in (in call #offlineStart)
-        WantMoveCursor = 1 << 15,	    // set by plug-in (in call #offlineStart)
-        WantSelect = 1 << 16	        // set by plug-in (in call #offlineStart)
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        CanProcessSelection = 1 << 10,
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        NoCrossfade = 1 << 11,
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        WantRead = 1 << 12,
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        WantWrite = 1 << 13,
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        WantWriteMarker = 1 << 14,
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        WantMoveCursor = 1 << 15,
+        /// <summary>set by plug-in (in call #offlineStart).</summary>
+        WantSelect = 1 << 16
     }
 }

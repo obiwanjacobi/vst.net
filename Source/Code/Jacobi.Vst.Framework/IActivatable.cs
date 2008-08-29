@@ -14,7 +14,7 @@
         /// </summary>
         void Activate();
         /// <summary>
-        /// Deactivates the object (does nothing when already deactive).
+        /// Deactivates the object (does nothing when already inactive).
         /// </summary>
         void Deactivate();
     }

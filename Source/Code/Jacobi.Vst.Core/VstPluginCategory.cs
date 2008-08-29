@@ -1,18 +1,33 @@
 ﻿namespace Jacobi.Vst.Core
 {
+    /// <summary>
+    /// Indicates under what category the plugin falls.
+    /// </summary>
     public enum VstPluginCategory
     {
-        Unknown = 0,	// Unknown, category not implemented
-        Effect,			// Simple Effect
-        Synth,			// VST Instrument (Synths, samplers,...)
-        Analysis,		// Scope, Tuner, ...
-        Mastering,		// Dynamics, ...
-        Spacializer,	// Panners, ...
-        RoomFx,			// Delays and Reverbs
-        SurroundFx,		// Dedicated surround processor
-        Restoration,	// Denoiser, ...
-        OfflineProcess,	// Offline Process
-        Shell,			// Plug-in is container of other plug-ins  @see effShellGetNextPlugin
-        Generator,		// ToneGenerator, ...
+        /// <summary>Unknown, category not implemented.</summary>
+        Unknown = 0,
+        /// <summary>Simple Effect.</summary>
+        Effect,
+        /// <summary>VST Instrument (Synths, samplers, ...).</summary>
+        Synth,
+        /// <summary>Scope, Tuner, ...</summary>
+        Analysis,
+        /// <summary>Dynamics, ...</summary>
+        Mastering,
+        /// <summary>Panners, ...</summary>
+        Spacializer,
+        /// <summary>Delays and Reverbs.</summary>
+        RoomFx,
+        /// <summary>Dedicated surround processor.</summary>
+        SurroundFx,
+        /// <summary>Denoiser, ...</summary>
+        Restoration,
+        /// <summary>Offline Process.</summary>
+        OfflineProcess,
+        /// <summary>Plug-in is container of other plug-ins.</summary>
+        Shell,
+        /// <summary>ToneGenerator, ...</summary>
+        Generator,
     }
 }
