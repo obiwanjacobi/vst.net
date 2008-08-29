@@ -3,14 +3,14 @@
   <Interface Name="Jacobi.Vst.Framework.IVstHost">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAgAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IVstHost.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Jacobi.Vst.Framework.IVstHostSequencer">
     <Position X="4" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>RQAAQAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAECAAAAA=</HashCode>
+      <HashCode>RQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAA=</HashCode>
       <FileName>IVstHostSequencer.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -49,10 +49,10 @@
       <FileName>IVstHostAutomation.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Framework.IVstPluginPersistence" Collapsed="true">
+  <Interface Name="Jacobi.Vst.Framework.IVstPluginPersistence">
     <Position X="9.25" Y="6.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ggAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IVstPluginPersistence.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -64,7 +64,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Jacobi.Vst.Framework.IVstPluginHost" Collapsed="true">
-    <Position X="9.25" Y="7.25" Width="1.75" />
+    <Position X="7" Y="8.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IVstPluginHost.cs</FileName>
@@ -127,14 +127,14 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Jacobi.Vst.Framework.IVstPluginParameters">
-    <Position X="7.25" Y="7" Width="1.75" />
+    <Position X="7" Y="7" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAAAA=</HashCode>
       <FileName>IVstPluginParameters.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Jacobi.Vst.Framework.IVstPluginPrograms">
-    <Position X="2.5" Y="3.5" Width="1.75" />
+    <Position X="2.75" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAACAAAAAAA=</HashCode>
       <FileName>IVstPluginPrograms.cs</FileName>

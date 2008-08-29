@@ -20,13 +20,25 @@
         public ManagedPluginFactory(string interopAssemblyPath)
         {
             string dir = Path.GetDirectoryName(interopAssemblyPath);
-            string file = Path.GetFileNameWithoutExtension(interopAssemblyPath);
+            string filePath = Path.Combine(dir, Path.GetFileNameWithoutExtension(interopAssemblyPath));
 
-            file += ".net.dll";
+            // default .net.dll extension
+            string dotNetFile = filePath + ".net.dll";
 
-            string assemblyPath = Path.Combine(dir, file);
+            // fallback to .net.vstdll
+            if (!File.Exists(dotNetFile))
+            {
+                dotNetFile = filePath + ".net.vstdll";
+            }
 
-            _assembly = Assembly.LoadFile(assemblyPath);
+            if (!File.Exists(dotNetFile))
+            {
+                throw new FileNotFoundException(
+                    "Could not find the managed VST plugin assembly with either the .net.dll or .net.vstdll extension.", 
+                    filePath);
+            }
+
+            _assembly = Assembly.LoadFile(dotNetFile);
         }
 
         public IVstPluginCommandStub CreatePluginCommandStub()
