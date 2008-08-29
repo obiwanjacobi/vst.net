@@ -1,18 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Jacobi.Vst.Core.VstAudioBuffer">
-    <Position X="7.5" Y="2.25" Width="1.5" />
+    <Position X="8" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <HashCode>AAAAAAAASAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>VstAudioBuffer.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Jacobi.Vst.Core.VstAudioPrecisionBuffer">
-    <Position X="9.25" Y="2.25" Width="2" />
+    <Position X="9.75" Y="2.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAQAA=</HashCode>
-      <FileName>VstAudioBuffer.cs</FileName>
+      <HashCode>AAAAAAQAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>VstAudioPrecisionBuffer.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Jacobi.Vst.Core.VstAudioFile">
     <Position X="3.75" Y="5" Width="2.25" />
@@ -27,7 +29,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>VstEvent.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -76,14 +78,14 @@
   <Class Name="Jacobi.Vst.Core.VstParameterProperties">
     <Position X="4.75" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAIABAAAEAAAAAAAIAIBAAACAABAAQJAABAQAAAACAA=</HashCode>
+      <HashCode>AAIABAAAEAAAAAAAIAIBAgACAABAAQJAABAAAAAACAA=</HashCode>
       <FileName>VstParameterProperties.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Jacobi.Vst.Core.VstPatchChunkInfo">
     <Position X="7.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAgAAABAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAAAgAAAAAAAA=</HashCode>
       <FileName>VstPatchChunkInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -101,7 +103,7 @@
       <FileName>VstSpeakerArrangement.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="Speakers" />
+      <Property Name="Speakers" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Jacobi.Vst.Core.VstSpeakerProperties">
@@ -128,7 +130,7 @@
   <Class Name="Jacobi.Vst.Core.Plugin.VstPluginInfo">
     <Position X="3.75" Y="9.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAABAgAAgAAAAAAAAAAIAAEAAAAAAAIAAgAAEAAAAA=</HashCode>
+      <HashCode>AAAQBQEAAgAAAAAAAAAAAAAAAAAAAAAIAAgAAAAABAA=</HashCode>
       <FileName>Plugin\VstPluginInfo.cs</FileName>
     </TypeIdentifier>
   </Class>

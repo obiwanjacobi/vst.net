@@ -80,7 +80,7 @@ public:
 				midiData[2] = pMidiEvent->midiData[2];
 
 				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = gcnew Jacobi::Vst::Core::VstMidiEvent(
-					pMidiEvent->deltaFrames, pMidiEvent->flags, 
+					pMidiEvent->deltaFrames, 
 					pMidiEvent->noteLength, pMidiEvent->noteOffset, midiData, pMidiEvent->detune, pMidiEvent->noteOffVelocity);
 
 				eventArray[n] = midiEvent;
@@ -98,7 +98,7 @@ public:
 				}
 
 				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = gcnew Jacobi::Vst::Core::VstMidiSysExEvent(
-					pMidiEvent->deltaFrames, pMidiEvent->flags, 
+					pMidiEvent->deltaFrames, 
 					midiData);
 
 				eventArray[n] = midiEvent;
@@ -134,7 +134,7 @@ public:
 				::VstMidiEvent* pMidiEvent = new ::VstMidiEvent();
 
 				pMidiEvent->byteSize = sizeof(::VstMidiEvent) - (2 * sizeof(VstInt32));
-				pMidiEvent->flags = midiEvent->Flags;
+				pMidiEvent->flags = 0;
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
 				pMidiEvent->type = (VstInt32)midiEvent->EventType;
 
@@ -157,7 +157,7 @@ public:
 				::VstMidiSysexEvent* pMidiEvent = new ::VstMidiSysexEvent();
 
 				pMidiEvent->byteSize = sizeof(::VstMidiSysexEvent) - (2 * sizeof(VstInt32));
-				pMidiEvent->flags = midiEvent->Flags;
+				pMidiEvent->flags = 0;
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
 				pMidiEvent->type = (VstInt32)midiEvent->EventType;
 

@@ -2,10 +2,15 @@
 {
     public enum VstAutomationStates
     {
-        Unsupported = 0,	// not supported by Host
-        Off,				// off
-        Read,				// read
-        Write,			    // write
-        ReadWrite			// read and write
+        /// <summary>not supported by Host</summary>
+        Unsupported,
+        /// <summary>off</summary>
+        Off,
+        /// <summary>read</summary>
+        Read,
+        /// <summary>write</summary>
+        Write,
+        /// <summary>read and write</summary>
+        ReadWrite
     }
 }

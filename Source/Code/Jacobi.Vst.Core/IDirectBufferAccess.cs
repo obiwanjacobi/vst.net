@@ -1,7 +1,7 @@
 ﻿namespace Jacobi.Vst.Core
 {
     /// <summary>
-    /// Provides unmanged buffer access to an audio channel
+    /// Provides unmanged buffer access to an audio buffer
     /// </summary>
     public unsafe interface IDirectBufferAccess32
     {
@@ -16,7 +16,7 @@
     }
 
     /// <summary>
-    /// Provides unmanged buffer access to an audio channel
+    /// Provides unmanged buffer access to an audio buffer
     /// </summary>
     public unsafe interface IDirectBufferAccess64
     {

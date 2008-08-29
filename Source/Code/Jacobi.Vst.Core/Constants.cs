@@ -3,7 +3,7 @@
     /// <summary>
     /// Constants used in the VST interface
     /// </summary>
-    public class Constants
+    public static class Constants
     {
         // VST 1.0 constants
         /// <summary>used for #effGetProgramName; #effSetProgramName; #effGetProgramNameIndexed</summary>
