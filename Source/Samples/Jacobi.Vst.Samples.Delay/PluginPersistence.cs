@@ -6,11 +6,18 @@
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
+    /// <summary>
+    /// This class manages custom persistence for all the plugin's programs and parameters.
+    /// </summary>
     internal class PluginPersistence : IVstPluginPersistence
     {
         private FxTestPlugin _plugin;
         private Encoding _encoding = Encoding.ASCII;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
         public PluginPersistence(FxTestPlugin plugin)
         {
             _plugin = plugin;
@@ -18,6 +25,11 @@
 
         #region IVstPluginPersistence Members
 
+        /// <summary>
+        /// Reads the programs for the <paramref name="stream"/> and fills the <paramref name="programs"/> collection.
+        /// </summary>
+        /// <param name="stream">Must not be null.</param>
+        /// <param name="programs">Must not be null.</param>
         public void ReadPrograms(Stream stream, VstProgramCollection programs)
         {
             BinaryReader reader = new BinaryReader(stream, _encoding);
@@ -32,6 +44,11 @@
             }
         }
 
+        /// <summary>
+        /// Writes all the <paramref name="programs"/> to the <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream">Must not be null.</param>
+        /// <param name="programs">Must not be null.</param>
         public void WritePrograms(Stream stream, VstProgramCollection programs)
         {
             BinaryWriter writer = new BinaryWriter(stream, _encoding);
@@ -44,6 +61,11 @@
             }
         }
 
+        /// <summary>
+        /// Called just before reading in programs to detect (in)compatibility.
+        /// </summary>
+        /// <param name="chunkInfo">Must not be null.</param>
+        /// <returns>Returns true when the data can be read.</returns>
         public bool CanLoadChunk(VstPatchChunkInfo chunkInfo)
         {
             // TODO: determine version
@@ -52,6 +74,11 @@
 
         #endregion
 
+        /// <summary>
+        /// Helper method to read one program and its parameters.
+        /// </summary>
+        /// <param name="reader">Must not be null.</param>
+        /// <returns>Never returns null.</returns>
         private VstProgram ReadProgram(BinaryReader reader)
         {
             VstProgram program = CreateProgram();
@@ -73,6 +100,11 @@
             return program;
         }
 
+        /// <summary>
+        /// Helper method to write one program and its parameters.
+        /// </summary>
+        /// <param name="writer">Must not be null.</param>
+        /// <param name="program">Must not be null.</param>
         private void WriteProgram(BinaryWriter writer, VstProgram program)
         {
             writer.Write(program.Name);
@@ -85,6 +117,10 @@
             }
         }
 
+        /// <summary>
+        /// Helper method to create a new program and its parameters.
+        /// </summary>
+        /// <returns>Never returns null.</returns>
         private VstProgram CreateProgram()
         {
             VstProgram program = new VstProgram(_plugin.ParameterFactory.Categories);

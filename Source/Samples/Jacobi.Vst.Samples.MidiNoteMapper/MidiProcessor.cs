@@ -42,7 +42,6 @@
                     midiData[2] = midiEvent.MidiData[2];
 
                     mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames, 
-                        midiEvent.Flags, 
                         midiEvent.NoteLength, 
                         midiEvent.NoteOffset, 
                         midiData, 
