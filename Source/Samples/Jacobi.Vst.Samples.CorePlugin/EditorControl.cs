@@ -3,13 +3,23 @@
     using System;
     using System.Windows.Forms;
 
-    public partial class EditorControl1 : UserControl
+    /// <summary>
+    /// This control is used as Plugin Editor UI.
+    /// </summary>
+    internal partial class EditorControl : UserControl
     {
-        public EditorControl1()
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        public EditorControl()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Adds the <paramref name="text"/> to the log.
+        /// </summary>
+        /// <param name="text">A text to log on the UI. Must not be null.</param>
         public void AddLine(string text)
         {
             if(this.InvokeRequired)

@@ -3,10 +3,17 @@
     using System.Diagnostics;
     using Jacobi.Vst.Framework;
 
+    /// <summary>
+    /// This class manages the plugin programs.
+    /// </summary>
     class PluginPrograms : IVstPluginPrograms
     {
         FxTestPlugin _plugin;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
         public PluginPrograms(FxTestPlugin plugin)
         {
             _plugin = plugin;
@@ -15,6 +22,9 @@
         #region IVstPluginPrograms Members
 
         private VstProgramCollection _programs;
+        /// <summary>
+        /// Gets all the programs.
+        /// </summary>
         public VstProgramCollection Programs
         {
             get
@@ -30,6 +40,9 @@
         }
 
         private VstProgram _activeProgram;
+        /// <summary>
+        /// Gets or sets the current or active program.
+        /// </summary>
         public VstProgram ActiveProgram
         {
             get
@@ -57,11 +70,17 @@
             }
         }
 
+        /// <summary>
+        /// Called by the host (if supported) just before the program is set.
+        /// </summary>
         public void BeginSetProgram()
         {
             Trace.WriteLine("BeginSetProgram", "Jacobi.Vst.Framework.TestPlugin");
         }
 
+        /// <summary>
+        /// Called by the host (if supported) just after the program is set.
+        /// </summary>
         public void EndSetProgram()
         {
             Trace.WriteLine("EndSetProgram", "Jacobi.Vst.Framework.TestPlugin");
@@ -69,6 +88,10 @@
 
         #endregion
 
+        /// <summary>
+        /// Initializes the plugin program collection.
+        /// </summary>
+        /// <param name="programs">A program collection that gets filled.</param>
         private void FillPrograms(VstProgramCollection programs)
         {
             

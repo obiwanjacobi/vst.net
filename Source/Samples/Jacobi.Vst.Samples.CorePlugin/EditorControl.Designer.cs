@@ -1,6 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.CorePlugin
 {
-    partial class EditorControl1
+    partial class EditorControl
     {
         /// <summary> 
         /// Required designer variable.
