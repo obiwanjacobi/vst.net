@@ -2,6 +2,9 @@
 {
     using Jacobi.Vst.Framework;
 
+    /// <summary>
+    /// This class implements a DPS routine that acts as a delay.
+    /// </summary>
     internal class Delay
     {
         private float[] _delayBuffer;
@@ -13,6 +16,9 @@
         private VstParameterManager _dryLevelMgr;
         private VstParameterManager _wetLevelMgr;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
         public Delay()
         {
             _paramInfos = new VstParameterInfoCollection();
@@ -89,12 +95,18 @@
         }
 
         private VstParameterInfoCollection _paramInfos;
+        /// <summary>
+        /// Gets the Parameter definitions that originate here.
+        /// </summary>
         public VstParameterInfoCollection ParameterInfos
         {
             get { return _paramInfos; }
         }
 
         private float _sampleRate;
+        /// <summary>
+        /// Gets or sets the sample rate.
+        /// </summary>
         public float SampleRate
         {
             get { return _sampleRate; }
@@ -108,6 +120,11 @@
             }
         }
 
+        /// <summary>
+        /// Processes the <paramref name="sample"/> using a delay effect.
+        /// </summary>
+        /// <param name="sample">A single sample.</param>
+        /// <returns>Returns the new value for the sample.</returns>
         public float ProcessSample(float sample)
         {
             if (_delayBuffer == null) return sample;

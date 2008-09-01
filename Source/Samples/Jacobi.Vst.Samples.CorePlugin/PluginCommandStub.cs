@@ -4,12 +4,16 @@
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
 
+    /// <summary>
+    /// Custom implementation for the Plugin command stub.
+    /// </summary>
+    /// <remarks>Most methods just log to the UI.</remarks>
     public class PluginCommandStub : IVstPluginCommandStub
     {
         private VstPluginInfo _pluginInfo;
         private IVstHostCommandStub _hostStub;
         
-        private WinFormsWrapper<EditorControl1> _editorCtrl = new WinFormsWrapper<EditorControl1>();
+        private WinFormsWrapper<EditorControl> _editorCtrl = new WinFormsWrapper<EditorControl>();
 
         #region IVstPluginCommandStub Members
 
@@ -18,9 +22,9 @@
             _hostStub = hostCmdStub;
             _pluginInfo = new VstPluginInfo();
 
-            _pluginInfo.NumberOfAudioInputs = 1;
-            _pluginInfo.NumberOfAudioOutputs = 2;
-            _pluginInfo.NumberOfPrograms = 1;
+            _pluginInfo.AudioInputCount = 1;
+            _pluginInfo.AudioOutputCount = 2;
+            _pluginInfo.ProgramCount = 1;
             _pluginInfo.Flags = VstPluginFlags.HasEditor | VstPluginFlags.CanReplacing;
             _pluginInfo.PluginID = 1234;
             _pluginInfo.PluginVersion = 1000;
