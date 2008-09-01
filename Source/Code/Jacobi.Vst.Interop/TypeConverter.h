@@ -3,6 +3,7 @@
 class TypeConverter
 {
 public:
+	// Converts a managed string to an unmanaged char buffer.
 	static void StringToChar(System::String^ source, char* dest, size_t maxLength)
 	{
 		if(source)
@@ -13,6 +14,7 @@ public:
 		}
 	}
 
+	// Converts an unmanaged char buffer to a managed string.
 	static System::String^ CharToString(char* source)
 	{
 		System::String^ str;
@@ -25,6 +27,7 @@ public:
 		return str;
 	}
 
+	// Converts a managed rect to an unmanaged ppRect
 	static void RectangleToERect(System::Drawing::Rectangle rect, ERect** ppRect)
 	{
 		*ppRect = new ERect();
@@ -34,6 +37,7 @@ public:
 		(*ppRect)->right = rect.Right;
 	}
 
+	// Converts a managed byteArray to an unmanaged array.
 	// delete[] retval
 	static void* ByteArrayToPtr(array<System::Byte>^ byteArray)
 	{
@@ -48,6 +52,7 @@ public:
 		return buffer;
 	}
 
+	// Converts an unmanaged char pBuffer to a managed Byte array.
 	static array<System::Byte>^ PtrToByteArray(char *pBuffer, int length)
 	{
 		array<System::Byte>^ byteArray = gcnew array<System::Byte>(length);
@@ -60,6 +65,8 @@ public:
 		return byteArray;
 	}
 
+	// Converts an unmanaged events to a managed VstEvent array.
+	// Only handles MidiEvent and MidiSysExEvent types.
 	static array<Jacobi::Vst::Core::VstEvent^>^ ToEventArray(VstEvents* pEvents)
 	{
 		array<Jacobi::Vst::Core::VstEvent^>^ eventArray = gcnew array<Jacobi::Vst::Core::VstEvent^>(pEvents->numEvents);
@@ -113,7 +120,8 @@ public:
 		return eventArray;
 	}
 
-	// delete retval
+	// Converts a managed VstEvent array to an unmanaged VstEvent array.
+	// Call DeleteVstEvents on retval.
 	static ::VstEvents* FromEventsArray(array<Jacobi::Vst::Core::VstEvent^>^ events)
 	{
 		int length = events->Length;
@@ -180,6 +188,7 @@ public:
 		return pEvents;
 	}
 
+	// Cleanup method for the return value of 'FromEventsArray'
 	static void DeleteVstEvents(::VstEvents* pEvents)
 	{
 		for(int n = 0 ; n < pEvents->numEvents; n++)
@@ -196,18 +205,7 @@ public:
 		delete pEvents;
 	}
 
-	/*static Jacobi::Vst::Core::VstPinProperties^ ToPinProperties(::VstPinProperties* pProps)
-	{
-		Jacobi::Vst::Core::VstPinProperties^ pinProperties = gcnew Jacobi::Vst::Core::VstPinProperties();
-		
-		pinProperties->Flags = (Jacobi::Vst::Core::VstPinPropertiesFlags)pProps->flags;
-		pinProperties->Label = CharToString(pProps->label);
-		pinProperties->ShortLabel = CharToString(pProps->shortLabel);
-		pinProperties->ArrangementType = (Jacobi::Vst::Core::VstSpeakerArrangementType)pProps->arrangementType;
-
-		return pinProperties;
-	}*/
-
+	// Assigns the values of the managed pinProps to the unmanaged pProps fields.
 	static void FromPinProperties(Jacobi::Vst::Core::VstPinProperties^ pinProps, ::VstPinProperties* pProps)
 	{
 		pProps->flags = safe_cast<VstInt32>(pinProps->Flags);
@@ -216,6 +214,7 @@ public:
 		pProps->arrangementType = safe_cast<VstInt32>(pinProps->ArrangementType);
 	}
 
+	// Converts an unmanaged speaker pArrangement to a managed VstSpeakerArrangement.
 	static Jacobi::Vst::Core::VstSpeakerArrangement^ ToSpeakerArrangement(::VstSpeakerArrangement* pArrangement)
 	{
 		Jacobi::Vst::Core::VstSpeakerArrangement^ spkArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
@@ -240,32 +239,7 @@ public:
 		return spkArr;
 	}
 
-	/*static Jacobi::Vst::Core::VstParameterProperties^ ToParameterProperties(::VstParameterProperties* pProps)
-	{
-		Jacobi::Vst::Core::VstParameterProperties^ paramProps = gcnew Jacobi::Vst::Core::VstParameterProperties();
-
-		paramProps->Flags = (Jacobi::Vst::Core::VstParameterPropertiesFlags)pProps->flags;
-		paramProps->StepFloat = pProps->stepFloat;
-		paramProps->LargeStepFloat = pProps->largeStepFloat;
-		paramProps->SmallStepFloat = pProps->smallStepFloat;
-
-		paramProps->StepInteger = pProps->stepInteger;
-		paramProps->LargeStepInteger = pProps->largeStepInteger;
-		paramProps->MaxInteger = pProps->maxInteger;
-		paramProps->MinInteger = pProps->minInteger;
-		
-		paramProps->DisplayIndex = pProps->displayIndex;
-
-		paramProps->Label = CharToString(pProps->label);
-		paramProps->ShortLabel = CharToString(pProps->shortLabel);
-
-		paramProps->Category = pProps->category;
-		paramProps->NumParametersInCategory = pProps->numParametersInCategory;
-		paramProps->CategoryLabel = CharToString(pProps->categoryLabel);
-
-		return paramProps;
-	}*/
-
+	// Assigns the values from the managed paramProps to the unmanaged pProps fields.
 	static void FromParameterProperties(Jacobi::Vst::Core::VstParameterProperties^ paramProps, ::VstParameterProperties* pProps)
 	{
 		pProps->flags = safe_cast<VstInt32>(paramProps->Flags);
@@ -287,6 +261,7 @@ public:
 		pProps->numParametersInCategory = paramProps->ParameterCountInCategory;
 	}
 
+	// Assigns the values of the managed midiProgName to the unmanaged pProgName fields.
 	static void FromMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::MidiProgramName* pProgName)
 	{
 		pProgName->thisProgramIndex = midiProgName->CurrentProgramIndex;
@@ -298,6 +273,7 @@ public:
 		pProgName->parentCategoryIndex = midiProgName->ParentCategoryIndex;
 	}
 
+	// Assigns the values of the managed midiProgCat to the unmanaged pProgCat fields.
 	static void FromMidiProgramCategory(Jacobi::Vst::Core::VstMidiProgramCategory^ midiProgCat, ::MidiProgramCategory* pProgCat)
 	{
 		pProgCat->thisCategoryIndex = midiProgCat->CurrentCategoryIndex;
@@ -305,6 +281,7 @@ public:
 		StringToChar(midiProgCat->Name, pProgCat->name, kVstMaxNameLen);
 	}
 
+	// Converts the unmanaged pChunkInfo to a managed VstPatchChunkInfo.
 	static Jacobi::Vst::Core::VstPatchChunkInfo^ ToPatchChunkInfo(::VstPatchChunkInfo* pChunkInfo)
 	{
 		Jacobi::Vst::Core::VstPatchChunkInfo^ patchChunkInfo = 
@@ -317,6 +294,7 @@ public:
 		return patchChunkInfo;
 	}
 
+	// Converts the unmanaged pTimeInfo to the managed VstTimeInfo.
 	static Jacobi::Vst::Core::VstTimeInfo^ ToTimeInfo(::VstTimeInfo* pTimeInfo)
 	{
 		Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
@@ -339,6 +317,7 @@ public:
 		return timeInfo;
 	}
 
+	// Converts the unmanaged sample buffer to a managed VstAudioBuffer array.
 	static array<Jacobi::Vst::Core::VstAudioBuffer^>^ ToAudioBufferArray(float** buffer, int sampleFrames, int numberOfBuffers, bool canWrite)
 	{
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstAudioBuffer^>(numberOfBuffers);
@@ -351,6 +330,7 @@ public:
 		return bufferArray;
 	}
 
+	// Converts the unmanaged sample buffer to a managed VstAudioPrecissionBuffer array.
 	static array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ ToAudioBufferArray(double** buffer, int sampleFrames, int numberOfBuffers, bool canWrite)
 	{
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>(numberOfBuffers);

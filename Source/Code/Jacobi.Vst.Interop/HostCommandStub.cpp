@@ -2,6 +2,7 @@
 #include "HostCommandStub.h"
 #include "TypeConverter.h"
 
+// Creates a new instance based on a native callback function pointer.
 HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 {
 	if(hostCallback == NULL)
@@ -12,11 +13,13 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 	_hostCallback = hostCallback;
 }
 
+// destructor. See Finalizer
 HostCommandStub::~HostCommandStub()
 {
 	this->!HostCommandStub();
 }
 
+// Finalizer deletes the AEffect instance
 HostCommandStub::!HostCommandStub()
 {
 	_hostCallback = NULL;
@@ -29,6 +32,7 @@ HostCommandStub::!HostCommandStub()
 }
 
 // IVstHostCommandStub
+// Updates the passed pluginInfo in with the host.
 System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
 	if(pluginInfo)
@@ -247,7 +251,7 @@ Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstH
 {
 	ThrowIfNotInitialized();
 	
-	char* pText = new char[64];
+	char* pText = char[64];
 	TypeConverter::StringToChar(cando.ToString(), pText, 64);
 	pText[0] += 32;	// tolower
 
@@ -310,6 +314,7 @@ System::Boolean HostCommandStub::CloseFileSelector(/*VstFileSelect*/)
 	return false;
 }
 
+// Throws an InvalidOperationException if the host command stub has not been initialized.
 inline void HostCommandStub::ThrowIfNotInitialized()
 {
 	if(IsInitialized() == false)

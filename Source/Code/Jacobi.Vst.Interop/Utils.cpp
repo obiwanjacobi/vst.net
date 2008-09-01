@@ -1,23 +1,17 @@
 #include "StdAfx.h"
 #include "Utils.h"
 
+// Shows a MessageBox with the exception information.
 void Utils::ShowError(System::Exception^ e)
 {
-	System::String^ text = e->ToString();
-
-	System::IntPtr mem = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(text);
-
-	::MessageBox(NULL, (LPCTSTR)mem.ToPointer(), LPCTSTR("VST.NET Error"), MB_ICONERROR | MB_OK);
-
-	System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
+	System::Windows::Forms::MessageBox::Show(nullptr, e->ToString(), "VST.NET Error", 
+		System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
 }
 
+// Shows a MessageBox with the warning message
 void Utils::ShowWarning(System::String^ message)
 {
-	System::IntPtr mem = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(message);
-
-	::MessageBox(NULL, (LPCTSTR)mem.ToPointer(), LPCTSTR("VST.NET Warning"), MB_ICONEXCLAMATION | MB_OK);
-
-	System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
+	System::Windows::Forms::MessageBox::Show(nullptr, message, "VST.NET Warning", 
+		System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Exclamation);
 }
 
