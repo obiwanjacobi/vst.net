@@ -21,7 +21,7 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 	AssemblyLoader::Initialize(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
 
 	//
-	// We have boostrapped the AssemblyLoader (above).
+	// We have boot-strapped the AssemblyLoader (above).
 	// Now call the actual VST main.
 	//
 	return VSTPluginMainInternal(hostCallback);
@@ -90,6 +90,7 @@ AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback)
 	return NULL;
 }
 
+// Dispatcher Procedure called by the host
 VstIntPtr DispatcherProc(AEffect* pluginInfo, VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
 {
 	if(pluginInfo && pluginInfo->user)
@@ -103,6 +104,7 @@ VstIntPtr DispatcherProc(AEffect* pluginInfo, VstInt32 opcode, VstInt32 index, V
 	return 0;
 }
 
+// Audio processing Procedure called by the host
 void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt32 sampleFrames)
 {
 	if(pluginInfo && pluginInfo->user)
@@ -114,6 +116,7 @@ void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt3
 	}
 }
 
+// Audio precission processing Procedure called by the host
 void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstInt32 sampleFrames)
 {
 	if(pluginInfo && pluginInfo->user)
@@ -125,6 +128,7 @@ void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstIn
 	}
 }
 
+// Parameter assignment Procedure called by the host
 void SetParameterProc(AEffect* pluginInfo, VstInt32 index, float value)
 {
 	if(pluginInfo && pluginInfo->user)
@@ -136,6 +140,7 @@ void SetParameterProc(AEffect* pluginInfo, VstInt32 index, float value)
 	}
 }
 
+// Parameter retrieval Procedure called by the host
 float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 {
 	if(pluginInfo && pluginInfo->user)
@@ -149,6 +154,7 @@ float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 	return 0.0;
 }
 
+// Helper method to create the AEffect structure based on the pluginInfo.
 AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
 	// deleted in the Finalizer method of the HostCommandStub
