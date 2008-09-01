@@ -4,6 +4,7 @@
 #include "Utils.h"
 #include<vcclr.h>
 
+// constructs a new instance based on a reference to the plugin command stub
 PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ cmdStub)
 {
 	if(cmdStub == nullptr)
@@ -15,6 +16,8 @@ PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginComm
 	_memTracker = gcnew MemoryTracker();
 }
 
+// Dispatches an opcode to the plugin command stub.
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
 VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
 {
 	VstIntPtr result = 0;
@@ -321,13 +324,14 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	}
 	catch(System::Exception^ e)
 	{
-		// TODO: handle exception
 		Utils::ShowError(e);
 	}
 
 	return result;
 }
 
+// Calls the plugin command stub to process audio.
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs)
 {
 	try
@@ -339,11 +343,12 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 	}
 	catch(System::Exception^ e)
 	{
-		// TODO: handle exception
 		Utils::ShowError(e);
 	}
 }
 
+// Calls the plugin command stub to process audio.
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs)
 {
 	try
@@ -355,11 +360,12 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sam
 	}
 	catch(System::Exception^ e)
 	{
-		// TODO: handle exception
 		Utils::ShowError(e);
 	}
 }
 
+// Calls the plugin command stub to assign the parameter.
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::SetParameter(VstInt32 index, float value)
 {
 	try
@@ -368,11 +374,12 @@ void PluginCommandProxy::SetParameter(VstInt32 index, float value)
 	}
 	catch(System::Exception^ e)
 	{
-		// TODO: handle exception
 		Utils::ShowError(e);
 	}
 }
 
+// Calls the plugin command stub to retrieve the parameter.
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
 float PluginCommandProxy::GetParameter(VstInt32 index)
 {
 	try
@@ -381,13 +388,13 @@ float PluginCommandProxy::GetParameter(VstInt32 index)
 	}
 	catch(System::Exception^ e)
 	{
-		// TODO: handle exception
 		Utils::ShowError(e);
 	}
 
 	return 0.0f;
 }
 
+// Cleans up any delayed memory deletes.
 void PluginCommandProxy::Cleanup()
 {
 	if(_memTracker != nullptr)
