@@ -49,7 +49,7 @@ namespace Jacobi.Vst.Framework
         /// Returns a unique key for the specified <paramref name="item"/>.
         /// </summary>
         /// <param name="item">The item in the collection a key is needed for.</param>
-        /// <returns>Returns the <see cref="VstParameter.Name"/> property.</returns>
+        /// <returns>Returns the <see cref="VstParameterInfo.Name"/> property.</returns>
         protected override string GetKeyForItem(VstParameter item)
         {
             return item.Info.Name;

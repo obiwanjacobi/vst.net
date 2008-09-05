@@ -100,7 +100,6 @@
         /// </summary>
         /// <param name="task">Must not be null.</param>
         /// <param name="option"></param>
-        /// <param name="readSource"></param>
         /// <returns>Returns true if supported by the host.</returns>
         bool OfflineWrite(VstOfflineTask task, VstOfflineOption option);
         /// <summary>

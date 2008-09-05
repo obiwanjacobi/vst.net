@@ -91,7 +91,7 @@
       <FileName>IVstPluginAudioProcessor.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Jacobi.Vst.Framework.IVstPluginAudioPrecissionProcessor">
+  <Interface Name="Jacobi.Vst.Framework.IVstPluginAudioprecisionProcessor">
     <Position X="2.25" Y="8" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

@@ -251,7 +251,7 @@ Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstH
 {
 	ThrowIfNotInitialized();
 	
-	char* pText = char[64];
+	char* pText = new char[64];
 	TypeConverter::StringToChar(cando.ToString(), pText, 64);
 	pText[0] += 32;	// tolower
 
