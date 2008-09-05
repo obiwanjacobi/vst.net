@@ -44,12 +44,12 @@
 
         #region IVstPluginCommands24 Members
         /// <summary>
-        /// Called by the host query inform the plugin on the precission of audio processing it supports.
+        /// Called by the host query inform the plugin on the precision of audio processing it supports.
         /// </summary>
         /// <param name="precision">An indication of either 32 bit or 64 bit samples.</param>
-        /// <returns>Returns true when the requested <paramref name="precission"/> is supported.</returns>
+        /// <returns>Returns true when the requested <paramref name="precision"/> is supported.</returns>
         /// <remarks>The implementation just queries the plugin for the <see cref="IVstPluginAudioProcessor"/> and
-        /// <see cref="IVstPluginAudioPrecissionProcessor"/> interfaces. Override to change this behavior.</remarks>
+        /// <see cref="IVstPluginAudioprecisionProcessor"/> interfaces. Override to change this behavior.</remarks>
         public virtual bool SetProcessPrecision(VstProcessPrecision precision)
         {
             bool canDo = false;
@@ -60,7 +60,7 @@
                     canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioProcessor>();
                     break;
                 case VstProcessPrecision.Process64:
-                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioPrecissionProcessor>();
+                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioprecisionProcessor>();
                     break;
             }
             
@@ -1339,10 +1339,10 @@
         /// </summary>
         /// <param name="inputs">An array with audio input buffers.</param>
         /// <param name="outputs">An array with audio output buffers.</param>
-        /// <remarks>The implementation calls the <see cref="IVstPluginAudioPrecissionProcessor"/> interface.</remarks>
+        /// <remarks>The implementation calls the <see cref="IVstPluginAudioprecisionProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
-            IVstPluginAudioPrecissionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioPrecissionProcessor>();
+            IVstPluginAudioprecisionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioprecisionProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1433,7 +1433,7 @@
                 pluginInfo.Flags |= VstPluginFlags.HasEditor;
             if (audioProcessor != null)
                 pluginInfo.Flags |= VstPluginFlags.CanReplacing;
-            if (plugin.Supports<IVstPluginAudioPrecissionProcessor>())
+            if (plugin.Supports<IVstPluginAudioprecisionProcessor>())
                 pluginInfo.Flags |= VstPluginFlags.CanDoubleReplacing;
             if (plugin.Supports<IVstPluginPersistence>())
                 pluginInfo.Flags |= VstPluginFlags.ProgramChunks;

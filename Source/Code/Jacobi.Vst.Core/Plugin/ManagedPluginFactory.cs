@@ -17,8 +17,17 @@
     {
         private Assembly _assembly;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="interopAssemblyPath">The full path to the interop assembly. Must not be null or empty.</param>
         public ManagedPluginFactory(string interopAssemblyPath)
         {
+            if (String.IsNullOrEmpty(interopAssemblyPath))
+            {
+                throw new ArgumentException("Paremeter is null or empty.", "interopAssemblyPath");
+            }
+
             string dir = Path.GetDirectoryName(interopAssemblyPath);
             string filePath = Path.Combine(dir, Path.GetFileNameWithoutExtension(interopAssemblyPath));
 
@@ -41,6 +50,10 @@
             _assembly = Assembly.LoadFile(dotNetFile);
         }
 
+        /// <summary>
+        /// Creates the public Plugin command stub.
+        /// </summary>
+        /// <returns></returns>
         public IVstPluginCommandStub CreatePluginCommandStub()
         {
             Type pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub));

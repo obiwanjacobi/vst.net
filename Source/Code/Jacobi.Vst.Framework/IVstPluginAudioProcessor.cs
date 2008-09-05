@@ -51,12 +51,12 @@ namespace Jacobi.Vst.Framework
     }
 
     /// <summary>
-    /// This interface can be implemented by plugins that want to support double precission audio samples.
+    /// This interface can be implemented by plugins that want to support double precision audio samples.
     /// </summary>
     /// <remarks>Note that this interface derives from <see cref="IVstPluginAudioProcessor"/> and that a
-    /// plugin that supports double precission should also support 'normal' audio processing. 
-    /// Not all hosts support double precission audio samples.</remarks>
-    public interface IVstPluginAudioPrecissionProcessor : IVstPluginAudioProcessor
+    /// plugin that supports double precision should also support 'normal' audio processing. 
+    /// Not all hosts support double precision audio samples.</remarks>
+    public interface IVstPluginAudioprecisionProcessor : IVstPluginAudioProcessor
     {
         /// <summary>
         /// Called by the host repeatedly to allow the plugin to process the incoming audio and/or output altered audio.

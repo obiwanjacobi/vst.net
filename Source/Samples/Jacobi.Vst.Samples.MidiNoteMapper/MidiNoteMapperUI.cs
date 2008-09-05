@@ -3,14 +3,23 @@ using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
+    /// <summary>
+    /// The plugin custom editor UI.
+    /// </summary>
     partial class MidiNoteMapperUI : UserControl
     {
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
         public MidiNoteMapperUI()
         {
             InitializeComponent();
         }
 
         private MapNoteItemList _noteMap;
+        /// <summary>
+        /// Gets or sets the list of note map items that are shown in the editor.
+        /// </summary>
         public MapNoteItemList NoteMap
         {
             get { return _noteMap; }

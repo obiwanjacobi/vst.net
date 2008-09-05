@@ -7,7 +7,7 @@
     /// This class manages all plugin interfaces instance on behalf of a plugin.
     /// </summary>
     /// <remarks>The following interfaces are supported:
-    /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioPrecissionProcessor"/>,
+    /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioprecisionProcessor"/>,
     /// <see cref="IVstPluginBypass"/>, <see cref="IVstPluginConnections"/>,
     /// <see cref="IVstPluginEditor"/>, <see cref="IVstPluginHost"/>, 
     /// <see cref="IVstMidiProcessor"/>, <see cref="IVstPluginMidiPrograms"/>,
@@ -16,7 +16,7 @@
     /// <see cref="IVstPluginProcess"/> and <see cref="IVstPluginPrograms"/>.</remarks>
     public abstract class PluginInterfaceManagerBase : IExtensible, IDisposable
     {
-        private InterfaceManager<IVstPluginAudioPrecissionProcessor> _audioPrecission;
+        private InterfaceManager<IVstPluginAudioprecisionProcessor> _audioprecision;
         private InterfaceManager<IVstPluginAudioProcessor> _audioProcessor;
         private InterfaceManager<IVstPluginBypass> _bypass;
         private InterfaceManager<IVstPluginConnections> _connections;
@@ -36,8 +36,8 @@
         /// </summary>
         public PluginInterfaceManagerBase()
         {
-            _audioPrecission = new InterfaceManager<IVstPluginAudioPrecissionProcessor>(CreateAudioPrecissionProcessor);
-            _audioPrecission.DisposeParent = this;
+            _audioprecision = new InterfaceManager<IVstPluginAudioprecisionProcessor>(CreateAudioprecisionProcessor);
+            _audioprecision.DisposeParent = this;
             
             _audioProcessor = new InterfaceManager<IVstPluginAudioProcessor>(CreateAudioProcessor);
             _audioProcessor.DisposeParent = this;
@@ -93,17 +93,17 @@
         }
 
         /// <summary>
-        /// Called when an instance of the <see cref="IVstPluginAudioPrecissionProcessor"/> interface is requested.
+        /// Called when an instance of the <see cref="IVstPluginAudioprecisionProcessor"/> interface is requested.
         /// </summary>
         /// <param name="instance">The default instance or null.</param>
         /// <returns>Returns <paramref name="instance"/>.</returns>
-        /// <remarks>Override to create an instance of the <see cref="IVstPluginAudioPrecissionProcessor"/> interface. 
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginAudioprecisionProcessor"/> interface. 
         /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
         /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.
-        /// Note that you do not need to override <see cref="CreateAudioProcessor"/> when you implement the precission audio processor interface.
+        /// Note that you do not need to override <see cref="CreateAudioProcessor"/> when you implement the precision audio processor interface.
         /// The PluginInterfaceManagerBase will call this method when a request comes in for the <see cref="IVstPluginAudioProcessor"/>
         /// and cast the result when the call to <see cref="CreateAudioProcessor"/> returns null.</remarks>
-        protected virtual IVstPluginAudioPrecissionProcessor CreateAudioPrecissionProcessor(IVstPluginAudioPrecissionProcessor instance)
+        protected virtual IVstPluginAudioprecisionProcessor CreateAudioprecisionProcessor(IVstPluginAudioprecisionProcessor instance)
         {
             return instance;
         }
@@ -288,20 +288,20 @@
         {
             // interfaces are more or less ordered in priority
 
-            // special case for the AudioProcessor: IVstPluginAudioPrecissionProcessor could also provide the IVstPluginAudioProcessor.
-            ExtensibleInterfaceRef<IVstPluginAudioPrecissionProcessor> audioPrecission = _audioPrecission.MatchInterface<T>();
+            // special case for the AudioProcessor: IVstPluginAudioprecisionProcessor could also provide the IVstPluginAudioProcessor.
+            ExtensibleInterfaceRef<IVstPluginAudioprecisionProcessor> audioprecision = _audioprecision.MatchInterface<T>();
             ExtensibleInterfaceRef<IVstPluginAudioProcessor> audioProcessor = _audioProcessor.MatchInterface<T>();
             if (audioProcessor != null)
             {
-                if (audioProcessor.SafeInstance == null && audioPrecission != null)
+                if (audioProcessor.SafeInstance == null && audioprecision != null)
                 {
-                    return audioPrecission.SafeInstance as T;
+                    return audioprecision.SafeInstance as T;
                 }
 
                 return audioProcessor.SafeInstance as T;
             }
 
-            if (audioPrecission != null) return audioPrecission.SafeInstance as T;
+            if (audioprecision != null) return audioprecision.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginPrograms> programs = _programs.MatchInterface<T>();
             if (programs != null) return programs.SafeInstance as T;
@@ -378,7 +378,7 @@
         {
             if (disposing)
             {
-                _audioPrecission.Dispose();
+                _audioprecision.Dispose();
                 _audioProcessor.Dispose();
                 _bypass.Dispose();
                 _connections.Dispose();

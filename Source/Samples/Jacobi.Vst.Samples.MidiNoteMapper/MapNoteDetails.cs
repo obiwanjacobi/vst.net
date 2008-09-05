@@ -3,13 +3,22 @@ using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
+    /// <summary>
+    /// A form that allows the user to edit the details of a note map item.
+    /// </summary>
     partial class MapNoteDetails : Form
     {
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
         public MapNoteDetails()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets or sets the note map item that is edited in the form.
+        /// </summary>
         public MapNoteItem MapNoteItem { get; set; }
 
         private void EntityToForm()

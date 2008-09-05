@@ -116,7 +116,7 @@ void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt3
 	}
 }
 
-// Audio precission processing Procedure called by the host
+// Audio precision processing Procedure called by the host
 void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstInt32 sampleFrames)
 {
 	if(pluginInfo && pluginInfo->user)

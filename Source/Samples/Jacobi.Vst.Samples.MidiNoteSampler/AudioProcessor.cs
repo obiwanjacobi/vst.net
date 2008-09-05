@@ -3,10 +3,17 @@
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
+    /// <summary>
+    /// Implements the audio processing of the plugin using the <see cref="SampleManager"/>.
+    /// </summary>
     internal class AudioProcessor : IVstPluginAudioProcessor
     {
         private Plugin _plugin;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
         public AudioProcessor(Plugin plugin)
         {
             _plugin = plugin;

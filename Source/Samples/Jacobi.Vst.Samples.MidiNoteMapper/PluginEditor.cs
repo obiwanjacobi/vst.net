@@ -5,11 +5,18 @@
     using Jacobi.Vst.Framework;
     using Jacobi.Vst.Framework.Common;
 
+    /// <summary>
+    /// Implements the custom UI editor for the plugin.
+    /// </summary>
     class PluginEditor : IVstPluginEditor
     {
         private Plugin _plugin;
         private WindowsFormsWrapper<MidiNoteMapperUI> _uiWrapper = new WindowsFormsWrapper<MidiNoteMapperUI>();
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
         public PluginEditor(Plugin plugin)
         {
             _plugin = plugin;
