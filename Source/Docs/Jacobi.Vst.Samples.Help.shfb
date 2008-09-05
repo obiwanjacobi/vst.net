@@ -1,9 +1,9 @@
 ﻿<project schemaVersion="1.6.0.7">
     <assemblies>
-        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" xmlCommentsPath="" commentsOnly="False" />
-        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" xmlCommentsPath="" commentsOnly="False" />
-        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" xmlCommentsPath="" commentsOnly="False" />
-        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" xmlCommentsPath="" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.XML" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.XML" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.XML" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.XML" commentsOnly="False" />
     </assemblies>
     <ProjectSummary />
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
