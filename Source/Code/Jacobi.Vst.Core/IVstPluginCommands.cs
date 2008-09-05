@@ -145,7 +145,7 @@
     public interface IVstPluginCommands20 : IVstPluginCommands10
     {
         /// <summary>
-        /// Called by the host when the plugin has specified the <see cref="VstPluginCapabilities.ReceieveMidiEvents"/> flag.
+        /// Called by the host when the plugin has specified the <see cref="VstPluginCanDo.ReceiveVstMidiEvent"/> flag.
         /// </summary>
         /// <param name="events">The (Midi) events for the current 'block'.</param>
         /// <returns>Returns false if not implemented.</returns>
@@ -197,17 +197,15 @@
         /// <summary>
         /// Under construction
         /// </summary>
-        /// <param name="audioFiles"></param>
+        /// <param name="tasks"></param>
         /// <param name="count"></param>
-        /// <param name="startFlag"></param>
         /// <returns></returns>
         bool OfflinePrepare(VstOfflineTask[] tasks, int count);
         /// <summary>
         /// Under construction
         /// </summary>
-        /// <param name="audioFiles"></param>
+        /// <param name="tasks"></param>
         /// <param name="count"></param>
-        /// <param name="startFlag"></param>
         /// <returns></returns>
         bool OfflineRun(VstOfflineTask[] tasks, int count);
         /// <summary>
@@ -304,14 +302,14 @@
         /// <summary>
         /// Retrieves information about a midi program for a specific Midi <paramref name="channel"/>.
         /// </summary>
-        /// <param name="midiProgramName">Must not be null.</param>
+        /// <param name="midiProgram">Must not be null.</param>
         /// <param name="channel">The zero-based Midi channel.</param>
         /// <returns>Returns the number of implemented Midi programs or 0 if not implemented.</returns>
         int GetMidiProgramName(VstMidiProgramName midiProgram, int channel);
         /// <summary>
         /// Retrieves information about the current midi program for a specific Midi <paramref name="channel"/>.
         /// </summary>
-        /// <param name="midiProgramName">Must not be null.</param>
+        /// <param name="midiProgram">Must not be null.</param>
         /// <param name="channel">The zero-based Midi channel.</param>
         /// <returns>Returns the number of implemented Midi programs or 0 if not implemented.</returns>
         int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel);
@@ -364,9 +362,7 @@
         /// </summary>
         /// <param name="numberOfSamples">The sample count.</param>
         /// <returns>It is unclear what this return value represents.</returns>
-        /// <remarks>The implementation queries the plugin for the <see cref="IVstPluginOfflineProcessor"/> interface.
-        /// Override to change this behavior.
-        /// Under construction.</remarks>
+        /// <remarks>Under construction.</remarks>
         int SetTotalSamplesToProcess(int numberOfSamples);
         /// <summary>
         /// Under construction.
@@ -411,10 +407,10 @@
     public interface IVstPluginCommands24 : IVstPluginCommands23
     {
         /// <summary>
-        /// Called by the host query inform the plugin on the precission of audio processing it supports.
+        /// Called by the host query inform the plugin on the precision of audio processing it supports.
         /// </summary>
         /// <param name="precision">An indication of either 32 bit or 64 bit samples.</param>
-        /// <returns>Returns true when the requested <paramref name="precission"/> is supported.</returns>
+        /// <returns>Returns true when the requested <paramref name="precision"/> is supported.</returns>
         bool SetProcessPrecision(VstProcessPrecision precision);
         /// <summary>
         /// Called by the host to retrieve the number of Midi In channels the plugin supports.

@@ -330,7 +330,7 @@ public:
 		return bufferArray;
 	}
 
-	// Converts the unmanaged sample buffer to a managed VstAudioPrecissionBuffer array.
+	// Converts the unmanaged sample buffer to a managed VstAudioprecisionBuffer array.
 	static array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ ToAudioBufferArray(double** buffer, int sampleFrames, int numberOfBuffers, bool canWrite)
 	{
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>(numberOfBuffers);

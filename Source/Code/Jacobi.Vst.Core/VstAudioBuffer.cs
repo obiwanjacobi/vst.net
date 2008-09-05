@@ -40,10 +40,10 @@
         /// </summary>
         /// <param name="index">A zer-based index into the buffer.</param>
         /// <returns>Returns the sample value.</returns>
-        /// <remarks>The setter will cause an exception when <see cref="Writable"/> is false.</remarks>
+        /// <remarks>The setter will cause an exception when <see cref="CanWrite"/> is false.</remarks>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the specified <paramref name="index"/> was not greater 
         /// or equal to zero or it was greater or equal to <see cref="SampleCount"/>.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the setter was used on a read-only buffer (<see cref="Writable"/> is false).</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the setter was used on a read-only buffer (<see cref="CanWrite"/> is false).</exception>
         public float this[int index]
         {
             get

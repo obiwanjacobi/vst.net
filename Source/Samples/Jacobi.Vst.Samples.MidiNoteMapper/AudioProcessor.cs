@@ -3,12 +3,19 @@
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
 
+    /// <summary>
+    /// A dummy audio processor only used for the timing of midi processing.
+    /// </summary>
     class AudioProcessor : IVstPluginAudioProcessor
     {
         private Plugin _plugin;
         private MidiProcessor _midiProcessor;
         private IVstMidiProcessor _hostProcessor;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
         public AudioProcessor(Plugin plugin)
         {
             _plugin = plugin;
