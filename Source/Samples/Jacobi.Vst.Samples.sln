@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.MidiNote
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.MidiNoteSampler", "Jacobi.Vst.Samples.MidiNoteSampler\Jacobi.Vst.Samples.MidiNoteSampler.csproj", "{5E27B599-75F6-476B-89A2-8C140F94529A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A795875-D114-4961-B721-0D944D0761A8}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyInfo.Version.cs = AssemblyInfo.Version.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 5

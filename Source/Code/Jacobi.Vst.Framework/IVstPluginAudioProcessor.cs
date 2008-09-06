@@ -48,6 +48,12 @@ namespace Jacobi.Vst.Framework
         /// This method is called when the host calls processReplacing. 
         /// Refer to the VST SDK documentation for more information on processReplacing.</remarks>
         void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels);
+        /// <summary>
+        /// Informs the plugin of the pan algorithm to use.
+        /// </summary>
+        /// <param name="type">The pan algorithm type.</param>
+        /// <param name="gain">A gain factor.</param>
+        bool SetPanLaw(VstPanLaw type, float gain);
     }
 
     /// <summary>

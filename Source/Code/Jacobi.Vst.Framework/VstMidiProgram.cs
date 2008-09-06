@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Contains information about a Midi Program.

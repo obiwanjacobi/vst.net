@@ -87,6 +87,7 @@
         /// </summary>
         /// <returns>Returns a value indicating the automation level.</returns>
         VstAutomationStates GetAutomationState();
+        #region Offline processing not implemented
         /// <summary>
         /// Part of offline processing.
         /// </summary>
@@ -94,14 +95,14 @@
         /// <param name="option"></param>
         /// <param name="readSource"></param>
         /// <returns>Returns true if supported by the host.</returns>
-        bool OfflineRead(VstOfflineTask task, VstOfflineOption option, bool readSource);
+        //bool OfflineRead(VstOfflineTask task, VstOfflineOption option, bool readSource);
         /// <summary>
         /// Part of offline processing.
         /// </summary>
         /// <param name="task">Must not be null.</param>
         /// <param name="option"></param>
         /// <returns>Returns true if supported by the host.</returns>
-        bool OfflineWrite(VstOfflineTask task, VstOfflineOption option);
+        //bool OfflineWrite(VstOfflineTask task, VstOfflineOption option);
         /// <summary>
         /// Part of offline processing.
         /// </summary>
@@ -109,17 +110,18 @@
         /// <param name="numberOfAudioFiles"></param>
         /// <param name="numberOfNewAudioFiles"></param>
         /// <returns>Returns true if supported by the host.</returns>
-        bool OfflineStart(VstAudioFile[] files, int numberOfAudioFiles, int numberOfNewAudioFiles);
+        //bool OfflineStart(VstAudioFile[] files, int numberOfAudioFiles, int numberOfNewAudioFiles);
         /// <summary>
         /// Part of offline processing.
         /// </summary>
         /// <returns></returns>
-        int OfflineGetCurrentPass();
+        //int OfflineGetCurrentPass();
         /// <summary>
         /// Part of offline processing.
         /// </summary>
         /// <returns></returns>
-        int OfflineGetCurrentMetaPass();
+        //int OfflineGetCurrentMetaPass();
+        #endregion
         /// <summary>
         /// Retrieves the host vendor string.
         /// </summary>
@@ -172,11 +174,11 @@
         /// Not implemented.
         /// </summary>
         /// <returns>Returns true if supported by the host.</returns>
-        bool OpenFileSelector(/*VstFileSelect*/);
+        bool OpenFileSelector(VstFileSelect fileSelect);
         /// <summary>
         /// Not implemented.
         /// </summary>
         /// <returns>Returns true if supported by the host.</returns>
-        bool CloseFileSelector(/*VstFileSelect*/);
+        bool CloseFileSelector(VstFileSelect fileSelect);
     }
 }

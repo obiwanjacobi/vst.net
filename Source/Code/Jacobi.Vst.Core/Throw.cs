@@ -1,8 +1,8 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Core
 {
     using System;
 
-    internal static class Throw
+    public static class Throw
     {
         public static void IfArgumentIsNull<T>(T argument, string argumentName) where T : class
         {

@@ -9,9 +9,8 @@
     /// <remarks>The following interfaces are supported:
     /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioprecisionProcessor"/>,
     /// <see cref="IVstPluginBypass"/>, <see cref="IVstPluginConnections"/>,
-    /// <see cref="IVstPluginEditor"/>, <see cref="IVstPluginHost"/>, 
-    /// <see cref="IVstMidiProcessor"/>, <see cref="IVstPluginMidiPrograms"/>,
-    /// <see cref="IVstPluginMidiSource"/>, <see cref="IVstPluginOfflineProcessor"/>,
+    /// <see cref="IVstPluginEditor"/>, <see cref="IVstMidiProcessor"/>, 
+    /// <see cref="IVstPluginMidiPrograms"/>, <see cref="IVstPluginMidiSource"/>, 
     /// <see cref="IVstPluginParameters"/>, <see cref="IVstPluginPersistence"/>,
     /// <see cref="IVstPluginProcess"/> and <see cref="IVstPluginPrograms"/>.</remarks>
     public abstract class PluginInterfaceManagerBase : IExtensible, IDisposable
@@ -21,11 +20,11 @@
         private InterfaceManager<IVstPluginBypass> _bypass;
         private InterfaceManager<IVstPluginConnections> _connections;
         private InterfaceManager<IVstPluginEditor> _editor;
-        private InterfaceManager<IVstPluginHost> _host;
+        //private InterfaceManager<IVstPluginHost> _host;
         private InterfaceManager<IVstMidiProcessor> _midiProcessor;
         private InterfaceManager<IVstPluginMidiPrograms> _midiPrograms;
         private InterfaceManager<IVstPluginMidiSource> _midiSource;
-        private InterfaceManager<IVstPluginOfflineProcessor> _offlineProcessor;
+        //private InterfaceManager<IVstPluginOfflineProcessor> _offlineProcessor;
         private InterfaceManager<IVstPluginParameters> _parameters;
         private InterfaceManager<IVstPluginPersistence> _persistence;
         private InterfaceManager<IVstPluginProcess> _process;
@@ -51,8 +50,8 @@
             _editor = new InterfaceManager<IVstPluginEditor>(CreateEditor);
             _editor.DisposeParent = this;
             
-            _host = new InterfaceManager<IVstPluginHost>(CreateHost);
-            _host.DisposeParent = this;
+            //_host = new InterfaceManager<IVstPluginHost>(CreateHost);
+            //_host.DisposeParent = this;
             
             _midiProcessor = new InterfaceManager<IVstMidiProcessor>(CreateMidiProcessor);
             _midiProcessor.DisposeParent = this;
@@ -63,8 +62,8 @@
             _midiSource = new InterfaceManager<IVstPluginMidiSource>(CreateMidiSource);
             _midiSource.DisposeParent = this;
             
-            _offlineProcessor = new InterfaceManager<IVstPluginOfflineProcessor>(CreateOfflineProcessor);
-            _offlineProcessor.DisposeParent = this;
+            //_offlineProcessor = new InterfaceManager<IVstPluginOfflineProcessor>(CreateOfflineProcessor);
+            //_offlineProcessor.DisposeParent = this;
             
             _parameters = new InterfaceManager<IVstPluginParameters>(CreateParameters);
             _parameters.DisposeParent = this;
@@ -155,10 +154,10 @@
         /// <remarks>Override to create an instance of the <see cref="IVstPluginHost"/> interface. 
         /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
         /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
-        protected virtual IVstPluginHost CreateHost(IVstPluginHost instance)
-        {
-            return instance;
-        }
+        //protected virtual IVstPluginHost CreateHost(IVstPluginHost instance)
+        //{
+        //    return instance;
+        //}
 
         /// <summary>
         /// Called when an instance of the <see cref="IVstMidiProcessor"/> interface is requested.
@@ -207,10 +206,10 @@
         /// <remarks>Override to create an instance of the <see cref="IVstPluginOfflineProcessor"/> interface. 
         /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
         /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
-        protected virtual IVstPluginOfflineProcessor CreateOfflineProcessor(IVstPluginOfflineProcessor instance)
-        {
-            return instance;
-        }
+        //protected virtual IVstPluginOfflineProcessor CreateOfflineProcessor(IVstPluginOfflineProcessor instance)
+        //{
+        //    return instance;
+        //}
 
         /// <summary>
         /// Called when an instance of the <see cref="IVstPluginParameters"/> interface is requested.
@@ -345,11 +344,11 @@
             ExtensibleInterfaceRef<IVstPluginEditor> editor = _editor.MatchInterface<T>();
             if (editor != null) return editor.SafeInstance as T;
 
-            ExtensibleInterfaceRef<IVstPluginHost> host = _host.MatchInterface<T>();
-            if (host != null) return host.SafeInstance as T;
+            //ExtensibleInterfaceRef<IVstPluginHost> host = _host.MatchInterface<T>();
+            //if (host != null) return host.SafeInstance as T;
 
-            ExtensibleInterfaceRef<IVstPluginOfflineProcessor> offlineProcessor = _offlineProcessor.MatchInterface<T>();
-            if (offlineProcessor != null) return offlineProcessor.SafeInstance as T;
+            //ExtensibleInterfaceRef<IVstPluginOfflineProcessor> offlineProcessor = _offlineProcessor.MatchInterface<T>();
+            //if (offlineProcessor != null) return offlineProcessor.SafeInstance as T;
 
             ExtensibleInterfaceRef<IVstPluginPersistence> persistence = _persistence.MatchInterface<T>();
             if (persistence != null) return persistence.SafeInstance as T;
@@ -383,10 +382,10 @@
                 _bypass.Dispose();
                 _connections.Dispose();
                 _editor.Dispose();
-                _host.Dispose();
+                //_host.Dispose();
                 _midiPrograms.Dispose();
                 _midiSource.Dispose();
-                _offlineProcessor.Dispose();
+                //_offlineProcessor.Dispose();
                 _parameters.Dispose();
                 _persistence.Dispose();
                 _process.Dispose();
