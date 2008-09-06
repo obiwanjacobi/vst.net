@@ -59,6 +59,10 @@
             get { return 0; }
         }
 
+        public bool SetPanLaw(VstPanLaw type, float gain)
+        {
+            return false;
+        }
         #endregion
     }
 }

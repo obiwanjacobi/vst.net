@@ -1,4 +1,8 @@
-﻿namespace Jacobi.Vst.Framework.Host
+﻿//
+// This source file is not compiled!
+// It is part of offline processing which is not implemented
+//
+namespace Jacobi.Vst.Framework.Host
 {
     /// <summary>
     /// Not implemented.

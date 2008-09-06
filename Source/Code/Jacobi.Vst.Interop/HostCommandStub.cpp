@@ -166,45 +166,45 @@ Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 	return (Jacobi::Vst::Core::VstAutomationStates)CallHost(audioMasterGetAutomationState, 0, 0, 0, 0);
 }
 
-System::Boolean HostCommandStub::OfflineRead(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option, System::Boolean readSource)
-{
-	ThrowIfNotInitialized();
-
-	// TODO: implement
-	return false;
-}
-
-System::Boolean HostCommandStub::OfflineWrite(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option)
-{
-	ThrowIfNotInitialized();
-
-	// TODO: implement
-	return false;
-}
-
-System::Boolean HostCommandStub::OfflineStart(array<Jacobi::Vst::Core::VstAudioFile^>^ files, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles)
-{
-	ThrowIfNotInitialized();
-
-	// TODO: implement
-	return false;
-}
-
-// bool?
-System::Int32 HostCommandStub::OfflineGetCurrentPass()
-{
-	ThrowIfNotInitialized();
-	
-	return CallHost(audioMasterOfflineGetCurrentPass, 0, 0, 0, 0);
-}
-
-// bool?
-System::Int32 HostCommandStub::OfflineGetCurrentMetaPass()
-{
-	ThrowIfNotInitialized();
-	
-	return CallHost(audioMasterOfflineGetCurrentMetaPass, 0, 0, 0, 0);
-}
+//System::Boolean HostCommandStub::OfflineRead(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option, System::Boolean readSource)
+//{
+//	ThrowIfNotInitialized();
+//
+//	// TODO: implement
+//	return false;
+//}
+//
+//System::Boolean HostCommandStub::OfflineWrite(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option)
+//{
+//	ThrowIfNotInitialized();
+//
+//	// TODO: implement
+//	return false;
+//}
+//
+//System::Boolean HostCommandStub::OfflineStart(array<Jacobi::Vst::Core::VstAudioFile^>^ files, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles)
+//{
+//	ThrowIfNotInitialized();
+//
+//	// TODO: implement
+//	return false;
+//}
+//
+//// bool?
+//System::Int32 HostCommandStub::OfflineGetCurrentPass()
+//{
+//	ThrowIfNotInitialized();
+//	
+//	return CallHost(audioMasterOfflineGetCurrentPass, 0, 0, 0, 0);
+//}
+//
+//// bool?
+//System::Int32 HostCommandStub::OfflineGetCurrentMetaPass()
+//{
+//	ThrowIfNotInitialized();
+//	
+//	return CallHost(audioMasterOfflineGetCurrentMetaPass, 0, 0, 0, 0);
+//}
 
 System::String^ HostCommandStub::GetVendorString()
 {
@@ -298,20 +298,34 @@ System::Boolean HostCommandStub::EndEdit(System::Int32 index)
 	return (CallHost(audioMasterEndEdit, index, 0, 0, 0) != 0);
 }
 
-System::Boolean HostCommandStub::OpenFileSelector(/*VstFileSelect*/)
+System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
 {
 	ThrowIfNotInitialized();
 
-	// TODO: implement
-	return false;
+	::VstFileSelect* pFileSelect = TypeConverter::FromFileSelect(fileSelect);
+
+	System::Boolean succeeded = (CallHost(audioMasterOpenFileSelector, 0, 0, pFileSelect, 0) != 0);
+
+	if(succeeded)
+	{
+		// update the managed type with the users selections.
+		TypeConverter::ToFileSelect(fileSelect, pFileSelect);
+	}
+
+	return succeeded;
 }
 
-System::Boolean HostCommandStub::CloseFileSelector(/*VstFileSelect*/)
+System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
 {
 	ThrowIfNotInitialized();
 
-	// TODO: implement
-	return false;
+	::VstFileSelect* pFileSelect = (::VstFileSelect*)fileSelect->Reserved.ToPointer();
+
+	System::Boolean succeeded = (CallHost(audioMasterCloseFileSelector, 0, 0, pFileSelect, 0) != 0);
+
+	TypeConverter::DeleteFileSelect(pFileSelect);
+
+	return succeeded;
 }
 
 // Throws an InvalidOperationException if the host command stub has not been initialized.

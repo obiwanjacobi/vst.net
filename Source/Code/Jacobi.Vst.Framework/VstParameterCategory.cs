@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Names a parameter category.

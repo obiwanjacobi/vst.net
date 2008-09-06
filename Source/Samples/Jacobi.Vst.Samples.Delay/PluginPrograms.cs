@@ -94,20 +94,21 @@
         /// <param name="programs">A program collection that gets filled.</param>
         private void FillPrograms(VstProgramCollection programs)
         {
-            
-            VstProgram prog = new VstProgram(_plugin.ParameterFactory.Categories);
+            // NOTE: use the new VstProgram constructor that discovers the categories.
+
+            VstProgram prog = new VstProgram();//_plugin.ParameterFactory.Categories);
             prog.Name = "Fx Program 1";
             _plugin.ParameterFactory.CreateParameters(prog.Parameters);
 
             programs.Add(prog);
 
-            prog = new VstProgram(_plugin.ParameterFactory.Categories);
+            prog = new VstProgram();//_plugin.ParameterFactory.Categories);
             prog.Name = "Fx Program 2";
             _plugin.ParameterFactory.CreateParameters(prog.Parameters);
 
             programs.Add(prog);
 
-            prog = new VstProgram(_plugin.ParameterFactory.Categories);
+            prog = new VstProgram();//_plugin.ParameterFactory.Categories);
             prog.Name = "Fx Program 3";
             _plugin.ParameterFactory.CreateParameters(prog.Parameters);
 

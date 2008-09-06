@@ -108,11 +108,11 @@
         #region IVstPluginCommands23 Members
 
         /// <summary>
-        /// Under construction.
+        /// Returns the speaker arrangements for the input and output of the plugin.
         /// </summary>
-        /// <param name="input">Should be an array?</param>
-        /// <param name="output">Should be an array?</param>
-        /// <returns></returns>
+        /// <param name="input">Filled with the speaker arrangement for the plugin inputs.</param>
+        /// <param name="output">Filled with the speaker arrangement for the plugin outputs.</param>
+        /// <returns>Returns true when the plugin implements the <see cref="IVstPluginConnections"/> interfcace.</returns>
         public virtual bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
         {
             IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
@@ -130,6 +130,7 @@
             return false;
         }
 
+        #region Offline processing not implemented
         /// <summary>
         /// Informs the plugin offline processor of the number of samples left to be processed.
         /// </summary>
@@ -138,37 +139,40 @@
         /// <remarks>The implementation queries the plugin for the <see cref="IVstPluginOfflineProcessor"/> interface.
         /// Override to change this behavior.
         /// The <see cref="IVstPluginOfflineProcessor"/> interface is under construction.</remarks>
-        public virtual int SetTotalSamplesToProcess(int numberOfSamples)
-        {
-            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+        //public virtual int SetTotalSamplesToProcess(int numberOfSamples)
+        //{
+        //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
 
-            if (pluginOffline != null)
-            {
-                pluginOffline.TotalSamplesToProcess = numberOfSamples;
+        //    if (pluginOffline != null)
+        //    {
+        //        pluginOffline.TotalSamplesToProcess = numberOfSamples;
 
-                // TODO: what to return?
-            }
+        //        // TODO: what to return?
+        //    }
 
-            return 0;
-        }
+        //    return 0;
+        //}
+        #endregion
 
+        #region Plugin Host/Shell not implemented
         /// <summary>
         /// Under construction.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public virtual int GetNextPlugin(out string name)
-        {
-            IVstPluginHost pluginHost = _pluginCtx.Plugin.GetInstance<IVstPluginHost>();
+        //public virtual int GetNextPlugin(out string name)
+        //{
+        //    IVstPluginHost pluginHost = _pluginCtx.Plugin.GetInstance<IVstPluginHost>();
 
-            if (pluginHost != null)
-            {
+        //    if (pluginHost != null)
+        //    {
 
-            }
+        //    }
 
-            name = null;
-            return 0;
-        }
+        //    name = null;
+        //    return 0;
+        //}
+        #endregion
 
         /// <summary>
         /// Called just before Process is called.
@@ -183,6 +187,7 @@
                 pluginProcess.Start();
                 
                 // TODO: what to return!?
+                return 1;
             }
 
             return 0;
@@ -201,21 +206,27 @@
                 pluginProcess.Stop();
 
                 // TODO: what to return!?
+                return 1;
             }
 
             return 0;
         }
 
         /// <summary>
-        /// Under construction.
+        /// Informs the plugin of the pan algorithm to use.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="value"></param>
-        /// <returns>Returns false.</returns>
-        public virtual bool SetPanLaw(VstPanLaw type, float value)
+        /// <param name="type">The pan algorithm type.</param>
+        /// <param name="gain">A gain factor.</param>
+        /// <returns>Returns false when not implemented.</returns>
+        public virtual bool SetPanLaw(VstPanLaw type, float gain)
         {
-            // TODO: where to put PanLaw?
-            // Plugin? Editor? AudioProcessor?
+            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+
+            if (audioProcessor != null)
+            {
+                return audioProcessor.SetPanLaw(type, gain);
+            }
+
             return false;
         }
 
@@ -646,6 +657,7 @@
             return _pluginCtx.Plugin.Category;
         }
 
+        #region Offline processing not implemented
         /// <summary>
         /// Under construction
         /// </summary>
@@ -653,37 +665,18 @@
         /// <param name="count"></param>
         /// <param name="startFlag"></param>
         /// <returns>Always returns false</returns>
-        public virtual bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag)
-        {
-            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+        //public virtual bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag)
+        //{
+        //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
 
-            if (pluginOffline != null)
-            {
-                // TODO:
-                pluginOffline.Notify();
-            }
+        //    if (pluginOffline != null)
+        //    {
+        //        // TODO:
+        //        pluginOffline.Notify();
+        //    }
 
-            return false;
-        }
-
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <param name="count"></param>
-        /// <returns>Always returns false</returns>
-        public virtual bool OfflinePrepare(VstOfflineTask[] tasks, int count)
-        {
-            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
-
-            if (pluginOffline != null)
-            {
-                // TODO:
-                pluginOffline.Prepare();
-            }
-
-            return false;
-        }
+        //    return false;
+        //}
 
         /// <summary>
         /// Under construction
@@ -691,29 +684,49 @@
         /// <param name="tasks"></param>
         /// <param name="count"></param>
         /// <returns>Always returns false</returns>
-        public virtual bool OfflineRun(VstOfflineTask[] tasks, int count)
-        {
-            IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+        //public virtual bool OfflinePrepare(VstOfflineTask[] tasks, int count)
+        //{
+        //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
 
-            if (pluginOffline != null)
-            {
-                // TODO:
-                pluginOffline.Run();
-            }
+        //    if (pluginOffline != null)
+        //    {
+        //        // TODO:
+        //        pluginOffline.Prepare();
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
+
+        /// <summary>
+        /// Under construction
+        /// </summary>
+        /// <param name="tasks"></param>
+        /// <param name="count"></param>
+        /// <returns>Always returns false</returns>
+        //public virtual bool OfflineRun(VstOfflineTask[] tasks, int count)
+        //{
+        //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
+
+        //    if (pluginOffline != null)
+        //    {
+        //        // TODO:
+        //        pluginOffline.Run();
+        //    }
+
+        //    return false;
+        //}
 
         /// <summary>
         /// Under construction
         /// </summary>
         /// <param name="variableIO"></param>
         /// <returns>Always returns false</returns>
-        public virtual bool ProcessVariableIO(VstVariableIO variableIO)
-        {
-            // TODO
-            return false;
-        }
+        //public virtual bool ProcessVariableIO(VstVariableIO variableIO)
+        //{
+        //    // TODO
+        //    return false;
+        //}
+        #endregion
 
         /// <summary>
         /// Under Construction
@@ -821,7 +834,7 @@
                     result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.Offline:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    //result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.ReceiveVstEvents:
                 case VstPluginCanDo.ReceiveVstMidiEvent:
@@ -878,14 +891,15 @@
                 paramProps.Label = parameter.Info.Label;
                 paramProps.ShortLabel = parameter.Info.ShortLabel;
 
-                if(parameter.Category != null)
+                VstParameterCategory category = parameter.Info.Category;
+                if(category != null)
                 {
                     // find parameters in current category
-                    VstParameterCollection catParams = pluginParameters.Parameters.FindParametersIn(parameter.Category);
+                    VstParameterCollection catParams = pluginParameters.Parameters.FindParametersIn(category);
                     
                     paramProps.Flags |= VstParameterPropertiesFlags.ParameterSupportsDisplayCategory;
-                    paramProps.CategoryLabel = parameter.Category.Name;
-                    paramProps.Category = (short)(pluginParameters.Categories.IndexOf(parameter.Category) + 1);
+                    paramProps.CategoryLabel = category.Name;
+                    paramProps.Category = (short)(pluginParameters.Categories.IndexOf(category) + 1);
                     paramProps.ParameterCountInCategory = (short)catParams.Count;
                 }
 

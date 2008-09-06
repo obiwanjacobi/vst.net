@@ -59,7 +59,7 @@
     <Compile Include="Host\VstHostAutomation.cs" />
     <Compile Include="Host\VstHostInterfaceManager.cs" />
     <Compile Include="Host\VstHostMidiProcessor.cs" />
-    <Compile Include="Host\VstHostOfflineProcessor.cs" />
+    <None Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IActivatable.cs" />
     <Compile Include="IExtensible.cs" />
@@ -77,9 +77,9 @@
     <Compile Include="IVstPlugin.cs" />
     <Compile Include="IVstPluginBypass.cs" />
     <Compile Include="IVstPluginEditor.cs" />
-    <Compile Include="IVstPluginHost.cs" />
+    <None Include="IVstPluginHost.cs" />
     <Compile Include="IVstPluginMidiPrograms.cs" />
-    <Compile Include="IVstPluginOfflineProcessor.cs" />
+    <None Include="IVstPluginOfflineProcessor.cs" />
     <Compile Include="IVstPluginPersistence.cs" />
     <Compile Include="IVstPluginPrograms.cs" />
     <Compile Include="Plugin\PluginInterfaceManagerBase.cs" />
@@ -92,7 +92,6 @@
     <Compile Include="VstProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Plugin\StdPluginCommandStub.cs" />
-    <Compile Include="Throw.cs" />
     <Compile Include="VstConnectionInfo.cs" />
     <Compile Include="VstEventCollection.cs" />
     <Compile Include="Host\VstHostSequencer.cs" />

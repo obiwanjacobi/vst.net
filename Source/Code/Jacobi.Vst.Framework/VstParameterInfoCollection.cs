@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Manages a collection of <see cref="VstParameterInfo"/> instances.

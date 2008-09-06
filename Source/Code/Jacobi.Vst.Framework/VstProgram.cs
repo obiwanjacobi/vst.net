@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// The VstProgram class represents one plugin program.
@@ -9,6 +10,17 @@
     /// For this reason the VstProgram implements the <see cref="IVstPluginParameters"/> interface.</remarks>
     public class VstProgram : IVstPluginParameters, IDisposable
     {
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <remarks>The <see cref="Categories"/> are automatically filled as <see cref="VstParameters"/> 
+        /// are added to the <see cref="Parameters"/> collection.</remarks>
+        public VstProgram()
+        {
+            Categories = new VstParameterCategoryCollection();
+            Parameters.Changed += new EventHandler<EventArgs>(Parameters_Changed);
+        }
+
         /// <summary>
         /// Constructs a new instance based on a collection of parameter <paramref name="categories"/>.
         /// </summary>
@@ -83,5 +95,20 @@
         }
 
         #endregion
+
+        private void Parameters_Changed(object sender, EventArgs e)
+        {
+            foreach (VstParameter parameter in Parameters)
+            {
+                if (parameter.Info.Category != null)
+                {
+                    // add category to collection if not present yet
+                    if (!Categories.Contains(parameter.Info.Category.Name))
+                    {
+                        Categories.Add(parameter.Info.Category);
+                    }
+                }
+            }
+        }
     }
 }

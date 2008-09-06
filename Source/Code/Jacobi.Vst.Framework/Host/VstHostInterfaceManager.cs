@@ -9,7 +9,7 @@
     /// This class manages the extensible interfaces for the host.
     /// </summary>
     /// <remarks>The supported host interfaces are:
-    /// <see cref="IVstHostAutomation"/>, <see cref="IVstHostOfflineProcessor"/>,
+    /// <see cref="IVstHostAutomation"/>, 
     /// <see cref="IVstHostSequencer"/>, <see cref="IVstHostShell"/> and
     /// <see cref="IVstMidiProcessor"/>.</remarks>
     internal class VstHostInterfaceManager : IExtensible, IDisposable
@@ -17,7 +17,7 @@
         private VstHost _host;
 
         private InterfaceManager<IVstHostAutomation> _automation;
-        private InterfaceManager<IVstHostOfflineProcessor> _offline;
+        //private InterfaceManager<IVstHostOfflineProcessor> _offline;
         private InterfaceManager<IVstHostSequencer> _sequencer;
         private InterfaceManager<IVstHostShell> _shell;
         private InterfaceManager<IVstMidiProcessor> _midiProcessor;
@@ -28,7 +28,7 @@
         private VstHostInterfaceManager()
         {
             _automation = new InterfaceManager<IVstHostAutomation>(CreateAutomation);
-            _offline = new InterfaceManager<IVstHostOfflineProcessor>(CreateOffline);
+            //_offline = new InterfaceManager<IVstHostOfflineProcessor>(CreateOffline);
             _sequencer = new InterfaceManager<IVstHostSequencer>(CreateSequencer);
             _shell = new InterfaceManager<IVstHostShell>(CreateShell);
             _midiProcessor = new InterfaceManager<IVstMidiProcessor>(CreateMidiProcessor);
@@ -53,16 +53,16 @@
             return instance;
         }
 
-        private IVstHostOfflineProcessor CreateOffline(IVstHostOfflineProcessor instance)
-        {
-            if (instance == null &&
-                _host.HostCommandStub.CanDo(VstHostCanDo.Offline) == VstCanDoResult.Yes)
-            {
-                return new VstHostOfflineProcessor(_host);
-            }
+        //private IVstHostOfflineProcessor CreateOffline(IVstHostOfflineProcessor instance)
+        //{
+        //    if (instance == null &&
+        //        _host.HostCommandStub.CanDo(VstHostCanDo.Offline) == VstCanDoResult.Yes)
+        //    {
+        //        return new VstHostOfflineProcessor(_host);
+        //    }
 
-            return instance;
-        }
+        //    return instance;
+        //}
 
         private IVstHostSequencer CreateSequencer(IVstHostSequencer instance)
         {
@@ -129,11 +129,11 @@
                 return shell.Instance as T;
             }
 
-            ExtensibleInterfaceRef<IVstHostOfflineProcessor> offline = _offline.MatchInterface<T>();
-            if (offline != null)
-            {
-                return offline.Instance as T;
-            }
+            //ExtensibleInterfaceRef<IVstHostOfflineProcessor> offline = _offline.MatchInterface<T>();
+            //if (offline != null)
+            //{
+            //    return offline.Instance as T;
+            //}
 
             return null;
         }
@@ -146,7 +146,7 @@
         {
             _automation.Dispose();
             _midiProcessor.Dispose();
-            _offline.Dispose();
+            //_offline.Dispose();
             _sequencer.Dispose();
             _shell.Dispose();
         }

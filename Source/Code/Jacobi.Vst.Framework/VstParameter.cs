@@ -32,12 +32,6 @@ namespace Jacobi.Vst.Framework
         /// </summary>
         public VstParameterInfo Info { get; private set; }
 
-        /// <summary>
-        /// Gets or sets the parameter category.
-        /// </summary>
-        /// <remarks>TODO: Should this go to the VstParameterInfo?</remarks>
-        public VstParameterCategory Category { get; set; }
-
         private float _value;
         /// <summary>
         /// Gets or sets the numberical value of the parameter.

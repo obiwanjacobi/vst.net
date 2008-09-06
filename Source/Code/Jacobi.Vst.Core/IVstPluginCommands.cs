@@ -186,6 +186,7 @@
         /// Returns the plugin category.
         /// </summary>
         VstPluginCategory GetCategory();
+        #region Offline processing not implemented
         /// <summary>
         /// Under construction
         /// </summary>
@@ -193,27 +194,28 @@
         /// <param name="count"></param>
         /// <param name="startFlag"></param>
         /// <returns></returns>
-        bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
+        //bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
         /// <summary>
         /// Under construction
         /// </summary>
         /// <param name="tasks"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        bool OfflinePrepare(VstOfflineTask[] tasks, int count);
+        //bool OfflinePrepare(VstOfflineTask[] tasks, int count);
         /// <summary>
         /// Under construction
         /// </summary>
         /// <param name="tasks"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        bool OfflineRun(VstOfflineTask[] tasks, int count);
+        //bool OfflineRun(VstOfflineTask[] tasks, int count);
         /// <summary>
         /// Under construction
         /// </summary>
         /// <param name="variableIO"></param>
         /// <returns></returns>
-        bool ProcessVariableIO(VstVariableIO variableIO);
+        //bool ProcessVariableIO(VstVariableIO variableIO);
+        #endregion
         /// <summary>
         /// Under Construction
         /// </summary>
@@ -351,25 +353,29 @@
     public interface IVstPluginCommands23 : IVstPluginCommands21
     {
         /// <summary>
-        /// Under construction.
+        /// Returns the speaker arrangements for the input and output of the plugin.
         /// </summary>
-        /// <param name="input">Should be an array?</param>
-        /// <param name="output">Should be an array?</param>
-        /// <returns></returns>
+        /// <param name="input">Filled with the speaker arrangement for the plugin inputs.</param>
+        /// <param name="output">Filled with the speaker arrangement for the plugin outputs.</param>
+        /// <returns>Returns false when not implemented.</returns>
         bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output);
+        #region Offline processing not implemented
         /// <summary>
         /// Informs the plugin offline processor of the number of samples left to be processed.
         /// </summary>
         /// <param name="numberOfSamples">The sample count.</param>
         /// <returns>It is unclear what this return value represents.</returns>
         /// <remarks>Under construction.</remarks>
-        int SetTotalSamplesToProcess(int numberOfSamples);
+        //int SetTotalSamplesToProcess(int numberOfSamples);
+        #endregion
+        #region Plugin Host/Shell not implemented
         /// <summary>
         /// Under construction.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        int GetNextPlugin(out string name);
+        //int GetNextPlugin(out string name);
+        #endregion
         /// <summary>
         /// Called just before Process is called.
         /// </summary>
@@ -381,12 +387,12 @@
         /// <returns>It is unclear what this return value represents.</returns>
         int StopProcess();
         /// <summary>
-        /// Under construction.
+        /// Informs the plugin of the pan algorithm to use.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="value"></param>
+        /// <param name="type">The pan algorithm type.</param>
+        /// <param name="gain">A gain factor.</param>
         /// <returns>Returns false when not implemented.</returns>
-        bool SetPanLaw(VstPanLaw type, float value);
+        bool SetPanLaw(VstPanLaw type, float gain);
         /// <summary>
         /// Called by the host to query the plugin that supports persistence if the chunk can be read.
         /// </summary>

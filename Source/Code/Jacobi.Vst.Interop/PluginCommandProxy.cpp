@@ -277,15 +277,34 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->EndSetProgram() ? 1 : 0;
 			break;
 		case effGetSpeakerArrangement:
-			// TODO: implement
-			// mem alloc
+			{
+			::VstSpeakerArrangement** ppInput = (::VstSpeakerArrangement**)value;
+			::VstSpeakerArrangement** ppOutput = (::VstSpeakerArrangement**)ptr;
+
+			*ppInput = NULL;
+			*ppOutput = NULL;
+
+			Jacobi::Vst::Core::VstSpeakerArrangement^ inputArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
+			Jacobi::Vst::Core::VstSpeakerArrangement^ outputArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
+			// let plugin fill the input and output speaker arrangements
+			result = _commandStub->GetSpeakerArrangement(inputArr, outputArr) ? 1 : 0;
+			if(result)
+			{
+				// NOTE: register retvals with the memory tracker to be deleted later.
+				*ppInput = TypeConverter::FromSpeakerArrangement(inputArr);
+				_memTracker->RegisterObject(*ppInput);
+
+				*ppOutput = TypeConverter::FromSpeakerArrangement(outputArr);
+				_memTracker->RegisterObject(*ppOutput);
+			}
+			}
 			break;
 		case effShellGetNextPlugin:
-			{
+			/*{
 			System::String^ str;
 			result = _commandStub->GetNextPlugin(str);
 			TypeConverter::StringToChar(str, (char*)ptr, kVstMaxProductStrLen);
-			}
+			}*/
 			break;
 		case effStartProcess:
 			result = _commandStub->StartProcess();
@@ -294,7 +313,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->StopProcess();
 			break;
 		case effSetTotalSampleToProcess:
-			result = _commandStub->SetTotalSamplesToProcess(value);
+			//result = _commandStub->SetTotalSamplesToProcess(value);
 			break;
 		case effSetPanLaw:
 			result = _commandStub->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;

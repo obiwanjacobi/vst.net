@@ -220,30 +220,6 @@
             return VstPluginCategory.Unknown;
         }
 
-        public bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag)
-        {
-            _editorCtrl.Instance.AddLine("OfflineNotify");
-            return false;
-        }
-
-        public bool OfflinePrepare(VstOfflineTask[] tasks, int count)
-        {
-            _editorCtrl.Instance.AddLine("OfflinePrepare");
-            return false;
-        }
-
-        public bool OfflineRun(VstOfflineTask[] tasks, int count)
-        {
-            _editorCtrl.Instance.AddLine("OfflineRun");
-            return false;
-        }
-
-        public bool ProcessVariableIO(VstVariableIO variableIO)
-        {
-            _editorCtrl.Instance.AddLine("ProcessVariableIO");
-            return false;
-        }
-
         public bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput)
         {
             _editorCtrl.Instance.AddLine("SetSpeakerArrangement");
@@ -315,7 +291,8 @@
 
         public void Close()
         {
-            _editorCtrl.Instance.AddLine("Close");
+            // Calling back into the Form at this point can cause a dead-lock.
+            //_editorCtrl.Instance.AddLine("Close");
         }
 
         public void SetProgram(int programNumber)
@@ -381,6 +358,7 @@
 
         public bool EditorOpen(System.IntPtr hWnd)
         {
+            _editorCtrl.Instance.Host = _hostStub;
             _editorCtrl.Open(hWnd);
             return true;
         }

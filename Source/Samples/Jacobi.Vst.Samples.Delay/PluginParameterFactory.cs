@@ -41,12 +41,12 @@
         {
             foreach (VstParameterInfo paramInfo in ParameterInfos)
             {
-                VstParameter param = new VstParameter(paramInfo);
-
-                if (Categories.Count > 0)
+                if (Categories.Count > 0 && paramInfo.Category == null)
                 {
-                    param.Category = Categories[0];
+                    paramInfo.Category = Categories[0];
                 }
+
+                VstParameter param = new VstParameter(paramInfo);
 
                 parameters.Add(param);
             }

@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
+      <Link>Properties\AssemblyInfo.General.cs</Link>
+    </Compile>
+    <Compile Include="..\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
     <Compile Include="AudioProcessor.cs" />
     <Compile Include="MidiProcessor.cs" />
     <Compile Include="Plugin.cs" />

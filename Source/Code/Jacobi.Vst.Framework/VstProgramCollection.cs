@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System.Collections.ObjectModel;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Manages a collection of <see cref="VstProgram"/> instances.
