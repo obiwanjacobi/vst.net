@@ -28,5 +28,12 @@
         public const int MaxCategoryLabelLength = 23;
         /// <summary>used for #VstAudioFile->name</summary>
         public const int MaxFileNameLength = 99;
+
+        /// <summary>used for #VstFileSelect->title</summary>
+        public const int MaxFileSelectorTitle = 1023;
+        /// <summary>used for #VstFileType->name and mimeType(2)</summary>
+        public const int MaxFileTypeName = 127;
+        /// <summary>used for #VstFileType->dos/unix/macType</summary>
+        public const int MaxFileTypeExtension = 7;
     }
 }

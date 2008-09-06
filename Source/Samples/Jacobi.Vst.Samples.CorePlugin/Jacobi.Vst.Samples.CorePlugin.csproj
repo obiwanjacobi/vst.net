@@ -52,6 +52,9 @@
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
       <Link>Properties\AssemblyInfo.General.cs</Link>
     </Compile>
+    <Compile Include="..\AssemblyInfo.Version.cs">
+      <Link>Properties\AssemblyInfo.Version.cs</Link>
+    </Compile>
     <Compile Include="EditorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,6 +1,8 @@
-﻿using System;
-namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Framework
 {
+    using System;
+    using Jacobi.Vst.Core;
+
     /// <summary>
     /// The VstParameterInfo contains the meta information for a parameter.
     /// </summary>
@@ -25,6 +27,11 @@ namespace Jacobi.Vst.Framework
                 _paramMgr = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the parameter category.
+        /// </summary>
+        public VstParameterCategory Category { get; set; }
 
         /// <summary>
         /// Gets or sets the default value the <see cref="VstParameter"/> is initialized with.

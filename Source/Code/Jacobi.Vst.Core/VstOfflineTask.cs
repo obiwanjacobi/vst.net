@@ -1,4 +1,8 @@
-﻿namespace Jacobi.Vst.Core
+﻿//
+// This source file is not compiled!
+// It is part of offline processing which is not implemented
+//
+namespace Jacobi.Vst.Core
 {
     using System;
 

@@ -22,11 +22,11 @@ public:
 	virtual System::Int32 GetOutputLatency();
 	virtual Jacobi::Vst::Core::VstProcessLevels GetProcessLevel();
 	virtual Jacobi::Vst::Core::VstAutomationStates GetAutomationState();
-	virtual System::Boolean OfflineRead(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option, System::Boolean readSource);
-	virtual System::Boolean OfflineWrite(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option);
-	virtual System::Boolean OfflineStart(array<Jacobi::Vst::Core::VstAudioFile^>^ files, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles);
-	virtual System::Int32 OfflineGetCurrentPass();
-	virtual System::Int32 OfflineGetCurrentMetaPass();
+	//virtual System::Boolean OfflineRead(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option, System::Boolean readSource);
+	//virtual System::Boolean OfflineWrite(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option);
+	//virtual System::Boolean OfflineStart(array<Jacobi::Vst::Core::VstAudioFile^>^ files, System::Int32 numberOfAudioFiles, System::Int32 numberOfNewAudioFiles);
+	//virtual System::Int32 OfflineGetCurrentPass();
+	//virtual System::Int32 OfflineGetCurrentMetaPass();
 	virtual System::String^ GetVendorString();
 	virtual System::String^ GetProductString();
 	virtual System::Int32 GetVendorVersion();
@@ -36,8 +36,8 @@ public:
 	virtual System::Boolean UpdateDisplay();
 	virtual System::Boolean BeginEdit(System::Int32 index);
 	virtual System::Boolean EndEdit(System::Int32 index);
-	virtual System::Boolean OpenFileSelector(/*VstFileSelect*/);
-	virtual System::Boolean CloseFileSelector(/*VstFileSelect*/);
+	virtual System::Boolean OpenFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect);
+	virtual System::Boolean CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect);
 
 	~HostCommandStub();
 	!HostCommandStub();

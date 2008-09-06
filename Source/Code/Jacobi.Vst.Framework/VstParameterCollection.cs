@@ -1,8 +1,10 @@
 namespace Jacobi.Vst.Framework
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Manages a collection of <see cref="VstParameter"/> instances.
@@ -36,7 +38,7 @@ namespace Jacobi.Vst.Framework
 
             foreach (VstParameter param in this.Items)
             {
-                if (param.Category == category)
+                if (param.Info.Category == category)
                 {
                     results.Add(param);
                 }
@@ -66,6 +68,19 @@ namespace Jacobi.Vst.Framework
             }
 
             base.ClearItems();
+            OnChanged();
+        }
+
+        /// <summary>
+        /// Override to trigger the <see cref="Changed"/> event.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
+        protected override void InsertItem(int index, VstParameter item)
+        {
+            base.InsertItem(index, item);
+
+            OnChanged();
         }
 
         /// <summary>
@@ -78,6 +93,8 @@ namespace Jacobi.Vst.Framework
             base.RemoveItem(index);
 
             parameter.Dispose();
+
+            OnChanged();
         }
 
         /// <summary>
@@ -93,6 +110,8 @@ namespace Jacobi.Vst.Framework
             }
 
             base.SetItem(index, item);
+
+            OnChanged();
         }
 
         #region IActivatable Members
@@ -128,6 +147,21 @@ namespace Jacobi.Vst.Framework
             IsActive = false;
         }
 
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event EventHandler<EventArgs> Changed;
+
+        protected virtual void OnChanged()
+        {
+            EventHandler<EventArgs> temp = Changed;
+
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
+        }
         #endregion
     }
 }

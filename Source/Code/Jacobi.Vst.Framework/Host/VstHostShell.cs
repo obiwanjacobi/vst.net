@@ -94,12 +94,12 @@
         /// Under construction!
         /// </summary>
         /// <returns>Returns null when the host does not support opening a file selector.</returns>
-        public IDisposable OpenFileSelector()
+        public IDisposable OpenFileSelector(VstFileSelect fileSelect)
         {
             // check capability of the host
             if ((_host.Capabilities & VstHostCapabilities.OpenFileSelector) > 0)
             {
-                return new FileSelectorScope(_host);
+                return new FileSelectorScope(_host, fileSelect);
             }
 
             return null;
@@ -115,12 +115,14 @@
         private class FileSelectorScope : IDisposable
         {
             private VstHost _host;
+            private VstFileSelect _fileSelect;
 
-            public FileSelectorScope(VstHost host)
+            public FileSelectorScope(VstHost host, VstFileSelect fileSelect)
             {
                 _host = host;
+                _fileSelect = fileSelect;
 
-                if (_host.HostCommandStub.OpenFileSelector() == false)
+                if (_host.HostCommandStub.OpenFileSelector(_fileSelect) == false)
                 {
                     throw new InvalidOperationException("Host does not implement OpenFileSelector.");
                 }
@@ -135,7 +137,7 @@
             {
                 if (_host != null)
                 {
-                    _host.HostCommandStub.CloseFileSelector();
+                    _host.HostCommandStub.CloseFileSelector(_fileSelect);
                     _host = null;
                 }
             }

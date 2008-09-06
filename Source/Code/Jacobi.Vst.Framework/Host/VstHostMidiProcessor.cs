@@ -1,5 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework.Host
 {
+    using Jacobi.Vst.Core;
+
     /// <summary>
     /// Forwards the <see cref="IVstMidiProcessor"/> calls to the host stub.
     /// </summary>

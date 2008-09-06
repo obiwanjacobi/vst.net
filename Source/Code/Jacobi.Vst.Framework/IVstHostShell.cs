@@ -2,6 +2,7 @@ namespace Jacobi.Vst.Framework
 {
     using System;
     using System.Globalization;
+using Jacobi.Vst.Core;
 
     /// <summary>
     /// Provides access to the windowing shell of the host.
@@ -31,9 +32,9 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Opens the File Selector.
         /// </summary>
+        /// <param name="fileSelect">Information on how the file selector should behave and selected paths.</param>
         /// <returns>Returns null if the host does not support the Open File Selector.</returns>
-        /// <remarks>Call <see cref="IDisposable.Dispose"/> on the return value to close the File Selector.
-        /// This method is still under construction!</remarks>
-        IDisposable OpenFileSelector(/*file selector struct*/);
+        /// <remarks>Call <see cref="IDisposable.Dispose"/> on the return value to close the File Selector.</remarks>
+        IDisposable OpenFileSelector(VstFileSelect fileSelect);
     }
 }

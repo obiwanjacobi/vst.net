@@ -27,6 +27,25 @@ public:
 		return str;
 	}
 
+	// Call DeallocateString on retval
+	static char* AllocateString(System::String^ source)
+	{
+		System::IntPtr mem = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(source);
+
+		return (char*)mem.ToPointer();
+	}
+
+	// frees the unmanaged memory
+	static void DeallocateString(char* pBuffer)
+	{
+		if(pBuffer != NULL)
+		{
+			System::IntPtr mem(pBuffer);
+
+			System::Runtime::InteropServices::Marshal::FreeHGlobal(mem);
+		}
+	}
+
 	// Converts a managed rect to an unmanaged ppRect
 	static void RectangleToERect(System::Drawing::Rectangle rect, ERect** ppRect)
 	{
@@ -39,7 +58,7 @@ public:
 
 	// Converts a managed byteArray to an unmanaged array.
 	// delete[] retval
-	static void* ByteArrayToPtr(array<System::Byte>^ byteArray)
+	static char* ByteArrayToPtr(array<System::Byte>^ byteArray)
 	{
 		int length = byteArray->Length;
 		char* buffer = new char[length];
@@ -59,7 +78,7 @@ public:
 
 		for(int n = 0; n < length; n++)
 		{
-			byteArray[n] = pBuffer[n];
+			byteArray[n] = safe_cast<System::Byte>(pBuffer[n]);
 		}
 
 		return byteArray;
@@ -112,7 +131,7 @@ public:
 				}
 				break;
 			default:
-				// log skipping
+				// TODO: log skipping
 				break;
 			}
 		}
@@ -126,11 +145,14 @@ public:
 	{
 		int length = events->Length;
 		if(length > 2) length -= 2;
+		
+		int totalLength = sizeof(VstEvent) + (length * sizeof(VstEvent*));
 
-		::VstEvents* pEvents = (::VstEvents*)new char[sizeof(VstEvent) + (length * sizeof(VstEvent*))];
+		::VstEvents* pEvents = (::VstEvents*)new char[totalLength];
+		ZeroMemory(pEvents, totalLength);
 
 		pEvents->numEvents = events->Length;
-
+		
 		int index = 0;
 		for each(Jacobi::Vst::Core::VstEvent^ evnt in events)
 		{
@@ -179,6 +201,9 @@ public:
 
 				pEvents->events[index] = (::VstEvent*)pMidiEvent;
 				}
+				break;
+			default:
+				// TODO: log skipping
 				break;
 			}
 
@@ -237,6 +262,30 @@ public:
 		}
 
 		return spkArr;
+	}
+
+	// Converts a managed speaker arrangement to an unmanaged VstSpeakerArrangement.
+	// delete retval
+	static ::VstSpeakerArrangement* FromSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement)
+	{
+		::VstSpeakerArrangement* pArrangement = new ::VstSpeakerArrangement();
+
+		pArrangement->numChannels = arrangement->Speakers->Length;
+		pArrangement->type = safe_cast<::VstSpeakerArrangementType>(arrangement->Type);
+
+		// a maximum of 8 audio channels is supported in the ::VstSpeakerArrangement struct
+		for (int index = 0; index < pArrangement->numChannels && index < 8; index++)
+		{
+			Jacobi::Vst::Core::VstSpeakerProperties^ speakerProps = arrangement->Speakers[index];
+
+			pArrangement->speakers[index].azimuth = speakerProps->Azimath;
+			pArrangement->speakers[index].elevation = speakerProps->Elevation;
+			StringToChar(speakerProps->Name, pArrangement->speakers[index].name, kVstMaxNameLen);
+			pArrangement->speakers[index].radius = speakerProps->Radius;
+			pArrangement->speakers[index].type = safe_cast<VstInt32>(speakerProps->SpeakerType);
+		}
+
+		return pArrangement;
 	}
 
 	// Assigns the values from the managed paramProps to the unmanaged pProps fields.
@@ -330,7 +379,7 @@ public:
 		return bufferArray;
 	}
 
-	// Converts the unmanaged sample buffer to a managed VstAudioprecisionBuffer array.
+	// Converts the unmanaged sample buffer to a managed VstAudioPrecisionBuffer array.
 	static array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ ToAudioBufferArray(double** buffer, int sampleFrames, int numberOfBuffers, bool canWrite)
 	{
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ bufferArray = gcnew array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>(numberOfBuffers);
@@ -341,6 +390,64 @@ public:
 		}
 
 		return bufferArray;
+	}
+
+	// Call DeleteFileSelect on retval
+	static ::VstFileSelect* FromFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
+	{
+		::VstFileSelect* pFileSelect = new ::VstFileSelect();
+		
+		// clear structure
+		ZeroMemory(pFileSelect, sizeof(::VstFileSelect));
+
+		// keep track of unmanaged memory for call to closeFileSelector
+		fileSelect->Reserved = System::IntPtr(pFileSelect);
+
+		pFileSelect->command = safe_cast<VstInt32>(fileSelect->Command);
+		pFileSelect->initialPath = AllocateString(fileSelect->InitialPath);
+		
+		pFileSelect->nbFileTypes = fileSelect->FileTypes->Length;
+		pFileSelect->fileTypes = new ::VstFileType[fileSelect->FileTypes->Length];
+		
+		// clear allocated file type structures
+		ZeroMemory(pFileSelect->fileTypes, fileSelect->FileTypes->Length * sizeof(::VstFileType));
+
+		// copy file type array
+		for(int index = 0; index < fileSelect->FileTypes->Length; index++)
+		{
+			StringToChar(fileSelect->FileTypes[index]->Extension, pFileSelect->fileTypes[index].dosType, 8);
+			StringToChar(fileSelect->FileTypes[index]->Name, pFileSelect->fileTypes[index].name, 128);
+		}
+
+		return pFileSelect;
+	}
+
+	// updates the managed VstFileSelect with output information set by the host.
+	static void ToFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect, ::VstFileSelect* pFileSelect)
+	{
+		if(pFileSelect->returnPath != NULL)
+		{
+			fileSelect->ReturnPaths = gcnew array<System::String^>(1);
+			fileSelect->ReturnPaths[0] = CharToString(pFileSelect->returnPath);
+		}
+		else if(pFileSelect->returnMultiplePaths != NULL)
+		{
+			fileSelect->ReturnPaths = gcnew array<System::String^>(pFileSelect->nbReturnPath);
+
+			for(int index = 0; index < pFileSelect->nbReturnPath; index++)
+			{
+				fileSelect->ReturnPaths[index] = CharToString(pFileSelect->returnMultiplePaths[index]);
+			}
+		}
+	}
+
+	// frees the unmanaged memory
+	static void DeleteFileSelect(::VstFileSelect* pFileSelect)
+	{
+		DeallocateString(pFileSelect->initialPath);
+
+		delete[] pFileSelect->fileTypes;
+		delete pFileSelect;
 	}
 
 private:

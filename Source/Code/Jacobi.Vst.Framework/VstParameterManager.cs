@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// catches parameter changes and communicates these back to the source component
