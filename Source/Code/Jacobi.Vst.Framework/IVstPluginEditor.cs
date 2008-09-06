@@ -9,7 +9,7 @@ namespace Jacobi.Vst.Framework
     /// </summary>
     /// <remarks>The editor is a custom GUI that display the plugin's settings.
     /// Note that the life time of the GUI form is NOT linked to the lifetime of 
-    /// the instance of the class that implements this interface. <see cref="Close"/></remarks>
+    /// the instance of the class that implements this interface. <seealso cref="Close"/></remarks>
     public interface IVstPluginEditor
     {
         /// <summary>

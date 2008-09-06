@@ -4,7 +4,7 @@
     using Jacobi.Vst.Framework.Common;
 
     /// <summary>
-    /// This class manages all plugin interfaces instance on behalf of a plugin.
+    /// This class manages all plugin interface instances on behalf of a plugin.
     /// </summary>
     /// <remarks>The following interfaces are supported:
     /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioprecisionProcessor"/>,
@@ -16,7 +16,7 @@
     /// <see cref="IVstPluginProcess"/> and <see cref="IVstPluginPrograms"/>.</remarks>
     public abstract class PluginInterfaceManagerBase : IExtensible, IDisposable
     {
-        private InterfaceManager<IVstPluginAudioprecisionProcessor> _audioprecision;
+        private InterfaceManager<IVstPluginAudioPrecisionProcessor> _audioprecision;
         private InterfaceManager<IVstPluginAudioProcessor> _audioProcessor;
         private InterfaceManager<IVstPluginBypass> _bypass;
         private InterfaceManager<IVstPluginConnections> _connections;
@@ -36,7 +36,7 @@
         /// </summary>
         public PluginInterfaceManagerBase()
         {
-            _audioprecision = new InterfaceManager<IVstPluginAudioprecisionProcessor>(CreateAudioprecisionProcessor);
+            _audioprecision = new InterfaceManager<IVstPluginAudioPrecisionProcessor>(CreateAudioprecisionProcessor);
             _audioprecision.DisposeParent = this;
             
             _audioProcessor = new InterfaceManager<IVstPluginAudioProcessor>(CreateAudioProcessor);
@@ -103,7 +103,7 @@
         /// Note that you do not need to override <see cref="CreateAudioProcessor"/> when you implement the precision audio processor interface.
         /// The PluginInterfaceManagerBase will call this method when a request comes in for the <see cref="IVstPluginAudioProcessor"/>
         /// and cast the result when the call to <see cref="CreateAudioProcessor"/> returns null.</remarks>
-        protected virtual IVstPluginAudioprecisionProcessor CreateAudioprecisionProcessor(IVstPluginAudioprecisionProcessor instance)
+        protected virtual IVstPluginAudioPrecisionProcessor CreateAudioprecisionProcessor(IVstPluginAudioPrecisionProcessor instance)
         {
             return instance;
         }
@@ -289,7 +289,7 @@
             // interfaces are more or less ordered in priority
 
             // special case for the AudioProcessor: IVstPluginAudioprecisionProcessor could also provide the IVstPluginAudioProcessor.
-            ExtensibleInterfaceRef<IVstPluginAudioprecisionProcessor> audioprecision = _audioprecision.MatchInterface<T>();
+            ExtensibleInterfaceRef<IVstPluginAudioPrecisionProcessor> audioprecision = _audioprecision.MatchInterface<T>();
             ExtensibleInterfaceRef<IVstPluginAudioProcessor> audioProcessor = _audioProcessor.MatchInterface<T>();
             if (audioProcessor != null)
             {
