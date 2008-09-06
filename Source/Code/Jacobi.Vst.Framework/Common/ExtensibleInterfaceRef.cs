@@ -109,7 +109,7 @@
 
         #region IDisposable Members
         /// <summary>
-        /// Disposes the innstance.
+        /// Disposes the instance.
         /// </summary>
         /// <remarks>Both the <see cref="Instance"/> and <see cref="ThreadSafeInstance"/> are disposed, 
         /// but only when <see cref="DisposeInstance"/> and <see cref="DisposeThreadSafeInstance"/> are true.

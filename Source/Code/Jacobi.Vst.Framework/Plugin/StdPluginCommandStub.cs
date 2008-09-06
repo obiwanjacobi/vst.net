@@ -60,7 +60,7 @@
                     canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioProcessor>();
                     break;
                 case VstProcessPrecision.Process64:
-                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioprecisionProcessor>();
+                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioPrecisionProcessor>();
                     break;
             }
             
@@ -1342,7 +1342,7 @@
         /// <remarks>The implementation calls the <see cref="IVstPluginAudioprecisionProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
-            IVstPluginAudioprecisionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioprecisionProcessor>();
+            IVstPluginAudioPrecisionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioPrecisionProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1433,7 +1433,7 @@
                 pluginInfo.Flags |= VstPluginFlags.HasEditor;
             if (audioProcessor != null)
                 pluginInfo.Flags |= VstPluginFlags.CanReplacing;
-            if (plugin.Supports<IVstPluginAudioprecisionProcessor>())
+            if (plugin.Supports<IVstPluginAudioPrecisionProcessor>())
                 pluginInfo.Flags |= VstPluginFlags.CanDoubleReplacing;
             if (plugin.Supports<IVstPluginPersistence>())
                 pluginInfo.Flags |= VstPluginFlags.ProgramChunks;
