@@ -38,6 +38,7 @@
         /// Constructs an instance based on the host proxy.
         /// </summary>
         /// <param name="host">Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
         public VstHostInterfaceManager(VstHost host)
             : this()
         {
@@ -97,6 +98,13 @@
             return (GetInstance<T>() != null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException">Thrown when the <see cref="IVstMidiProcessor"/> interface is requested
+        /// and the plugin does not implement the <see cref="IVstPluginMidiSource"/> interface.</exception>
         public T GetInstance<T>() where T : class
         {
             ExtensibleInterfaceRef<IVstMidiProcessor> midiProcessor = _midiProcessor.MatchInterface<T>();

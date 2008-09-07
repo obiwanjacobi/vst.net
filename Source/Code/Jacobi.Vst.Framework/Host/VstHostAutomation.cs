@@ -14,6 +14,7 @@
         /// Constructs an instance on the host proxy.
         /// </summary>
         /// <param name="host">Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
         public VstHostAutomation(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");

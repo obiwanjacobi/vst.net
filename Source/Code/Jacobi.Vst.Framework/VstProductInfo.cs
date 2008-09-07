@@ -15,9 +15,13 @@
         /// </summary>
         /// <param name="product">Must not exceed 63 characters.</param>
         /// <param name="vendor">Must not exceed 63 characters.</param>
-        /// <param name="version">A version number in the thousends. Fo example 1100 means version 1.1.0.0.</param>
+        /// <param name="version">A version number in the thousends. For example 1100 means version 1.1.0.0.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="product"/> or <paramref name="vendor"/> are not set to an instance of an object.</exception>
+        /// <exception cref="ArgumentException">Thrown when the <paramref name="product"/> or <paramref name="vendor"/> are empty or exceed their length of 63 characters.</exception>
         public VstProductInfo(string product, string vendor, int version)
         {
+            Throw.IfArgumentIsNullOrEmpty(product, "product");
+            Throw.IfArgumentIsNullOrEmpty(vendor, "vendor");
             Throw.IfArgumentTooLong(product, Core.Constants.MaxProductStringLength, "product");
             Throw.IfArgumentTooLong(vendor, Core.Constants.MaxVendorStringLength, "vendor");
 

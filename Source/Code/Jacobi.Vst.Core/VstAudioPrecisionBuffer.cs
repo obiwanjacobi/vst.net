@@ -48,11 +48,7 @@
         {
             get
             {
-                if (index < 0 || index >= SampleCount)
-                {
-                    throw new ArgumentOutOfRangeException("index", index,
-                        String.Format("The value should lie between '0' and '{0}'.", SampleCount));
-                }
+                Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, "index");
 
                 unsafe
                 {
@@ -61,12 +57,8 @@
             }
             set
             {
-                if (!CanWrite) throw new InvalidOperationException("Cannot write to the channel.");
-                if (index < 0 || index >= SampleCount)
-                {
-                    throw new ArgumentOutOfRangeException("index", index,
-                        String.Format("The value should lie between '0' and '{0}'.", SampleCount));
-                }
+                if (!CanWrite) throw new InvalidOperationException(Properties.Resources.VstAudioBuffer_BufferNotWritable);
+                Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, "index");
 
                 unsafe
                 {

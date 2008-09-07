@@ -18,6 +18,8 @@
         /// </summary>
         /// <param name="hostCmdStub">Must not be null.</param>
         /// <param name="plugin">Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="hostCmdStub"/> or 
+        /// <paramref name="plugin"/> is not set to an instance of an object.</exception>
         public VstHost(IVstHostCommandStub hostCmdStub, IVstPlugin plugin)
         {
             Throw.IfArgumentIsNull(hostCmdStub, "hostCmdStub");

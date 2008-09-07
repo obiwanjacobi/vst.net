@@ -19,7 +19,7 @@
         ReceiveVstMidiEvent,
         /// <summary>Host will indicates the plug-in when something changes in plug-in´s routing/connections with #suspend/#resume/#setSpeakerArrangement.</summary>
         ReportConnectionChanges,
-        /// <summary>Host supports <see cref="M:IVstHostCommands20.IoChanged"/>.</summary>
+        /// <summary>Host supports <see cref="IVstHostCommands20.IoChanged"/>.</summary>
         AcceptIOChanges,
         /// <summary></summary>
         SizeWindow,

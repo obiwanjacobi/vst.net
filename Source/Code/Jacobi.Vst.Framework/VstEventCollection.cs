@@ -34,6 +34,8 @@ namespace Jacobi.Vst.Framework
         /// Adds a range of <see cref="VstEvent"/> instance.
         /// </summary>
         /// <param name="events">Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="events"/> 
+        /// is not set to an instance of an object.</exception>
         public void AddRange(IEnumerable<VstEvent> events)
         {
             Throw.IfArgumentIsNull(events, "events");
@@ -70,6 +72,7 @@ namespace Jacobi.Vst.Framework
         /// </summary>
         /// <param name="index">The index to insert the <paramref name="item"/> at.</param>
         /// <param name="item">The <see cref="VstEvent"/> instance to insert.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only.</exception>
         public void Insert(int index, VstEvent item)
         {
             ThrowIfReadOnly();
@@ -81,6 +84,7 @@ namespace Jacobi.Vst.Framework
         /// Removes an item from the specified <paramref name="index"/>.
         /// </summary>
         /// <param name="index">A zero-based index of the item to remove.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only.</exception>
         public void RemoveAt(int index)
         {
             ThrowIfReadOnly();
@@ -93,6 +97,7 @@ namespace Jacobi.Vst.Framework
         /// </summary>
         /// <param name="index">The zero-based index of the item.</param>
         /// <returns>Returns the item at <paramref name="index"/>.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only and the setter is called.</exception>
         public VstEvent this[int index]
         {
             get
@@ -115,6 +120,7 @@ namespace Jacobi.Vst.Framework
         /// Adds a new instance to the collection.
         /// </summary>
         /// <param name="item">A new item to add.</param>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only.</exception>
         public void Add(VstEvent item)
         {
             ThrowIfReadOnly();
@@ -125,6 +131,7 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Removes all items from the collection.
         /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only.</exception>
         public void Clear()
         {
             ThrowIfReadOnly();
@@ -177,6 +184,7 @@ namespace Jacobi.Vst.Framework
         /// <param name="item">The item to remove.</param>
         /// <returns>Returns true when the <paramref name="item"/> was successful removed. 
         /// False is returned when the <paramref name="item"/> was not found in the collection.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only.</exception>
         public bool Remove(VstEvent item)
         {
             ThrowIfReadOnly();
@@ -215,11 +223,12 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Helper method to throw an exception when the collection is read-only.
         /// </summary>
+        /// <exception cref="InvalidOperationException">Thrown when the collection is read-only.</exception>
         private void ThrowIfReadOnly()
         {
             if (IsReadOnly)
             {
-                throw new InvalidOperationException("The VstEventCollection is read-only.");
+                throw new InvalidOperationException(Properties.Resources.VstEventCollection_CollectionReadOnly);
             }
         }
     }

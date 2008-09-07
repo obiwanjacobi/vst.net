@@ -13,6 +13,7 @@
         /// Constructs an instance on the host proxy.
         /// </summary>
         /// <param name="host">Must not be null.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
         public VstHostMidiProcessor(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");
@@ -35,6 +36,7 @@
         /// Passes the <paramref name="events"/> onto the host.
         /// </summary>
         /// <param name="events">Must not be null.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="events"/> is not set to an instance of an object.</exception>
         public void Process(VstEventCollection events)
         {
             Throw.IfArgumentIsNull(events, "events");

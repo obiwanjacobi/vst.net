@@ -47,15 +47,39 @@
         /// </summary>
         public int LargeStepInteger { get; set; }
 
+        private string _label;
         /// <summary>
         /// The label for the parameter.
         /// </summary>
-        public string Label { get; set; }
+        /// <remarks>The value must not exceed 63 characters.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
+        public string Label
+        {
+            get { return _label; }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Constants.MaxLabelLength, "Label");
 
+                _label = value;
+            }
+        }
+
+        private string _shortLabel;
         /// <summary>
         /// A short label for the parameter.
         /// </summary>
-        public string ShortLabel { get; set; }
+        /// <remarks>The value must not exceed 7 characters.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
+        public string ShortLabel
+        {
+            get { return _shortLabel; }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Constants.MaxShortLabelLength, "ShortLabel");
+
+                _shortLabel = value;
+            }
+        }
 
         /// <summary>
         /// The order in which to display the parameter relative to the other plugin parameters.
@@ -76,10 +100,22 @@
         /// </summary>
         public short ParameterCountInCategory { get; set; }
 
+        private string _catLabel;
         /// <summary>
         /// The label for the category.
         /// </summary>
-        public string CategoryLabel { get; set; }
+        /// <remarks>The value must not exceed 23 characters.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 23 characters.</exception>
+        public string CategoryLabel
+        {
+            get { return _catLabel; }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Constants.MaxLabelLength, "CategoryLabel");
+
+                _catLabel = value;
+            }
+        }
     }
 
     /// <summary>
