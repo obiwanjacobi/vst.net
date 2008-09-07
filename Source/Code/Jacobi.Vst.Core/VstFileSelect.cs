@@ -28,6 +28,7 @@
         /// </summary>
         /// <remarks>Fill this field before call the OpenFileSelector method.
         /// The number of characters must not exceed 1023.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 1023 characters.</exception>
         public string Title
         {
             get { return _title; }
@@ -77,6 +78,7 @@
         /// Gets or sets the name of the filter.
         /// </summary>
         /// <remarks>The number of characters must not exceed 127.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 127 characters.</exception>
         public string Name
         {
             get { return _name; }
@@ -92,6 +94,7 @@
         /// Gets or sets the file extension for the file filter.
         /// </summary>
         /// <remarks>The number of characters must not exceed 7.</remarks>
+        /// <exception cref="ArgumentException">Thrown when value exceeds 7 characters.</exception>
         public string Extension
         {
             get { return _extension; }

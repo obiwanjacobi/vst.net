@@ -13,7 +13,7 @@
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        /// <remarks>The <see cref="Categories"/> are automatically filled as <see cref="VstParameters"/> 
+        /// <remarks>The <see cref="Categories"/> are automatically filled as <see cref="VstParameter"/> instances
         /// are added to the <see cref="Parameters"/> collection.</remarks>
         public VstProgram()
         {

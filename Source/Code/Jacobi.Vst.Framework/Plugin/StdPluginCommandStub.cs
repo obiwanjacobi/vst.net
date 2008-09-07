@@ -49,7 +49,7 @@
         /// <param name="precision">An indication of either 32 bit or 64 bit samples.</param>
         /// <returns>Returns true when the requested <paramref name="precision"/> is supported.</returns>
         /// <remarks>The implementation just queries the plugin for the <see cref="IVstPluginAudioProcessor"/> and
-        /// <see cref="IVstPluginAudioprecisionProcessor"/> interfaces. Override to change this behavior.</remarks>
+        /// <see cref="IVstPluginAudioPrecisionProcessor"/> interfaces. Override to change this behavior.</remarks>
         public virtual bool SetProcessPrecision(VstProcessPrecision precision)
         {
             bool canDo = false;
@@ -962,6 +962,7 @@
         /// This is the first method called by the host right after the assembly is loaded.
         /// </summary>
         /// <remarks>Always call the base class when overriding.</remarks>
+        /// <exception cref="InvalidOperationException">Thrown when the HostCommandStub has not been initialized.</exception>
         public virtual void Open()
         {
             if (!_pluginCtx.Host.HostCommandStub.IsInitialized())
@@ -1353,7 +1354,7 @@
         /// </summary>
         /// <param name="inputs">An array with audio input buffers.</param>
         /// <param name="outputs">An array with audio output buffers.</param>
-        /// <remarks>The implementation calls the <see cref="IVstPluginAudioprecisionProcessor"/> interface.</remarks>
+        /// <remarks>The implementation calls the <see cref="IVstPluginAudioPrecisionProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
             IVstPluginAudioPrecisionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioPrecisionProcessor>();
@@ -1411,9 +1412,11 @@
         /// </summary>
         /// <param name="cando">Must not be null.</param>
         /// <returns>Returns <see cref="VstPluginCanDo.Unknown"/> when string did not match an enum value.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="cando"/> is not set to an instance of an object.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="cando"/> is an empty string.</exception>
         protected VstPluginCanDo ParsePluginCanDo(string cando)
         {
-            Throw.IfArgumentIsNull(cando, "cando");
+            Throw.IfArgumentIsNullOrEmpty(cando, "cando");
 
             VstPluginCanDo result = VstPluginCanDo.Unknown;
             Type enumType = typeof(VstPluginCanDo);

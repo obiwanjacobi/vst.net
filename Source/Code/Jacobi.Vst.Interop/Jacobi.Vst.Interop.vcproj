@@ -288,6 +288,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\TimeCriticalScope.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Utils.cpp"
 				>
 			</File>
@@ -319,6 +323,10 @@
 			</File>
 			<File
 				RelativePath=".\targetver.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TimeCriticalScope.h"
 				>
 			</File>
 			<File

@@ -27,10 +27,22 @@
         /// </summary>
         public float Radius { get; set; }
 
+        private string _name;
         /// <summary>
         /// for new setups, new names should be given (L/R/C... won't do).
         /// </summary>
-        public string Name { get; set; }
+        /// <remarks>The value must not exceed 63 characters.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, "Name");
+
+                _name = value;
+            }
+        }
 
         /// <summary>
         /// The speaker type.

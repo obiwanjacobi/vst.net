@@ -17,10 +17,22 @@
         /// </summary>
         public VstMidiProgramNameFlags Flags { get; set; }
 
+        private string _name;
         /// <summary>
         /// The name for the <see cref="CurrentProgramIndex"/>.
         /// </summary>
-        public string Name { get; set; }
+        /// <remarks>The value must not exceed 63 characters.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, "Name");
+
+                _name = value;
+            }
+        }
 
         /// <summary>
         /// The program change number for the <see cref="CurrentProgramIndex"/>.

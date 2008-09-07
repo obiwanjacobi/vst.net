@@ -19,12 +19,14 @@
         /// <param name="capabilities">The plugin capabilities <see cref="P:Capabilities"/>.</param>
         /// <param name="initialDelay">The initial delay of the plugin. <see cref="P:InitialDelay"/></param>
         /// <param name="pluginID">The unique Id of the plugin. <see cref="P:PluginID"/></param>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="productInfo"/> or <paramref name="name"/> is not set to an instance of an object.</exception>
+        /// <exception cref="System.ArgumentException">Thrown when <paramref name="name"/> is an empty string.</exception>
         protected VstPluginBase(string name, VstProductInfo productInfo, 
             VstPluginCategory category, VstPluginCapabilities capabilities, 
             int initialDelay, int pluginID)
         {
             Throw.IfArgumentIsNull(productInfo, "productInfo");
-            Throw.IfArgumentIsNull(name, "name");
+            Throw.IfArgumentIsNullOrEmpty(name, "name");
 
             ProductInfo = productInfo;
             Name = name;

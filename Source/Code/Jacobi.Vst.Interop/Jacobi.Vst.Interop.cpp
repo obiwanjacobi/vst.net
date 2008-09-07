@@ -5,6 +5,7 @@
 #include "AssemblyLoader.h"
 #include "PluginCommandProxy.h"
 #include "HostCommandStub.h"
+#include "TimeCriticalScope.h"
 #include "Utils.h"
 #include<vcclr.h>
 
@@ -109,6 +110,9 @@ void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt3
 {
 	if(pluginInfo && pluginInfo->user)
 	{
+		// Tell the GC we are doing real-time processing here
+		TimeCriticalScope scope;
+
 		PluginCommandProxy^ proxy = (PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
@@ -121,6 +125,9 @@ void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstIn
 {
 	if(pluginInfo && pluginInfo->user)
 	{
+		// Tell the GC we are doing real-time processing here
+		TimeCriticalScope scope;
+
 		PluginCommandProxy^ proxy = (PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 

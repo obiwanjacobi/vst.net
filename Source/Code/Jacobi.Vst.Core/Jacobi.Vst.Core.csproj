@@ -57,6 +57,11 @@
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IVstHostCommands.cs" />
     <Compile Include="IVstPluginCommands.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Throw.cs" />
     <Compile Include="VstAudioBuffer.cs" />
     <Compile Include="VstAudioPrecisionBuffer.cs" />
@@ -103,6 +108,12 @@
     <None Include="Class Diagrams\Jacobi.Vst.Core.Enums.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Interfaces.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Types.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
