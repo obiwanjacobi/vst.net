@@ -151,8 +151,14 @@ namespace Jacobi.Vst.Framework
 
         #region INotifyPropertyChanged Members
 
+        /// <summary>
+        /// Fires after a <see cref="VstParameter"/> has been added or removed from the collection.
+        /// </summary>
         public event EventHandler<EventArgs> Changed;
 
+        /// <summary>
+        /// Raises the <see cref="Changed"/> event.
+        /// </summary>
         protected virtual void OnChanged()
         {
             EventHandler<EventArgs> temp = Changed;

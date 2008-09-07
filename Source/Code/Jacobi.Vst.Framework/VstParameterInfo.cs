@@ -14,6 +14,8 @@
         /// </summary>
         /// <remarks>The <see cref="VstParameterManager.ParameterInfo"/> property must be assigned to <b>this</b> instance, 
         /// otherwise an <see cref="ArgumentException"/> is thrown.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the <see cref="VstParameterManager"/> instance that is set, 
+        /// does not managed <b>this</b> parameter.</exception>
         public VstParameterManager ParameterManager
         {
             get { return _paramMgr; }
@@ -21,7 +23,7 @@
             {
                 if (value != null && value.ParameterInfo != this)
                 {
-                    throw new ArgumentException("Assigned VstParameterManager value is not linked to this VstParamaterInfo instance.", "ParameterManager");
+                    throw new ArgumentException(Properties.Resources.VstParameterInfo_ParameterManagerNotLinked, "ParameterManager");
                 }
 
                 _paramMgr = value;
@@ -58,6 +60,7 @@
         /// Gets or sets the name of the parameter.
         /// </summary>
         /// <remarks>The Name cannot exceed 7 characters.</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
         public string Name
         {
             get { return _name; }
@@ -74,6 +77,7 @@
         /// Gets or sets the label of the parameter.
         /// </summary>
         /// <remarks>The Label cannot exceed 63 characters</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         public string Label 
         {
             get { return _label; }
@@ -90,6 +94,7 @@
         /// Gets or sets the short label of the parameter.
         /// </summary>
         /// <remarks>The ShortLabel cannot exceed 7 characters</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
         public string ShortLabel
         {
             get { return _shortLabel; }

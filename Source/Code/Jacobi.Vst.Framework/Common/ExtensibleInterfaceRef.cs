@@ -20,12 +20,16 @@
         /// </summary>
         /// <remarks>You can only set the instance when it is null, otherwise an exception is thrown. 
         /// This is done to guard against accidental overwrites. When you first assign null and then a new reference, no exception is thrown.</remarks>
+        /// <exception cref="InvalidOperationException">Thrown when an instance is already assigned.</exception>
         public T Instance
         {
             get { return _instance; }
             set
             {
-                if (_instance != null && value != null) throw new InvalidOperationException("Instance is already set.");
+                if (_instance != null && value != null)
+                {
+                    throw new InvalidOperationException(Properties.Resources.ExtensibleInterfaceRef_InstanceAlreadySet);
+                }
 
                 _instance = value;
                 _threadId = (value != null) ? Thread.CurrentThread.ManagedThreadId : 0;
@@ -56,12 +60,16 @@
         /// </summary>
         /// <remarks>You can only set the instance when it is null, otherwise an exception is thrown. 
         /// This is done to guard against accidental overwrites. When you first assign null and then a new reference, no exception is thrown.</remarks>
+        /// <exception cref="InvalidOperationException">Thrown when an instance is already assigned.</exception>
         public T ThreadSafeInstance
         {
             get { return _threadSafeInstance; }
             set
             {
-                if (_threadSafeInstance != null && value != null) throw new InvalidOperationException("ThreadSafeInstance is already set.");
+                if (_threadSafeInstance != null && value != null)
+                {
+                    throw new InvalidOperationException(Properties.Resources.ExtensibleInterfaceRef_InstanceAlreadySet);
+                }
 
                 _threadSafeInstance = value;
             }

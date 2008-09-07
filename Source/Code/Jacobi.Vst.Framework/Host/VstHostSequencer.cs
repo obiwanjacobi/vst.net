@@ -14,6 +14,7 @@
         /// Constructs a new instance based on a root <paramref name="host"/> object.
         /// </summary>
         /// <param name="host">Must not be null.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
         public VstHostSequencer(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");

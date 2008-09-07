@@ -7,7 +7,7 @@
     /// </summary>
     public enum VstVirtualKey
     {
-        /// <summary></summary>
+        /// <summary>Null value.</summary>
         VKEY_NONE,
         /// <summary></summary>
         VKEY_BACK,

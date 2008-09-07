@@ -7,7 +7,7 @@
     /// This class manages all plugin interface instances on behalf of a plugin.
     /// </summary>
     /// <remarks>The following interfaces are supported:
-    /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioprecisionProcessor"/>,
+    /// <see cref="IVstPluginAudioProcessor"/>, <see cref="IVstPluginAudioPrecisionProcessor"/>,
     /// <see cref="IVstPluginBypass"/>, <see cref="IVstPluginConnections"/>,
     /// <see cref="IVstPluginEditor"/>, <see cref="IVstMidiProcessor"/>, 
     /// <see cref="IVstPluginMidiPrograms"/>, <see cref="IVstPluginMidiSource"/>, 
@@ -35,7 +35,7 @@
         /// </summary>
         public PluginInterfaceManagerBase()
         {
-            _audioprecision = new InterfaceManager<IVstPluginAudioPrecisionProcessor>(CreateAudioprecisionProcessor);
+            _audioprecision = new InterfaceManager<IVstPluginAudioPrecisionProcessor>(CreateAudioPrecisionProcessor);
             _audioprecision.DisposeParent = this;
             
             _audioProcessor = new InterfaceManager<IVstPluginAudioProcessor>(CreateAudioProcessor);
@@ -92,17 +92,17 @@
         }
 
         /// <summary>
-        /// Called when an instance of the <see cref="IVstPluginAudioprecisionProcessor"/> interface is requested.
+        /// Called when an instance of the <see cref="IVstPluginAudioPrecisionProcessor"/> interface is requested.
         /// </summary>
         /// <param name="instance">The default instance or null.</param>
         /// <returns>Returns <paramref name="instance"/>.</returns>
-        /// <remarks>Override to create an instance of the <see cref="IVstPluginAudioprecisionProcessor"/> interface. 
+        /// <remarks>Override to create an instance of the <see cref="IVstPluginAudioPrecisionProcessor"/> interface. 
         /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
         /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.
         /// Note that you do not need to override <see cref="CreateAudioProcessor"/> when you implement the precision audio processor interface.
         /// The PluginInterfaceManagerBase will call this method when a request comes in for the <see cref="IVstPluginAudioProcessor"/>
         /// and cast the result when the call to <see cref="CreateAudioProcessor"/> returns null.</remarks>
-        protected virtual IVstPluginAudioPrecisionProcessor CreateAudioprecisionProcessor(IVstPluginAudioPrecisionProcessor instance)
+        protected virtual IVstPluginAudioPrecisionProcessor CreateAudioPrecisionProcessor(IVstPluginAudioPrecisionProcessor instance)
         {
             return instance;
         }
