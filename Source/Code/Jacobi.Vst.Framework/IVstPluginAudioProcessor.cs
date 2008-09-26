@@ -53,6 +53,7 @@ namespace Jacobi.Vst.Framework
         /// </summary>
         /// <param name="type">The pan algorithm type.</param>
         /// <param name="gain">A gain factor.</param>
+        /// <returns>Returns true when the plugin support setting the pan law.</returns>
         bool SetPanLaw(VstPanLaw type, float gain);
     }
 

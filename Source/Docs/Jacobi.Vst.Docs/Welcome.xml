@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<developerConceptualDocument
+  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <introduction>
+    <para>Welcome to <token>vstnet</token>.</para>
+    <para><token>vstnet</token> is an open source project hosted on codeplex that allows you 
+    to write VST plugins in .NET.</para>
+  </introduction>
+
+  <section address="VstSection">
+    <title>Virtual Studio Technology (VST)</title>
+    <content>
+      <para><legacyItalic>Text below taken from</legacyItalic> <externalLink><linkText><legacyItalic>wikipedia</legacyItalic></linkText><linkUri>http://en.wikipedia.org/wiki/Virtual_Studio_Technology</linkUri></externalLink>.</para>
+      
+      <para>Steinberg's Virtual Studio Technology (VST) is an interface for integrating software audio synthesizer and effect plugins with audio editors and hard-disk recording systems. VST and similar technologies use Digital Signal Processing to simulate traditional recording studio hardware with software. Thousands of plugins exist, both commercial and freeware, and VST is supported by a large number of audio applications. The technology can be licensed from its creator, Steinberg.</para>
+      <para>VST plugins are generally run within a Digital Audio Workstation, providing the host application with additional functionality. Most VST plugins can be classified as either instruments (VSTi) or effects, although other categories exist. VST plugins generally provide a custom GUI, displaying controls similar to the physical switches and knobs on audio hardware. Some (often older) plugins rely on the host application for their UI.</para>
+
+      <para>VST instruments include software emulations of well-known hardware synthesizer devices and samplers, emulating the look of the original equipment and its sonic characteristics. This enables VSTi users to use virtual versions of devices that may be otherwise difficult to obtain.</para>
+
+      <para>VST instruments require notes to be sent via MIDI in order to output audio, while effect plugins process audio data. MIDI messages can often also be used to control parameters of both instrument and effect plugins. Most host applications allow the audio output from one VST to be routed to the audio input of another VST (known as chaining). For example, output of a VST synthesizer can be sent to a VST reverb effect for further processing.</para>
+
+      <para>With appropriate hardware and drivers, such as a sound card that supports ASIO, VST plugins can be used in real-time. ASIO bypasses Windows' slower audio engine, offering much lower latency.</para>
+
+    </content>
+  </section>
+
+  <section address="AdvantagesSection">
+    <title>Advantages of using VST.NET.</title>
+    <content>
+      <para>
+		<list class="bullet">
+		  <listItem><token>vstnet</token> is easier to learn than the native VST SDK API.</listItem>
+		  <listItem>You can program VST plugins in any .NET language.</listItem>
+		  <listItem><token>vstnet</token> provides a framework that simplifies and clarifies the VST interfacing options.</listItem>
+		  <listItem>It takes far less time to develop a managed <token>vstnet</token> plugin than to develop a C/C++ native VST plugin.</listItem>
+		  <listItem><token>vstnet</token> provides you with good documentation and samples.</listItem>
+		  <listItem>Your existing native VST knowledge still applies.</listItem>
+		  <listItem>Managed code provides a robust basis to work in.</listItem>
+		</list>
+      </para>
+    </content>
+  </section>
+
+  <relatedTopics>
+    <externalLink>
+        <linkText>Steinberg VST SDK</linkText>
+        <linkUri>http://www.steinberg.net/en/company/3rd_party_developer.html</linkUri>
+    </externalLink>
+  </relatedTopics>
+  
+</developerConceptualDocument>

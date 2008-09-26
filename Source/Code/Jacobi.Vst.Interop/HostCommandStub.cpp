@@ -128,7 +128,7 @@ System::Double HostCommandStub::GetSampleRate()
 {
 	ThrowIfNotInitialized();
 	
-	return (System::Double)CallHost(audioMasterGetSampleRate, 0, 0, 0, 0);
+	return safe_cast<System::Double>(CallHost(audioMasterGetSampleRate, 0, 0, 0, 0));
 }
 
 System::Int32 HostCommandStub::GetBlockSize()
@@ -156,14 +156,14 @@ Jacobi::Vst::Core::VstProcessLevels HostCommandStub::GetProcessLevel()
 {
 	ThrowIfNotInitialized();
 	
-	return (Jacobi::Vst::Core::VstProcessLevels)CallHost(audioMasterGetCurrentProcessLevel, 0, 0, 0, 0);
+	return safe_cast<Jacobi::Vst::Core::VstProcessLevels>(CallHost(audioMasterGetCurrentProcessLevel, 0, 0, 0, 0));
 }
 
 Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 {
 	ThrowIfNotInitialized();
 	
-	return (Jacobi::Vst::Core::VstAutomationStates)CallHost(audioMasterGetAutomationState, 0, 0, 0, 0);
+	return safe_cast<Jacobi::Vst::Core::VstAutomationStates>(CallHost(audioMasterGetAutomationState, 0, 0, 0, 0));
 }
 
 //System::Boolean HostCommandStub::OfflineRead(Jacobi::Vst::Core::VstOfflineTask^ task, Jacobi::Vst::Core::VstOfflineOption option, System::Boolean readSource)
@@ -211,7 +211,7 @@ System::String^ HostCommandStub::GetVendorString()
 	ThrowIfNotInitialized();
 
 	System::String^ str = nullptr;
-	char* pText = new char[64];
+	char* pText = new char[kVstMaxVendorStrLen];
 
 	if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
 	{
@@ -228,7 +228,7 @@ System::String^ HostCommandStub::GetProductString()
 	ThrowIfNotInitialized();
 
 	System::String^ str = nullptr;
-	char* pText = new char[64];
+	char* pText = new char[kVstMaxProductStrLen];
 
 	if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
 	{
@@ -256,7 +256,7 @@ Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstH
 	pText[0] += 32;	// tolower
 
 	Jacobi::Vst::Core::VstCanDoResult result = 
-		(Jacobi::Vst::Core::VstCanDoResult)CallHost(audioMasterCanDo, 0, 0, pText, 0);
+		safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));
 
 	delete[] pText;
 
@@ -267,7 +267,7 @@ Jacobi::Vst::Core::VstHostLanguage HostCommandStub::GetLanguage()
 {
 	ThrowIfNotInitialized();
 	
-	return (Jacobi::Vst::Core::VstHostLanguage)CallHost(audioMasterGetLanguage, 0, 0, 0, 0);
+	return safe_cast<Jacobi::Vst::Core::VstHostLanguage>(CallHost(audioMasterGetLanguage, 0, 0, 0, 0));
 }
 
 System::String^ HostCommandStub::GetDirectory()
