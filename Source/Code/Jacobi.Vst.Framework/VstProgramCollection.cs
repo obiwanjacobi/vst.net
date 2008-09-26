@@ -38,6 +38,7 @@
         /// <summary>
         /// Overridden to <see cref="VstProgram.Dispose"/> the removed instance.
         /// </summary>
+        /// <param name="index">A zero-based index that will be removed.</param>
         protected override void RemoveItem(int index)
         {
             VstProgram program = this[index];
@@ -50,6 +51,8 @@
         /// <summary>
         /// Overridden to <see cref="VstProgram.Dispose"/> the replaced instance.
         /// </summary>
+        /// <param name="index">A zero-based index the new <paramref name="item"/> will be set.</param>
+        /// <param name="item">The new item to set. Can be null.</param>
         protected override void SetItem(int index, VstProgram item)
         {
             VstProgram program = this[index];

@@ -49,7 +49,7 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Returns the collection of <see cref="VstEvent"/> instances as an array.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a copy of the <see cref="VstEvent"/> instances.</returns>
         public VstEvent[] ToArray()
         {
             return _list.ToArray();

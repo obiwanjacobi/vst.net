@@ -13,12 +13,12 @@
         /// To be called from the default constructor of the derived plugin class
         /// to initialize the base class.
         /// </summary>
-        /// <param name="name">The name of the plugin. Must not be null. <see cref="P:Name"/></param>
-        /// <param name="productInfo">The product information of the plugin. Must not be null. <see cref="P:ProductInfo"/></param>
-        /// <param name="category">The plugin category. <see cref="P:Category"/></param>
-        /// <param name="capabilities">The plugin capabilities <see cref="P:Capabilities"/>.</param>
-        /// <param name="initialDelay">The initial delay of the plugin. <see cref="P:InitialDelay"/></param>
-        /// <param name="pluginID">The unique Id of the plugin. <see cref="P:PluginID"/></param>
+        /// <param name="name">The name of the plugin. Must not be null. <seealso cref="Name"/></param>
+        /// <param name="productInfo">The product information of the plugin. Must not be null. <seealso cref="ProductInfo"/></param>
+        /// <param name="category">The plugin category. <seealso cref="Category"/></param>
+        /// <param name="capabilities">The plugin capabilities <seealso cref="Capabilities"/>.</param>
+        /// <param name="initialDelay">The initial delay of the plugin. <seealso cref="InitialDelay"/></param>
+        /// <param name="pluginID">The unique Id of the plugin. <seealso cref="PluginID"/></param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="productInfo"/> or <paramref name="name"/> is not set to an instance of an object.</exception>
         /// <exception cref="System.ArgumentException">Thrown when <paramref name="name"/> is an empty string.</exception>
         protected VstPluginWithInterfaceManagerBase(string name, VstProductInfo productInfo, 
@@ -103,6 +103,7 @@
         /// <summary>
         /// Called by the framework to cleanup the plugin resources.
         /// </summary>
+        /// <param name="disposing">When true, release (dispose) both managed and unmanaged resource. When false, only release unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

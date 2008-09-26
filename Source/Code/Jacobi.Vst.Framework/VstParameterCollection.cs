@@ -74,8 +74,8 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Override to trigger the <see cref="Changed"/> event.
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="item"></param>
+        /// <param name="index">A zero-based index the new <paramref name="item"/> will be inserted at.</param>
+        /// <param name="item">The item to insert. Can be null.</param>
         protected override void InsertItem(int index, VstParameter item)
         {
             base.InsertItem(index, item);
@@ -86,6 +86,7 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Override to <see cref="VstParameter.Dispose"/> the collection item.
         /// </summary>
+        /// <param name="index">A zero-based index that will be removed.</param>
         protected override void RemoveItem(int index)
         {
             VstParameter parameter = this[index];
@@ -100,6 +101,8 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Override to <see cref="VstParameter.Dispose"/> the collection item.
         /// </summary>
+        /// <param name="index">A zero-based index the new <paramref name="item"/> will be set.</param>
+        /// <param name="item">The new item to set. Can be null.</param>
         protected override void SetItem(int index, VstParameter item)
         {
             VstParameter parameter = this[index];

@@ -88,38 +88,38 @@
         /// <returns>Returns a value indicating the automation level.</returns>
         VstAutomationStates GetAutomationState();
         #region Offline processing not implemented
-        /// <summary>
-        /// Part of offline processing.
-        /// </summary>
-        /// <param name="task">Must not be null.</param>
-        /// <param name="option"></param>
-        /// <param name="readSource"></param>
-        /// <returns>Returns true if supported by the host.</returns>
+        ///// <summary>
+        ///// Part of offline processing.
+        ///// </summary>
+        ///// <param name="task">Must not be null.</param>
+        ///// <param name="option"></param>
+        ///// <param name="readSource"></param>
+        ///// <returns>Returns true if supported by the host.</returns>
         //bool OfflineRead(VstOfflineTask task, VstOfflineOption option, bool readSource);
-        /// <summary>
-        /// Part of offline processing.
-        /// </summary>
-        /// <param name="task">Must not be null.</param>
-        /// <param name="option"></param>
-        /// <returns>Returns true if supported by the host.</returns>
+        ///// <summary>
+        ///// Part of offline processing.
+        ///// </summary>
+        ///// <param name="task">Must not be null.</param>
+        ///// <param name="option"></param>
+        ///// <returns>Returns true if supported by the host.</returns>
         //bool OfflineWrite(VstOfflineTask task, VstOfflineOption option);
-        /// <summary>
-        /// Part of offline processing.
-        /// </summary>
-        /// <param name="files"></param>
-        /// <param name="numberOfAudioFiles"></param>
-        /// <param name="numberOfNewAudioFiles"></param>
-        /// <returns>Returns true if supported by the host.</returns>
+        ///// <summary>
+        ///// Part of offline processing.
+        ///// </summary>
+        ///// <param name="files"></param>
+        ///// <param name="numberOfAudioFiles"></param>
+        ///// <param name="numberOfNewAudioFiles"></param>
+        ///// <returns>Returns true if supported by the host.</returns>
         //bool OfflineStart(VstAudioFile[] files, int numberOfAudioFiles, int numberOfNewAudioFiles);
-        /// <summary>
-        /// Part of offline processing.
-        /// </summary>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Part of offline processing.
+        ///// </summary>
+        ///// <returns></returns>
         //int OfflineGetCurrentPass();
-        /// <summary>
-        /// Part of offline processing.
-        /// </summary>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Part of offline processing.
+        ///// </summary>
+        ///// <returns></returns>
         //int OfflineGetCurrentMetaPass();
         #endregion
         /// <summary>
@@ -130,12 +130,12 @@
         /// <summary>
         /// Retrieves the host product infotmation.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Never returns null?</returns>
         string GetProductString();
         /// <summary>
         /// Retrieves the host version.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Never returns 0 (zero).</returns>
         int GetVendorVersion();
         /// <summary>
         /// Queries the host for specific support.
@@ -144,14 +144,14 @@
         /// <returns>Returns <see cref="VstCanDoResult.Yes"/> if the host supports the capability.</returns>
         VstCanDoResult CanDo(VstHostCanDo cando);
         /// <summary>
-        /// Returns an value indicating the host UI language.
+        /// Retrieves the localized langauge of the host.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns an value indicating the host UI language.</returns>
         VstHostLanguage GetLanguage();
         /// <summary>
         /// Retieves the base directory for the plugin.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a rooted path.</returns>
         string GetDirectory();
         /// <summary>
         /// Request the host to update its display.
@@ -171,14 +171,19 @@
         /// <returns>Returns true if supported by the host.</returns>
         bool EndEdit(int index);
         /// <summary>
-        /// Not implemented.
+        /// Opens the file selector in the host.
         /// </summary>
+        /// <param name="fileSelect">A structure describing the options and settings.</param>
         /// <returns>Returns true if supported by the host.</returns>
+        /// <remarks>On return (if true) the selected paths are filled in <paramref name="fileSelect"/>.</remarks>
         bool OpenFileSelector(VstFileSelect fileSelect);
         /// <summary>
-        /// Not implemented.
+        /// Cleans up the unmanaged resources consumed by a call to <see cref="OpenFileSelector"/>.
         /// </summary>
+        /// <param name="fileSelect">The exact same instance that was also passed to <see cref="OpenFileSelector"/>.</param>
         /// <returns>Returns true if supported by the host.</returns>
+        /// <remarks>This method must always be called when <see cref="OpenFileSelector"/> returned true. 
+        /// Otherwise unmanaged memory will leak.</remarks>
         bool CloseFileSelector(VstFileSelect fileSelect);
     }
 }

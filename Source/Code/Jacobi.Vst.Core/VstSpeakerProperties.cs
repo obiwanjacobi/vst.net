@@ -32,7 +32,7 @@
         /// for new setups, new names should be given (L/R/C... won't do).
         /// </summary>
         /// <remarks>The value must not exceed 63 characters.</remarks>
-        /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
+        /// <exception cref="System.ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         public string Name
         {
             get { return _name; }
