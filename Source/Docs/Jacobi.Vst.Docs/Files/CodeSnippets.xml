@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- This code snippets file contains the code examples for the VST.NET documentation. -->
+<examples>
+  
+  <!-- 
+    Getting Started code snippets 
+    -->
+  <item id="GettingStarted#ImplementPluginCommandStub">
+    <sampleCode language="CSharp">using Jacobi.Vst.Core.Plugin;
+using Jacobi.Vst.Framework;
+using Jacobi.Vst.Framework.Plugin;
+
+namespace MyPluginProject
+{    
+    public class MyPluginCommandStub : StdPluginCommandStub, IVstPluginCommandStub
+    {
+        protected override IVstPlugin CreatePluginInstance()
+        {
+            return new MyPlugin();
+        }
+    }
+}</sampleCode>
+  </item>
+
+  <item id="GettingStarted#ImplementPluginCommandStubCustom">
+    <sampleCode language="CSharp"><![CDATA[using Jacobi.Vst.Core.Plugin;
+    
+public class MyPluginCommandStub : IVstPluginCommandStub
+{
+    private VstPluginInfo _pluginInfo;
+    private IVstHostCommandStub _hostStub;
+
+    #region IVstPluginCommandStub Members
+
+    public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
+    {
+        _hostStub = hostCmdStub;
+        _pluginInfo = new VstPluginInfo();
+
+        //_pluginInfo.AudioInputCount = ?;
+        //_pluginInfo.AudioOutputCount = ?;
+        //_pluginInfo.ProgramCount = ?;
+        //_pluginInfo.Flags = ?;
+        //_pluginInfo.PluginID = ?;
+        //_pluginInfo.PluginVersion = ?;
+
+        return _pluginInfo;
+    }
+
+    #endregion
+
+    #region IVstPluginCommands24 Members
+
+    public bool SetProcessPrecision(VstProcessPrecision precision)
+    {
+        return false;
+    }
+
+    public int GetNumberOfMidiInputChannels()
+    {
+        return 0;
+    }
+
+    public int GetNumberOfMidiOutputChannels()
+    {
+        return 0;
+    }
+
+    #endregion
+
+    #region IVstPluginCommands23 Members
+
+    public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
+    {
+        input = null;
+        output = null;
+
+        return false;
+    }
+
+    public int SetTotalSamplesToProcess(int numberOfSamples)
+    {
+        return 0;
+    }
+
+    public int GetNextPlugin(out string name)
+    {
+        name = null;
+        return 0;
+    }
+
+    public int StartProcess()
+    {
+        return 0;
+    }
+
+    public int StopProcess()
+    {
+        return 0;
+    }
+
+    public bool SetPanLaw(VstPanLaw type, float value)
+    {
+        return false;
+    }
+
+    public VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
+    {
+        return VstCanDoResult.Unknown;
+    }
+
+    public VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo)
+    {
+        return VstCanDoResult.Unknown;
+    }
+
+    #endregion
+
+    #region IVstPluginCommands21 Members
+
+    public bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
+    {
+        return false;
+    }
+
+    public bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
+    {
+        return false;
+    }
+
+    public bool SetEditorKnobMode(VstKnobMode mode)
+    {
+        return false;
+    }
+
+    public int GetMidiProgramName(VstMidiProgramName midiProgram, int channel)
+    {
+        return 0;
+    }
+
+    public int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel)
+    {
+        return 0;
+    }
+
+    public int GetMidiProgramCategory(VstMidiProgramCategory midiCat, int channel)
+    {
+        return 0;
+    }
+
+    public bool HasMidiProgramsChanged(int channel)
+    {
+        return false;
+    }
+
+    public bool GetMidiKeyName(VstMidiKeyName midiKeyName, int channel)
+    {
+        return false;
+    }
+
+    public bool BeginSetProgram()
+    {
+        return false;
+    }
+
+    public bool EndSetProgram()
+    {
+        return false;
+    }
+
+    #endregion
+
+    #region IVstPluginCommands20 Members
+
+    public bool ProcessEvents(VstEvent[] events)
+    {
+        return false;
+    }
+
+    public bool CanParameterBeAutomated(int index)
+    {
+        return false;
+    }
+
+    public bool String2Parameter(int index, string str)
+    {
+        return false;
+    }
+
+    public string GetProgramNameIndexed(int index)
+    {
+        return null;
+    }
+
+    public VstPinProperties GetInputProperties(int index)
+    {
+        return null;
+    }
+
+    public VstPinProperties GetOutputProperties(int index)
+    {
+        return null;
+    }
+
+    public VstPluginCategory GetCategory()
+    {
+        return VstPluginCategory.Unknown;
+    }
+
+    public bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput)
+    {
+        return false;
+    }
+
+    public bool SetBypass(bool bypass)
+    {
+        return false;
+    }
+
+    public string GetEffectName()
+    {
+        return null;
+    }
+
+    public string GetVendorString()
+    {
+        return null;
+    }
+
+    public string GetProductString()
+    {
+        return null;
+    }
+
+    public int GetVendorVersion()
+    {
+    	// version 1.0.0.0
+        return 1000;
+    }
+
+    public VstCanDoResult CanDo(string cando)
+    {
+        return VstCanDoResult.No;
+    }
+
+    public int GetTailSize()
+    {
+        return 0;
+    }
+
+    public VstParameterProperties GetParameterProperties(int index)
+    {
+        return null;
+    }
+
+    public int GetVstVersion()
+    {
+    	// VST 2.4
+        return 2400;
+    }
+
+    #endregion
+
+    #region IVstPluginCommands10 Members
+
+    public void Open()
+    {
+        // first call to plugin after it has been loaded.
+    }
+
+    public void Close()
+    {
+        // Last call to plugin. Release all (unmanaged) resources.
+    }
+
+    public void SetProgram(int programNumber)
+    {
+    }
+
+    public int GetProgram()
+    {
+        return 0;
+    }
+
+    public void SetProgramName(string name)
+    {
+    }
+
+    public string GetProgramName()
+    {
+        return null;
+    }
+
+    public string GetParameterLabel(int index)
+    {
+        return null;
+    }
+
+    public string GetParameterDisplay(int index)
+    {
+        return null;
+    }
+
+    public string GetParameterName(int index)
+    {
+        return null;
+    }
+
+    public void SetSampleRate(float sampleRate)
+    {
+    }
+
+    public void SetBlockSize(int blockSize)
+    {
+    }
+
+    public void MainsChanged(bool onoff)
+    {
+    }
+
+    public bool EditorGetRect(out System.Drawing.Rectangle rect)
+    {
+        return false;
+    }
+
+    public bool EditorOpen(System.IntPtr hWnd)
+    {
+        return false;
+    }
+
+    public void EditorClose()
+    {
+    }
+
+    public void EditorIdle()
+    {
+    }
+
+    public byte[] GetChunk(bool isPreset)
+    {
+        return null;
+    }
+
+    public int SetChunk(byte[] data, bool isPreset)
+    {
+        return 0;
+    }
+
+    #endregion
+
+    #region IVstPluginCommandsBase Members
+
+    public void ProcessReplacing(VstAudioBuffer[] input, VstAudioBuffer[] outputs)
+    {
+    }
+
+    public void ProcessReplacing(VstAudioPrecisionBuffer[] input, VstAudioPrecisionBuffer[] outputs)
+    {
+    }
+
+    public void SetParameter(int index, float value)
+    {
+    }
+
+    public float GetParameter(int index)
+    {
+        return 0.0f;
+    }
+
+    #endregion
+
+}]]></sampleCode>
+  </item>
+  
+  <item id="GettingStarted#ImplementPluginRootClassIVstPlugin">
+    <sampleCode language="CSharp"><![CDATA[using Jacobi.Vst.Framework;
+
+    internal class Plugin : IVstPlugin
+    {
+        private IVstHost _host;
+        
+        #region IVstPlugin Members
+
+        private VstProductInfo _productInfo;
+        public VstProductInfo ProductInfo
+        {
+            get
+            {
+                if (_productInfo == null)
+                {
+                    _productInfo = new VstProductInfo("My Product", "My Vendor", 1000);
+                }
+
+                return _productInfo;
+            }
+        }
+
+        public string Name
+        {
+            get { return "My Plugin Name"; }
+        }
+
+        public Jacobi.Vst.Core.VstPluginCategory Category
+        {
+            get { return Jacobi.Vst.Core.VstPluginCategory.Unknown; }
+        }
+
+        public VstPluginCapabilities Capabilities
+        {
+            get { return VstPluginCapabilities.None; }
+        }
+
+        public int InitialDelay
+        {
+            get { return 0; }
+        }
+
+        // A four character code as integer.
+        public int PluginID
+        {
+            get { return 0; }
+        }
+
+        public void Open(IVstHost host)
+        {
+            _host = host;
+        }
+
+        public void Suspend()
+        {
+        }
+
+        public void Resume()
+        {
+        }
+
+        #endregion
+
+        #region IExtensibleObject Members
+
+        public bool Supports<T>() where T : class
+        {
+            return ((this as T) != null);
+        }
+
+        public T GetInstance<T>() where T : class
+        {
+            return (T)this as T;
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            _host = null;
+        }
+
+        #endregion
+    }
+}]]></sampleCode>
+  </item>
+
+  <item id="GettingStarted#ImplementPluginRootClassVstPluginBase">
+    <sampleCode language="CSharp">
+    </sampleCode>
+  </item>
+  
+  <item id="GettingStarted#ImplementPluginRootClassVstPluginBaseWithInterfaceManager">
+    <sampleCode language="CSharp">
+    </sampleCode>
+  </item>
+  
+  <item id="GettingStarted#ImplementAudioProcessor">
+    <sampleCode language="CSharp">
+    </sampleCode>
+  </item>
+</examples>

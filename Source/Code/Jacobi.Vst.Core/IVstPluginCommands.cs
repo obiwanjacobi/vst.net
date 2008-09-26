@@ -183,37 +183,38 @@
         /// <returns>Returns null if not implemented.</returns>
         VstPinProperties GetOutputProperties(int index);
         /// <summary>
-        /// Returns the plugin category.
+        /// Retrieves a categorization value for the plugin.
         /// </summary>
+        /// <returns>Returns the plugin category.</returns>
         VstPluginCategory GetCategory();
         #region Offline processing not implemented
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="audioFiles"></param>
-        /// <param name="count"></param>
-        /// <param name="startFlag"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="audioFiles"></param>
+        ///// <param name="count"></param>
+        ///// <param name="startFlag"></param>
+        ///// <returns></returns>
         //bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag);
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="tasks"></param>
+        ///// <param name="count"></param>
+        ///// <returns></returns>
         //bool OfflinePrepare(VstOfflineTask[] tasks, int count);
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="tasks"></param>
+        ///// <param name="count"></param>
+        ///// <returns></returns>
         //bool OfflineRun(VstOfflineTask[] tasks, int count);
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="variableIO"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="variableIO"></param>
+        ///// <returns></returns>
         //bool ProcessVariableIO(VstVariableIO variableIO);
         #endregion
         /// <summary>
@@ -360,20 +361,20 @@
         /// <returns>Returns false when not implemented.</returns>
         bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output);
         #region Offline processing not implemented
-        /// <summary>
-        /// Informs the plugin offline processor of the number of samples left to be processed.
-        /// </summary>
-        /// <param name="numberOfSamples">The sample count.</param>
-        /// <returns>It is unclear what this return value represents.</returns>
-        /// <remarks>Under construction.</remarks>
+        ///// <summary>
+        ///// Informs the plugin offline processor of the number of samples left to be processed.
+        ///// </summary>
+        ///// <param name="numberOfSamples">The sample count.</param>
+        ///// <returns>It is unclear what this return value represents.</returns>
+        ///// <remarks>Under construction.</remarks>
         //int SetTotalSamplesToProcess(int numberOfSamples);
         #endregion
         #region Plugin Host/Shell not implemented
-        /// <summary>
-        /// Under construction.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Under construction.
+        ///// </summary>
+        ///// <param name="name"></param>
+        ///// <returns></returns>
         //int GetNextPlugin(out string name);
         #endregion
         /// <summary>

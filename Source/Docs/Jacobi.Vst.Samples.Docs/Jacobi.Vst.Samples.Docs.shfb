@@ -1,17 +1,13 @@
 ﻿<project schemaVersion="1.6.0.7">
     <assemblies>
-        <assembly assemblyPath="..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.dll" xmlCommentsPath="..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.xml" commentsOnly="False" />
-        <assembly assemblyPath="..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.dll" xmlCommentsPath="..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.XML" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.XML" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.XML" commentsOnly="False" />
+        <assembly assemblyPath="..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" xmlCommentsPath="..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.XML" commentsOnly="False" />
     </assemblies>
-    <namespaceSummaries>
-        <namespaceSummaryItem name="" isDocumented="False" />
-        <namespaceSummaryItem name="Jacobi.Vst.Framework" isDocumented="True" />
-        <namespaceSummaryItem name="Jacobi.Vst.Framework.Common" isDocumented="True" />
-        <namespaceSummaryItem name="Jacobi.Vst.Framework.Plugin" isDocumented="True" />
-    </namespaceSummaries>
     <ProjectSummary />
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
-    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <VisibleItems>InheritedMembers, Internals, Protected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath path="" />
     <HtmlHelp2xCompilerPath path="" />
     <OutputPath>.\Help\</OutputPath>
@@ -27,8 +23,8 @@
     <Preliminary>False</Preliminary>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <RootNamespaceTitle />
-    <HelpTitle>VST.NET Help</HelpTitle>
-    <HtmlHelpName>Jacobi.Vst.Help</HtmlHelpName>
+    <HelpTitle>VST.NET Samples Documentation</HelpTitle>
+    <HtmlHelpName>Jacobi.Vst.Samples.Docs</HtmlHelpName>
     <Language>en-US</Language>
     <CopyrightHref>http://www.codeplex.com/vstnet</CopyrightHref>
     <CopyrightText>Copyright 2008 Jacobi Software</CopyrightText>
