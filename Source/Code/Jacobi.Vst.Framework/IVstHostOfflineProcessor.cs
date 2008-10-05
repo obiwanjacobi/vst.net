@@ -1,4 +1,8 @@
-﻿namespace Jacobi.Vst.Framework
+﻿//
+// This source file is not compiled!
+// It is part of offline processing which is not implemented
+//
+namespace Jacobi.Vst.Framework
 {
     // is 'processor' the right word?
     /// <summary>

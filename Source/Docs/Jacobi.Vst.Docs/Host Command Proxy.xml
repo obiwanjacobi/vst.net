@@ -5,80 +5,78 @@
 
   <!--
   <summary>
-    <para>Optional summary abstract</para>
-  </summary>
-  -->
-
-  <introduction>
     <para>Explain where the Host Command Proxy is located (in the framework)
     and that it is more a conceptual term (unlike the Plugin Command Proxy 
     which is a real object). Explain that with the host interface the Stub
     performs the marshaling in interop.</para>
+  </summary>
+  -->
+
+  <introduction>
+    <para>The Host Command Proxy is used in the same way as the
+    <link xlink:href="30e478e7-4eba-4eab-8a32-f9d9a2c4d2b3" />
+    but in the oposite direction. The Host Command Proxy is an object (or 
+    multiple as we will see) that lives inside the mananged Plugin and forwards
+    managed calls from the Plugin to the Host. At "the other end" the 
+    <link xlink:href="1386a1db-aa7f-437f-94d2-a6755e375ea6" />
+    receives the call (inside the 
+    <token>interop</token>
+    assembly), converts the data types and calls the Host callback function 
+    through a function pointer that was provide by the host during the Plugin
+    loading sequence.
+    </para>
   </introduction>
 
-  <!-- Add one or more top-level section elements.  These are collapsible.
-       If using <autoOutline /> tag, add an address attribute to identify
-       it so that it can be jumped to with a hyperlink. -->
-  <section address="Section1">
-    <title>Section title</title>
+  <section address="Framework">
+    <title>Inside the Framework</title>
     <content>
-      <!-- Uncomment this to create a sub-section outline
-      <autoOutline /> -->
-      <para>Add one or more sections with content</para>
+      <para>Although it does not bear the name of Host Command Proxy, there is
+      one implemented in the 
+      <token>framework</token>
+      assembly, inside the Host namespace. This namespace does not show in the
+      documentation because all its classes are internal. The class that
+      implements the
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHost</codeEntityReference>
+      interface is the root of the Host Command Proxy. The other functionality 
+      of the host is provided by other 
+      <codeInline>IVstHostXxxx</codeInline>
+      interfaces that only will be available to the Plugin if the Host supports
+      the functionality they represent. There are also some methods that return
+      a boolean as an indication wether they are supported or not.
+      </para>
+      
+      <alert class="note">
+        <para>The Host Command Proxy is not an object you have to write yourself
+        unless you write a Core Level Plugin, and even then you have the choice
+        of not writing one, but instead directly use the 
+        <codeInline>IVstHostCommandStub</codeInline>
+        interface that is passed to your Plugin.
+        </para>
+      </alert>
     </content>
-    <!-- If a section contains a sections element, its content creates
-         sub-sections.  These are not collapsible.
-    <sections>
-        <section address="SubSection1">
-            <title>Sub-section 1</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-        <section address="SubSection2">
-            <title>Sub-section 2</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-    </sections> -->
   </section>
 
+  <section address="ClassDiagram">
+    <title>Class Diagram</title>
+    <content>
+      <para>The following class diagram details the Host Command Proxy as it is 
+      implemented in the 
+      <token>framework</token>
+      assembly.
+      </para>
+      <mediaLink>
+        <caption placement="after" lead="Class Diagram">The Host Command Proxy</caption>
+        <image xlink:href="f510aae0-a362-46cf-b66b-f2eb78abab34" />
+      </mediaLink>
+    </content>
+  </section>
+  
   <relatedTopics>
-    <!-- One or more of the following:
-         - A local link
-         - An external link
-         - A code entity reference
-
-    <link xlink:href="Other Topic's ID"/>
-    <link xlink:href="Other Topic's ID">Link inner text</link>
-
-    <externalLink>
-        <linkText>Link text</linkText>
-        <linkAlternateText>Optional alternate link text</linkAlternateText>
-        <linkUri>URI</linkUri>
-    </externalLink>
-
-    <codeEntityReference>API member ID</codeEntityReference>
-
-    Examples:
-
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-    <externalLink>
-        <linkText>SHFB on CodePlex</linkText>
-        <linkAlternateText>Go to CodePlex</linkAlternateText>
-        <linkUri>http://www.codeplex.com/SHFB</linkUri>
-    </externalLink>
-
-    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-    -->
+    <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.IVstHost</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostAutomation</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostSequencer</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostShell</codeEntityReference>
+    <link xlink:href="1386a1db-aa7f-437f-94d2-a6755e375ea6" />
   </relatedTopics>
 </developerConceptualDocument>

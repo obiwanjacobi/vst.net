@@ -7,7 +7,7 @@
     <para>
     	Before you can start coding you need to setup a 
     	<application>Visual Studio</application> Project. This section describes 
-    	the steps you need to take to have a basis for your project.
+    	the steps you need to take to have a basis for your Plugin project.
     </para>
   </introduction>
 
@@ -16,8 +16,8 @@
     <content>
     	<para>Your Managed Plugin will be build into (at least) one assembly. 
     	The custom code you write will be compiled to a dll and loaded by the
-    	<token>vstnet</token> <token>interop</token> assembly. This means that
-    	the 
+    	<token>interop</token> 
+    	assembly. This means that the 
     	<application>Visual Studio</application> 
     	Project type you choose must produce a .dll. The most obvious choice 
     	is the
@@ -26,7 +26,7 @@
     	<para>This project is going to contain (at least) the public
     	<link xlink:href="3feb73bb-72dd-4618-816f-f9f1c46d7f73">Plugin Command Stub</link>
     	. If you choose to separate your plugin into multiple assemblies (dlls)
-    	you need to make sure they all are installed in the same folder or in 
+    	you need to make sure they all are installed in a single folder or in 
     	the GAC.
     	</para>
     </content>
@@ -90,7 +90,7 @@
     	<legacyBold>Add Reference...</legacyBold>.
     	</para>
     	<list class="bullet">
-  			<listItem>Add the <token>core</token>.dll</listItem>
+  			<listItem>Add the <link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" />.dll</listItem>
   			<listItem>Add the <token>framework</token>.dll</listItem>
   		</list>
   		
@@ -99,7 +99,7 @@
   			the 
   			<token>framework</token>.dll 
   			dependency and you only add the
-  			<token>core</token>.dll.
+  			<link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" />.dll.
   			</para>
 		</alert>
 	  

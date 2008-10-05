@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Struct Name="AEffect">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAACCAAAIAAAAAAAKEIAAAAAAAAAQYBCUEAERQ=</HashCode>
+      <FileName>_vst\aeffect.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ERect">
+    <Position X="2.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAgAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>_vst\aeffect.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="AEffectOpcodes">
+    <Position X="2.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>KACEBACAAMgBAAAAABAAIIBIIAICABIABAAAECAAIII=</HashCode>
+      <FileName>_vst\aeffect.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AEffectXOpcodes">
+    <Position X="4.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>JAAEAAQAClRGAA7iEABUBQgIASECAgoAgAAgAyAGEkU=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AudioMasterOpcodes">
+    <Position X="8" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAgAAAAAAAECACAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffect.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AudioMasterOpcodesX">
+    <Position X="8" Y="2.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>BAgIgICZAgAICEQAiERAAIQMABBEIAGgAEKAIggCAAE=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Vst2StringConstants">
+    <Position X="0.5" Y="8.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAIhAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstAEffectFlags">
+    <Position X="0.5" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAQICACQAAEAAAAAAgAAAgAAAAAIAAAAAIAAAAAA=</HashCode>
+      <FileName>_vst\aeffect.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

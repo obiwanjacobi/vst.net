@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginBase">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <AssociationLine Name="ProductInfo" Type="Jacobi.Vst.Framework.VstProductInfo" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="6.625" />
+        <Point X="6.25" Y="6.625" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Category" Type="Jacobi.Vst.Core.VstPluginCategory" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="4.562" />
+        <Point X="7.625" Y="4.562" />
+        <Point X="7.625" Y="2.875" />
+        <Point X="6.25" Y="2.875" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Capabilities" Type="Jacobi.Vst.Framework.VstPluginCapabilities" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="8" Y="5.437" />
+        <Point X="7.385" Y="5.437" />
+        <Point X="7.385" Y="4.051" />
+        <Point X="6.5" Y="4.051" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEiAAIgAAAAAAAAQABAAACCAIAAAAAAgADAA=</HashCode>
+      <FileName>Plugin\VstPluginBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProductInfo" />
+      <Property Name="Category" />
+      <Property Name="Capabilities" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase">
+    <Position X="0.5" Y="4.75" Width="2.75" />
+    <InheritanceLine Type="Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase" FixedFromPoint="true">
+      <Path>
+        <Point X="1.875" Y="4.164" />
+        <Point X="1.875" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Category" Type="Jacobi.Vst.Core.VstPluginCategory" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="5.125" />
+        <Point X="3.625" Y="5.125" />
+        <Point X="3.625" Y="2.926" />
+        <Point X="4.75" Y="2.926" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Capabilities" Type="Jacobi.Vst.Framework.VstPluginCapabilities" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="5.55" />
+        <Point X="3.896" Y="5.55" />
+        <Point X="3.896" Y="4.5" />
+        <Point X="4.75" Y="4.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEiAAIgAAAAAAAAQAAAAACCAIAAAAAAgACAA=</HashCode>
+      <FileName>Plugin\VstPluginWithInterfaceManagerBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProductInfo" />
+      <Property Name="Category" />
+      <Property Name="Capabilities" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase">
+    <Position X="1" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEAAAQCEACgGAAAAAIBCAAAABIAIAAAgAIQogIQCBAI=</HashCode>
+      <FileName>Plugin\PluginInterfaceManagerBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.VstProductInfo">
+    <Position X="4.75" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAECAAAAAABAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>VstProductInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Jacobi.Vst.Core.VstPluginCategory">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Jacobi.Vst.Framework.VstPluginCapabilities">
+    <Position X="4.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAABAAAAAAAAAEAAAA=</HashCode>
+      <FileName>VstPluginCapabilities.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
