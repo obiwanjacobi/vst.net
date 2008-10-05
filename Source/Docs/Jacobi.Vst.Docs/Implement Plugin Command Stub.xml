@@ -26,18 +26,19 @@
       <token>framework</token> 
       contians a base class that implements the 
       <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
-      interface, you simply derive your public class and override the 
+      interface, you simply derive your public class  from the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.StdPluginCommandStub</codeEntityReference>
+      base class and override the
       <codeEntityReference>M:Jacobi.Vst.Core.Plugin.StdPluginCommandStub.CreatePluginInstance</codeEntityReference>
       method and return a new instance of the 
-      <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b" />
-      .
+      <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b" />.
       </para>
       <codeReference>GettingStarted#ImplementPluginCommandStub</codeReference>
       
 <alert class="note">
   <para>Note that the public class explicitly derives from
   <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
-  . When the 
+  interface. When the 
   <link xlink:href="4781d47a-3b7a-41a6-b632-4a6785082bfa" />
   loads the managed Plugin assembly it will search for a public type that 
   implements that interface, but it does not search for it on base classes. 

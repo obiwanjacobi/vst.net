@@ -3,13 +3,6 @@
   xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
   xmlns:xlink="http://www.w3.org/1999/xlink">
 
-  <summary>
-    <para>Explain the function of the plugin root class.</para>
-    <para>Discuss the base classes the framework provide.</para>
-    <para>Link to the Interface Manager.</para>
-    <para>Provide a code snippet using a base class.</para>
-  </summary>
-
   <introduction>
   	<para>The 
     <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
@@ -73,12 +66,35 @@
       <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
       for you. Most of the properties are set to the value passed into the 
       constructor of this base class and the methods of the interface are all 
-      implemented as virtual, thus overridable in your derived class.
+      implemented as virtual, thus overridable in your derived class. Another 
+      important aspect of using this base class is that it assumes you implement
+      all additional interfaces on the Plugin root object instance itself 
+      (a bit like the original VST C++ SDK did). If you want to use the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+      class you should override the 
+      <codeInline>Supports</codeInline>
+      and
+      <codeInline>GetInstance</codeInline>
+      methods and route those to your instance of the class that derives from
+      <codeInline>PluginInterfaceManagerBase</codeInline> class.
       </para>
       <para>The following code example shows you how to use the VstPluginBase
       class.</para>
       
       <codeReference>GettingStarted#ImplementPluginRootClassVstPluginBase</codeReference>
+      
+      <para>Compared to the previous section there is a lot less coding to do. 
+      The
+      <codeInline>VstPluginBase</codeInline>
+      class implements the
+      <codeInline>IExtensible</codeInline>
+      interface in the same way as show in the previous section. The
+      <codeEntityReference>M:Jacobi.Vst.Framework.Plugin.VstPluginBase.Dispose</codeEntityReference>
+      method is virtual and can be overriden. Do call the base class for it 
+      resets the 
+      <codeEntityReference>P:Jacobi.Vst.Framework.Plugin.VstPluginBase.Host</codeEntityReference>
+      property.
+      </para>
     </content>
   </section>
 
@@ -86,14 +102,41 @@
     <title>Derive from VstPluginWithInterfaceManagerBase</title>
     <content>
       <para>
+      The 
       <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
+      not only provides an implementation for the 
+      <codeInline>IVstPlugin</codeInline>
+      interface it also derives from the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+      base class. The methods of the 
+      <codeInline>IExtension</codeInline>
+      interface are mapped to the implementation provided by the 
+      <codeInline>PluginInterfaceManagerBase</codeInline> class.
       </para>
+      <para>This means that all the
+      <codeInline>CreateXxxx</codeInline>
+      overrides are implemented on the Plugin root object as shown in the 
+      following example.
+      </para>
+      
+      <codeReference>GettingStarted#ImplementPluginRootClassVstPluginWithInterfaceManagerBase</codeReference>
+      
+	  <alert class="note">
+		<para>Note that the 
+		<codeInline>AudioProcessor</codeInline>
+		is a class that is not shown in the sample code but is meant to 
+		demonstrate how the objects that implement the additional interfaces of
+		<token>vstnet</token> could be managed.
+		</para>
+	  </alert>
+
     </content>
   </section>
   
   <relatedTopics>
   <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
-  <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.FxPluginInterfaceManager</codeEntityReference>
+  <codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+  <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
   <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginBase</codeEntityReference>
   <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
   <link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a"/> 

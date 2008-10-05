@@ -375,105 +375,211 @@ public class MyPluginCommandStub : IVstPluginCommandStub
   <item id="GettingStarted#ImplementPluginRootClassIVstPlugin">
     <sampleCode language="CSharp"><![CDATA[using Jacobi.Vst.Framework;
 
-    internal class Plugin : IVstPlugin
+internal class Plugin : IVstPlugin
+{
+    private IVstHost _host;
+    
+    #region IVstPlugin Members
+
+    private VstProductInfo _productInfo;
+    public VstProductInfo ProductInfo
     {
-        private IVstHost _host;
-        
-        #region IVstPlugin Members
-
-        private VstProductInfo _productInfo;
-        public VstProductInfo ProductInfo
+        get
         {
-            get
+            if (_productInfo == null)
             {
-                if (_productInfo == null)
-                {
-                    _productInfo = new VstProductInfo("My Product", "My Vendor", 1000);
-                }
-
-                return _productInfo;
+                _productInfo = new VstProductInfo("My Product", "My Vendor", 1000);
             }
+
+            return _productInfo;
         }
-
-        public string Name
-        {
-            get { return "My Plugin Name"; }
-        }
-
-        public Jacobi.Vst.Core.VstPluginCategory Category
-        {
-            get { return Jacobi.Vst.Core.VstPluginCategory.Unknown; }
-        }
-
-        public VstPluginCapabilities Capabilities
-        {
-            get { return VstPluginCapabilities.None; }
-        }
-
-        public int InitialDelay
-        {
-            get { return 0; }
-        }
-
-        // A four character code as integer.
-        public int PluginID
-        {
-            get { return 0; }
-        }
-
-        public void Open(IVstHost host)
-        {
-            _host = host;
-        }
-
-        public void Suspend()
-        {
-        }
-
-        public void Resume()
-        {
-        }
-
-        #endregion
-
-        #region IExtensibleObject Members
-
-        public bool Supports<T>() where T : class
-        {
-            return ((this as T) != null);
-        }
-
-        public T GetInstance<T>() where T : class
-        {
-            return (T)this as T;
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            _host = null;
-        }
-
-        #endregion
     }
+
+    public string Name
+    {
+        get { return "My Plugin Name"; }
+    }
+
+    public Jacobi.Vst.Core.VstPluginCategory Category
+    {
+        get { return Jacobi.Vst.Core.VstPluginCategory.Unknown; }
+    }
+
+    public VstPluginCapabilities Capabilities
+    {
+        get { return VstPluginCapabilities.None; }
+    }
+
+    public int InitialDelay
+    {
+        get { return 0; }
+    }
+
+    // A four character code as integer.
+    public int PluginID
+    {
+        get { return 0; }
+    }
+
+    public void Open(IVstHost host)
+    {
+        _host = host;
+    }
+
+    public void Suspend()
+    {
+    }
+
+    public void Resume()
+    {
+    }
+
+    #endregion
+
+    #region IExtensibleObject Members
+
+    public bool Supports<T>() where T : class
+    {
+        return (this is T);
+    }
+
+    public T GetInstance<T>() where T : class
+    {
+        return (this as T);
+    }
+
+    #endregion
+
+    #region IDisposable Members
+
+    public void Dispose()
+    {
+        _host = null;
+    }
+
+    #endregion
 }]]></sampleCode>
   </item>
 
   <item id="GettingStarted#ImplementPluginRootClassVstPluginBase">
-    <sampleCode language="CSharp">
-    </sampleCode>
+    <sampleCode language="CSharp">using Jacobi.Vst.Core;
+using Jacobi.Vst.Framework;
+using Jacobi.Vst.Framework.Plugin;
+
+class MyPlugin : VstPluginBase, IVstPluginBypass
+{
+    public MyPlugin()
+        : base("My Plugin", 
+            new VstProductInfo("My Product", "My Vendor", 1000),
+            VstPluginCategory.Synth, 
+            VstPluginCapabilities.NoSoundInStop, 
+            0, 
+            0)  // enter unique plugin ID
+    {}
+    
+    private bool _bypass;
+    public bool Bypass
+    {
+    	get { return _bypass; }
+    	set { _bypass = value; OnBypassChanged(); }
+    }
+    
+    protected virtual void OnBypassChanged()
+    {
+    	// TODO: raise event to trigger audio processor
+    }
+    
+    // other methods...
+}</sampleCode>
   </item>
   
-  <item id="GettingStarted#ImplementPluginRootClassVstPluginBaseWithInterfaceManager">
-    <sampleCode language="CSharp">
-    </sampleCode>
+  <item id="GettingStarted#ImplementPluginRootClassVstPluginWithInterfaceManagerBase">
+    <sampleCode language="CSharp">using Jacobi.Vst.Core;
+using Jacobi.Vst.Framework;
+using Jacobi.Vst.Framework.Plugin;
+
+class MyPlugin : VstPluginWithInterfaceManagerBase
+{
+    public MyPlugin()
+        : base("My Plugin", 
+            new VstProductInfo("My Product", "My Vendor", 1000),
+            VstPluginCategory.Synth, 
+            VstPluginCapabilities.NoSoundInStop, 
+            0, 
+            0)  // enter unique plugin ID
+    {}
+    
+    protected override IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
+    {
+        if (instance == null) return new AudioProcessor(this);
+
+        // base class just returns 'instance'
+        return base.CreateAudioProcessor(instance);
+    }
+    
+    // other methods...
+}</sampleCode>
   </item>
   
   <item id="GettingStarted#ImplementAudioProcessor">
+    <sampleCode language="CSharp"><![CDATA[using Jacobi.Vst.Core;
+using Jacobi.Vst.Framework;
+
+class AudioProcessor : IVstPluginAudioProcessor
+{
+    #region IVstPluginAudioProcessor Members
+
+    public int BlockSize { get; set; }
+
+    public int InputCount
+    {
+        get { return 2; }
+    }
+
+    public int OutputCount
+    {
+        get { return 2; }
+    }
+
+    public double SampleRate { get; set; }
+
+    public int TailSize
+    {
+        get { return 0; }
+    }
+
+    public void Process(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
+    {
+        VstAudioBuffer input = inputs[0];
+        VstAudioBuffer output = outputs[0];
+
+        for (int index = 0; index < output.SampleCount; index++)
+        {
+            output[index] = input[index];
+        }
+
+        input = inputs[1];
+        output = outputs[1];
+
+        for (int index = 0; index < output.SampleCount; index++)
+        {
+            output[index] = input[index];
+        }
+    }
+
+    public bool SetPanLaw(VstPanLaw type, float gain)
+    {
+        return false;
+    }
+    
+    #endregion
+}]]></sampleCode>
+  </item>
+  
+  <item id="GettingStarted#">
     <sampleCode language="CSharp">
+    
     </sampleCode>
   </item>
+  
 </examples>

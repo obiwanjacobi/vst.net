@@ -2,18 +2,46 @@
     <assemblies>
         <assembly assemblyPath="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.dll" xmlCommentsPath="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.xml" commentsOnly="False" />
         <assembly assemblyPath="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.dll" xmlCommentsPath="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.xml" commentsOnly="False" />
-        <assembly assemblyPath="..\..\Code\Debug\Jacobi.Vst.Interop.dll" xmlCommentsPath="" commentsOnly="False" />
     </assemblies>
+    <namespaceSummaries>
+        <namespaceSummaryItem name="" isDocumented="False" />
+        <namespaceSummaryItem name="Jacobi.Vst.Core" isDocumented="True">The Jacobi.Vst.Core namespace contains all managed types that have an unmanaged counterpart in the native C++ VST SDK.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Jacobi.Vst.Core.Plugin" isDocumented="True">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Plugin.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Jacobi.Vst.Framework" isDocumented="True">The Jacobi.Vst.Framework namespace contains all framework interfaces and types that are used as a basis for the implementation and communication with a managed Plugin.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Jacobi.Vst.Framework.Common" isDocumented="True">The Jacobi.Vst.Framework.Common namespace contains reusable types for implementing Managed Plugins.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Jacobi.Vst.Framework.Plugin" isDocumented="True">The Jacobi.Vst.Framework.Plugin namespace contains all types that directly support implementing a managed Plugin.</namespaceSummaryItem>
+    </namespaceSummaries>
     <conceptualContent snippetFile=".\Files\CodeSnippets.xml">
         <tokens>
-            <token name="core" value="Jacobi.Vst.Core" />
-            <token name="framework" value="Jacobi.Vst.Framework" />
-            <token name="interop" value="Jacobi.Vst.Interop" />
-            <token name="vs2005" value="Visual Studio 2005" />
-            <token name="vs2008" value="Visual Studio 2008" />
-            <token name="vs2008e" value="Visual Studio 2008 Express" />
+            <token name="core" value="&lt;ddue:link xlink:href=&quot;4f3d4350-e61e-4909-a294-c281511a336a&quot; /&gt;" />
+            <token name="framework" value="&lt;ddue:link xlink:href=&quot;bf34ecc4-5cd1-4770-86fe-2cda55f05823&quot; /&gt;" />
+            <token name="interop" value="&lt;ddue:link xlink:href=&quot;e5d53d11-e4bb-43b9-abe9-04b0507465dc&quot; /&gt;" />
+            <token name="vs2005" value="&lt;application&gt;Visual Studio 2005&lt;/application&gt;" />
+            <token name="vs2008" value="&lt;application&gt;Visual Studio 2008&lt;/application&gt;" />
+            <token name="vs2008e" value="&lt;application&gt;Visual Studio 2008 Express&lt;/application&gt;" />
             <token name="vstnet" value="&lt;ddue:externalLink&gt;&#xD;&#xA;    &lt;ddue:linkText&gt;VST.NET&lt;/ddue:linkText&gt;&#xD;&#xA;    &lt;ddue:linkUri&gt;http://www.codeplex.com/vstnet&lt;/ddue:linkUri&gt;&#xD;&#xA;&lt;/ddue:externalLink&gt;" />
+            <token name="depnote" value="The double underscores '__' preceding some member names as well as these names ending in &lt;literal&gt;Deprecated&lt;/literal&gt;, is an indication of deprecated members for VST version 2.4. These members were used in an earlier version of the VST standard but are no longer used in VST 2.4." />
         </tokens>
+        <images>
+            <image id="c6b3a492-895c-474f-8da3-6e6f6462ea19" file=".\Files\Class Diagrams\Jacobi.Vst.Core.Enums.png" altText="" alwaysCopy="False" />
+            <image id="e1c8b48e-9a89-453b-92ce-675a6943580f" file=".\Files\Class Diagrams\Jacobi.Vst.Core.Interfaces.png" altText="" alwaysCopy="False" />
+            <image id="27c2404c-0398-406b-99f8-35415f5c6e3f" file=".\Files\Class Diagrams\Jacobi.Vst.Core.Types.png" altText="" alwaysCopy="False" />
+            <image id="50f88d51-248a-4c4a-bf58-c0696d339261" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.InterfaceManager.png" altText="" alwaysCopy="False" />
+            <image id="9105df1e-24d0-4912-8808-72f787e5e285" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.Interfaces.png" altText="" alwaysCopy="False" />
+            <image id="557c9abc-efc6-4710-bc5a-dadc7d2e4494" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.MidiPrograms.png" altText="" alwaysCopy="False" />
+            <image id="f34ce520-6a4c-45e3-bc4a-a45b6e4f448d" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.PluginCommandStub.png" altText="" alwaysCopy="False" />
+            <image id="241b05d3-427c-42b8-a6f8-f11d6501474a" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.PluginRoot.png" altText="" alwaysCopy="False" />
+            <image id="02d56585-99fc-4b52-803c-7794f670c031" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.Programs.png" altText="" alwaysCopy="False" />
+            <image id="6579ac13-8a11-42a6-a3d5-b76b6c3cefe3" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.SpeakerArrangements.png" altText="" alwaysCopy="False" />
+            <image id="b395f371-e20f-4061-b194-55b2eb3a6366" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.Types.png" altText="" alwaysCopy="False" />
+            <image id="2e41f8c2-90da-426b-acc6-86dfa60a908c" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstMain.png" altText="" alwaysCopy="False" />
+            <image id="6694ccb9-4dbf-4aff-b148-83de9b63cda2" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstMidi.png" altText="" alwaysCopy="False" />
+            <image id="7d0ddcff-27a2-4ea1-947c-1bb92844d50b" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstOffline.png" altText="" alwaysCopy="False" />
+            <image id="ffe9b212-1e9e-40d4-8155-459af64126c3" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstParametersTimeInfo.png" altText="" alwaysCopy="False" />
+            <image id="dbcfb90b-2658-4c0a-996c-fc10690741f8" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstPlugin.png" altText="" alwaysCopy="False" />
+            <image id="16c8f304-27a2-40e2-a3e8-f5aad579dcb6" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstSpeakerArrangement.png" altText="" alwaysCopy="False" />
+            <image id="f510aae0-a362-46cf-b66b-f2eb78abab34" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.gHostCommandProxy.png" altText="" alwaysCopy="False" />
+        </images>
         <topics defaultTopic="ece9a5be-249e-40c1-9846-2af35a396e02">
             <topic id="ece9a5be-249e-40c1-9846-2af35a396e02" file=".\Welcome.xml" revision="1" visible="True" />
             <topic id="cf9d75ad-b917-4760-bd47-f5fc9a913c3c" file=".\License Agreement.xml" revision="1" visible="True" />
@@ -25,21 +53,35 @@
                 <topic id="5e94bd76-fadd-4def-9e1a-261b18a42f0e" file=".\Implement Audio Processor.xml" title="Implement an Audio Processor" revision="1" visible="True" />
             </topic>
             <topic id="998b4a9d-b4a6-4529-93e3-6bd96e620a50" file=".\Reference.xml" revision="1" visible="True">
-                <topic id="4781d47a-3b7a-41a6-b632-4a6785082bfa" file=".\Managed Plugin Factory.xml" revision="1" visible="True" />
-                <topic id="30e478e7-4eba-4eab-8a32-f9d9a2c4d2b3" file=".\Plugin Command Proxy.xml" revision="1" visible="True" />
-                <topic id="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6" file=".\Plugin Command Stub.xml" revision="1" visible="True" />
-                <topic id="a6802bfe-1ae8-444e-abd5-dbe1a348f193" file=".\Host Command Proxy.xml" revision="1" visible="True" />
-                <topic id="1386a1db-aa7f-437f-94d2-a6755e375ea6" file=".\Host Command Stub.xml" revision="1" visible="True" />
-                <topic id="0aca5a96-16d9-4f8e-a830-202d8bad418a" file=".\Plugin Interface Manager.xml" revision="1" visible="True" />
-                <topic id="62feac6e-0c75-4ef8-8703-fb970f81280b" file=".\Plugin Root Class.xml" revision="1" visible="True" />
-                <topic id="b1420795-40cc-451e-8240-582023abe7ab" file=".\Custom Plugin Editor.xml" revision="1" visible="True" />
-                <topic id="1977452f-9b2d-4d4f-a93c-768ab2ede63e" file=".\Audio Processing.xml" revision="1" visible="True" />
-                <topic id="95fdded5-2ce5-401d-aecd-ff8feceaba91" file=".\Midi Processing.xml" revision="1" visible="True" />
-                <topic id="ba4dbc74-d9b0-439a-b767-ada82c153a56" file=".\Plugin Midi Programs.xml" revision="1" visible="True" />
-                <topic id="c3df31da-acf5-4f57-8178-c00b1bc545ba" file=".\Plugin Parameters.xml" revision="1" visible="True" />
-                <topic id="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb" file=".\Plugin Programs.xml" revision="1" visible="True" />
-                <topic id="9285210d-328b-495d-826e-9a20939004d1" file=".\Plugin Persistence.xml" revision="1" visible="True" />
-                <topic id="f6dfa34b-ce35-4e73-9f79-d5056050800d" file=".\Plugin Connections.xml" revision="1" visible="True" />
+                <topic id="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" file=".\Vst 2.4.xml" revision="1" visible="True">
+                    <topic id="15c41efc-a95c-4b32-88ca-4757a512119d" file=".\Vst Main Types.xml" revision="1" visible="True" />
+                    <topic id="157d7456-7408-4191-bb51-b10d84f34c3b" file=".\Vst Plugin Types.xml" revision="1" visible="True" />
+                    <topic id="1fe46e11-2175-419e-9c3c-2b073c2fa033" file=".\Vst Parameter and Time Info Types.xml" revision="1" visible="True" />
+                    <topic id="e39fb19a-8671-4ee3-9cce-94dd9ac55a0e" file=".\Vst Midi Types.xml" revision="1" visible="True" />
+                    <topic id="b48c995e-c3fc-4f67-b097-6e57869d8fc9" file=".\Vst Connection Types.xml" revision="1" visible="True" />
+                    <topic id="a52645b1-9524-44ea-a849-9c96604bb9e6" file=".\Vst Offline Types.xml" revision="1" visible="True" />
+                </topic>
+                <topic id="e5d53d11-e4bb-43b9-abe9-04b0507465dc" file=".\Jacobi.Vst.Interop.xml" revision="1" visible="True">
+                    <topic id="30e478e7-4eba-4eab-8a32-f9d9a2c4d2b3" file=".\Plugin Command Proxy.xml" revision="1" visible="True" />
+                    <topic id="1386a1db-aa7f-437f-94d2-a6755e375ea6" file=".\Host Command Stub.xml" revision="1" visible="True" />
+                </topic>
+                <topic id="4f3d4350-e61e-4909-a294-c281511a336a" file=".\Jacobi.Vst.Core.xml" revision="1" visible="True">
+                    <topic id="4781d47a-3b7a-41a6-b632-4a6785082bfa" file=".\Managed Plugin Factory.xml" revision="1" visible="True" />
+                </topic>
+                <topic id="bf34ecc4-5cd1-4770-86fe-2cda55f05823" file=".\Jacobi.Vst.Framework.xml" revision="1" visible="True">
+                    <topic id="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6" file=".\Plugin Command Stub.xml" revision="1" visible="True" />
+                    <topic id="a6802bfe-1ae8-444e-abd5-dbe1a348f193" file=".\Host Command Proxy.xml" revision="1" visible="True" />
+                    <topic id="62feac6e-0c75-4ef8-8703-fb970f81280b" file=".\Plugin Root Class.xml" revision="1" visible="True" />
+                    <topic id="0aca5a96-16d9-4f8e-a830-202d8bad418a" file=".\Plugin Interface Manager.xml" revision="1" visible="True" />
+                    <topic id="1977452f-9b2d-4d4f-a93c-768ab2ede63e" file=".\Audio Processing.xml" revision="1" visible="True" />
+                    <topic id="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb" file=".\Plugin Programs.xml" revision="1" visible="True" />
+                    <topic id="c3df31da-acf5-4f57-8178-c00b1bc545ba" file=".\Plugin Parameters.xml" revision="1" visible="True" />
+                    <topic id="9285210d-328b-495d-826e-9a20939004d1" file=".\Plugin Persistence.xml" revision="1" visible="True" />
+                    <topic id="b1420795-40cc-451e-8240-582023abe7ab" file=".\Custom Plugin Editor.xml" revision="1" visible="True" />
+                    <topic id="95fdded5-2ce5-401d-aecd-ff8feceaba91" file=".\Midi Processing.xml" revision="1" visible="True" />
+                    <topic id="ba4dbc74-d9b0-439a-b767-ada82c153a56" file=".\Plugin Midi Programs.xml" revision="1" visible="True" />
+                    <topic id="f6dfa34b-ce35-4e73-9f79-d5056050800d" file=".\Plugin Connections.xml" revision="1" visible="True" />
+                </topic>
                 <topic id="ddbac9cc-dc13-4463-a2c3-38dd9c3ed99f" file=".\Not Supported.xml" revision="1" visible="True" />
             </topic>
         </topics>
@@ -51,10 +93,9 @@
         <component id="Cached Framework Comments Index Data" enabled="True" configuration="&lt;component id=&quot;Cached Framework Comments Index Data&quot; type=&quot;SandcastleBuilder.Components.CachedCopyFromIndexComponent&quot; assembly=&quot;{@SHFBFolder}SandcastleBuilder.Components.dll&quot;&gt;&#xD;&#xA;&lt;index name=&quot;comments&quot; value=&quot;/doc/members/member&quot; key=&quot;@name&quot; cache=&quot;100&quot;&gt;&#xD;&#xA;{@CachedFrameworkCommentList}&#xD;&#xA;{@CommentFileList}&#xD;&#xA;            &lt;/index&gt;&#xD;&#xA;&lt;copy name=&quot;comments&quot; source=&quot;*&quot; target=&quot;/document/comments&quot; /&gt;&#xD;&#xA;&lt;/component&gt;" />
     </componentConfigurations>
     <plugInConfigurations>
-        <plugIn id="Hierarchical Table of Content" enabled="True" configuration="&lt;configuration&gt;&lt;toc minParts=&quot;2&quot; insertBelow=&quot;True&quot; /&gt;&lt;/configuration&gt;" />
-        <plugIn id="Table of Content Exclusion" enabled="True" configuration="&lt;configuration /&gt;" />
+        <plugIn id="Hierarchical Table of Content" enabled="True" configuration="&lt;configuration /&gt;" />
     </plugInConfigurations>
-    <ProjectSummary />
+    <ProjectSummary>VST.NET (Jacobi.Vst) is a code library that allows developer to create managed VST Plugins quickly. It takes care of marshalling calls between .NET and C++ and visa versa.</ProjectSummary>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath path="" />

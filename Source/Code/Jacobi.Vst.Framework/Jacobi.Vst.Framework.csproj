@@ -66,7 +66,7 @@
     <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />
-    <Compile Include="IVstHostOfflineProcessor.cs" />
+    <None Include="IVstHostOfflineProcessor.cs" />
     <Compile Include="IVstPluginConnections.cs" />
     <Compile Include="IVstPluginMidiSource.cs" />
     <Compile Include="IVstPluginParameters.cs" />
@@ -118,7 +118,14 @@
     <Compile Include="VstConnectionInfoCollection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Class Diagrams\Jacobi.Vst.Framework._HostCommandProxy.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.InterfaceManager.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Framework.Interfaces.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.MidiPrograms.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.PluginCommandStub.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.PluginRoot.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.Programs.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.SpeakerArrangements.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Framework.Types.cd" />
   </ItemGroup>
   <ItemGroup>

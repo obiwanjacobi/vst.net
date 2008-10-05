@@ -47,6 +47,16 @@
     </sections> -->
   </section>
 
+  <section address="ClassDiagram">
+    <title>Class Diagram</title>
+    <content>
+      <mediaLink>
+        <caption placement="after" lead="Class Diagram">The Plugin Interface Manager</caption>
+        <image xlink:href="50f88d51-248a-4c4a-bf58-c0696d339261" />
+      </mediaLink>
+    </content>
+  </section>
+  
   <relatedTopics>
     <!-- One or more of the following:
          - A local link

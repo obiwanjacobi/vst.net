@@ -356,6 +356,35 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Class Diagrams"
+			Filter="cd"
+			>
+			<File
+				RelativePath=".\Jacobi.Vst.Interop.VstMain.cd"
+				>
+			</File>
+			<File
+				RelativePath=".\Jacobi.Vst.Interop.VstMidi.cd"
+				>
+			</File>
+			<File
+				RelativePath=".\Jacobi.Vst.Interop.VstOffline.cd"
+				>
+			</File>
+			<File
+				RelativePath=".\Jacobi.Vst.Interop.VstParametersTimeInfo.cd"
+				>
+			</File>
+			<File
+				RelativePath=".\Jacobi.Vst.Interop.VstPlugin.cd"
+				>
+			</File>
+			<File
+				RelativePath=".\Jacobi.Vst.Interop.VstSpeakerArrangement.cd"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

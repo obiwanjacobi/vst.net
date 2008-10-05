@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Struct Name="VstFileSelect">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAQBIAAQAIAAAAAAAAAAQBBAAABQAAAAAAAEI=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstFileType">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAEAABGAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstKeyCode">
+    <Position X="4.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="VstAutomationStates">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAgAACgAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstFileSelectCommand">
+    <Position X="2.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAAAQAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstFileSelectType">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstHostLanguage">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAgAAABAAAgAAAAAAAAAAgAIAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstModifierKey">
+    <Position X="4.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAIAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstPanLawType">
+    <Position X="2.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstPlugCategory">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEQAAAABCAAQAAAACBAAAADAIBAAAAAAgAACAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstProcessLevels">
+    <Position X="0.5" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAIAAAAAAAAAAAAAAAAAAAFAAAAAAEAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstProcessPrecision">
+    <Position X="4.25" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgCAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstVirtualKey">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EJAACDCAQAARBQNKJCoJAIFhHwAIoAAAElQAEgIAAEA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
