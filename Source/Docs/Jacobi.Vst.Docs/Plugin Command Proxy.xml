@@ -5,81 +5,116 @@
 
   <!--
   <summary>
-    <para>Optional summary abstract</para>
-  </summary>
-  -->
-
-  <introduction>
     <para>Explain the function of the Plugin Command Proxy and how it receives
     callbacks from the host and delegates those to the Plugin Command Stub.
     Explain about the Type Conversion done and when allocated unmanaged memory
     is freed. Explain the difference between dispatch (non-time critical)
     and process(Replacing) and Get/SetParameter callbacks (time critical).</para>
+  </summary>
+  -->
+
+  <introduction>
+    <para>The
+    <codeInline>PluginCommandProxy</codeInline>
+    class is the front end of the journey a Host-to-Plugin call makes. As a 
+    result of the VST Plugin loading sequence the Host receives several function
+    pointers it uses to perform certain operations. These calls all come in at 
+    the
+    <codeInline>PluginCommandProxy</codeInline>
+    where the parameters are transformed into .NET compatible types and 
+    forwarded to the
+    <codeInline>PluginCommandStub</codeInline>.
+    </para>
   </introduction>
 
-  <!-- Add one or more top-level section elements.  These are collapsible.
-       If using <autoOutline /> tag, add an address attribute to identify
-       it so that it can be jumped to with a hyperlink. -->
-  <section address="Section1">
-    <title>Section title</title>
+  <section address="PluginCommandProxyRole">
+    <title>The role of the Plugin Command Proxy</title>
     <content>
-      <!-- Uncomment this to create a sub-section outline
-      <autoOutline /> -->
-      <para>Add one or more sections with content</para>
+      <para>The role of the
+      <codeInline>PluginCommandProxy</codeInline>
+      is to receive calls from the Host made on those function pointers it got
+      when the Plugin was loaded and forward them to the
+      <codeInline>PluginCommandStub</codeInline>.
+      The problem this objects addresses is that the Host is C++ and the
+      <codeInline>PluginCommandStub</codeInline> is managed code (C#). So in 
+      forwarding the call it also converts the method parameters into .NET 
+      (compatible) types.
+      </para>
+      <para>
+      Not all calls from the Host are treated in the same fashion.
+      <token>vstnet</token>
+      devides the calls into two categories:
+      <list class="bullet">
+        <listItem>Time-critical. (<codeInline>ProcesReplacing</codeInline>)</listItem>
+        <listItem>Non-time-critical. (all others)</listItem>
+      </list>
+      The 
+      <codeInline>ProcessReplacing</codeInline>
+      calls handle audio processing (32 bit and 64 bit) and are seen as 
+      time-critical. During execution of the calls the Garbage Collector of .NET 
+      is set to a low-latency mode, causing as few interuptions as possible. 
+      During this time you should <legacyBold>not</legacyBold> allocate large 
+      structures.
+      </para>
     </content>
-    <!-- If a section contains a sections element, its content creates
-         sub-sections.  These are not collapsible.
-    <sections>
-        <section address="SubSection1">
-            <title>Sub-section 1</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-        <section address="SubSection2">
-            <title>Sub-section 2</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-    </sections> -->
+  </section>
+  
+  <section address="MakingJump">
+    <title>Making the Jump to .NET</title>
+    <content>
+      <para>Without going into too much details on how the type conversion in 
+      the
+      <token>interop</token>
+      assemlby works exactly this section attempts to shed some light on it. The
+      <token>interop</token>
+      assembly uses the Managed Extensions of the Microsoft C++ compiler to work 
+      its magic. The Managed Extensions allow you to build a C++ dll that 
+      contains both native C++ code as well as managed .NET code. This means 
+      that the
+      <token>interop</token> 
+      assembly can implement a native C++ (VST) interface
+      but still call out to a managed object on the other side. The VST Standard
+      uses a lot of structures (the managed versions of these structures are 
+      located in the 
+      <token>core</token>
+      assembly) that have to be converted by hand. The 
+      <codeInline>TypeConverter</codeInline>
+      has all the conversion routines needed for all the data types used in the
+      VST interface. Luckily for us there is not much difference in the C++ 
+      basic data types (integer, float, etc) and its managed counter parts. 
+      These types are known as blittable types and can be assigned freely.
+      </para>
+      <para>Some VST method calls require an unmanaged memory allocation. There
+      is a 
+      <codeInline>MemoryTracker</codeInline> object that keeps track on all 
+      allocated memory (just a list, really). During the suspend/resume call, 
+      when the Plugin is turned on or off, the unmanaged memory is freed.
+      </para>
+    </content>
+  </section>
+
+  <section address="ProxyStub">
+    <title>More on Proxy - Stub</title>
+    <content>
+      <para>The terminology of Proxy and Stub is taken from COM (Component 
+      Object Model) a binary component standard in Windows. Whenever a call had
+      to be marshalled from a remote place to the actual object a proxy-stub
+      pair was used to make that happen. The proxy implemented the exact same 
+      interface as the real object so the client didn't have to change any code.
+      The proxy took the call, serialized it into a blob and sent it to the stub
+      where the blob was deserialized and the actual object was called with the
+      parameters that were provided by the client. The return value went in 
+      reverse.</para>
+      
+      <para>So a proxy in 
+      <token>vstnet</token>
+      is an object that accepts calls from a 'client' and transforms them in such
+      a way that they make it over to the other side, where the stub is waiting
+      to dispatch that call to the actual object.</para>
+    </content>
   </section>
 
   <relatedTopics>
-    <!-- One or more of the following:
-         - A local link
-         - An external link
-         - A code entity reference
-
-    <link xlink:href="Other Topic's ID"/>
-    <link xlink:href="Other Topic's ID">Link inner text</link>
-
-    <externalLink>
-        <linkText>Link text</linkText>
-        <linkAlternateText>Optional alternate link text</linkAlternateText>
-        <linkUri>URI</linkUri>
-    </externalLink>
-
-    <codeEntityReference>API member ID</codeEntityReference>
-
-    Examples:
-
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-    <externalLink>
-        <linkText>SHFB on CodePlex</linkText>
-        <linkAlternateText>Go to CodePlex</linkAlternateText>
-        <linkUri>http://www.codeplex.com/SHFB</linkUri>
-    </externalLink>
-
-    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-    -->
+    <link xlink:href="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6"/>
   </relatedTopics>
 </developerConceptualDocument>

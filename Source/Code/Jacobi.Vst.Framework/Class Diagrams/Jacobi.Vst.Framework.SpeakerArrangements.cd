@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Framework.VstConnectionInfoCollection" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstConnectionInfoCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.VstConnectionInfo">
+    <Position X="4.5" Y="2.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAEAAAAAAAABABAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>VstConnectionInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpeakerArrangementType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstSpeakerArrangement">
+    <Position X="0.5" Y="3" Width="2.25" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Speakers" />
+      <Property Name="Type" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstSpeakerProperties">
+    <Position X="1" Y="4.5" Width="1.75" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="SpeakerType" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="Jacobi.Vst.Framework.IVstPluginConnections" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <AssociationLine Name="InputConnectionInfos" Type="Jacobi.Vst.Framework.VstConnectionInfoCollection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="0.688" />
+        <Point X="5.922" Y="0.688" />
+        <Point X="5.922" Y="1.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.461" Y="0.131" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="OutputConnectionInfos" Type="Jacobi.Vst.Framework.VstConnectionInfoCollection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="0.812" />
+        <Point X="5.18" Y="0.812" />
+        <Point X="5.18" Y="1.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.081" Y="0.141" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="InputSpeakerArrangement" Type="Jacobi.Vst.Core.VstSpeakerArrangement">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.69" Y="0.225" Height="0.16" Width="1.7" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="OutputSpeakerArrangement" Type="Jacobi.Vst.Core.VstSpeakerArrangement">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.794" Y="0.12" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAQAAgIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginConnections.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="InputConnectionInfos" />
+      <Property Name="OutputConnectionInfos" />
+      <Property Name="InputSpeakerArrangement" />
+      <Property Name="OutputSpeakerArrangement" />
+    </ShowAsAssociation>
+  </Interface>
+  <Enum Name="Jacobi.Vst.Core.VstSpeakerArrangementType">
+    <Position X="8.75" Y="1.25" Width="2.25" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="Jacobi.Vst.Core.VstSpeakerTypes">
+    <Position X="4.5" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

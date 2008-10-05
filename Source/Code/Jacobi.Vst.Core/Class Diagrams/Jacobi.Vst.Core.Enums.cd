@@ -8,17 +8,10 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstModifierKeys">
-    <Position X="9" Y="10.75" Width="1.5" />
+    <Position X="9" Y="11" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAIAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>VstVirtualKey.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="Jacobi.Vst.Core.VstAudioFileFlags">
-    <Position X="0.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAABAAAAAAAAAAABQAQAAgCIAAAAAAIAAAQAAA=</HashCode>
-      <FileName>VstAudioFile.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstAutomationStates">
@@ -36,28 +29,28 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstPluginCanDo">
-    <Position X="6" Y="3.75" Width="1.5" />
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAgAAQAAAAIAAAiQAIAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAIAgAAQAAAAIAAAiQAIAAAAAAABA=</HashCode>
       <FileName>VstCanDo.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstCanDoResult">
-    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Position X="4.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>VstCanDoResult.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstEventTypes">
-    <Position X="0.5" Y="3" Width="1.5" />
+    <Position X="2.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAAAAAAAABA=</HashCode>
       <FileName>VstEvent.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstHostLanguage">
-    <Position X="0.5" Y="4.25" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAACQAAAAAAAIQAAAAAAABAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>VstHostLanguage.cs</FileName>
@@ -77,22 +70,8 @@
       <FileName>VstMidiProgramName.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Jacobi.Vst.Core.VstOfflineTaskFlags">
-    <Position X="2.25" Y="3.75" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAACAIAEAAAAAAMAAIAAAAAAAAQAAEAAAA=</HashCode>
-      <FileName>VstOfflineTask.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="Jacobi.Vst.Core.VstOfflineOption">
-    <Position X="3" Y="10.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAgAAAAAQAAAAAAAAEAAQAAACAQAAAAAAAAAAAAQAA=</HashCode>
-      <FileName>VstOfflineTask.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Enum Name="Jacobi.Vst.Core.VstPanLaw">
-    <Position X="4.25" Y="2" Width="1.5" />
+    <Position X="4.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>VstPanLaw.cs</FileName>
@@ -106,14 +85,14 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstPinPropertiesFlags">
-    <Position X="6.75" Y="9.5" Width="1.75" />
+    <Position X="4.75" Y="11.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>VstPinProperties.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstPluginCategory">
-    <Position X="4.25" Y="3.25" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAgAAAIgQhAAAAAAAgAAAAAAAAEAEAAAABAAAABA=</HashCode>
       <FileName>VstPluginCategory.cs</FileName>
@@ -127,14 +106,14 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstProcessLevels">
-    <Position X="4.75" Y="11.5" Width="1.5" />
+    <Position X="3" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAAQAAAgAAAAAIAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>VstProcessLevels.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstProcessPrecision">
-    <Position X="0.5" Y="12.25" Width="1.75" />
+    <Position X="6.75" Y="9.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAI=</HashCode>
       <FileName>VstProcessPrecision.cs</FileName>
@@ -162,10 +141,17 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Jacobi.Vst.Core.VstSmpteFrameRate">
-    <Position X="6.75" Y="11" Width="1.75" />
+    <Position X="6.75" Y="10.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAEAEAAAgABAAAAAAAAAABAAABCgAEAAAAAEAACAAAA=</HashCode>
       <FileName>VstTimeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Jacobi.Vst.Core.VstFileSelectCommand">
+    <Position X="6" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAACAAAAQAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstFileSelect.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Tahoma" Size="8.25" />

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<developerConceptualDocument
+  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <introduction>
+    <para>Required introduction</para>
+  </introduction>
+
+  <section address="Interfaces">
+    <title>Framework Interfaces</title>
+    <content>
+      <para>Add one or more sections with content</para>
+      <mediaLink>
+        <caption placement="after" lead="Class Diagram">The Framework Interfaces</caption>
+        <image xlink:href="9105df1e-24d0-4912-8808-72f787e5e285" />
+      </mediaLink>
+    </content>
+  </section>
+
+  <section address="Types">
+    <title>Framework Types</title>
+    <content>
+      <para>Add one or more sections with content</para>
+      <mediaLink>
+        <caption placement="after" lead="Class Diagram">The Framework Types</caption>
+        <image xlink:href="b395f371-e20f-4061-b194-55b2eb3a6366" />
+      </mediaLink>
+    </content>
+  </section>
+  
+  <relatedTopics>
+  </relatedTopics>
+</developerConceptualDocument>

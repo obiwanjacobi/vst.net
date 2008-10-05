@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Struct Name="VstAudioFile">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAQASCgAAQAEBAAAgQCACAAAAsAgAAASCAAAAAACQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstAudioFileMarker">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAIAAAAAAFAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstOfflineTask">
+    <Position X="4.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAeACAgAFAAAIAAwAAEAABAMAAqAAAYSIQoEBAAQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstVariableIo">
+    <Position X="9.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAIAAAAAAAAQAAABAAACAAAAQAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="VstAudioFileFlags">
+    <Position X="2.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAIAQAAAAQAAIAAAAIgABiAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstOfflineOption">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABggAABAAAAAAAAAAAAAAAAAgAAgAAAAAAAAAAAACA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstOfflineTaskFlags">
+    <Position X="7" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAQAAAAAIAQAAAAAAAAABAAAAAAAAAAAAAAAEEAABQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

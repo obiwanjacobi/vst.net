@@ -6,7 +6,28 @@
   <introduction>
     <para>Welcome to <token>vstnet</token>.</para>
     <para><token>vstnet</token> is an open source project hosted on codeplex that allows you 
-    to write VST plugins in .NET.</para>
+    to write VST plugins in .NET. There are two level to interface with the 
+    unmanaged Host:
+    <list class="bullet">
+	  <listItem>At Core level.</listItem>
+	  <listItem>Use the Framework.</listItem>
+	</list>
+    </para>
+
+	<para>
+	Interfacing at Core level allows a developer to directly use the managed
+	versions of the native VST methods. This approach has minimal overhead but
+	requires intimate knowledge of the VST standard. For adapting existing
+	code to the VST standard, only using Core level can be a valid option.
+	</para>
+	
+	<para>
+	The framework on the other hand provides the developer with a structured 
+	basis on which to build their Plugin. The framework abstracts some of the
+	details of the VST interface away. It also structures the VST standard by
+	grouping functionality in clearly defined (code) interfaces, almost all of
+	which are optional.
+	</para>
   </introduction>
 
   <section address="VstSection">
@@ -44,6 +65,10 @@
   </section>
 
   <relatedTopics>
+    <externalLink>
+        <linkText>VST.NET on www.codeplex.com</linkText>
+        <linkUri>http://www.codeplex.com/vstnet</linkUri>
+    </externalLink>
     <externalLink>
         <linkText>Steinberg VST SDK</linkText>
         <linkUri>http://www.steinberg.net/en/company/3rd_party_developer.html</linkUri>

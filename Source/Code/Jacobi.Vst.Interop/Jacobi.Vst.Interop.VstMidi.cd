@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Struct Name="MidiKeyName">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAABAAAAAQAY=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MidiProgramCategory">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACBAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MidiProgramName">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAACoAAAAAAAAAAAEAAAAAAAAAAAAAAY=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstEvent">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAAQAAAAAAQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstEvents">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAMAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="events" />
+    </ShowAsCollectionAssociation>
+  </Struct>
+  <Struct Name="VstMidiEvent">
+    <Position X="4.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAJAAIAAgAAAIAAAABAAAAQAAAQAAAAAQ=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VstMidiSysexEvent">
+    <Position X="6.25" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAIoAAABAAAAAAAAAAAAAAU=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="VstEventTypes">
+    <Position X="0.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAABCAAQBAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstMidiEventFlags">
+    <Position X="4.5" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VstMidiProgramNameFlags">
+    <Position X="6.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_vst\aeffectx.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

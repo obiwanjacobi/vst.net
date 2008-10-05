@@ -44,7 +44,7 @@
       Luckily all the hard work has been done in the
       <token>framework</token> 
       assembly and you just derive from a base class and override one virtual 
-      method to create and return the Plugin Root Class.
+      method to create and return the Plugin root object.
       </para>
     </content>
   </section>
@@ -54,12 +54,12 @@
     <content>
       <para>In 
       <link xlink:href="2d6d5838-0551-4404-b5c8-698de8d41aa7">this section</link>
-      you will implement a Plugin Root Class also by deriving from a base class 
+      you will implement a Plugin root object also by deriving from a base class 
       in the 
       <token>framework</token>
       assembly.
       </para>
-      <para>The Plugin Root Class receives all requests for subsequent 
+      <para>The Plugin root object receives all requests for subsequent 
       interfaces, each representing a specific feature or area of the VST 2.4
       specification.</para>
     </content>
@@ -74,7 +74,7 @@
       audio sample.</para>
       <para><link xlink:href="5e94bd76-fadd-4def-9e1a-261b18a42f0e">This section</link>
       demonstrates how the Plugin implements additional interfaces. All 
-      framework interfaces are requested through the Plugin Root Class.
+      framework interfaces are requested through the Plugin root object.
       </para>
     </content>
   </section>
