@@ -83,7 +83,7 @@
     <Compile Include="IVstPluginPersistence.cs" />
     <Compile Include="IVstPluginPrograms.cs" />
     <Compile Include="Plugin\PluginInterfaceManagerBase.cs" />
-    <Compile Include="Common\WindowsFormsWrapper.cs" />
+    <Compile Include="Common\WinFormsControlWrapper.cs" />
     <Compile Include="Plugin\VstPluginBase.cs" />
     <Compile Include="Plugin\VstPluginContext.cs" />
     <Compile Include="Plugin\VstPluginWithInterfaceManagerBase.cs" />

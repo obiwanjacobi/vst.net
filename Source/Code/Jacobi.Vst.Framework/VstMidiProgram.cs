@@ -23,6 +23,8 @@
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxMidiNameLength, "Name");
 
                 _name = value;
+                
+                OnNameChanged();
             }
         }
 
@@ -59,5 +61,25 @@
 
             return KeyNames[note] + (octave - 2);
         }
+
+        /// <summary>
+        /// Fires the NameChanged event.
+        /// </summary>
+        /// <remarks>Also call this method in you custom implementation of 
+        /// <see cref="GetKeyName"/> when (and if) the key names change.</remarks>
+        protected virtual void OnNameChanged()
+        {
+            EventHandler<EventArgs> temp = NameChanged;
+
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// Fires when the <see cref="Name"/> or <b>Key Name</b>s change.
+        /// </summary>
+        public event EventHandler<EventArgs> NameChanged;
     }
 }

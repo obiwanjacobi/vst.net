@@ -59,7 +59,7 @@
         /// <summary>
         /// Gets or sets the sample rate.
         /// </summary>
-        /// <remarks>This property is a proxy for the <see cref="Delay.SampleRate"/> property.</remarks>
+        /// <remarks>This property is a proxy for the <see cref="T:Jacobi.Vst.Samples.Delay.Delay.SampleRate"/> property.</remarks>
         public double SampleRate
         {
             get { return (Double)_delay.SampleRate; }

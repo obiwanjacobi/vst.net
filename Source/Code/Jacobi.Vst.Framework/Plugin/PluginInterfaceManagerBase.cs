@@ -146,14 +146,14 @@
             return instance;
         }
 
-        /// <summary>
-        /// Called when an instance of the <see cref="IVstPluginHost"/> interface is requested.
-        /// </summary>
-        /// <param name="instance">The default instance or null.</param>
-        /// <returns>Returns <paramref name="instance"/>.</returns>
-        /// <remarks>Override to create an instance of the <see cref="IVstPluginHost"/> interface. 
-        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
-        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
+        ///// <summary>
+        ///// Called when an instance of the <see cref="IVstPluginHost"/> interface is requested.
+        ///// </summary>
+        ///// <param name="instance">The default instance or null.</param>
+        ///// <returns>Returns <paramref name="instance"/>.</returns>
+        ///// <remarks>Override to create an instance of the <see cref="IVstPluginHost"/> interface. 
+        ///// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        ///// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         //protected virtual IVstPluginHost CreateHost(IVstPluginHost instance)
         //{
         //    return instance;
@@ -198,14 +198,14 @@
             return instance;
         }
 
-        /// <summary>
-        /// Called when an instance of the <see cref="IVstPluginOfflineProcessor"/> interface is requested.
-        /// </summary>
-        /// <param name="instance">The default instance or null.</param>
-        /// <returns>Returns <paramref name="instance"/>.</returns>
-        /// <remarks>Override to create an instance of the <see cref="IVstPluginOfflineProcessor"/> interface. 
-        /// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
-        /// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
+        ///// <summary>
+        ///// Called when an instance of the <see cref="IVstPluginOfflineProcessor"/> interface is requested.
+        ///// </summary>
+        ///// <param name="instance">The default instance or null.</param>
+        ///// <returns>Returns <paramref name="instance"/>.</returns>
+        ///// <remarks>Override to create an instance of the <see cref="IVstPluginOfflineProcessor"/> interface. 
+        ///// When <paramref name="instance"/> is null, create the default instance. When the <paramref name="instance"/>
+        ///// is not null, create a Thread Safe instance, possibly wrapping the default <paramref name="instance"/>.</remarks>
         //protected virtual IVstPluginOfflineProcessor CreateOfflineProcessor(IVstPluginOfflineProcessor instance)
         //{
         //    return instance;
