@@ -16,7 +16,7 @@ void MemoryTracker::RegisterObject(void* memoryObject)
 }
 
 // add an arrayObject to the tracker.
-// memoryObject must be an array.
+// arrayObject must be an array.
 void MemoryTracker::RegisterArray(void* arrayObject)
 {
 	_arrPtrs->Add(System::IntPtr(arrayObject));

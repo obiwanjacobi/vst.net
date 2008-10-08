@@ -87,8 +87,6 @@
         /// <param name="e"><see cref="EventArgs.Empty"/>.</param>
         private void Parameter_ValueChanged(object sender, EventArgs e)
         {
-            // TODO: smooth parameter value transitions
-
             VstParameter currentParameter = sender as VstParameter;
 
             // early exit when change is done on an inactive parameter

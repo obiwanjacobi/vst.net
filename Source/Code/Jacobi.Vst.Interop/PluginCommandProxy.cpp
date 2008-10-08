@@ -143,22 +143,22 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		case effGetPlugCategory:
 			result = (VstInt32)_commandStub->GetCategory();
 			break;
-		case effOfflineNotify:
+		//case effOfflineNotify:
 			// ptr -> VstAudioFile*
 			//result = _commandStub->OfflineNotify(value, index != 0);
-			break;
-		case effOfflinePrepare:
+			//break;
+		//case effOfflinePrepare:
 			// ptr -> VstOfflineTask*
 			//result = _commandStub->OfflinePrepare(value);
-			break;
-		case effOfflineRun:
+			//break;
+		//case effOfflineRun:
 			// ptr -> VstOfflineTask*
 			//result = _commandStub->OfflineRun(value);
-			break;
-		case effProcessVarIo:
+			//break;
+		//case effProcessVarIo:
 			// ptr -> VstVariableIo*
 			//result = _commandStub->ProcessVariableIO();
-			break;
+			//break;
 		case effSetSpeakerArrangement:
 			result = _commandStub->SetSpeakerArrangement(TypeConverter::ToSpeakerArrangement((::VstSpeakerArrangement*)value),
 				TypeConverter::ToSpeakerArrangement((::VstSpeakerArrangement*)ptr));
@@ -299,13 +299,13 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			}
 			}
 			break;
-		case effShellGetNextPlugin:
+		//case effShellGetNextPlugin:
 			/*{
 			System::String^ str;
 			result = _commandStub->GetNextPlugin(str);
 			TypeConverter::StringToChar(str, (char*)ptr, kVstMaxProductStrLen);
 			}*/
-			break;
+			//break;
 		case effStartProcess:
 			result = _commandStub->StartProcess();
 			break;
@@ -337,7 +337,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		default:
 			// unknown command
-			//System::Diagnostics::Trace::WriteLine("Unhandled dispatcher opcode:" + opcode, "VST.NET");
+			System::Diagnostics::Debug::WriteLine("Unhandled dispatcher opcode:" + opcode, "VST.NET");
 			break;
 		}
 	}
