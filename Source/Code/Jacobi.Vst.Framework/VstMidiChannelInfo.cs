@@ -1,5 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework
 {
+    using System;
+
     /// <summary>
     /// The VstMidiChannelInfo contains Midi Program information for a Midi channel.
     /// </summary>
@@ -36,6 +38,7 @@
                 if (_programs == null)
                 {
                     _programs = new VstMidiProgramCollection();
+                    _programs.MidiProgramNameChanged += new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
                 }
 
                 return _programs;
@@ -45,7 +48,19 @@
         /// <summary>
         /// Gets or sets the active/current Midi Program for this channel.
         /// </summary>
-        public VstMidiProgram ActiveProgram
-        { get; set; }
+        public VstMidiProgram ActiveProgram { get; set; }
+
+        /// <summary>
+        /// Indicates if either the Midi Program Names have changed or the Key Names.
+        /// </summary>
+        /// <remarks>The framework will automatically reset this property (false)
+        /// when the host has inquired if the names have changed.</remarks>
+        public bool HaveNamesChanged { get; set; }
+
+        // event handler that receives VstMidiProgram.NameChanged events
+        private void VstMidiProgram_NameChanged(object sender, EventArgs e)
+        {
+            HaveNamesChanged = true;
+        }
     }
 }

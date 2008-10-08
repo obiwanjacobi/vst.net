@@ -11,7 +11,7 @@
     class PluginEditor : IVstPluginEditor
     {
         private Plugin _plugin;
-        private WindowsFormsWrapper<MidiNoteMapperUI> _uiWrapper = new WindowsFormsWrapper<MidiNoteMapperUI>();
+        private WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper = new WinFormsControlWrapper<MidiNoteMapperUI>();
 
         /// <summary>
         /// Constructs a new instance.

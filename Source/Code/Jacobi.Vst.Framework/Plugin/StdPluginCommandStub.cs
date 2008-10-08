@@ -131,14 +131,14 @@
         }
 
         #region Offline processing not implemented
-        /// <summary>
-        /// Informs the plugin offline processor of the number of samples left to be processed.
-        /// </summary>
-        /// <param name="numberOfSamples">The sample count.</param>
-        /// <returns>Returns 0 (zero). It is unclear what this return value represents.</returns>
-        /// <remarks>The implementation queries the plugin for the <see cref="IVstPluginOfflineProcessor"/> interface.
-        /// Override to change this behavior.
-        /// The <see cref="IVstPluginOfflineProcessor"/> interface is under construction.</remarks>
+        ///// <summary>
+        ///// Informs the plugin offline processor of the number of samples left to be processed.
+        ///// </summary>
+        ///// <param name="numberOfSamples">The sample count.</param>
+        ///// <returns>Returns 0 (zero). It is unclear what this return value represents.</returns>
+        ///// <remarks>The implementation queries the plugin for the <see cref="IVstPluginOfflineProcessor"/> interface.
+        ///// Override to change this behavior.
+        ///// The <see cref="IVstPluginOfflineProcessor"/> interface is under construction.</remarks>
         //public virtual int SetTotalSamplesToProcess(int numberOfSamples)
         //{
         //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
@@ -155,11 +155,11 @@
         #endregion
 
         #region Plugin Host/Shell not implemented
-        /// <summary>
-        /// Under construction.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Under construction.
+        ///// </summary>
+        ///// <param name="name"></param>
+        ///// <returns></returns>
         //public virtual int GetNextPlugin(out string name)
         //{
         //    IVstPluginHost pluginHost = _pluginCtx.Plugin.GetInstance<IVstPluginHost>();
@@ -175,9 +175,9 @@
         #endregion
 
         /// <summary>
-        /// Called just before Process is called.
+        /// Called just before Process cycle is started.
         /// </summary>
-        /// <returns>Returns 0 (zero). It is unclear what this return value represents.</returns>
+        /// <returns>Returns 0 (zero) when not supported. It is unclear what this return value represents.</returns>
         public virtual int StartProcess()
         {
             IVstPluginProcess pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
@@ -194,9 +194,9 @@
         }
 
         /// <summary>
-        /// Called just after Process is called.
+        /// Called just after Process cycle is stopped.
         /// </summary>
-        /// <returns>Returns 0 (zero). It is unclear what this return value represents.</returns>
+        /// <returns>Returns 0 (zero) when not supported. It is unclear what this return value represents.</returns>
         public virtual int StopProcess()
         {
             IVstPluginProcess pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
@@ -445,7 +445,7 @@
         }
 
         /// <summary>
-        /// Indicates if the program for the specified Midi <paramref name="channel"/> has changed.
+        /// Indicates if the program names or key names for the specified Midi <paramref name="channel"/> has changed.
         /// </summary>
         /// <param name="channel">The zero-base Midi channel.</param>
         /// <returns>Returns true if the Midi Program has changed, otherwise false is returned.</returns>
@@ -457,7 +457,13 @@
             if (midiPrograms != null)
             {
                 VstMidiChannelInfo channelInfo = midiPrograms.ChannelInfos[channel];
-                //TODO: how do we know!?
+
+                bool changed = channelInfo.HaveNamesChanged;
+                
+                // reset dirty flag
+                channelInfo.HaveNamesChanged = false;
+                
+                return changed;
             }
 
             return false;
@@ -658,13 +664,13 @@
         }
 
         #region Offline processing not implemented
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="audioFiles"></param>
-        /// <param name="count"></param>
-        /// <param name="startFlag"></param>
-        /// <returns>Always returns false</returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="audioFiles"></param>
+        ///// <param name="count"></param>
+        ///// <param name="startFlag"></param>
+        ///// <returns>Always returns false</returns>
         //public virtual bool OfflineNotify(VstAudioFile[] audioFiles, int count, int startFlag)
         //{
         //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
@@ -678,12 +684,12 @@
         //    return false;
         //}
 
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <param name="count"></param>
-        /// <returns>Always returns false</returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="tasks"></param>
+        ///// <param name="count"></param>
+        ///// <returns>Always returns false</returns>
         //public virtual bool OfflinePrepare(VstOfflineTask[] tasks, int count)
         //{
         //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
@@ -697,12 +703,12 @@
         //    return false;
         //}
 
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="tasks"></param>
-        /// <param name="count"></param>
-        /// <returns>Always returns false</returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="tasks"></param>
+        ///// <param name="count"></param>
+        ///// <returns>Always returns false</returns>
         //public virtual bool OfflineRun(VstOfflineTask[] tasks, int count)
         //{
         //    IVstPluginOfflineProcessor pluginOffline = _pluginCtx.Plugin.GetInstance<IVstPluginOfflineProcessor>();
@@ -716,11 +722,11 @@
         //    return false;
         //}
 
-        /// <summary>
-        /// Under construction
-        /// </summary>
-        /// <param name="variableIO"></param>
-        /// <returns>Always returns false</returns>
+        ///// <summary>
+        ///// Under construction
+        ///// </summary>
+        ///// <param name="variableIO"></param>
+        ///// <returns>Always returns false</returns>
         //public virtual bool ProcessVariableIO(VstVariableIO variableIO)
         //{
         //    // TODO
@@ -841,8 +847,7 @@
                     result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.ReceiveVstTimeInfo:
-                    // TODO: define interface?
-                    result = VstCanDoResult.Unknown;
+                    result = ((_pluginCtx.Plugin.Capabilities & VstPluginCapabilities.ReceiveTimeInfo) > 0) ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.SendVstEvents:
                 case VstPluginCanDo.SendVstMidiEvent:

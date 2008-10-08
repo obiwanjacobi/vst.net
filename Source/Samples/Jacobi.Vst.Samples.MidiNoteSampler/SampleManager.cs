@@ -69,7 +69,7 @@
         }
 
         /// <summary>
-        /// Copies out the audio samples from the <see cref="channels"/>.
+        /// Copies out the audio samples from the <paramref name="channels"/>.
         /// </summary>
         /// <param name="channels">Input buffers. Must not be null.</param>
         public void RecordAudio(VstAudioBuffer[] channels)

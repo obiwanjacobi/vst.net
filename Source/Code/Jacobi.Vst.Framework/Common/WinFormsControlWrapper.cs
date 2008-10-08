@@ -8,7 +8,7 @@
     /// This wrapper class makes it easy to use a WinForms (User) Control as an Editor UI.
     /// </summary>
     /// <typeparam name="T">The type of WinForms (User) Control.</typeparam>
-    public class WindowsFormsWrapper<T> : IDisposable 
+    public class WinFormsControlWrapper<T> : IDisposable 
         where T : Control, new()
     {
         private void EnsureInstance()
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        /// Gets the dimensions of the User Control.
+        /// Gets the dimensions of the (User) Control.
         /// </summary>
         public Rectangle Bounds
         {
@@ -67,7 +67,7 @@
         }
 
         /// <summary>
-        /// Closes and Disposes the User Control.
+        /// Closes and Disposes the (User) Control.
         /// </summary>
         public void Close()
         {

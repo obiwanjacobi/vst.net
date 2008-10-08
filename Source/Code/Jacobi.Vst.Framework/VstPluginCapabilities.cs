@@ -9,11 +9,10 @@
     public enum VstPluginCapabilities
     {
         /// <summary>The plugin has no extra capabilities to report to the host.</summary>
-        None,
-        /// <summary>The plugin is a VST Instrument (Synth).</summary>
-        [Obsolete("Implementing the IVstPluginAudioProcessor and the IVstMidiProcessor interfaces automatically turns on this flag.")]
-        IsSynth,
+        None = 0x00,
         /// <summary>The plugin will not produce any sound when audio input is silence.</summary>
-        NoSoundInStop,
+        NoSoundInStop = 0x01,
+        /// <summary>Indicates to the host that the plugin will request Time Information.</summary>
+        ReceiveTimeInfo = 0x02,
     }
 }

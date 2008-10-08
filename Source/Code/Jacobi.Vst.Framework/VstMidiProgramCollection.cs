@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Framework
 {
+    using System;
     using System.Collections.ObjectModel;
 
     /// <summary>
@@ -15,6 +16,89 @@
         protected override string GetKeyForItem(VstMidiProgram item)
         {
             return item.Name;
+        }
+
+        /// <summary>
+        /// Called to clear all the items from the collection.
+        /// </summary>
+        /// <remarks>The implementation removes all event handlers from the instances.</remarks>
+        protected override void ClearItems()
+        {
+            foreach (VstMidiProgram old in this)
+            {
+                old.NameChanged -= new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+            }
+
+            base.ClearItems();
+        }
+
+        /// <summary>
+        /// Called to insert a new instance into the collection.
+        /// </summary>
+        /// <param name="index">Zero-based position into the collection.</param>
+        /// <param name="item">The item to insert.</param>
+        /// <remarks>The implementation adds an event handler to the <see cref="VstMidiProgram.NameChanged"/> event.</remarks>
+        protected override void InsertItem(int index, VstMidiProgram item)
+        {
+            item.NameChanged += new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+
+            base.InsertItem(index, item);
+        }
+
+        /// <summary>
+        /// Called to set a new item on an exisint position in the collection.
+        /// </summary>
+        /// <param name="index">Zero-based position into the collection.</param>
+        /// <param name="item">The item to set.</param>
+        /// <remarks>The implementation adds an event handler to the <see cref="VstMidiProgram.NameChanged"/> 
+        /// event and remove the event handler from the old item that is replaced.</remarks>
+        protected override void SetItem(int index, VstMidiProgram item)
+        {
+            VstMidiProgram old = this[index];
+            old.NameChanged -= new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+
+            item.NameChanged += new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+
+            base.SetItem(index, item);
+        }
+
+        /// <summary>
+        /// Called when to remove an item from the collection.
+        /// </summary>
+        /// <param name="index">Zero-based position into the collection.</param>
+        /// <remarks>The implementation removes the event handler from the item that is removed.</remarks>
+        protected override void RemoveItem(int index)
+        {
+            VstMidiProgram old = this[index];
+            old.NameChanged -= new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+
+            base.RemoveItem(index);
+        }
+
+        /// <summary>
+        /// Event is raised when a <see cref="VstMidiProgram.NameChanged"/> event is raised.
+        /// </summary>
+        public event EventHandler<EventArgs> MidiProgramNameChanged;
+
+        /// <summary>
+        /// Raises the <see cref="MidiProgramNameChanged"/> event when a
+        /// <see cref="VstMidiProgram.NameChanged"/> event is fired.
+        /// </summary>
+        /// <param name="sender">The original <see cref="VstMidiProgram"/> that fired the event.</param>
+        protected virtual void OnMidiProgramNameChanged(object sender)
+        {
+            EventHandler<EventArgs> temp = MidiProgramNameChanged;
+
+            if (temp != null)
+            {
+                temp(sender, EventArgs.Empty);
+            }
+        }
+
+        // event handler that receives NameChanged events from the VstMidiProgram instances.
+        private void VstMidiProgram_NameChanged(object sender, EventArgs e)
+        {
+            OnMidiProgramNameChanged(sender);
         }
     }
 }
