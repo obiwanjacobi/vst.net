@@ -57,6 +57,7 @@
 		  <listItem><token>vstnet</token> provides a framework that simplifies and clarifies the VST interfacing options.</listItem>
 		  <listItem>It takes far less time to develop a managed <token>vstnet</token> plugin than to develop a C/C++ native VST plugin.</listItem>
 		  <listItem><token>vstnet</token> provides you with good documentation and samples.</listItem>
+		  <listItem>Much less time is spent on programming 'plumbing'.</listItem>
 		  <listItem>Your existing native VST knowledge still applies.</listItem>
 		  <listItem>Managed code provides a robust basis to work in.</listItem>
 		</list>
