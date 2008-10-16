@@ -2,6 +2,10 @@
     <assemblies>
         <assembly assemblyPath="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.dll" xmlCommentsPath="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.xml" commentsOnly="False" />
         <assembly assemblyPath="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.dll" xmlCommentsPath="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" xmlCommentsPath="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" xmlCommentsPath="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" xmlCommentsPath="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" xmlCommentsPath="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" commentsOnly="False" />
     </assemblies>
     <namespaceSummaries>
         <namespaceSummaryItem name="" isDocumented="False" />
@@ -97,7 +101,7 @@
     </plugInConfigurations>
     <ProjectSummary>VST.NET (Jacobi.Vst) is a code library that allows developer to create managed VST Plugins quickly. It takes care of marshalling calls between .NET and C++ and visa versa.</ProjectSummary>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
-    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, Internals, Protected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath path="" />
     <HtmlHelp2xCompilerPath path="" />
     <OutputPath>.\Help\</OutputPath>

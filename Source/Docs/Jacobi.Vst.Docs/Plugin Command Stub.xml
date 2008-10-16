@@ -64,10 +64,35 @@
   <section address="ClassDiagram">
     <title>Class Diagram</title>
     <content>
+      <para>The following class diagram shows the classes involved in the 
+      Framework implementation of the Plugin Command Stub.
+      </para>
       <mediaLink>
         <caption placement="after" lead="Class Diagram">The Plugin Command Stub</caption>
         <image xlink:href="f34ce520-6a4c-45e3-bc4a-a45b6e4f448d" />
       </mediaLink>
+      <para>The 
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.StdPluginCommandStub</codeEntityReference>
+      implements the 
+      <codeEntityReference>M:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
+      interface. Each method dispatches its call to on of the interfaces through
+      the
+      <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b" />.
+      The
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginContext</codeEntityReference>
+      class maintains the context in which the Plugin is running. The
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.VstPluginInfo</codeEntityReference>
+      that is returned to the 
+      <token>interop</token>
+      assembly during the loading sequence and the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Host.VstHost</codeEntityReference>
+      that encapsulates the
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub</codeEntityReference>
+      interface. The Plugin itself is created and a reference to its 
+      implementation of the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.IVstPlugin</codeEntityReference>
+      interface is stored in the Plugin Context.
+      </para>
     </content>
   </section>
 
