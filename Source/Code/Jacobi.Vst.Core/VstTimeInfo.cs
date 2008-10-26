@@ -59,7 +59,7 @@
         /// <summary>
         /// Cycle End (right locator), in Quarter Note.
         /// </summary>
-        public double CysleEndPosition { get; set; }
+        public double CycleEndPosition { get; set; }
 
         /// <summary>
         /// Time Signature Numerator (e.g. 3 for 3/4)
