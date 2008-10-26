@@ -349,8 +349,8 @@ public:
 		Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
 
 		timeInfo->BarStartPosition = pTimeInfo->barStartPos;
-		timeInfo->CycleStartPosition = pTimeInfo->cycleEndPos;
-		timeInfo->CysleEndPosition = pTimeInfo->cycleStartPos;
+		timeInfo->CycleStartPosition = pTimeInfo->cycleStartPos;
+		timeInfo->CycleEndPosition = pTimeInfo->cycleEndPos;
 		timeInfo->Flags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(pTimeInfo->flags);
 		timeInfo->NanoSeconds = pTimeInfo->nanoSeconds;
 		timeInfo->PpqPosition = pTimeInfo->ppqPos;
