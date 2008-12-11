@@ -54,10 +54,19 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Gets the value of the parameter formatted for displaying.
         /// </summary>
-        /// <remarks>Derived classes can set this property but the length should not exceed 7 characters.</remarks>
+        /// <remarks>Derived classes can set this property but the length should not exceed 7 characters. 
+        /// By default the <see cref="Value"/> property is returned as string (untill you set a value).</remarks>
         public virtual string DisplayValue 
         {
-            get { return _displayValue; }
+            get
+            {
+                if (_displayValue == null)
+                {
+                    return Value.ToString();
+                }
+
+                return _displayValue;
+            }
             protected set
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, "DisplayValue");
@@ -75,6 +84,7 @@ namespace Jacobi.Vst.Framework
         public virtual bool ParseValue(string value)
         {
             float fValue;
+
             if (Single.TryParse(value, out fValue))
             {
                 Value = fValue;
@@ -154,16 +164,29 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Disposes the instance.
         /// </summary>
-        /// <remarks>All references are cleared (null).</remarks>
-        public virtual void Dispose()
+        public void Dispose()
         {
-            // clear all references
-            DisplayValue = null;
-            Info = null;
-            ValueChangedCallback = null;
-            ActivationChangedCallback = null;
+            Dispose(true);
         }
 
+        /// <summary>
+        /// Override this method in derived classes to cleanup managed and/or
+        /// unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">When true dispose managed and unmanaged resources. 
+        /// when false dispose only unmanaged resources.</param>
+        /// <remarks>All references are cleared (null), also the callback handlers.</remarks>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // clear all references
+                DisplayValue = null;
+                Info = null;
+                ValueChangedCallback = null;
+                ActivationChangedCallback = null;
+            }
+        }
         #endregion
     }
 }

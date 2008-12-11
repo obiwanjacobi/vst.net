@@ -23,7 +23,7 @@
     <Preliminary>False</Preliminary>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <RootNamespaceTitle />
-    <HelpTitle>VST.NET Samples Documentation</HelpTitle>
+    <HelpTitle>VST.NET 0.6 Samples Documentation</HelpTitle>
     <HtmlHelpName>Jacobi.Vst.Samples.Docs</HtmlHelpName>
     <Language>en-US</Language>
     <CopyrightHref>http://www.codeplex.com/vstnet</CopyrightHref>

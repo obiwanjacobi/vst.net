@@ -40,8 +40,7 @@
       provides the most flexibility in how you handle implementing the 
       properties and the 
       <codeInline>IExtensible</codeInline>
-      interface. You still have the option to
-      use the
+      interface. You still have the option to use the
       <link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a"/> 
       in your implementation.</para>
       <para>The following code snippet shows a basic implementation. You can 
