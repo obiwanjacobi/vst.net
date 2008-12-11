@@ -189,7 +189,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		case effGetProductString:
 			{
 			System::String^ str = _commandStub->GetProductString();
-			if(str == nullptr)
+			if(str != nullptr)
 			{
 				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxEffectNameLen);
 				result = 1;

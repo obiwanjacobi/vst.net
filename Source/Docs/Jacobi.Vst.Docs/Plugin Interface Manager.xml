@@ -5,11 +5,6 @@
 
   <!--
   <summary>
-    <para>Optional summary abstract</para>
-  </summary>
-  -->
-
-  <introduction>
     <para>Describe the role of the plugin Interface Manager. Start with the 
     IExtensible interface and its reason for being. Then introduce the 
     interface manager and detail the way the instances for each framework
@@ -17,6 +12,12 @@
     Talk about the significance of the instance parameter in the CreateXxxxx 
     methods. Perhaps also mention the ExtensibleInterfaceRef class and its 
     place in all this.</para>
+  </summary>
+  -->
+
+  <introduction>
+    <para>
+    </para>
   </introduction>
 
   <!-- Add one or more top-level section elements.  These are collapsible.

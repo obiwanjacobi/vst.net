@@ -5,90 +5,130 @@
 
   <!--
   <summary>
-    <para>Optional summary abstract</para>
-  </summary>
-  -->
-
-  <introduction>
     <para>Describe the role of the Plugin root class (mention the Host root 
     class implemented in the framework and detail similarities). Refer to the
     Interface manager and the base classes that the framework provides to
     derive the plugin root class from.</para>
+  </summary>
+  -->
+
+  <introduction>
+    <para>The Plugin Root Class (or Object) is the basis of a Plugin. It is the
+    point from were all other actions are started. The lifetime of the root 
+    class represents the lifetime of the Plugin. The Plugin Root Class must 
+    implement the
+    <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
+    interface.
+    </para>
   </introduction>
 
-  <!-- Add one or more top-level section elements.  These are collapsible.
-       If using <autoOutline /> tag, add an address attribute to identify
-       it so that it can be jumped to with a hyperlink. -->
-  <section address="Section1">
-    <title>Section title</title>
+  <section address="IVstPlugin">
+    <title>IVstPlugin interface</title>
     <content>
-      <!-- Uncomment this to create a sub-section outline
-      <autoOutline /> -->
-      <para>Add one or more sections with content</para>
+      <para>The 
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
+      interface forms the basic entry point into a Plugin. It has methods open 
+      and close the Plugin (
+      <codeEntityReference>M:Jacobi.Vst.Framework.IVstPlugin.Open()</codeEntityReference>
+      and
+      <codeEntityReference>M:Jacobi.Vst.Framework.IVstPlugin.Dispose()</codeEntityReference>)
+      and to 
+      <codeEntityReference>M:Jacobi.Vst.Framework.IVstPlugin.Suspend()</codeEntityReference>
+      and
+      <codeEntityReference>M:Jacobi.Vst.Framework.IVstPlugin.Resume()</codeEntityReference>
+      the Plugin processing.
+      Its properties communicate static Plugin information to the Framework and 
+      ultimately to the Host.
+      </para>
+      
+      <sections>
+        <section address="IExtensible">
+            <title>IExtensible interface</title>
+            <content>
+                <para>
+                The
+                <codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+                interface receives interface implementation requests from the 
+                Framework. This interface is only mandatory on the Plugin root
+                class but can also be used in other places, if that is 
+                convenient for you.
+                The
+                <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+                base class can be used to implement the
+                <codeInline>IExtensible</codeInline> interface after you derive
+                from it.
+                </para>
+                <para>Refer to
+                <link xlink:href="2d6d5838-0551-4404-b5c8-698de8d41aa7" />
+                for more information.</para>
+            </content>
+        </section>
+        <section address="IDisposable">
+            <title>IDisposable interface</title>
+            <content>
+                <para>The standard
+                <codeEntityReference>T:System.IDisposable</codeEntityReference>
+                interface is used to close the Plugin when the host unloads it.
+                The 
+                <codeInline>Dispose</codeInline>
+                method is the last method called on the Plugin. Make sure you 
+                release all (unmanaged) resources and clean up properly.
+                </para>
+            </content>
+        </section>
+    </sections>
     </content>
-    <!-- If a section contains a sections element, its content creates
-         sub-sections.  These are not collapsible.
-    <sections>
-        <section address="SubSection1">
-            <title>Sub-section 1</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-        <section address="SubSection2">
-            <title>Sub-section 2</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-    </sections> -->
   </section>
 
   <section address="ClassDiagram">
     <title>Class Diagram</title>
     <content>
+      <para>The following class diagram shows the available base classes that 
+      implement the 
+      <codeInline>IVstPlugin</codeInline> 
+      interface for you.
+      </para>
       <mediaLink>
         <caption placement="after" lead="Class Diagram">The Plugin Root Class</caption>
         <image xlink:href="241b05d3-427c-42b8-a6f8-f11d6501474a" />
       </mediaLink>
+      <para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+      class implements a basis for managing the references to the implemented
+      Framework Plugin interfaces. This class can also be used separately. The
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
+      base class provides you with a full implementation of the 
+      <codeInline>IVstPlugin</codeInline>
+      interface. Just derive from this class and pass all your Plugin specific
+      data in the constructor.
+      </para>
+      <para>On the other side of the diagram is the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginBase</codeEntityReference>
+      base class. This is a simplified implementation of the
+      <codeInline>IVstPlugin</codeInline>
+      interface. This implementation covers all members of the
+      <codeInline>IVstPlugin</codeInline>
+      interface but implements the 
+      <codeInline>IExtensible</codeInline>
+      interface not using the
+      <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+      but the code outlined in 
+      <link xlink:href="2d6d5838-0551-4404-b5c8-698de8d41aa7" />.
+      </para>
+      <para>Finally a word about
+      <codeEntityReference>Jacobi.Vst.Core.VstPluginCapabilities</codeEntityReference></para>
+      enumeration. The options in the (flags) enumeration indicate behavioral 
+      aspects of the Plugin that are not (can not) be expressed in meaningful 
+      interfaces.
     </content>
   </section>
   
   <relatedTopics>
-    <!-- One or more of the following:
-         - A local link
-         - An external link
-         - A code entity reference
-
-    <link xlink:href="Other Topic's ID"/>
-    <link xlink:href="Other Topic's ID">Link inner text</link>
-
-    <externalLink>
-        <linkText>Link text</linkText>
-        <linkAlternateText>Optional alternate link text</linkAlternateText>
-        <linkUri>URI</linkUri>
-    </externalLink>
-
-    <codeEntityReference>API member ID</codeEntityReference>
-
-    Examples:
-
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-    <externalLink>
-        <linkText>SHFB on CodePlex</linkText>
-        <linkAlternateText>Go to CodePlex</linkAlternateText>
-        <linkUri>http://www.codeplex.com/SHFB</linkUri>
-    </externalLink>
-
-    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-    -->
+  <codeEntityReference>Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
+  <codeEntityReference>Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+  <codeEntityReference>Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+  <codeEntityReference>Jacobi.Vst.Framework.Plugin.VstPluginBase</codeEntityReference>
+  <codeEntityReference>Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
+  <link xlink:href="2d6d5838-0551-4404-b5c8-698de8d41aa7" />
   </relatedTopics>
 </developerConceptualDocument>

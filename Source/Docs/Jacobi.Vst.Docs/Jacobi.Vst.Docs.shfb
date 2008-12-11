@@ -18,18 +18,19 @@
     <conceptualContent snippetFile=".\Files\CodeSnippets.xml">
         <tokens>
             <token name="core" value="&lt;ddue:link xlink:href=&quot;4f3d4350-e61e-4909-a294-c281511a336a&quot; /&gt;" />
+            <token name="depnote" value="The double underscores '__' preceding some member names as well as these names ending in &lt;literal&gt;Deprecated&lt;/literal&gt;, is an indication of deprecated members for VST version 2.4. These members were used in an earlier version of the VST standard but are no longer used in VST 2.4." />
             <token name="framework" value="&lt;ddue:link xlink:href=&quot;bf34ecc4-5cd1-4770-86fe-2cda55f05823&quot; /&gt;" />
             <token name="interop" value="&lt;ddue:link xlink:href=&quot;e5d53d11-e4bb-43b9-abe9-04b0507465dc&quot; /&gt;" />
             <token name="vs2005" value="&lt;application&gt;Visual Studio 2005&lt;/application&gt;" />
             <token name="vs2008" value="&lt;application&gt;Visual Studio 2008&lt;/application&gt;" />
             <token name="vs2008e" value="&lt;application&gt;Visual Studio 2008 Express&lt;/application&gt;" />
             <token name="vstnet" value="&lt;ddue:externalLink&gt;&#xD;&#xA;    &lt;ddue:linkText&gt;VST.NET&lt;/ddue:linkText&gt;&#xD;&#xA;    &lt;ddue:linkUri&gt;http://www.codeplex.com/vstnet&lt;/ddue:linkUri&gt;&#xD;&#xA;&lt;/ddue:externalLink&gt;" />
-            <token name="depnote" value="The double underscores '__' preceding some member names as well as these names ending in &lt;literal&gt;Deprecated&lt;/literal&gt;, is an indication of deprecated members for VST version 2.4. These members were used in an earlier version of the VST standard but are no longer used in VST 2.4." />
         </tokens>
         <images>
             <image id="c6b3a492-895c-474f-8da3-6e6f6462ea19" file=".\Files\Class Diagrams\Jacobi.Vst.Core.Enums.png" altText="" alwaysCopy="False" />
             <image id="e1c8b48e-9a89-453b-92ce-675a6943580f" file=".\Files\Class Diagrams\Jacobi.Vst.Core.Interfaces.png" altText="" alwaysCopy="False" />
             <image id="27c2404c-0398-406b-99f8-35415f5c6e3f" file=".\Files\Class Diagrams\Jacobi.Vst.Core.Types.png" altText="" alwaysCopy="False" />
+            <image id="f510aae0-a362-46cf-b66b-f2eb78abab34" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.gHostCommandProxy.png" altText="" alwaysCopy="False" />
             <image id="50f88d51-248a-4c4a-bf58-c0696d339261" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.InterfaceManager.png" altText="" alwaysCopy="False" />
             <image id="9105df1e-24d0-4912-8808-72f787e5e285" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.Interfaces.png" altText="" alwaysCopy="False" />
             <image id="557c9abc-efc6-4710-bc5a-dadc7d2e4494" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.MidiPrograms.png" altText="" alwaysCopy="False" />
@@ -44,7 +45,6 @@
             <image id="ffe9b212-1e9e-40d4-8155-459af64126c3" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstParametersTimeInfo.png" altText="" alwaysCopy="False" />
             <image id="dbcfb90b-2658-4c0a-996c-fc10690741f8" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstPlugin.png" altText="" alwaysCopy="False" />
             <image id="16c8f304-27a2-40e2-a3e8-f5aad579dcb6" file=".\Files\Class Diagrams\Jacobi.Vst.Interop.VstSpeakerArrangement.png" altText="" alwaysCopy="False" />
-            <image id="f510aae0-a362-46cf-b66b-f2eb78abab34" file=".\Files\Class Diagrams\Jacobi.Vst.Framework.gHostCommandProxy.png" altText="" alwaysCopy="False" />
         </images>
         <topics defaultTopic="ece9a5be-249e-40c1-9846-2af35a396e02">
             <topic id="ece9a5be-249e-40c1-9846-2af35a396e02" file=".\Welcome.xml" revision="1" visible="True" />
@@ -117,7 +117,7 @@
     <Preliminary>False</Preliminary>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <RootNamespaceTitle />
-    <HelpTitle>VST.NET 0.5 Documentation</HelpTitle>
+    <HelpTitle>VST.NET 0.6 Documentation</HelpTitle>
     <HtmlHelpName>Jacobi.Vst.Docs</HtmlHelpName>
     <Language>en-US</Language>
     <CopyrightHref>http://www.codeplex.com/vstnet</CopyrightHref>
