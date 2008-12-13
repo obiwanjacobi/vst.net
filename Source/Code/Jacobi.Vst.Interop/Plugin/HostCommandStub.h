@@ -16,7 +16,7 @@ public:
 	virtual System::Boolean ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events);
 	virtual System::Boolean IoChanged();
 	virtual System::Boolean SizeWindow(System::Int32 width, System::Int32 height);
-	virtual System::Double GetSampleRate();
+	virtual System::Single GetSampleRate();
 	virtual System::Int32 GetBlockSize();
 	virtual System::Int32 GetInputLatency();
 	virtual System::Int32 GetOutputLatency();
