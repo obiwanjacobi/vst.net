@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "HostCommandStub.h"
-#include "TypeConverter.h"
+#include "..\TypeConverter.h"
 
 // Creates a new instance based on a native callback function pointer.
 HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
@@ -124,11 +124,11 @@ System::Boolean HostCommandStub::SizeWindow(System::Int32 width, System::Int32 h
 	return (CallHost(audioMasterSizeWindow, width, height, 0, 0) != 0);
 }
 
-System::Double HostCommandStub::GetSampleRate()
+System::Single HostCommandStub::GetSampleRate()
 {
 	ThrowIfNotInitialized();
 	
-	return safe_cast<System::Double>(CallHost(audioMasterGetSampleRate, 0, 0, 0, 0));
+	return safe_cast<System::Single>(CallHost(audioMasterGetSampleRate, 0, 0, 0, 0));
 }
 
 System::Int32 HostCommandStub::GetBlockSize()

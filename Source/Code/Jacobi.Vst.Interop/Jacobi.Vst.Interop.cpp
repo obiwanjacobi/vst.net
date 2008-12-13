@@ -3,8 +3,8 @@
 
 #include "stdafx.h"
 #include "AssemblyLoader.h"
-#include "PluginCommandProxy.h"
-#include "HostCommandStub.h"
+#include "Plugin/PluginCommandProxy.h"
+#include "Plugin/HostCommandStub.h"
 #include "TimeCriticalScope.h"
 #include "Utils.h"
 #include<vcclr.h>

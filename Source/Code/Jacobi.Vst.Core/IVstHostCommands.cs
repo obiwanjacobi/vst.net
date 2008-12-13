@@ -61,7 +61,7 @@
         /// Retrieves the current sample rate from the host.
         /// </summary>
         /// <returns>Returns the number of samples per second.</returns>
-        double GetSampleRate();
+        float GetSampleRate();
         /// <summary>
         /// Retrieves the number of samples passed to the plugin during the audio processing cycles.
         /// </summary>
