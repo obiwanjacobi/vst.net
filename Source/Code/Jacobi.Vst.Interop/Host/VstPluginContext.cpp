@@ -18,7 +18,6 @@ namespace Host
 		}
 
 		_hostCmdProxy = gcnew VstHostCommandProxy(hostCmdStub);
-		_pluginCmdStub = gcnew VstPluginCommandStub();
 	}
 
 	VstPluginContext::~VstPluginContext()
@@ -66,11 +65,18 @@ namespace Host
 			// call main and retrieve AEffect*
 			_pEffect = pluginMain(&DispatchCallback);
 
+			if(_pEffect == NULL)
+			{
+				throw gcnew System::InvalidOperationException(pluginPath + " did not return an AEffect structure.");
+			}
+
 			System::Runtime::InteropServices::GCHandle ctxHandle = 
 					System::Runtime::InteropServices::GCHandle::Alloc(this);
 
 			// maintain the context reference as part of the effect struct
 			_pEffect->resvd1 = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();
+
+			_pluginCmdStub = gcnew VstPluginCommandStub(_pEffect);
 		}
 		catch(...)
 		{
