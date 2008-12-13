@@ -211,7 +211,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\AssemblyInfo.cpp"
+				RelativePath=".\Properties\AssemblyInfo.cpp"
 				>
 			</File>
 			<File
@@ -249,7 +249,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\HostCommandStub.cpp"
+				RelativePath=".\Plugin\HostCommandStub.cpp"
 				>
 			</File>
 			<File
@@ -261,11 +261,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MemoryTracker.cpp"
+				RelativePath=".\Plugin\MemoryTracker.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\PluginCommandProxy.cpp"
+				RelativePath=".\Plugin\PluginCommandProxy.cpp"
 				>
 			</File>
 			<File
@@ -296,6 +296,18 @@
 				RelativePath=".\Utils.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Host\VstHostCommandProxy.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstPluginCommandStub.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstPluginContext.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -307,15 +319,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\HostCommandStub.h"
+				RelativePath=".\Plugin\HostCommandStub.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MemoryTracker.h"
+				RelativePath=".\Plugin\MemoryTracker.h"
 				>
 			</File>
 			<File
-				RelativePath=".\PluginCommandProxy.h"
+				RelativePath=".\Plugin\PluginCommandProxy.h"
 				>
 			</File>
 			<File
@@ -323,7 +335,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\targetver.h"
+				RelativePath=".\Properties\targetver.h"
 				>
 			</File>
 			<File
@@ -336,6 +348,18 @@
 			</File>
 			<File
 				RelativePath=".\Utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstHostCommandProxy.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstPluginCommandStub.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstPluginContext.h"
 				>
 			</File>
 		</Filter>
@@ -362,27 +386,27 @@
 			Filter="cd"
 			>
 			<File
-				RelativePath=".\Jacobi.Vst.Interop.VstMain.cd"
+				RelativePath=".\Class Diagrams\Jacobi.Vst.Interop.VstMain.cd"
 				>
 			</File>
 			<File
-				RelativePath=".\Jacobi.Vst.Interop.VstMidi.cd"
+				RelativePath=".\Class Diagrams\Jacobi.Vst.Interop.VstMidi.cd"
 				>
 			</File>
 			<File
-				RelativePath=".\Jacobi.Vst.Interop.VstOffline.cd"
+				RelativePath=".\Class Diagrams\Jacobi.Vst.Interop.VstOffline.cd"
 				>
 			</File>
 			<File
-				RelativePath=".\Jacobi.Vst.Interop.VstParametersTimeInfo.cd"
+				RelativePath=".\Class Diagrams\Jacobi.Vst.Interop.VstParametersTimeInfo.cd"
 				>
 			</File>
 			<File
-				RelativePath=".\Jacobi.Vst.Interop.VstPlugin.cd"
+				RelativePath=".\Class Diagrams\Jacobi.Vst.Interop.VstPlugin.cd"
 				>
 			</File>
 			<File
-				RelativePath=".\Jacobi.Vst.Interop.VstSpeakerArrangement.cd"
+				RelativePath=".\Class Diagrams\Jacobi.Vst.Interop.VstSpeakerArrangement.cd"
 				>
 			</File>
 		</Filter>

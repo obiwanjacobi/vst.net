@@ -54,6 +54,8 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Host\IVstHostCommandStub.cs" />
+    <Compile Include="Host\IVstPluginCommandProxy.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IVstHostCommands.cs" />
     <Compile Include="IVstPluginCommands.cs" />

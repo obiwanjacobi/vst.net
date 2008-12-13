@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "PluginCommandProxy.h"
-#include "TypeConverter.h"
-#include "Utils.h"
+#include "..\TypeConverter.h"
+#include "..\Utils.h"
 #include<vcclr.h>
 
 // constructs a new instance based on a reference to the plugin command stub
