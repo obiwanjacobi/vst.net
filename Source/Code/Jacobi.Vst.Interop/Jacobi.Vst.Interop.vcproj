@@ -347,6 +347,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Host\UnmanagedArray.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\UnmanagedPointer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\UnmanagedString.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Utils.h"
 				>
 			</File>

@@ -103,6 +103,52 @@ namespace Host
 	private:
 		::AEffect* _pEffect;
 
+		UnmanagedArray<float*> _audioInputs;
+		UnmanagedArray<float*> _audioOutputs;
+		
+		VstInt32 CopyBufferPointers(float** ppBuffers, array<Jacobi::Vst::Core::VstAudioBuffer^>^ audioBuffers)
+		{
+			VstInt32 sampleCount = 0;
+
+			for(int i = 0; i < audioBuffers->Length; i++)
+			{
+				Jacobi::Vst::Core::IDirectBufferAccess32^ unmanagedBuffer = 
+					safe_cast<Jacobi::Vst::Core::IDirectBufferAccess32^>(audioBuffers[i]);
+
+				ppBuffers[i] = unmanagedBuffer->Buffer;
+
+				if(sampleCount < unmanagedBuffer->SampleCount)
+				{
+					sampleCount = unmanagedBuffer->SampleCount;
+				}
+			}
+
+			return sampleCount;
+		}
+
+		UnmanagedArray<double*> _precisionInputs;
+		UnmanagedArray<double*> _precisionOutputs;
+
+		VstInt32 CopyBufferPointers(double** ppBuffers, array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ audioBuffers)
+		{
+			VstInt32 sampleCount = 0;
+
+			for(int i = 0; i < audioBuffers->Length; i++)
+			{
+				Jacobi::Vst::Core::IDirectBufferAccess64^ unmanagedBuffer = 
+					safe_cast<Jacobi::Vst::Core::IDirectBufferAccess64^>(audioBuffers[i]);
+
+				ppBuffers[i] = unmanagedBuffer->Buffer;
+
+				if(sampleCount < unmanagedBuffer->SampleCount)
+				{
+					sampleCount = unmanagedBuffer->SampleCount;
+				}
+			}
+
+			return sampleCount;
+		}
+
 		// helper methods for calling the plugin
 		::VstIntPtr CallDispatch(::VstInt32 opcode, ::VstInt32 index, ::VstIntPtr value, void* ptr, float opt)
 		{ return _pEffect->dispatcher(_pEffect, opcode, index, value, ptr, opt); }
