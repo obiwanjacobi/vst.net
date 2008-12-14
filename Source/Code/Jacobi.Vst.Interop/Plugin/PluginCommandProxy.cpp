@@ -73,6 +73,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			{
 			System::Drawing::Rectangle rect;
 			result = (_commandStub->EditorGetRect(rect) ? 1 : 0);
+			// TODO: ERect is allocated. Will this leak!?
 			TypeConverter::RectangleToERect(rect, (ERect**)ptr);
 			}
 			break;

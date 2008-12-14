@@ -56,6 +56,14 @@ public:
 		(*ppRect)->right = rect.Right;
 	}
 
+	// converts an unmanaged ERect* to a Rectangle. 
+	static System::Drawing::Rectangle ERectToRectangle(ERect* pRect)
+	{
+		System::Drawing::Rectangle rect(pRect->top, pRect->left, pRect->bottom, pRect->right);
+
+		return rect;
+	}
+
 	// Converts a managed byteArray to an unmanaged array.
 	// delete[] retval
 	static char* ByteArrayToPtr(array<System::Byte>^ byteArray)
@@ -237,6 +245,18 @@ public:
 		StringToChar(pinProps->Label, pProps->label, kVstMaxLabelLen);
 		StringToChar(pinProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
 		pProps->arrangementType = safe_cast<VstInt32>(pinProps->ArrangementType);
+	}
+
+	static Jacobi::Vst::Core::VstPinProperties^ ToPinProperties(::VstPinProperties* pProps)
+	{
+		Jacobi::Vst::Core::VstPinProperties^ pinProps = gcnew Jacobi::Vst::Core::VstPinProperties();
+
+		pinProps->Flags = safe_cast<Jacobi::Vst::Core::VstPinPropertiesFlags>(pProps->flags);
+		pinProps->Label = CharToString(pProps->label);
+		pinProps->ShortLabel = CharToString(pProps->shortLabel);
+		pinProps->ArrangementType = safe_cast<Jacobi::Vst::Core::VstSpeakerArrangementType>(pProps->arrangementType);
+
+		return pinProps;
 	}
 
 	// Converts an unmanaged speaker pArrangement to a managed VstSpeakerArrangement.

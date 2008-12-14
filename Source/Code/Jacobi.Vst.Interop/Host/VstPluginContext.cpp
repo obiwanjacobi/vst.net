@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "VstHostCommandProxy.h"
+#include "UnmanagedArray.h"
 #include "VstPluginCommandStub.h"
 #include "VstPluginContext.h"
 #include "..\TypeConverter.h"
