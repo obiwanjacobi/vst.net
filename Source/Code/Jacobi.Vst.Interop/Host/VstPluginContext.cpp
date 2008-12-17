@@ -78,10 +78,19 @@ namespace Host
 			_pEffect->resvd1 = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();
 
 			_pluginCmdStub = gcnew VstPluginCommandStub(_pEffect);
+
+			// check if the plugin supports our VST version
+			if(_pluginCmdStub->GetVstVersion() < 2400)
+			{
+				throw gcnew System::InvalidOperationException("The Plugin '" + pluginPath + "' does not support VST 2.4 or higher.");
+			}
 		}
 		catch(...)
 		{
 			CloseLibrary();
+
+			_pluginCmdStub = nullptr;
+			_pEffect = NULL;
 
 			throw;
 		}
