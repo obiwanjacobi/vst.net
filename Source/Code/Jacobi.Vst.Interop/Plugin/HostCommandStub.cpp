@@ -58,7 +58,7 @@ void HostCommandStub::SetParameterAutomated(System::Int32 index, System::Single 
 
 System::Int32 HostCommandStub::GetVersion()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	VstInt32 version = CallHost(audioMasterVersion, 0, 0, 0, 0);
 
@@ -70,7 +70,7 @@ System::Int32 HostCommandStub::GetVersion()
 
 System::Int32 HostCommandStub::GetCurrentPluginID()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	return CallHost(audioMasterCurrentId, 0, 0, 0, 0);
 }
@@ -87,7 +87,7 @@ Jacobi::Vst::Core::VstTimeInfo^ HostCommandStub::GetTimeInfo(Jacobi::Vst::Core::
 {
 	ThrowIfNotInitialized();
 
-	::VstTimeInfo* pTimeInfo = (::VstTimeInfo*)CallHost(audioMasterGetTime, 0, (VstInt32)filterFlags, 0, 0);
+	::VstTimeInfo* pTimeInfo = (::VstTimeInfo*)CallHost(audioMasterGetTime, 0, safe_cast<VstInt32>(filterFlags), 0, 0);
 
 	return TypeConverter::ToTimeInfo(pTimeInfo);
 }
@@ -112,56 +112,56 @@ System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent
 
 System::Boolean HostCommandStub::IoChanged()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	return (CallHost(audioMasterIOChanged, 0, 0, 0, 0) != 0);
 }
 
 System::Boolean HostCommandStub::SizeWindow(System::Int32 width, System::Int32 height)
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return (CallHost(audioMasterSizeWindow, width, height, 0, 0) != 0);
 }
 
 System::Single HostCommandStub::GetSampleRate()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return safe_cast<System::Single>(CallHost(audioMasterGetSampleRate, 0, 0, 0, 0));
 }
 
 System::Int32 HostCommandStub::GetBlockSize()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	return CallHost(audioMasterGetBlockSize, 0, 0, 0, 0);
 }
 
 System::Int32 HostCommandStub::GetInputLatency()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return CallHost(audioMasterGetInputLatency, 0, 0, 0, 0);
 }
 
 System::Int32 HostCommandStub::GetOutputLatency()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	return CallHost(audioMasterGetOutputLatency, 0, 0, 0, 0);
 }
 
 Jacobi::Vst::Core::VstProcessLevels HostCommandStub::GetProcessLevel()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return safe_cast<Jacobi::Vst::Core::VstProcessLevels>(CallHost(audioMasterGetCurrentProcessLevel, 0, 0, 0, 0));
 }
 
 Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return safe_cast<Jacobi::Vst::Core::VstAutomationStates>(CallHost(audioMasterGetAutomationState, 0, 0, 0, 0));
 }
@@ -208,71 +208,87 @@ Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 
 System::String^ HostCommandStub::GetVendorString()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	System::String^ str = nullptr;
 	char* pText = new char[kVstMaxVendorStrLen];
 
-	if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
+	try
 	{
-		str = TypeConverter::CharToString(pText);
+		if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
+		{
+			str = TypeConverter::CharToString(pText);
+		}
 	}
-
-	delete[] pText;
+	finally
+	{
+		delete[] pText;
+	}
 
 	return str;
 }
 
 System::String^ HostCommandStub::GetProductString()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 
 	System::String^ str = nullptr;
 	char* pText = new char[kVstMaxProductStrLen];
 
-	if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
+	try
 	{
-		str = TypeConverter::CharToString(pText);
+		if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
+		{
+			str = TypeConverter::CharToString(pText);
+		}
 	}
-
-	delete[] pText;
+	finally
+	{
+		delete[] pText;
+	}
 
 	return str;
 }
 
 System::Int32 HostCommandStub::GetVendorVersion()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return CallHost(audioMasterGetVendorVersion, 0, 0, 0, 0);
 }
 
 Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstHostCanDo cando)
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	char* pText = new char[64];
-	TypeConverter::StringToChar(cando.ToString(), pText, 64);
-	pText[0] += 32;	// tolower
 
-	Jacobi::Vst::Core::VstCanDoResult result = 
-		safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));
+	try
+	{
+		TypeConverter::StringToChar(cando.ToString(), pText, 64);
+		pText[0] += 32;	// tolower
 
-	delete[] pText;
+		Jacobi::Vst::Core::VstCanDoResult result = 
+			safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));
 
-	return result;
+		return result;
+	}
+	finally
+	{
+		delete[] pText;
+	}
 }
 
 Jacobi::Vst::Core::VstHostLanguage HostCommandStub::GetLanguage()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return safe_cast<Jacobi::Vst::Core::VstHostLanguage>(CallHost(audioMasterGetLanguage, 0, 0, 0, 0));
 }
 
 System::String^ HostCommandStub::GetDirectory()
 {
-	ThrowIfNotInitialized();
+	//ThrowIfNotInitialized();
 	
 	return TypeConverter::CharToString((char*)CallHost(audioMasterGetDirectory, 0, 0, 0, 0));
 }
@@ -302,17 +318,29 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 {
 	ThrowIfNotInitialized();
 
-	::VstFileSelect* pFileSelect = TypeConverter::FromFileSelect(fileSelect);
-
-	System::Boolean succeeded = (CallHost(audioMasterOpenFileSelector, 0, 0, pFileSelect, 0) != 0);
-
-	if(succeeded)
+	if(fileSelect->Reserved != System::IntPtr::Zero)
 	{
-		// update the managed type with the users selections.
-		TypeConverter::ToFileSelect(fileSelect, pFileSelect);
+		throw gcnew System::InvalidOperationException("The argument is already initialized with an unmanaged VstFileSelect structure.");
 	}
 
-	return succeeded;
+	::VstFileSelect* pFileSelect = TypeConverter::FromFileSelect(fileSelect);
+
+	try
+	{
+		System::Boolean succeeded = (CallHost(audioMasterOpenFileSelector, 0, 0, pFileSelect, 0) != 0);
+
+		if(succeeded)
+		{
+			// update the managed type with the users selections.
+			TypeConverter::ToFileSelect(fileSelect, pFileSelect);
+		}
+
+		return succeeded;
+	}
+	catch(...)
+	{
+		TypeConverter::DeleteFileSelect(pFileSelect);
+	}
 }
 
 System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
@@ -321,11 +349,22 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 
 	::VstFileSelect* pFileSelect = (::VstFileSelect*)fileSelect->Reserved.ToPointer();
 
-	System::Boolean succeeded = (CallHost(audioMasterCloseFileSelector, 0, 0, pFileSelect, 0) != 0);
+	if(pFileSelect == NULL)
+	{
+		throw gcnew System::InvalidOperationException("The unmanaged VstFileSelect structure has been disposed.");
+	}
 
-	TypeConverter::DeleteFileSelect(pFileSelect);
+	try
+	{
+		System::Boolean succeeded = (CallHost(audioMasterCloseFileSelector, 0, 0, pFileSelect, 0) != 0);
 
-	return succeeded;
+		return succeeded;
+	}
+	finally
+	{
+		TypeConverter::DeleteFileSelect(pFileSelect);
+		fileSelect->Reserved = System::IntPtr::Zero;
+	}
 }
 
 // Throws an InvalidOperationException if the host command stub has not been initialized.

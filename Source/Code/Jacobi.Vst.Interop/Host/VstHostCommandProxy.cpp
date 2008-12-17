@@ -53,6 +53,7 @@ namespace Host
 				Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
 				if(timeInfo != nullptr)
 				{
+					//TODO:
 					//result = VstTimeInfo* pTimeInfo;
 				}
 				}
@@ -111,11 +112,11 @@ namespace Host
 			//	break;
 			case audioMasterGetVendorString:
 				// [ptr]: char buffer for vendor string, limited to #kVstMaxVendorStrLen  @see AudioEffectX::getHostVendorString
-				_hostCmdStub->GetVendorString();
+				TypeConverter::StringToChar(_hostCmdStub->GetVendorString(), (char*)ptr, kVstMaxVendorStrLen);
 				break;
 			case audioMasterGetProductString:
 				// [ptr]: char buffer for vendor string, limited to #kVstMaxProductStrLen  @see AudioEffectX::getHostProductString
-				_hostCmdStub->GetProductString();
+				TypeConverter::StringToChar(_hostCmdStub->GetProductString(), (char*)ptr, kVstMaxProductStrLen);
 				break;
 			case audioMasterGetVendorVersion:
 				// [return value]: vendor-specific version  @see AudioEffectX::getHostVendorVersion
@@ -128,17 +129,18 @@ namespace Host
 				{
 				// [ptr]: "can do" string [return value]: 1 for supported
 				System::String^ candoStr = TypeConverter::CharToString((char*)ptr);
-				Jacobi::Vst::Core::VstHostCanDo cando = Jacobi::Vst::Core::VstHostCanDo::None;
-				// TODO: convert string to enum
+				Jacobi::Vst::Core::VstHostCanDo cando = safe_cast<Jacobi::Vst::Core::VstHostCanDo>(
+					System::Enum::Parse(Jacobi::Vst::Core::VstHostCanDo::typeid, candoStr));
 				result = safe_cast<VstIntPtr>(_hostCmdStub->CanDo(cando));
 				}
 				break;
 			case audioMasterGetLanguage:
-				///< [return value]: language code  @see VstHostLanguage
+				// [return value]: language code  @see VstHostLanguage
 				result = safe_cast<VstIntPtr>(_hostCmdStub->GetLanguage());
 				break;
 			case audioMasterGetDirectory:
 				// [return value]: FSSpec on MAC, else char*  @see AudioEffectX::getDirectory
+				//TODO:
 				//result = _hostCmdStub->GetDirectory();
 				break;
 			case audioMasterUpdateDisplay:
@@ -155,10 +157,12 @@ namespace Host
 				break;
 			case audioMasterOpenFileSelector:
 				// [ptr]: VstFileSelect* [return value]: 1 if supported  @see AudioEffectX::openFileSelector
+				//TODO:
 				//result = _hostCmdStub->OpenFileSelector() ? 1 : 0;
 				break;
 			case audioMasterCloseFileSelector:
 				// [ptr]: VstFileSelect*  @see AudioEffectX::closeFileSelector
+				//TODO:
 				//result = _hostCmdStub->CloseFileSelector() ? 1 : 0;
 				break;
 			default:
