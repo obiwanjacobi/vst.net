@@ -464,9 +464,18 @@ public:
 	// frees the unmanaged memory
 	static void DeleteFileSelect(::VstFileSelect* pFileSelect)
 	{
-		DeallocateString(pFileSelect->initialPath);
+		if(pFileSelect->initialPath != NULL)
+		{
+			DeallocateString(pFileSelect->initialPath);
+			pFileSelect->initialPath = NULL;
+		}
 
-		delete[] pFileSelect->fileTypes;
+		if(pFileSelect->fileTypes != NULL)
+		{
+			delete[] pFileSelect->fileTypes;
+			pFileSelect->fileTypes = NULL;
+		}
+
 		delete pFileSelect;
 	}
 

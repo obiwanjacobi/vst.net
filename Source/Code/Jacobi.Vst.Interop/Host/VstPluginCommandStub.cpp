@@ -211,7 +211,8 @@ namespace Host
 	{
 		UnmanagedArray<char> dataArr (TypeConverter::ByteArrayToPtr(data), data->Length);
 
-		return safe_cast<System::Int32>(CallDispatch(effGetChunk, isPreset ? 1 : 0, data->Length, dataArr, 0));
+		//TODO: we need to hold on to the unmanaged memory until suspend/resume is called.
+		return safe_cast<System::Int32>(CallDispatch(effSetChunk, isPreset ? 1 : 0, data->Length, dataArr, 0));
 	}
 
 	// IVstPluginCommands20
@@ -287,54 +288,87 @@ namespace Host
     //System::Boolean OfflineRun(array<VstOfflineTask^>^ tasks, System::Int32 count);
     //System::Boolean ProcessVariableIO(VstVariableIO^ variableIO);
 
-    System::Boolean VstPluginCommandStub::SetSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ saInput, Jacobi::Vst::Core::VstSpeakerArrangement^ saOutput)
+    System::Boolean VstPluginCommandStub::SetSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ saInput, 
+		Jacobi::Vst::Core::VstSpeakerArrangement^ saOutput)
 	{
+		//TODO:
 		return false;
 	}
 
     System::Boolean VstPluginCommandStub::SetBypass(System::Boolean bypass)
 	{
-		return false;
+		return (CallDispatch(effSetBypass, 0, bypass ? 1 : 0, 0, 0) != 0);
 	}
 
     System::String^ VstPluginCommandStub::GetEffectName()
 	{
+		UnmanagedString effectName(kVstMaxEffectNameLen);
+
+		if(CallDispatch(effGetEffectName, 0, 0, effectName, 0) != 0)
+		{
+			return TypeConverter::CharToString(effectName);
+		}
+
 		return nullptr;
 	}
 
     System::String^ VstPluginCommandStub::GetVendorString()
 	{
+		UnmanagedString vendor(kVstMaxEffectNameLen);
+
+		if(CallDispatch(effGetVendorString, 0, 0, vendor, 0) != 0)
+		{
+			return TypeConverter::CharToString(vendor);
+		}
+
 		return nullptr;
 	}
 
     System::String^ VstPluginCommandStub::GetProductString()
 	{
+		UnmanagedString product(kVstMaxEffectNameLen);
+
+		if(CallDispatch(effGetProductString, 0, 0, product, 0) != 0)
+		{
+			return TypeConverter::CharToString(product);
+		}
+
 		return nullptr;
 	}
 
     System::Int32 VstPluginCommandStub::GetVendorVersion()
 	{
-		return 0;
+		return safe_cast<System::Int32>(CallDispatch(effGetVendorVersion, 0, 0, 0, 0));
 	}
 
     Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::CanDo(System::String^ cando)
 	{
-		return Jacobi::Vst::Core::VstCanDoResult::Unknown;
+		char* pCanDo = TypeConverter::AllocateString(cando);
+
+		try
+		{
+			return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallDispatch(effCanDo, 0, 0, pCanDo, 0));
+		}
+		finally
+		{
+			TypeConverter::DeallocateString(pCanDo);
+		}
 	}
 
     System::Int32 VstPluginCommandStub::GetTailSize()
 	{
-		return 0;
+		return safe_cast<System::Int32>(CallDispatch(effGetTailSize, 0, 0, 0, 0));
 	}
 
     Jacobi::Vst::Core::VstParameterProperties^ VstPluginCommandStub::GetParameterProperties(System::Int32 index)
 	{
+		//TODO:
 		return nullptr;
 	}
 
     System::Int32 VstPluginCommandStub::GetVstVersion()
 	{
-		return 0;
+		return safe_cast<System::Int32>(CallDispatch(effGetVstVersion, 0, 0, 0, 0));
 	}
 
 	// IVstPluginCommands21

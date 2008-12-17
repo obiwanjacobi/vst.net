@@ -15,7 +15,9 @@ namespace Host
 
 		void Initialize(System::String^ pluginPath);
 
+		// TODO: make type and prop internal
 		property VstHostCommandProxy^ HostCommandProxy { VstHostCommandProxy^ get() { return _hostCmdProxy; } }
+		// TODO: make type internal and change prop to commands interface type
 		property VstPluginCommandStub^ PluginCommandStub { VstPluginCommandStub^ get() { return _pluginCmdStub; } }
 
 	internal:

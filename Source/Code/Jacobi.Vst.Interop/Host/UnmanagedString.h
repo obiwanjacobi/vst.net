@@ -6,6 +6,7 @@ public:
 	UnmanagedString(int maxLength)
 	{
 		_buffer = new char[maxLength];
+		ZeroMemory(_buffer, maxLength);
 	}
 
 	~UnmanagedString()
