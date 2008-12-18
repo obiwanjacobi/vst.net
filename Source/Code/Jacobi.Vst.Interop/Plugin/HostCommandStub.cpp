@@ -341,6 +341,8 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 	{
 		TypeConverter::DeleteFileSelect(pFileSelect);
 	}
+
+	return false;
 }
 
 System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect)

@@ -82,8 +82,13 @@ namespace Host
 			// check if the plugin supports our VST version
 			if(_pluginCmdStub->GetVstVersion() < 2400)
 			{
-				throw gcnew System::InvalidOperationException("The Plugin '" + pluginPath + "' does not support VST 2.4 or higher.");
+				throw gcnew System::InvalidOperationException("The Plugin '" + pluginPath + "' does not support VST 2.4.");
 			}
+
+			// setup the plugin info
+			_pluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
+
+			AcceptPluginInfoData(false);
 		}
 		catch(...)
 		{
@@ -103,6 +108,20 @@ namespace Host
 
 			LoadingPlugin = nullptr;
 		}
+	}
+
+	void VstPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
+	{
+		// TODO: implement raiseEvents;
+
+		_pluginInfo->Flags = safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags);
+		_pluginInfo->ProgramCount = _pEffect->numPrograms;
+		_pluginInfo->ParameterCount = _pEffect->numParams;
+		_pluginInfo->AudioInputCount = _pEffect->numInputs;
+		_pluginInfo->AudioOutputCount = _pEffect->numOutputs;
+		_pluginInfo->InitialDelay = _pEffect->initialDelay;
+		_pluginInfo->PluginID = _pEffect->uniqueID;
+		_pluginInfo->PluginVersion = _pEffect->version;
 	}
 
 }}}} // namespace Jacobi.Vst.Interop.Host

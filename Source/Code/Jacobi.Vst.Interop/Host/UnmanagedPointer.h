@@ -4,7 +4,7 @@ template<class T>
 class UnmanagedPointer
 {
 public:
-	UnmanagedPointer(bool allocate){ if(allocate) _instance = new T(); else _instance = NULL; }
+	UnmanagedPointer(){ _instance = new T(); }
 	UnmanagedPointer(T* instance){ _instance = instance; }
 	virtual ~UnmanagedPointer(){ delete _instance; }
 
@@ -14,6 +14,11 @@ public:
 	}
 
 	operator T*()
+	{
+		return _instance;
+	}
+
+	T* operator->()
 	{
 		return _instance;
 	}

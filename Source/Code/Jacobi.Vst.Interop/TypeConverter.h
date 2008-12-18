@@ -247,6 +247,7 @@ public:
 		pProps->arrangementType = safe_cast<VstInt32>(pinProps->ArrangementType);
 	}
 
+	// Returns the values of the unmanaged pProps as managed VstPinProperties instance.
 	static Jacobi::Vst::Core::VstPinProperties^ ToPinProperties(::VstPinProperties* pProps)
 	{
 		Jacobi::Vst::Core::VstPinProperties^ pinProps = gcnew Jacobi::Vst::Core::VstPinProperties();
@@ -330,16 +331,53 @@ public:
 		pProps->numParametersInCategory = paramProps->ParameterCountInCategory;
 	}
 
+	static Jacobi::Vst::Core::VstParameterProperties^ ToParameterProperties(::VstParameterProperties* pProps)
+	{
+		Jacobi::Vst::Core::VstParameterProperties^ paramProps = gcnew Jacobi::Vst::Core::VstParameterProperties();
+
+		paramProps->Flags = safe_cast<Jacobi::Vst::Core::VstParameterPropertiesFlags>(pProps->flags);
+		paramProps->StepFloat = pProps->stepFloat;
+		paramProps->SmallStepFloat = pProps->smallStepFloat;
+		paramProps->LargeStepFloat = pProps->largeStepFloat;
+
+		paramProps->StepInteger = pProps->stepInteger;
+		paramProps->LargeStepInteger = pProps->largeStepInteger;
+		paramProps->MaxInteger = pProps->maxInteger;
+		paramProps->MinInteger = pProps->minInteger;
+
+		paramProps->DisplayIndex = pProps->displayIndex;
+		paramProps->Label = CharToString(pProps->label);
+		paramProps->ShortLabel = CharToString(pProps->shortLabel);
+
+		paramProps->Category = pProps->category;
+		paramProps->CategoryLabel = CharToString(pProps->categoryLabel);
+		paramProps->ParameterCountInCategory = pProps->numParametersInCategory;
+
+		return paramProps;
+	}
+
 	// Assigns the values of the managed midiProgName to the unmanaged pProgName fields.
 	static void FromMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::MidiProgramName* pProgName)
 	{
 		pProgName->thisProgramIndex = midiProgName->CurrentProgramIndex;
-		pProgName->flags = (VstInt32)midiProgName->Flags;
+		pProgName->flags = safe_cast<VstInt32>(midiProgName->Flags);
 		pProgName->midiBankLsb = safe_cast<char>(midiProgName->MidiBankLSB);
 		pProgName->midiBankMsb = safe_cast<char>(midiProgName->MidiBankMSB);
 		pProgName->midiProgram = safe_cast<char>(midiProgName->MidiProgram);
 		StringToChar(midiProgName->Name, pProgName->name, kVstMaxNameLen);
 		pProgName->parentCategoryIndex = midiProgName->ParentCategoryIndex;
+	}
+
+	// Assigns the values of the unmanaged pProgName to the managed midiProgName
+	static void ToMidiProgramName(::MidiProgramName* pProgName, Jacobi::Vst::Core::VstMidiProgramName^ midiProgName)
+	{
+		midiProgName->CurrentProgramIndex = pProgName->thisProgramIndex;
+		midiProgName->Flags = safe_cast<Jacobi::Vst::Core::VstMidiProgramNameFlags>(pProgName->flags);
+		midiProgName->MidiBankLSB = pProgName->midiBankLsb;
+		midiProgName->MidiBankMSB = pProgName->midiBankMsb;
+		midiProgName->MidiProgram = pProgName->midiProgram;
+		midiProgName->Name = CharToString(pProgName->name);
+		midiProgName->ParentCategoryIndex = pProgName->parentCategoryIndex;
 	}
 
 	// Assigns the values of the managed midiProgCat to the unmanaged pProgCat fields.
@@ -348,6 +386,14 @@ public:
 		pProgCat->thisCategoryIndex = midiProgCat->CurrentCategoryIndex;
 		pProgCat->parentCategoryIndex = midiProgCat->ParentCategoryIndex;
 		StringToChar(midiProgCat->Name, pProgCat->name, kVstMaxNameLen);
+	}
+
+	// Assigns the values of the unmanaged pProgCat to the managed midiProgCat fields.
+	static void ToMidiProgramCategory(::MidiProgramCategory* pProgCat, Jacobi::Vst::Core::VstMidiProgramCategory^ midiProgCat)
+	{
+		midiProgCat->CurrentCategoryIndex = pProgCat->thisCategoryIndex;
+		midiProgCat->ParentCategoryIndex = pProgCat->parentCategoryIndex;
+		midiProgCat->Name = CharToString(pProgCat->name);
 	}
 
 	// Converts the unmanaged pChunkInfo to a managed VstPatchChunkInfo.
@@ -361,6 +407,15 @@ public:
 				pChunkInfo->numElements);
 
 		return patchChunkInfo;
+	}
+
+	// Assigns the field values of the managed chunkInfo to the unmanaged pChunkInfo fields.
+	static void FromPatchChunkInfo(Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo, ::VstPatchChunkInfo* pChunkInfo)
+	{
+		pChunkInfo->version = chunkInfo->Version;
+		pChunkInfo->pluginUniqueID = chunkInfo->PluginID;
+		pChunkInfo->pluginVersion = chunkInfo->PluginVersion;
+		pChunkInfo->numElements = chunkInfo->ElementCount;
 	}
 
 	// Converts the unmanaged pTimeInfo to the managed VstTimeInfo.
