@@ -320,11 +320,9 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;
 			break;
 		case effBeginLoadBank:
-			// TODO: how do we deal with VstPatchChunkInfo in PluginHost scenario?
 			result = safe_cast<VstInt32>(_commandStub->BeginLoadBank(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
 			break;
 		case effBeginLoadProgram:
-			// TODO: how do we deal with VstPatchChunkInfo in PluginHost scenario?
 			result = safe_cast<VstInt32>(_commandStub->BeginLoadProgram(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
 			break;
 		case effSetProcessPrecision:
