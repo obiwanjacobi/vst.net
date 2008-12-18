@@ -14,17 +14,20 @@ namespace Host
 		!VstPluginContext();
 
 		void Initialize(System::String^ pluginPath);
+		void AcceptPluginInfoData(System::Boolean raiseEvents);
 
-		// TODO: make type and prop internal
-		property VstHostCommandProxy^ HostCommandProxy { VstHostCommandProxy^ get() { return _hostCmdProxy; } }
-		// TODO: make type internal and change prop to commands interface type
-		property VstPluginCommandStub^ PluginCommandStub { VstPluginCommandStub^ get() { return _pluginCmdStub; } }
+		property Jacobi::Vst::Core::Host::IVstPluginCommandStub^ PluginCommandStub 
+		{ Jacobi::Vst::Core::Host::IVstPluginCommandStub^ get() { return _pluginCmdStub; } }
+
+		property Jacobi::Vst::Core::Plugin::VstPluginInfo^ PluginInfo 
+		{ Jacobi::Vst::Core::Plugin::VstPluginInfo^ get() { return _pluginInfo; } }
 
 	internal:
 		// only set during loading of plugin
 		static property VstPluginContext^ LoadingPlugin;
 
-		::AEffect* GetEffectStruct() { return _pEffect; }
+		property VstHostCommandProxy^ HostCommandProxy 
+		{ VstHostCommandProxy^ get() { return _hostCmdProxy; } }
 
 	private:
 		HMODULE _hLib;
@@ -32,6 +35,7 @@ namespace Host
 
 		VstHostCommandProxy^ _hostCmdProxy;
 		VstPluginCommandStub^ _pluginCmdStub;
+		Jacobi::Vst::Core::Plugin::VstPluginInfo^ _pluginInfo;
 
 		void CloseLibrary() { if(_hLib != NULL) { ::FreeLibrary(_hLib); _hLib = NULL; } }
 	};
