@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "HostCommandStub.h"
 #include "..\TypeConverter.h"
+#include "..\UnmanagedString.h"
 
 // Creates a new instance based on a native callback function pointer.
 HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
@@ -89,14 +90,14 @@ Jacobi::Vst::Core::VstTimeInfo^ HostCommandStub::GetTimeInfo(Jacobi::Vst::Core::
 
 	::VstTimeInfo* pTimeInfo = (::VstTimeInfo*)CallHost(audioMasterGetTime, 0, safe_cast<VstInt32>(filterFlags), 0, 0);
 
-	return TypeConverter::ToTimeInfo(pTimeInfo);
+	return TypeConverter::ToManagedTimeInfo(pTimeInfo);
 }
 
 System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)
 {
 	ThrowIfNotInitialized();
 
-	::VstEvents* pEvents = TypeConverter::FromEventsArray(events);
+	::VstEvents* pEvents = TypeConverter::AllocUnmanagedEvents(events);
 
 	try
 	{
@@ -104,7 +105,7 @@ System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent
 	}
 	finally
 	{
-		TypeConverter::DeleteVstEvents(pEvents);
+		TypeConverter::DeleteUnmanagedEvents(pEvents);
 	}
 
 	return false;
@@ -210,44 +211,28 @@ System::String^ HostCommandStub::GetVendorString()
 {
 	//ThrowIfNotInitialized();
 
-	System::String^ str = nullptr;
-	char* pText = new char[kVstMaxVendorStrLen];
+	UnmanagedString pText(kVstMaxVendorStrLen);
 
-	try
+	if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
 	{
-		if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
-		{
-			str = TypeConverter::CharToString(pText);
-		}
-	}
-	finally
-	{
-		delete[] pText;
+		return TypeConverter::CharToString(pText);
 	}
 
-	return str;
+	return nullptr;
 }
 
 System::String^ HostCommandStub::GetProductString()
 {
 	//ThrowIfNotInitialized();
 
-	System::String^ str = nullptr;
-	char* pText = new char[kVstMaxProductStrLen];
+	UnmanagedString pText(kVstMaxProductStrLen);
 
-	try
+	if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
 	{
-		if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
-		{
-			str = TypeConverter::CharToString(pText);
-		}
-	}
-	finally
-	{
-		delete[] pText;
+		return TypeConverter::CharToString(pText);
 	}
 
-	return str;
+	return nullptr;
 }
 
 System::Int32 HostCommandStub::GetVendorVersion()
@@ -261,22 +246,12 @@ Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstH
 {
 	//ThrowIfNotInitialized();
 	
-	char* pText = new char[64];
+	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
 
-	try
-	{
-		TypeConverter::StringToChar(cando.ToString(), pText, 64);
-		pText[0] += 32;	// tolower
+	TypeConverter::StringToChar(cando.ToString(), pText, Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
+	pText[0] += 32;	// tolower
 
-		Jacobi::Vst::Core::VstCanDoResult result = 
-			safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));
-
-		return result;
-	}
-	finally
-	{
-		delete[] pText;
-	}
+	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));
 }
 
 Jacobi::Vst::Core::VstHostLanguage HostCommandStub::GetLanguage()
@@ -323,7 +298,7 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 		throw gcnew System::InvalidOperationException("The argument is already initialized with an unmanaged VstFileSelect structure.");
 	}
 
-	::VstFileSelect* pFileSelect = TypeConverter::FromFileSelect(fileSelect);
+	::VstFileSelect* pFileSelect = TypeConverter::AllocUnmanagedFileSelect(fileSelect);
 
 	try
 	{
@@ -332,14 +307,14 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 		if(succeeded)
 		{
 			// update the managed type with the users selections.
-			TypeConverter::ToFileSelect(fileSelect, pFileSelect);
+			TypeConverter::ToManagedFileSelect(fileSelect, pFileSelect);
 		}
 
 		return succeeded;
 	}
 	catch(...)
 	{
-		TypeConverter::DeleteFileSelect(pFileSelect);
+		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
 	}
 
 	return false;
@@ -364,7 +339,7 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 	}
 	finally
 	{
-		TypeConverter::DeleteFileSelect(pFileSelect);
+		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
 		fileSelect->Reserved = System::IntPtr::Zero;
 	}
 }

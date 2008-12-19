@@ -55,7 +55,7 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 			break;
 		case audioMasterProcessEvents:
 			// [ptr]: pointer to #VstEvents  @see VstEvents @see AudioEffectX::sendVstEventsToHost
-			_hostCmdStub->ProcessEvents(TypeConverter::ToEventArray((::VstEvents*)ptr));
+			_hostCmdStub->ProcessEvents(TypeConverter::ToManagedEventArray((::VstEvents*)ptr));
 			result = 1;
 			break;
 		case audioMasterIOChanged:

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "..\MemoryTracker.h"
+
 ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub
 {
 public:
@@ -156,4 +158,6 @@ private:
 	{ return _pEffect->getParameter(_pEffect, index); }
 
 	template<typename T> void ThrowIfArgumentNotOfType(System::Object^ argument);
+
+	MemoryTracker^ _memoryTracker;
 };

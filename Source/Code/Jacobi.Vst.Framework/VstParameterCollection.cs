@@ -58,7 +58,7 @@ namespace Jacobi.Vst.Framework
         }
 
         /// <summary>
-        /// Override to <see cref="VstParameter.Dispose"/> the collection items.
+        /// Override to <see cref="VstParameter.Dispose()"/> the collection items.
         /// </summary>
         protected override void ClearItems()
         {
@@ -84,7 +84,7 @@ namespace Jacobi.Vst.Framework
         }
 
         /// <summary>
-        /// Override to <see cref="VstParameter.Dispose"/> the collection item.
+        /// Override to <see cref="VstParameter.Dispose()"/> the collection item.
         /// </summary>
         /// <param name="index">A zero-based index that will be removed.</param>
         protected override void RemoveItem(int index)
@@ -99,7 +99,7 @@ namespace Jacobi.Vst.Framework
         }
 
         /// <summary>
-        /// Override to <see cref="VstParameter.Dispose"/> the collection item.
+        /// Override to <see cref="VstParameter.Dispose()"/> the collection item.
         /// </summary>
         /// <param name="index">A zero-based index the new <paramref name="item"/> will be set.</param>
         /// <param name="item">The new item to set. Can be null.</param>

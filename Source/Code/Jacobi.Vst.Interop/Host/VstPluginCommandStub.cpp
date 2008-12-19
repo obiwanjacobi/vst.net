@@ -2,8 +2,8 @@
 #include "UnmanagedArray.h"
 #include "VstPluginCommandStub.h"
 #include "..\TypeConverter.h"
-#include "UnmanagedString.h"
-#include "UnmanagedPointer.h"
+#include "..\UnmanagedString.h"
+#include "..\UnmanagedPointer.h"
 
 
 VstPluginCommandStub::VstPluginCommandStub(::AEffect* pEffect)
@@ -14,6 +14,7 @@ VstPluginCommandStub::VstPluginCommandStub(::AEffect* pEffect)
 	}
 
 	_pEffect = pEffect;
+	_memoryTracker = gcnew MemoryTracker();
 }
 
 // IVstPluginCommandsBase
@@ -67,6 +68,7 @@ void VstPluginCommandStub::Open()
 
 void VstPluginCommandStub::Close()
 {
+	_memoryTracker->ClearAll();
 	CallDispatch(effClose, 0, 0, 0, 0);
 }
 
@@ -163,7 +165,7 @@ System::Boolean VstPluginCommandStub::EditorGetRect([System::Runtime::InteropSer
 
 	if(CallDispatch(effEditGetRect, 0, 0, &unmanagedRect, 0))
 	{
-		rect = TypeConverter::ERectToRectangle(unmanagedRect);
+		rect = TypeConverter::ToManagedRectangle(unmanagedRect);
 		return true;
 	}
 
@@ -204,16 +206,18 @@ array<System::Byte>^ VstPluginCommandStub::GetChunk(System::Boolean isPreset)
 
 System::Int32 VstPluginCommandStub::SetChunk(array<System::Byte>^ data, System::Boolean isPreset)
 {
-	UnmanagedArray<char> dataArr (TypeConverter::ByteArrayToPtr(data), data->Length);
+	char* dataArr = TypeConverter::ByteArrayToPtr(data);
 
-	//TODO: we need to hold on to the unmanaged memory until suspend/resume is called.
+	// we need to hold on to the unmanaged memory until suspend/resume is called.
+	_memoryTracker->RegisterArray(dataArr);
+
 	return safe_cast<System::Int32>(CallDispatch(effSetChunk, isPreset ? 1 : 0, data->Length, dataArr, 0));
 }
 
 // IVstPluginCommands20
 System::Boolean VstPluginCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)
 {
-	::VstEvents* pEvents = TypeConverter::FromEventsArray(events);
+	::VstEvents* pEvents = TypeConverter::AllocUnmanagedEvents(events);
 
 	try
 	{
@@ -221,7 +225,7 @@ System::Boolean VstPluginCommandStub::ProcessEvents(array<Jacobi::Vst::Core::Vst
 	}
 	finally
 	{
-		TypeConverter::DeleteVstEvents(pEvents);
+		TypeConverter::DeleteUnmanagedEvents(pEvents);
 	}
 }
 
@@ -262,7 +266,7 @@ Jacobi::Vst::Core::VstPinProperties^ VstPluginCommandStub::GetInputProperties(Sy
 
 	if(CallDispatch(effGetInputProperties, index, 0, pinProps, 0) != 0)
 	{
-		return TypeConverter::ToPinProperties(pinProps);
+		return TypeConverter::ToManagedPinProperties(pinProps);
 	}
 	
 	return nullptr;
@@ -274,7 +278,7 @@ Jacobi::Vst::Core::VstPinProperties^ VstPluginCommandStub::GetOutputProperties(S
 
 	if(CallDispatch(effGetOutputProperties, index, 0, pinProps, 0) != 0)
 	{
-		return TypeConverter::ToPinProperties(pinProps);
+		return TypeConverter::ToManagedPinProperties(pinProps);
 	}
 
 	return nullptr;
@@ -294,8 +298,8 @@ Jacobi::Vst::Core::VstPluginCategory VstPluginCommandStub::GetCategory()
 System::Boolean VstPluginCommandStub::SetSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ saInput, 
 	Jacobi::Vst::Core::VstSpeakerArrangement^ saOutput)
 {
-	UnmanagedPointer<::VstSpeakerArrangement> pInput(TypeConverter::FromSpeakerArrangement(saInput));
-	UnmanagedPointer<::VstSpeakerArrangement> pOutput(TypeConverter::FromSpeakerArrangement(saOutput));
+	UnmanagedPointer<::VstSpeakerArrangement> pInput(TypeConverter::AllocUnmanagedSpeakerArrangement(saInput));
+	UnmanagedPointer<::VstSpeakerArrangement> pOutput(TypeConverter::AllocUnmanagedSpeakerArrangement(saOutput));
 
 	return (CallDispatch(effSetSpeakerArrangement, 0, (VstIntPtr)(::VstSpeakerArrangement*)pInput, pOutput, 0) != 0);
 }
@@ -371,7 +375,7 @@ Jacobi::Vst::Core::VstParameterProperties^ VstPluginCommandStub::GetParameterPro
 
 	if(CallDispatch(effGetParameterProperties, index, 0, pProps, 0))
 	{
-		return TypeConverter::ToParameterProperties(pProps);
+		return TypeConverter::ToManagedParameterProperties(pProps);
 	}
 
 	return nullptr;
@@ -408,7 +412,7 @@ System::Int32 VstPluginCommandStub::GetMidiProgramName(Jacobi::Vst::Core::VstMid
 
 	if(result != 0)
 	{
-		TypeConverter::ToMidiProgramName(pProgName, midiProgram);
+		TypeConverter::ToManagedMidiProgramName(midiProgram, pProgName);
 	}
 
 	return result;
@@ -422,7 +426,7 @@ System::Int32 VstPluginCommandStub::GetCurrentMidiProgramName(Jacobi::Vst::Core:
 
 	if(result != 0)
 	{
-		TypeConverter::ToMidiProgramName(pProgName, midiProgram);
+		TypeConverter::ToManagedMidiProgramName(midiProgram, pProgName);
 	}
 
 	return result;
@@ -436,7 +440,7 @@ System::Int32 VstPluginCommandStub::GetMidiProgramCategory(Jacobi::Vst::Core::Vs
 
 	if(result != 0)
 	{
-		TypeConverter::ToMidiProgramCategory(pProgCat, midiCat);
+		TypeConverter::ToManagedMidiProgramCategory(midiCat, pProgCat);
 	}
 
 	return result;
@@ -481,8 +485,8 @@ System::Boolean VstPluginCommandStub::GetSpeakerArrangement([System::Runtime::In
 
 	if(CallDispatch(effGetSpeakerArrangement, 0, (VstIntPtr)(::VstSpeakerArrangement*)pInput, pOutput, 0))
 	{
-		input = TypeConverter::ToSpeakerArrangement(pInput);
-		output = TypeConverter::ToSpeakerArrangement(pOutput);
+		input = TypeConverter::ToManagedSpeakerArrangement(pInput);
+		output = TypeConverter::ToManagedSpeakerArrangement(pOutput);
 		return true;
 	}
 
@@ -519,7 +523,7 @@ Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadBank(Jacobi::Vs
 
 	if(result != 0)
 	{
-		TypeConverter::FromPatchChunkInfo(chunkInfo, pChunkInfo);
+		TypeConverter::ToUnmanagedPatchChunkInfo(pChunkInfo, chunkInfo);
 	}
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(result);
@@ -533,7 +537,7 @@ Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadProgram(Jacobi:
 
 	if(result != 0)
 	{
-		TypeConverter::FromPatchChunkInfo(chunkInfo, pChunkInfo);
+		TypeConverter::ToUnmanagedPatchChunkInfo(pChunkInfo, chunkInfo);
 	}
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(result);
