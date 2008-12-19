@@ -1,5 +1,7 @@
 #pragma once
 
+#include "..\MemoryTracker.h"
+
 namespace Jacobi {
 namespace Vst {
 namespace Interop {

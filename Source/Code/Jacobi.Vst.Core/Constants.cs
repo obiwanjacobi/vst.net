@@ -35,5 +35,8 @@
         public const int MaxFileTypeName = 127;
         /// <summary>used for #VstFileType->dos/unix/macType</summary>
         public const int MaxFileTypeExtension = 7;
+
+        /// <summary>used in both host and plugin cando's.</summary>
+        public const int MaxCanDoLength = 63;
     }
 }

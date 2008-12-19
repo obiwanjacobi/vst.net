@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MemoryTracker.h"
+#include "..\MemoryTracker.h"
 
 ref class PluginCommandProxy
 {

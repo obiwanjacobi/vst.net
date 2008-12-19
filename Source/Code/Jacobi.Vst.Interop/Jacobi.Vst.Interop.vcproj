@@ -261,7 +261,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Plugin\MemoryTracker.cpp"
+				RelativePath=".\MemoryTracker.cpp"
 				>
 			</File>
 			<File
@@ -297,6 +297,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Host\VstAudioBufferManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstAudioPrecisionBufferManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Host\VstHostCommandProxy.cpp"
 				>
 			</File>
@@ -323,7 +331,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Plugin\MemoryTracker.h"
+				RelativePath=".\MemoryTracker.h"
 				>
 			</File>
 			<File
@@ -351,15 +359,23 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Host\UnmanagedPointer.h"
+				RelativePath=".\UnmanagedPointer.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Host\UnmanagedString.h"
+				RelativePath=".\UnmanagedString.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Utils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstAudioBufferManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstAudioPrecisionBufferManager.h"
 				>
 			</File>
 			<File
