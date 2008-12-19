@@ -6,9 +6,24 @@ ref class UnmanagedArray : System::IDisposable
 {
 public:
 	UnmanagedArray(){ _array = NULL; _length = 0; }
-	UnmanagedArray(T* instance, int length){ _array = instance; _length = length; }
+	UnmanagedArray(T* instance, long length){ _array = instance; _length = length; }
 	~UnmanagedArray(){ this->!UnmanagedArray(); }
 	!UnmanagedArray(){ DeleteArray(); }
+
+	long GetLength()
+	{
+		return _length;
+	}
+
+	long GetByteLength()
+	{
+		return _length * sizeof(T);
+	}
+
+	T* GetArray()
+	{
+		return _array;
+	}
 
 	T* GetArray(int length)
 	{
@@ -33,10 +48,10 @@ public:
 	}
 
 private:
-	int _length;
+	long _length;
 	T* _array;
 
-	void AllocateArray(int length)
+	void AllocateArray(long length)
 	{
 		_array = new T[length];
 		_length = length;

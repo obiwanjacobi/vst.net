@@ -74,7 +74,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			System::Drawing::Rectangle rect;
 			result = (_commandStub->EditorGetRect(rect) ? 1 : 0);
 			// TODO: ERect is allocated. Will this leak!?
-			TypeConverter::RectangleToERect(rect, (ERect**)ptr);
+			*((ERect**)ptr) = TypeConverter::AllocUnmanagedRectangle(rect);
 			}
 			break;
 		case effEditOpen:
@@ -103,7 +103,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			}
 			break;
 		case effProcessEvents:
-			result = _commandStub->ProcessEvents(TypeConverter::ToEventArray((VstEvents*)ptr)) ? 1 : 0;
+			result = _commandStub->ProcessEvents(TypeConverter::ToManagedEventArray((VstEvents*)ptr)) ? 1 : 0;
 			break;
 		case effCanBeAutomated:
 			result = _commandStub->CanParameterBeAutomated(index) ? 1 : 0;
@@ -126,7 +126,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->GetInputProperties(index);
 			if(pinProps != nullptr)
 			{
-				TypeConverter::FromPinProperties(pinProps, (::VstPinProperties*)ptr);
+				TypeConverter::ToUnmanagedPinProperties((::VstPinProperties*)ptr, pinProps);
 				result = 1;
 			}
 			}
@@ -136,7 +136,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->GetOutputProperties(index);
 			if(pinProps != nullptr)
 			{
-				TypeConverter::FromPinProperties(pinProps, (::VstPinProperties*)ptr);
+				TypeConverter::ToUnmanagedPinProperties((::VstPinProperties*)ptr, pinProps);
 				result = 1;
 			}
 			}
@@ -161,8 +161,8 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			//result = _commandStub->ProcessVariableIO();
 			//break;
 		case effSetSpeakerArrangement:
-			result = _commandStub->SetSpeakerArrangement(TypeConverter::ToSpeakerArrangement((::VstSpeakerArrangement*)value),
-				TypeConverter::ToSpeakerArrangement((::VstSpeakerArrangement*)ptr));
+			result = _commandStub->SetSpeakerArrangement(TypeConverter::ToManagedSpeakerArrangement((::VstSpeakerArrangement*)value),
+				TypeConverter::ToManagedSpeakerArrangement((::VstSpeakerArrangement*)ptr));
 			break;
 		case effSetBypass:
 			result = _commandStub->SetBypass(value != 0 ? true : false) ? 1 : 0;
@@ -211,7 +211,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			Jacobi::Vst::Core::VstParameterProperties^ paramProps = _commandStub->GetParameterProperties(index);
 			if(paramProps != nullptr)
 			{
-				TypeConverter::FromParameterProperties(paramProps,(::VstParameterProperties*)ptr);
+				TypeConverter::ToUnmanagedParameterProperties((::VstParameterProperties*)ptr, paramProps);
 				result = 1;
 			}
 			}
@@ -238,7 +238,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			Jacobi::Vst::Core::VstMidiProgramName^ progName = gcnew Jacobi::Vst::Core::VstMidiProgramName();
 			progName->CurrentProgramIndex = pProgName->thisProgramIndex;
 			result = _commandStub->GetMidiProgramName(progName, index);
-			TypeConverter::FromMidiProgramName(progName, pProgName);
+			TypeConverter::ToUnmanagedMidiProgramName(pProgName, progName);
 			}
 			break;
 		case effGetCurrentMidiProgram:
@@ -246,7 +246,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			::MidiProgramName* pProgName = (::MidiProgramName*)ptr;
 			Jacobi::Vst::Core::VstMidiProgramName^ progName = gcnew Jacobi::Vst::Core::VstMidiProgramName();
 			result = _commandStub->GetCurrentMidiProgramName(progName, index);
-			TypeConverter::FromMidiProgramName(progName, pProgName);
+			TypeConverter::ToUnmanagedMidiProgramName(pProgName, progName);
 			}
 			break;
 		case effGetMidiProgramCategory:
@@ -255,7 +255,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			Jacobi::Vst::Core::VstMidiProgramCategory^ progCat = gcnew Jacobi::Vst::Core::VstMidiProgramCategory();
 			progCat->CurrentCategoryIndex = pProgCat->thisCategoryIndex;
 			result = _commandStub->GetMidiProgramCategory(progCat, index);
-			TypeConverter::FromMidiProgramCategory(progCat, pProgCat);
+			TypeConverter::ToUnmanagedMidiProgramCategory(pProgCat, progCat);
 			}
 			break;
 		case effHasMidiProgramsChanged:
@@ -292,10 +292,10 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			if(result)
 			{
 				// NOTE: register retvals with the memory tracker to be deleted later.
-				*ppInput = TypeConverter::FromSpeakerArrangement(inputArr);
+				*ppInput = TypeConverter::AllocUnmanagedSpeakerArrangement(inputArr);
 				_memTracker->RegisterObject(*ppInput);
 
-				*ppOutput = TypeConverter::FromSpeakerArrangement(outputArr);
+				*ppOutput = TypeConverter::AllocUnmanagedSpeakerArrangement(outputArr);
 				_memTracker->RegisterObject(*ppOutput);
 			}
 			}
@@ -320,10 +320,10 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;
 			break;
 		case effBeginLoadBank:
-			result = safe_cast<VstInt32>(_commandStub->BeginLoadBank(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
+			result = safe_cast<VstInt32>(_commandStub->BeginLoadBank(TypeConverter::ToManagedPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
 			break;
 		case effBeginLoadProgram:
-			result = safe_cast<VstInt32>(_commandStub->BeginLoadProgram(TypeConverter::ToPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
+			result = safe_cast<VstInt32>(_commandStub->BeginLoadProgram(TypeConverter::ToManagedPatchChunkInfo((::VstPatchChunkInfo*)ptr)));
 			break;
 		case effSetProcessPrecision:
 			result = _commandStub->SetProcessPrecision(safe_cast<Jacobi::Vst::Core::VstProcessPrecision>(value)) ? 1 : 0;
@@ -354,8 +354,8 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 {
 	try
 	{
-		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs, false);
-		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs, true);
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToManagedAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
 		_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 	}
@@ -371,8 +371,8 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sam
 {
 	try
 	{
-		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToAudioBufferArray(inputs, sampleFrames, numInputs, false);
-		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputBuffers = TypeConverter::ToAudioBufferArray(outputs, sampleFrames, numOutputs, true);
+		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
+		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputBuffers = TypeConverter::ToManagedAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
 		_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
 	}
