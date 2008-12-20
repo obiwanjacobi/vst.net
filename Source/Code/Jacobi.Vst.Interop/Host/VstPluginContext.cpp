@@ -18,7 +18,12 @@ namespace Host
 			throw gcnew System::ArgumentNullException("hostCmdStub");
 		}
 
+		_hostCmdStub = hostCmdStub;
 		_hostCmdProxy = gcnew VstHostCommandProxy(hostCmdStub);
+
+		hostCmdStub->PluginContext = this;
+
+		_props = gcnew System::Collections::Generic::Dictionary<System::String^, System::Object^>();
 	}
 
 	VstPluginContext::~VstPluginContext()
@@ -78,6 +83,7 @@ namespace Host
 			_pEffect->resvd1 = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();
 
 			_pluginCmdStub = gcnew VstPluginCommandStub(_pEffect);
+			_pluginCmdStub->PluginContext = this;
 
 			// check if the plugin supports our VST version
 			if(_pluginCmdStub->GetVstVersion() < 2400)
@@ -110,10 +116,80 @@ namespace Host
 		}
 	}
 
+	generic<typename T> 
+	void VstPluginContext::Set(System::String^ keyName, T value)
+	{
+		if(_props->ContainsKey(keyName))
+		{
+			_props->default[keyName] = value;
+			RaisePropertyChanged(keyName);
+		}
+		else
+		{
+			_props->Add(keyName, value);
+		}
+	}
+
+	generic<typename T> 
+	T VstPluginContext::Find(System::String^ keyName)
+	{
+		if(_props->ContainsKey(keyName))
+		{
+			return (T)_props->default[keyName];
+		}
+
+		return T();
+	}
+
 	void VstPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		// TODO: implement raiseEvents;
+		System::Collections::Generic::List<System::String^> changedPropNames = 
+			gcnew System::Collections::Generic::List<System::String^>();
 
+		if(raiseEvents)
+		{
+			if(_pluginInfo->Flags != safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags))
+			{
+				changedPropNames.Add("PluginInfo.Flags");
+			}
+
+			if(_pluginInfo->ProgramCount != _pEffect->numPrograms)
+			{
+				changedPropNames.Add("PluginInfo.ProgramCount");
+			}
+
+			if(_pluginInfo->ParameterCount != _pEffect->numParams)
+			{
+				changedPropNames.Add("PluginInfo.ParameterCount");
+			}
+
+			if(_pluginInfo->AudioInputCount != _pEffect->numInputs)
+			{
+				changedPropNames.Add("PluginInfo.AudioInputCount");
+			}
+
+			if(_pluginInfo->AudioOutputCount != _pEffect->numOutputs)
+			{
+				changedPropNames.Add("PluginInfo.AudioOutputCount");
+			}
+
+			if(_pluginInfo->InitialDelay != _pEffect->initialDelay)
+			{
+				changedPropNames.Add("PluginInfo.InitialDelay");
+			}
+			
+			if(_pluginInfo->PluginID != _pEffect->uniqueID)
+			{
+				changedPropNames.Add("PluginInfo.PluginID");
+			}
+
+			if(_pluginInfo->PluginVersion != _pEffect->version)
+			{
+				changedPropNames.Add("PluginInfo.PluginVersion");
+			}
+		}
+
+		// assign new values
 		_pluginInfo->Flags = safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags);
 		_pluginInfo->ProgramCount = _pEffect->numPrograms;
 		_pluginInfo->ParameterCount = _pEffect->numParams;
@@ -122,6 +198,12 @@ namespace Host
 		_pluginInfo->InitialDelay = _pEffect->initialDelay;
 		_pluginInfo->PluginID = _pEffect->uniqueID;
 		_pluginInfo->PluginVersion = _pEffect->version;
+
+		// raise all the changed property events
+		for each(System::String^ propName in changedPropNames)
+		{
+			RaisePropertyChanged(propName);
+		}
 	}
 
 }}}} // namespace Jacobi.Vst.Interop.Host
