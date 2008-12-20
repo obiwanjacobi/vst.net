@@ -6,8 +6,9 @@ namespace Jacobi.Vst.Core.Host
     /// The IVstPluginCommandStub interface is implemented by the command stub for the Plugin commands
     /// in the Interop assembly.
     /// </summary>
-    /// <remarks>The interfaces derives from <see cref="IVstPluginCommands24"/> and adds no new members.</remarks>
+    /// <remarks>The interfaces derives from <see cref="IVstPluginCommands24"/>.</remarks>
     public interface IVstPluginCommandStub : IVstPluginCommands24
     {
+        IVstPluginContext PluginContext { get; set; }
     }
 }

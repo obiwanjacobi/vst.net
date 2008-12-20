@@ -91,7 +91,7 @@ public:
     virtual System::Int32 GetNumberOfMidiOutputChannels();
 
 	// IVstPluginCommandStub
-	// ...
+	virtual property Jacobi::Vst::Core::Host::IVstPluginContext^ PluginContext;
 
 internal:
 	VstPluginCommandStub(::AEffect* pEffect);
