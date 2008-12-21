@@ -5,8 +5,8 @@ class UnmanagedString
 public:
 	UnmanagedString(int maxLength)
 	{
-		_buffer = new char[maxLength];
-		ZeroMemory(_buffer, maxLength);
+		_buffer = new char[maxLength + 1];
+		ZeroMemory(_buffer, maxLength + 1);
 	}
 
 	~UnmanagedString()

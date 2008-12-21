@@ -5,16 +5,6 @@ using Jacobi.Vst.Interop.Host;
 
 namespace Jacobi.Vst.Samples.Host
 {
-    class PluginCalledEventArgs : EventArgs
-    {
-        public PluginCalledEventArgs(string message)
-        {
-            Message = message;
-        }
-
-        public string Message { get; private set; }
-    }
-
     class HostCommandStub : IVstHostCommandStub 
     {
         public event EventHandler<PluginCalledEventArgs> PluginCalled;
@@ -191,5 +181,15 @@ namespace Jacobi.Vst.Samples.Host
         }
 
         #endregion
+    }
+
+    class PluginCalledEventArgs : EventArgs
+    {
+        public PluginCalledEventArgs(string message)
+        {
+            Message = message;
+        }
+
+        public string Message { get; private set; }
     }
 }

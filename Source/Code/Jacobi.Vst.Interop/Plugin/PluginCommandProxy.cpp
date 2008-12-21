@@ -40,34 +40,43 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effSetProgram:
 			_commandStub->SetProgram(value);
+			result = 1;
 			break;
 		case effGetProgram:
 			result = _commandStub->GetProgram();
 			break;
 		case effSetProgramName:
 			_commandStub->SetProgramName(TypeConverter::CharToString((char*)ptr));
+			result = 1;
 			break;
 		case effGetProgramName:
 			TypeConverter::StringToChar(_commandStub->GetProgramName(), (char*)ptr, kVstMaxProgNameLen);
+			result = 1;
 			break;
 		case effGetParamLabel:
 			TypeConverter::StringToChar(_commandStub->GetParameterLabel(index), (char*)ptr, kVstMaxParamStrLen);
+			result = 1;
 			break;
 		case effGetParamDisplay:
 			TypeConverter::StringToChar(_commandStub->GetParameterDisplay(index), (char*)ptr, kVstMaxParamStrLen);
+			result = 1;
 			break;
 		case effGetParamName:
 			TypeConverter::StringToChar(_commandStub->GetParameterName(index), (char*)ptr, kVstMaxParamStrLen);
+			result = 1;
 			break;
 		case effSetSampleRate:
 			_commandStub->SetSampleRate(opt);
+			result = 1;
 			break;
 		case effSetBlockSize:
 			_commandStub->SetBlockSize(value);
+			result = 1;
 			break;
 		case effMainsChanged:
 			_memTracker->ClearAll(); // safe to delete allocated memory during suspend/resume
 			_commandStub->MainsChanged(value != 0);
+			result = 1;
 			break;
 		case effEditGetRect:
 			{
@@ -82,9 +91,11 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effEditClose:
 			_commandStub->EditorClose();
+			result = 1;
 			break;
 		case effEditIdle:
 			_commandStub->EditorIdle();
+			result = 1;
 			break;
 		case effGetChunk:
 			{
@@ -313,9 +324,9 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		case effStopProcess:
 			result = _commandStub->StopProcess();
 			break;
-		case effSetTotalSampleToProcess:
+		//case effSetTotalSampleToProcess:
 			//result = _commandStub->SetTotalSamplesToProcess(value);
-			break;
+			//break;
 		case effSetPanLaw:
 			result = _commandStub->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;
 			break;
