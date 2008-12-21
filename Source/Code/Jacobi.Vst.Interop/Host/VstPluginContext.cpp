@@ -55,7 +55,7 @@ namespace Host
 
 			if(_hLib == NULL)
 			{
-				throw gcnew System::InvalidOperationException(pluginPath + " cannot be loaded.");
+				throw gcnew System::ArgumentException(pluginPath + " cannot be loaded.");
 			}
 
 			// check entry point
@@ -63,7 +63,7 @@ namespace Host
 
 			if(pluginMain == NULL)
 			{
-				throw gcnew System::InvalidOperationException(pluginPath + " has no exported 'VSTPluginMain' function (VST 2.4).");
+				throw gcnew System::ArgumentException(pluginPath + " has no exported 'VSTPluginMain' function (VST 2.4).");
 			}
 			
 			LoadingPlugin = this;
@@ -73,7 +73,12 @@ namespace Host
 
 			if(_pEffect == NULL)
 			{
-				throw gcnew System::InvalidOperationException(pluginPath + " did not return an AEffect structure.");
+				throw gcnew System::ArgumentException(pluginPath + " did not return an AEffect structure.");
+			}
+
+			if(_pEffect->magic != kEffectMagic)
+			{
+				throw gcnew System::ArgumentException(pluginPath + " did not return an AEffect structure with the correct 'Magic' number.");
 			}
 
 			System::Runtime::InteropServices::GCHandle ctxHandle = 

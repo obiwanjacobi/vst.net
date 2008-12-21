@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 using Jacobi.Vst.Core;
 using Jacobi.Vst.Interop.Host;
-using System.Diagnostics;
 
 namespace Jacobi.Vst.Samples.Host
 {
@@ -44,7 +44,18 @@ namespace Jacobi.Vst.Samples.Host
 
             hostCmdStub.PluginCalled += new EventHandler<PluginCalledEventArgs>(HostCmdStub_PluginCalled);
 
-            ctx.Initialize(pluginPath);
+            try
+            {
+                ctx.Initialize(pluginPath);
+
+                ctx.PluginCommandStub.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(this, e.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                ctx = null;
+            }
 
             return ctx;
         }
@@ -53,17 +64,39 @@ namespace Jacobi.Vst.Samples.Host
         {
             foreach (VstPluginContext ctx in _plugins)
             {
+                ctx.PluginCommandStub.Close();
                 ctx.Dispose();
             }
 
             _plugins.Clear();
         }
 
+        private VstPluginContext SelectedPluginContext
+        {
+            get
+            {
+                if (PluginListVw.SelectedItems.Count > 0)
+                {
+                    return (VstPluginContext)PluginListVw.SelectedItems[0].Tag;
+                }
+
+                return null;
+            }
+        }
+
         private void HostCmdStub_PluginCalled(object sender, PluginCalledEventArgs e)
         {
             HostCommandStub hostCmdStub = (HostCommandStub)sender;
 
-            Debug.WriteLine("Plugin " + hostCmdStub.PluginContext.PluginInfo.PluginID + " called" + e.Message);
+            // can be null when called from inside the plugin main entry point.
+            if (hostCmdStub.PluginContext.PluginInfo != null)
+            {
+                Debug.WriteLine("Plugin " + hostCmdStub.PluginContext.PluginInfo.PluginID + " called:" + e.Message);
+            }
+            else
+            {
+                Debug.WriteLine("The loading Plugin called:" + e.Message);
+            }
         }
 
         private void BrowseBtn_Click(object sender, EventArgs e)
@@ -80,14 +113,25 @@ namespace Jacobi.Vst.Samples.Host
         {
             VstPluginContext ctx = OpenPlugin(PluginPathTxt.Text);
 
-            _plugins.Add(ctx);
+            if (ctx != null)
+            {
+                _plugins.Add(ctx);
 
-            FillPluginList();
+                FillPluginList();
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ReleaseAllPlugins();
+        }
+
+        private void ViewPluginBtn_Click(object sender, EventArgs e)
+        {
+            PluginForm dlg = new PluginForm();
+            dlg.PluginContext = SelectedPluginContext;
+
+            dlg.ShowDialog(this);
         }
     }
 }
