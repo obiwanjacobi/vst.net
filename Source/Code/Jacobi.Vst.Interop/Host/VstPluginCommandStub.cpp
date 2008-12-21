@@ -100,48 +100,36 @@ System::String^ VstPluginCommandStub::GetProgramName()
 {
 	UnmanagedString progName(kVstMaxProgNameLen);
 
-	if(CallDispatch(effGetProgramName, 0, 0, progName, 0))
-	{
-		return TypeConverter::CharToString(progName);
-	}
+	CallDispatch(effGetProgramName, 0, 0, progName, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(progName);
 }
 
 System::String^ VstPluginCommandStub::GetParameterLabel(System::Int32 index)
 {
 	UnmanagedString paramLabel(kVstMaxParamStrLen);
 
-	if(CallDispatch(effGetParamLabel, index, 0, paramLabel, 0))
-	{
-		return TypeConverter::CharToString(paramLabel);
-	}
+	CallDispatch(effGetParamLabel, index, 0, paramLabel, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(paramLabel);
 }
 
 System::String^ VstPluginCommandStub::GetParameterDisplay(System::Int32 index)
 {
 	UnmanagedString paramLabel(kVstMaxParamStrLen);
 
-	if(CallDispatch(effGetParamDisplay, index, 0, paramLabel, 0))
-	{
-		return TypeConverter::CharToString(paramLabel);
-	}
+	CallDispatch(effGetParamDisplay, index, 0, paramLabel, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(paramLabel);
 }
 
 System::String^ VstPluginCommandStub::GetParameterName(System::Int32 index)
 {
 	UnmanagedString paramName(kVstMaxParamStrLen);
 
-	if(CallDispatch(effGetParamName, index, 0, paramName, 0))
-	{
-		return TypeConverter::CharToString(paramName);
-	}
+	CallDispatch(effGetParamName, index, 0, paramName, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(paramName);
 }
 
 void VstPluginCommandStub::SetSampleRate(System::Single sampleRate)
@@ -163,7 +151,7 @@ System::Boolean VstPluginCommandStub::EditorGetRect([System::Runtime::InteropSer
 {
 	UnmanagedPointer<ERect> unmanagedRect(false);
 
-	if(CallDispatch(effEditGetRect, 0, 0, &unmanagedRect, 0))
+	if(CallDispatch(effEditGetRect, 0, 0, &unmanagedRect, 0) != 0)
 	{
 		rect = TypeConverter::ToManagedRectangle(unmanagedRect);
 		return true;
@@ -252,12 +240,9 @@ System::String^ VstPluginCommandStub::GetProgramNameIndexed(System::Int32 index)
 {
 	UnmanagedString progName(kVstMaxProgNameLen);
 
-	if(CallDispatch(effGetProgramNameIndexed, index, 0, progName, 0))
-	{
-		return TypeConverter::CharToString(progName);
-	}
+	CallDispatch(effGetProgramNameIndexed, index, 0, progName, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(progName);
 }
 
 Jacobi::Vst::Core::VstPinProperties^ VstPluginCommandStub::GetInputProperties(System::Int32 index)
@@ -313,24 +298,18 @@ System::String^ VstPluginCommandStub::GetEffectName()
 {
 	UnmanagedString effectName(kVstMaxEffectNameLen);
 
-	if(CallDispatch(effGetEffectName, 0, 0, effectName, 0) != 0)
-	{
-		return TypeConverter::CharToString(effectName);
-	}
+	CallDispatch(effGetEffectName, 0, 0, effectName, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(effectName);
 }
 
 System::String^ VstPluginCommandStub::GetVendorString()
 {
 	UnmanagedString vendor(kVstMaxEffectNameLen);
 
-	if(CallDispatch(effGetVendorString, 0, 0, vendor, 0) != 0)
-	{
-		return TypeConverter::CharToString(vendor);
-	}
+	CallDispatch(effGetVendorString, 0, 0, vendor, 0);
 
-	return nullptr;
+	return TypeConverter::CharToString(vendor);
 }
 
 System::String^ VstPluginCommandStub::GetProductString()

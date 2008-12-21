@@ -13,7 +13,7 @@
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
-            : base("VST.NET Midi Note Sampler Plugin", 
+            : base("VST.NET Midi Note Sampler", 
                 new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2008", 1000),
                 VstPluginCategory.Synth, 
                 VstPluginCapabilities.NoSoundInStop, 

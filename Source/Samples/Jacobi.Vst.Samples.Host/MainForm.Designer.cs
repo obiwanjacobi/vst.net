@@ -40,6 +40,7 @@
             this.AddBtn = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.OpenFileDlg = new System.Windows.Forms.OpenFileDialog();
+            this.ViewPluginBtn = new System.Windows.Forms.Button();
             label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -63,7 +64,10 @@
             this.VendorHdr,
             this.VersionHdr,
             this.AssemblyHdr});
+            this.PluginListVw.FullRowSelect = true;
+            this.PluginListVw.HideSelection = false;
             this.PluginListVw.Location = new System.Drawing.Point(12, 56);
+            this.PluginListVw.MultiSelect = false;
             this.PluginListVw.Name = "PluginListVw";
             this.PluginListVw.Size = new System.Drawing.Size(338, 169);
             this.PluginListVw.TabIndex = 0;
@@ -142,11 +146,23 @@
             // 
             this.OpenFileDlg.Filter = "Plugins (*.dll)|*.dll|All Files (*.*)|*.*";
             // 
+            // ViewPluginBtn
+            // 
+            this.ViewPluginBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ViewPluginBtn.Location = new System.Drawing.Point(274, 231);
+            this.ViewPluginBtn.Name = "ViewPluginBtn";
+            this.ViewPluginBtn.Size = new System.Drawing.Size(75, 23);
+            this.ViewPluginBtn.TabIndex = 6;
+            this.ViewPluginBtn.Text = "View...";
+            this.ViewPluginBtn.UseVisualStyleBackColor = true;
+            this.ViewPluginBtn.Click += new System.EventHandler(this.ViewPluginBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(362, 266);
+            this.Controls.Add(this.ViewPluginBtn);
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.BrowseBtn);
@@ -175,6 +191,7 @@
         private System.Windows.Forms.ColumnHeader AssemblyHdr;
         private System.Windows.Forms.Button DeleteBtn;
         private System.Windows.Forms.OpenFileDialog OpenFileDlg;
+        private System.Windows.Forms.Button ViewPluginBtn;
     }
 }
 
