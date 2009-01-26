@@ -6,7 +6,7 @@ using Jacobi.Vst.Interop.Host;
 
 namespace Jacobi.Vst.Samples.Host
 {
-    public partial class PluginForm : Form
+    partial class PluginForm : Form
     {
         public PluginForm()
         {

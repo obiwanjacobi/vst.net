@@ -1,6 +1,10 @@
 #include "StdAfx.h"
 #include "TimeCriticalScope.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 // starts a time critical scope
 TimeCriticalScope::TimeCriticalScope(void)
 {
@@ -19,3 +23,5 @@ TimeCriticalScope::!TimeCriticalScope(void)
 {
 	System::Runtime::GCSettings::LatencyMode = _originalMode;
 }
+
+}}} // Jacobi::Vst::Interop

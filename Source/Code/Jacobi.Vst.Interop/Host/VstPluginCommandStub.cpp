@@ -5,6 +5,10 @@
 #include "..\UnmanagedString.h"
 #include "..\UnmanagedPointer.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Host {
 
 VstPluginCommandStub::VstPluginCommandStub(::AEffect* pEffect)
 {
@@ -553,3 +557,5 @@ template<typename T> void VstPluginCommandStub::ThrowIfArgumentNotOfType(System:
 		}
 	}
 }
+
+}}}} // Jacobi::Vst::Interop::Host

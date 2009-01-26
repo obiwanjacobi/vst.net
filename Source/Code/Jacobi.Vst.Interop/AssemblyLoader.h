@@ -1,5 +1,9 @@
 #pragma once
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 ref class AssemblyLoader
 {
 public:
@@ -12,3 +16,5 @@ private:
 	AssemblyLoader(System::String^ baseDir);
 	System::Reflection::Assembly^ LoadAssembly(System::Object^ sender, System::ResolveEventArgs^ e);
 };
+
+}}} // Jacobi::Vst::Interop

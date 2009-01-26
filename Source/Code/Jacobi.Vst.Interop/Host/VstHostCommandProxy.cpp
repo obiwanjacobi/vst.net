@@ -3,6 +3,11 @@
 #include "..\TypeConverter.h"
 #include "..\Utils.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Host {
+
 VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 {
 	if(hostCmdStub == nullptr)
@@ -171,3 +176,5 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 
 	return result;
 }
+
+}}}} // Jacobi::Vst::Interop::Host

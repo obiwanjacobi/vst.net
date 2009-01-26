@@ -1,5 +1,9 @@
 #pragma once
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 class UnmanagedString
 {
 public:
@@ -23,3 +27,5 @@ private:
 	char* _buffer;
 
 };
+
+}}} // Jacobi::Vst::Interop

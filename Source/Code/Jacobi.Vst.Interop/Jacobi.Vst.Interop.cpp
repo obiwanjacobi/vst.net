@@ -9,6 +9,10 @@
 #include "Utils.h"
 #include<vcclr.h>
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 // fwd refs
 AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback);
 
@@ -34,7 +38,8 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback)
 {
 	// create the host command stub (sends commands to host)
-	HostCommandStub^ hostStub = gcnew HostCommandStub(hostCallback);
+	Jacobi::Vst::Interop::Plugin::HostCommandStub^ hostStub = 
+		gcnew Jacobi::Vst::Interop::Plugin::HostCommandStub(hostCallback);
 
 	try
 	{
@@ -64,7 +69,7 @@ AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback)
 				// connect the plugin command stub to the command proxy and construct a handle
 				System::Runtime::InteropServices::GCHandle proxyHandle = 
 					System::Runtime::InteropServices::GCHandle::Alloc(
-						gcnew PluginCommandProxy(commandStub), System::Runtime::InteropServices::GCHandleType::Normal);
+						gcnew Jacobi::Vst::Interop::Plugin::PluginCommandProxy(commandStub), System::Runtime::InteropServices::GCHandleType::Normal);
 
 				// maintain the proxy reference as part of the effect struct
 				pEffect->user = System::Runtime::InteropServices::GCHandle::ToIntPtr(proxyHandle).ToPointer();
@@ -96,7 +101,7 @@ VstIntPtr DispatcherProc(AEffect* pluginInfo, VstInt32 opcode, VstInt32 index, V
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		return proxy->Dispatch(opcode, index, value, ptr, opt);
@@ -113,7 +118,7 @@ void Process32Proc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt3
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
@@ -128,7 +133,7 @@ void Process64Proc(AEffect* pluginInfo, double** inputs, double** outputs, VstIn
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
@@ -140,7 +145,7 @@ void SetParameterProc(AEffect* pluginInfo, VstInt32 index, float value)
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->SetParameter(index, value);
@@ -152,7 +157,7 @@ float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		PluginCommandProxy^ proxy = (PluginCommandProxy^)
+		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		return proxy->GetParameter(index);
@@ -166,14 +171,15 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 {
 	// deleted in the Finalizer method of the HostCommandStub
 	AEffect* pEffect = new AEffect();
+	ZeroMemory(pEffect, sizeof(AEffect));
 	pEffect->magic = kEffectMagic;
 
 	// assign function pointers
-	pEffect->dispatcher = ::DispatcherProc;
-	pEffect->processReplacing = ::Process32Proc;
-	pEffect->processDoubleReplacing = ::Process64Proc;
-	pEffect->setParameter = ::SetParameterProc;
-	pEffect->getParameter = ::GetParameterProc;
+	pEffect->dispatcher = Jacobi::Vst::Interop::DispatcherProc;
+	pEffect->processReplacing = Jacobi::Vst::Interop::Process32Proc;
+	pEffect->processDoubleReplacing = Jacobi::Vst::Interop::Process64Proc;
+	pEffect->setParameter = Jacobi::Vst::Interop::SetParameterProc;
+	pEffect->getParameter = Jacobi::Vst::Interop::GetParameterProc;
 
 	// assign info data
 	pEffect->flags = (int)pluginInfo->Flags;
@@ -187,3 +193,5 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 
 	return pEffect;
 }
+
+}}} // Jacobi::Vst::Interop

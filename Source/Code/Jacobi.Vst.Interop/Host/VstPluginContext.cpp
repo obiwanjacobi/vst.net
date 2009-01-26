@@ -33,11 +33,44 @@ namespace Host
 
 	VstPluginContext::!VstPluginContext()
 	{
+		System::IDisposable^ disposable = nullptr;
+
+		// dispose all content
+		for each(System::Collections::Generic::KeyValuePair<System::String^, System::Object^> item in _props)
+		{
+			disposable = dynamic_cast<System::IDisposable^>(item.Value);
+
+			if(disposable != nullptr)
+			{
+				delete disposable;
+			}
+		}
+
+		// if the host command stub implements IDisposable, it is disposed too.
+		disposable = dynamic_cast<System::IDisposable^>(_hostCmdStub);
+		
+		if(disposable != nullptr)
+		{
+			delete disposable;
+		}
+
+		// dispose the plugin command stub (unmanaged)
+		_pluginCmdStub->~VstPluginCommandStub();
+		_pluginCmdStub = nullptr;
+		_pluginInfo = nullptr;
+
+		// close the loaded library.
 		CloseLibrary();
 	}
 
 	void VstPluginContext::Initialize(System::String^ pluginPath)
 	{
+		// method called more than once?
+		if(_hLib != NULL)
+		{
+			throw gcnew System::InvalidOperationException("This instance of the VstPluginContext is already initialized.");
+		}
+
 		// verify file exist
 		if(!System::IO::File::Exists(pluginPath))
 		{
@@ -63,7 +96,7 @@ namespace Host
 
 			if(pluginMain == NULL)
 			{
-				throw gcnew System::ArgumentException(pluginPath + " has no exported 'VSTPluginMain' function (VST 2.4).");
+				throw gcnew System::EntryPointNotFoundException(pluginPath + " has no exported 'VSTPluginMain' function (VST 2.4).");
 			}
 			
 			LoadingPlugin = this;
@@ -73,12 +106,12 @@ namespace Host
 
 			if(_pEffect == NULL)
 			{
-				throw gcnew System::ArgumentException(pluginPath + " did not return an AEffect structure.");
+				throw gcnew System::OperationCanceledException(pluginPath + " did not return an AEffect structure.");
 			}
 
 			if(_pEffect->magic != kEffectMagic)
 			{
-				throw gcnew System::ArgumentException(pluginPath + " did not return an AEffect structure with the correct 'Magic' number.");
+				throw gcnew System::OperationCanceledException(pluginPath + " did not return an AEffect structure with the correct 'Magic' number.");
 			}
 
 			System::Runtime::InteropServices::GCHandle ctxHandle = 
@@ -93,7 +126,7 @@ namespace Host
 			// check if the plugin supports our VST version
 			if(_pluginCmdStub->GetVstVersion() < 2400)
 			{
-				throw gcnew System::InvalidOperationException("The Plugin '" + pluginPath + "' does not support VST 2.4.");
+				throw gcnew System::NotSupportedException("The Plugin '" + pluginPath + "' does not support VST 2.4.");
 			}
 
 			// setup the plugin info
@@ -106,6 +139,7 @@ namespace Host
 			CloseLibrary();
 
 			_pluginCmdStub = nullptr;
+			_pluginInfo = nullptr;
 			_pEffect = NULL;
 
 			throw;
@@ -140,10 +174,22 @@ namespace Host
 	{
 		if(_props->ContainsKey(keyName))
 		{
-			return (T)_props->default[keyName];
+			return (T)(_props->default[keyName]);
 		}
 
 		return T();
+	}
+
+	void VstPluginContext::Delete(System::String^ keyName)
+	{
+		System::IDisposable^ prop = dynamic_cast<System::IDisposable^>(Find<System::Object^>(keyName));
+
+		if(prop != nullptr)
+		{
+			delete prop;
+		}
+
+		Remove(keyName);
 	}
 
 	void VstPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
