@@ -1,5 +1,9 @@
 #pragma once
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 class Utils
 {
 public:
@@ -8,3 +12,5 @@ public:
 	static System::String^ GetCurrentFileName()
 	{ return System::Reflection::Assembly::GetExecutingAssembly()->Location; }
 };
+
+}}} // Jacobi::Vst::Interop

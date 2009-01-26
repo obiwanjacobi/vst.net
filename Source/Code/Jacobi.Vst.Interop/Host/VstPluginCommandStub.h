@@ -2,9 +2,18 @@
 
 #include "..\MemoryTracker.h"
 
-ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Host {
+
+ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub, System::IDisposable
 {
 public:
+	VstPluginCommandStub() { _pEffect = NULL; }
+	~VstPluginCommandStub() { this->!VstPluginCommandStub(); }
+	!VstPluginCommandStub() { _memoryTracker->ClearAll(); }
+
 	// IVstPluginCommandsBase
 	virtual void ProcessReplacing(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, 
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs);
@@ -161,3 +170,5 @@ private:
 
 	MemoryTracker^ _memoryTracker;
 };
+
+}}}} // Jacobi::Vst::Interop::Host

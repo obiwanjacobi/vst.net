@@ -2,6 +2,11 @@
 
 #include "..\MemoryTracker.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Plugin {
+
 ref class PluginCommandProxy
 {
 internal:
@@ -19,3 +24,5 @@ private:
 	Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
 	MemoryTracker^ _memTracker;
 };
+
+}}}} // Jacobi::Vst::Interop::Plugin

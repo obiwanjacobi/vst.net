@@ -4,6 +4,11 @@
 #include "..\Utils.h"
 #include<vcclr.h>
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Plugin {
+
 // constructs a new instance based on a reference to the plugin command stub
 PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ cmdStub)
 {
@@ -434,3 +439,5 @@ void PluginCommandProxy::Cleanup()
 
 	_commandStub = nullptr;
 }
+
+}}}} // Jacobi::Vst::Interop::Plugin

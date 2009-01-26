@@ -3,6 +3,11 @@
 #include "..\TypeConverter.h"
 #include "..\UnmanagedString.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Plugin {
+
 // Creates a new instance based on a native callback function pointer.
 HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 {
@@ -12,6 +17,7 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 	}
 
 	_hostCallback = hostCallback;
+	_pluginInfo = NULL;
 }
 
 // destructor. See Finalizer
@@ -352,3 +358,5 @@ inline void HostCommandStub::ThrowIfNotInitialized()
 		throw gcnew System::InvalidOperationException("The HostCommandStub is not Initialized yet.");
 	}
 }
+
+}}}} // Jacobi::Vst::Interop::Plugin

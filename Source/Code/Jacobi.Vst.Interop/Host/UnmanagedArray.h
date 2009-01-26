@@ -1,5 +1,10 @@
 #pragma once
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Host {
+
 // caches an array of T and grows on demand
 template<class T>
 ref class UnmanagedArray : System::IDisposable
@@ -67,3 +72,5 @@ private:
 		}
 	}
 };
+
+}}}} // Jacobi::Vst::Interop::Host

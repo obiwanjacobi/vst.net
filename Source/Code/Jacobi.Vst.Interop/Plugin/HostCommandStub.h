@@ -1,8 +1,16 @@
 #pragma once
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+namespace Plugin {
+
 ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub
 {
 public:
+	~HostCommandStub();
+	!HostCommandStub();
+
 	// IVstHostCommandStub
 	virtual System::Boolean IsInitialized() { return (_pluginInfo != NULL); }
 	virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
@@ -39,9 +47,6 @@ public:
 	virtual System::Boolean OpenFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect);
 	virtual System::Boolean CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect);
 
-	~HostCommandStub();
-	!HostCommandStub();
-
 internal:
 	HostCommandStub(::audioMasterCallback hostCallback);
 	void Initialize(AEffect* pluginInfo) { if(pluginInfo == NULL) { throw gcnew System::ArgumentNullException("pluginInfo"); } _pluginInfo = pluginInfo; }
@@ -53,3 +58,5 @@ private:
 	void ThrowIfNotInitialized();
 	VstIntPtr CallHost(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt) { return _hostCallback(_pluginInfo, opcode, index, value, ptr, opt); }
 };
+
+}}}} // Jacobi::Vst::Interop::Plugin

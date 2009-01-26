@@ -52,6 +52,7 @@
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
+				GenerateXMLDocumentationFiles="true"
 				WarningLevel="3"
 				SuppressStartupBanner="false"
 				Detect64BitPortabilityProblems="false"
