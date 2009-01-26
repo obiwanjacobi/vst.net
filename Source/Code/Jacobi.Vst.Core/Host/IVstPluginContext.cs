@@ -10,6 +10,7 @@ namespace Jacobi.Vst.Core.Host
         void Set<T>(string keyName, T value);
         T Find<T>(string keyName);
         void Remove(string keyName);
+        void Delete(string keyName);
 
         IVstHostCommandStub HostCommandStub { get; }
         IVstPluginCommandStub PluginCommandStub { get; }

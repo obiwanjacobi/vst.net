@@ -1,6 +1,10 @@
 #include "StdAfx.h"
 #include "MemoryTracker.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 // default ctor.
 MemoryTracker::MemoryTracker(void)
 {
@@ -39,3 +43,5 @@ void MemoryTracker::ClearAll()
 
 	_arrPtrs->Clear();
 }
+
+}}} // Jacobi::Vst::Interop

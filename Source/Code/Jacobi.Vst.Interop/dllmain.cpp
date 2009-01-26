@@ -1,6 +1,10 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 void* g_hModule;
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -23,3 +27,4 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	return TRUE;
 }
 
+}}} // Jacobi::Vst::Interop

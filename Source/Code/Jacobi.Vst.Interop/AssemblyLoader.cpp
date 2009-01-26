@@ -1,6 +1,10 @@
 #include "StdAfx.h"
 #include "AssemblyLoader.h"
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 // constructs a new instance and registers a handler to resolve assemblies.
 // The baseDir points to the folder that contains the assemblies to resolve.
 AssemblyLoader::AssemblyLoader(System::String^ baseDir)
@@ -27,3 +31,5 @@ void AssemblyLoader::Initialize(System::String^ baseDir)
 		_instance = gcnew AssemblyLoader(baseDir);
 	}
 }
+
+}}} // Jacobi::Vst::Interop

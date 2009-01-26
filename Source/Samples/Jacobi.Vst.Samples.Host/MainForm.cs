@@ -8,7 +8,7 @@ using Jacobi.Vst.Interop.Host;
 
 namespace Jacobi.Vst.Samples.Host
 {
-    public partial class MainForm : Form
+    partial class MainForm : Form
     {
         private List<VstPluginContext> _plugins = new List<VstPluginContext>();
 
@@ -39,6 +39,7 @@ namespace Jacobi.Vst.Samples.Host
             HostCommandStub hostCmdStub = new HostCommandStub();
             VstPluginContext ctx = new VstPluginContext(hostCmdStub);
 
+            // add custom data to the context
             ctx.Set("PluginPath", pluginPath);
             ctx.Set("HostCmdStub", hostCmdStub);
 
@@ -46,8 +47,10 @@ namespace Jacobi.Vst.Samples.Host
 
             try
             {
+                // will load the plugin assembly and call the exported main function
                 ctx.Initialize(pluginPath);
 
+                // actually open the plugin itself
                 ctx.PluginCommandStub.Open();
             }
             catch (Exception e)
@@ -64,7 +67,9 @@ namespace Jacobi.Vst.Samples.Host
         {
             foreach (VstPluginContext ctx in _plugins)
             {
+                // close the plugin
                 ctx.PluginCommandStub.Close();
+                // dispose of all (unmanaged) resources
                 ctx.Dispose();
             }
 
@@ -132,6 +137,21 @@ namespace Jacobi.Vst.Samples.Host
             dlg.PluginContext = SelectedPluginContext;
 
             dlg.ShowDialog(this);
+        }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+            VstPluginContext ctx = SelectedPluginContext;
+
+            if(ctx != null)
+            {
+                ctx.PluginCommandStub.Close();
+                ctx.Dispose();
+
+                _plugins.Remove(ctx);
+
+                FillPluginList();
+            }
         }
     }
 }

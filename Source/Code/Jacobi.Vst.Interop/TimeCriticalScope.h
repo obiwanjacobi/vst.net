@@ -1,5 +1,9 @@
 #pragma once
 
+namespace Jacobi {
+namespace Vst {
+namespace Interop {
+
 ref class TimeCriticalScope : public System::IDisposable
 {
 public:
@@ -10,3 +14,5 @@ public:
 private:
 	System::Runtime::GCLatencyMode _originalMode;
 };
+
+}}} // Jacobi::Vst::Interop

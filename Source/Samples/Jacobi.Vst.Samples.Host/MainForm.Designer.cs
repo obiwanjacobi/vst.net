@@ -141,6 +141,7 @@
             this.DeleteBtn.TabIndex = 5;
             this.DeleteBtn.Text = "Delete";
             this.DeleteBtn.UseVisualStyleBackColor = true;
+            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
             // 
             // OpenFileDlg
             // 
