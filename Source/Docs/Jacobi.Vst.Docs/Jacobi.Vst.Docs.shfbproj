@@ -1,0 +1,348 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which
+         assemblies to include from solution and project documentation
+         sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{12e35e7b-8be6-451f-90ac-d9acd03fa2a4}</ProjectGuid>
+    <SHFBSchemaVersion>1.8.0.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
+         Studio adds them anyway -->
+    <AssemblyName>Documentation</AssemblyName>
+    <RootNamespace>Documentation</RootNamespace>
+    <Name>Documentation</Name>
+    <!-- SHFB properties -->
+    <OutputPath>.\Help\</OutputPath>
+    <HtmlHelpName>Jacobi.Vst.Docs</HtmlHelpName>
+    <ApiFilter>
+      <Filter entryType="Namespace" fullName="" isExposed="False" xmlns="">
+        <Filter entryType="Structure" fullName="AEffect" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="AEffectOpcodes" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="AEffectXOpcodes" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="AudioMasterOpcodes" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="AudioMasterOpcodesX" isExposed="True" />
+        <Filter entryType="Structure" fullName="ERect" isExposed="True" />
+        <Filter entryType="Structure" fullName="MidiKeyName" isExposed="True" />
+        <Filter entryType="Structure" fullName="MidiProgramCategory" isExposed="True" />
+        <Filter entryType="Structure" fullName="MidiProgramName" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="Vst2StringConstants" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstAEffectFlags" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstAudioFileFlags" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstAutomationStates" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstEvent" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstEvents" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstEventTypes" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstFileSelect" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstFileSelectCommand" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstFileSelectType" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstFileType" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstHostLanguage" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstMidiEvent" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstMidiEventFlags" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstMidiProgramNameFlags" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstMidiSysexEvent" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstModifierKey" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstOfflineOption" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstOfflineTaskFlags" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstPanLawType" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstParameterFlags" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstParameterProperties" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstPatchChunkInfo" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstPinProperties" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstPinPropertiesFlags" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstPlugCategory" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstProcessLevels" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstProcessPrecision" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstSmpteFrameRate" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstSpeakerArrangement" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstSpeakerArrangementType" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstSpeakerProperties" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstSpeakerType" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstStringConstants" isExposed="True" />
+        <Filter entryType="Structure" fullName="VstTimeInfo" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstTimeInfoFlags" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstUserSpeakerType" isExposed="True" />
+        <Filter entryType="Enumeration" fullName="VstVirtualKey" isExposed="True" />
+      </Filter>
+      <Filter entryType="Namespace" fullName="&lt;CppImplementationDetails&gt;" isExposed="False" xmlns="" />
+      <Filter entryType="Namespace" fullName="&lt;CrtImplementationDetails&gt;" isExposed="False" xmlns="" />
+      <Filter entryType="Namespace" fullName="Jacobi.Vst.Interop.Host" isExposed="True" xmlns="">
+        <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;double *&gt;" filterName="UnmanagedArray&lt;double *&gt;" isExposed="False" />
+        <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;float *&gt;" filterName="UnmanagedArray&lt;float *&gt;" isExposed="False" />
+      </Filter>
+      <Filter entryType="Namespace" fullName="vc_attributes" isExposed="False" xmlns="" />
+    </ApiFilter>
+    <ProjectSummary>VST.NET %28Jacobi.Vst%29 is a code library that allows developer to create managed VST Plugins quickly. It takes care of marshalling calls between .NET and C++ and visa versa.</ProjectSummary>
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
+    <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, Internals, Protected, ProtectedInternalAsProtected, SealedProtected</VisibleItems>
+    <HtmlHelp1xCompilerPath>
+    </HtmlHelp1xCompilerPath>
+    <HtmlHelp2xCompilerPath>
+    </HtmlHelp2xCompilerPath>
+    <SandcastlePath>
+    </SandcastlePath>
+    <WorkingPath>
+    </WorkingPath>
+    <CleanIntermediates>False</CleanIntermediates>
+    <BuildLogFile>
+    </BuildLogFile>
+    <CppCommentsFixup>True</CppCommentsFixup>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
+    <HelpTitle>VST.NET 0.6 Documentation</HelpTitle>
+    <CopyrightHref>http://www.codeplex.com/vstnet</CopyrightHref>
+    <CopyrightText>Copyright 2008-2009 Jacobi Software, all rights reserved.</CopyrightText>
+    <FeedbackEMailAddress>obiwanjacobi%40hotmail.com</FeedbackEMailAddress>
+    <FooterText>VST is a trademark of Steinberg Media Technologies GmbH.</FooterText>
+    <PresentationStyle>vs2005</PresentationStyle>
+    <NamingMethod>MemberName</NamingMethod>
+    <ComponentConfigurations>
+      <ComponentConfig id="Cached Framework Comments Index Data" enabled="True">
+        <component id="Cached Framework Comments Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <index name="comments" value="/doc/members/member" key="@name" cache="100">
+{@CachedFrameworkCommentList}
+{@CommentFileList}
+            </index>
+          <copy name="comments" source="*" target="/document/comments" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Cached MSDN URL References" enabled="True">
+        <component id="Cached MSDN URL References" type="SandcastleBuilder.Components.CachedResolveReferenceLinksComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll" locale="{@Locale}" linkTarget="{@SdkLinkTarget}">
+          <cache filename="{@LocalDataFolder}Cache\MsdnUrl.cache" />
+          <targets base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" type="{@SDKLinks}" />
+          <targets files="reflection.xml" type="{@ProjectLinks}" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Cached Reflection Index Data" enabled="True">
+        <component id="Cached Reflection Index Data" type="SandcastleBuilder.Components.CachedCopyFromIndexComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <index name="reflection" value="/reflection/apis/api" key="@id" cache="10">
+            <cache base="{@SandcastlePath}Data\Reflection" recurse="true" files="*.xml" cacheFile="{@LocalDataFolder}Cache\Reflection.cache" />
+            <data files="reflection.xml" />
+          </index>
+          <copy name="reflection" source="*" target="/document/reference" />
+        </component>
+      </ComponentConfig>
+      <ComponentConfig id="Code Block Component" enabled="True">
+        <component id="Code Block Component" type="SandcastleBuilder.Components.CodeBlockComponent" assembly="{@SHFBFolder}SandcastleBuilder.Components.dll">
+          <!-- Base path for relative filenames in source attributes
+                 (optional) -->
+          <basePath value="{@ProjectFolder}" />
+          <!-- Connect to language filter (optional).  If omitted,
+                 language filtering is enabled by default. -->
+          <languageFilter value="true" />
+          <!-- Allow missing source files (Optional).  If omitted,
+                 it will generate errors if referenced source files
+                 are missing. -->
+          <allowMissingSource value="false" />
+          <!-- Remove region markers from imported code blocks.  If omitted,
+                 region markers in imported code blocks are left alone. -->
+          <removeRegionMarkers value="false" />
+          <!-- Code colorizer options (required).
+                 Attributes:
+                    Language syntax configuration file (required)
+                    XSLT style file (required)
+                    "Copy" image file URL (required)
+                    Default language (optional)
+                    Enable line numbering (optional)
+                    Enable outlining (optional)
+                    Keep XML comment "see" tags within the code (optional)
+                    Tab size override (optional, 0 = Use syntax file setting)
+                    Use language name as default title (optional) -->
+          <colorizer syntaxFile="{@SHFBFolder}Colorizer\highlight.xml" styleFile="{@SHFBFolder}Colorizer\highlight.xsl" copyImageUrl="../icons/CopyCode.gif" language="cs" numberLines="false" outlining="false" keepSeeTags="false" tabSize="0" defaultTitle="true" />
+        </component>
+      </ComponentConfig>
+    </ComponentConfigurations>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.xml" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.xml" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Code\Debug\Jacobi.Vst.Interop.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Code\Debug\Jacobi.Vst.Interop.xml" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.xml" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.xml" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.xml" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" xmlns="" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" xmlns="" />
+    </DocumentationSources>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="True" xmlns="">The global namespace contains the classes that are used internally by the Interop assembly.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="&lt;CppImplementationDetails&gt;" isDocumented="False" xmlns="" />
+      <NamespaceSummaryItem name="&lt;CrtImplementationDetails&gt;" isDocumented="False" xmlns="" />
+      <NamespaceSummaryItem name="Jacobi.Vst.Core" isDocumented="True" xmlns="">The Jacobi.Vst.Core namespace contains all managed types that have an unmanaged counterpart in the native C++ VST SDK.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Core.Host" isDocumented="True" xmlns="">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Host.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Core.Plugin" isDocumented="True" xmlns="">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Plugin.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Framework" isDocumented="True" xmlns="">The Jacobi.Vst.Framework namespace contains all framework interfaces and types that are used as a basis for the implementation and communication with a managed Plugin.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Framework.Common" isDocumented="True" xmlns="">The Jacobi.Vst.Framework.Common namespace contains reusable types for implementing Managed Plugins.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Framework.Host" isDocumented="True" xmlns="">The Jacobi.Vst.Framework.Host namespace contains all types that directly support implementing Host access for a Plugin.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Framework.Plugin" isDocumented="True" xmlns="">The Jacobi.Vst.Framework.Plugin namespace contains all types that directly support implementing a managed Plugin.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Interop" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Jacobi.Vst.Interop.Host" isDocumented="True" xmlns="">The Jacobi.Vst.Interop.Host namespace contains all types that directly support implementing a managed Host.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Jacobi.Vst.Interop.Plugin" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Jacobi.Vst.Samples.CorePlugin" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Jacobi.Vst.Samples.Delay" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Jacobi.Vst.Samples.MidiNoteMapper" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Jacobi.Vst.Samples.MidiNoteSampler" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="vc_attributes" isDocumented="False" xmlns="" />
+    </NamespaceSummaries>
+    <PlugInConfigurations>
+      <PlugInConfig id="Hierarchical Table of Contents" enabled="True">
+        <configuration>
+          <toc minParts="2" insertBelow="False" />
+        </configuration>
+      </PlugInConfig>
+    </PlugInConfigurations>
+  </PropertyGroup>
+  <!-- There are no properties for these two groups but they need to appear in
+       order for Visual Studio to perform the build. -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <CodeSnippets Include="CodeSnippets.snippets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Tokens Include="Jacobi.Vst.Docs.tokens" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\Class Diagrams\" />
+    <Folder Include="Files\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Core.Enums.png">
+      <ImageId>c6b3a492-895c-474f-8da3-6e6f6462ea19</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Core.Interfaces.png">
+      <ImageId>e1c8b48e-9a89-453b-92ce-675a6943580f</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Core.Types.png">
+      <ImageId>27c2404c-0398-406b-99f8-35415f5c6e3f</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.gHostCommandProxy.png">
+      <ImageId>f510aae0-a362-46cf-b66b-f2eb78abab34</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.InterfaceManager.png">
+      <ImageId>50f88d51-248a-4c4a-bf58-c0696d339261</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.Interfaces.png">
+      <ImageId>9105df1e-24d0-4912-8808-72f787e5e285</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.MidiPrograms.png">
+      <ImageId>557c9abc-efc6-4710-bc5a-dadc7d2e4494</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.PluginCommandStub.png">
+      <ImageId>f34ce520-6a4c-45e3-bc4a-a45b6e4f448d</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.PluginRoot.png">
+      <ImageId>241b05d3-427c-42b8-a6f8-f11d6501474a</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.Programs.png">
+      <ImageId>02d56585-99fc-4b52-803c-7794f670c031</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.SpeakerArrangements.png">
+      <ImageId>6579ac13-8a11-42a6-a3d5-b76b6c3cefe3</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Framework.Types.png">
+      <ImageId>b395f371-e20f-4061-b194-55b2eb3a6366</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Interop.VstMain.png">
+      <ImageId>2e41f8c2-90da-426b-acc6-86dfa60a908c</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Interop.VstMidi.png">
+      <ImageId>6694ccb9-4dbf-4aff-b148-83de9b63cda2</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Interop.VstOffline.png">
+      <ImageId>7d0ddcff-27a2-4ea1-947c-1bb92844d50b</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Interop.VstParametersTimeInfo.png">
+      <ImageId>ffe9b212-1e9e-40d4-8155-459af64126c3</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Interop.VstPlugin.png">
+      <ImageId>dbcfb90b-2658-4c0a-996c-fc10690741f8</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\Class Diagrams\Jacobi.Vst.Interop.VstSpeakerArrangement.png">
+      <ImageId>16c8f304-27a2-40e2-a3e8-f5aad579dcb6</ImageId>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Audio Processing.aml" />
+    <None Include="Custom Plugin Editor.aml" />
+    <None Include="Not Supported.aml" />
+    <None Include="Plugin Connections.aml" />
+    <None Include="Plugin Midi Programs.aml" />
+    <None Include="Midi Processing.aml" />
+    <None Include="Plugin Persistence.aml" />
+    <None Include="Plugin Parameters.aml" />
+    <None Include="Plugin Programs.aml" />
+    <None Include="Plugin Interface Manager.aml" />
+    <None Include="Plugin Root Class.aml" />
+    <None Include="Host Command Proxy.aml" />
+    <None Include="Plugin Command Stub.aml" />
+    <None Include="Jacobi.Vst.Framework.aml" />
+    <None Include="Managed Plugin Factory.aml" />
+    <None Include="Jacobi.Vst.Core.aml" />
+    <None Include="Host Command Stub.aml" />
+    <None Include="Plugin Command Proxy.aml" />
+    <None Include="Jacobi.Vst.Interop.aml" />
+    <None Include="Vst Offline Types.aml" />
+    <None Include="Vst Connection Types.aml" />
+    <None Include="Vst Midi Types.aml" />
+    <None Include="Vst Parameter and Time Info Types.aml" />
+    <None Include="Vst Plugin Types.aml" />
+    <None Include="Vst Main Types.aml" />
+    <None Include="Vst 2.4.aml" />
+    <None Include="Reference.aml" />
+    <None Include="Implement Audio Processor.aml" />
+    <None Include="Implement Plugin Root Class.aml" />
+    <None Include="Implement Plugin Command Stub.aml" />
+    <None Include="Prepare Project.aml" />
+    <None Include="Getting Started.aml" />
+    <None Include="Glossary.aml" />
+    <None Include="License Agreement.aml" />
+    <None Include="Welcome.aml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ContentLayout Include="Jacobi.Vst.Docs.content" />
+  </ItemGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+</Project>

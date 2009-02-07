@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="e39fb19a-8671-4ee3-9cce-94dd9ac55a0e" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>Required introduction</para>
+    </introduction>
+    <section address="VstMidi">
+      <title>VST Plugin Midi types</title>
+      <content>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Plugin Midi VST types</caption>
+          <image xlink:href="6694ccb9-4dbf-4aff-b148-83de9b63cda2" />
+        </mediaLink>
+        <alert class="note">
+          <para>
+            <token>depnote</token>
+          </para>
+        </alert>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

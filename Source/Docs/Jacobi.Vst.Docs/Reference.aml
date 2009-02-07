@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="998b4a9d-b4a6-4529-93e3-6bd96e620a50" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>Describe the child topics and where they fit in in the global picture</para>
+      <para>Perhaps provide a diagram that links all topics.</para>
+      <para>Maybe we should subdevide in interop, core and framework subjects.</para>
+    </introduction>
+    <section address="Interop">
+      <title>VST.NET Interop</title>
+      <content>
+        <para>Describes the Interop assembly and its key classes.</para>
+      </content>
+    </section>
+    <section address="Core">
+      <title>VST.NET Core</title>
+      <content>
+        <para>Describes the Core assembly and its namespaces.</para>
+      </content>
+    </section>
+    <section address="Framework">
+      <title>VST.NET Framework</title>
+      <content>
+        <para>Describes the Framework assembly and its key classes and mechanisms.</para>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

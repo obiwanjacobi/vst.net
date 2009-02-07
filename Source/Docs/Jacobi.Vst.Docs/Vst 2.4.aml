@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>This section discusses the unmanaged
+    <newTerm>VST</newTerm> types.
+    </para>
+    </introduction>
+    <section address="MainVst">
+      <title>VST Main types</title>
+      <content>
+        <para>The
+      <link xlink:href="15c41efc-a95c-4b32-88ca-4757a512119d" />
+      section discusses the main types mainly used during the Plugin loading
+      sequence and during dispatching commands.
+      </para>
+      </content>
+    </section>
+    <section address="VstPlugin">
+      <title>VST Plugin types</title>
+      <content>
+        <para>The
+      <link xlink:href="157d7456-7408-4191-bb51-b10d84f34c3b" />
+      section discusses the types that have to do with the core of the Plugin.
+      </para>
+      </content>
+    </section>
+    <section address="VstParametersTimeInfo">
+      <title>VST Plugin Parameter and Time Information types</title>
+      <content>
+        <para>The
+      <link xlink:href="1fe46e11-2175-419e-9c3c-2b073c2fa033" />
+      section detail on the types for Plugin Parameters and Time Information.
+      </para>
+      </content>
+    </section>
+    <section address="VstMidi">
+      <title>VST Plugin Midi types</title>
+      <content>
+        <para>The
+      <link xlink:href="e39fb19a-8671-4ee3-9cce-94dd9ac55a0e" />
+      section contains the types that are used for 
+      <newTerm>MIDI</newTerm>
+      related operations.
+      </para>
+      </content>
+    </section>
+    <section address="VstPluginConnection">
+      <title>VST Plugin Connection types</title>
+      <content>
+        <para>The
+      <link xlink:href="b48c995e-c3fc-4f67-b097-6e57869d8fc9" />
+      section discusses audio connection types.
+      </para>
+      </content>
+    </section>
+    <section address="VstPluginOffline">
+      <title>VST Plugin Offline types</title>
+      <content>
+        <para>The
+      <link xlink:href="a52645b1-9524-44ea-a849-9c96604bb9e6" />
+      section shows the types invloved in offline processing (not supported by
+      <newTerm>VST.NET</newTerm>).
+      </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="15c41efc-a95c-4b32-88ca-4757a512119d" />
+      <link xlink:href="157d7456-7408-4191-bb51-b10d84f34c3b" />
+      <link xlink:href="1fe46e11-2175-419e-9c3c-2b073c2fa033" />
+      <link xlink:href="e39fb19a-8671-4ee3-9cce-94dd9ac55a0e" />
+      <link xlink:href="b48c995e-c3fc-4f67-b097-6e57869d8fc9" />
+      <link xlink:href="a52645b1-9524-44ea-a849-9c96604bb9e6" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
