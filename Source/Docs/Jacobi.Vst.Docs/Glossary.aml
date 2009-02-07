@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c79af580-08ca-4efe-9afa-14053f6f69d1" revisionNumber="1">
+  <developerGlossaryDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <glossary>
+      <title>VST.NET Glossary</title>
+      <!-- C -->
+      <glossaryEntry>
+        <terms>
+          <term termId="CoreLevelPlugin">Core Level Plugin</term>
+          <term termId="CoreLevelImpl">Core Level Implementation</term>
+        </terms>
+        <definition>
+          <para>A plugin that just uses the 
+          <link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" />
+          assembly but not the
+          <token>framework</token>
+          assembly is a core-level plugin.</para>
+        </definition>
+      </glossaryEntry>
+      <!-- G -->
+      <glossaryEntry>
+        <terms>
+          <term termId="GAC">GAC</term>
+          <term termId="Global Assembly Cache">Global Assembly Cache</term>
+        </terms>
+        <definition>
+          <para>A machine-wide assembly storage location for .NET. An 
+          assembly must be signed to be in the GAC. Dependent assemblies will
+          automatically load from the GAC when the assembly is not found in 
+          their local folder.</para>
+        </definition>
+      </glossaryEntry>
+      <!-- M -->
+      <glossaryEntry>
+        <terms>
+          <term termId="ManagedPluginFactory">Managed Plugin Factory</term>
+        </terms>
+        <definition>
+          <para>The Managed Plugin Factory is a class located in the 
+          <link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" />
+          assembly that creates the 
+          <link xlink:href="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6">Plugin Command Stub</link>
+          for the managed plugin.</para>
+        </definition>
+        <relatedEntry termId="PluginCommandStub" />
+      </glossaryEntry>
+      <glossaryEntry>
+        <terms>
+          <term termId="Midi">MIDI</term>
+        </terms>
+        <definition>
+          <para>MIDI stands for Musical Instrument Digital Interface and is a
+          standard used to communicate note and control messages to (or from) 
+          an audio devicde such as a keyboard or sound module (drum machine).</para>
+          <para>
+            <externalLink>
+              <linkText>Midi on wikipedia</linkText>
+              <linkUri>http://en.wikipedia.org/wiki/Musical_Instrument_Digital_Interface</linkUri>
+            </externalLink>
+          </para>
+          <para>
+            <externalLink>
+              <linkText>Midi Manufacturers Association</linkText>
+              <linkUri>http://www.midi.org</linkUri>
+            </externalLink>
+          </para>
+        </definition>
+      </glossaryEntry>
+      <!-- P -->
+      <glossaryEntry>
+        <terms>
+          <term termId="PluginCommandProxy">Plugin Command Proxy</term>
+        </terms>
+        <definition>
+          <para>The Plugin Command Proxy is located in the 
+          <token>interop</token>
+          assembly.</para>
+        </definition>
+        <relatedEntry termId="PluginCommandStub" />
+      </glossaryEntry>
+      <glossaryEntry>
+        <terms>
+          <term termId="PluginCommandStub">Plugin Command Stub</term>
+        </terms>
+        <definition>
+          <para>The Plugin Command Stub is a public class that is implemented by
+          the managed plugin that contains all methods for the VST 2.4 interface.
+          These methods are called by the Plugin Command Proxy located in the 
+          <token>interop</token>
+          assembly.</para>
+        </definition>
+        <relatedEntry termId="PluginCommandProxy" />
+      </glossaryEntry>
+      <glossaryEntry>
+        <terms>
+          <term termId="Proxy">Proxy</term>
+        </terms>
+        <definition>
+          <para>A Proxy is an object that has the role to receive calls from a
+          client and send those to the Stub. In the process of 
+          marshaling the proxy and stub coperate to transmit a call over a 
+          boundary.</para>
+        </definition>
+        <relatedEntry termId="Stub" />
+      </glossaryEntry>
+      <!-- S -->
+      <glossaryEntry>
+        <terms>
+          <term termId="Stub">Stub</term>
+        </terms>
+        <definition>
+          <para>A Stub is an object that has the role to receive calls from a
+          proxy and dispatch those to another object. In the process of 
+          marshaling the proxy and stub coperate to transmit a call over a 
+          boundary.</para>
+        </definition>
+        <relatedEntry termId="Proxy" />
+      </glossaryEntry>
+      <!-- V -->
+      <glossaryEntry>
+        <terms>
+          <term termId="VST">VST</term>
+        </terms>
+        <definition>
+          <para>VST is a Steinberg owned native C/C++ plugin-host interfacing 
+          standard that allows audio plugins to run inside music programs.</para>
+        </definition>
+        <relatedEntry termId="VSTNET" />
+      </glossaryEntry>
+      <glossaryEntry>
+        <terms>
+          <term termId="VSTNET">VST.NET</term>
+        </terms>
+        <definition>
+          <para>
+            <token>vstnet</token>
+          is an open source Code Library that allows
+          developers to write VST plugins using the .NET framework and any .NET 
+          compatible language.</para>
+        </definition>
+        <relatedEntry termId="VST" />
+      </glossaryEntry>
+    </glossary>
+  </developerGlossaryDocument>
+</topic>

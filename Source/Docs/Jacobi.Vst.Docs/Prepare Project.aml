@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6057b859-b117-409a-a513-8ff470348e46" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+    	Before you can start coding you need to setup a 
+    	<application>Visual Studio</application> Project. This section describes 
+    	the steps you need to take to have a basis for your Plugin project.
+    </para>
+    </introduction>
+    <section address="CreateANewProject">
+      <title>Create a New Project</title>
+      <content>
+        <para>Your Managed Plugin will be build into (at least) one assembly. 
+    	The custom code you write will be compiled to a dll and loaded by the
+    	<token>interop</token> 
+    	assembly. This means that the 
+    	<application>Visual Studio</application> 
+    	Project type you choose must produce a .dll. The most obvious choice 
+    	is the
+    	<legacyBold>Class Library</legacyBold> 
+    	Project.</para>
+        <para>This project is going to contain (at least) the public
+    	<link xlink:href="3feb73bb-72dd-4618-816f-f9f1c46d7f73">Plugin Command Stub</link>
+    	. If you choose to separate your plugin into multiple assemblies (dlls)
+    	you need to make sure they all are installed in a single folder or in 
+    	the GAC.
+    	</para>
+      </content>
+    </section>
+    <section address="AddPostBuildEvent">
+      <title>Add a Post-Build Event</title>
+      <content>
+        <para>This step is optional. If you do not want to automatically rename 
+      and move your Plugin assembly (and the <token>interop</token> assembly)
+      just skip these instructions. You do need to follow the naming convention
+      discussed here though. Otherwise your plugin will not load or give errors
+      during loading by the host.</para>
+        <list class="bullet">
+          <listItem>Open the project properties of your plugin .NET project.</listItem>
+          <listItem>Click on the <legacyBold>Build Events</legacyBold> tab.</listItem>
+          <listItem>Copy the statements below into the 
+  		<legacyBold>Post-build event command line</legacyBold> edit box.</listItem>
+        </list>
+        <para>The following code snippet contains two statements that will rename 
+      the <token>interop</token> assembly to the name of your plugin and it will
+      rename the project output assembly to a 
+      <literal>.net.dll</literal>
+      postfix. You can also use the 
+      <literal>.net.vstdll</literal>
+      extension if you want to stop the host displaying the Managed Plugin 
+      assembly.</para>
+        <code langauge="C#"><![CDATA[
+      copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.dll"
+      copy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).dll"
+      ]]></code>
+        <para>The content of the post-build event is independent on the 
+	  .NET language (C#/VB.NET).
+	  </para>
+        <alert class="note">
+          <para>Note that these statements assume a common binary folder called 
+          <codeInline>_SharedAssmblies</codeInline>. Please change that to suite your
+          project structure. But don't change the <codeInline>_SharedAssemblies</codeInline>
+          in the first part of the second statement, unless you also coppied the 
+          <token>interop</token> assembly to that location.</para>
+        </alert>
+        <alert class="warning">
+          <para>Make sure the path you choose to copy the renamed assemblies to
+  		exists before building your project.</para>
+        </alert>
+      </content>
+    </section>
+    <section address="AddProjectDependencies">
+      <title>Add the Project Dependencies</title>
+      <content>
+        <para>Right click in the solution browser of your Project on the
+    	References folder and select 
+    	<legacyBold>Add Reference...</legacyBold>.
+    	</para>
+        <list class="bullet">
+          <listItem>Add the <link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" />.dll</listItem>
+          <listItem>Add the <token>framework</token>.dll</listItem>
+        </list>
+        <alert class="note">
+          <para>If you build a Core-Level Plugin you obviously don't need
+  			the 
+  			<token>framework</token>.dll 
+  			dependency and you only add the
+  			<link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" />.dll.
+  			</para>
+        </alert>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="a52645b1-9524-44ea-a849-9c96604bb9e6" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>Required introduction</para>
+    </introduction>
+    <section address="VstPluginOffline">
+      <title>VST Plugin Offline types</title>
+      <content>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Plugin Offline VST types</caption>
+          <image xlink:href="7d0ddcff-27a2-4ea1-947c-1bb92844d50b" />
+        </mediaLink>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="4f3d4350-e61e-4909-a294-c281511a336a" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>The
+    <token>core</token>
+    assembly contains the common managed types that are shared between the
+    managed Plugin and the 
+    <token>interop</token>
+    assembly. Most (if not all) of these types are 1:1 representations of the
+    unmanaged native 
+    <link xlink:href="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" />
+    C++ types. The assembly also declares the to interface chains for the Host
+    Commands and the Plugin Commands.
+    </para>
+    </introduction>
+    <section address="Interfaces">
+      <title>The Core Interfaces</title>
+      <content>
+        <para>The interfaces defined in the assembly are (mainly) the interfaces
+      that declare all the method calls that a Host can send to a Plugin or a
+      Plugin can sent to a host. There are also two interfaces for direct buffer
+      access to the audio samples that are passed during 
+      <link xlink:href="1977452f-9b2d-4d4f-a93c-768ab2ede63e" />
+      into the Plugin.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Core Interfaces</caption>
+          <image xlink:href="e1c8b48e-9a89-453b-92ce-675a6943580f" />
+        </mediaLink>
+        <para>The 
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstPluginCommandsBase</codeEntityReference>
+      interface declares the methods that are called "directly" by the Host 
+      through the function pointers passed in the 
+      <codeInline>AEffect</codeInline>
+      structure. The derived interfaces
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstPluginCommands10</codeEntityReference>,
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstPluginCommands20</codeEntityReference>,
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstPluginCommands21</codeEntityReference>,
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstPluginCommands23</codeEntityReference>
+      and
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstPluginCommands24</codeEntityReference>
+      each declare the methods that are dispatched using the opcodes (see 
+      <link xlink:href="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" />)
+      for each
+      version of the VST Standard. The last interface in the chain is the
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
+      interface that implements the 
+      <token>vstnet</token>
+      specific methods that are needed for 
+      <newTerm>VST.NET</newTerm>
+      to operate.
+      </para>
+        <para>For the calls that can be made to the Host, the
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstHostCommands10</codeEntityReference>
+      and
+      <codeEntityReference>T:Jacobi.Vst.Core.IVstHostCommands20</codeEntityReference>
+      interfaces declare the methods for each 
+      <newTerm>VST</newTerm>
+      version. There is no base interface here because all communication with 
+      the Host is done with opcodes (see 
+      <link xlink:href="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" />).
+      The
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub</codeEntityReference>
+      interface agaun declares the method needed for 
+      <newTerm>VST.NET</newTerm>
+      to work.
+      </para>
+        <para>The
+      <codeEntityReference>T:Jacobi.Vst.Core.IDirectBufferAccess32</codeEntityReference>
+      and
+      <codeEntityReference>T:Jacobi.Vst.Core.IDirectBufferAccess64</codeEntityReference>
+      interfaces are implemented on the 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstAudioBuffer</codeEntityReference>
+      and the 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstAudioPrecisionBuffer</codeEntityReference>
+      classes, to allow unmanaged direct access to the underlying unmanged 
+      values.
+      </para>
+      </content>
+    </section>
+    <section address="Types">
+      <title>The Core Types</title>
+      <content>
+        <para>The Classes defined in the assembly are all modeled in almost the
+      same way as the unmanaged counterparts (see 
+      <link xlink:href="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" />). There are two
+      exceptions and that is the 
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.ManagedPluginFactory</codeEntityReference>
+      class, which is used during the Plugin loading sequence in the
+      <token>interop</token>
+      assembly and the
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.VstPluginInfo</codeEntityReference>
+      class, which is used to communicate the initial Plugin properties to the
+      Host (these values are copied to the native
+      <codeInline>AEffect</codeInline>
+      structure). The following class diagram shows the classes of the assembly.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Core Types</caption>
+          <image xlink:href="27c2404c-0398-406b-99f8-35415f5c6e3f" />
+        </mediaLink>
+        <para>The 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstEvent</codeEntityReference>
+      class and the derived
+      <codeEntityReference>T:Jacobi.Vst.Core.VstMidiEvent</codeEntityReference>
+      and
+      <codeEntityReference>T:Jacobi.Vst.Core.VstMidiSysExEvent</codeEntityReference>
+      classes are used when passing 
+      <newTerm>MIDI</newTerm>
+      information either from Host to Plugin or visa versa. In other versions of
+      <newTerm>VST</newTerm>
+      there were some other types of events but these are all deprecated in 
+      version 2.4.
+      The Parameters of a Plugin are communicated directly using methods in the
+      <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
+      interface. There is one method that passes a structure to obtain extra 
+      (meta) information on a parameter. This structure is represented by the
+      <codeEntityReference>T:Jacobi.Vst.Core.VstParameterProperties</codeEntityReference>
+      class.
+      The
+      <codeEntityReference>T:Jacobi.Vst.Core.VstPatchChunkInfo</codeEntityReference>
+      class is used to communicate meta information on a chunk of persisted
+      Plugin information.
+      The 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstMidiProgramCategory</codeEntityReference>
+      class is used to communicate Midi Program Categories a Plugin could 
+      implement.
+      The 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstMidiKeyName</codeEntityReference>
+      class is used to communicate the names of Midi Note numbers.
+      The
+      <codeEntityReference>T:Jacobi.Vst.Core.VstSpeakerArrangement</codeEntityReference>
+      and the 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstSpeakerProperties</codeEntityReference>
+      classes as well as the 
+      <codeEntityReference>T:Jacobi.Vst.Core.VstPinProperties</codeEntityReference>
+      class are used to communicate the number of audio channels a Plugin
+      might support.
+      The
+      <codeEntityReference>T:Jacobi.Vst.Core.VstMidiProgramName</codeEntityReference>
+      class is used to communicate Midi Patch names a Plugin might support.
+      The
+      <codeEntityReference>T:Jacobi.Vst.Core.VstTimeInfo</codeEntityReference>
+      is used to communicate time information.
+      The
+      <codeEntityReference>T:Jacobi.Vst.Core.VstFileSelect</codeEntityReference>
+      and
+      <codeEntityReference>T:Jacobi.Vst.Core.VstFileType</codeEntityReference>
+      classes are used to open a File Selector dialog in the Host and 
+      communicate the user's choice back to the Plugin.
+      </para>
+      </content>
+    </section>
+    <section address="Enums">
+      <title>The Core Enumerations</title>
+      <content>
+        <para>The enums declared in the assembly, again, resemble their unamanged
+      counterparts very closely. The following class diagram shows these enums.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Core Enumerations</caption>
+          <image xlink:href="c6b3a492-895c-474f-8da3-6e6f6462ea19" />
+        </mediaLink>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="c5859574-6e7a-4f9c-b2f8-ff4428f2aa14" />
+      <link xlink:href="e5d53d11-e4bb-43b9-abe9-04b0507465dc" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
