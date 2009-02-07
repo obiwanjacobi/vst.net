@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="157d7456-7408-4191-bb51-b10d84f34c3b" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>Required introduction</para>
+    </introduction>
+    <section address="VstPlugin">
+      <title>VST Plugin types</title>
+      <content>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Plugin VST types</caption>
+          <image xlink:href="dbcfb90b-2658-4c0a-996c-fc10690741f8" />
+        </mediaLink>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

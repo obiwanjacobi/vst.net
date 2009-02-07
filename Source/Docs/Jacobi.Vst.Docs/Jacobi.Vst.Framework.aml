@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="bf34ecc4-5cd1-4770-86fe-2cda55f05823" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>The
+    <token>framework</token>
+    assembly is an optional assembly that provides the Plugin developer with a
+    structured way to implement a VST Plugin. The assembly implements a
+    <link xlink:href="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6" />
+    and some base classes that make implementing a Plugin a breeze. The 
+    developer can focus on the functional code and spents far less time on 
+    'plumbing'. Each feature of a VST Plugin is declared in an (optional) code
+    interface that can be implemented by the developer, thus clarifying the 
+    requirements for supporting that feature.
+    </para>
+      <para>The 
+    <token>framework</token>
+    assembly also provides some abstraction over the 'bare' VST standard, 
+    especially for Plugin Programs and Parameters. These 'services' will help
+    you to accelerate your Plugin development even further.
+    </para>
+      <para>The following sections discuss the interfaces and class of the
+    <token>framework</token>
+    assembly in more detail.
+    </para>
+    </introduction>
+    <section address="Interfaces">
+      <title>Framework Interfaces</title>
+      <content>
+        <para>The following class diagram shows the interfaces that are defined by
+      the
+      <token>framework</token>
+      assembly. The interfaces at the top of the diagram are used to access the
+      Host from within the Plugin and the bottom interfaces are called by the
+      <token>interop</token>
+      assemlby when the Host calls into the Plugin.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Framework Interfaces</caption>
+          <image xlink:href="9105df1e-24d0-4912-8808-72f787e5e285" />
+        </mediaLink>
+        <para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHost</codeEntityReference>
+      interface represents the Host root interface of the
+      <link xlink:href="a6802bfe-1ae8-444e-abd5-dbe1a348f193" />.
+      <para>The other interfaces
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostShell</codeEntityReference><codeEntityReference>T:Jacobi.Vst.Framework.IVstHostSequencer</codeEntityReference>
+      and
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostAutomation</codeEntityReference>
+      can be retrieved using the 
+      <codeEntityReference>M:Jacobi.Vst.Framework.IExtensible.GetInstance</codeEntityReference>
+      method of the
+      <codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+      interface from which 
+      <codeInline>IVstHost</codeInline>
+      derives.</para><para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstMidiProcessor</codeEntityReference>
+      interface is used in the Host as well as the Plugin implementation. When
+      the Host supports accepting Midi events from a Plugin it is available 
+      through the 
+      <codeInline>IVstHost</codeInline>
+      root interface. When the Plugin want to receive Midi Events from the Host
+      it can implement the interface and make it available through the
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
+      root interface, that also derives from 
+      <codeInline>IExtensible</codeInline>.
+      </para><para>Note that the 
+      <codeInline>IVstPlugin</codeInline>
+      inherits from the
+      <codeEntityReference>T:System.IDisposable</codeEntityReference>
+      interface. 
+      <codeInline>Dispose</codeInline> is called at the very end of the life 
+      cycle of the Plugin at which time the Plugin can cleanup all resources it
+      used.</para><para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginPrograms</codeEntityReference>
+      interface can be implemented by the Plugin if it supports 
+      <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb" />
+      or presets. The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginParameters</codeEntityReference>
+      interface is closely linked to the 
+      <codeInline>IVstPluginPrograms</codeInline>
+      interface but can also be implemented seperately (if Programs are not 
+      supported).</para><para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginEditor</codeEntityReference>
+      interface represents the ability of having a custom Plugin editor UI.</para><para>When a Plugin implements the
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
+      and/or
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioPrecisionProcessor</codeEntityReference>
+      interfaces it indicates the capability of processing audio samples.
+      </para><para>A Plugin can implement the
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginMidiPrograms</codeEntityReference>
+      when it supports Midi (
+      <codeInline>IVstMidiProcessor</codeInline>
+      ) and Midi Patches or Programs. The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginMidiSource</codeEntityReference>
+      interface is implemented when a Plugin outputs Midi events to the Host.
+      </para><para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginConnections</codeEntityReference>
+      interface give a Plugin the opportunity to manage its audio channels (or
+      connections) dynamically. There is sort of handshake between Host and 
+      Plugin to determine the actual number of audio channels.
+      </para><para>The 
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginBypass</codeEntityReference>
+      interface can be implemented by the Plugin when it allows for a soft 
+      bypass or needs to be aware that it is bypassed.
+      </para><para>The
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginProcess</codeEntityReference>
+      interface notifies the Plugin when the Host starts and stops processing
+      audio samples. This can be used to allocate and free resources for Plugin
+      audio processing.
+      </para><para>When a Plugin state cannot be expressed in Parameters and Programs
+      the
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginPersistence</codeEntityReference>
+      interface allows a Plugin to load and save its state as an opague blob.
+      What structure the Plugin uses to read and write its settings is 
+      completely free.
+      </para><para>Refer to the relative sections for more information on these 
+      interfaces.</para></para>
+      </content>
+    </section>
+    <section address="Types">
+      <title>Framework Types</title>
+      <content>
+        <para>The following class diagram shows the classes that come with the
+      <token>framework</token>
+      assembly. Most class are paired in an item class and a collection class.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Class Diagram">The Framework Types</caption>
+          <image xlink:href="b395f371-e20f-4061-b194-55b2eb3a6366" />
+        </mediaLink>
+        <para>Refer to the relative sections for more information on the rest of 
+      the classes.</para>
+      </content>
+    </section>
+    <relatedTopics>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHost</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostShell</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostSequencer</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstHostAutomation</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstMidiProcessor</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginParameters</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginPrograms</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginEditor</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioPrecisionProcessor</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginMidiPrograms</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginBypass</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginPersistence</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginMidiSource</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginProcess</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginConnections</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstProgram</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstProgramCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameter</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterInfo</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterInfoCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterManager</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategory</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategoryCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstProductInfo</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstMidiChannelInfo</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstMidiChannelInfoCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstMidiProgram</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstMidiProgramCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstMidiCategory</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstMidiCategoryCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstConnectionInfo</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstConnectionInfoCollection</codeEntityReference>
+      <codeEntityReference>T:Jacobi.Vst.Framework.VstEventCollection</codeEntityReference>
+      <link xlink:href="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6" />
+      <link xlink:href="a6802bfe-1ae8-444e-abd5-dbe1a348f193" />
+      <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b" />
+      <link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a" />
+      <link xlink:href="1977452f-9b2d-4d4f-a93c-768ab2ede63e" />
+      <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb" />
+      <link xlink:href="c3df31da-acf5-4f57-8178-c00b1bc545ba" />
+      <link xlink:href="9285210d-328b-495d-826e-9a20939004d1" />
+      <link xlink:href="b1420795-40cc-451e-8240-582023abe7ab" />
+      <link xlink:href="95fdded5-2ce5-401d-aecd-ff8feceaba91" />
+      <link xlink:href="ba4dbc74-d9b0-439a-b767-ada82c153a56" />
+      <link xlink:href="f6dfa34b-ce35-4e73-9f79-d5056050800d" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<content xml:space="preserve" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <item id="core"><ddue:link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a" /></item>
+  <item id="depnote">The double underscores '__' preceding some member names as well as these names ending in <literal>Deprecated</literal>, is an indication of deprecated members for VST version 2.4. These members were used in an earlier version of the VST standard but are no longer used in VST 2.4.</item>
+  <item id="framework"><ddue:link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823" /></item>
+  <item id="interop"><ddue:link xlink:href="e5d53d11-e4bb-43b9-abe9-04b0507465dc" /></item>
+  <item id="vs2005"><application>Visual Studio 2005</application></item>
+  <item id="vs2008"><application>Visual Studio 2008</application></item>
+  <item id="vs2008e"><application>Visual Studio 2008 Express</application></item>
+  <item id="vstnet"><ddue:externalLink>
+    <ddue:linkText>VST.NET</ddue:linkText>
+    <ddue:linkUri>http://www.codeplex.com/vstnet</ddue:linkUri>
+</ddue:externalLink></item>
+</content>
