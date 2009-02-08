@@ -69,7 +69,7 @@
             this.PluginListVw.Location = new System.Drawing.Point(12, 56);
             this.PluginListVw.MultiSelect = false;
             this.PluginListVw.Name = "PluginListVw";
-            this.PluginListVw.Size = new System.Drawing.Size(338, 169);
+            this.PluginListVw.Size = new System.Drawing.Size(546, 152);
             this.PluginListVw.TabIndex = 0;
             this.PluginListVw.UseCompatibleStateImageBehavior = false;
             this.PluginListVw.View = System.Windows.Forms.View.Details;
@@ -107,13 +107,13 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.PluginPathTxt.Location = new System.Drawing.Point(12, 29);
             this.PluginPathTxt.Name = "PluginPathTxt";
-            this.PluginPathTxt.Size = new System.Drawing.Size(222, 20);
+            this.PluginPathTxt.Size = new System.Drawing.Size(430, 20);
             this.PluginPathTxt.TabIndex = 1;
             // 
             // BrowseBtn
             // 
             this.BrowseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowseBtn.Location = new System.Drawing.Point(240, 27);
+            this.BrowseBtn.Location = new System.Drawing.Point(448, 27);
             this.BrowseBtn.Name = "BrowseBtn";
             this.BrowseBtn.Size = new System.Drawing.Size(31, 23);
             this.BrowseBtn.TabIndex = 3;
@@ -124,7 +124,7 @@
             // AddBtn
             // 
             this.AddBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddBtn.Location = new System.Drawing.Point(277, 27);
+            this.AddBtn.Location = new System.Drawing.Point(485, 27);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(75, 23);
             this.AddBtn.TabIndex = 4;
@@ -135,7 +135,7 @@
             // DeleteBtn
             // 
             this.DeleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.DeleteBtn.Location = new System.Drawing.Point(12, 231);
+            this.DeleteBtn.Location = new System.Drawing.Point(12, 214);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(75, 23);
             this.DeleteBtn.TabIndex = 5;
@@ -150,7 +150,7 @@
             // ViewPluginBtn
             // 
             this.ViewPluginBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ViewPluginBtn.Location = new System.Drawing.Point(274, 231);
+            this.ViewPluginBtn.Location = new System.Drawing.Point(482, 214);
             this.ViewPluginBtn.Name = "ViewPluginBtn";
             this.ViewPluginBtn.Size = new System.Drawing.Size(75, 23);
             this.ViewPluginBtn.TabIndex = 6;
@@ -162,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 266);
+            this.ClientSize = new System.Drawing.Size(570, 249);
             this.Controls.Add(this.ViewPluginBtn);
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.AddBtn);

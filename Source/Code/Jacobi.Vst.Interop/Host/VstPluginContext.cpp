@@ -55,8 +55,12 @@ namespace Host
 		}
 
 		// dispose the plugin command stub (unmanaged)
-		_pluginCmdStub->~VstPluginCommandStub();
-		_pluginCmdStub = nullptr;
+		if(_pluginCmdStub != nullptr)
+		{
+			_pluginCmdStub->~VstPluginCommandStub();
+			_pluginCmdStub = nullptr;
+		}
+
 		_pluginInfo = nullptr;
 
 		// close the loaded library.
@@ -84,7 +88,7 @@ namespace Host
 			pPluginPath = TypeConverter::AllocateString(pluginPath);
 
 			// Load plugin dll
-			_hLib = ::LoadLibrary(pPluginPath);
+			_hLib = ::LoadLibraryA(pPluginPath);
 
 			if(_hLib == NULL)
 			{
@@ -92,7 +96,7 @@ namespace Host
 			}
 
 			// check entry point
-			VSTPluginMain pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, TEXT("VSTPluginMain"));
+			VSTPluginMain pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "VSTPluginMain");
 
 			if(pluginMain == NULL)
 			{

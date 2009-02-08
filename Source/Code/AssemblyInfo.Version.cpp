@@ -13,5 +13,5 @@ using namespace System::Reflection;
 // You can specify all the value or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly:AssemblyVersionAttribute("0.6.0.0")];
-[assembly:AssemblyFileVersionAttribute("0.6.0.0")];
+[assembly:AssemblyVersionAttribute("0.7.0.0")];
+[assembly:AssemblyFileVersionAttribute("0.7.0.0")];

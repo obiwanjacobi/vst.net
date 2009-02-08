@@ -8,7 +8,7 @@ namespace Host
 {
 	VstAudioPrecisionBufferManager::VstAudioPrecisionBufferManager(System::Int32 bufferCount, System::Int32 bufferSize)
 	{
-		if(bufferCount <= 0)
+		if(bufferCount < 0)
 		{
 			throw gcnew System::ArgumentOutOfRangeException("bufferCount");
 		}
@@ -21,14 +21,18 @@ namespace Host
 		_bufferCount = bufferCount;
 		_bufferSize = bufferSize;
 
-		// allocate the buffers in one call
-		double* pBuffer = _unmanagedBuffers.GetArray(bufferCount * bufferSize);
 		_managedBuffers = gcnew System::Collections::Generic::List<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>();
 
-		for(int n = 0; n < bufferCount; n++)
+		if(_bufferCount > 0)
 		{
-			_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioPrecisionBuffer(pBuffer, bufferSize, true));
-			pBuffer += n * bufferSize;
+			// allocate the buffers in one call
+			double* pBuffer = _unmanagedBuffers.GetArray(bufferCount * bufferSize);
+
+			for(int n = 0; n < bufferCount; n++)
+			{
+				_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioPrecisionBuffer(pBuffer, bufferSize, true));
+				pBuffer += n * bufferSize;
+			}
 		}
 	}
 
@@ -60,14 +64,23 @@ namespace Host
 		
 		Jacobi::Vst::Core::IDirectBufferAccess64^ directBuf = (Jacobi::Vst::Core::IDirectBufferAccess64^)buffer;
 
-		// TODO: check if the unmanaged buffer matches the range of our _unamangedBuffers array.
+		double* lowerBound = _unmanagedBuffers.GetArray();
+		double* upperBound = lowerBound + (_bufferSize * _bufferCount);
+		double* pBuffer = directBuf->Buffer;
 
-		ZeroMemory(directBuf->Buffer, directBuf->SampleCount);
+		// check if the unmanaged buffer matches the range of our _unamangedBuffers array.
+		if(lowerBound == NULL ||
+			!(lowerBound <= pBuffer && pBuffer < upperBound))
+		{
+			throw gcnew System::ArgumentException("Specified buffer is not managed by this instance.", "buffer");
+		}
+
+		ClearBuffer(directBuf->Buffer, directBuf->SampleCount);
 	}
 
 	void VstAudioPrecisionBufferManager::ClearAllBuffers()
 	{
-		ZeroMemory(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetByteLength());
+		ClearBuffer(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetByteLength());
 	}
 
 }}}} // namespace Jacobi.Vst.Interop.Host
