@@ -130,7 +130,7 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 			// [ptr]: "can do" string [return value]: 1 for supported
 			System::String^ candoStr = TypeConverter::CharToString((char*)ptr);
 			Jacobi::Vst::Core::VstHostCanDo cando = safe_cast<Jacobi::Vst::Core::VstHostCanDo>(
-				System::Enum::Parse(Jacobi::Vst::Core::VstHostCanDo::typeid, candoStr));
+				System::Enum::Parse(Jacobi::Vst::Core::VstHostCanDo::typeid, candoStr, true));
 			result = safe_cast<VstIntPtr>(_hostCmdStub->CanDo(cando));
 			}
 			break;

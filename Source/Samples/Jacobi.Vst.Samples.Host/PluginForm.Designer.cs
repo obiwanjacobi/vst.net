@@ -33,14 +33,15 @@
             this.PluginPropertyListVw = new System.Windows.Forms.ListView();
             this.PropertyNameHdr = new System.Windows.Forms.ColumnHeader();
             this.PropertyValueHdr = new System.Windows.Forms.ColumnHeader();
-            this.OKBtn = new System.Windows.Forms.Button();
-            this.ProgramIndexNud = new System.Windows.Forms.NumericUpDown();
-            this.ProgramNameTxt = new System.Windows.Forms.TextBox();
             this.PluginParameterListVw = new System.Windows.Forms.ListView();
             this.ParameterNameHdr = new System.Windows.Forms.ColumnHeader();
             this.ParameterValueHdr = new System.Windows.Forms.ColumnHeader();
             this.ParameterLabelHdr = new System.Windows.Forms.ColumnHeader();
             this.ParameterShortLabelHdr = new System.Windows.Forms.ColumnHeader();
+            this.ProgramNameTxt = new System.Windows.Forms.TextBox();
+            this.ProgramIndexNud = new System.Windows.Forms.NumericUpDown();
+            this.OKBtn = new System.Windows.Forms.Button();
+            this.GenerateNoiseBtn = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
@@ -61,20 +62,6 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Plugin Properties";
-            // 
-            // groupBox2
-            // 
-            groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            groupBox2.Controls.Add(this.PluginParameterListVw);
-            groupBox2.Controls.Add(this.ProgramNameTxt);
-            groupBox2.Controls.Add(this.ProgramIndexNud);
-            groupBox2.Location = new System.Drawing.Point(13, 177);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(395, 178);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Programs && Parameters";
             // 
             // PluginPropertyListVw
             // 
@@ -102,31 +89,19 @@
             this.PropertyValueHdr.Text = "Property Value";
             this.PropertyValueHdr.Width = 180;
             // 
-            // OKBtn
+            // groupBox2
             // 
-            this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OKBtn.Location = new System.Drawing.Point(333, 361);
-            this.OKBtn.Name = "OKBtn";
-            this.OKBtn.Size = new System.Drawing.Size(75, 23);
-            this.OKBtn.TabIndex = 3;
-            this.OKBtn.Text = "Close";
-            this.OKBtn.UseVisualStyleBackColor = true;
-            // 
-            // ProgramIndexNud
-            // 
-            this.ProgramIndexNud.Location = new System.Drawing.Point(7, 20);
-            this.ProgramIndexNud.Name = "ProgramIndexNud";
-            this.ProgramIndexNud.Size = new System.Drawing.Size(41, 20);
-            this.ProgramIndexNud.TabIndex = 0;
-            this.ProgramIndexNud.ValueChanged += new System.EventHandler(this.ProgramIndexNud_ValueChanged);
-            // 
-            // ProgramNameTxt
-            // 
-            this.ProgramNameTxt.Location = new System.Drawing.Point(54, 20);
-            this.ProgramNameTxt.Name = "ProgramNameTxt";
-            this.ProgramNameTxt.Size = new System.Drawing.Size(226, 20);
-            this.ProgramNameTxt.TabIndex = 1;
+            groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox2.Controls.Add(this.PluginParameterListVw);
+            groupBox2.Controls.Add(this.ProgramNameTxt);
+            groupBox2.Controls.Add(this.ProgramIndexNud);
+            groupBox2.Location = new System.Drawing.Point(13, 177);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(395, 178);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Programs && Parameters";
             // 
             // PluginParameterListVw
             // 
@@ -167,11 +142,48 @@
             // 
             this.ParameterShortLabelHdr.Text = "Short Lbl";
             // 
+            // ProgramNameTxt
+            // 
+            this.ProgramNameTxt.Location = new System.Drawing.Point(54, 20);
+            this.ProgramNameTxt.Name = "ProgramNameTxt";
+            this.ProgramNameTxt.Size = new System.Drawing.Size(226, 20);
+            this.ProgramNameTxt.TabIndex = 1;
+            // 
+            // ProgramIndexNud
+            // 
+            this.ProgramIndexNud.Location = new System.Drawing.Point(7, 20);
+            this.ProgramIndexNud.Name = "ProgramIndexNud";
+            this.ProgramIndexNud.Size = new System.Drawing.Size(41, 20);
+            this.ProgramIndexNud.TabIndex = 0;
+            this.ProgramIndexNud.ValueChanged += new System.EventHandler(this.ProgramIndexNud_ValueChanged);
+            // 
+            // OKBtn
+            // 
+            this.OKBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OKBtn.Location = new System.Drawing.Point(333, 361);
+            this.OKBtn.Name = "OKBtn";
+            this.OKBtn.Size = new System.Drawing.Size(75, 23);
+            this.OKBtn.TabIndex = 3;
+            this.OKBtn.Text = "Close";
+            this.OKBtn.UseVisualStyleBackColor = true;
+            // 
+            // GenerateNoiseBtn
+            // 
+            this.GenerateNoiseBtn.Location = new System.Drawing.Point(20, 362);
+            this.GenerateNoiseBtn.Name = "GenerateNoiseBtn";
+            this.GenerateNoiseBtn.Size = new System.Drawing.Size(84, 23);
+            this.GenerateNoiseBtn.TabIndex = 4;
+            this.GenerateNoiseBtn.Text = "Process Noise";
+            this.GenerateNoiseBtn.UseVisualStyleBackColor = true;
+            this.GenerateNoiseBtn.Click += new System.EventHandler(this.GenerateNoiseBtn_Click);
+            // 
             // PluginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(421, 394);
+            this.Controls.Add(this.GenerateNoiseBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(groupBox2);
             this.Controls.Add(groupBox1);
@@ -203,5 +215,6 @@
         private System.Windows.Forms.ColumnHeader ParameterValueHdr;
         private System.Windows.Forms.ColumnHeader ParameterLabelHdr;
         private System.Windows.Forms.ColumnHeader ParameterShortLabelHdr;
+        private System.Windows.Forms.Button GenerateNoiseBtn;
     }
 }

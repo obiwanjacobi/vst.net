@@ -108,4 +108,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
