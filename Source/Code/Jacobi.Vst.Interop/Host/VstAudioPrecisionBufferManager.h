@@ -49,6 +49,14 @@ namespace Host
 
 		UnmanagedArray<double> _unmanagedBuffers;
 		System::Collections::Generic::List<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ _managedBuffers;
+
+		void ClearBuffer(double* buffer, int bufferSize)
+		{
+			if(buffer != NULL)
+			{
+				ZeroMemory(buffer, bufferSize * sizeof(double));
+			}
+		}
 	};
 
 }}}} // namespace Jacobi.Vst.Interop.Host

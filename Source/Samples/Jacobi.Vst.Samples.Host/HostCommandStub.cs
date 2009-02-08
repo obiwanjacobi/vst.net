@@ -61,7 +61,7 @@ namespace Jacobi.Vst.Samples.Host
         public int GetBlockSize()
         {
             RaisePluginCalled("GetBlockSize()");
-            return 0;
+            return 1024;
         }
 
         public string GetDirectory()
@@ -103,7 +103,7 @@ namespace Jacobi.Vst.Samples.Host
         public float GetSampleRate()
         {
             RaisePluginCalled("GetSampleRate()");
-            return 0f;
+            return 44.8f;
         }
 
         public Jacobi.Vst.Core.VstTimeInfo GetTimeInfo(Jacobi.Vst.Core.VstTimeInfoFlags filterFlags)

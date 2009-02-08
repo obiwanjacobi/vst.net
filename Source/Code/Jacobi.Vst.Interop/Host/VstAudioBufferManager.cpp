@@ -8,7 +8,7 @@ namespace Host
 {
 	VstAudioBufferManager::VstAudioBufferManager(System::Int32 bufferCount, System::Int32 bufferSize)
 	{
-		if(bufferCount <= 0)
+		if(bufferCount < 0)
 		{
 			throw gcnew System::ArgumentOutOfRangeException("bufferCount");
 		}
@@ -21,14 +21,18 @@ namespace Host
 		_bufferCount = bufferCount;
 		_bufferSize = bufferSize;
 
-		// allocate the buffers in one call
-		float* pBuffer = _unmanagedBuffers.GetArray(bufferCount * bufferSize);
 		_managedBuffers = gcnew System::Collections::Generic::List<Jacobi::Vst::Core::VstAudioBuffer^>();
 
-		for(int n = 0; n < bufferCount; n++)
+		if(_bufferCount > 0)
 		{
-			_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioBuffer(pBuffer, bufferSize, true));
-			pBuffer += n * bufferSize;
+			// allocate the buffers in one call
+			float* pBuffer = _unmanagedBuffers.GetArray(bufferCount * bufferSize);
+
+			for(int n = 0; n < bufferCount; n++)
+			{
+				_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioBuffer(pBuffer, bufferSize, true));
+				pBuffer += n * bufferSize;
+			}
 		}
 	}
 
@@ -55,19 +59,28 @@ namespace Host
 
 		if(buffer->SampleCount != _bufferSize)
 		{
-			throw gcnew System::ArgumentException("Buffer size does not match this manager.", "buffer");
+			throw gcnew System::ArgumentException("Buffer size does not match this manager instance.", "buffer");
 		}
 		
 		Jacobi::Vst::Core::IDirectBufferAccess32^ directBuf = (Jacobi::Vst::Core::IDirectBufferAccess32^)buffer;
 
-		// TODO: check if the unmanaged buffer matches the range of our _unamangedBuffers array.
+		float* lowerBound = _unmanagedBuffers.GetArray();
+		float* upperBound = lowerBound + (_bufferSize * _bufferCount);
+		float* pBuffer = directBuf->Buffer;
 
-		ZeroMemory(directBuf->Buffer, directBuf->SampleCount);
+		// check if the unmanaged buffer matches the range of our _unamangedBuffers array.
+		if(lowerBound == NULL ||
+			!(lowerBound <= pBuffer && pBuffer < upperBound))
+		{
+			throw gcnew System::ArgumentException("Specified buffer is not managed by this instance.", "buffer");
+		}
+
+		ClearBuffer(directBuf->Buffer, directBuf->SampleCount);
 	}
 
 	void VstAudioBufferManager::ClearAllBuffers()
 	{
-		ZeroMemory(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetByteLength());
+		ClearBuffer(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetByteLength());
 	}
 
 }}}} // namespace Jacobi.Vst.Interop.Host

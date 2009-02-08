@@ -118,5 +118,39 @@ namespace Jacobi.Vst.Samples.Host
             }
         }
 
+        private void GenerateNoiseBtn_Click(object sender, EventArgs e)
+        {
+            // plugin does not support processing audio
+            if ((PluginContext.PluginInfo.Flags & VstPluginFlags.CanReplacing) == 0)
+            {
+                return;
+            }
+
+            int inputCount = PluginContext.PluginInfo.AudioInputCount;
+            int outputCount = PluginContext.PluginInfo.AudioOutputCount;
+            int blockSize = 1024;
+
+            VstAudioBufferManager inputMgr = new VstAudioBufferManager(inputCount, blockSize);
+            VstAudioBufferManager outputMgr = new VstAudioBufferManager(outputCount, blockSize);
+
+            foreach (VstAudioBuffer buffer in inputMgr.ToArray())
+            {
+                Random rnd = new Random((int)DateTime.Now.Ticks);
+
+                for (int i = 0; i < blockSize; i++)
+                {
+                    // generate a value between -1.0 and 1.0
+                    buffer[i] = (float)((rnd.NextDouble() * 2.0) - 1.0);
+                }
+            }
+
+            PluginContext.PluginCommandStub.SetBlockSize(blockSize);
+            PluginContext.PluginCommandStub.SetSampleRate(44.8f);
+
+            PluginContext.PluginCommandStub.StartProcess();
+            PluginContext.PluginCommandStub.ProcessReplacing(inputMgr.ToArray(), outputMgr.ToArray());
+            PluginContext.PluginCommandStub.StopProcess();
+        }
+
     }
 }
