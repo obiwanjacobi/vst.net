@@ -14,80 +14,184 @@
   -->
     <introduction>
       <para>
+      The Plugin Interface Manager is a class the devloper writes that handles 
+      the requests from the 
+      <token>framework</token> 
+      for optional interface implementations.
+      </para>
+      <para>
+      The 
+      <token>vstnet</token> 
+      Plugin Framework delcares an interface for each VST feature. When the 
+      Plugin is started it communicates some of these features to the Host (so 
+      it knows what to expect) through bit-flags. But other calls a Host can 
+      make to a Plugin can cause the
+      <token>framework</token>
+      to query the managed Plugin for additional interface implementations. 
+      These enquiries are performed on the 
+      <codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+      implementation on the
+      <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b">Plugin Root Class</link>.
+      </para>
+      <para>
+      A Plugin can pick and choose the VST features it likes (or needs) to 
+      support and communicate those choices through returning implementation
+      references of the specific interfaces when asked for them by the Framework.
       </para>
     </introduction>
-    <!-- Add one or more top-level section elements.  These are collapsible.
-       If using <autoOutline /> tag, add an address attribute to identify
-       it so that it can be jumped to with a hyperlink. -->
-    <section address="Section1">
-      <title>Section title</title>
+    
+    <section address="PluginInterfaceManagerBase">
+      <title>The Plugin Interface Manager Base Class</title>
       <content>
-        <!-- Uncomment this to create a sub-section outline
-      <autoOutline /> -->
-        <para>Add one or more sections with content</para>
+        <para>
+        	As with a lot of other VST.NET code, you have several options to 
+        	implement the
+        	<codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+        	interface of the
+        	<link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b">Plugin Root Class</link>.
+			<list class="bullet">
+  				<listItem>Use a custom implementation.</listItem>
+  				<listItem>Derive a class from 
+  				<codeInline>PluginInterfaceManagerBase</codeInline> 
+  				and route the requests from the 
+  				<codeInline>Plugin Root Class</codeInline> to this instance.</listItem>
+  				<listItem>Derive your
+  				<codeInline>Plugin Root Class</codeInline>
+  				from the
+  				<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
+  				base class. This class itself derives from 
+  				<codeInline>PluginInterfaceManagerBase</codeInline>.
+  				</listItem>
+			</list>
+        	<para>
+        	The
+        	<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+        	class provides a basis for implementing a mechanism to manage the 
+        	creation and destruction of all the interface implementation 
+        	instances. Two out of the three options use this class in one way or 
+        	another.
+        	</para>
+        	<para>
+        	The 
+        	<codeInline>PluginInterfaceManagerBase</codeInline>
+        	also implements the 
+        	<codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+        	interface, making it easy to connect the Interface Manager to the
+        	<link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b">Plugin Root Class</link>.
+        	</para>
+        	<para>
+        	The 
+        	<codeInline>PluginInterfaceManagerBase</codeInline>
+        	implements a virtual method for each (type of) interface in the 
+        	Framework. When an interface is requested its cached references is 
+        	checked (discussed later in more detail) and if it is null, the 
+        	virtual method for that type of interface is called. The derived 
+        	class has the virtual methods overridden of all the interface types
+        	the Plugin supports. The default implementation causes a null 
+        	reference to be returned.
+        	</para>
+        	<para>
+        	The virtual methods are all prefixed with <literal>Create</literal>
+        	followed by the name of the interface but without the 
+        	<literal>IVstPlugin</literal> prefix. All virtual methods are typed 
+        	to their related interfaces. The following code example shows an 
+        	abstraction of their method signatures (where T is the interface Type):
+        	<code language="cs">
+			protected virtual T CreateXxxxx(T instance);
+			</code>
+        	</para>
+        	<para>
+        	Because a Host usually uses several threads to call into a Plugin, 
+        	the chances are real that the thread the interface implementation 
+        	class instance was created on will not always be used for future 
+        	calls. The Interface Manager assumes you have a synchronized wrapper
+        	class for each interface implementation or that the implementation 
+        	itself is thread safe. That is why the virtual 
+        	<codeInline>CreateXxxxx</codeInline> methods can be called once or 
+        	twice (but never more).
+			<list class="ordered">
+				<listItem>The first time the method is called the
+				<codeInline>instance</codeInline> 
+				parameter is null and you are requested to return your default
+				implementation.
+				</listItem>
+				<listItem>
+				The second time the method is called the
+				<codeInline>instance</codeInline> 
+				parameter contains the default instance you returned when called 
+				for the first time and you are requested to return your 
+				thread-safe interface implementation.
+				</listItem>
+			</list>
+        	</para>
+        	<para>
+        	Now if the default interface implementation is thread-safe to begin 
+        	with, you can simply return the 
+        	<codeInline>instance</codeInline> 
+        	parameter on the second time the method is called. If not, you can
+        	wrap the default interface implementation in a synchronized wrapper
+        	implementation. Using a synchronized wrapper will not add locking
+        	overhead when the calling thread is the original thread that created 
+        	the interface implementation instance.
+        	</para>
+        </para>
       </content>
-      <!-- If a section contains a sections element, its content creates
-         sub-sections.  These are not collapsible.
-    <sections>
-        <section address="SubSection1">
-            <title>Sub-section 1</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-        <section address="SubSection2">
-            <title>Sub-section 2</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-    </sections> -->
     </section>
+    
     <section address="ClassDiagram">
       <title>Class Diagram</title>
       <content>
+      	<para>
+      	The following class diagram shows the internal structure of the
+      	<codeInline>PluginInterfaceManagerBase</codeInline> class.
+      	</para>
+      
         <mediaLink>
           <caption placement="after" lead="Class Diagram">The Plugin Interface Manager</caption>
           <image xlink:href="50f88d51-248a-4c4a-bf58-c0696d339261" />
         </mediaLink>
+        
+        <para>
+        For each interface reference the
+	    <codeInline>PluginInterfaceManagerBase</codeInline>
+	    manages a
+	    <codeInline>InterfaceManager{T}</codeInline>
+	    class is created. This internal class implements the logic for calling 
+	    the virtual
+	    <codeInline>CreateXxxxx</codeInline>
+	    method through a delegate. It stores the interface implementation 
+	    references (default and thread-safe) using an instance of the
+	    <codeInline>ExtensibleInterfaceRef</codeInline>
+	    class. This class is public and you can use it to implement your own
+	    Interface Manager if you decide to do so.
+	    The
+	    <codeInline>ExtensibleInterfaceRef</codeInline>
+	    class also stores the thread ID of the thread that constructs the 
+	    default (first) interface implementation reference. The
+	    <codeInline>SafeInstance</codeInline> property either returns the 
+	    default instance, when the call was made from the same thread that 
+	    constructed the interface implementation reference, or the thread-safe
+	    instance when the call was made from another thread. The
+	    <codeInline>Instance</codeInline>
+	    and
+	    <codeInline>ThreadSafeInstance</codeInline>
+	    properties access the respective types of instances. Note that setting 
+	    these properties requires the property value to be null. This is to 
+	    catch accidental overwrites of already set instances.
+        </para>
+        
       </content>
     </section>
+
+	<para>Jacobi.Vst.Framework</para>
+
     <relatedTopics>
-      <!-- One or more of the following:
-         - A local link
-         - An external link
-         - A code entity reference
-
-    <link xlink:href="Other Topic's ID"/>
-    <link xlink:href="Other Topic's ID">Link inner text</link>
-
-    <externalLink>
-        <linkText>Link text</linkText>
-        <linkAlternateText>Optional alternate link text</linkAlternateText>
-        <linkUri>URI</linkUri>
-    </externalLink>
-
-    <codeEntityReference>API member ID</codeEntityReference>
-
-    Examples:
-
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-    <externalLink>
-        <linkText>SHFB on CodePlex</linkText>
-        <linkAlternateText>Go to CodePlex</linkAlternateText>
-        <linkUri>http://www.codeplex.com/SHFB</linkUri>
-    </externalLink>
-
-    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-    -->
+    <codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.ExtensibleInterfaceRef</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
+    
+    <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

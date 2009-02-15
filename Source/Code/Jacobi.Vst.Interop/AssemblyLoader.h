@@ -4,9 +4,16 @@ namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
+/// <summary>
+/// The AssemblyLoader registers the AppDomain event when an assembly is not found
+/// and then tries to load it from the plugin folder.
+/// <summary/>
 ref class AssemblyLoader
 {
 public:
+	/// <summary>
+	/// Initializes the one and only instance with the plugin folder. Can be called multiple times.
+	/// <summary/>
 	static void Initialize(System::String^ baseDir);
 
 private:

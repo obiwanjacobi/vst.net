@@ -18,6 +18,7 @@
     interface.
     </para>
     </introduction>
+    
     <section address="IVstPlugin">
       <title>IVstPlugin interface</title>
       <content>
@@ -74,6 +75,7 @@
         </sections>
       </content>
     </section>
+    
     <section address="ClassDiagram">
       <title>Class Diagram</title>
       <content>
@@ -116,6 +118,9 @@
       interfaces.
     </content>
     </section>
+    
+    <para>Jacobi.Vst.Framework</para>
+    
     <relatedTopics>
       <codeEntityReference>Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
       <codeEntityReference>Jacobi.Vst.Framework.IExtensible</codeEntityReference>

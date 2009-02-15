@@ -17,64 +17,15 @@
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Jacobi.Vst.Docs</HtmlHelpName>
     <ApiFilter>
-      <Filter entryType="Namespace" fullName="" isExposed="False" xmlns="">
-        <Filter entryType="Structure" fullName="AEffect" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="AEffectOpcodes" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="AEffectXOpcodes" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="AudioMasterOpcodes" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="AudioMasterOpcodesX" isExposed="True" />
-        <Filter entryType="Structure" fullName="ERect" isExposed="True" />
-        <Filter entryType="Structure" fullName="MidiKeyName" isExposed="True" />
-        <Filter entryType="Structure" fullName="MidiProgramCategory" isExposed="True" />
-        <Filter entryType="Structure" fullName="MidiProgramName" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="Vst2StringConstants" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstAEffectFlags" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstAudioFileFlags" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstAutomationStates" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstEvent" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstEvents" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstEventTypes" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstFileSelect" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstFileSelectCommand" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstFileSelectType" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstFileType" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstHostLanguage" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstMidiEvent" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstMidiEventFlags" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstMidiProgramNameFlags" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstMidiSysexEvent" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstModifierKey" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstOfflineOption" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstOfflineTaskFlags" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstPanLawType" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstParameterFlags" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstParameterProperties" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstPatchChunkInfo" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstPinProperties" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstPinPropertiesFlags" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstPlugCategory" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstProcessLevels" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstProcessPrecision" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstSmpteFrameRate" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstSpeakerArrangement" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstSpeakerArrangementType" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstSpeakerProperties" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstSpeakerType" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstStringConstants" isExposed="True" />
-        <Filter entryType="Structure" fullName="VstTimeInfo" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstTimeInfoFlags" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstUserSpeakerType" isExposed="True" />
-        <Filter entryType="Enumeration" fullName="VstVirtualKey" isExposed="True" />
-      </Filter>
-      <Filter entryType="Namespace" fullName="&lt;CppImplementationDetails&gt;" isExposed="False" xmlns="" />
-      <Filter entryType="Namespace" fullName="&lt;CrtImplementationDetails&gt;" isExposed="False" xmlns="" />
-      <Filter entryType="Namespace" fullName="Jacobi.Vst.Interop.Host" isExposed="True" xmlns="">
-        <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;double *&gt;" filterName="UnmanagedArray&lt;double *&gt;" isExposed="False" />
-        <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;float *&gt;" filterName="UnmanagedArray&lt;float *&gt;" isExposed="False" />
-      </Filter>
-      <Filter entryType="Namespace" fullName="vc_attributes" isExposed="False" xmlns="" />
-    </ApiFilter>
-    <ProjectSummary>VST.NET %28Jacobi.Vst%29 is a code library that allows developer to create managed VST Plugins quickly. It takes care of marshalling calls between .NET and C++ and visa versa.</ProjectSummary>
+      <Filter entryType="Namespace" fullName="" isExposed="False" />
+<Filter entryType="Namespace" fullName="&lt;CppImplementationDetails&gt;" isExposed="False" />
+<Filter entryType="Namespace" fullName="&lt;CrtImplementationDetails&gt;" isExposed="False" />
+<Filter entryType="Namespace" fullName="Jacobi.Vst.Interop.Host" isExposed="True">
+  <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;double *&gt;" filterName="UnmanagedArray&lt;double *&gt;" isExposed="False" />
+  <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;float *&gt;" filterName="UnmanagedArray&lt;float *&gt;" isExposed="False" />
+</Filter>
+<Filter entryType="Namespace" fullName="vc_attributes" isExposed="False" /></ApiFilter>
+    <ProjectSummary>VST.NET %28Jacobi.Vst%29 is a code library that allows developer to create managed VST Plugins quickly. It takes care of marshalling calls between .NET and C++ and visa versa. There is also Interop support for creating managed Hosts.</ProjectSummary>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
     <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, Internals, Protected, ProtectedInternalAsProtected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath>
@@ -90,7 +41,7 @@
     </BuildLogFile>
     <CppCommentsFixup>True</CppCommentsFixup>
     <FrameworkVersion>2.0.50727</FrameworkVersion>
-    <HelpTitle>VST.NET 0.6 Documentation</HelpTitle>
+    <HelpTitle>VST.NET 0.7 Documentation</HelpTitle>
     <CopyrightHref>http://www.codeplex.com/vstnet</CopyrightHref>
     <CopyrightText>Copyright 2008-2009 Jacobi Software, all rights reserved.</CopyrightText>
     <FeedbackEMailAddress>obiwanjacobi%40hotmail.com</FeedbackEMailAddress>
@@ -170,25 +121,24 @@
       <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" xmlns="" />
     </DocumentationSources>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="(global)" isDocumented="True" xmlns="">The global namespace contains the classes that are used internally by the Interop assembly.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="&lt;CppImplementationDetails&gt;" isDocumented="False" xmlns="" />
-      <NamespaceSummaryItem name="&lt;CrtImplementationDetails&gt;" isDocumented="False" xmlns="" />
-      <NamespaceSummaryItem name="Jacobi.Vst.Core" isDocumented="True" xmlns="">The Jacobi.Vst.Core namespace contains all managed types that have an unmanaged counterpart in the native C++ VST SDK.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Core.Host" isDocumented="True" xmlns="">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Host.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Core.Plugin" isDocumented="True" xmlns="">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Plugin.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Framework" isDocumented="True" xmlns="">The Jacobi.Vst.Framework namespace contains all framework interfaces and types that are used as a basis for the implementation and communication with a managed Plugin.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Framework.Common" isDocumented="True" xmlns="">The Jacobi.Vst.Framework.Common namespace contains reusable types for implementing Managed Plugins.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Framework.Host" isDocumented="True" xmlns="">The Jacobi.Vst.Framework.Host namespace contains all types that directly support implementing Host access for a Plugin.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Framework.Plugin" isDocumented="True" xmlns="">The Jacobi.Vst.Framework.Plugin namespace contains all types that directly support implementing a managed Plugin.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Interop" isDocumented="True" xmlns="" />
-      <NamespaceSummaryItem name="Jacobi.Vst.Interop.Host" isDocumented="True" xmlns="">The Jacobi.Vst.Interop.Host namespace contains all types that directly support implementing a managed Host.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Jacobi.Vst.Interop.Plugin" isDocumented="True" xmlns="" />
-      <NamespaceSummaryItem name="Jacobi.Vst.Samples.CorePlugin" isDocumented="True" xmlns="" />
-      <NamespaceSummaryItem name="Jacobi.Vst.Samples.Delay" isDocumented="True" xmlns="" />
-      <NamespaceSummaryItem name="Jacobi.Vst.Samples.MidiNoteMapper" isDocumented="True" xmlns="" />
-      <NamespaceSummaryItem name="Jacobi.Vst.Samples.MidiNoteSampler" isDocumented="True" xmlns="" />
-      <NamespaceSummaryItem name="vc_attributes" isDocumented="False" xmlns="" />
-    </NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="True">The global namespace contains the classes that are used internally by the Interop assembly.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="&lt;CppImplementationDetails&gt;" isDocumented="False" />
+<NamespaceSummaryItem name="&lt;CrtImplementationDetails&gt;" isDocumented="False" />
+<NamespaceSummaryItem name="Jacobi.Vst.Core" isDocumented="True">The Jacobi.Vst.Core namespace contains all managed types that have an unmanaged counterpart in the native C++ VST SDK.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Core.Host" isDocumented="True">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Host.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Core.Plugin" isDocumented="True">The Jacobi.Vst.Core.Plugin namespace contains all types that are used by the Jacobi.Vst.Interop assembly for managing the Plugin.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Framework" isDocumented="True">The Jacobi.Vst.Framework namespace contains all framework interfaces and types that are used as a basis for the implementation and communication with a managed Plugin.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Framework.Common" isDocumented="True">The Jacobi.Vst.Framework.Common namespace contains reusable types for implementing Managed Plugins.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Framework.Host" isDocumented="True">The Jacobi.Vst.Framework.Host namespace contains all types that directly support implementing Host access for a Plugin.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Framework.Plugin" isDocumented="True">The Jacobi.Vst.Framework.Plugin namespace contains all types that directly support implementing a managed Plugin.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Interop" isDocumented="True">This namespace contains the root of all interoperability code for VST.NET.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Interop.Host" isDocumented="True">The Jacobi.Vst.Interop.Host namespace contains all types that directly support implementing a managed Host.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Interop.Plugin" isDocumented="True">The Jacobi.Vst.Interop.Plugin namespace contains all types that support implementing a managed Plugin.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Samples.CorePlugin" isDocumented="True">A Sample that shows you how to program against the Core of VST.NET (without the Framework).</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Samples.Delay" isDocumented="True">A Sample that demonstrates an effect.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Samples.MidiNoteMapper" isDocumented="True">A Sample that shows Midi input and output processing.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Jacobi.Vst.Samples.MidiNoteSampler" isDocumented="True">A Sample that records and playsback audio triggered by Midi notes.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="vc_attributes" isDocumented="False" /></NamespaceSummaries>
     <PlugInConfigurations>
       <PlugInConfig id="Hierarchical Table of Contents" enabled="True">
         <configuration>
@@ -306,6 +256,10 @@
   <ItemGroup>
     <None Include="Audio Processing.aml" />
     <None Include="Custom Plugin Editor.aml" />
+    <None Include="Assemblies.aml" />
+    <None Include="Plugin Context.aml" />
+    <None Include="Host.aml" />
+    <None Include="Plugin.aml" />
     <None Include="Not Supported.aml" />
     <None Include="Plugin Connections.aml" />
     <None Include="Plugin Midi Programs.aml" />

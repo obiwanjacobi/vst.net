@@ -3,78 +3,133 @@
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!--
   <summary>
-    <para>Optional summary abstract</para>
-  </summary>
-  -->
-    <introduction>
-      <para>Explain the priciple. Link to blog post. Cover the interface and 
+    <para>Explain the principle. Link to blog post. Cover the interface and 
     detail on the Parameter, ParameterInfo and the ParameterManager.
     Mention value smoothing and how to implement that. Link the persistence 
     subject.</para>
+  </summary>
+  -->
+  
+    <introduction>
+      <para>
+      A Plugin Parameter advertizes a runtime variable that controls a part of 
+      the workings of the Plugin providing a (slightly) different output when 
+      its value is manipulated. Hosts generally provide the following service to 
+      a plugin that supports parameters:
+      <list class="bullet">
+  		<listItem>Auto-generated Editor UI.
+  		<para>A form that lists all the Parameters for a Plugin is generated at 
+  		runtime allowing the user to interact with the Plugin Parameters through
+  		this user interface.</para>
+  		</listItem>
+  		<listItem>Parameter value automation.
+  		<para>When a Host is a sequencer they ofter allow the Plugin Parameter
+  		values to be stored on an automation track. This provides repeatable and 
+  		controlled Parameter value changes with (pretty) exact timing.</para>
+  		</listItem>
+  		<listItem>Parameter value persistence.
+  		<para>The current settings of the Plugin Parameter values can be saved 
+  		along with the rest of the arrangement.</para>
+  		</listItem>
+	  </list>
+      </para>
+      <para>
+      The use of Plugin Parameters is closely linked to 
+      <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb">Programs</link>.
+      </para>
     </introduction>
-    <!-- Add one or more top-level section elements.  These are collapsible.
-       If using <autoOutline /> tag, add an address attribute to identify
-       it so that it can be jumped to with a hyperlink. -->
-    <section address="Section1">
-      <title>Section title</title>
+    
+    <section address="ParameterSupport">
+      <title>Framework Parameter Support</title>
       <content>
-        <!-- Uncomment this to create a sub-section outline
-      <autoOutline /> -->
-        <para>Add one or more sections with content</para>
+        <para>
+        The Parameter support <token>vstnet</token> offers goes beyond the VST
+        specification - as well as Program support. VST.NET provides several 
+        classes that can be used as is, or extended to allow custom properties 
+        and functionality. But first lets see how a Plugin exposes its 
+        Parameters.
+        </para>
+        <para>
+        When a Plugin supports the
+        <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginParameters</codeEntityReference>
+        interface it indicates to the Framework that the Plugin has Parameters. 
+        You only have to implement this interface explicitly when you don't 
+        support
+        <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb">Programs</link>.
+        That is because the
+        <codeEntityReference>T:Jacobi.Vst.Framework.VstProgram</codeEntityReference>
+        class also implements this interface and the 
+        <link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a">Interface Manager</link>
+        is hardwired to use that implementation of the
+        <codeInline>IVstPluginParameters</codeInline> interface when Programs 
+        are supported by the Plugin.
+        </para>
+        <para>
+        The Plugin Parameters are represented by the 
+        <codeEntityReference>T:Jacobi.Vst.Framework.VstParameter</codeEntityReference>
+        class. One instance is created for each parameter - although this is not
+        true when supporting 
+        <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb">Programs</link>.
+        To be able to construct a 
+        <codeInline>VstParameter</codeInline>
+        you need a
+        <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterInfo</codeEntityReference>
+        instance that describes the meta information of the parameter. Its name,
+        labels and value range are in the
+        <codeInline>VstParameterInfo</codeInline>
+        class. These two classes are the minimum you need to support Parameters
+        for your plugin.
+        <alert class="caution">
+  			<para>
+  			Not all hosts call the VST method to inquire the meta properties of
+  			Parameters (represented by
+  			<codeInline>VstParameterInfo</codeInline>).
+  			That type of Hosts will assume your Parameter value range is between
+  			0.0 and 1.0 for all Paremeters. That means that if your Parameter 
+  			value range is between -1.0 and +1.0 you will not have access to 
+  			your full range. VST.NET does not have a transparent solution to 
+  			this problem yet.
+  			</para>
+		</alert>
+        </para>
       </content>
-      <!-- If a section contains a sections element, its content creates
-         sub-sections.  These are not collapsible.
-    <sections>
-        <section address="SubSection1">
-            <title>Sub-section 1</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-        <section address="SubSection2">
-            <title>Sub-section 2</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-    </sections> -->
     </section>
+    
+    <section address="ParameterCategories">
+      <title>Parameter Categories</title>
+      <content>
+        <para>
+        A Plugin Parameter can be linked to a Category. Parameter Categories are
+        represented by the
+        <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategory</codeEntityReference>
+        class, which is no more than a human readable category name. The idea
+        here is that the sub components your Plugin consists of (like oscilator
+        1, oscilator 2, envelope 1 and envelope 2) all publish their own 
+        Parameters linked to their category. Your Plugin implementation of the
+        <codeInline>IVstPluginParameters</codeInline>
+        collects these Parameters in one collections to expose to the Host 
+        (through the Framework). 
+        </para>
+      </content>
+    </section>
+    
+    <para>Jacobi.Vst.Framework</para>
+    
     <relatedTopics>
-      <!-- One or more of the following:
-         - A local link
-         - An external link
-         - A code entity reference
-
-    <link xlink:href="Other Topic's ID"/>
-    <link xlink:href="Other Topic's ID">Link inner text</link>
-
+    <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginParameters</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.VstParameter</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCollection</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterInfo</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategory</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategoryCollection</codeEntityReference>
+    <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterManager</codeEntityReference>
+    
+    <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb">Plugin Programs</link>
+    
     <externalLink>
-        <linkText>Link text</linkText>
-        <linkAlternateText>Optional alternate link text</linkAlternateText>
-        <linkUri>URI</linkUri>
+        <linkText>VST.NET Programs and Parameters</linkText>
+        <linkUri>http://obiwanjacobi.blogspot.com/2008/05/vstnet-programs-and-parameters.html</linkUri>
     </externalLink>
-
-    <codeEntityReference>API member ID</codeEntityReference>
-
-    Examples:
-
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-    <externalLink>
-        <linkText>SHFB on CodePlex</linkText>
-        <linkAlternateText>Go to CodePlex</linkAlternateText>
-        <linkUri>http://www.codeplex.com/SHFB</linkUri>
-    </externalLink>
-
-    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-    -->
     </relatedTopics>
   </developerConceptualDocument>
 </topic>
