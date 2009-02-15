@@ -23,6 +23,7 @@
     loading sequence.
     </para>
     </introduction>
+    
     <section address="Framework">
       <title>Inside the Framework</title>
       <content>
@@ -49,6 +50,7 @@
         </alert>
       </content>
     </section>
+    
     <section address="ClassDiagram">
       <title>Class Diagram</title>
       <content>
@@ -138,6 +140,9 @@
       </para>
       </content>
     </section>
+    
+    <para>Jacobi.Vst.Framework</para>
+    
     <relatedTopics>
       <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub</codeEntityReference>
       <codeEntityReference>T:Jacobi.Vst.Framework.IVstHost</codeEntityReference>

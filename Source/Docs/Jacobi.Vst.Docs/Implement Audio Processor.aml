@@ -5,8 +5,13 @@
       <para>There are three basic forms of 
     <link xlink:href="1977452f-9b2d-4d4f-a93c-768ab2ede63e" />
     a Plugin can perform.
-    <list class="bullet"><listItem>An Effect.</listItem><listItem>A Synthesizer.</listItem><listItem>A recorder (sampler).</listItem></list></para>
-      <para>
+    <list class="bullet">
+    	<listItem>An Effect.</listItem>
+    	<listItem>A Synthesizer.</listItem>
+    	<listItem>A recorder (sampler).</listItem>
+    </list>
+    </para>
+    <para>
 	An effect Plugin will change the audio signal to produce the desired effect.
 	Reverb, chorus and overdrive are examples of this. A Synthesizer Plugin
 	generates an audio signal using either oscillators or pre-recorded sounds

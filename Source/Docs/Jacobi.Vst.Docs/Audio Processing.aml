@@ -3,77 +3,180 @@
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!--
   <summary>
-    <para>Optional summary abstract</para>
+    <para>Introduce how audio processing works. Mention double precision. Cover
+    the interfaces and show sample code of a pass-through. Refer to the Delay
+    sample project. Detail the audio buffer and direct buffer access.</para>
   </summary>
   -->
     <introduction>
-      <para>Introduce how audio processing works. Mention double precision. Cover
-    the interfaces and show sample code of a pass-through. Refer to the Delay
-    sample project. Detail the audio buffer and direct buffer access.</para>
+      <para>
+      There are three basic types of audio processing that a Plugin can perform.
+	  <list class="bullet">
+    	<listItem>An Effect.</listItem>
+    	<listItem>A Synthesizer.</listItem>
+    	<listItem>A recorder (sampler).</listItem>
+      </list>
+      </para>
+      
+      <para>
+	  An effect Plugin will change the audio signal to produce the desired effect.
+      Reverb, chorus and overdrive are examples of this. A Synthesizer Plugin
+	  generates an audio signal using either oscillators or pre-recorded sounds
+	  triggered by a Midi note event. A recording Plugin or sampler records the
+	  audio for playback at a later time. Playback is usually also trigged by 
+	  Midi note events.
+	  </para>
+	  
+	  <para>
+	  To implement any of these three types of audio processing a Plugin needs to 
+	  implement the 
+	  <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
+	  interface or the
+	  <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioPrecisionProcessor</codeEntityReference>
+	  interface. The 
+	  <codeInline>IVstPluginAudioPrecisionProcessor</codeInline>
+	  interface is only needed when you wish to perform audio processing in double
+	  in stead of single (float) precision.
+	  </para>
     </introduction>
-    <!-- Add one or more top-level section elements.  These are collapsible.
-       If using <autoOutline /> tag, add an address attribute to identify
-       it so that it can be jumped to with a hyperlink. -->
-    <section address="Section1">
-      <title>Section title</title>
+    
+    <section address="IVstPluginAudioProcessor">
+      <title> The IVstPluginAudio(Precision)Processor interface</title>
       <content>
-        <!-- Uncomment this to create a sub-section outline
-      <autoOutline /> -->
-        <para>Add one or more sections with content</para>
+        <para>
+        The 
+        <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
+        interface indicates to the Framework (and the Host indriectly) that the
+        Plugin processes audio in some form or another. The 
+        <codeInline>Process</codeInline>
+        method receives the input audio buffers - the audio the Plugin can 
+        analyse and perform its algorithms on - and the output audio buffers -
+        the place where the Plugin stores the result of its processing. The 
+        number of audio buffers that you can expect for input and output is 
+        specified in the
+        <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b">Plugin Root Class</link>.
+        The
+        <codeInline>Process</codeInline>
+        method on the Audio Processer is called repeatedly in rapid succession. 
+        This means that you need to be quick with you processing in order to 
+        keep the latency down as much as possible. The audio buffers are the 
+        <legacyBold>not</legacyBold> copied at all during the marshalling of the
+        <codeInline>Process</codeInline> 
+        call.
+        </para>
+		
+		<alert class="note">
+  			<para>
+  			Because of the Interop marshalling that is done to get from 
+  			unmanaged to managed code and visa versa, the performance of a 
+  			VST.NET Plugin can never be the same as a Plugin written in C++ and 
+  			using hand-optimized assembly code (SSE).
+  			</para>
+		</alert>
+		
+		<para>
+		The principles and interactions are the same for both normal (single or 
+		float) precision as wel as for double precision audio processing. With 
+		single audio processing each audio sample is stored in a 32-bit float 
+		datatype. With double audio processing, the audio sample is stored in a 
+		64-bit double datatype.
+		</para>
+		<para>
+		The 
+		<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioPrecisionProcessor</codeEntityReference>
+		interface derives from the 
+		<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
+		interface. Which means that when you want to support the double 
+		precision audio processing you must also support the normal precision
+		audio processing. This design decision was made because there are not
+		many hosts out there that support double precision audio processing.
+		</para>
       </content>
-      <!-- If a section contains a sections element, its content creates
-         sub-sections.  These are not collapsible.
-    <sections>
-        <section address="SubSection1">
-            <title>Sub-section 1</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-        <section address="SubSection2">
-            <title>Sub-section 2</title>
-            <content>
-                <para>Sub-section content.</para>
-            </content>
-        </section>
-    </sections> -->
     </section>
+    
+    <section address="VstAudioBuffer">
+    	<title>The VstAudio(Precision)Buffer</title>
+    	<content>
+    		<para>
+    		The 
+    		<codeEntityReference>T:Jacobi.Vst.Core.VstAudioBuffer</codeEntityReference>
+    		class wraps the unmanaged sample array (float*) and exposes this as
+    		a managed indexable array of 
+    		<codeInline>float</codeInline>s.
+    		The Plugin can use the 
+    		<codeInline>SampleCount</codeInline>
+    		property to determine how many audio samples are in the buffer.
+    		</para>
+    		<para>An instance of the
+    		<codeEntityReference>T:Jacobi.Vst.Core.VstAudioBuffer</codeEntityReference>
+    		can be cast to the
+    		<codeEntityReference>T:Jacobi.Vst.Core.IDirectBufferAccess32</codeEntityReference>
+    		interface. This interface allows you access to the unmanaged (and 
+    		unsafe) underlying array directly. This gives the developer the 
+    		opportunity to work with the unmanaged buffer directly.
+    		</para>
+    		
+    		<para>
+    		For double precision audio processing the 
+    		<codeEntityReference>T:Jacobi.Vst.Core.VstAudioPrecisionBuffer</codeEntityReference>
+    		represents the audio buffer. It can be cast to 
+    		<codeEntityReference>T:Jacobi.Vst.Core.IDirectBufferAccess64</codeEntityReference>
+    		to gain access to the underlying unmanaged array of 
+    		<codeInline>double</codeInline>s.
+    		</para>
+    	</content>
+    </section>
+    
+    <section address="IVstPluginBypass">
+    	<title>The IVstPluginBypass interface</title>
+    	<content>
+    		<para>
+    			Although it is defined as a seperate interface, the
+    			<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginBypass</codeEntityReference>
+    			interface is typically implemented on the audio processor class.
+    			The audio processor should bypass its processing algorithms when
+    			the
+    			<codeInine>Bypass</codeInine> 
+    			property is set to true.
+    		</para>
+			<alert class="note">
+			  <para>
+			  When you implement multiple interfaces on the same class, remember
+			  to pass the correct instance from the virtual
+			  <codeInline>CreateXxxxx</codeInline>
+			  methods of the
+			  <link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a">Plugin Interface Manager</link>.
+			  In the example above you would implement the
+			  <codeInline>CreateBypass</codeInline>
+			  method as follows:
+			  <code language="cs"><![CDATA[
+			  	protected override IVstPluginBypass CreateBypass(IVstPluginBypass instance)
+			  	{
+			  		if(instance == null)
+			  		{
+			  			return GetInstance<IVstPluginAudioProcessor>() as IVstPluginBypass;
+			  		}
+			  		
+			  		// assume the default implementation is also thread-safe.
+			  		return instance;
+			  	}
+			  ]]></code>
+			  </para>
+			</alert>
+    	</content>
+    </section>
+    
+    <para>Jacobi.Vst.Framework</para>
+    
     <relatedTopics>
-      <!-- One or more of the following:
-         - A local link
-         - An external link
-         - A code entity reference
-
-    <link xlink:href="Other Topic's ID"/>
-    <link xlink:href="Other Topic's ID">Link inner text</link>
-
-    <externalLink>
-        <linkText>Link text</linkText>
-        <linkAlternateText>Optional alternate link text</linkAlternateText>
-        <linkUri>URI</linkUri>
-    </externalLink>
-
-    <codeEntityReference>API member ID</codeEntityReference>
-
-    Examples:
-
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8270" />
-    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
-
-    <externalLink>
-        <linkText>SHFB on CodePlex</linkText>
-        <linkAlternateText>Go to CodePlex</linkAlternateText>
-        <linkUri>http://www.codeplex.com/SHFB</linkUri>
-    </externalLink>
-
-    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
-    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
-    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
-    -->
+    	<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
+    	<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioPrecisionProcessor</codeEntityReference>
+    	<codeEntityReference>T:Jacobi.Vst.Core.VstAudioBuffer</codeEntityReference>
+    	<codeEntityReference>T:Jacobi.Vst.Core.VstAudioPrecisionBuffer</codeEntityReference>
+    	<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginBypass</codeEntityReference>
+    	
+    	<link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b"/>
+    	<link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

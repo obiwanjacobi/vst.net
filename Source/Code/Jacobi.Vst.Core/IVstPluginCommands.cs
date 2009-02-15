@@ -378,12 +378,12 @@
         //int GetNextPlugin(out string name);
         #endregion
         /// <summary>
-        /// Called just before Process is called.
+        /// Called just before the first call to Process is made.
         /// </summary>
         /// <returns>It is unclear what this return value represents.</returns>
         int StartProcess();
         /// <summary>
-        /// Called just after Process is called.
+        /// Called just after the last call to Process is made.
         /// </summary>
         /// <returns>It is unclear what this return value represents.</returns>
         int StopProcess();
