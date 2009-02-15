@@ -542,20 +542,4 @@ System::Int32 VstPluginCommandStub::GetNumberOfMidiOutputChannels()
 	return safe_cast<System::Int32>(CallDispatch(effGetNumMidiOutputChannels, 0, 0, 0, 0));
 }
 
-// validates if the correct type was passed in as an argument
-template<typename T> void VstPluginCommandStub::ThrowIfArgumentNotOfType(System::Object^ argument)
-{
-	if(argument != nullptr)
-	{
-		System::Type^ actualType = argument->GetType();
-		System::Type^ expectedType = T::typeid;
-
-		if(!expectedType->IsAssignableFrom(actualType))
-		{
-			throw gcnew ArgumentException(
-				System::String::Format("The actual argument type is '{0}' while '{1}' was expected.", actualType->FullName, expectedType->FullName));
-		}
-	}
-}
-
 }}}} // Jacobi::Vst::Interop::Host

@@ -24,6 +24,7 @@
     assembly, you have to implement all these methods (almost 60!) yourself. 
     </para>
     </introduction>
+    
     <section address="Framework">
       <title>Using the Framework</title>
       <content>
@@ -56,6 +57,7 @@
       </para>
       </content>
     </section>
+    
     <section address="ClassDiagram">
       <title>Class Diagram</title>
       <content>
@@ -90,6 +92,7 @@
       </para>
       </content>
     </section>
+    
     <section address="Core">
       <title>Core level Implementation</title>
       <content>
@@ -107,6 +110,9 @@
       </para>
       </content>
     </section>
+    
+    <para>Jacobi.Vst.Framework</para>
+    
     <relatedTopics>
       <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
       <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.StdPluginCommandStub</codeEntityReference>

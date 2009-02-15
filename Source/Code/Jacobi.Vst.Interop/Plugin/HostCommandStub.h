@@ -5,6 +5,9 @@ namespace Vst {
 namespace Interop {
 namespace Plugin {
 
+/// <summary>
+/// The HostCommandStub calls the host callback function.
+/// <summary/>
 ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub
 {
 public:
@@ -12,13 +15,22 @@ public:
 	!HostCommandStub();
 
 	// IVstHostCommandStub
+	/// <summary>
+	/// Returns true when the HostCommandStub has been fully initialized (the execution path has left the VSTPluginMain).
+	/// <summary/>
 	virtual System::Boolean IsInitialized() { return (_pluginInfo != NULL); }
+	/// <summary>
+	/// Updates the unmanaged <b>AEffect</b> structure with the new values in the <paramref name="pluginInfo"/>.
+	/// <summary/>
+	/// <param name="pluginInfo">Must not be null.</param>
 	virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
+	
 	// IVstHostCommands10
 	virtual void SetParameterAutomated(System::Int32 index, System::Single value);
 	virtual System::Int32 GetVersion();
     virtual System::Int32 GetCurrentPluginID();
     virtual void ProcessIdle();
+	
 	// IVstHostCommands20
 	virtual Jacobi::Vst::Core::VstTimeInfo^ GetTimeInfo(Jacobi::Vst::Core::VstTimeInfoFlags filterFlags);
 	virtual System::Boolean ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events);

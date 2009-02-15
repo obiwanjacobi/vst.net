@@ -103,6 +103,9 @@
       to dispatch that call to the actual object.</para>
       </content>
     </section>
+    
+    <para>Jacobi.Vst.Interop</para>
+    
     <relatedTopics>
       <link xlink:href="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6" />
     </relatedTopics>
