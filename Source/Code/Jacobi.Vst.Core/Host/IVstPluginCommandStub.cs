@@ -9,6 +9,9 @@ namespace Jacobi.Vst.Core.Host
     /// <remarks>The interfaces derives from <see cref="IVstPluginCommands24"/>.</remarks>
     public interface IVstPluginCommandStub : IVstPluginCommands24
     {
+        /// <summary>
+        /// Gets or sets the plugin context this instance is part of.
+        /// </summary>
         IVstPluginContext PluginContext { get; set; }
     }
 }

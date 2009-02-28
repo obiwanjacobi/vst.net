@@ -56,7 +56,7 @@ public:
     /// </summary>
 	virtual void Close();
     /// <summary>
-    /// The plugin should activate the Program at <paramref name="index"/>.
+    /// The plugin should activate the Program at <paramref name="programNumber"/>.
     /// </summary>
     /// <param name="programNumber">A zero-based program number (index).</param>
 	virtual void SetProgram(System::Int32 programNumber);
@@ -148,7 +148,7 @@ public:
 
 	// IVstPluginCommands20
 	/// <summary>
-    /// Called by the host when the plugin has specified the <see cref="VstPluginCanDo.ReceiveVstMidiEvent"/> flag.
+	/// Called by the host when the plugin has specified the <see cref="Jacobi::Vst::Core::VstPluginCanDo"/><b>.ReceiveVstMidiEvent</b> flag.
     /// </summary>
     /// <param name="events">The (Midi) events for the current 'block'.</param>
     /// <returns>Returns false if not implemented.</returns>
@@ -357,13 +357,13 @@ public:
     /// Called by the host to query the plugin that supports persistence if the chunk can be read.
     /// </summary>
     /// <param name="chunkInfo">Must not be null.</param>
-    /// <returns>Returns <see cref="VstCanDoResult.Yes"/> if the plugin can read the data.</returns>
+	/// <returns>Returns <see cref="Jacobi::Vst::Core::VstCanDoResult"/><b>.Yes</b> if the plugin can read the data.</returns>
 	virtual Jacobi::Vst::Core::VstCanDoResult BeginLoadBank(Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo);
     /// <summary>
     /// Called by the host to query the plugin that supports persistence if the chunk can be read.
     /// </summary>
     /// <param name="chunkInfo">Must not be null.</param>
-    /// <returns>Returns <see cref="VstCanDoResult.Yes"/> if the plugin can read the data.</returns>
+	/// <returns>Returns <see cref="Jacobi::Vst::Core::VstCanDoResult"/><b>.Yes</b> if the plugin can read the data.</returns>
 	virtual Jacobi::Vst::Core::VstCanDoResult BeginLoadProgram(Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo);
 
 	// IVstPluginCommands24

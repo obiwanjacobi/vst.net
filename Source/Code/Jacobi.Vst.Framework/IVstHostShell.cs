@@ -2,7 +2,7 @@ namespace Jacobi.Vst.Framework
 {
     using System;
     using System.Globalization;
-using Jacobi.Vst.Core;
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Provides access to the windowing shell of the host.

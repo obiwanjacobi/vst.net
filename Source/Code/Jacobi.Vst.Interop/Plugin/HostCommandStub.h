@@ -7,7 +7,7 @@ namespace Plugin {
 
 /// <summary>
 /// The HostCommandStub calls the host callback function.
-/// <summary/>
+/// </summary>
 ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub
 {
 public:
@@ -17,11 +17,11 @@ public:
 	// IVstHostCommandStub
 	/// <summary>
 	/// Returns true when the HostCommandStub has been fully initialized (the execution path has left the VSTPluginMain).
-	/// <summary/>
+	/// </summary>
 	virtual System::Boolean IsInitialized() { return (_pluginInfo != NULL); }
 	/// <summary>
 	/// Updates the unmanaged <b>AEffect</b> structure with the new values in the <paramref name="pluginInfo"/>.
-	/// <summary/>
+	/// </summary>
 	/// <param name="pluginInfo">Must not be null.</param>
 	virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 	
