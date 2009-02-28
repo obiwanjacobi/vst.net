@@ -198,7 +198,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			System::String^ str = _commandStub->GetVendorString();
 			if(str != nullptr)
 			{
-				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxEffectNameLen);
+				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxVendorStrLen);
 				result = 1;
 			}
 			}
@@ -208,7 +208,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			System::String^ str = _commandStub->GetProductString();
 			if(str != nullptr)
 			{
-				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxEffectNameLen);
+				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxProductStrLen);
 				result = 1;
 			}
 			}

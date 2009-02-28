@@ -6,7 +6,7 @@
     public class VstPatchChunkInfo
     {
         /// <summary>
-        /// Constructs a immutable instance.
+        /// Constructs an immutable instance.
         /// </summary>
         /// <param name="version">Version number of the format. Should be 1.</param>
         /// <param name="pluginId">The unique ID of the plugin that wrote the chunk data.</param>

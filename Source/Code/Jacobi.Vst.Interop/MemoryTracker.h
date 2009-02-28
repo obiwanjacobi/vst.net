@@ -6,26 +6,26 @@ namespace Interop {
 
 /// <summary>
 /// The MemoryTracker class maintains a list of native allocated objects that can be deleted (freed) at another time.
-/// <summary/>
+/// </summary>
 ref class MemoryTracker
 {
 public:
 	/// <summary>
 	/// Constructs a new instance.
-	/// <summary/>
+	/// </summary>
 	MemoryTracker(void);
 
 	/// <summary>
 	/// Registers a <paramref name="memoryObject"/> that is not an array.
-	/// <summary/>
+	/// </summary>
 	void RegisterObject(void* memoryObject);
 	/// <summary>
 	/// Registers an <paramref name="arrayObject"/> that is an array.
-	/// <summary/>
+	/// </summary>
 	void RegisterArray(void* arrayObject);
 	/// <summary>
 	/// Deletes all 'pointers' tracked.
-	/// <summary/>
+	/// </summary>
 	void ClearAll();
 
 private:

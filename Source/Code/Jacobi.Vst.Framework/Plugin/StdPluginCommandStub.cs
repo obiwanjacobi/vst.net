@@ -989,7 +989,7 @@
         }
 
         /// <summary>
-        /// The plugin should activate the Program at <paramref name="index"/>.
+        /// The plugin should activate the Program at <paramref name="programNumber"/>.
         /// </summary>
         /// <param name="programNumber">A zero-based program number (index).</param>
         public virtual void SetProgram(int programNumber)
@@ -1409,7 +1409,7 @@
         /// <summary>
         /// Derived class must override and create the plugin instance.
         /// </summary>
-        /// <returns>Returning null will abort loading plugin.</returns>
+        /// <returns>Returning null will abort loading the plugin.</returns>
         protected abstract IVstPlugin CreatePluginInstance();
 
         /// <summary>
