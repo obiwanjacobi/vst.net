@@ -82,10 +82,16 @@
     <None Include="IVstPluginOfflineProcessor.cs" />
     <Compile Include="IVstPluginPersistence.cs" />
     <Compile Include="IVstPluginPrograms.cs" />
+    <Compile Include="Plugin\IO\VstProgramReaderBase.cs" />
+    <Compile Include="Plugin\IO\VstProgramWriter.cs" />
     <Compile Include="Plugin\PluginInterfaceManagerBase.cs" />
     <Compile Include="Common\WinFormsControlWrapper.cs" />
+    <Compile Include="Plugin\VstPluginAudioPrecisionProcessorBase.cs" />
+    <Compile Include="Plugin\VstPluginAudioProcessorBase.cs" />
     <Compile Include="Plugin\VstPluginBase.cs" />
     <Compile Include="Plugin\VstPluginContext.cs" />
+    <Compile Include="Plugin\VstPluginPersistenceBase.cs" />
+    <Compile Include="Plugin\VstPluginProgramsBase.cs" />
     <Compile Include="Plugin\VstPluginWithInterfaceManagerBase.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
