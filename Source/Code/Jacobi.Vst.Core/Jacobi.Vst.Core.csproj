@@ -42,9 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
@@ -57,6 +55,8 @@
     <Compile Include="Host\IVstHostCommandStub.cs" />
     <Compile Include="Host\IVstPluginCommandStub.cs" />
     <Compile Include="Host\IVstPluginContext.cs" />
+    <Compile Include="Host\VstHostCommandAdapter.cs" />
+    <Compile Include="Host\VstPluginCommandAdapter.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IVstHostCommands.cs" />
     <Compile Include="IVstPluginCommands.cs" />

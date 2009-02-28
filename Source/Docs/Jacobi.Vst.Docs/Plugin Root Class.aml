@@ -118,16 +118,16 @@
       interfaces.
     </content>
     </section>
-    
-    <para>Jacobi.Vst.Framework</para>
-    
+        
     <relatedTopics>
       <codeEntityReference>Jacobi.Vst.Framework.IVstPlugin</codeEntityReference>
       <codeEntityReference>Jacobi.Vst.Framework.IExtensible</codeEntityReference>
       <codeEntityReference>Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase</codeEntityReference>
       <codeEntityReference>Jacobi.Vst.Framework.Plugin.VstPluginBase</codeEntityReference>
       <codeEntityReference>Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
+
       <link xlink:href="2d6d5838-0551-4404-b5c8-698de8d41aa7" />
+      <link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

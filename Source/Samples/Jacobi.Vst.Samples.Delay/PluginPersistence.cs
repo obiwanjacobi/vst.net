@@ -95,6 +95,11 @@
                     VstParameter parameter = program.Parameters[paramName];
                     parameter.Value = reader.ReadSingle();
                 }
+                else
+                {
+                    // keep stream in sync.
+                    reader.ReadSingle();
+                }
             }
 
             return program;

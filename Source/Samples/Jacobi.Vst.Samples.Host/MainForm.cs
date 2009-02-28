@@ -36,39 +36,34 @@ namespace Jacobi.Vst.Samples.Host
 
         private VstPluginContext OpenPlugin(string pluginPath)
         {
-            HostCommandStub hostCmdStub = new HostCommandStub();
-            VstPluginContext ctx = new VstPluginContext(hostCmdStub);
-
-            // add custom data to the context
-            ctx.Set("PluginPath", pluginPath);
-            ctx.Set("HostCmdStub", hostCmdStub);
-
-            hostCmdStub.PluginCalled += new EventHandler<PluginCalledEventArgs>(HostCmdStub_PluginCalled);
-
             try
             {
-                // will load the plugin assembly and call the exported main function
-                ctx.Initialize(pluginPath);
+                HostCommandStub hostCmdStub = new HostCommandStub();
+                hostCmdStub.PluginCalled += new EventHandler<PluginCalledEventArgs>(HostCmdStub_PluginCalled);
+
+                VstPluginContext ctx = VstPluginContext.Create(pluginPath, hostCmdStub);
+
+                // add custom data to the context
+                ctx.Set("PluginPath", pluginPath);
+                ctx.Set("HostCmdStub", hostCmdStub);
 
                 // actually open the plugin itself
                 ctx.PluginCommandStub.Open();
+
+                return ctx;
             }
             catch (Exception e)
             {
                 MessageBox.Show(this, e.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-                ctx = null;
             }
 
-            return ctx;
+            return null;
         }
 
         private void ReleaseAllPlugins()
         {
             foreach (VstPluginContext ctx in _plugins)
             {
-                // close the plugin
-                ctx.PluginCommandStub.Close();
                 // dispose of all (unmanaged) resources
                 ctx.Dispose();
             }
@@ -145,7 +140,6 @@ namespace Jacobi.Vst.Samples.Host
 
             if(ctx != null)
             {
-                ctx.PluginCommandStub.Close();
                 ctx.Dispose();
 
                 _plugins.Remove(ctx);

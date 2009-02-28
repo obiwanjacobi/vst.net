@@ -140,9 +140,7 @@
       </para>
       </content>
     </section>
-    
-    <para>Jacobi.Vst.Framework</para>
-    
+        
     <relatedTopics>
       <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub</codeEntityReference>
       <codeEntityReference>T:Jacobi.Vst.Framework.IVstHost</codeEntityReference>
@@ -154,7 +152,9 @@
       <codeEntityReference>T:Jacobi.Vst.Framework.Host.VstHostSequencer</codeEntityReference>
       <codeEntityReference>T:Jacobi.Vst.Framework.Host.VstHostShell</codeEntityReference>
       <codeEntityReference>T:Jacobi.Vst.Framework.Host.VstHostAutomation</codeEntityReference>
+
       <link xlink:href="1386a1db-aa7f-437f-94d2-a6755e375ea6" />
+      <link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>
