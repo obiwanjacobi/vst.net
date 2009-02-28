@@ -1,5 +1,6 @@
 #pragma once
 
+#include "UnmanagedArray.h"
 #include "..\MemoryTracker.h"
 
 namespace Jacobi {

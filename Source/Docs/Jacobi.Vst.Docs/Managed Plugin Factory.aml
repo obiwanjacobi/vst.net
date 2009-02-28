@@ -74,12 +74,11 @@
       is not used anymore.</para>
       </content>
     </section>
-    
-    <para>Jacobi.Vst.Core</para>
-    
+        
     <relatedTopics>
       <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
       <link xlink:href="bf904c4c-fdf7-4e94-8590-13d0b3d9baf6" />
+      <link xlink:href="4f3d4350-e61e-4909-a294-c281511a336a"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

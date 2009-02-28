@@ -110,13 +110,12 @@
       </para>
       </content>
     </section>
-    
-    <para>Jacobi.Vst.Framework</para>
-    
+        
     <relatedTopics>
       <codeEntityReference>T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub</codeEntityReference>
       <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.StdPluginCommandStub</codeEntityReference>
       <link xlink:href="3feb73bb-72dd-4618-816f-f9f1c46d7f73" />
+      <link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

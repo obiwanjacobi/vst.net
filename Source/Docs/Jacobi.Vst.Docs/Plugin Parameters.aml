@@ -112,9 +112,7 @@
         </para>
       </content>
     </section>
-    
-    <para>Jacobi.Vst.Framework</para>
-    
+        
     <relatedTopics>
     <codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginParameters</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameter</codeEntityReference>
@@ -125,6 +123,7 @@
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterManager</codeEntityReference>
     
     <link xlink:href="da9d3d7d-c5f5-4d05-99a2-70b020f2cbfb">Plugin Programs</link>
+    <link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823"/>
     
     <externalLink>
         <linkText>VST.NET Programs and Parameters</linkText>

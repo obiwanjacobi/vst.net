@@ -3,13 +3,94 @@
 #include "UnmanagedArray.h"
 #include "VstPluginCommandStub.h"
 #include "VstPluginContext.h"
+#include "VstManagedPluginContext.h"
+#include "VstUnmanagedPluginContext.h"
 #include "..\TypeConverter.h"
 
 namespace Jacobi {
 namespace Vst {
 namespace Interop {
-namespace Host
-{
+namespace Host {
+
+	// static factory method
+	VstPluginContext^ VstPluginContext::Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	{
+		// verify file exist
+		if(!System::IO::File::Exists(pluginPath))
+		{
+			throw gcnew System::IO::FileNotFoundException(pluginPath);
+		}
+
+		if(hostCmdStub == nullptr)
+		{
+			throw gcnew System::ArgumentNullException("hostCmdStub");
+		}
+
+		VstPluginContext^ pluginCtx = InitializeManaged(pluginPath, hostCmdStub);
+
+		if(pluginCtx == nullptr)
+		{
+			pluginCtx = InitializeUnmanaged(pluginPath, hostCmdStub);
+		}
+
+		return pluginCtx;
+	}
+
+	
+	VstPluginContext^ VstPluginContext::InitializeManaged(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	{
+		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+		System::String^ baseName = System::IO::Path::GetFileNameWithoutExtension(pluginPath);
+		System::String^ fileName = System::IO::Path::Combine(basePath, baseName);
+		System::String^ filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension;
+
+		if(!System::IO::File::Exists(filePath))
+		{
+			filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension;
+		}
+
+		if(System::IO::File::Exists(filePath))
+		{
+			Jacobi::Vst::Interop::Host::VstManagedPluginContext^ pluginCtx = 
+				gcnew Jacobi::Vst::Interop::Host::VstManagedPluginContext(hostCmdStub);
+
+			try
+			{
+				pluginCtx->Initialize(pluginPath);
+			}
+			catch(...)
+			{
+				delete pluginCtx;
+
+				throw;
+			}
+
+			return pluginCtx;
+		}
+
+		return nullptr;
+	}
+
+	VstPluginContext^ VstPluginContext::InitializeUnmanaged(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	{
+		Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^ pluginCtx = 
+				gcnew Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext(hostCmdStub);
+
+		try
+		{
+			pluginCtx->Initialize(pluginPath);
+		}
+		catch(...)
+		{
+			delete pluginCtx;
+
+			throw;
+		}
+
+		return pluginCtx;
+	}
+
+	//-------------------------------------------------------------------------
 
 	VstPluginContext::VstPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
@@ -19,20 +100,18 @@ namespace Host
 		}
 
 		_hostCmdStub = hostCmdStub;
-		_hostCmdProxy = gcnew VstHostCommandProxy(hostCmdStub);
-
-		hostCmdStub->PluginContext = this;
+		_hostCmdStub->PluginContext = this;
 
 		_props = gcnew System::Collections::Generic::Dictionary<System::String^, System::Object^>();
 	}
 
 	VstPluginContext::~VstPluginContext()
 	{
-		this->!VstPluginContext();
-	}
+		if(PluginCommandStub != nullptr)
+		{
+			PluginCommandStub->Close();
+		}
 
-	VstPluginContext::!VstPluginContext()
-	{
 		System::IDisposable^ disposable = nullptr;
 
 		// dispose all content
@@ -48,7 +127,7 @@ namespace Host
 
 		// if the host command stub implements IDisposable, it is disposed too.
 		disposable = dynamic_cast<System::IDisposable^>(_hostCmdStub);
-		
+	
 		if(disposable != nullptr)
 		{
 			delete disposable;
@@ -57,106 +136,11 @@ namespace Host
 		// dispose the plugin command stub (unmanaged)
 		if(_pluginCmdStub != nullptr)
 		{
-			_pluginCmdStub->~VstPluginCommandStub();
+			delete _pluginCmdStub;
 			_pluginCmdStub = nullptr;
 		}
 
 		_pluginInfo = nullptr;
-
-		// close the loaded library.
-		CloseLibrary();
-	}
-
-	void VstPluginContext::Initialize(System::String^ pluginPath)
-	{
-		// method called more than once?
-		if(_hLib != NULL)
-		{
-			throw gcnew System::InvalidOperationException("This instance of the VstPluginContext is already initialized.");
-		}
-
-		// verify file exist
-		if(!System::IO::File::Exists(pluginPath))
-		{
-			throw gcnew System::IO::FileNotFoundException(pluginPath);
-		}
-
-		char* pPluginPath = NULL;
-
-		try
-		{
-			pPluginPath = TypeConverter::AllocateString(pluginPath);
-
-			// Load plugin dll
-			_hLib = ::LoadLibraryA(pPluginPath);
-
-			if(_hLib == NULL)
-			{
-				throw gcnew System::ArgumentException(pluginPath + " cannot be loaded.");
-			}
-
-			// check entry point
-			VSTPluginMain pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "VSTPluginMain");
-
-			if(pluginMain == NULL)
-			{
-				throw gcnew System::EntryPointNotFoundException(pluginPath + " has no exported 'VSTPluginMain' function (VST 2.4).");
-			}
-			
-			LoadingPlugin = this;
-
-			// call main and retrieve AEffect*
-			_pEffect = pluginMain(&DispatchCallback);
-
-			if(_pEffect == NULL)
-			{
-				throw gcnew System::OperationCanceledException(pluginPath + " did not return an AEffect structure.");
-			}
-
-			if(_pEffect->magic != kEffectMagic)
-			{
-				throw gcnew System::OperationCanceledException(pluginPath + " did not return an AEffect structure with the correct 'Magic' number.");
-			}
-
-			System::Runtime::InteropServices::GCHandle ctxHandle = 
-					System::Runtime::InteropServices::GCHandle::Alloc(this);
-
-			// maintain the context reference as part of the effect struct
-			_pEffect->resvd1 = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();
-
-			_pluginCmdStub = gcnew VstPluginCommandStub(_pEffect);
-			_pluginCmdStub->PluginContext = this;
-
-			// check if the plugin supports our VST version
-			if(_pluginCmdStub->GetVstVersion() < 2400)
-			{
-				throw gcnew System::NotSupportedException("The Plugin '" + pluginPath + "' does not support VST 2.4.");
-			}
-
-			// setup the plugin info
-			_pluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
-
-			AcceptPluginInfoData(false);
-		}
-		catch(...)
-		{
-			CloseLibrary();
-
-			_pluginCmdStub = nullptr;
-			_pluginInfo = nullptr;
-			_pEffect = NULL;
-
-			throw;
-		}
-		finally
-		{
-			if(pPluginPath != NULL)
-			{
-				TypeConverter::DeallocateString(pPluginPath);
-			}
-
-			LoadingPlugin = nullptr;
-		}
 	}
 
 	generic<typename T> 
@@ -196,97 +180,5 @@ namespace Host
 		Remove(keyName);
 	}
 
-	void VstPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
-	{
-		System::Collections::Generic::List<System::String^> changedPropNames = 
-			gcnew System::Collections::Generic::List<System::String^>();
 
-		if(raiseEvents)
-		{
-			if(_pluginInfo->Flags != safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags))
-			{
-				changedPropNames.Add("PluginInfo.Flags");
-			}
-
-			if(_pluginInfo->ProgramCount != _pEffect->numPrograms)
-			{
-				changedPropNames.Add("PluginInfo.ProgramCount");
-			}
-
-			if(_pluginInfo->ParameterCount != _pEffect->numParams)
-			{
-				changedPropNames.Add("PluginInfo.ParameterCount");
-			}
-
-			if(_pluginInfo->AudioInputCount != _pEffect->numInputs)
-			{
-				changedPropNames.Add("PluginInfo.AudioInputCount");
-			}
-
-			if(_pluginInfo->AudioOutputCount != _pEffect->numOutputs)
-			{
-				changedPropNames.Add("PluginInfo.AudioOutputCount");
-			}
-
-			if(_pluginInfo->InitialDelay != _pEffect->initialDelay)
-			{
-				changedPropNames.Add("PluginInfo.InitialDelay");
-			}
-			
-			if(_pluginInfo->PluginID != _pEffect->uniqueID)
-			{
-				changedPropNames.Add("PluginInfo.PluginID");
-			}
-
-			if(_pluginInfo->PluginVersion != _pEffect->version)
-			{
-				changedPropNames.Add("PluginInfo.PluginVersion");
-			}
-		}
-
-		// assign new values
-		_pluginInfo->Flags = safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags);
-		_pluginInfo->ProgramCount = _pEffect->numPrograms;
-		_pluginInfo->ParameterCount = _pEffect->numParams;
-		_pluginInfo->AudioInputCount = _pEffect->numInputs;
-		_pluginInfo->AudioOutputCount = _pEffect->numOutputs;
-		_pluginInfo->InitialDelay = _pEffect->initialDelay;
-		_pluginInfo->PluginID = _pEffect->uniqueID;
-		_pluginInfo->PluginVersion = _pEffect->version;
-
-		// raise all the changed property events
-		for each(System::String^ propName in changedPropNames)
-		{
-			RaisePropertyChanged(propName);
-		}
-	}
-
-}}}} // namespace Jacobi.Vst.Interop.Host
-
-
-VstIntPtr DispatchCallback(::AEffect* pEffect, ::VstInt32 opcode, ::VstInt32 index, ::VstIntPtr value, void* ptr, float opt)
-{
-	Jacobi::Vst::Interop::Host::VstPluginContext^ context = nullptr;
-
-	if(pEffect != NULL)
-	{
-		// extract the reference to the VstPluginContext from the effect struct.
-		context = (Jacobi::Vst::Interop::Host::VstPluginContext^)
-			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr((void*)pEffect->resvd1)).Target;
-	}
-
-	// fallback to the current loading plugin.
-	if(context == nullptr)
-	{
-		context = Jacobi::Vst::Interop::Host::VstPluginContext::LoadingPlugin;
-	}
-
-	// dispatch call to plugin context and its Host Proxy.
-	if(context != nullptr)
-	{
-		return context->HostCommandProxy->Dispatch(opcode, index, value, ptr, opt);
-	}
-
-	// no-one there to answer...
-	return 0;
-}
+}}}} // namespace Jacobi::Vst::Interop::Host

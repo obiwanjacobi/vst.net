@@ -311,11 +311,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Host\VstManagedPluginContext.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Host\VstPluginCommandStub.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Host\VstPluginContext.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstUnmanagedPluginContext.cpp"
 				>
 			</File>
 		</Filter>
@@ -385,11 +393,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Host\VstManagedPluginContext.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Host\VstPluginCommandStub.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Host\VstPluginContext.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Host\VstUnmanagedPluginContext.h"
 				>
 			</File>
 		</Filter>
