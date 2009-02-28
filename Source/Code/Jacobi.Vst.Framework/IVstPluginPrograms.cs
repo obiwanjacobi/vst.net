@@ -12,9 +12,11 @@
         /// </summary>
         VstProgramCollection Programs { get; }
         /// <summary>
-        /// Gets
+        /// Gets or sets the program that is currently active in the Plugin.
         /// </summary>
-        /// <remarks>Note to implementor: You must not return null. When no program is active, activate the first in the list.</remarks>
+        /// <remarks>Note to implementor: You must not return null. 
+        /// When no program is active, activate the first in the list.
+        /// A null value can be set.</remarks>
         VstProgram ActiveProgram { get; set; }
         /// <summary>
         /// Called by the host just before a Program is set (activated).

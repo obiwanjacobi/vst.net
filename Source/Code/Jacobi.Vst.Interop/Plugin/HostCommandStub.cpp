@@ -252,9 +252,9 @@ Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstH
 {
 	//ThrowIfNotInitialized();
 	
-	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
+	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength);
 
-	TypeConverter::StringToChar(cando.ToString(), pText, Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
+	TypeConverter::StringToChar(cando.ToString(), pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
 	pText[0] += 32;	// tolower
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));

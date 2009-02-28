@@ -33,7 +33,7 @@ namespace Jacobi.Vst.Core.Host
         void Remove(string keyName);
         /// <summary>
         /// Removes the property identified by <paramref name="keyName"/> from the context and 
-        /// calls <see cref="IDispose.Dispose"/> if the data 'value' implements it.
+        /// calls <see cref="IDisposable.Dispose"/> if the data 'value' implements it.
         /// </summary>
         /// <param name="keyName">The unique identification of the context property.</param>
         void Delete(string keyName);
