@@ -14,7 +14,7 @@
         /// </summary>
         public Plugin()
             : base("VST.NET Midi Note Sampler", 
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2008", 1000),
+                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2009", 1000),
                 VstPluginCategory.Synth, 
                 VstPluginCapabilities.NoSoundInStop, 
                 0, 

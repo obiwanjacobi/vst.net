@@ -40,10 +40,9 @@
     </para>
       </content>
     </section>
-    
-    <para>Jacobi.Vst.Interop</para>
-    
+        
     <relatedTopics>
+    	<link xlink:href="e5d53d11-e4bb-43b9-abe9-04b0507465dc"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

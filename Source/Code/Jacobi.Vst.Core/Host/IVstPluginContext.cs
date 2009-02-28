@@ -49,7 +49,7 @@ namespace Jacobi.Vst.Core.Host
         /// <summary>
         /// Gets a reference to the plug information.
         /// </summary>
-        VstPluginInfo PluginInfo { get; }
+        VstPluginInfo PluginInfo { get; set; }
         /// <summary>
         /// Promotes the plugin information published in the <b>AEffect</b> structure to the <see cref="PluginInfo"/> property.
         /// </summary>

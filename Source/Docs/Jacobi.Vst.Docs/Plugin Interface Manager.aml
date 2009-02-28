@@ -183,8 +183,6 @@
       </content>
     </section>
 
-	<para>Jacobi.Vst.Framework</para>
-
     <relatedTopics>
     <codeEntityReference>T:Jacobi.Vst.Framework.IExtensible</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.ExtensibleInterfaceRef</codeEntityReference>
@@ -192,6 +190,7 @@
     <codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginWithInterfaceManagerBase</codeEntityReference>
     
     <link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b"/>
+    <link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

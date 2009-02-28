@@ -127,6 +127,39 @@
     	</content>
     </section>
     
+    <section address="VstPluginAudioProcessorBase">
+    	<title>The VstPluginAudio(Presision)ProcessorBase base class</title>
+    	<content>
+    		<para>Because processing audio is something most Plugins do, VST.NET
+    		provides a base class to eas implementing an audio processor class.
+    		The
+    		<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginAudioProcessorBase</codeEntityReference>
+    		abstract base class provides implementation for all interface 
+    		members. The implementation of the
+    		<codeInline>Process</codeInline>
+    		method is a pass-through of the audio input to the output. You 
+    		typically overide the
+    		<codeInline>Process</codeInline>
+    		method and implement your custom audio processing in that overridden
+    		method. When you want to bypass your Plugin audio processing you can
+    		call the base implementation of the
+    		<codeInline>Process</codeInline>
+    		method.
+    		</para>
+    		<para>
+    		The 
+    		<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginAudioPrecisionProcessorBase</codeEntityReference>
+    		abstract base class provides the same eas for double precision audio
+    		processing. The class is derived from the 
+    		<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginAudioProcessorBase</codeEntityReference>
+    		base class in-line with the inetrface inheritence. Here also, the 
+    		base implementation of the 
+    		<codeInline>Process</codeInline>
+    		methods provides an audio-through.
+    		</para>
+    	</content>
+    </section>
+    
     <section address="IVstPluginBypass">
     	<title>The IVstPluginBypass interface</title>
     	<content>
@@ -165,18 +198,19 @@
 			</alert>
     	</content>
     </section>
-    
-    <para>Jacobi.Vst.Framework</para>
-    
+
     <relatedTopics>
     	<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioProcessor</codeEntityReference>
     	<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginAudioPrecisionProcessor</codeEntityReference>
     	<codeEntityReference>T:Jacobi.Vst.Core.VstAudioBuffer</codeEntityReference>
     	<codeEntityReference>T:Jacobi.Vst.Core.VstAudioPrecisionBuffer</codeEntityReference>
     	<codeEntityReference>T:Jacobi.Vst.Framework.IVstPluginBypass</codeEntityReference>
+    	<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginAudioProcessorBase</codeEntityReference>
+    	<codeEntityReference>T:Jacobi.Vst.Framework.Plugin.VstPluginAudioPrecisionProcessorBase</codeEntityReference>
     	
     	<link xlink:href="62feac6e-0c75-4ef8-8703-fb970f81280b"/>
     	<link xlink:href="0aca5a96-16d9-4f8e-a830-202d8bad418a"/>
+    	<link xlink:href="bf34ecc4-5cd1-4770-86fe-2cda55f05823"/>
     </relatedTopics>
   </developerConceptualDocument>
 </topic>

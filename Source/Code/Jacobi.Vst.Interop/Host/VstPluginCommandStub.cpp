@@ -309,7 +309,7 @@ System::String^ VstPluginCommandStub::GetEffectName()
 
 System::String^ VstPluginCommandStub::GetVendorString()
 {
-	UnmanagedString vendor(kVstMaxEffectNameLen);
+	UnmanagedString vendor(kVstMaxVendorStrLen);
 
 	CallDispatch(effGetVendorString, 0, 0, vendor, 0);
 
@@ -318,7 +318,7 @@ System::String^ VstPluginCommandStub::GetVendorString()
 
 System::String^ VstPluginCommandStub::GetProductString()
 {
-	UnmanagedString product(kVstMaxEffectNameLen);
+	UnmanagedString product(kVstMaxProductStrLen);
 
 	if(CallDispatch(effGetProductString, 0, 0, product, 0) != 0)
 	{

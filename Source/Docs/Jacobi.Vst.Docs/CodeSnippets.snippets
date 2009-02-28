@@ -576,10 +576,37 @@ class AudioProcessor : IVstPluginAudioProcessor
 }]]></sampleCode>
   </item>
   
-  <item id="GettingStarted#">
-    <sampleCode language="CSharp">
-    
-    </sampleCode>
+  <item id="IVstPluginPrograms#ActiveProgram">
+    <sampleCode language="CSharp"><![CDATA[private VstProgram _activeProgram;
+/// <summary>
+/// Gets or sets the current or active program.
+/// </summary>
+public VstProgram ActiveProgram
+{
+    get
+    {
+        if (_activeProgram == null && Programs.Count > 0)
+        {
+            ActiveProgram = Programs[0];
+        }
+
+        return _activeProgram;
+    }
+    set
+    {
+        if (_activeProgram != null)
+        {
+            _activeProgram.Parameters.Deactivate();
+        }
+
+        _activeProgram = value;
+
+        if (_activeProgram != null)
+        {
+            _activeProgram.Parameters.Activate();
+        }
+    }
+}]]></sampleCode>
   </item>
   
 </examples>

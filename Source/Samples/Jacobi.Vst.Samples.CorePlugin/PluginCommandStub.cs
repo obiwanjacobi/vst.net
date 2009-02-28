@@ -274,7 +274,7 @@
         public string GetVendorString()
         {
             _editorCtrl.Instance.AddLine("GetVendorString");
-            return "Jacobi Software (c) 2008";
+            return "Jacobi Software (c) 2009";
         }
 
         /// <inheritdoc />
