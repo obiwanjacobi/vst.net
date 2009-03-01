@@ -8,22 +8,17 @@
     /// <summary>
     /// The Plugin root class that implements the interface manager and the plugin midi source.
     /// </summary>
-    class Plugin : PluginInterfaceManagerBase, IVstPlugin, IVstPluginMidiSource
+    class Plugin : VstPluginWithInterfaceManagerBase, IVstPluginMidiSource
     {
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
+            : base("VST.NET Midi Note Mapper", new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2009", 1000),
+                VstPluginCategory.Synth, VstPluginCapabilities.NoSoundInStop, 0, 0x30313233)
         {
             NoteMap = new MapNoteItemList();
         }
-
-        private IVstHost _host;
-        /// <summary>
-        /// Gets the vst host interface.
-        /// </summary>
-        public IVstHost Host
-        { get { return _host; } }
 
         /// <summary>
         /// Creates a default instance and reuses that for all threads.
@@ -71,64 +66,6 @@
             return this;
         }
 
-        #region IVstPlugin Members
-
-        public VstPluginCapabilities Capabilities
-        {
-            get { return VstPluginCapabilities.NoSoundInStop; }
-        }
-
-        public VstPluginCategory Category
-        {
-            get { return VstPluginCategory.Unknown; }
-        }
-
-        public int InitialDelay
-        {
-            get { return 0; }
-        }
-
-        public string Name
-        {
-            get { return "VST.NET Midi Note Mapper"; }
-        }
-
-        public void Open(IVstHost host)
-        {
-            _host = host;
-        }
-
-        public int PluginID
-        {
-            get { return 0x30313233; }
-        }
-
-        private VstProductInfo _productInfo;
-        public VstProductInfo ProductInfo
-        {
-            get
-            {
-                if (_productInfo == null)
-                {
-                    _productInfo = new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2009", 1000);
-                }
-
-                return _productInfo;
-            }
-        }
-
-        public void Resume()
-        {
-            // no-op
-        }
-
-        public void Suspend()
-        {
-            // no-op
-        }
-
-        #endregion
-
         #region IVstPluginMidiSource Members
 
         /// <summary>
@@ -140,9 +77,9 @@
             {
                 IVstMidiProcessor midiProcessor = null;
                 
-                if(_host != null)
+                if(Host != null)
                 {
-                    midiProcessor = _host.GetInstance<IVstMidiProcessor>();
+                    midiProcessor = Host.GetInstance<IVstMidiProcessor>();
                 }
 
                 if (midiProcessor != null)

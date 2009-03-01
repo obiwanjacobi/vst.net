@@ -74,6 +74,7 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="PluginCommandStub.cs" />
     <Compile Include="PluginEditor.cs" />
+    <Compile Include="PluginPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

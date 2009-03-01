@@ -1,6 +1,5 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
-    using System.Collections.ObjectModel;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
     
