@@ -17,6 +17,8 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SignAssembly>false</SignAssembly>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,9 +46,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
@@ -61,9 +77,13 @@
     <Compile Include="EditorControl.Designer.cs">
       <DependentUpon>EditorControl.cs</DependentUpon>
     </Compile>
+    <None Include="EditorControl.xaml.cs">
+      <DependentUpon>EditorControl.xaml</DependentUpon>
+    </None>
     <Compile Include="NativeMethods.cs" />
     <Compile Include="PluginCommandStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="WpfControlWrapper.cs" />
     <Compile Include="WinFormsWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +91,15 @@
       <DependentUpon>EditorControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
