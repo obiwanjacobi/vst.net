@@ -2,11 +2,12 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Framework.Plugin;
 
     /// <summary>
     /// A dummy audio processor only used for the timing of midi processing.
     /// </summary>
-    class AudioProcessor : IVstPluginAudioProcessor
+    class AudioProcessor : VstPluginAudioProcessorBase
     {
         private Plugin _plugin;
         private MidiProcessor _midiProcessor;
@@ -17,24 +18,11 @@
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
         public AudioProcessor(Plugin plugin)
+            : base(0, 0, 0)
         {
             _plugin = plugin;
             
             _midiProcessor = plugin.GetInstance<MidiProcessor>();
-        }
-
-        #region IVstPluginAudioProcessor Members
-
-        public int BlockSize { get; set; }
-
-        public int InputCount
-        {
-            get { return 0; }
-        }
-
-        public int OutputCount
-        {
-            get { return 0; }
         }
 
         public void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
@@ -50,19 +38,9 @@
                 _hostProcessor.Process(_midiProcessor.Events);
                 _midiProcessor.Events.Clear();
             }
-        }
 
-        public double SampleRate { get; set; }
-
-        public int TailSize
-        {
-            get { return 0; }
+            // perform audio-through
+            base.Process(inChannels, outChannels);
         }
-
-        public bool SetPanLaw(VstPanLaw type, float gain)
-        {
-            return false;
-        }
-        #endregion
     }
 }

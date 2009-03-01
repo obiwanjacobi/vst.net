@@ -142,6 +142,6 @@
         /// Gets the reference to the Host root object.
         /// </summary>
         /// <remarks>This member can be null. It is set after a call to <see cref="Open"/>.</remarks>
-        protected IVstHost Host { get; private set; }
+        public IVstHost Host { get; private set; }
     }
 }

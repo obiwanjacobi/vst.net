@@ -2,11 +2,12 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Framework.Plugin;
 
     /// <summary>
     /// Implements the audio processing of the plugin using the <see cref="SampleManager"/>.
     /// </summary>
-    internal class AudioProcessor : IVstPluginAudioProcessor
+    internal class AudioProcessor : VstPluginAudioProcessorBase
     {
         private Plugin _plugin;
 
@@ -15,32 +16,12 @@
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
         public AudioProcessor(Plugin plugin)
+            : base(2, 2, 0)
         {
             _plugin = plugin;
         }
 
-        #region IVstPluginAudioProcessor Members
-
-        public int BlockSize { get; set; }
-
-        public int InputCount
-        {
-            get { return 2; }
-        }
-
-        public int OutputCount
-        {
-            get { return 2; }
-        }
-
-        public double SampleRate { get; set; }
-
-        public int TailSize
-        {
-            get { return 0; }
-        }
-
-        public void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
+        public override void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
             if (_plugin.SampleManager.IsPlaying)
             {
@@ -70,11 +51,5 @@
                 _plugin.SampleManager.RecordAudio(inChannels);
             }
         }
-
-        public bool SetPanLaw(VstPanLaw type, float gain)
-        {
-            return false;
-        }
-        #endregion
     }
 }
