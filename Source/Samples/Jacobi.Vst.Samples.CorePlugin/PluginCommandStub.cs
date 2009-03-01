@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Samples.CorePlugin
 {
     using System;
+    using System.Diagnostics;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
 
@@ -14,6 +15,7 @@
         private IVstHostCommandStub _hostStub;
         
         private WinFormsWrapper<EditorControl> _editorCtrl = new WinFormsWrapper<EditorControl>();
+        //private WpfControlWrapper<EditorControl> _editorCtrl = new WpfControlWrapper<EditorControl>(300, 300);
 
         #region IVstPluginCommandStub Members
 
@@ -33,6 +35,16 @@
             return _pluginInfo;
         }
 
+        private void Log(string text)
+        {
+            Debug.WriteLine(text);
+
+            if (_editorCtrl.Instance != null)
+            {
+                _editorCtrl.Instance.AddLine(text);
+            }
+        }
+
         #endregion
 
         #region IVstPluginCommands24 Members
@@ -40,21 +52,21 @@
         /// <inheritdoc />
         public bool SetProcessPrecision(VstProcessPrecision precision)
         {
-            _editorCtrl.Instance.AddLine("SetProcessPrecision:" + precision);
+            Log("SetProcessPrecision:" + precision);
             return false;
         }
 
         /// <inheritdoc />
         public int GetNumberOfMidiInputChannels()
         {
-            _editorCtrl.Instance.AddLine("GetNumberOfMidiInputChannels");
+            Log("GetNumberOfMidiInputChannels");
             return 0;
         }
 
         /// <inheritdoc />
         public int GetNumberOfMidiOutputChannels()
         {
-            _editorCtrl.Instance.AddLine("GetNumberOfMidiOutputChannels");
+            Log("GetNumberOfMidiOutputChannels");
             return 0;
         }
 
@@ -65,7 +77,7 @@
         /// <inheritdoc />
         public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
         {
-            _editorCtrl.Instance.AddLine("GetSpeakerArrangement");
+            Log("GetSpeakerArrangement");
             input = null;
             output = null;
 
@@ -75,14 +87,14 @@
         /// <inheritdoc />
         public int SetTotalSamplesToProcess(int numberOfSamples)
         {
-            _editorCtrl.Instance.AddLine("SetTotalSamplesToProcess: " + numberOfSamples);
+            Log("SetTotalSamplesToProcess: " + numberOfSamples);
             return 0;
         }
 
         /// <inheritdoc />
         public int GetNextPlugin(out string name)
         {
-            _editorCtrl.Instance.AddLine("GetNextPlugin");
+            Log("GetNextPlugin");
             name = null;
             return 0;
         }
@@ -90,35 +102,35 @@
         /// <inheritdoc />
         public int StartProcess()
         {
-            _editorCtrl.Instance.AddLine("StartProcess");
+            Log("StartProcess");
             return 0;
         }
 
         /// <inheritdoc />
         public int StopProcess()
         {
-            _editorCtrl.Instance.AddLine("StopProcess");
+            Log("StopProcess");
             return 0;
         }
 
         /// <inheritdoc />
         public bool SetPanLaw(VstPanLaw type, float value)
         {
-            _editorCtrl.Instance.AddLine("SetPanLaw: " + type);
+            Log("SetPanLaw: " + type);
             return false;
         }
 
         /// <inheritdoc />
         public VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
         {
-            _editorCtrl.Instance.AddLine("BeginLoadBank");
+            Log("BeginLoadBank");
             return VstCanDoResult.Unknown;
         }
         
         /// <inheritdoc />
         public VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo)
         {
-            _editorCtrl.Instance.AddLine("BeginLoadProgram");
+            Log("BeginLoadProgram");
             return VstCanDoResult.Unknown;
         }
 
@@ -129,70 +141,70 @@
         /// <inheritdoc />
         public bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
-            _editorCtrl.Instance.AddLine("EditorKeyDown: " + ascii);
+            Log("EditorKeyDown: " + ascii);
             return false;
         }
 
         /// <inheritdoc />
         public bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
-            _editorCtrl.Instance.AddLine("EditorKeyUp: " + ascii);
+            Log("EditorKeyUp: " + ascii);
             return false;
         }
 
         /// <inheritdoc />
         public bool SetEditorKnobMode(VstKnobMode mode)
         {
-            _editorCtrl.Instance.AddLine("SetEditorKnobMode: " + mode);
+            Log("SetEditorKnobMode: " + mode);
             return false;
         }
 
         /// <inheritdoc />
         public int GetMidiProgramName(VstMidiProgramName midiProgram, int channel)
         {
-            _editorCtrl.Instance.AddLine("GetMidiProgramName: " + channel);
+            Log("GetMidiProgramName: " + channel);
             return 0;
         }
 
         /// <inheritdoc />
         public int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel)
         {
-            _editorCtrl.Instance.AddLine("GetCurrentMidiProgramName: " + channel);
+            Log("GetCurrentMidiProgramName: " + channel);
             return 0;
         }
 
         /// <inheritdoc />
         public int GetMidiProgramCategory(VstMidiProgramCategory midiCat, int channel)
         {
-            _editorCtrl.Instance.AddLine("GetMidiProgramCategory: " + channel);
+            Log("GetMidiProgramCategory: " + channel);
             return 0;
         }
 
         /// <inheritdoc />
         public bool HasMidiProgramsChanged(int channel)
         {
-            _editorCtrl.Instance.AddLine("HasMidiProgramsChanged: " + channel);
+            Log("HasMidiProgramsChanged: " + channel);
             return false;
         }
 
         /// <inheritdoc />
         public bool GetMidiKeyName(VstMidiKeyName midiKeyName, int channel)
         {
-            _editorCtrl.Instance.AddLine("GetMidiKeyName: " + channel);
+            Log("GetMidiKeyName: " + channel);
             return false;
         }
 
         /// <inheritdoc />
         public bool BeginSetProgram()
         {
-            _editorCtrl.Instance.AddLine("BeginSetProgram");
+            Log("BeginSetProgram");
             return false;
         }
 
         /// <inheritdoc />
         public bool EndSetProgram()
         {
-            _editorCtrl.Instance.AddLine("EndSetProgram");
+            Log("EndSetProgram");
             return false;
         }
 
@@ -203,119 +215,119 @@
         /// <inheritdoc />
         public bool ProcessEvents(VstEvent[] events)
         {
-            _editorCtrl.Instance.AddLine("ProcessEvents: " + events.Length);
+            Log("ProcessEvents: " + events.Length);
             return false;
         }
 
         /// <inheritdoc />
         public bool CanParameterBeAutomated(int index)
         {
-            _editorCtrl.Instance.AddLine("CanParameterBeAutomated: " + index);
+            Log("CanParameterBeAutomated: " + index);
             return false;
         }
 
         /// <inheritdoc />
         public bool String2Parameter(int index, string str)
         {
-            _editorCtrl.Instance.AddLine("String2Parameter: " + index + ", " + str);
+            Log("String2Parameter: " + index + ", " + str);
             return false;
         }
 
         /// <inheritdoc />
         public string GetProgramNameIndexed(int index)
         {
-            _editorCtrl.Instance.AddLine("GetProgramNameIndexed: " + index);
+            Log("GetProgramNameIndexed: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public VstPinProperties GetInputProperties(int index)
         {
-            _editorCtrl.Instance.AddLine("GetInputProperties: " + index);
+            Log("GetInputProperties: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public VstPinProperties GetOutputProperties(int index)
         {
-            _editorCtrl.Instance.AddLine("GetOutputProperties: " + index);
+            Log("GetOutputProperties: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public VstPluginCategory GetCategory()
         {
-            _editorCtrl.Instance.AddLine("GetCategory");
+            Log("GetCategory");
             return VstPluginCategory.Unknown;
         }
 
         /// <inheritdoc />
         public bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput)
         {
-            _editorCtrl.Instance.AddLine("SetSpeakerArrangement");
+            Log("SetSpeakerArrangement");
             return false;
         }
 
         /// <inheritdoc />
         public bool SetBypass(bool bypass)
         {
-            _editorCtrl.Instance.AddLine("SetBypass: " + bypass);
+            Log("SetBypass: " + bypass);
             return false;
         }
 
         /// <inheritdoc />
         public string GetEffectName()
         {
-            _editorCtrl.Instance.AddLine("GetEffectName");
+            Log("GetEffectName");
             return "VST.NET Core Plugin";
         }
 
         /// <inheritdoc />
         public string GetVendorString()
         {
-            _editorCtrl.Instance.AddLine("GetVendorString");
+            Log("GetVendorString");
             return "Jacobi Software (c) 2009";
         }
 
         /// <inheritdoc />
         public string GetProductString()
         {
-            _editorCtrl.Instance.AddLine("GetProductString");
+            Log("GetProductString");
             return "VST.NET Code Samples";
         }
 
         /// <inheritdoc />
         public int GetVendorVersion()
         {
-            _editorCtrl.Instance.AddLine("GetVendorVersion");
+            Log("GetVendorVersion");
             return 1000;
         }
 
         /// <inheritdoc />
         public VstCanDoResult CanDo(string cando)
         {
-            _editorCtrl.Instance.AddLine("CanDo: " + cando);
+            Log("CanDo: " + cando);
             return VstCanDoResult.No;
         }
 
         /// <inheritdoc />
         public int GetTailSize()
         {
-            _editorCtrl.Instance.AddLine("GetTailSize");
+            Log("GetTailSize");
             return 0;
         }
 
         /// <inheritdoc />
         public VstParameterProperties GetParameterProperties(int index)
         {
-            _editorCtrl.Instance.AddLine("GetParameterProperties: " + index);
+            Log("GetParameterProperties: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public int GetVstVersion()
         {
-            _editorCtrl.Instance.AddLine("GetVstVersion");
+            Log("GetVstVersion");
             return 2400;
         }
 
@@ -326,79 +338,79 @@
         /// <inheritdoc />
         public void Open()
         {
-            _editorCtrl.Instance.AddLine("Open");
+            Log("Open");
         }
 
         /// <inheritdoc />
         public void Close()
         {
             // Calling back into the Form at this point can cause a dead-lock.
-            //_editorCtrl.Instance.AddLine("Close");
+            //Log("Close");
         }
 
         /// <inheritdoc />
         public void SetProgram(int programNumber)
         {
-            _editorCtrl.Instance.AddLine("SetProgram: " + programNumber);
+            Log("SetProgram: " + programNumber);
         }
 
         /// <inheritdoc />
         public int GetProgram()
         {
-            _editorCtrl.Instance.AddLine("GetProgram");
+            Log("GetProgram");
             return 0;
         }
 
         /// <inheritdoc />
         public void SetProgramName(string name)
         {
-            _editorCtrl.Instance.AddLine("SetProgramName: " + name);
+            Log("SetProgramName: " + name);
         }
 
         /// <inheritdoc />
         public string GetProgramName()
         {
-            _editorCtrl.Instance.AddLine("GetProgramName");
+            Log("GetProgramName");
             return "NoProgram";
         }
 
         /// <inheritdoc />
         public string GetParameterLabel(int index)
         {
-            _editorCtrl.Instance.AddLine("GetParameterLabel: " + index);
+            Log("GetParameterLabel: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public string GetParameterDisplay(int index)
         {
-            _editorCtrl.Instance.AddLine("GetParameterDisplay: " + index);
+            Log("GetParameterDisplay: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public string GetParameterName(int index)
         {
-            _editorCtrl.Instance.AddLine("GetParameterName: " + index);
+            Log("GetParameterName: " + index);
             return null;
         }
 
         /// <inheritdoc />
         public void SetSampleRate(float sampleRate)
         {
-            _editorCtrl.Instance.AddLine("SetSampleRate: " + sampleRate);
+            Log("SetSampleRate: " + sampleRate);
         }
 
         /// <inheritdoc />
         public void SetBlockSize(int blockSize)
         {
-            _editorCtrl.Instance.AddLine("SetBlockSize: " + blockSize);
+            Log("SetBlockSize: " + blockSize);
         }
         
         /// <inheritdoc />
         public void MainsChanged(bool onoff)
         {
-            _editorCtrl.Instance.AddLine("MainsChanged: " + onoff);
+            Log("MainsChanged: " + onoff);
         }
 
         /// <inheritdoc />
@@ -411,8 +423,9 @@
         /// <inheritdoc />
         public bool EditorOpen(System.IntPtr hWnd)
         {
-            _editorCtrl.Instance.Host = _hostStub;
             _editorCtrl.Open(hWnd);
+            _editorCtrl.Instance.Host = _hostStub;
+
             return true;
         }
 
@@ -431,14 +444,14 @@
         /// <inheritdoc />
         public byte[] GetChunk(bool isPreset)
         {
-            _editorCtrl.Instance.AddLine("GetChunk");
+            Log("GetChunk");
             return null;
         }
 
         /// <inheritdoc />
         public int SetChunk(byte[] data, bool isPreset)
         {
-            _editorCtrl.Instance.AddLine("SetChunk");
+            Log("SetChunk");
             return 0;
         }
 
@@ -473,13 +486,13 @@
         /// <inheritdoc />
         public void SetParameter(int index, float value)
         {
-            _editorCtrl.Instance.AddLine("SetParameter");
+            Log("SetParameter");
         }
 
         /// <inheritdoc />
         public float GetParameter(int index)
         {
-            _editorCtrl.Instance.AddLine("GetParameter");
+            Log("GetParameter");
             return 0.0f;
         }
 
