@@ -18,8 +18,7 @@ public:
 	/// <param name="instance">An array of elements of type <typeparamref name="T"/> or NULL.</param>
 	/// <param name="length">The number of elements in <paramref name="instance"/>.</param>
 	UnmanagedArray(T* instance, long length){ _array = instance; _length = length; }
-	~UnmanagedArray(){ this->!UnmanagedArray(); }
-	!UnmanagedArray(){ DeleteArray(); }
+	~UnmanagedArray() { DeleteArray(); }
 
 	/// <summary>Returns the number of elements in the array.</summary>
 	long GetLength()

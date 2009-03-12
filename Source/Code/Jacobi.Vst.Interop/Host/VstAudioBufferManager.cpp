@@ -38,11 +38,7 @@ namespace Host
 
 	VstAudioBufferManager::~VstAudioBufferManager()
 	{
-		this->!VstAudioBufferManager();
-	}
-
-	VstAudioBufferManager::!VstAudioBufferManager()
-	{
+		// destroys the contained UnmanagedArray.
 	}
 
 	array<Jacobi::Vst::Core::VstAudioBuffer^>^ VstAudioBufferManager::ToArray()
@@ -52,10 +48,7 @@ namespace Host
 
 	void VstAudioBufferManager::ClearBuffer(Jacobi::Vst::Core::VstAudioBuffer^ buffer)
 	{
-		if(buffer == nullptr)
-		{
-			throw gcnew System::ArgumentNullException("buffer");
-		}
+		Jacobi::Vst::Core::Throw::IfArgumentIsNull(buffer, "buffer");
 
 		if(buffer->SampleCount != _bufferSize)
 		{

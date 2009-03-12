@@ -25,7 +25,6 @@ namespace Host
 		VstAudioBufferManager(System::Int32 bufferCount, System::Int32 bufferSize);
 		/// <summary>Disposes the instance and free's the unmanaged memory.</summary>
 		~VstAudioBufferManager();
-		!VstAudioBufferManager();
 
 		/// <summary>Retrieves the buffers objects, one for each buffer.</summary>
 		/// <returns>Returns an array of <see cref="Jacobi::Vst::Core::VstAudioBuffer"/> instances.</returns>

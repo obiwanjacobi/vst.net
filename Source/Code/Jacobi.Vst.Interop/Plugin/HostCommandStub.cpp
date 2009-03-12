@@ -313,7 +313,7 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 		if(succeeded)
 		{
 			// update the managed type with the users selections.
-			TypeConverter::ToManagedFileSelect(fileSelect, pFileSelect);
+			TypeConverter::UpdateManagedFileSelect(fileSelect, pFileSelect);
 		}
 
 		return succeeded;

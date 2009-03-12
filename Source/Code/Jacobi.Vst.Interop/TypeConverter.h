@@ -447,6 +447,25 @@ public:
 		return timeInfo;
 	}
 
+	// assigns the field values of the managed timeInfo to the unmanaged pTimeInfo fields.
+	static void ToUnmanagedTimeInfo(::VstTimeInfo* pTimeInfo, Jacobi::Vst::Core::VstTimeInfo^ timeInfo)
+	{
+		pTimeInfo->barStartPos = timeInfo->BarStartPosition;
+		pTimeInfo->cycleStartPos = timeInfo->CycleStartPosition;
+		pTimeInfo->cycleEndPos = timeInfo->CycleEndPosition;
+		pTimeInfo->flags = safe_cast<VstInt32>(timeInfo->Flags);
+		pTimeInfo->nanoSeconds = timeInfo->NanoSeconds;
+		pTimeInfo->ppqPos = timeInfo->PpqPosition;
+		pTimeInfo->samplePos = timeInfo->SamplePosition;
+		pTimeInfo->sampleRate = timeInfo->SampleRate;
+		pTimeInfo->samplesToNextClock = timeInfo->SamplesToNearestClock;
+		pTimeInfo->smpteFrameRate = safe_cast<VstInt32>(timeInfo->SmpteFrameRate);
+		pTimeInfo->smpteOffset = timeInfo->SmpteOffset;
+		pTimeInfo->tempo = timeInfo->Tempo;
+		pTimeInfo->timeSigDenominator = timeInfo->TimeSignatureDenominator;
+		pTimeInfo->timeSigNumerator = timeInfo->TimeSignatureNumerator;
+	}
+
 	// Converts the unmanaged sample buffer to a managed VstAudioBuffer array.
 	static array<Jacobi::Vst::Core::VstAudioBuffer^>^ ToManagedAudioBufferArray(float** buffer, int sampleFrames, int numberOfBuffers, bool canWrite)
 	{
@@ -503,8 +522,69 @@ public:
 		return pFileSelect;
 	}
 
+	// creates a managed VstFileSelect from the unmanaged pFileSelect
+	static Jacobi::Vst::Core::VstFileSelect^ ToManagedFileSelect(::VstFileSelect* pFileSelect)
+	{
+		Jacobi::Vst::Core::VstFileSelect^ fileSelect = gcnew Jacobi::Vst::Core::VstFileSelect();
+		// not really needed, but gives the Host a chance to work with MIME info. No harm when overwritten.
+		fileSelect->Reserved = System::IntPtr(pFileSelect);
+		
+		// create a strong handle to the managed VstFileSelect instance to keep its lifetime coupled with the unmanaged one.
+		System::Runtime::InteropServices::GCHandle fsHandle = 
+			System::Runtime::InteropServices::GCHandle::Alloc(fileSelect);
+		
+		// couple our managed instance to our unmanaged instance
+		pFileSelect->reserved = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(fsHandle).ToPointer();
+
+		fileSelect->Command = safe_cast<Jacobi::Vst::Core::VstFileSelectCommand>(pFileSelect->command);
+		fileSelect->InitialPath = CharToString(pFileSelect->initialPath);
+		fileSelect->FileTypes = gcnew array<Jacobi::Vst::Core::VstFileType^>(pFileSelect->nbFileTypes);
+
+		// copy file types
+		for(int index = 0; index < pFileSelect->nbFileTypes; index++)
+		{
+			fileSelect->FileTypes[index]->Extension = CharToString(pFileSelect->fileTypes[index].dosType);
+			fileSelect->FileTypes[index]->Name = CharToString(pFileSelect->fileTypes[index].name);
+		}
+
+		return fileSelect;
+	}
+
+	// retrieves the managed VstFileSelect instance stored in the reserved field of the unmanaged pFileSelect.
+	static Jacobi::Vst::Core::VstFileSelect^ GetManagedFileSelect(::VstFileSelect* pFileSelect)
+	{
+		if(pFileSelect != NULL && pFileSelect->reserved != 0)
+		{
+			return safe_cast<Jacobi::Vst::Core::VstFileSelect^>(
+				System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pFileSelect->reserved)).Target);
+		}
+
+		return nullptr;
+	}
+
+	// updates the unmanaged pFileSelect with output information set by the managed host (allocates unmanaged resources).
+	static void AllocUpdateUnmanagedFileSelect(::VstFileSelect* pFileSelect, Jacobi::Vst::Core::VstFileSelect^ fileSelect)
+	{
+		if(pFileSelect->command == ::kVstMultipleFilesLoad)
+		{
+			// allocate the pointers slots
+			pFileSelect->returnMultiplePaths = new char*[fileSelect->ReturnPaths->Length];
+			pFileSelect->nbReturnPath = fileSelect->ReturnPaths->Length;
+
+			for(int index = 0; index < fileSelect->ReturnPaths->Length; index++)
+			{
+				pFileSelect->returnMultiplePaths[index] = AllocateString(fileSelect->ReturnPaths[index]);
+			}
+		}
+		else if(fileSelect->ReturnPaths != nullptr && fileSelect->ReturnPaths->Length > 0)
+		{
+			pFileSelect->returnPath = AllocateString(fileSelect->ReturnPaths[0]);
+			pFileSelect->sizeReturnPath = strlen(pFileSelect->returnPath) + 1;
+		}
+	}
+
 	// updates the managed VstFileSelect with output information set by the host.
-	static void ToManagedFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect, ::VstFileSelect* pFileSelect)
+	static void UpdateManagedFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect, ::VstFileSelect* pFileSelect)
 	{
 		if(pFileSelect->returnPath != NULL)
 		{
@@ -538,6 +618,36 @@ public:
 		}
 
 		delete pFileSelect;
+	}
+
+	// frees the unmanaged resources allocated by 'AllocUpdateUnmanagedFileSelect'. Also releases the managed instance.
+	static void DeleteUpdateUnmanagedFileSelect(::VstFileSelect* pFileSelect)
+	{
+		if(pFileSelect->returnMultiplePaths != NULL)
+		{
+			for(int index = 0; index < pFileSelect->nbReturnPath; index++)
+			{
+				DeallocateString(pFileSelect->returnMultiplePaths[index]);
+			}
+
+			delete [] pFileSelect->returnMultiplePaths;
+			pFileSelect->returnMultiplePaths = NULL;
+			pFileSelect->nbReturnPath = 0;
+		}
+
+		if(pFileSelect->returnPath != NULL)
+		{
+			DeallocateString(pFileSelect->returnPath);
+			pFileSelect->returnPath = NULL;
+			pFileSelect->sizeReturnPath = 0;
+		}
+
+		if(pFileSelect->reserved != 0)
+		{
+			// release the managed instance
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pFileSelect->reserved)).Free();
+			pFileSelect->reserved = 0;
+		}
 	}
 
 private:

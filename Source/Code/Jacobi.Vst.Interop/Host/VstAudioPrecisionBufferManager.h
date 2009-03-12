@@ -26,7 +26,6 @@ namespace Host
 		VstAudioPrecisionBufferManager(System::Int32 bufferCount, System::Int32 bufferSize);
 		/// <summary>Disposes the instance and free's the unmanaged memory.</summary>
 		~VstAudioPrecisionBufferManager();
-		!VstAudioPrecisionBufferManager();
 
 		/// <summary>Retrieves the buffers objects, one for each buffer.</summary>
 		/// <returns>Returns an array of <see cref="Jacobi::Vst::Core::VstAudioPrecisionBuffer"/> instances.</returns>
