@@ -13,12 +13,19 @@ public:
 	/// <summary>
 	/// Constructs a new instance and sets the latence mode of the GC.
 	/// </summary>
-	TimeCriticalScope(void);
-	!TimeCriticalScope(void);
+	TimeCriticalScope(void)
+	{
+		_originalMode = System::Runtime::GCSettings::LatencyMode;
+		System::Runtime::GCSettings::LatencyMode = System::Runtime::GCLatencyMode::LowLatency;
+	}
+
 	/// <summary>
 	/// Restores the latency mode of the GC to its original value.
 	/// </summary>
-	~TimeCriticalScope(void);
+	~TimeCriticalScope(void)
+	{
+		System::Runtime::GCSettings::LatencyMode = _originalMode;
+	}
 
 private:
 	System::Runtime::GCLatencyMode _originalMode;

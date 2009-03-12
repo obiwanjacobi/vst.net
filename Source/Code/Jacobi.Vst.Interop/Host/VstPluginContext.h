@@ -98,7 +98,14 @@ namespace Host {
 		virtual property Jacobi::Vst::Core::Plugin::VstPluginInfo^ PluginInfo 
 		{
 			Jacobi::Vst::Core::Plugin::VstPluginInfo^ get() { return _pluginInfo; }
-			void set(Jacobi::Vst::Core::Plugin::VstPluginInfo^ value) { _pluginInfo = value; }
+			void set(Jacobi::Vst::Core::Plugin::VstPluginInfo^ value)
+			{
+				if(_pluginInfo != value)
+				{
+					_pluginInfo = value;
+					RaisePropertyChanged("PluginInfo");
+				}
+			}
 		}
 
 		/// <summary>
@@ -115,9 +122,15 @@ namespace Host {
 		virtual event System::ComponentModel::PropertyChangedEventHandler^ PropertyChanged;
 
 	protected:
+		/// <summary>Constructor for derived classes.</summary>
+		/// <param name="hostCmdStub">Reference is stored at the <see cref="HostCommandStub"/> property 
+		/// and its <see cref="Jacobi::Vst::Core::Host::IVstHostCommandStub::PluginContext"/> property is set. 
+		/// Must not be null.</param>
 		VstPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
 
-		void RaisePropertyChanged(System::String^ propName)
+		/// <summary>Raises the <see cref="PropertyChanged"/> event for the <paramref name="propName"/> property.</summary>
+		/// <param name="propName">The name of the property that has changed. Must not be null or empty.</param>
+		virtual void RaisePropertyChanged(System::String^ propName)
 		{ PropertyChanged(this, gcnew System::ComponentModel::PropertyChangedEventArgs(propName));}
 
 	private:

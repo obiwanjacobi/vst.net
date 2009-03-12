@@ -38,11 +38,7 @@ namespace Host
 
 	VstAudioPrecisionBufferManager::~VstAudioPrecisionBufferManager()
 	{
-		this->!VstAudioPrecisionBufferManager();
-	}
-
-	VstAudioPrecisionBufferManager::!VstAudioPrecisionBufferManager()
-	{
+		// destroys the contained UnmanagedArray.
 	}
 
 	array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ VstAudioPrecisionBufferManager::ToArray()
@@ -52,10 +48,7 @@ namespace Host
 
 	void VstAudioPrecisionBufferManager::ClearBuffer(Jacobi::Vst::Core::VstAudioPrecisionBuffer^ buffer)
 	{
-		if(buffer == nullptr)
-		{
-			throw gcnew System::ArgumentNullException("buffer");
-		}
+		Jacobi::Vst::Core::Throw::IfArgumentIsNull(buffer, "buffer");
 
 		if(buffer->SampleCount != _bufferSize)
 		{
