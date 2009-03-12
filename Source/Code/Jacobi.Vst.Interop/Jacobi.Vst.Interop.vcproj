@@ -291,10 +291,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\TimeCriticalScope.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Utils.cpp"
 				>
 			</File>

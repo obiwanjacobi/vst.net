@@ -14,6 +14,8 @@ namespace Host {
 
 	void VstManagedPluginContext::Initialize(System::String^ pluginPath)
 	{
+		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
+
 		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
 		Jacobi::Vst::Interop::AssemblyLoader::Initialize(basePath);
@@ -34,6 +36,7 @@ namespace Host {
 		PluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
 
 		PluginCommandStub = gcnew Jacobi::Vst::Core::Host::VstPluginCommandAdapter(pluginCmdStub);
+		PluginCommandStub->PluginContext = this;
 	}
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)

@@ -26,6 +26,8 @@ namespace Host {
 
 	void VstUnmanagedPluginContext::Initialize(System::String^ pluginPath)
 	{
+		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
+
 		// method called more than once?
 		if(_hLib != NULL)
 		{
@@ -183,11 +185,11 @@ VstIntPtr DispatchCallback(::AEffect* pEffect, ::VstInt32 opcode, ::VstInt32 ind
 {
 	Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^ context = nullptr;
 
-	if(pEffect != NULL)
+	if(pEffect != NULL && pEffect->resvd1 != 0)
 	{
 		// extract the reference to the VstPluginContext from the effect struct.
-		context = (Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^)
-			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr((void*)pEffect->resvd1)).Target;
+		context = safe_cast<Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^>(
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr((void*)pEffect->resvd1)).Target);
 	}
 
 	// fallback to the current loading plugin.
@@ -203,5 +205,6 @@ VstIntPtr DispatchCallback(::AEffect* pEffect, ::VstInt32 opcode, ::VstInt32 ind
 	}
 
 	// no-one there to answer...
+	System::Diagnostics::Debug::WriteLine("Warning: No VstUnmanagedPluginContext instance was found to dispatch opcode:" + opcode);
 	return 0;
 }

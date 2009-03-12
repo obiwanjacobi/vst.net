@@ -15,15 +15,13 @@ namespace Host {
 	// static factory method
 	VstPluginContext^ VstPluginContext::Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
+		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
+		Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
+
 		// verify file exist
 		if(!System::IO::File::Exists(pluginPath))
 		{
 			throw gcnew System::IO::FileNotFoundException(pluginPath);
-		}
-
-		if(hostCmdStub == nullptr)
-		{
-			throw gcnew System::ArgumentNullException("hostCmdStub");
 		}
 
 		VstPluginContext^ pluginCtx = InitializeManaged(pluginPath, hostCmdStub);
@@ -94,15 +92,12 @@ namespace Host {
 
 	VstPluginContext::VstPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
-		if(hostCmdStub == nullptr)
-		{
-			throw gcnew System::ArgumentNullException("hostCmdStub");
-		}
+		Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
+
+		_props = gcnew System::Collections::Generic::Dictionary<System::String^, System::Object^>();
 
 		_hostCmdStub = hostCmdStub;
 		_hostCmdStub->PluginContext = this;
-
-		_props = gcnew System::Collections::Generic::Dictionary<System::String^, System::Object^>();
 	}
 
 	VstPluginContext::~VstPluginContext()

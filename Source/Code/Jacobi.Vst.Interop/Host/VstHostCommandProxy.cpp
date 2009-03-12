@@ -10,12 +10,33 @@ namespace Host {
 
 VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 {
-	if(hostCmdStub == nullptr)
-	{
-		throw gcnew System::ArgumentNullException("hostCommandStub");
-	}
+	Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
 
 	_hostCmdStub = hostCmdStub;
+
+	// unmanaged structures
+	_pTimeInfo = new VstTimeInfo();
+	_directory = NULL;
+}
+
+VstHostCommandProxy::~VstHostCommandProxy()
+{
+	this->!VstHostCommandProxy();
+}
+
+VstHostCommandProxy::!VstHostCommandProxy()
+{
+	if(_pTimeInfo != NULL)
+	{
+		delete _pTimeInfo;
+		_pTimeInfo = NULL;
+	}
+
+	if(_directory != NULL)
+	{
+		TypeConverter::DeallocateString(_directory);
+		_directory = NULL;
+	}
 }
 
 VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
@@ -53,8 +74,8 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
 			if(timeInfo != nullptr)
 			{
-				//TODO:
-				//result = VstTimeInfo* pTimeInfo;
+				TypeConverter::ToUnmanagedTimeInfo(_pTimeInfo, timeInfo);
+				result = (VstIntPtr)_pTimeInfo;
 			}
 			}
 			break;
@@ -140,8 +161,12 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 			break;
 		case audioMasterGetDirectory:
 			// [return value]: FSSpec on MAC, else char*  @see AudioEffectX::getDirectory
-			//TODO:
-			//result = _hostCmdStub->GetDirectory();
+			if(_directory == NULL)
+			{
+				_directory = TypeConverter::AllocateString(_hostCmdStub->GetDirectory());
+			}
+			// return cached value
+			result = (VstIntPtr)_directory;
 			break;
 		case audioMasterUpdateDisplay:
 			// no arguments	
@@ -156,14 +181,20 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 			result = _hostCmdStub->EndEdit(index) ? 1 : 0;
 			break;
 		case audioMasterOpenFileSelector:
+			{
 			// [ptr]: VstFileSelect* [return value]: 1 if supported  @see AudioEffectX::openFileSelector
-			//TODO:
-			//result = _hostCmdStub->OpenFileSelector() ? 1 : 0;
+			Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::ToManagedFileSelect((::VstFileSelect*)ptr);
+			result = _hostCmdStub->OpenFileSelector(fileSelect) ? 1 : 0;
+			TypeConverter::AllocUpdateUnmanagedFileSelect((::VstFileSelect*)ptr, fileSelect);
+			}
 			break;
 		case audioMasterCloseFileSelector:
+			{
 			// [ptr]: VstFileSelect*  @see AudioEffectX::closeFileSelector
-			//TODO:
-			//result = _hostCmdStub->CloseFileSelector() ? 1 : 0;
+			Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::GetManagedFileSelect((::VstFileSelect*)ptr);
+			result = _hostCmdStub->CloseFileSelector(fileSelect) ? 1 : 0;
+			TypeConverter::DeleteUpdateUnmanagedFileSelect((::VstFileSelect*)ptr);
+			}
 			break;
 		default:
 			break;

@@ -9,15 +9,36 @@ namespace Vst {
 namespace Interop {
 namespace Host {
 
+	/// <summary>
+	/// Implements a PluginContext for an unmanaged Plugin, marshalling the calls between the Context and the Plugin.
+	/// </summary>
 	ref class VstUnmanagedPluginContext : public VstPluginContext
 	{
 	public:
+		/// <summary>
+		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
+		/// </summary>
+		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
 		VstUnmanagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
+		/// <summary>
+		/// Disposes managed resources and calls the finalizer.
+		/// </summary>
 		~VstUnmanagedPluginContext();
+		/// <summary>
+		/// Disposes unmanaged resources.
+		/// </summary>
 		!VstUnmanagedPluginContext();
-
+		/// <summary>
+		/// Initializes the PluginContext instance with the plugin pointed to by the <paramref name="pluginPath"/>.
+		/// </summary>
+		/// <param name="pluginPath">An absolute path the the plugin dll (that contains the exported 
+		/// 'VSTPluginMain' function). Must not be null or empty.</param>
 		void Initialize(System::String^ pluginPath);
-
+		/// <summary>
+		/// Copies the new values from the unmanaged AEffect structure to the <see cref="PluginInfo"/> property.
+		/// </summary>
+		/// <param name="raiseEvents">When true the <see cref="PropertyChanged"/> event will be raised for each property that has changed.</param>
+		/// <remarks>All property names will be prefixed with 'PluginInfo.' to indicate the path to the property.</remarks>
 		virtual void AcceptPluginInfoData(System::Boolean raiseEvents) override;
 
 	internal:
