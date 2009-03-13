@@ -133,6 +133,9 @@ namespace Host {
 		virtual void RaisePropertyChanged(System::String^ propName)
 		{ PropertyChanged(this, gcnew System::ComponentModel::PropertyChangedEventArgs(propName));}
 
+		/// <summary>Implemented by derived classes to clean up resources.</summary>
+		virtual void Uninitialize() {}
+
 	private:
 		Jacobi::Vst::Core::Host::IVstHostCommandStub^ _hostCmdStub;
 		Jacobi::Vst::Core::Host::IVstPluginCommandStub^ _pluginCmdStub;

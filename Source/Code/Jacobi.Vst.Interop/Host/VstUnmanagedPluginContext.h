@@ -51,6 +51,10 @@ namespace Host {
 		property VstHostCommandProxy^ HostCommandProxy 
 		{ VstHostCommandProxy^ get() { return _hostCmdProxy; } }
 
+	protected:
+		/// <summary>Cleans up unmanaged resources.</summary>
+		virtual void Uninitialize() override;
+
 	private:
 		HMODULE _hLib;
 		::AEffect* _pEffect;

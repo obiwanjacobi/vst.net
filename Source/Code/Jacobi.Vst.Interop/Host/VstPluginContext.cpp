@@ -136,6 +136,9 @@ namespace Host {
 		}
 
 		_pluginInfo = nullptr;
+
+		// cleanup 'derived' resources
+		Uninitialize();
 	}
 
 	generic<typename T> 

@@ -111,7 +111,9 @@ System::String^ VstPluginCommandStub::GetProgramName()
 
 System::String^ VstPluginCommandStub::GetParameterLabel(System::Int32 index)
 {
-	UnmanagedString paramLabel(kVstMaxParamStrLen);
+	//UnmanagedString paramLabel(kVstMaxParamStrLen);
+	// Some plugin don't have 8 character param labels
+	UnmanagedString paramLabel(64);
 
 	CallDispatch(effGetParamLabel, index, 0, paramLabel, 0);
 
@@ -120,7 +122,9 @@ System::String^ VstPluginCommandStub::GetParameterLabel(System::Int32 index)
 
 System::String^ VstPluginCommandStub::GetParameterDisplay(System::Int32 index)
 {
-	UnmanagedString paramLabel(kVstMaxParamStrLen);
+	//UnmanagedString paramLabel(kVstMaxParamStrLen);
+	// Some plugin don't have 8 character param display values
+	UnmanagedString paramLabel(64);
 
 	CallDispatch(effGetParamDisplay, index, 0, paramLabel, 0);
 
@@ -129,7 +133,9 @@ System::String^ VstPluginCommandStub::GetParameterDisplay(System::Int32 index)
 
 System::String^ VstPluginCommandStub::GetParameterName(System::Int32 index)
 {
-	UnmanagedString paramName(kVstMaxParamStrLen);
+	//UnmanagedString paramName(kVstMaxParamStrLen);
+	// Some plugin don't have 8 character param names
+	UnmanagedString paramName(64);
 
 	CallDispatch(effGetParamName, index, 0, paramName, 0);
 
