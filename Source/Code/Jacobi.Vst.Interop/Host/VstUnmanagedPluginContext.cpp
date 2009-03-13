@@ -15,13 +15,19 @@ namespace Host {
 
 	VstUnmanagedPluginContext::~VstUnmanagedPluginContext()
 	{
-		this->!VstUnmanagedPluginContext();
+		// we dont call the finalizer because otherwise the Dll is unloaded before Plugin.Close could be called.
+		//this->!VstUnmanagedPluginContext();
 	}
 
 	VstUnmanagedPluginContext::!VstUnmanagedPluginContext()
 	{
 		// close the loaded library.
 		CloseLibrary();
+	}
+	
+	void VstUnmanagedPluginContext::Uninitialize()
+	{
+		this->!VstUnmanagedPluginContext();
 	}
 
 	void VstUnmanagedPluginContext::Initialize(System::String^ pluginPath)

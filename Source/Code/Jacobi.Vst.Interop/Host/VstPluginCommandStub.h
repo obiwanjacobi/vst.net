@@ -446,15 +446,32 @@ private:
 
 	// helper methods for calling the plugin
 	::VstIntPtr CallDispatch(::VstInt32 opcode, ::VstInt32 index, ::VstIntPtr value, void* ptr, float opt)
-	{ return _pEffect->dispatcher(_pEffect, opcode, index, value, ptr, opt); }
+	{
+		if(_pEffect && _pEffect->dispatcher)
+			return _pEffect->dispatcher(_pEffect, opcode, index, value, ptr, opt);
+		return 0;
+	}
 	void CallProcess32(float** inputs, float** outputs, ::VstInt32 sampleFrames)
-	{ if(_pEffect->processReplacing) _pEffect->processReplacing(_pEffect, inputs, outputs, sampleFrames); }
+	{
+		if(_pEffect && _pEffect->processReplacing)
+			_pEffect->processReplacing(_pEffect, inputs, outputs, sampleFrames);
+	}
 	void CallProcess64(double** inputs, double** outputs, ::VstInt32 sampleFrames)
-	{ if(_pEffect->processDoubleReplacing) _pEffect->processDoubleReplacing(_pEffect, inputs, outputs, sampleFrames); }
+	{
+		if(_pEffect && _pEffect->processDoubleReplacing) 
+			_pEffect->processDoubleReplacing(_pEffect, inputs, outputs, sampleFrames);
+	}
 	void CallSetParameter(::VstInt32 index, float parameter)
-	{ _pEffect->setParameter(_pEffect, index, parameter); }
+	{
+		if(_pEffect && _pEffect->setParameter)
+			_pEffect->setParameter(_pEffect, index, parameter);
+	}
 	float CallGetParameter(::VstInt32 index)
-	{ return _pEffect->getParameter(_pEffect, index); }
+	{
+		if(_pEffect && _pEffect->getParameter)
+			return _pEffect->getParameter(_pEffect, index);
+		return 0.0f;
+	}
 
 	MemoryTracker^ _memoryTracker;
 };

@@ -170,6 +170,7 @@
             // 
             // GenerateNoiseBtn
             // 
+            this.GenerateNoiseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.GenerateNoiseBtn.Location = new System.Drawing.Point(20, 362);
             this.GenerateNoiseBtn.Name = "GenerateNoiseBtn";
             this.GenerateNoiseBtn.Size = new System.Drawing.Size(84, 23);
