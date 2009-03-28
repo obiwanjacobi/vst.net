@@ -24,34 +24,15 @@ namespace Host {
 			throw gcnew System::IO::FileNotFoundException(pluginPath);
 		}
 
-		VstPluginContext^ pluginCtx = InitializeManaged(pluginPath, hostCmdStub);
+		VstPluginContext^ pluginCtx = VstManagedPluginContext::Create(pluginPath, hostCmdStub);
 
 		if(pluginCtx == nullptr)
 		{
-			pluginCtx = InitializeUnmanaged(pluginPath, hostCmdStub);
+			pluginCtx = VstUnmanagedPluginContext::Create(pluginPath, hostCmdStub);
 		}
 
-		return pluginCtx;
-	}
-
-	
-	VstPluginContext^ VstPluginContext::InitializeManaged(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
-	{
-		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
-		System::String^ baseName = System::IO::Path::GetFileNameWithoutExtension(pluginPath);
-		System::String^ fileName = System::IO::Path::Combine(basePath, baseName);
-		System::String^ filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension;
-
-		if(!System::IO::File::Exists(filePath))
+		if(pluginCtx != nullptr)
 		{
-			filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension;
-		}
-
-		if(System::IO::File::Exists(filePath))
-		{
-			Jacobi::Vst::Interop::Host::VstManagedPluginContext^ pluginCtx = 
-				gcnew Jacobi::Vst::Interop::Host::VstManagedPluginContext(hostCmdStub);
-
 			try
 			{
 				pluginCtx->Initialize(pluginPath);
@@ -62,27 +43,6 @@ namespace Host {
 
 				throw;
 			}
-
-			return pluginCtx;
-		}
-
-		return nullptr;
-	}
-
-	VstPluginContext^ VstPluginContext::InitializeUnmanaged(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
-	{
-		Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^ pluginCtx = 
-				gcnew Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext(hostCmdStub);
-
-		try
-		{
-			pluginCtx->Initialize(pluginPath);
-		}
-		catch(...)
-		{
-			delete pluginCtx;
-
-			throw;
 		}
 
 		return pluginCtx;

@@ -16,11 +16,6 @@ namespace Host {
 	{
 	public:
 		/// <summary>
-		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
-		/// </summary>
-		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
-		VstUnmanagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
-		/// <summary>
 		/// Disposes managed resources and calls the finalizer.
 		/// </summary>
 		~VstUnmanagedPluginContext();
@@ -28,12 +23,6 @@ namespace Host {
 		/// Disposes unmanaged resources.
 		/// </summary>
 		!VstUnmanagedPluginContext();
-		/// <summary>
-		/// Initializes the PluginContext instance with the plugin pointed to by the <paramref name="pluginPath"/>.
-		/// </summary>
-		/// <param name="pluginPath">An absolute path the the plugin dll (that contains the exported 
-		/// 'VSTPluginMain' function). Must not be null or empty.</param>
-		void Initialize(System::String^ pluginPath);
 		/// <summary>
 		/// Copies the new values from the unmanaged AEffect structure to the <see cref="PluginInfo"/> property.
 		/// </summary>
@@ -52,6 +41,23 @@ namespace Host {
 		{ VstHostCommandProxy^ get() { return _hostCmdProxy; } }
 
 	protected:
+		/// <summary>
+		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
+		/// </summary>
+		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
+		VstUnmanagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
+		/// <summary>
+		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
+		/// </summary>
+		/// <param name="pluginPath">An absolute path the the plugin dll. Must not be null or empty.</param>
+		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
+		static VstPluginContext^ Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
+		/// <summary>
+		/// Initializes the PluginContext instance with the plugin pointed to by the <paramref name="pluginPath"/>.
+		/// </summary>
+		/// <param name="pluginPath">An absolute path the the plugin dll (that contains the exported 
+		/// 'VSTPluginMain' function). Must not be null or empty.</param>
+		virtual void Initialize(System::String^ pluginPath) override;
 		/// <summary>Cleans up unmanaged resources.</summary>
 		virtual void Uninitialize() override;
 

@@ -42,7 +42,7 @@
     </BuildLogFile>
     <CppCommentsFixup>True</CppCommentsFixup>
     <FrameworkVersion>2.0.50727</FrameworkVersion>
-    <HelpTitle>VST.NET 0.7 Documentation</HelpTitle>
+    <HelpTitle>VST.NET 0.8 Documentation</HelpTitle>
     <CopyrightHref>http://www.codeplex.com/vstnet</CopyrightHref>
     <CopyrightText>Copyright 2008-2009 Jacobi Software, all rights reserved.</CopyrightText>
     <FeedbackEMailAddress>obiwanjacobi%40hotmail.com</FeedbackEMailAddress>
@@ -301,6 +301,11 @@
   </ItemGroup>
   <ItemGroup>
     <ContentLayout Include="Jacobi.Vst.Docs.content" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\DelayEditorCubaseSx2.PNG">
+      <ImageId>f62de1d7-38fc-4992-991d-e35c64425a5d</ImageId>
+    </Image>
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
