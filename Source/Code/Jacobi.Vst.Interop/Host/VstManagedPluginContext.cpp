@@ -12,6 +12,26 @@ namespace Host {
 	{
 	}
 
+	VstPluginContext^ VstManagedPluginContext::Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	{
+		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+		System::String^ baseName = System::IO::Path::GetFileNameWithoutExtension(pluginPath);
+		System::String^ fileName = System::IO::Path::Combine(basePath, baseName);
+		System::String^ filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension;
+
+		if(!System::IO::File::Exists(filePath))
+		{
+			filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension;
+		}
+
+		if(System::IO::File::Exists(filePath))
+		{
+			return gcnew Jacobi::Vst::Interop::Host::VstManagedPluginContext(hostCmdStub);
+		}
+
+		return nullptr;
+	}
+
 	void VstManagedPluginContext::Initialize(System::String^ pluginPath)
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");

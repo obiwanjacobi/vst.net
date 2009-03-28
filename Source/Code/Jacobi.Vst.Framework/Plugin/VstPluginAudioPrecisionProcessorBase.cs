@@ -5,18 +5,25 @@ using Jacobi.Vst.Core;
 
 namespace Jacobi.Vst.Framework.Plugin
 {
+    /// <summary>
+    /// The VstPluginAudioPrecisionProcessorBase implements the <see cref="IVstPluginAudioPrecisionProcessor"/> 
+    /// interface and provides a basis for the Plugin implementation.
+    /// </summary>
     public class VstPluginAudioPrecisionProcessorBase : VstPluginAudioProcessorBase, IVstPluginAudioPrecisionProcessor
     {
+        /// <inheritdoc />
         protected VstPluginAudioPrecisionProcessorBase()
             : base ()
         { }
 
+        /// <inheritdoc />
         protected VstPluginAudioPrecisionProcessorBase(int inputCount, int outputCount, int tailSize)
             : base(inputCount, outputCount, tailSize)
         { }
 
         #region IVstPluginAudioPrecisionProcessor Members
 
+        /// <inheritdoc />
         public virtual void Process(VstAudioPrecisionBuffer[] inChannels, VstAudioPrecisionBuffer[] outChannels)
         {
             int outCount = outChannels.Length;
@@ -32,6 +39,11 @@ namespace Jacobi.Vst.Framework.Plugin
 
         #endregion
 
+        /// <summary>
+        /// Copies the samples from the <paramref name="source"/> to the <paramref name="dest"/>ination.
+        /// </summary>
+        /// <param name="source">The source audio buffer. Must not be null.</param>
+        /// <param name="dest">The destination audio buffer. Must be writable. Must not be null.</param>
         protected void Copy(VstAudioPrecisionBuffer source, VstAudioPrecisionBuffer dest)
         {
             Debug.Assert(source.SampleCount == dest.SampleCount);

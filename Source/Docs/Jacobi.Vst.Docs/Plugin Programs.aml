@@ -151,6 +151,13 @@
         <codeInline>ActiveProgram</codeInline>
         property.
         <codeReference>IVstPluginPrograms#ActiveProgram</codeReference>
+		<alert class="note">
+		  <para>
+		  This code is also implemented in the
+		  <codeInline>VstPluginProgramsBase</codeInline>
+		  class.
+		  </para>
+		</alert>
         </para>
       </content>
     </section>

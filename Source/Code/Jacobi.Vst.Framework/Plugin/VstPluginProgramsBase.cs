@@ -2,14 +2,20 @@
 
 namespace Jacobi.Vst.Framework.Plugin
 {
+    /// <summary>
+    /// The VstPluginProgramsBase class implements the <see cref="IVstPluginPrograms"/>
+    /// interface and provides a basis for implementing Programs in a plugin.
+    /// </summary>
+    /// <remarks>
+    /// The class must be derived and the abstract <see cref="CreateProgramCollection"/>
+    /// method must be implemented.
+    /// </remarks>
     public abstract class VstPluginProgramsBase : IVstPluginPrograms
     {
         #region IVstPluginPrograms Members
 
         private VstProgramCollection _programs;
-        /// <summary>
-        /// Gets all the programs.
-        /// </summary>
+        /// <inheritdoc />
         public VstProgramCollection Programs
         {
             get
@@ -24,9 +30,7 @@ namespace Jacobi.Vst.Framework.Plugin
         }
 
         private VstProgram _activeProgram;
-        /// <summary>
-        /// Gets or sets the current or active program.
-        /// </summary>
+        /// <inheritdoc />
         public virtual VstProgram ActiveProgram
         {
             get
@@ -57,16 +61,23 @@ namespace Jacobi.Vst.Framework.Plugin
             }
         }
 
+        /// <inheritdoc />
         public virtual void BeginSetProgram()
         {
         }
 
+        /// <inheritdoc />
         public virtual void EndSetProgram()
         {
         }
 
         #endregion
 
+        /// <summary>
+        /// Called on first access on the <see cref="Programs"/> property and returns
+        /// a completely filled collection of Programs.
+        /// </summary>
+        /// <returns>Never returns null.</returns>
         protected abstract VstProgramCollection CreateProgramCollection();
     }
 }
