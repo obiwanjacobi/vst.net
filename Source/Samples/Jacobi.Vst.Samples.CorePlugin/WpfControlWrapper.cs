@@ -6,12 +6,21 @@
     using System.Windows.Interop;
     using System.Drawing;
 
+    /// <summary>
+    /// Helper class to attach a WPF UserControl to a Win32 native main window of the host.
+    /// </summary>
+    /// <typeparam name="T">The type of the managed WPF Control.</typeparam>
     class WpfControlWrapper<T> where T : UserControl, new()
     {
         private HwndSource _hwndSource;
         private int _width;
         private int _height;
 
+        /// <summary>
+        /// Constructs a new instance for the specified <paramref name="width"/> and <paramref name="height"/>.
+        /// </summary>
+        /// <param name="width">The width of the control.</param>
+        /// <param name="height">The height of the control.</param>
         public WpfControlWrapper(int width, int height)
         {
             _width = width;

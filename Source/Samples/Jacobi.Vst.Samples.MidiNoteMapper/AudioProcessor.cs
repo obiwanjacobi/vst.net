@@ -25,7 +25,9 @@
             _midiProcessor = plugin.GetInstance<MidiProcessor>();
         }
 
-        public void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
+        /// <inheritdoc />
+        /// <remarks>This method is used to push midi events to the host.</remarks>
+        public override void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
             if (_hostProcessor == null)
             {

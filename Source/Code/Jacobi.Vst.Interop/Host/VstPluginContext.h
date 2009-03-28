@@ -133,6 +133,9 @@ namespace Host {
 		virtual void RaisePropertyChanged(System::String^ propName)
 		{ PropertyChanged(this, gcnew System::ComponentModel::PropertyChangedEventArgs(propName));}
 
+		/// <summary>Implemented by derived classes to initialize the instance.</summary>
+		/// <param name="pluginPath">An absolute path the the plugin dll. Must not be null or empty.</param>
+		virtual void Initialize(System::String^ pluginPath) {}
 		/// <summary>Implemented by derived classes to clean up resources.</summary>
 		virtual void Uninitialize() {}
 
@@ -143,9 +146,6 @@ namespace Host {
 
 		// contains all user properties
 		System::Collections::Generic::Dictionary<System::String^, System::Object^>^ _props;
-
-		static VstPluginContext^ InitializeManaged(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
-		static VstPluginContext^ InitializeUnmanaged(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
 	};
 
 }}}} // namespace Jacobi::Vst::Interop::Host
