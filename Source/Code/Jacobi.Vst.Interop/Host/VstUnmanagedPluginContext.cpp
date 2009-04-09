@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "VstUnmanagedPluginContext.h"
 #include "..\TypeConverter.h"
+#include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -42,7 +43,8 @@ namespace Host {
 		// method called more than once?
 		if(_hLib != NULL)
 		{
-			throw gcnew System::InvalidOperationException("This instance of the VstPluginContext is already initialized.");
+			throw gcnew System::InvalidOperationException(
+				Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_AlreadyInitialized);
 		}
 
 		char* pPluginPath = NULL;
@@ -56,7 +58,10 @@ namespace Host {
 
 			if(_hLib == NULL)
 			{
-				throw gcnew System::ArgumentException(pluginPath + " cannot be loaded.");
+				throw gcnew System::ArgumentException(
+					System::String::Format(
+						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_LoadPluginFailed,
+						pluginPath));
 			}
 
 			// check entry point
@@ -64,7 +69,10 @@ namespace Host {
 
 			if(pluginMain == NULL)
 			{
-				throw gcnew System::EntryPointNotFoundException(pluginPath + " has no exported 'VSTPluginMain' function (VST 2.4).");
+				throw gcnew System::EntryPointNotFoundException(
+					System::String::Format(
+						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_EntryPointNotFound,
+						pluginPath));
 			}
 			
 			LoadingPlugin = this;
@@ -74,12 +82,18 @@ namespace Host {
 
 			if(_pEffect == NULL)
 			{
-				throw gcnew System::OperationCanceledException(pluginPath + " did not return an AEffect structure.");
+				throw gcnew System::OperationCanceledException(
+					System::String::Format(
+						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_PluginReturnedNull,
+						pluginPath));
 			}
 
 			if(_pEffect->magic != kEffectMagic)
 			{
-				throw gcnew System::OperationCanceledException(pluginPath + " did not return an AEffect structure with the correct 'Magic' number.");
+				throw gcnew System::OperationCanceledException(
+					System::String::Format(
+						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_MagicNumberMismatch,
+						pluginPath));
 			}
 
 			System::Runtime::InteropServices::GCHandle ctxHandle = 
@@ -94,7 +108,10 @@ namespace Host {
 			// check if the plugin supports our VST version
 			if(PluginCommandStub->GetVstVersion() < 2400)
 			{
-				throw gcnew System::NotSupportedException("The Plugin '" + pluginPath + "' does not support VST 2.4.");
+				throw gcnew System::NotSupportedException(
+					System::String::Format(
+						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_VstVersionMismatch,
+						pluginPath));
 			}
 
 			// setup the plugin info

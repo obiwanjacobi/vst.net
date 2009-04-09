@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "VstManagedPluginContext.h"
 #include "..\AssemblyLoader.h"
+#include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -47,7 +48,10 @@ namespace Host {
 
 		if(pluginCmdStub == nullptr)
 		{
-			throw gcnew System::EntryPointNotFoundException(pluginPath + " does not have a public implementation of the IVstPluginCommandStub interface.");
+			throw gcnew System::EntryPointNotFoundException(
+				System::String::Format(
+					Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
+					pluginPath));
 		}
 
 		Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 

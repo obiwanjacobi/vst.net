@@ -79,6 +79,24 @@ namespace Jacobi.Vst.Framework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The HostCommandStub has not been initialized..
+        /// </summary>
+        internal static string StdPluginCommandStub_HostNotInitialized {
+            get {
+                return ResourceManager.GetString("StdPluginCommandStub_HostNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Plugin returned a {0} &apos;{1}&apos; that is too long. Maximum length is {2} characters..
+        /// </summary>
+        internal static string StdPluginCommandStub_StringTooLong {
+            get {
+                return ResourceManager.GetString("StdPluginCommandStub_StringTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The VstEventCollection is read-only..
         /// </summary>
         internal static string VstEventCollection_CollectionReadOnly {

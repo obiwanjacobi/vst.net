@@ -4,6 +4,7 @@
 #include "..\TypeConverter.h"
 #include "..\UnmanagedString.h"
 #include "..\UnmanagedPointer.h"
+#include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -32,7 +33,8 @@ void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioBuf
 
 	if(inputSampleCount != outputSampleCount)
 	{
-		throw gcnew System::ArgumentException("The number of samples in the 'inputs' and the 'outputs' VstAudioBuffer array was not the same.");
+		throw gcnew System::ArgumentException(
+			Jacobi::Vst::Interop::Properties::Resources::VstPluginCommandStub_SampleCountMismatch);
 	}
 
 	CallProcess32(ppInputs, ppOutputs, inputSampleCount);
@@ -48,7 +50,8 @@ void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioPre
 
 	if(inputSampleCount != outputSampleCount)
 	{
-		throw gcnew System::ArgumentException("The number of samples in the 'inputs' and the 'outputs' VstAudioBuffer array was not the same.");
+		throw gcnew System::ArgumentException(
+			Jacobi::Vst::Interop::Properties::Resources::VstPluginCommandStub_SampleCountMismatch);
 	}
 
 	CallProcess64(ppInputs, ppOutputs, inputSampleCount);

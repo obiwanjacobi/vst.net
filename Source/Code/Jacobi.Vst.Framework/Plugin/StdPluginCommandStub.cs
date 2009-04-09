@@ -391,7 +391,8 @@
 
                     if (channelInfo.ActiveProgram.ParentCategory != null)
                     {
-                        midiProgramName.ParentCategoryIndex = channelInfo.Categories.IndexOf(channelInfo.ActiveProgram.ParentCategory);
+                        midiProgramName.ParentCategoryIndex = 
+                            channelInfo.Categories.IndexOf(channelInfo.ActiveProgram.ParentCategory);
                     }
                     else
                     {
@@ -449,7 +450,6 @@
         /// </summary>
         /// <param name="channel">The zero-base Midi channel.</param>
         /// <returns>Returns true if the Midi Program has changed, otherwise false is returned.</returns>
-        /// <remarks>NOT IMPLEMENTED: how do we know something has changed and from what point on?</remarks>
         public virtual bool HasMidiProgramsChanged(int channel)
         {
             IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
@@ -784,7 +784,9 @@
 
             if (name != null && name.Length > Core.Constants.MaxEffectNameLength)
             {
-                throw new InvalidOperationException("The plugin returned a name that is too long.");
+                throw new InvalidOperationException(
+                    String.Format(Properties.Resources.StdPluginCommandStub_StringTooLong, 
+                        "Plugin.Name", name, Core.Constants.MaxEffectNameLength));
             }
 
             return name;
@@ -839,9 +841,9 @@
                 case VstPluginCanDo.MidiProgramNames:
                     result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
-                case VstPluginCanDo.Offline:
+                //case VstPluginCanDo.Offline:
                     //result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
-                    break;
+                    //break;
                 case VstPluginCanDo.ReceiveVstEvents:
                 case VstPluginCanDo.ReceiveVstMidiEvent:
                     result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
@@ -972,7 +974,7 @@
         {
             if (!_pluginCtx.Host.HostCommandStub.IsInitialized())
             {
-                throw new InvalidOperationException("The HostCommandStub has not been initialized.");
+                throw new InvalidOperationException(Properties.Resources.StdPluginCommandStub_HostNotInitialized);
             }
 
             _pluginCtx.Plugin.Open(_pluginCtx.Host);
@@ -984,8 +986,11 @@
         /// <remarks>Always call the base class when overriding.</remarks>
         public virtual void Close()
         {
-            _pluginCtx.Dispose();
-            _pluginCtx = null;
+            if (_pluginCtx != null)
+            {
+                _pluginCtx.Dispose();
+                _pluginCtx = null;
+            }
         }
 
         /// <summary>
