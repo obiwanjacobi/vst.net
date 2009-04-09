@@ -2,6 +2,7 @@
 #include "HostCommandStub.h"
 #include "..\TypeConverter.h"
 #include "..\UnmanagedString.h"
+#include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -301,7 +302,8 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 
 	if(fileSelect->Reserved != System::IntPtr::Zero)
 	{
-		throw gcnew System::InvalidOperationException("The argument is already initialized with an unmanaged VstFileSelect structure.");
+		throw gcnew System::InvalidOperationException(
+			Jacobi::Vst::Interop::Properties::Resources::HostCommandStub_VstFileSelectAlreadyInitialized);
 	}
 
 	::VstFileSelect* pFileSelect = TypeConverter::AllocUnmanagedFileSelect(fileSelect);
@@ -334,7 +336,8 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 
 	if(pFileSelect == NULL)
 	{
-		throw gcnew System::InvalidOperationException("The unmanaged VstFileSelect structure has been disposed.");
+		throw gcnew System::InvalidOperationException(
+			Jacobi::Vst::Interop::Properties::Resources::HostCommandStub_VstFileSelectAlreadyDisposed);
 	}
 
 	try
@@ -355,7 +358,8 @@ inline void HostCommandStub::ThrowIfNotInitialized()
 {
 	if(IsInitialized() == false)
 	{
-		throw gcnew System::InvalidOperationException("The HostCommandStub is not Initialized yet.");
+		throw gcnew System::InvalidOperationException(
+			Jacobi::Vst::Interop::Properties::Resources::HostCommandStub_NotInitialized);
 	}
 }
 

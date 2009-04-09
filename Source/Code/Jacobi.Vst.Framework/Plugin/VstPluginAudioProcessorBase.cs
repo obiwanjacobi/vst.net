@@ -59,7 +59,7 @@ namespace Jacobi.Vst.Framework.Plugin
             {
                 for (int i = 0; i < inChannels.Length && n < outCount; i++, n++)
                 {
-                    Copy(inChannels[i], outChannels[n]);
+                    inChannels[i].CopyTo(outChannels[n]);
                 }
             }
         }
@@ -71,27 +71,5 @@ namespace Jacobi.Vst.Framework.Plugin
         }
 
         #endregion
-
-        /// <summary>
-        /// Copies the samples from the <paramref name="source"/> to the <paramref name="dest"/>ination.
-        /// </summary>
-        /// <param name="source">The source audio buffer. Must not be null.</param>
-        /// <param name="dest">The destination audio buffer. Must be writable. Must not be null.</param>
-        protected void Copy(VstAudioBuffer source, VstAudioBuffer dest)
-        {
-            Debug.Assert(source.SampleCount == dest.SampleCount);
-            Debug.Assert(dest.CanWrite);
-
-            unsafe
-            {
-                float* inputBuffer = ((IDirectBufferAccess32)source).Buffer;
-                float* outputBuffer = ((IDirectBufferAccess32)dest).Buffer;
-
-                for (int i = 0; i < source.SampleCount; i++)
-                {
-                    outputBuffer[i] = inputBuffer[i];
-                }
-            }
-        }
     }
 }

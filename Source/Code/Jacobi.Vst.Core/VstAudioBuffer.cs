@@ -77,5 +77,32 @@
         }
 
         #endregion
+
+        /// <summary>
+        /// Copies the samples from this instance to the <paramref name="destination"/>.
+        /// </summary>
+        /// <param name="destination">The destination audio buffer. Must be writable. Must not be null.</param>
+        public void CopyTo(VstAudioBuffer destination)
+        {
+            if (this.SampleCount <= destination.SampleCount)
+            {
+                throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferTooSmall, "destination");
+            }
+            if (destination.CanWrite)
+            {
+                throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferNotWritable, "destination");
+            }
+
+            unsafe
+            {
+                float* inputBuffer = this.Buffer;
+                float* outputBuffer = ((IDirectBufferAccess32)destination).Buffer;
+
+                for (int i = 0; i < this.SampleCount; i++)
+                {
+                    outputBuffer[i] = inputBuffer[i];
+                }
+            }
+        }
     }
 }

@@ -113,5 +113,14 @@ namespace Jacobi.Vst.Core.Properties {
                 return ResourceManager.GetString("VstAudioBuffer_BufferNotWritable", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The destination buffer is too small..
+        /// </summary>
+        internal static string VstAudioBuffer_BufferTooSmall {
+            get {
+                return ResourceManager.GetString("VstAudioBuffer_BufferTooSmall", resourceCulture);
+            }
+        }
     }
 }
