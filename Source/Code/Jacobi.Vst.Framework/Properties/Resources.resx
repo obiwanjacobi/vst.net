@@ -125,6 +125,14 @@
     <value>The Host does not implement OpenFileSelector.</value>
     <comment>Exception text.</comment>
   </data>
+  <data name="StdPluginCommandStub_HostNotInitialized" xml:space="preserve">
+    <value>The HostCommandStub has not been initialized.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="StdPluginCommandStub_StringTooLong" xml:space="preserve">
+    <value>The Plugin returned a {0} '{1}' that is too long. Maximum length is {2} characters.</value>
+    <comment>Exception text.</comment>
+  </data>
   <data name="VstEventCollection_CollectionReadOnly" xml:space="preserve">
     <value>The VstEventCollection is read-only.</value>
     <comment>Exception text.</comment>

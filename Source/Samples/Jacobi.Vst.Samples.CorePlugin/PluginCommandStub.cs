@@ -346,6 +346,15 @@
         {
             // Calling back into the Form at this point can cause a dead-lock.
             //Log("Close");
+
+            // perform cleanup of the host stub
+            if (_hostStub != null)
+            {
+                _hostStub.Dispose();
+                _hostStub = null;
+
+                _pluginInfo = null;
+            }
         }
 
         /// <inheritdoc />

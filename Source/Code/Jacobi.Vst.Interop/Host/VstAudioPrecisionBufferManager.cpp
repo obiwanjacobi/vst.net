@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "VstAudioPrecisionBufferManager.h"
+#include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -52,7 +53,8 @@ namespace Host
 
 		if(buffer->SampleCount != _bufferSize)
 		{
-			throw gcnew System::ArgumentException("Buffer size does not match this manager.", "buffer");
+			throw gcnew System::ArgumentException(
+				Jacobi::Vst::Interop::Properties::Resources::VstAudioBufferManager_InvalidBufferSize, "buffer");
 		}
 		
 		Jacobi::Vst::Core::IDirectBufferAccess64^ directBuf = (Jacobi::Vst::Core::IDirectBufferAccess64^)buffer;
@@ -65,7 +67,8 @@ namespace Host
 		if(lowerBound == NULL ||
 			!(lowerBound <= pBuffer && pBuffer < upperBound))
 		{
-			throw gcnew System::ArgumentException("Specified buffer is not managed by this instance.", "buffer");
+			throw gcnew System::ArgumentException(
+				Jacobi::Vst::Interop::Properties::Resources::VstAudioBufferManager_BufferNotOwned, "buffer");
 		}
 
 		ClearBuffer(directBuf->Buffer, directBuf->SampleCount);

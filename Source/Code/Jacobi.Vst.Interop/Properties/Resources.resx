@@ -117,32 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ManagedPluginFactory_FileNotFound" xml:space="preserve">
-    <value>Could not find the managed VST plugin assembly with either the .net.dll or .net.vstdll extension.</value>
+  <data name="HostCommandStub_NotInitialized" xml:space="preserve">
+    <value>The HostCommandStub is not Initialized yet.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="ManagedPluginFactory_NoPublicStub" xml:space="preserve">
-    <value>"{0}" does not expose a public class that implements the IVstPluginCommandStub interface.</value>
+  <data name="HostCommandStub_VstFileSelectAlreadyDisposed" xml:space="preserve">
+    <value>The (unmanaged) VstFileSelect structure has already been disposed.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="Throw_ArgumentIsEmpty" xml:space="preserve">
-    <value>The argument is empty.</value>
+  <data name="HostCommandStub_VstFileSelectAlreadyInitialized" xml:space="preserve">
+    <value>The argument is already initialized with an unmanaged VstFileSelect structure.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="Throw_ArgumentNotInRange" xml:space="preserve">
-    <value>The value should lie between '{0}' and '{1}'.</value>
+  <data name="VstAudioBufferManager_BufferNotOwned" xml:space="preserve">
+    <value>Specified buffer is not managed by this instance.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="Throw_ArgumentTooLong" xml:space="preserve">
-    <value>'{0}' is too long. Maximum length is {1} characters.</value>
+  <data name="VstAudioBufferManager_InvalidBufferSize" xml:space="preserve">
+    <value>Buffer size does not match this manager instance.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="VstAudioBuffer_BufferNotWritable" xml:space="preserve">
-    <value>The Audio buffer is read-only.</value>
+  <data name="VstManagedPluginContext_PluginCommandStubNotFound" xml:space="preserve">
+    <value>'{0}' does not have a public implementation of the IVstPluginCommandStub interface.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="VstAudioBuffer_BufferTooSmall" xml:space="preserve">
-    <value>The destination buffer is too small.</value>
+  <data name="VstPluginCommandStub_SampleCountMismatch" xml:space="preserve">
+    <value>The number of samples in the 'inputs' and the 'outputs' audio buffer array was not the same.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstUnmanagedPluginContext_AlreadyInitialized" xml:space="preserve">
+    <value>This instance of the VstPluginContext is already initialized.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstUnmanagedPluginContext_EntryPointNotFounVstUnmanagedPluginContext_EntryPointNotFoun" xml:space="preserve">
+    <value>'{0}' has no exported 'VSTPluginMain' function (VST 2.4).</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstUnmanagedPluginContext_LoadPluginFailed" xml:space="preserve">
+    <value>'{0}' failed to load.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstUnmanagedPluginContext_MagicNumberMismatch" xml:space="preserve">
+    <value>'{0}' did not return an AEffect structure with the correct 'Magic' number.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstUnmanagedPluginContext_PluginReturnedNull" xml:space="preserve">
+    <value>'{0}' did not return an AEffect structure (but null).</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstUnmanagedPluginContext_VstVersionMismatch" xml:space="preserve">
+    <value>The Plugin '{0}' does not support VST 2.4.</value>
     <comment>Exception text.</comment>
   </data>
 </root>
