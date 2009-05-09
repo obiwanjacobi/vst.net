@@ -24,11 +24,11 @@ namespace Host {
 			throw gcnew System::IO::FileNotFoundException(pluginPath);
 		}
 
-		VstPluginContext^ pluginCtx = VstManagedPluginContext::Create(pluginPath, hostCmdStub);
+		VstPluginContext^ pluginCtx = VstManagedPluginContext::CreateInternal(pluginPath, hostCmdStub);
 
 		if(pluginCtx == nullptr)
 		{
-			pluginCtx = VstUnmanagedPluginContext::Create(pluginPath, hostCmdStub);
+			pluginCtx = VstUnmanagedPluginContext::CreateInternal(pluginPath, hostCmdStub);
 		}
 
 		if(pluginCtx != nullptr)
