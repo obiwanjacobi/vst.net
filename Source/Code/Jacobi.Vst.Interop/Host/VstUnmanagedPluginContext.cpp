@@ -26,7 +26,7 @@ namespace Host {
 		CloseLibrary();
 	}
 	
-	VstPluginContext^ VstUnmanagedPluginContext::Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	VstPluginContext^ VstUnmanagedPluginContext::CreateInternal(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
 		return gcnew VstUnmanagedPluginContext(hostCmdStub);
 	}

@@ -40,18 +40,19 @@ namespace Host {
 		property VstHostCommandProxy^ HostCommandProxy 
 		{ VstHostCommandProxy^ get() { return _hostCmdProxy; } }
 
+		/// <summary>
+		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
+		/// </summary>
+		/// <param name="pluginPath">An absolute path the the plugin dll. Must not be null or empty.</param>
+		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
+		static VstPluginContext^ CreateInternal(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
+
 	protected:
 		/// <summary>
 		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
 		/// </summary>
 		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
 		VstUnmanagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
-		/// <summary>
-		/// Constructs a new uninitialized instance using the <paramref name="hostCmdStub"/>.
-		/// </summary>
-		/// <param name="pluginPath">An absolute path the the plugin dll. Must not be null or empty.</param>
-		/// <param name="hostCmdStub">An implementation of the host command stub. Must not be null.</param>
-		static VstPluginContext^ Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
 		/// <summary>
 		/// Initializes the PluginContext instance with the plugin pointed to by the <paramref name="pluginPath"/>.
 		/// </summary>
