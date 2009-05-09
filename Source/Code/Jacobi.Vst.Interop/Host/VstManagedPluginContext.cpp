@@ -13,7 +13,7 @@ namespace Host {
 	{
 	}
 
-	VstPluginContext^ VstManagedPluginContext::Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	VstPluginContext^ VstManagedPluginContext::CreateInternal(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
 		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 		System::String^ baseName = System::IO::Path::GetFileNameWithoutExtension(pluginPath);
