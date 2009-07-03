@@ -85,11 +85,11 @@
         /// <param name="destination">The destination audio buffer. Must be writable. Must not be null.</param>
         public void CopyTo(VstAudioPrecisionBuffer destination)
         {
-            if (this.SampleCount <= destination.SampleCount)
+            if (this.SampleCount > destination.SampleCount)
             {
                 throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferTooSmall, "destination");
             }
-            if (destination.CanWrite)
+            if (!destination.CanWrite)
             {
                 throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferNotWritable, "destination");
             }
