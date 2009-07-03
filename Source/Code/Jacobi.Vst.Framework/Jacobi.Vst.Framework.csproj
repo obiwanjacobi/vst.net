@@ -42,8 +42,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
@@ -57,12 +59,14 @@
     <Compile Include="Common\NativeMethods.cs" />
     <Compile Include="Host\VstHost.cs" />
     <Compile Include="Host\VstHostAutomation.cs" />
+    <Compile Include="Host\VstHostDeprecated.cs" />
     <Compile Include="Host\VstHostInterfaceManager.cs" />
     <Compile Include="Host\VstHostMidiProcessor.cs" />
     <None Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IActivatable.cs" />
     <Compile Include="IExtensible.cs" />
+    <Compile Include="IVstHostDeprecated.cs" />
     <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />

@@ -8,7 +8,8 @@ namespace Plugin {
 	/// <summary>
 	/// The HostCommandStub calls the host callback function.
 	/// </summary>
-	ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub
+	ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub, 
+		Jacobi::Vst::Core::IVstHostCommandsDeprecated
 	{
 	public:
 		/// <summary>
@@ -177,6 +178,15 @@ namespace Plugin {
         /// <remarks>This method must always be called when <see cref="OpenFileSelector"/> returned true. 
         /// Otherwise unmanaged memory will leak.</remarks>
 		virtual System::Boolean CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect);
+
+		//
+		// Deprecated method support (VST 2.4)
+		//
+
+		/// <summary>
+		/// Indicates to the Host that the Plugin wants to process Midi events.
+		/// </summary>
+		virtual System::Void WantMidi();
 
 	internal:
 		HostCommandStub(::audioMasterCallback hostCallback);
