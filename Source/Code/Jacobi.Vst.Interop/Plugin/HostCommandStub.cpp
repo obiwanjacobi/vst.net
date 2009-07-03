@@ -353,6 +353,15 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 	}
 }
 
+//
+// Deprecated VST 2.4 methods
+//
+
+System::Void HostCommandStub::WantMidi()
+{
+	CallHost(DECLARE_VST_DEPRECATED (audioMasterWantMidi), 0, 0, 0, 0);
+}
+
 // Throws an InvalidOperationException if the host command stub has not been initialized.
 inline void HostCommandStub::ThrowIfNotInitialized()
 {

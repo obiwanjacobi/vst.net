@@ -95,7 +95,15 @@
         /// <remarks>Your plugin can receive multiple <see cref="Suspend"/>/Resume calls during its lifetime.</remarks>
         public virtual void Resume()
         {
-            // no-op
+            if (Supports<IVstMidiProcessor>())
+            {
+                IVstHostDeprecated deprecated = Host.GetInstance<IVstHostDeprecated>();
+
+                if (deprecated != null)
+                {
+                    deprecated.WantMidi();
+                }
+            }
         }
 
         #endregion
