@@ -112,6 +112,22 @@ namespace Properties {
 			}
 		}
 
+		static property System::String^ VstInteropMain_CouldNotCreatePluginCmdStub
+		{
+			System::String^ get()
+			{
+				return ResourceManager->GetString("VstInteropMain_CouldNotCreatePluginCmdStub", Culture);
+			}
+		}
+
+		static property System::String^ VstInteropMain_GetPluginInfoNull
+		{
+			System::String^ get()
+			{
+				return ResourceManager->GetString("VstInteropMain_GetPluginInfoNull", Culture);
+			}
+		}
+
 		//---------------------------------------------------------------------
 
 		static property System::Resources::ResourceManager^ ResourceManager
@@ -120,7 +136,7 @@ namespace Properties {
 			{
 				if(_rescMgr == nullptr)
 				{
-					_rescMgr = gcnew System::Resources::ResourceManager("Jacobi.Vst.Interop.Properties", 
+					_rescMgr = gcnew System::Resources::ResourceManager("JacobiVstInterop.Resources", 
 						System::Reflection::Assembly::GetExecutingAssembly());
 				}
 

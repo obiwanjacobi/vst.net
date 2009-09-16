@@ -137,6 +137,14 @@
     <value>Buffer size does not match this manager instance.</value>
     <comment>Exception text.</comment>
   </data>
+  <data name="VstInteropMain_CouldNotCreatePluginCmdStub" xml:space="preserve">
+    <value>The Plugin Factory was unable to create a Plugin Command Stub. Loading will be cancelled.</value>
+    <comment>Message Text.</comment>
+  </data>
+  <data name="VstInteropMain_GetPluginInfoNull" xml:space="preserve">
+    <value>The Plugin Command Stub did not return a Plugin Info instance. Loading will be cancelled.</value>
+    <comment>Message Text.</comment>
+  </data>
   <data name="VstManagedPluginContext_PluginCommandStubNotFound" xml:space="preserve">
     <value>'{0}' does not have a public implementation of the IVstPluginCommandStub interface.</value>
     <comment>Exception text.</comment>
@@ -149,7 +157,7 @@
     <value>This instance of the VstPluginContext is already initialized.</value>
     <comment>Exception text.</comment>
   </data>
-  <data name="VstUnmanagedPluginContext_EntryPointNotFounVstUnmanagedPluginContext_EntryPointNotFoun" xml:space="preserve">
+  <data name="VstUnmanagedPluginContext_EntryPointNotFound" xml:space="preserve">
     <value>'{0}' has no exported 'VSTPluginMain' function (VST 2.4).</value>
     <comment>Exception text.</comment>
   </data>
