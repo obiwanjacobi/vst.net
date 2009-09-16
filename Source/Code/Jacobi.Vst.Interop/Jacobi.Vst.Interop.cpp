@@ -7,6 +7,7 @@
 #include "Plugin/HostCommandStub.h"
 #include "TimeCriticalScope.h"
 #include "Utils.h"
+#include "Properties/Resources.h"
 #include<vcclr.h>
 
 namespace Jacobi {
@@ -78,12 +79,12 @@ AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback)
 			}
 			else
 			{
-				Utils::ShowWarning("The Plugin Command Stub did not return a Plugin Info instance. Loading will be cancelled.");
+				Utils::ShowWarning(Jacobi::Vst::Interop::Properties::Resources::VstInteropMain_GetPluginInfoNull);
 			}
 		}
 		else
 		{
-			Utils::ShowWarning("The Plugin Factory was unable to create a Plugin Command Stub. Loading will be cancelled.");
+			Utils::ShowWarning(Jacobi::Vst::Interop::Properties::Resources::VstInteropMain_CouldNotCreatePluginCmdStub);
 		}
 	}
 	catch(System::Exception^ exc)
