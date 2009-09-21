@@ -8,6 +8,21 @@
     /// </summary>
     public class VstParameterInfo
     {
+        /// <summary>
+        /// Constructs a new instance and sets the <see cref="MaxInteger"/> property to 1.
+        /// </summary>
+        public VstParameterInfo()
+        {
+            // set default for [0,1] value range.
+            MaxInteger = 1;
+        }
+
+        /// <summary>
+        /// When set to an instance of an object it contains 
+        /// the normalization factors for this parameter.
+        /// </summary>
+        public VstParameterNormalizationInfo NormalizationInfo { get; set; }
+
         private VstParameterManager _paramMgr;
         /// <summary>
         /// Gets or sets the <see cref="VstParameterManager"/> for this parameter type.
