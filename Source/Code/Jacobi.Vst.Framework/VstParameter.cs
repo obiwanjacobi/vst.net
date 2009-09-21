@@ -50,12 +50,39 @@ namespace Jacobi.Vst.Framework
             }
         }
 
+        /// <summary>
+        /// Gets or sets the normalized value of the parameter [0.0, 1.0].
+        /// </summary>
+        public float NormalizedValue
+        {
+            get
+            {
+                if (Info.NormalizationInfo != null)
+                {
+                    return Info.NormalizationInfo.GetNormalizedValue(Value);
+                }
+
+                return Value;
+            }
+            set
+            {
+                if (Info.NormalizationInfo != null)
+                {
+                    Value = Info.NormalizationInfo.GetRawValue(value);
+                }
+                else
+                {
+                    Value = value;
+                }
+            }
+        }
+
         private string _displayValue;
         /// <summary>
         /// Gets the value of the parameter formatted for displaying.
         /// </summary>
         /// <remarks>Derived classes can set this property but the length should not exceed 7 characters. 
-        /// By default the <see cref="Value"/> property is returned as string (untill you set a value).</remarks>
+        /// By default the <see cref="Value"/> property is returned as string (untill you set a non-null value).</remarks>
         public virtual string DisplayValue 
         {
             get
