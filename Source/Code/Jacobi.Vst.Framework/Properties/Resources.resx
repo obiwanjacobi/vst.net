@@ -141,4 +141,12 @@
     <value>Assigned VstParameterManager value is not linked to this VstParamaterInfo instance.</value>
     <comment>Exception text.</comment>
   </data>
+  <data name="VstParameterNormalizationInfo_AlreadyAttached" xml:space="preserve">
+    <value>The specified VstParameterInfo instance already has a VstParameterNormalizationInfo instance attached.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstParameterNormalizationInfo_ParameterInfoInvalid" xml:space="preserve">
+    <value>The specified VstParameterInfo does not have a valid value range set.</value>
+    <comment>Exception text.</comment>
+  </data>
 </root>

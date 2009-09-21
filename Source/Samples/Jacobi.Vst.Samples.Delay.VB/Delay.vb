@@ -30,8 +30,8 @@ Namespace Jacobi.Vst.Samples.Delay.VB
             paramInfo.SmallStepFloat = 1.0F
             paramInfo.StepFloat = 10.0F
             paramInfo.DefaultValue = 200.0F
-            paramInfo.ParameterManager = New VstParameterManager(paramInfo)
-            _delayTimeMgr = paramInfo.ParameterManager
+            _delayTimeMgr = New VstParameterManager(paramInfo)
+            VstParameterNormalizationInfo.AttachTo(paramInfo)
 
             _paramInfos.Add(paramInfo)
 
@@ -45,8 +45,8 @@ Namespace Jacobi.Vst.Samples.Delay.VB
             paramInfo.SmallStepFloat = 0.01F
             paramInfo.StepFloat = 0.05F
             paramInfo.DefaultValue = 0.2F
-            paramInfo.ParameterManager = New VstParameterManager(paramInfo)
-            _feedbackMgr = paramInfo.ParameterManager
+            _feedbackMgr = New VstParameterManager(paramInfo)
+            VstParameterNormalizationInfo.AttachTo(paramInfo)
 
             _paramInfos.Add(paramInfo)
 
@@ -60,8 +60,8 @@ Namespace Jacobi.Vst.Samples.Delay.VB
             paramInfo.SmallStepFloat = 0.01F
             paramInfo.StepFloat = 0.05F
             paramInfo.DefaultValue = 0.8F
-            paramInfo.ParameterManager = New VstParameterManager(paramInfo)
-            _dryLevelMgr = paramInfo.ParameterManager
+            _dryLevelMgr = New VstParameterManager(paramInfo)
+            VstParameterNormalizationInfo.AttachTo(paramInfo)
 
             _paramInfos.Add(paramInfo)
 
@@ -75,8 +75,8 @@ Namespace Jacobi.Vst.Samples.Delay.VB
             paramInfo.SmallStepFloat = 0.01F
             paramInfo.StepFloat = 0.05F
             paramInfo.DefaultValue = 0.4F
-            paramInfo.ParameterManager = New VstParameterManager(paramInfo)
-            _wetLevelMgr = paramInfo.ParameterManager
+            _wetLevelMgr = New VstParameterManager(paramInfo)
+            VstParameterNormalizationInfo.AttachTo(paramInfo)
 
             _paramInfos.Add(paramInfo)
 
@@ -103,8 +103,10 @@ Namespace Jacobi.Vst.Samples.Delay.VB
                 _sampleRate = value
 
                 ' allocate buffer for max delay time
-                _bufferLength = CType(_delayTimeMgr.ParameterInfo.MaxInteger * _sampleRate / 1000, Integer)
-                _delayBuffer = New Single(_bufferLength) {}
+                Dim bufferLength As Int32 = CType(_delayTimeMgr.ParameterInfo.MaxInteger * _sampleRate / 1000, Integer)
+                _delayBuffer = New Single(bufferLength) {}
+
+                _bufferLength = CType(_delayTimeMgr.CurrentValue * _sampleRate / 1000, Integer)
             End Set
         End Property
 

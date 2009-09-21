@@ -37,7 +37,8 @@
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 200f;
-            _delayTimeMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
+            _delayTimeMgr = new VstParameterManager(paramInfo);
+            VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
@@ -51,7 +52,8 @@
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.2f;
-            _feedbackMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
+            _feedbackMgr = new VstParameterManager(paramInfo);
+            VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
@@ -65,7 +67,8 @@
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.8f;
-            _dryLevelMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
+            _dryLevelMgr = new VstParameterManager(paramInfo);
+            VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
@@ -79,7 +82,8 @@
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.4f;
-            _wetLevelMgr = paramInfo.ParameterManager = new VstParameterManager(paramInfo);
+            _wetLevelMgr = new VstParameterManager(paramInfo);
+            VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
@@ -117,6 +121,8 @@
                 // allocate buffer for max delay time
                 int bufferLength = (int)(_delayTimeMgr.ParameterInfo.MaxInteger * _sampleRate / 1000);
                 _delayBuffer = new float[bufferLength];
+
+                _bufferLength = (int)(_delayTimeMgr.CurrentValue * _sampleRate / 1000);
             }
         }
 

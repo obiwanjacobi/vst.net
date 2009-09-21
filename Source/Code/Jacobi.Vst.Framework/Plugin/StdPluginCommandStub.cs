@@ -892,6 +892,9 @@
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
                 
+                // clear the normalization info for this parameter
+                parameter.Info.NormalizationInfo = null;
+
                 VstParameterProperties paramProps = new VstParameterProperties();
 
                 // labels
@@ -1387,7 +1390,8 @@
             if (pluginParams != null)
             {
                 VstParameter parameter = pluginParams.Parameters[index];
-                parameter.Value = value;
+
+                parameter.NormalizedValue = value;
             }
         }
 
@@ -1403,7 +1407,8 @@
             if (pluginParams != null)
             {
                 VstParameter parameter = pluginParams.Parameters[index];
-                return parameter.Value;
+
+                return parameter.NormalizedValue;
             }
 
             return 0.0f;
