@@ -105,11 +105,14 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 		case effGetChunk:
 			{
 			array<System::Byte>^ buffer = _commandStub->GetChunk(index != 0);
-			*(void**)ptr = TypeConverter::ByteArrayToPtr(buffer);
+			if(buffer != nullptr)
+			{
+				*(void**)ptr = TypeConverter::ByteArrayToPtr(buffer);
 			
-			_memTracker->RegisterArray(*(void**)ptr);
+				_memTracker->RegisterArray(*(void**)ptr);
 
-			result = buffer->Length;
+				result = buffer->Length;
+			}
 			}
 			break;
 		case effSetChunk:
