@@ -57,6 +57,18 @@
         }
 
         /// <summary>
+        /// Creates a default instance and reuses that for all threads.
+        /// </summary>
+        /// <param name="instance">A reference to the default instance or null.</param>
+        /// <returns>Returns the default instance.</returns>
+        protected override IVstPluginPersistence CreatePersistence(IVstPluginPersistence instance)
+        {
+            if (instance == null) return new PluginPersistence(this);
+
+            return instance;
+        }
+
+        /// <summary>
         /// Always returns <b>this</b>.
         /// </summary>
         /// <param name="instance">A reference to the default instance or null.</param>

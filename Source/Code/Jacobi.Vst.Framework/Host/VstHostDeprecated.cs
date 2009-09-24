@@ -3,7 +3,7 @@
     using Jacobi.Vst.Core;
 
     /// <summary>
-    /// Forwards the calls of the <see cref="IVstDeprecated"/> interface to the Host Command Stub.
+    /// Forwards the calls of the <see cref="IVstHostDeprecated"/> interface to the Host Command Stub.
     /// </summary>
     internal class VstHostDeprecated : IVstHostDeprecated
     {
@@ -13,7 +13,7 @@
         /// Constructs an instance on the host proxy.
         /// </summary>
         /// <param name="host">Must not be null.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
         public VstHostDeprecated(VstHost host)
         {
             Throw.IfArgumentIsNull(host, "host");

@@ -1248,28 +1248,36 @@
             IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
             IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
 
-            if (pluginPersistence != null && pluginPrograms != null)
+            if (pluginPersistence != null)
             {
                 using (MemoryStream stream = new MemoryStream())
                 {
                     VstProgramCollection programs = null;
 
-                    if (isPreset)
+                    if (pluginPrograms != null)
                     {
-                        programs = new VstProgramCollection();
+                        if (isPreset)
+                        {
+                            programs = new VstProgramCollection();
 
-                        if (pluginPrograms.ActiveProgram != null)
-                        {
-                            programs.Add(pluginPrograms.ActiveProgram);
+                            if (pluginPrograms.ActiveProgram != null)
+                            {
+                                programs.Add(pluginPrograms.ActiveProgram);
+                            }
+                            else if (pluginPrograms.Programs.Count > 0)
+                            {
+                                programs.Add(pluginPrograms.Programs[0]);
+                            }
                         }
-                        else if(pluginPrograms.Programs.Count > 0)
+                        else
                         {
-                            programs.Add(pluginPrograms.Programs[0]);
+                            programs = pluginPrograms.Programs;
                         }
                     }
                     else
                     {
-                        programs = pluginPrograms.Programs;
+                        // allocate a dummy collection
+                        programs = new VstProgramCollection();
                     }
 
                     pluginPersistence.WritePrograms(stream, programs);
@@ -1295,7 +1303,7 @@
             IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
             IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
 
-            if (pluginPersistence != null && pluginPrograms != null)
+            if (pluginPersistence != null)
             {
                 using (MemoryStream stream = new MemoryStream(data, false))
                 {
@@ -1305,34 +1313,37 @@
                     
                     pluginPersistence.ReadPrograms(stream, programs);
 
-                    if (isPreset)
+                    if (pluginPrograms != null)
                     {
-                        VstProgram prog = null;
-
-                        if (programs.Count > 0)
+                        if (isPreset)
                         {
-                            prog = programs[0];
-                        }
+                            VstProgram prog = null;
 
-                        if (prog != null)
-                        {
-                            VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
-
-                            pluginPrograms.Programs.Add(prog);
-                            pluginPrograms.ActiveProgram = prog;
-
-                            // remove the previously active program that has now been replaced
-                            if (formerActiveProg != null)
+                            if (programs.Count > 0)
                             {
-                                pluginPrograms.Programs.Remove(formerActiveProg);
+                                prog = programs[0];
+                            }
+
+                            if (prog != null)
+                            {
+                                VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
+
+                                pluginPrograms.Programs.Add(prog);
+                                pluginPrograms.ActiveProgram = prog;
+
+                                // remove the previously active program that has now been replaced
+                                if (formerActiveProg != null)
+                                {
+                                    pluginPrograms.Programs.Remove(formerActiveProg);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        pluginPrograms.ActiveProgram = null;
-                        pluginPrograms.Programs.Clear();
-                        pluginPrograms.Programs.AddRange(programs);
+                        else
+                        {
+                            pluginPrograms.ActiveProgram = null;
+                            pluginPrograms.Programs.Clear();
+                            pluginPrograms.Programs.AddRange(programs);
+                        }
                     }
 
                     return (int)stream.Position;
