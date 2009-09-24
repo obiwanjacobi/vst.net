@@ -49,12 +49,13 @@
         public void Open(IntPtr hWnd)
         {
             _uiWrapper.SafeInstance.NoteMap = _plugin.NoteMap;
+            _uiWrapper.SafeInstance.NoteOnEvents = _plugin.GetInstance<MidiProcessor>().NoteOnEvents;
             _uiWrapper.Open(hWnd);
         }
 
         public void ProcessIdle()
         {
-            // no-op
+            _uiWrapper.SafeInstance.ProcessIdle();
         }
 
         #endregion

@@ -24,6 +24,7 @@ namespace Jacobi.Vst.Core.Host
 
         #region IVstPluginCommandStub Members
 
+        /// <inheritdoc />
         public IVstPluginContext PluginContext { get; set; }
 
         #endregion

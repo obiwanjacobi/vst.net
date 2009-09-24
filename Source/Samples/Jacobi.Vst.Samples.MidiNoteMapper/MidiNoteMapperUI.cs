@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.MidiNoteMapper
@@ -26,6 +28,39 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
             set { _noteMap = value; FillList(); }
         }
 
+        /// <summary>
+        /// Contains a queue with note-on note numbers currently playing.
+        /// </summary>
+        public Queue<byte> NoteOnEvents { get; set; }
+
+        /// <summary>
+        /// Updates the UI with the <see cref="NoteOnEvents"/>.
+        /// </summary>
+        public void ProcessIdle()
+        {
+            if (NoteOnEvents.Count > 0)
+            {
+                byte noteNo;
+
+                lock (((ICollection)NoteOnEvents).SyncRoot)
+                {
+                    noteNo = NoteOnEvents.Dequeue();
+                }
+
+                SelectNoteMapItem(noteNo);
+            }
+        }
+
+        private void SelectNoteMapItem(byte noteNo)
+        {
+            MapListVw.SelectedIndices.Clear();
+
+            if (MapListVw.Items.ContainsKey(noteNo.ToString()))
+            {
+                MapListVw.Items[noteNo.ToString()].Selected = true;
+            }
+        }
+
         private void FillList()
         {
             if (!this.Created || NoteMap == null) return;
@@ -46,6 +81,7 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
                 lvItem.SubItems.Add(item.OutputNoteNumber.ToString());
                 lvItem.Tag = item;
                 lvItem.Selected = (selectedItem == item);
+                lvItem.Name = item.TriggerNoteNumber.ToString();
 
                 MapListVw.Items.Add(lvItem);
             }
