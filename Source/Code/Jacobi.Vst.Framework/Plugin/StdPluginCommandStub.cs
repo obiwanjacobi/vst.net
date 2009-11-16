@@ -16,6 +16,14 @@
     {
         private VstPluginContext _pluginCtx;
 
+        /// <summary>
+        /// Provides derived classes accces to the root object of the Plugin.
+        /// </summary>
+        protected IVstPlugin Plugin
+        {
+            get { return _pluginCtx.Plugin; }
+        }
+
         #region IVstPluginCommandStub Members
         /// <summary>
         /// Called by the Interop loader to retrieve the plugin information.

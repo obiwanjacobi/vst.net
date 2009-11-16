@@ -59,14 +59,12 @@
     <Compile Include="Common\NativeMethods.cs" />
     <Compile Include="Host\VstHost.cs" />
     <Compile Include="Host\VstHostAutomation.cs" />
-    <Compile Include="Host\VstHostDeprecated.cs" />
     <Compile Include="Host\VstHostInterfaceManager.cs" />
     <Compile Include="Host\VstHostMidiProcessor.cs" />
     <None Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IActivatable.cs" />
     <Compile Include="IExtensible.cs" />
-    <Compile Include="IVstHostDeprecated.cs" />
     <Compile Include="IVstPluginAudioProcessor.cs" />
     <Compile Include="IVstHost.cs" />
     <Compile Include="IVstHostAutomation.cs" />
@@ -90,6 +88,7 @@
     <Compile Include="Plugin\IO\VstProgramWriter.cs" />
     <Compile Include="Plugin\PluginInterfaceManagerBase.cs" />
     <Compile Include="Common\WinFormsControlWrapper.cs" />
+    <Compile Include="Plugin\StdPluginDeprecatedCommandStub.cs" />
     <Compile Include="Plugin\VstPluginAudioPrecisionProcessorBase.cs" />
     <Compile Include="Plugin\VstPluginAudioProcessorBase.cs" />
     <Compile Include="Plugin\VstPluginBase.cs" />

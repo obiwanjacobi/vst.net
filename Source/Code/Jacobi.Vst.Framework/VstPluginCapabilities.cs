@@ -14,7 +14,5 @@
         NoSoundInStop = 0x01,
         /// <summary>Indicates to the host that the plugin will request Time Information.</summary>
         ReceiveTimeInfo = 0x02,
-        /// <summary>Indicates to the host that the plugin will call methods that were deprecated in VST 2.4.</summary>
-        RequireLegacy = 0x04,
     }
 }

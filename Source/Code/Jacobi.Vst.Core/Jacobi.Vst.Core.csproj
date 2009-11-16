@@ -42,7 +42,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
@@ -52,14 +54,21 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Deprecated\VstGenericEvent.cs" />
+    <Compile Include="Deprecated\VstPluginDeprecatedInfo.cs" />
+    <Compile Include="FourCharacterCode.cs" />
     <Compile Include="Host\IVstHostCommandStub.cs" />
     <Compile Include="Host\IVstPluginCommandStub.cs" />
     <Compile Include="Host\IVstPluginContext.cs" />
     <Compile Include="Host\VstHostCommandAdapter.cs" />
+    <Compile Include="Deprecated\VstHostCommandDeprecatedAdapter.cs" />
     <Compile Include="Host\VstPluginCommandAdapter.cs" />
+    <Compile Include="Deprecated\VstPluginCommandDeprecatedAdapter.cs" />
     <Compile Include="IDirectBufferAccess.cs" />
     <Compile Include="IVstHostCommands.cs" />
+    <Compile Include="Deprecated\IVstHostCommandsDeprecated.cs" />
     <Compile Include="IVstPluginCommands.cs" />
+    <Compile Include="Deprecated\IVstPluginCommandsDeprecated.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
