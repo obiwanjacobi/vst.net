@@ -18,7 +18,21 @@ PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginComm
 	}
 
 	_commandStub = cmdStub;
+	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20^>(cmdStub);
+
 	_memTracker = gcnew MemoryTracker();
+	_pEditorRect = new ERect();
+}
+
+PluginCommandProxy::~PluginCommandProxy()
+{
+	this->!PluginCommandProxy();
+}
+
+PluginCommandProxy::!PluginCommandProxy()
+{
+	Cleanup();
+	delete _pEditorRect;
 }
 
 // Dispatches an opcode to the plugin command stub.
@@ -31,17 +45,13 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	{
 		switch(opcode)
 		{
-		// Cubase 2.X SX asks for this and wont load otherwise
-		case DECLARE_VST_DEPRECATED (effIdentify):
-			result = CCONST ('N', 'v', 'E', 'f');
-			break;
-
 		case effOpen:
 			_commandStub->Open();
 			break;
 		case effClose:
 			_commandStub->Close();
-			Cleanup();
+			// dispose this instance
+			delete this;
 			break;
 		case effSetProgram:
 			_commandStub->SetProgram(value);
@@ -84,13 +94,15 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = 1;
 			break;
 		case effEditGetRect:
-			{
+		{
 			System::Drawing::Rectangle rect;
-			result = (_commandStub->EditorGetRect(rect) ? 1 : 0);
-			// TODO: ERect is allocated. Will this leak!?
-			*((ERect**)ptr) = TypeConverter::AllocUnmanagedRectangle(rect);
+			if (_commandStub->EditorGetRect(rect))
+			{
+				TypeConverter::ToUnmanagedRectangle(_pEditorRect, rect);
+				*((ERect**)ptr) = _pEditorRect;
+				result = 1;
 			}
-			break;
+		}	break;
 		case effEditOpen:
 			result = _commandStub->EditorOpen(System::IntPtr(ptr));
 			break;
@@ -103,7 +115,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = 1;
 			break;
 		case effGetChunk:
-			{
+		{
 			array<System::Byte>^ buffer = _commandStub->GetChunk(index != 0);
 			if(buffer != nullptr)
 			{
@@ -113,14 +125,12 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 
 				result = buffer->Length;
 			}
-			}
-			break;
+		}	break;
 		case effSetChunk:
-			{
+		{
 			array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, value);
 			result = _commandStub->SetChunk(buffer, index != 0) ? 1 : 0;
-			}
-			break;
+		}	break;
 		case effProcessEvents:
 			result = _commandStub->ProcessEvents(TypeConverter::ToManagedEventArray((VstEvents*)ptr)) ? 1 : 0;
 			break;
@@ -131,35 +141,32 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->String2Parameter(index, TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
 			break;
 		case effGetProgramNameIndexed:
-			{
+		{
 			System::String^ name = _commandStub->GetProgramNameIndexed(index);
 			if(name != nullptr)
 			{
 				TypeConverter::StringToChar(name, (char*)ptr, kVstMaxProgNameLen);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetInputProperties:
-			{
+		{
 			Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->GetInputProperties(index);
 			if(pinProps != nullptr)
 			{
 				TypeConverter::ToUnmanagedPinProperties((::VstPinProperties*)ptr, pinProps);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetOutputProperties:
-			{
+		{
 			Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->GetOutputProperties(index);
 			if(pinProps != nullptr)
 			{
 				TypeConverter::ToUnmanagedPinProperties((::VstPinProperties*)ptr, pinProps);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetPlugCategory:
 			result = (VstInt32)_commandStub->GetCategory();
 			break;
@@ -184,38 +191,35 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 				TypeConverter::ToManagedSpeakerArrangement((::VstSpeakerArrangement*)ptr));
 			break;
 		case effSetBypass:
-			result = _commandStub->SetBypass(value != 0 ? true : false) ? 1 : 0;
+			result = _commandStub->SetBypass(value != 0) ? 1 : 0;
 			break;
 		case effGetEffectName:
-			{
+		{
 			System::String^ name = _commandStub->GetEffectName();
 			if(name != nullptr)
 			{
 				TypeConverter::StringToChar(name, (char*)ptr, kVstMaxEffectNameLen);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetVendorString:
-			{
+		{
 			System::String^ str = _commandStub->GetVendorString();
 			if(str != nullptr)
 			{
 				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxVendorStrLen);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetProductString:
-			{
+		{
 			System::String^ str = _commandStub->GetProductString();
 			if(str != nullptr)
 			{
 				TypeConverter::StringToChar(str, (char*)ptr, kVstMaxProductStrLen);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetVendorVersion:
 			result = _commandStub->GetVendorVersion();
 			break;
@@ -226,15 +230,14 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->GetTailSize();
 			break;
 		case effGetParameterProperties:
-			{
+		{
 			Jacobi::Vst::Core::VstParameterProperties^ paramProps = _commandStub->GetParameterProperties(index);
 			if(paramProps != nullptr)
 			{
 				TypeConverter::ToUnmanagedParameterProperties((::VstParameterProperties*)ptr, paramProps);
 				result = 1;
 			}
-			}
-			break;
+		}	break;
 		case effGetVstVersion:
 			result = _commandStub->GetVstVersion();
 			break;
@@ -252,44 +255,40 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->SetEditorKnobMode(safe_cast<Jacobi::Vst::Core::VstKnobMode>(value)) ? 1 : 0;
 			break;
 		case effGetMidiProgramName:
-			{
+		{
 			::MidiProgramName* pProgName = (::MidiProgramName*)ptr;
 			Jacobi::Vst::Core::VstMidiProgramName^ progName = gcnew Jacobi::Vst::Core::VstMidiProgramName();
 			progName->CurrentProgramIndex = pProgName->thisProgramIndex;
 			result = _commandStub->GetMidiProgramName(progName, index);
 			TypeConverter::ToUnmanagedMidiProgramName(pProgName, progName);
-			}
-			break;
+		}	break;
 		case effGetCurrentMidiProgram:
-			{
+		{
 			::MidiProgramName* pProgName = (::MidiProgramName*)ptr;
 			Jacobi::Vst::Core::VstMidiProgramName^ progName = gcnew Jacobi::Vst::Core::VstMidiProgramName();
 			result = _commandStub->GetCurrentMidiProgramName(progName, index);
 			TypeConverter::ToUnmanagedMidiProgramName(pProgName, progName);
-			}
-			break;
+		}	break;
 		case effGetMidiProgramCategory:
-			{
+		{
 			::MidiProgramCategory* pProgCat = (::MidiProgramCategory*)ptr;
 			Jacobi::Vst::Core::VstMidiProgramCategory^ progCat = gcnew Jacobi::Vst::Core::VstMidiProgramCategory();
 			progCat->CurrentCategoryIndex = pProgCat->thisCategoryIndex;
 			result = _commandStub->GetMidiProgramCategory(progCat, index);
 			TypeConverter::ToUnmanagedMidiProgramCategory(pProgCat, progCat);
-			}
-			break;
+		}	break;
 		case effHasMidiProgramsChanged:
 			result = _commandStub->HasMidiProgramsChanged(index) ? 1 : 0;
 			break;
 		case effGetMidiKeyName:
-			{
+		{
 			::MidiKeyName* pKeyName = (::MidiKeyName*)ptr;
 			Jacobi::Vst::Core::VstMidiKeyName^ midiKeyName = gcnew Jacobi::Vst::Core::VstMidiKeyName();
 			midiKeyName->CurrentProgramIndex = pKeyName->thisProgramIndex;
 			midiKeyName->CurrentKeyNumber = pKeyName->thisKeyNumber;
 			result = _commandStub->GetMidiKeyName(midiKeyName, index);
 			TypeConverter::StringToChar(midiKeyName->Name, pKeyName->keyName, kVstMaxNameLen);
-			}
-			break;
+		}	break;
 		case effBeginSetProgram:
 			result = _commandStub->BeginSetProgram() ? 1 : 0;
 			break;
@@ -297,10 +296,9 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->EndSetProgram() ? 1 : 0;
 			break;
 		case effGetSpeakerArrangement:
-			{
+		{
 			::VstSpeakerArrangement** ppInput = (::VstSpeakerArrangement**)value;
 			::VstSpeakerArrangement** ppOutput = (::VstSpeakerArrangement**)ptr;
-
 			*ppInput = NULL;
 			*ppOutput = NULL;
 
@@ -317,8 +315,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 				*ppOutput = TypeConverter::AllocUnmanagedSpeakerArrangement(outputArr);
 				_memTracker->RegisterObject(*ppOutput);
 			}
-			}
-			break;
+		}	break;
 		//case effShellGetNextPlugin:
 			/*{
 			System::String^ str;
@@ -354,14 +351,114 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			result = _commandStub->GetNumberOfMidiOutputChannels();
 			break;
 		default:
-			// unknown command
-			System::Diagnostics::Debug::WriteLine("Unhandled dispatcher opcode:" + opcode, "VST.NET");
+			result = DispatchDeprecated(opcode, index, value, ptr, opt);
 			break;
 		}
 	}
 	catch(System::Exception^ e)
 	{
 		Utils::ShowError(e);
+	}
+
+	return result;
+}
+
+// continueation of Dispatch()
+// Dispatches an opcode to the plugin deprecated command stub.
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
+VstIntPtr PluginCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
+{
+	VstIntPtr result = 0;
+
+	if(_deprecatedCmdStub != nullptr)
+	{
+		switch(opcode)
+		{
+		// VST 1.0 deprecated
+		case DECLARE_VST_DEPRECATED (effGetVu):
+			// TODO: conversion from 'float' to 'VstIntPtr', possible loss of data
+			result = _deprecatedCmdStub->GetVu();
+			break;
+		//case DECLARE_VST_DEPRECATED (effEditDraw):
+		//	break;
+		//case DECLARE_VST_DEPRECATED (effEditMouse):
+		//	break;
+		case DECLARE_VST_DEPRECATED (effEditKey):
+			result = _deprecatedCmdStub->EditorKey(safe_cast<System::Int32>(value)) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effEditTop):
+			result = _deprecatedCmdStub->EditorTop() ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effEditSleep):
+			result = _deprecatedCmdStub->EditorSleep() ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effIdentify):
+			result = _deprecatedCmdStub->Identify();
+			break;
+
+		// VST 2.0 deprecated
+		case DECLARE_VST_DEPRECATED (effGetNumProgramCategories):
+			result = _deprecatedCmdStub->GetProgramCategoriesCount();
+			break;
+		case DECLARE_VST_DEPRECATED (effCopyProgram):
+			result = _deprecatedCmdStub->CopyCurrentProgramTo(index);
+			break;
+		case DECLARE_VST_DEPRECATED (effConnectInput):
+			result = _deprecatedCmdStub->ConnectInput(index, value != 0) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effConnectOutput):
+			result = _deprecatedCmdStub->ConnectOutput(index, value != 0) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effGetCurrentPosition):
+			result = _deprecatedCmdStub->GetCurrentPosition();
+			break;
+		case DECLARE_VST_DEPRECATED (effGetDestinationBuffer):
+		{
+			Jacobi::Vst::Core::IDirectBufferAccess32^ audioBuffer = 
+				dynamic_cast<Jacobi::Vst::Core::IDirectBufferAccess32^>(_deprecatedCmdStub->GetDestinationBuffer());
+			if(audioBuffer != nullptr)
+			{
+				result = (VstIntPtr)audioBuffer->Buffer;
+			}
+		}	break;
+		case DECLARE_VST_DEPRECATED (effSetBlockSizeAndSampleRate):
+			result = _deprecatedCmdStub->SetBlockSizeAndSampleRate(safe_cast<System::Int32>(value), opt) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effGetErrorText):
+		{
+			System::String^ txt = _deprecatedCmdStub->GetErrorText();
+			if(txt != nullptr)
+			{
+				TypeConverter::StringToChar(txt, (char*)ptr, 256);
+				result = 1;
+			}
+		}	break;
+		case DECLARE_VST_DEPRECATED (effIdle):
+			result = _deprecatedCmdStub->Idle() ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effGetIcon):
+		{
+			System::Drawing::Icon^ icon = _deprecatedCmdStub->GetIcon();
+			if(icon != nullptr)
+			{
+				// TODO:
+				// void* in <ptr>, not yet defined
+				//result = 1;
+			}
+		}	break;
+		case DECLARE_VST_DEPRECATED (effSetViewPosition):
+			result = _deprecatedCmdStub->SetViewPosition(System::Drawing::Point(index, safe_cast<System::Int32>(value))) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (effKeysRequired):
+			// NOTE: 0=Required, 1=dont need.
+			result = _deprecatedCmdStub->KeysRequired() ? 0 : 1;
+			break;
+
+		default:
+			// unknown command
+			System::Diagnostics::Debug::WriteLine("Plugin.PluginCommandProxy: Unhandled dispatcher opcode:" + opcode, "VST.NET");
+			break;
+		}
 	}
 
 	return result;
@@ -429,6 +526,25 @@ float PluginCommandProxy::GetParameter(VstInt32 index)
 	}
 
 	return 0.0f;
+}
+
+// Calls the plugin command stub to process audio (deprecated).
+// Takes care of marshaling from C++ to Managed .NET and visa versa.
+void PluginCommandProxy::ProcessAcc(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs)
+{
+	if(_deprecatedCmdStub == nullptr) return;
+
+	try
+	{
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
+		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToManagedAudioBufferArray(outputs, sampleFrames, numOutputs, true);
+
+		_deprecatedCmdStub->ProcessAcc(inputBuffers, outputBuffers);
+	}
+	catch(System::Exception^ e)
+	{
+		Utils::ShowError(e);
+	}
 }
 
 // Cleans up any delayed memory deletes.

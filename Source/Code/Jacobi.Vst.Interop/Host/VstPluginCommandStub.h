@@ -12,7 +12,12 @@ namespace Host {
 /// The VstPluginCommandStub class implements the <see cref="Jacobi::Vst::Core::Host::IVstPluginCommandStub"/>
 /// interface that is called by the host to access the Plugin.
 /// </summary>
-ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub, System::IDisposable
+/// <remarks>
+/// The class also implements the <see cref="Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20"/> 
+/// interface for deprecated method support.
+/// </remarks>
+ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub, 
+	Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20, System::IDisposable
 {
 public:
 	//VstPluginCommandStub() { _pEffect = NULL; }
@@ -391,6 +396,123 @@ public:
 	/// </summary>
 	virtual property Jacobi::Vst::Core::Host::IVstPluginContext^ PluginContext;
 
+	//
+	// Deprecated support
+	//
+
+	// IVstPluginCommandsDeprecatedBase
+	/// <summary>
+    /// Processes audio in an accumulating fashion.
+    /// </summary>
+    /// <param name="inputs">Audio input buffers. Must not be null.</param>
+    /// <param name="outputs">Audio output buffers. Must not be null.</param>
+	virtual void ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs);
+
+	// IVstPluginCommandsDeprecated10
+	/// <summary>
+    /// Called if the VstPluginDeprecatedInfo.DeprecatedFlags has the "HasClip" or "HasVu" flags set.
+    /// </summary>
+    /// <returns>Returns the current Vu value.</returns>
+    virtual System::Single GetVu();
+    /// <summary>
+    /// Called when a key stroke occurs in the editor.
+    /// </summary>
+    /// <param name="keycode">The key code value.</param>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean EditorKey(System::Int32 keycode);
+    /// <summary>
+    /// The window that hosts the plugin editor is put on top of other windows.
+    /// </summary>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean EditorTop();
+    /// <summary>
+    /// The window that hosts the plugin editor is put in the background.
+    /// </summary>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean EditorSleep();
+    /// <summary>
+    /// Returns an identifaction code.
+    /// </summary>
+    /// <returns>Returns 'NvEf' as an integer.</returns>
+    virtual System::Int32 Identify();
+
+	// IVstPluginCommandsDeprecated20
+	/// <summary>
+    /// Retrieves the number of program categories.
+    /// </summary>
+    /// <returns>Returns the number of program categories.</returns>
+    virtual System::Int32 GetProgramCategoriesCount();
+    /// <summary>
+    /// Copy the current program to the program at <paramref name="programIndex"/>.
+    /// </summary>
+    /// <param name="programIndex">A zero-based index into the program collection.</param>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean CopyCurrentProgramTo(System::Int32 programIndex);
+    /// <summary>
+    /// Notifies the plugin of the fact that an input pin was dis/connected.
+    /// </summary>
+    /// <param name="inputIndex">A zero-based index into the input connection collection.</param>
+    /// <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean ConnectInput(System::Int32 inputIndex, System::Boolean connected);
+    /// <summary>
+    /// Notifies the plugin of the fact that an output pin was dis/connected.
+    /// </summary>
+    /// <param name="outputIndex">A zero-based index into the output connection collection.</param>
+    /// <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean ConnectOutput(System::Int32 outputIndex, System::Boolean connected);
+    /// <summary>
+    /// For external DSP.
+    /// </summary>
+    /// <returns>Returns the current position.</returns>
+	/// <remarks>The <see cref="Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedFlags"/>.ExtIsAsync 
+    /// must be set in order for this method to be called.</remarks>
+    virtual System::Int32 GetCurrentPosition();
+    /// <summary>
+    /// For external DSP.
+    /// </summary>
+    /// <returns>Returns the destination audio buffer.</returns>
+	/// <remarks>The <see cref="Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedFlags"/>.ExtHasBuffer 
+    /// must be set in order for this method to be called.</remarks>
+    virtual Jacobi::Vst::Core::VstAudioBuffer^ GetDestinationBuffer();
+    /// <summary>
+    /// Assigns a new block size and sample rate value to the plugin.
+    /// </summary>
+    /// <param name="blockSize">The number of samples per frame (cycle).</param>
+    /// <param name="sampleRate">The new sample rate.</param>
+    /// <returns>Returns true if the call was successful.</returns>
+    virtual System::Boolean SetBlockSizeAndSampleRate(System::Int32 blockSize, System::Single sampleRate);
+    /// <summary>
+    /// Retrieves an error text from the plugin.
+    /// </summary>
+    /// <returns>Returns the error text.</returns>
+    /// <remarks>The length of the text must not exceed 256 characters.</remarks>
+    virtual System::String^ GetErrorText(); // max 256 chars
+    /// <summary>
+    /// Called by the host to allow some light idle processing by the plugin.
+    /// </summary>
+    /// <returns>Returns True when subsequent Idle calls should follow. 
+    /// False is returned when no further Idle processing is required.</returns>
+    virtual System::Boolean Idle();
+    /// <summary>
+    /// Retrieves an iconic representation of the plugin.
+    /// </summary>
+    /// <returns>Returns null when not supported.</returns>
+    /// <remarks>The VST specs are not final for this method. Not supported.</remarks>
+	virtual System::Drawing::Icon^ GetIcon();
+    /// <summary>
+    /// Moves the view to a new position inside the window.
+    /// </summary>
+    /// <param name="position">The x and y coordinates.</param>
+    /// <returns>Returns true if the call was successful.</returns>
+	virtual System::Boolean SetViewPosition(System::Drawing::Point% position);
+    /// <summary>
+    /// Indicates if keys are required by the plugin.
+    /// </summary>
+    /// <returns>Returns true if keys are required.</returns>
+    virtual System::Boolean KeysRequired();
+
 internal:
 	/// <summary>Constructs a new instance based on an <b>AEffect</b> structure.</summary>
 	VstPluginCommandStub(::AEffect* pEffect);
@@ -471,6 +593,13 @@ private:
 		if(_pEffect && _pEffect->getParameter)
 			return _pEffect->getParameter(_pEffect, index);
 		return 0.0f;
+	}
+
+	// deprecated support
+	void CallProcess32Acc(float** inputs, float** outputs, ::VstInt32 sampleFrames)
+	{
+		if(_pEffect && _pEffect->DECLARE_VST_DEPRECATED (process))
+			_pEffect->DECLARE_VST_DEPRECATED (process)(_pEffect, inputs, outputs, sampleFrames);
 	}
 
 	MemoryTracker^ _memoryTracker;

@@ -186,15 +186,4 @@
         /// Otherwise unmanaged memory will leak.</remarks>
         bool CloseFileSelector(VstFileSelect fileSelect);
     }
-
-    /// <summary>
-    /// Declares the supported deprecated methods (since VST 2.4).
-    /// </summary>
-    public interface IVstHostCommandsDeprecated
-    {
-        /// <summary>
-        /// Indicates to the Host that the Plugin want to process Midi events.
-        /// </summary>
-        void WantMidi();
-    }
 }

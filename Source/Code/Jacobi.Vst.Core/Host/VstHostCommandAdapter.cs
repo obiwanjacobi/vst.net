@@ -297,9 +297,26 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         public void Dispose()
         {
-            _hostCmdStub = null; 
+            Dispose(true);
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                _hostCmdStub = null; 
+            }
+        }
         #endregion
+
+        public static VstHostCommandAdapter Create(IVstHostCommandStub hostCmdStub)
+        {
+            if(hostCmdStub is Deprecated.IVstHostCommandsDeprecated20)
+            {
+                return new Deprecated.VstHostCommandDeprecatedAdapter(hostCmdStub);
+            }
+
+            return new VstHostCommandAdapter(hostCmdStub);
+        }
     }
 }

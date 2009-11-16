@@ -617,5 +617,15 @@ namespace Jacobi.Vst.Core.Host
         }
 
         #endregion
+
+        public static VstPluginCommandAdapter Create(Plugin.IVstPluginCommandStub pluginCmdStub)
+        {
+            if (pluginCmdStub is Deprecated.IVstPluginCommandsDeprecated20)
+            {
+                return new Deprecated.VstPluginCommandDeprecatedAdapter(pluginCmdStub);
+            }
+
+            return new VstPluginCommandAdapter(pluginCmdStub);
+        }
     }
 }

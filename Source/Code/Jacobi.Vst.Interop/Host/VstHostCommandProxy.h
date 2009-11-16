@@ -33,9 +33,13 @@ public:
 
 private:
 	Jacobi::Vst::Core::Host::IVstHostCommandStub^ _hostCmdStub;
+	Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^ _deprecatedCmdStub;
 
-	VstTimeInfo* _pTimeInfo;
+	::VstTimeInfo* _pTimeInfo;
 	char* _directory;
+	::VstSpeakerArrangement* _pArrangement;
+
+	VstIntPtr DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
 };
 
 }}}} // Jacobi::Vst::Interop::Host

@@ -55,11 +55,11 @@ namespace Host {
 		}
 
 		Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
-			gcnew Jacobi::Vst::Core::Host::VstHostCommandAdapter(HostCommandStub);
+			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
 
 		PluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
 
-		PluginCommandStub = gcnew Jacobi::Vst::Core::Host::VstPluginCommandAdapter(pluginCmdStub);
+		PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
 		PluginCommandStub->PluginContext = this;
 	}
 

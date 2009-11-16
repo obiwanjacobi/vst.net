@@ -167,6 +167,21 @@ float GetParameterProc(AEffect* pluginInfo, VstInt32 index)
 	return 0.0;
 }
 
+// Audio processing (accumulating)  Procedure called by the host
+void Process32AccProc(AEffect* pluginInfo, float** inputs, float** outputs, VstInt32 sampleFrames)
+{
+	if(pluginInfo && pluginInfo->user)
+	{
+		// Tell the GC we are doing real-time processing here
+		TimeCriticalScope scope;
+
+		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
+
+		proxy->ProcessAcc(inputs, outputs, sampleFrames, pluginInfo->numInputs, pluginInfo->numOutputs);
+	}
+}
+
 // Helper method to create the AEffect structure based on the pluginInfo.
 AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
@@ -191,6 +206,20 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 	pEffect->numPrograms = pluginInfo->ProgramCount;
 	pEffect->uniqueID = pluginInfo->PluginID;
 	pEffect->version = pluginInfo->PluginVersion;
+
+	// check for deprecated members
+	Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
+		dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(pluginInfo);
+
+	if(deprecatedInfo != nullptr)
+	{
+		// hook up the old accumulating process proc when deprecated PluginInfo is passed in
+		pEffect->DECLARE_VST_DEPRECATED (process) = Jacobi::Vst::Interop::Process32AccProc;
+
+		pEffect->DECLARE_VST_DEPRECATED (realQualities) = deprecatedInfo->RealQualities;
+		pEffect->DECLARE_VST_DEPRECATED (offQualities) = deprecatedInfo->OfflineQualities;
+		pEffect->DECLARE_VST_DEPRECATED (ioRatio) = deprecatedInfo->IoRatio;
+	}
 
 	return pEffect;
 }

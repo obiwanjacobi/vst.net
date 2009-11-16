@@ -9,7 +9,7 @@ namespace Plugin {
 	/// The HostCommandStub calls the host callback function.
 	/// </summary>
 	ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub, 
-		Jacobi::Vst::Core::IVstHostCommandsDeprecated
+		Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20
 	{
 	public:
 		/// <summary>
@@ -183,10 +183,113 @@ namespace Plugin {
 		// Deprecated method support (VST 2.4)
 		//
 
+		// IVstHostCommandsDeprecated10
+		/// <summary>
+		/// Reports whether the spefied pin at the <paramref name="connectionIndex"/> is connected.
+		/// </summary>
+		/// <param name="connectionIndex">A zero-based index of the connection pin.</param>
+		/// <param name="output">Report in output pins when True, otherwise (False) report on input pins.</param>
+		/// <returns>Returns True when the pin is connected, otherwise False is returned.</returns>
+		virtual System::Boolean PinConnected(System::Int32 connectionIndex, System::Boolean output);
+
+		// IVstHostCommandsDeprecated20
 		/// <summary>
 		/// Indicates to the Host that the Plugin wants to process Midi events.
 		/// </summary>
-		virtual System::Void WantMidi();
+		/// <returns>Returns True when the call was successful.</returns>
+		virtual System::Boolean WantMidi();
+		/// <summary>
+		/// Sets a new time for the Host.
+		/// </summary>
+		/// <param name="timeInfo">Must not be null.</param>
+		/// <param name="filterFlags">Unclear what the purpose is for these flags.</param>
+		/// <returns>Returns True when the call was successful.</returns>
+		virtual System::Boolean SetTime(Jacobi::Vst::Core::VstTimeInfo^ timeInfo, Jacobi::Vst::Core::VstTimeInfoFlags filterFlags);
+		/// <summary>
+		/// Retrieves the tempo at specified <paramref name="sampleIndex"/> location.
+		/// </summary>
+		/// <param name="sampleIndex">A zero-based sample index.</param>
+		/// <returns>Returns the tempo in bmp * 10000.</returns>
+        virtual System::Int32 GetTempoAt(System::Int32 sampleIndex); // bpm * 10000
+		/// <summary>
+		/// Returns the number of parameters that support automation.
+		/// </summary>
+		/// <returns>Returns the number of parameters that support automation.</returns>
+        virtual System::Int32 GetAutomatableParameterCount();
+		/// <summary>
+		/// Returns the integer value for +1.0 representation,
+		/// or 1 if full single float precision is maintained in automation.
+		/// </summary>
+		/// <param name="parameterIndex">A zero-based index into the parmeter collection or -1 for all/any.</param>
+		/// <returns>Returns the integer value for +1.0 representation, or 1 if full single float precision is maintained in automation.</returns>
+        virtual System::Int32 GetParameterQuantization(System::Int32 parameterIndex);
+		/// <summary>
+		/// Indicates to the host that the Plugin needs idle calls (outside its editor window).
+		/// </summary>
+		/// <returns>Returns True when the call was successful.</returns>
+        virtual System::Boolean NeedIdle();
+		/// <summary>
+		/// Retrieves the previous Plugin based on the specified <paramref name="pinIndex"/>.
+		/// </summary>
+		/// <param name="pinIndex">A zero-based pin index. Specify -1 for next.</param>
+		/// <returns>Return System.IntPtr.Zero when unsuccessful.</returns>
+        virtual System::IntPtr GetPreviousPlugin(System::Int32 pinIndex); // AEffect*
+		/// <summary>
+		/// Retrieves the next Plugin based on the specified <paramref name="pinIndex"/>.
+		/// </summary>
+		/// <param name="pinIndex">A zero-based pin index. Specify -1 for next.</param>
+		/// <returns>Return System.IntPtr.Zero when unsuccessful.</returns>
+        virtual System::IntPtr GetNextPlugin(System::Int32 pinIndex); // AEffect*
+		/// <summary>
+		/// Returns an indication how the Host processes audio.
+		/// </summary>
+		/// <returns>Returns 0=Not Supported, 1=Replace, 2=Accumulate.</returns>
+        virtual System::Int32 WillReplaceOrAccumulate();
+		/// <summary>
+        /// For variable IO. Sets the output sample rate.
+        /// </summary>
+        /// <param name="sampleRate">The sample rate.</param>
+        /// <returns>Returns True when the call was successful.</returns>
+		virtual System::Boolean SetOutputSampleRate(System::Single sampleRate);
+		/// <summary>
+        /// Gets the output speaker arrangement.
+        /// </summary>
+        /// <returns>Returns the speaker arrangement.</returns>
+        virtual Jacobi::Vst::Core::VstSpeakerArrangement^ GetOutputSpeakerArrangement();
+		/// <summary>
+        /// Provides the host with an icon representation of the plugin.
+        /// </summary>
+        /// <param name="icon">Passes the icon Handle to the Host. Must not be null.</param>
+        /// <returns>Returns True when the call was successful.</returns>
+		virtual System::Boolean SetIcon(System::Drawing::Icon^ icon);
+		/// <summary>
+        /// Opens a new host window.
+        /// </summary>
+        /// <returns>Returns the Win32 HWND window handle.</returns>
+        virtual System::IntPtr OpenWindow();    // HWND
+		/// <summary>
+        /// Closes a window previously opened by <see cref="OpenWindow"/>.
+        /// </summary>
+        /// <param name="wnd">The window handle.</param>
+        /// <returns>Returns True when the call was successful.</returns>
+		virtual System::Boolean CloseWindow(System::IntPtr wnd);
+		/// <summary>
+        /// Opens an audio editor window; defined by <paramref name="xml"/>.
+        /// </summary>
+        /// <param name="xml">Must not be null or empty.</param>
+        /// <returns>Returns True when the call was successful.</returns>
+		virtual System::Boolean EditFile(System::String^ xml);
+		/// <summary>
+        /// Gets the native path of currently loading bank or project.
+        /// </summary>
+        /// <returns>Return the file path to the chunk file.</returns>
+        /// <remarks>Call from within GetChunk.</remarks>
+		virtual System::String^ GetChunkFile();
+		/// <summary>
+        /// Gets the input speaker arrangement.
+        /// </summary>
+        /// <returns>Returns the speaker arrangement.</returns>
+		virtual Jacobi::Vst::Core::VstSpeakerArrangement^ GetInputSpeakerArrangement();
 
 	internal:
 		HostCommandStub(::audioMasterCallback hostCallback);
