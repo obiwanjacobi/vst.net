@@ -16,5 +16,13 @@
         {
             return item.Name;
         }
+
+        public void AddRange(VstParameterCategoryCollection categories)
+        {
+            foreach (VstParameterCategory paramCat in categories)
+            {
+                Add(paramCat);
+            }
+        }
     }
 }

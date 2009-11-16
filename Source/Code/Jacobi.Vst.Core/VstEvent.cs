@@ -1,5 +1,7 @@
 namespace Jacobi.Vst.Core
 {
+    using System;
+
     /// <summary>
     /// The VstEvent represents a base class common to both 
     /// <see cref="VstMidiEvent"/> and <see cref="VstMidiSysExEvent"/> classes.
@@ -13,6 +15,11 @@ namespace Jacobi.Vst.Core
         /// <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
         protected VstEvent(VstEventTypes eventType, int deltaFrames)
         {
+            if (eventType == VstEventTypes.Unknown)
+            {
+                throw new ArgumentException(Properties.Resources.VstEvent_InvalidEventType, "eventType");
+            }
+
             EventType = eventType;
             DeltaFrames = deltaFrames;
         }
@@ -36,7 +43,15 @@ namespace Jacobi.Vst.Core
         Unknown = 0,
         /// <summary>Midi event.</summary>
         MidiEvent = 1,
+        /// <summary>Audio event (deprecated).</summary>
+        DeprecatedAudioEvent,
+        /// <summary>Video event (deprecated).</summary>
+        DeprecatedVideoEvent,
+        /// <summary>Parameter event (deprecated).</summary>
+        DeprecatedParameterEvent,
+        /// <summary>Trigger event (deprecated).</summary>
+        DeprecatedTriggerEvent,
         /// <summary>Midi System Exclusive event.</summary>
-        MidiSysExEvent = 6
+        MidiSysExEvent
     }
 }

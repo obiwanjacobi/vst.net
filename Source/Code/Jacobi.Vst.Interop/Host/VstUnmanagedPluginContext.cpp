@@ -69,6 +69,12 @@ namespace Host {
 
 			if(pluginMain == NULL)
 			{
+				// check old entry point
+				pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "main");
+			}
+
+			if(pluginMain == NULL)
+			{
 				throw gcnew System::EntryPointNotFoundException(
 					System::String::Format(
 						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_EntryPointNotFound,
@@ -105,17 +111,25 @@ namespace Host {
 			PluginCommandStub = gcnew VstPluginCommandStub(_pEffect);
 			PluginCommandStub->PluginContext = this;
 
-			// check if the plugin supports our VST version
+			/*// check if the plugin supports our VST version
 			if(PluginCommandStub->GetVstVersion() < 2400)
 			{
 				throw gcnew System::NotSupportedException(
 					System::String::Format(
 						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_VstVersionMismatch,
 						pluginPath));
-			}
+			}*/
 
 			// setup the plugin info
-			PluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
+			if(PluginCommandStub->GetVstVersion() < 2400)
+			{
+				// use structure with extra deprecated fields for older versions
+				PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
+			}
+			else
+			{
+				PluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
+			}
 
 			AcceptPluginInfoData(false);
 		}
@@ -142,6 +156,9 @@ namespace Host {
 
 	void VstUnmanagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
+		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
+			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(PluginInfo);
+
 		System::Collections::Generic::List<System::String^> changedPropNames = 
 			gcnew System::Collections::Generic::List<System::String^>();
 
@@ -186,6 +203,24 @@ namespace Host {
 			{
 				changedPropNames.Add("PluginInfo.PluginVersion");
 			}
+
+			if(deprecatedInfo != nullptr)
+			{
+				if(deprecatedInfo->RealQualities != _pEffect->DECLARE_VST_DEPRECATED (realQualities))
+				{
+					changedPropNames.Add("PluginInfo.RealQualities");
+				}
+
+				if(deprecatedInfo->OfflineQualities != _pEffect->DECLARE_VST_DEPRECATED (offQualities))
+				{
+					changedPropNames.Add("PluginInfo.OfflineQualities");
+				}
+
+				if(deprecatedInfo->IoRatio != _pEffect->DECLARE_VST_DEPRECATED (ioRatio))
+				{
+					changedPropNames.Add("PluginInfo.IoRatio");
+				}
+			}
 		}
 
 		// assign new values
@@ -197,6 +232,14 @@ namespace Host {
 		PluginInfo->InitialDelay = _pEffect->initialDelay;
 		PluginInfo->PluginID = _pEffect->uniqueID;
 		PluginInfo->PluginVersion = _pEffect->version;
+
+		// deprecated fields
+		if(deprecatedInfo != nullptr)
+		{
+			deprecatedInfo->RealQualities = _pEffect->DECLARE_VST_DEPRECATED (realQualities);
+			deprecatedInfo->OfflineQualities = _pEffect->DECLARE_VST_DEPRECATED (offQualities);
+			deprecatedInfo->IoRatio = _pEffect->DECLARE_VST_DEPRECATED (ioRatio);
+		}
 
 		// raise all the changed property events
 		for each(System::String^ propName in changedPropNames)

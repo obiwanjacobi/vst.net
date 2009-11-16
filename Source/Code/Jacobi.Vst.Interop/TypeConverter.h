@@ -50,15 +50,12 @@ public:
 
 
 	// Converts a managed rect to an unmanaged ppRect
-	static ERect* AllocUnmanagedRectangle(System::Drawing::Rectangle rect)
+	static void ToUnmanagedRectangle(ERect* pRect, System::Drawing::Rectangle rect)
 	{
-		ERect* pRect = new ERect();
 		pRect->top = rect.Top;
 		pRect->left = rect.Left;
 		pRect->bottom = rect.Bottom;
 		pRect->right = rect.Right;
-
-		return pRect;
 	}
 
 	// converts an unmanaged ERect* to a Rectangle. 
@@ -110,7 +107,7 @@ public:
 			switch(pEvent->type)
 			{
 			case kVstMidiType:
-				{
+			{
 				::VstMidiEvent* pMidiEvent = (::VstMidiEvent*)pEvent;
 
 				array<System::Byte>^ midiData = gcnew array<System::Byte>(4);
@@ -123,10 +120,9 @@ public:
 					pMidiEvent->noteLength, pMidiEvent->noteOffset, midiData, pMidiEvent->detune, pMidiEvent->noteOffVelocity);
 
 				eventArray[n] = midiEvent;
-				}
-				break;
+			}	break;
 			case kVstSysExType:
-				{
+			{
 				::VstMidiSysexEvent* pMidiEvent = (::VstMidiSysexEvent*)pEvent;
 				
 				// copy sysex data into managed buffer
@@ -136,16 +132,30 @@ public:
 					midiData[i] = pMidiEvent->sysexDump[i];
 				}
 
-				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = gcnew Jacobi::Vst::Core::VstMidiSysExEvent(
-					pMidiEvent->deltaFrames, 
-					midiData);
+				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = 
+					gcnew Jacobi::Vst::Core::VstMidiSysExEvent(pMidiEvent->deltaFrames, midiData);
 
 				eventArray[n] = midiEvent;
-				}
-				break;
+			}	break;
 			default:
-				// TODO: log skipping
-				break;
+			{
+				// deprecated event types support
+				// subtract deltaFrames and flags fields from byteSize
+				int length = pEvent->byteSize - (2 * sizeof(VstInt32));
+				
+				array<System::Byte>^ data = gcnew array<System::Byte>(length);
+				for(int i = 0; i < length; i++)
+				{
+					data[i] = pEvent->data[i];
+				}
+
+				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent = 
+					gcnew Jacobi::Vst::Core::Deprecated::VstGenericEvent(
+						safe_cast<Jacobi::Vst::Core::VstEventTypes>(pEvent->type), pEvent->deltaFrames, data);
+
+				eventArray[n] = genericEvent;
+			}	break;
+
 			}
 		}
 
@@ -172,7 +182,7 @@ public:
 			switch(evnt->EventType)
 			{
 			case Jacobi::Vst::Core::VstEventTypes::MidiEvent:
-				{
+			{
 				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiEvent^)evnt;
 				::VstMidiEvent* pMidiEvent = new ::VstMidiEvent();
 
@@ -192,10 +202,9 @@ public:
 				pMidiEvent->noteOffVelocity = midiEvent->NoteOffVelocity;
 
 				pEvents->events[index] = (::VstEvent*)pMidiEvent;
-				}
-				break;
+			}	break;
 			case Jacobi::Vst::Core::VstEventTypes::MidiSysExEvent:
-				{
+			{
 				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiSysExEvent^)evnt;
 				::VstMidiSysexEvent* pMidiEvent = new ::VstMidiSysexEvent();
 
@@ -213,11 +222,29 @@ public:
 				}
 
 				pEvents->events[index] = (::VstEvent*)pMidiEvent;
-				}
-				break;
+			}	break;
 			default:
-				// TODO: log skipping
-				break;
+			{
+				// deprecated event types support
+				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Deprecated::VstGenericEvent^)evnt;
+				int dataLength = genericEvent->Data->Length + (2 * sizeof(VstInt32));
+				int structLength = dataLength + (2 * sizeof(VstInt32));
+
+				::VstEvent* pEvent = (::VstEvent*)new char[structLength];
+				
+				pEvent->type = safe_cast<VstInt32>(genericEvent->EventType);
+				pEvent->byteSize = dataLength;
+				pEvent->deltaFrames = genericEvent->DeltaFrames;
+				pEvent->flags = 0;
+
+				for(int i = 0; i < genericEvent->Data->Length; i++)
+				{
+					pEvent->data[i] = genericEvent->Data[i];
+				}
+
+				pEvents->events[index] = pEvent;
+			}	break;
+
 			}
 
 			index++;
@@ -296,6 +323,14 @@ public:
 	{
 		::VstSpeakerArrangement* pArrangement = new ::VstSpeakerArrangement();
 
+		ToUnmanagedSpeakerArrangement(pArrangement, arrangement);
+
+		return pArrangement;
+	}
+
+	// copies the values from the managed arrangenment to the unmanaged pArrangement.
+	static void ToUnmanagedSpeakerArrangement(::VstSpeakerArrangement* pArrangement, Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement)
+	{
 		pArrangement->numChannels = arrangement->Speakers->Length;
 		pArrangement->type = safe_cast<::VstSpeakerArrangementType>(arrangement->Type);
 
@@ -310,8 +345,6 @@ public:
 			pArrangement->speakers[index].radius = speakerProps->Radius;
 			pArrangement->speakers[index].type = safe_cast<VstInt32>(speakerProps->SpeakerType);
 		}
-
-		return pArrangement;
 	}
 
 	// Assigns the values from the managed paramProps to the unmanaged pProps fields.
@@ -464,6 +497,18 @@ public:
 		pTimeInfo->tempo = timeInfo->Tempo;
 		pTimeInfo->timeSigDenominator = timeInfo->TimeSignatureDenominator;
 		pTimeInfo->timeSigNumerator = timeInfo->TimeSignatureNumerator;
+	}
+
+	// call delete on retval.
+	static ::VstTimeInfo* AllocUnmanagedTimeInfo(Jacobi::Vst::Core::VstTimeInfo^ timeInfo)
+	{
+		::VstTimeInfo* pTimeInfo = new ::VstTimeInfo();
+
+		ZeroMemory(pTimeInfo, sizeof(::VstTimeInfo));
+
+		ToUnmanagedTimeInfo(pTimeInfo, timeInfo);
+
+		return pTimeInfo;
 	}
 
 	// Converts the unmanaged sample buffer to a managed VstAudioBuffer array.

@@ -216,8 +216,6 @@ Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 
 System::String^ HostCommandStub::GetVendorString()
 {
-	//ThrowIfNotInitialized();
-
 	UnmanagedString pText(kVstMaxVendorStrLen);
 
 	if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
@@ -230,8 +228,6 @@ System::String^ HostCommandStub::GetVendorString()
 
 System::String^ HostCommandStub::GetProductString()
 {
-	//ThrowIfNotInitialized();
-
 	UnmanagedString pText(kVstMaxProductStrLen);
 
 	if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
@@ -244,15 +240,11 @@ System::String^ HostCommandStub::GetProductString()
 
 System::Int32 HostCommandStub::GetVendorVersion()
 {
-	//ThrowIfNotInitialized();
-	
 	return CallHost(audioMasterGetVendorVersion, 0, 0, 0, 0);
 }
 
 Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstHostCanDo cando)
 {
-	//ThrowIfNotInitialized();
-	
 	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength);
 
 	TypeConverter::StringToChar(cando.ToString(), pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
@@ -263,15 +255,11 @@ Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstH
 
 Jacobi::Vst::Core::VstHostLanguage HostCommandStub::GetLanguage()
 {
-	//ThrowIfNotInitialized();
-	
 	return safe_cast<Jacobi::Vst::Core::VstHostLanguage>(CallHost(audioMasterGetLanguage, 0, 0, 0, 0));
 }
 
 System::String^ HostCommandStub::GetDirectory()
 {
-	//ThrowIfNotInitialized();
-	
 	return TypeConverter::CharToString((char*)CallHost(audioMasterGetDirectory, 0, 0, 0, 0));
 }
 
@@ -357,10 +345,126 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 // Deprecated VST 2.4 methods
 //
 
-System::Void HostCommandStub::WantMidi()
+// IVstPluginCommandsDeprecated10
+System::Boolean HostCommandStub::PinConnected(System::Int32 connectionIndex, System::Boolean output)
 {
-	CallHost(DECLARE_VST_DEPRECATED (audioMasterWantMidi), 0, 0, 0, 0);
+	// Note: retval 0 = true
+	return (CallHost(DECLARE_VST_DEPRECATED (audioMasterPinConnected), connectionIndex, safe_cast<VstIntPtr>(output), 0, 0) == 0);
 }
+
+// IVstPluginCommandsDeprecated20
+System::Boolean HostCommandStub::WantMidi()
+{
+	return (CallHost(DECLARE_VST_DEPRECATED (audioMasterWantMidi), 0, 0, 0, 0) != 0);
+}
+
+System::Boolean HostCommandStub::SetTime(Jacobi::Vst::Core::VstTimeInfo^ timeInfo, Jacobi::Vst::Core::VstTimeInfoFlags filterFlags)
+{
+	::VstTimeInfo* pTimeInfo = TypeConverter::AllocUnmanagedTimeInfo(timeInfo);
+
+	try
+	{
+		return (CallHost(DECLARE_VST_DEPRECATED (audioMasterSetTime), 0, safe_cast<VstIntPtr>(filterFlags), pTimeInfo, 0) != 0);
+	}
+	finally
+	{
+		delete pTimeInfo;
+	}
+}
+
+System::Int32 HostCommandStub::GetTempoAt(System::Int32 sampleIndex) // bpm * 10000
+{
+	return safe_cast<System::Int32>(CallHost(DECLARE_VST_DEPRECATED (audioMasterTempoAt), 0, safe_cast<VstIntPtr>(sampleIndex), 0, 0));
+}
+
+System::Int32 HostCommandStub::GetAutomatableParameterCount()
+{
+	return safe_cast<System::Int32>(CallHost(DECLARE_VST_DEPRECATED (audioMasterGetNumAutomatableParameters), 0, 0, 0, 0));
+}
+
+System::Int32 HostCommandStub::GetParameterQuantization(System::Int32 parameterIndex)
+{
+	return safe_cast<System::Int32>(CallHost(DECLARE_VST_DEPRECATED (audioMasterGetParameterQuantization), 0, safe_cast<VstIntPtr>(parameterIndex), 0, 0));
+}
+
+System::Boolean HostCommandStub::NeedIdle()
+{
+	return (CallHost(DECLARE_VST_DEPRECATED (audioMasterNeedIdle), 0, 0, 0, 0) != 0);
+}
+
+System::IntPtr HostCommandStub::GetPreviousPlugin(System::Int32 pinIndex) // AEffect*
+{
+	return System::IntPtr(CallHost(DECLARE_VST_DEPRECATED (audioMasterGetPreviousPlug), 0, safe_cast<VstIntPtr>(pinIndex), 0, 0));
+}
+
+System::IntPtr HostCommandStub::GetNextPlugin(System::Int32 pinIndex) // AEffect*
+{
+	return System::IntPtr(CallHost(DECLARE_VST_DEPRECATED (audioMasterGetNextPlug), 0, safe_cast<VstIntPtr>(pinIndex), 0, 0));
+}
+
+System::Int32 HostCommandStub::WillReplaceOrAccumulate() // 0=Not Supported, 1=Replace, 2=Accumulate
+{
+	return safe_cast<System::Int32>(CallHost(DECLARE_VST_DEPRECATED (audioMasterWillReplaceOrAccumulate), 0, 0, 0, 0));
+}
+
+System::Boolean HostCommandStub::SetOutputSampleRate(System::Single sampleRate)
+{
+	return (CallHost(DECLARE_VST_DEPRECATED (audioMasterSetOutputSampleRate), 0, 0, 0, sampleRate) != 0);
+}
+
+Jacobi::Vst::Core::VstSpeakerArrangement^ HostCommandStub::GetOutputSpeakerArrangement()
+{
+	::VstSpeakerArrangement* pArrangement = (::VstSpeakerArrangement*)CallHost(DECLARE_VST_DEPRECATED (audioMasterGetOutputSpeakerArrangement), 0, 0, 0, 0);
+
+	return TypeConverter::ToManagedSpeakerArrangement(pArrangement);
+}
+
+System::Boolean HostCommandStub::SetIcon(System::Drawing::Icon^ icon)
+{
+	return (CallHost(DECLARE_VST_DEPRECATED (audioMasterSetIcon), 0, 0, icon->Handle.ToPointer(), 0) != 0);
+}
+
+System::IntPtr HostCommandStub::OpenWindow()    // HWND
+{
+	return System::IntPtr(CallHost(DECLARE_VST_DEPRECATED (audioMasterOpenWindow), 0, 0, 0, 0));
+}
+
+System::Boolean HostCommandStub::CloseWindow(System::IntPtr wnd)
+{
+	return (CallHost(DECLARE_VST_DEPRECATED (audioMasterCloseWindow), 0, 0, wnd.ToPointer(), 0) != 0);
+}
+
+System::Boolean HostCommandStub::EditFile(System::String^ xml)
+{
+	char* pXml = TypeConverter::AllocateString(xml);
+
+	try
+	{
+		return (CallHost(DECLARE_VST_DEPRECATED (audioMasterEditFile), 0, 0, pXml, 0) != 0);
+	}
+	finally
+	{
+		TypeConverter::DeallocateString(pXml);
+	}
+}
+
+System::String^ HostCommandStub::GetChunkFile()
+{
+	UnmanagedString pFile(2048);
+
+	CallHost(DECLARE_VST_DEPRECATED (audioMasterGetChunkFile), 0, 0, pFile, 0);
+
+	return TypeConverter::CharToString(pFile);
+}
+
+Jacobi::Vst::Core::VstSpeakerArrangement^ HostCommandStub::GetInputSpeakerArrangement()
+{
+	::VstSpeakerArrangement* pArrangement = (::VstSpeakerArrangement*)CallHost(DECLARE_VST_DEPRECATED (audioMasterGetInputSpeakerArrangement), 0, 0, 0, 0);
+
+	return TypeConverter::ToManagedSpeakerArrangement(pArrangement);
+}
+
+//-----------------------------------------------------------------------------
 
 // Throws an InvalidOperationException if the host command stub has not been initialized.
 inline void HostCommandStub::ThrowIfNotInitialized()

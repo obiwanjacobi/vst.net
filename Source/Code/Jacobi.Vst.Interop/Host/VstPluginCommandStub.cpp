@@ -551,4 +551,127 @@ System::Int32 VstPluginCommandStub::GetNumberOfMidiOutputChannels()
 	return safe_cast<System::Int32>(CallDispatch(effGetNumMidiOutputChannels, 0, 0, 0, 0));
 }
 
+//
+// Deprecated support
+//
+
+// IVstPluginCommandsDeprecatedBase
+void VstPluginCommandStub::ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs)
+{
+	float** ppInputs = _audioInputs.GetArray(inputs->Length);
+	float** ppOutputs = _audioOutputs.GetArray(outputs->Length);
+
+	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
+	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
+
+	if(inputSampleCount != outputSampleCount)
+	{
+		throw gcnew System::ArgumentException(
+			Jacobi::Vst::Interop::Properties::Resources::VstPluginCommandStub_SampleCountMismatch);
+	}
+
+	CallProcess32Acc(ppInputs, ppOutputs, inputSampleCount);
+}
+
+// IVstPluginCommandsDeprecated10
+System::Single VstPluginCommandStub::GetVu()
+{
+	return safe_cast<System::Single>(CallDispatch(DECLARE_VST_DEPRECATED (effGetVu), 0, 0, 0, 0));
+}
+
+System::Boolean VstPluginCommandStub::EditorKey(System::Int32 keycode)
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effEditKey), 0, keycode, 0, 0) != 0);
+}
+
+System::Boolean VstPluginCommandStub::EditorTop()
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effEditTop), 0, 0, 0, 0) != 0);
+}
+
+System::Boolean VstPluginCommandStub::EditorSleep()
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effEditSleep), 0, 0, 0, 0) != 0);
+}
+
+System::Int32 VstPluginCommandStub::Identify()
+{
+	return safe_cast<System::Int32>(CallDispatch(DECLARE_VST_DEPRECATED (effIdentify), 0, 0, 0, 0));
+}
+
+// IVstPluginCommandsDeprecated20
+System::Int32 VstPluginCommandStub::GetProgramCategoriesCount()
+{
+	return safe_cast<System::Int32>(CallDispatch(DECLARE_VST_DEPRECATED (effGetNumProgramCategories), 0, 0, 0, 0));
+}
+
+System::Boolean VstPluginCommandStub::CopyCurrentProgramTo(System::Int32 programIndex)
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effCopyProgram), programIndex, 0, 0, 0) != 0);
+}
+
+System::Boolean VstPluginCommandStub::ConnectInput(System::Int32 inputIndex, System::Boolean connected)
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effConnectInput), inputIndex, connected, 0, 0) != 0);
+}
+
+System::Boolean VstPluginCommandStub::ConnectOutput(System::Int32 outputIndex, System::Boolean connected)
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effConnectOutput), outputIndex, connected, 0, 0) != 0);
+}
+
+System::Int32 VstPluginCommandStub::GetCurrentPosition()
+{
+	return safe_cast<System::Int32>(CallDispatch(DECLARE_VST_DEPRECATED (effGetCurrentPosition), 0, 0, 0, 0));
+}
+
+Jacobi::Vst::Core::VstAudioBuffer^ VstPluginCommandStub::GetDestinationBuffer()
+{
+	int length = 0; // TODO: retrieve block size?
+	
+	float* pBuffer = (float*)CallDispatch(DECLARE_VST_DEPRECATED (effGetDestinationBuffer), 0, 0, 0, 0);
+
+	return gcnew Jacobi::Vst::Core::VstAudioBuffer(pBuffer, length, true);
+}
+
+System::Boolean VstPluginCommandStub::SetBlockSizeAndSampleRate(System::Int32 blockSize, System::Single sampleRate)
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effSetBlockSizeAndSampleRate), 0, blockSize, 0, sampleRate) != 0);
+}
+
+System::String^ VstPluginCommandStub::GetErrorText()
+{
+	UnmanagedString pText(256);
+
+	if(CallDispatch(DECLARE_VST_DEPRECATED (effGetErrorText), 0, 0, 0, 0) != 0)
+	{
+		return TypeConverter::CharToString(pText);
+	}
+
+	return nullptr;
+}
+
+System::Boolean VstPluginCommandStub::Idle()
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effIdle), 0, 0, 0, 0) != 0);
+}
+
+System::Drawing::Icon^ VstPluginCommandStub::GetIcon()
+{
+	// TODO: implement
+	return nullptr;
+}
+
+System::Boolean VstPluginCommandStub::SetViewPosition(System::Drawing::Point% position)
+{
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effSetViewPosition), position.X, position.Y, 0, 0) != 0);
+}
+
+System::Boolean VstPluginCommandStub::KeysRequired()
+{
+	// NOTE: 0=Require keys, 1=dont need.
+	return (CallDispatch(DECLARE_VST_DEPRECATED (effKeysRequired), 0, 0, 0, 0) == 0);
+}
+
+
 }}}} // Jacobi::Vst::Interop::Host

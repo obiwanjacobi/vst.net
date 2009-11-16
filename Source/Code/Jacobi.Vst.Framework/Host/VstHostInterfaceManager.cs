@@ -21,7 +21,6 @@
         private InterfaceManager<IVstHostSequencer> _sequencer;
         private InterfaceManager<IVstHostShell> _shell;
         private InterfaceManager<IVstMidiProcessor> _midiProcessor;
-        private InterfaceManager<IVstHostDeprecated> _deprecated;
 
         /// <summary>
         /// Constructs all the interface managers.
@@ -33,7 +32,6 @@
             _sequencer = new InterfaceManager<IVstHostSequencer>(CreateSequencer);
             _shell = new InterfaceManager<IVstHostShell>(CreateShell);
             _midiProcessor = new InterfaceManager<IVstMidiProcessor>(CreateMidiProcessor);
-            _deprecated = new InterfaceManager<IVstHostDeprecated>(CreateDeprecated);
         }
 
         /// <summary>
@@ -84,21 +82,9 @@
         private IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
         {
             if (instance == null &&
-                _host.HostCommandStub.CanDo(VstHostCanDo.ReceiveVstEvents) == VstCanDoResult.Yes &&
-                _host.HostCommandStub.CanDo(VstHostCanDo.ReceiveVstMidiEvent) == VstCanDoResult.Yes)
+                _host.HostCommandStub.CanDo(VstHostCanDo.ReceiveVstMidiEvent) != VstCanDoResult.No)
             {
                 return new VstHostMidiProcessor(_host);
-            }
-
-            return instance;
-        }
-
-        private IVstHostDeprecated CreateDeprecated(IVstHostDeprecated instance)
-        {
-            if (instance == null && 
-                (_host.Plugin.Capabilities & VstPluginCapabilities.RequireLegacy) > 0)
-            {
-                return new VstHostDeprecated(_host);
             }
 
             return instance;
@@ -156,7 +142,7 @@
             //    return offline.Instance as T;
             //}
 
-            return null;
+            return _host.HostCommandStub as T;
         }
 
         #endregion

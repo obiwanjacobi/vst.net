@@ -13,10 +13,12 @@ VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostComman
 	Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
 
 	_hostCmdStub = hostCmdStub;
+	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^>(hostCmdStub);
 
 	// unmanaged structures
 	_pTimeInfo = new VstTimeInfo();
 	_directory = NULL;
+	_pArrangement = new ::VstSpeakerArrangement();
 }
 
 VstHostCommandProxy::~VstHostCommandProxy()
@@ -36,6 +38,12 @@ VstHostCommandProxy::!VstHostCommandProxy()
 	{
 		TypeConverter::DeallocateString(_directory);
 		_directory = NULL;
+	}
+
+	if(_pArrangement != NULL)
+	{
+		delete _pArrangement;
+		_pArrangement = NULL;
 	}
 }
 
@@ -69,7 +77,7 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 
 		// version 2.0 commands
 		case audioMasterGetTime:
-			{
+		{
 			// [return value]: #VstTimeInfo* or null if not supported [value]: request mask  @see VstTimeInfoFlags @see AudioEffectX::getTimeInfo
 			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
 			if(timeInfo != nullptr)
@@ -77,8 +85,7 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 				TypeConverter::ToUnmanagedTimeInfo(_pTimeInfo, timeInfo);
 				result = (VstIntPtr)_pTimeInfo;
 			}
-			}
-			break;
+		}	break;
 		case audioMasterProcessEvents:
 			// [ptr]: pointer to #VstEvents  @see VstEvents @see AudioEffectX::sendVstEventsToHost
 			_hostCmdStub->ProcessEvents(TypeConverter::ToManagedEventArray((::VstEvents*)ptr));
@@ -147,14 +154,13 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 		//	// no definition, vendor specific handling  @see AudioEffectX::hostVendorSpecific
 		//	break;
 		case audioMasterCanDo:
-			{
+		{
 			// [ptr]: "can do" string [return value]: 1 for supported
 			System::String^ candoStr = TypeConverter::CharToString((char*)ptr);
 			Jacobi::Vst::Core::VstHostCanDo cando = safe_cast<Jacobi::Vst::Core::VstHostCanDo>(
 				System::Enum::Parse(Jacobi::Vst::Core::VstHostCanDo::typeid, candoStr, true));
 			result = safe_cast<VstIntPtr>(_hostCmdStub->CanDo(cando));
-			}
-			break;
+		}	break;
 		case audioMasterGetLanguage:
 			// [return value]: language code  @see VstHostLanguage
 			result = safe_cast<VstIntPtr>(_hostCmdStub->GetLanguage());
@@ -181,28 +187,112 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 			result = _hostCmdStub->EndEdit(index) ? 1 : 0;
 			break;
 		case audioMasterOpenFileSelector:
-			{
+		{
 			// [ptr]: VstFileSelect* [return value]: 1 if supported  @see AudioEffectX::openFileSelector
 			Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::ToManagedFileSelect((::VstFileSelect*)ptr);
 			result = _hostCmdStub->OpenFileSelector(fileSelect) ? 1 : 0;
 			TypeConverter::AllocUpdateUnmanagedFileSelect((::VstFileSelect*)ptr, fileSelect);
-			}
-			break;
+		}	break;
 		case audioMasterCloseFileSelector:
-			{
+		{
 			// [ptr]: VstFileSelect*  @see AudioEffectX::closeFileSelector
 			Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::GetManagedFileSelect((::VstFileSelect*)ptr);
 			result = _hostCmdStub->CloseFileSelector(fileSelect) ? 1 : 0;
 			TypeConverter::DeleteUpdateUnmanagedFileSelect((::VstFileSelect*)ptr);
-			}
-			break;
+		}	break;
 		default:
+			result = DispatchDeprecated(opcode, index, value, ptr, opt);
 			break;
 		}
 	}
 	catch(System::Exception^ e)
 	{
 		Utils::ShowError(e);
+	}
+
+	return result;
+}
+
+VstIntPtr VstHostCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
+{
+	VstIntPtr result = 0;
+
+	if(_deprecatedCmdStub != nullptr)
+	{
+		switch(opcode)
+		{
+		// VST 1.0
+		case DECLARE_VST_DEPRECATED (audioMasterPinConnected):
+			result = _deprecatedCmdStub->PinConnected(index, value != 0) ? 1 : 0;
+			break;
+
+		// VST 2.0
+		case DECLARE_VST_DEPRECATED (audioMasterSetTime):
+		{
+			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = TypeConverter::ToManagedTimeInfo((::VstTimeInfo*)ptr);
+			Jacobi::Vst::Core::VstTimeInfoFlags filterFlags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value);
+
+			result = _deprecatedCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;
+		}	break;
+		case DECLARE_VST_DEPRECATED (audioMasterTempoAt):
+			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetTempoAt(safe_cast<System::Int32>(value)));
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetNumAutomatableParameters):
+			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetAutomatableParameterCount());
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetParameterQuantization):
+			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetParameterQuantization(safe_cast<System::Int32>(value)));
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterNeedIdle):
+			result = _deprecatedCmdStub->NeedIdle() ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetPreviousPlug):
+			result = (VstIntPtr)_deprecatedCmdStub->GetPreviousPlugin(safe_cast<System::Int32>(value)).ToPointer();
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetNextPlug):
+			result = (VstIntPtr)_deprecatedCmdStub->GetNextPlugin(safe_cast<System::Int32>(value)).ToPointer();
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterWillReplaceOrAccumulate):
+			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->WillReplaceOrAccumulate());
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterSetOutputSampleRate):
+			result = _deprecatedCmdStub->SetOutputSampleRate(opt) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetOutputSpeakerArrangement):
+		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetOutputSpeakerArrangement();
+			TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
+			result = (VstIntPtr)_pArrangement;
+		}	break;
+		case DECLARE_VST_DEPRECATED (audioMasterSetIcon):
+		{
+			System::IntPtr hIcon(ptr);
+			System::Drawing::Icon^ icon = System::Drawing::Icon::FromHandle(hIcon);
+			result = _deprecatedCmdStub->SetIcon(icon) ? 1 : 0;
+		}	break;
+		case DECLARE_VST_DEPRECATED (audioMasterOpenWindow):
+			result = (VstIntPtr)_deprecatedCmdStub->OpenWindow().ToPointer();
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterCloseWindow):
+			result = _deprecatedCmdStub->CloseWindow(System::IntPtr(ptr)) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterEditFile):
+			result = _deprecatedCmdStub->EditFile(TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
+			break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetChunkFile):
+		{	System::String^ path = _deprecatedCmdStub->GetChunkFile();
+			TypeConverter::StringToChar(path, (char*)ptr, 2047);
+			result = System::String::IsNullOrEmpty(path) ? 1 : 0;
+		}	break;
+		case DECLARE_VST_DEPRECATED (audioMasterGetInputSpeakerArrangement):
+		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetInputSpeakerArrangement();
+			TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
+			result = (VstIntPtr)_pArrangement;
+		}	break;
+		default:
+			// unknown command
+			System::Diagnostics::Debug::WriteLine("Host.VstHostCommandProxy: Unhandled dispatcher opcode:" + opcode, "VST.NET");
+			break;
+		}
 	}
 
 	return result;

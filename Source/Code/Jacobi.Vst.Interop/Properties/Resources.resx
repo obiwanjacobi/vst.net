@@ -158,7 +158,7 @@
     <comment>Exception text.</comment>
   </data>
   <data name="VstUnmanagedPluginContext_EntryPointNotFound" xml:space="preserve">
-    <value>'{0}' has no exported 'VSTPluginMain' function (VST 2.4).</value>
+    <value>'{0}' has no exported 'VSTPluginMain' or 'main' function.</value>
     <comment>Exception text.</comment>
   </data>
   <data name="VstUnmanagedPluginContext_LoadPluginFailed" xml:space="preserve">

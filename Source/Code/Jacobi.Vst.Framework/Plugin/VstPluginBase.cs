@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework.Plugin
 {
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Core.Deprecated;
 
     /// <summary>
     /// Provides a base class for the plugin root class.
@@ -97,7 +98,7 @@
         {
             if (Supports<IVstMidiProcessor>())
             {
-                IVstHostDeprecated deprecated = Host.GetInstance<IVstHostDeprecated>();
+                IVstHostCommandsDeprecated20 deprecated = Host.GetInstance<IVstHostCommandsDeprecated20>();
 
                 if (deprecated != null)
                 {
