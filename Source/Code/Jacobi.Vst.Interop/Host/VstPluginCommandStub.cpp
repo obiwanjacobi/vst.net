@@ -20,6 +20,8 @@ VstPluginCommandStub::VstPluginCommandStub(::AEffect* pEffect)
 
 	_pEffect = pEffect;
 	_memoryTracker = gcnew MemoryTracker();
+
+	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.PluginCommandStub", Jacobi::Vst::Core::Host::IVstPluginCommandStub::typeid);
 }
 
 // IVstPluginCommandsBase

@@ -40,6 +40,8 @@ private:
 	::VstSpeakerArrangement* _pArrangement;
 
 	VstIntPtr DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
+
+	Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
 
 }}}} // Jacobi::Vst::Interop::Host

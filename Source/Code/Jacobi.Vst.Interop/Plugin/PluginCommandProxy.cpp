@@ -22,6 +22,9 @@ PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginComm
 
 	_memTracker = gcnew MemoryTracker();
 	_pEditorRect = new ERect();
+
+	// construct a trace source for this command stub specific to the plugin its attached to.
+	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(Utils::GetPluginName() + ".Plugin.PluginCommandProxy", Jacobi::Vst::Core::Plugin::IVstPluginCommandStub::typeid);
 }
 
 PluginCommandProxy::~PluginCommandProxy()
@@ -41,6 +44,8 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 {
 	VstIntPtr result = 0;
 
+	_traceCtx->WriteDispatchBegin(opcode, index, System::IntPtr(value), System::IntPtr(ptr), opt);
+
 	try
 	{
 		switch(opcode)
@@ -50,7 +55,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			break;
 		case effClose:
 			_commandStub->Close();
-			// dispose this instance
+			// call Dispose() on this instance
 			delete this;
 			break;
 		case effSetProgram:
@@ -357,8 +362,12 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
+
+	_traceCtx->WriteDispatchEnd(System::IntPtr(result));
 
 	return result;
 }
@@ -468,6 +477,8 @@ VstIntPtr PluginCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs)
 {
+	_traceCtx->WriteProcess(numInputs, numOutputs, sampleFrames, sampleFrames);
+
 	try
 	{
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
@@ -477,6 +488,8 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
 }
@@ -485,6 +498,8 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, VstInt32 sampl
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs)
 {
+	_traceCtx->WriteProcess(numInputs, numOutputs, sampleFrames, sampleFrames);
+
 	try
 	{
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
@@ -494,6 +509,8 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sam
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
 }
@@ -502,12 +519,16 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, VstInt32 sam
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::SetParameter(VstInt32 index, float value)
 {
+	_traceCtx->WriteSetParameter(index, value);
+
 	try
 	{
 		_commandStub->SetParameter(index, value);
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
 }
@@ -516,12 +537,20 @@ void PluginCommandProxy::SetParameter(VstInt32 index, float value)
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 float PluginCommandProxy::GetParameter(VstInt32 index)
 {
+	_traceCtx->WriteGetParameterBegin(index);
+
 	try
 	{
-		return _commandStub->GetParameter(index);
+		float value = _commandStub->GetParameter(index);
+
+		_traceCtx->WriteGetParameterEnd(value);
+
+		return value;
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
 
@@ -534,6 +563,8 @@ void PluginCommandProxy::ProcessAcc(float** inputs, float** outputs, VstInt32 sa
 {
 	if(_deprecatedCmdStub == nullptr) return;
 
+	_traceCtx->WriteProcess(numInputs, numOutputs, sampleFrames, sampleFrames);
+
 	try
 	{
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
@@ -543,6 +574,8 @@ void PluginCommandProxy::ProcessAcc(float** inputs, float** outputs, VstInt32 sa
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
 }

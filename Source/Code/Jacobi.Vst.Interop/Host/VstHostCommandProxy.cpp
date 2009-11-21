@@ -19,6 +19,8 @@ VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostComman
 	_pTimeInfo = new VstTimeInfo();
 	_directory = NULL;
 	_pArrangement = new ::VstSpeakerArrangement();
+
+	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.HostCommandProxy", Jacobi::Vst::Core::Host::IVstHostCommandStub::typeid);
 }
 
 VstHostCommandProxy::~VstHostCommandProxy()
@@ -50,6 +52,8 @@ VstHostCommandProxy::!VstHostCommandProxy()
 VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
 {
 	VstIntPtr result = 0;
+
+	_traceCtx->WriteDispatchBegin(opcode, index, System::IntPtr(value), System::IntPtr(ptr), opt);
 
 	try
 	{
@@ -207,8 +211,12 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 	}
 	catch(System::Exception^ e)
 	{
+		_traceCtx->WriteError(e);
+
 		Utils::ShowError(e);
 	}
+
+	_traceCtx->WriteDispatchEnd(System::IntPtr(result));
 
 	return result;
 }
