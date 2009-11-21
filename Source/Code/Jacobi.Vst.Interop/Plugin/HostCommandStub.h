@@ -300,7 +300,18 @@ namespace Plugin {
 		audioMasterCallback _hostCallback;
 
 		void ThrowIfNotInitialized();
-		VstIntPtr CallHost(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt) { return _hostCallback(_pluginInfo, opcode, index, value, ptr, opt); }
+		VstIntPtr CallHost(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
+		{
+			_traceCtx->WriteDispatchBegin(opcode, index, System::IntPtr(value), System::IntPtr(ptr), opt);
+
+			VstIntPtr result = _hostCallback(_pluginInfo, opcode, index, value, ptr, opt);
+
+			_traceCtx->WriteDispatchEnd(System::IntPtr(result));
+
+			return result;
+		}
+
+		Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 	};
 
 }}}} // Jacobi::Vst::Interop::Plugin
