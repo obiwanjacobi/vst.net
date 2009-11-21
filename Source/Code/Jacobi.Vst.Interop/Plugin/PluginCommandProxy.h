@@ -59,6 +59,8 @@ namespace Plugin {
 
 		MemoryTracker^ _memTracker;
 		ERect* _pEditorRect;
+
+		Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 	};
 
 }}}} // Jacobi::Vst::Interop::Plugin

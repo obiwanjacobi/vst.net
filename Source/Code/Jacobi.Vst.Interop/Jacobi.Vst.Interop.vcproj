@@ -466,6 +466,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\app.config"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

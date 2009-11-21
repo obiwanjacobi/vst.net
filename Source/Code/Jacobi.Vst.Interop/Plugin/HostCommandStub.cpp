@@ -3,6 +3,7 @@
 #include "..\TypeConverter.h"
 #include "..\UnmanagedString.h"
 #include "..\Properties\Resources.h"
+#include "..\Utils.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -19,6 +20,8 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 
 	_hostCallback = hostCallback;
 	_pluginInfo = NULL;
+
+	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(Utils::GetPluginName() + "Plugin.HostCommandStub", Jacobi::Vst::Core::Plugin::IVstHostCommandStub::typeid);
 }
 
 // destructor. See Finalizer

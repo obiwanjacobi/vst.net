@@ -570,28 +570,56 @@ private:
 	::VstIntPtr CallDispatch(::VstInt32 opcode, ::VstInt32 index, ::VstIntPtr value, void* ptr, float opt)
 	{
 		if(_pEffect && _pEffect->dispatcher)
-			return _pEffect->dispatcher(_pEffect, opcode, index, value, ptr, opt);
+		{
+			_traceCtx->WriteDispatchBegin(opcode, index, System::IntPtr(value), System::IntPtr(ptr), opt);
+
+			::VstIntPtr result = _pEffect->dispatcher(_pEffect, opcode, index, value, ptr, opt);
+
+			_traceCtx->WriteDispatchEnd(System::IntPtr(result));
+		}
+
 		return 0;
 	}
 	void CallProcess32(float** inputs, float** outputs, ::VstInt32 sampleFrames)
 	{
 		if(_pEffect && _pEffect->processReplacing)
+		{
+			_traceCtx->WriteProcess(_pEffect->numInputs, _pEffect->numOutputs, sampleFrames, sampleFrames);
+
 			_pEffect->processReplacing(_pEffect, inputs, outputs, sampleFrames);
+		}
 	}
 	void CallProcess64(double** inputs, double** outputs, ::VstInt32 sampleFrames)
 	{
 		if(_pEffect && _pEffect->processDoubleReplacing) 
+		{
+			_traceCtx->WriteProcess(_pEffect->numInputs, _pEffect->numOutputs, sampleFrames, sampleFrames);
+
 			_pEffect->processDoubleReplacing(_pEffect, inputs, outputs, sampleFrames);
+		}
 	}
 	void CallSetParameter(::VstInt32 index, float parameter)
 	{
 		if(_pEffect && _pEffect->setParameter)
+		{
+			_traceCtx->WriteSetParameter(index, parameter);
+
 			_pEffect->setParameter(_pEffect, index, parameter);
+		}
 	}
 	float CallGetParameter(::VstInt32 index)
 	{
 		if(_pEffect && _pEffect->getParameter)
-			return _pEffect->getParameter(_pEffect, index);
+		{
+			_traceCtx->WriteGetParameterBegin(index);
+
+			float result = _pEffect->getParameter(_pEffect, index);
+
+			_traceCtx->WriteGetParameterEnd(result);
+
+			return result;
+		}
+
 		return 0.0f;
 	}
 
@@ -599,10 +627,15 @@ private:
 	void CallProcess32Acc(float** inputs, float** outputs, ::VstInt32 sampleFrames)
 	{
 		if(_pEffect && _pEffect->DECLARE_VST_DEPRECATED (process))
+		{
+			_traceCtx->WriteProcess(_pEffect->numInputs, _pEffect->numOutputs, sampleFrames, sampleFrames);
+
 			_pEffect->DECLARE_VST_DEPRECATED (process)(_pEffect, inputs, outputs, sampleFrames);
+		}
 	}
 
 	MemoryTracker^ _memoryTracker;
+	Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
 
 }}}} // Jacobi::Vst::Interop::Host
