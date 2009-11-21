@@ -24,12 +24,12 @@ Namespace Jacobi.Vst.Samples.Delay.VB
             End Get
         End Property
 
-        Public Overrides Property SampleRate() As Double
+        Public Overrides Property SampleRate() As Single
             Get
-                Return CType(_delay.SampleRate, Double)
+                Return _delay.SampleRate
             End Get
-            Set(ByVal value As Double)
-                _delay.SampleRate = CType(value, Single)
+            Set(ByVal value As Single)
+                _delay.SampleRate = value
             End Set
         End Property
 
