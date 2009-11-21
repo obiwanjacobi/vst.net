@@ -29,7 +29,7 @@ namespace Jacobi.Vst.Framework
         /// <remarks>The host will call into the plugin to set the sample rate (that call ends up here).
         /// When the sample rate changes, the plugin should prepare its inner structures (pre-allocated 
         /// memory buffer etc.) to accomodate the new sample rate.</remarks>
-        double SampleRate { get;set; }
+        float SampleRate { get;set; }
         /// <summary>
         /// Gets or sets the number of samples (per channel) that will be passed to the <see cref="Process"/> method.
         /// </summary>

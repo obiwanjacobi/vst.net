@@ -34,10 +34,10 @@
         /// Gets or sets the sample rate.
         /// </summary>
         /// <remarks>This property is a proxy for the <see cref="T:Jacobi.Vst.Samples.Delay.Delay.SampleRate"/> property.</remarks>
-        public override double SampleRate
+        public override float SampleRate
         {
-            get { return (Double)_delay.SampleRate; }
-            set { _delay.SampleRate = (Single)value; }
+            get { return _delay.SampleRate; }
+            set { _delay.SampleRate = value; }
         }
 
         /// <summary>

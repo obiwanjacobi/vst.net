@@ -45,7 +45,7 @@ namespace Jacobi.Vst.Framework.Plugin
         public int TailSize { get; protected set; }
         
         /// <inheritdoc />
-        public virtual double SampleRate { get; set; }
+        public virtual float SampleRate { get; set; }
         
         /// <inheritdoc />
         public virtual int BlockSize { get; set; }
