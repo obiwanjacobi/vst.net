@@ -87,10 +87,27 @@
   			That type of Hosts will assume your Parameter value range is between
   			0.0 and 1.0 for all Paremeters. That means that if your Parameter 
   			value range is between -1.0 and +1.0 you will not have access to 
-  			your full range. VST.NET does not have a transparent solution to 
-  			this problem yet.
+  			your full range.
   			</para>
 		</alert>
+        </para>
+        <para>To transparantly manage the parameter value range depending on the
+        host calling the correct method to retrieve the parameter properties, 
+        VST.NET uses an extra object called <codeInline>VstParameterNormalizationInfo</codeInline>.
+        This class can be attached to an instance of the <codeInline>VstParameterInfo</codeInline>
+        class and will be used to adjust the value of the parameter. Internally
+        the plugin will still see the Parameter value range it expects. But when 
+        the Host queries for the Parameter value and it has a <codeInline>VstParameterNormalizationInfo</codeInline>
+        object attached to it, its value will be mapped to a range of 0.0 to 1.0.
+        The NormalizationInfo property on the <codeInline>VstParameterInfo</codeInline>
+        that contains the instance of the <codeInline>VstParameterNormalizationInfo</codeInline>
+        class will be reset (set to null or Nothing) when the Host calls the method
+        to retrieve the parameter properties that specify the parameter's value
+        range. It is recommended that you always attach an <codeInline>VstParameterNormalizationInfo</codeInline>
+        instance to every parameter the plugin contains for it will be transparently
+        removed in the case the Host calls for the parameter properties. But if 
+        the Host does not, it will serve out a parameter value range that is managable
+        for (almost) all hosts.
         </para>
       </content>
     </section>
@@ -118,6 +135,7 @@
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameter</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCollection</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterInfo</codeEntityReference>
+	<codeEntityReference>T:Jacobi.Vst.Framework.VstParameterNormalizationInfo</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategory</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterCategoryCollection</codeEntityReference>
     <codeEntityReference>T:Jacobi.Vst.Framework.VstParameterManager</codeEntityReference>
