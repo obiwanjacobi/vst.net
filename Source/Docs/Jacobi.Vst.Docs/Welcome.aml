@@ -5,7 +5,7 @@
       <para>Welcome to <token>vstnet</token>.</para>
       <para>
         <token>vstnet</token> is an open source project hosted on codeplex that allows you 
-    to write VST plugins in .NET. There are two level to interface with the 
+    to write VST plugins in .NET. There are two levels to interface with the 
     unmanaged Host:
     <list class="bullet"><listItem>At Core level.</listItem><listItem>Use the Framework.</listItem></list></para>
       <para>
