@@ -5,8 +5,16 @@
     using System.Collections.Generic;
     using System.Reflection;
 
+    /// <summary>
+    /// Helper class for formatting errors.
+    /// </summary>
     public static class ErrorHelper
     {
+        /// <summary>
+        /// Formats the <paramref name="e"/>xception text.
+        /// </summary>
+        /// <param name="e">The exception to format the error text for.</param>
+        /// <returns>Returns the error text for the specified <paramref name="e"/>xception and its <see cref="Exception.InnerException"/>s.</returns>
         public static string FormatException(Exception e)
         {
             StringBuilder text = new StringBuilder();
@@ -33,6 +41,11 @@
             return text.ToString();
         }
 
+        /// <summary>
+        /// Formats the text for the <paramref name="e"/>xception.
+        /// </summary>
+        /// <param name="text">The <see cref="StringBuilder"/> that receives the text.</param>
+        /// <param name="e">Must not be null.</param>
         private static void BuildExceptionText(StringBuilder text, Exception e)
         {
             text.AppendFormat("{0}: {1}", e.GetType(), e.Message);
@@ -56,6 +69,11 @@
             }
         }
 
+        /// <summary>
+        /// Specialized formatter for <see cref="ReflectionTypeLoadException"/>.
+        /// </summary>
+        /// <param name="text">The <see cref="StringBuilder"/> that receives the text.</param>
+        /// <param name="rtle">A reference to the specialized exception. Can be null.</param>
         private static void BuildReflectionTypeLoadExceptionText(StringBuilder text, ReflectionTypeLoadException rtle)
         {
             if (rtle != null)
