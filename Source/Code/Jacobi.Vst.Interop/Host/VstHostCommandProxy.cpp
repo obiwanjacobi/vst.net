@@ -298,9 +298,14 @@ VstIntPtr VstHostCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 inde
 		}	break;
 		default:
 			// unknown command
-			System::Diagnostics::Debug::WriteLine("Host.VstHostCommandProxy: Unhandled dispatcher opcode:" + opcode, "VST.NET");
+			_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, "Unhandled dispatcher opcode:" + opcode);
 			break;
 		}
+	}
+	else
+	{
+		// unhandled command
+		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, "Unhandled dispatcher opcode:" + opcode);
 	}
 
 	return result;

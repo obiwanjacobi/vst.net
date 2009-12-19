@@ -300,6 +300,10 @@ namespace Jacobi.Vst.Core.Host
             Dispose(true);
         }
 
+        /// <summary>
+        /// Called to dispose this object instance.
+        /// </summary>
+        /// <param name="disposing">When true also disposes of managed resources. Otherwise only unmanaged resources are disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
             if(disposing)
@@ -309,6 +313,11 @@ namespace Jacobi.Vst.Core.Host
         }
         #endregion
 
+        /// <summary>
+        /// A factory method to create the correct <see cref="VstHostCommandAdapter"/> class type.
+        /// </summary>
+        /// <param name="hostCmdStub">A reference to the host command stub. Must not be null.</param>
+        /// <returns>Returns an instance of <see cref="Deprecated.VstHostCommandDeprecatedAdapter"/> when the <paramref name="hostCmdStub"/> supports deprecated methods.</returns>
         public static VstHostCommandAdapter Create(IVstHostCommandStub hostCmdStub)
         {
             if(hostCmdStub is Deprecated.IVstHostCommandsDeprecated20)

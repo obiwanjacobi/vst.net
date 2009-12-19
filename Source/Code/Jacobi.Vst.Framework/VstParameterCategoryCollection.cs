@@ -1,6 +1,8 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System.Collections.ObjectModel;
+    
+    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Manages a collection of <see cref="VstParameterCategory"/> instances.
@@ -17,8 +19,14 @@
             return item.Name;
         }
 
+        /// <summary>
+        /// Adds all instances in the <paramref name="categories"/> collection to this instance.
+        /// </summary>
+        /// <param name="categories">Must not be null.</param>
         public void AddRange(VstParameterCategoryCollection categories)
         {
+            Throw.IfArgumentIsNull(categories, "categories");
+
             foreach (VstParameterCategory paramCat in categories)
             {
                 Add(paramCat);
