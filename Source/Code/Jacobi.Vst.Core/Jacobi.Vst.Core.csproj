@@ -125,6 +125,7 @@
     <None Include="Class Diagrams\Jacobi.Vst.Core.Enums.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Interfaces.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Types.cd" />
+    <Compile Include="Diagnostics\TraceContext.OpcodeInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

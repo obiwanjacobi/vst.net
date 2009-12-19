@@ -6,7 +6,7 @@
     using Jacobi.Vst.Core.Plugin;
 
     /// <summary>
-    /// the StdPluginCommandStub provides a default implementation for adapting the <see cref="IVstPluginCommandStub"/> 
+    /// The StdPluginCommandStub class provides a default implementation for adapting the <see cref="IVstPluginCommandStub"/> 
     /// interface calls to the framework.
     /// </summary>
     /// <remarks>Each plugin must implement a public class the implements the <see cref="IVstPluginCommandStub"/> interface.
@@ -1444,7 +1444,7 @@
         /// <summary>
         /// Attempts to parse the <paramref name="cando"/> string.
         /// </summary>
-        /// <param name="cando">Must not be null.</param>
+        /// <param name="cando">Must not be null or empty.</param>
         /// <returns>Returns <see cref="VstPluginCanDo.Unknown"/> when string did not match an enum value.</returns>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="cando"/> is not set to an instance of an object.</exception>
         /// <exception cref="ArgumentException">Thrown when <paramref name="cando"/> is an empty string.</exception>

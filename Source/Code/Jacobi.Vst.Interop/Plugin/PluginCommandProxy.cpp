@@ -372,7 +372,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 	return result;
 }
 
-// continueation of Dispatch()
+// continuation of Dispatch()
 // Dispatches an opcode to the plugin deprecated command stub.
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 VstIntPtr PluginCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
@@ -385,8 +385,7 @@ VstIntPtr PluginCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index
 		{
 		// VST 1.0 deprecated
 		case DECLARE_VST_DEPRECATED (effGetVu):
-			// TODO: conversion from 'float' to 'VstIntPtr', possible loss of data
-			result = _deprecatedCmdStub->GetVu();
+			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetVu());
 			break;
 		//case DECLARE_VST_DEPRECATED (effEditDraw):
 		//	break;
@@ -462,12 +461,16 @@ VstIntPtr PluginCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index
 			// NOTE: 0=Required, 1=dont need.
 			result = _deprecatedCmdStub->KeysRequired() ? 0 : 1;
 			break;
-
 		default:
 			// unknown command
-			System::Diagnostics::Debug::WriteLine("Plugin.PluginCommandProxy: Unhandled dispatcher opcode:" + opcode, "VST.NET");
+			_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, "Unhandled dispatcher opcode:" + opcode);
 			break;
 		}
+	}
+	else
+	{
+		// unhandled command
+		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, "Unhandled dispatcher opcode:" + opcode);
 	}
 
 	return result;

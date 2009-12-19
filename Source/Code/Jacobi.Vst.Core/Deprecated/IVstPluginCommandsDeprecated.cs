@@ -80,7 +80,7 @@
         /// <summary>
         /// Notifies the plugin of the fact that an output pin was dis/connected.
         /// </summary>
-        /// <param name="inputIndex">A zero-based index into the output connection collection.</param>
+        /// <param name="outputIndex">A zero-based index into the output connection collection.</param>
         /// <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
         /// <returns>Returns true if the call was successful.</returns>
         bool ConnectOutput(int outputIndex, bool connected);
