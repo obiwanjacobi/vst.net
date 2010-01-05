@@ -126,6 +126,7 @@
     <None Include="Class Diagrams\Jacobi.Vst.Core.Interfaces.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Types.cd" />
     <Compile Include="Diagnostics\TraceContext.OpcodeInfo.cs" />
+    <Compile Include="VstCanDoHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

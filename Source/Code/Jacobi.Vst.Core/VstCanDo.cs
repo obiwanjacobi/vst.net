@@ -23,16 +23,24 @@
         AcceptIOChanges,
         /// <summary></summary>
         SizeWindow,
+        /// <summary></summary>
+        AsyncProcessing,
         /// <summary>Host supports offline feature.</summary>
         Offline,
+        /// <summary>Host calls idle on plugin.</summary>
+        SupplyIdle,
         /// <summary>Host supports function #openFileSelector().</summary>
         OpenFileSelector,
+        /// <summary></summary>
+        EditFile,
         /// <summary>Host supports function #closeFileSelector().</summary>
         CloseFileSelector,
         /// <summary>Host supports functions #startProcess() and #stopProcess().</summary>
         StartStopProcess,
         /// <summary>'shell' handling via uniqueID. If supported by the Host and the Plug-in has the category #kPlugCategShell.</summary>
         ShellCategory,
+        /// <summary>'shell' handling via uniqueID as suggested by Waves.</summary>
+        SupportShell,
         /// <summary>Host supports flags for <see cref="VstMidiEvent"/>.</summary>
         SendVstMidiEventFlagIsRealtime,
     }
@@ -48,6 +56,8 @@
         SendVstEvents,
         /// <summary>plug-in will send MIDI events to Host.</summary>
         SendVstMidiEvent,
+        /// <summary></summary>
+        SendVstTimeInfo,
         /// <summary>plug-in can receive MIDI events from Host.</summary>
         ReceiveVstEvents,
         /// <summary>plug-in can receive MIDI events from Host.</summary>
@@ -56,8 +66,46 @@
         ReceiveVstTimeInfo,
         /// <summary>plug-in supports offline functions (#offlineNotify, #offlinePrepare, #offlineRun).</summary>
         Offline,
+        /// <summary></summary>
+        PlugAsChannelInsert,
+        /// <summary></summary>
+	    PlugAsSend,
+        /// <summary></summary>
+	    MixDryWet,
+        /// <summary></summary>
+	    NoRealTime,
+        /// <summary></summary>
+	    Multipass,
+        /// <summary></summary>
+	    Metapass,
+        /// <summary>Strip of underscore.</summary>
+	    _1in1out,
+        /// <summary>Strip of underscore.</summary>
+	    _1in2out,
+        /// <summary>Strip of underscore.</summary>
+	    _2in1out,
+        /// <summary>Strip of underscore.</summary>
+	    _2in2out,
+        /// <summary>Strip of underscore.</summary>
+	    _2in4out,
+        /// <summary>Strip of underscore.</summary>
+	    _4in2out,
+        /// <summary>Strip of underscore.</summary>
+	    _4in4out,
+        /// <summary>Strip of underscore.</summary>
+	    _4in8out,	// 4:2 matrix to surround bus
+        /// <summary>Strip of underscore.</summary>
+	    _8in4out,	// surround bus to 4:2 matrix
+        /// <summary>Strip of underscore.</summary>
+	    _8in8out,
         /// <summary>plug-in supports function #getMidiProgramName().</summary>
         MidiProgramNames,
+        /// <summary>
+        /// mac: doesn't mess with grafport. general: may want
+        /// to call sizeWindow (). if you want to use sizeWindow (),
+        /// you must return true (1) in canDo ("conformsToWindowRules")
+        /// </summary>
+        ConformsToWindowRules,
         /// <summary>plug-in supports function #setBypass().</summary>
         Bypass,
     }

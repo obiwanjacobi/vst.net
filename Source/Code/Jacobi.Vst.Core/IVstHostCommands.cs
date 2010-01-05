@@ -142,7 +142,7 @@
         /// </summary>
         /// <param name="cando">A host capability.</param>
         /// <returns>Returns <see cref="VstCanDoResult.Yes"/> if the host supports the capability.</returns>
-        VstCanDoResult CanDo(VstHostCanDo cando);
+        VstCanDoResult CanDo(string cando);
         /// <summary>
         /// Retrieves the localized langauge of the host.
         /// </summary>
