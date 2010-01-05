@@ -43,7 +43,7 @@ namespace Jacobi.Vst.Samples.Host
         }
 
         /// <inheritdoc />
-        public Jacobi.Vst.Core.VstCanDoResult CanDo(Jacobi.Vst.Core.VstHostCanDo cando)
+        public Jacobi.Vst.Core.VstCanDoResult CanDo(string cando)
         {
             RaisePluginCalled("CanDo(" + cando + ")");
             return Jacobi.Vst.Core.VstCanDoResult.Unknown;
