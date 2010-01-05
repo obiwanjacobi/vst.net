@@ -246,12 +246,11 @@ System::Int32 HostCommandStub::GetVendorVersion()
 	return CallHost(audioMasterGetVendorVersion, 0, 0, 0, 0);
 }
 
-Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(Jacobi::Vst::Core::VstHostCanDo cando)
+Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(System::String^ cando)
 {
 	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength);
 
-	TypeConverter::StringToChar(cando.ToString(), pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
-	pText[0] += 32;	// tolower
+	TypeConverter::StringToChar(cando, pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(CallHost(audioMasterCanDo, 0, 0, pText, 0));
 }

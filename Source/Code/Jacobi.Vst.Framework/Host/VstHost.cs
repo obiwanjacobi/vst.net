@@ -79,39 +79,37 @@
                 if (_hostCapabilities == VstHostCapabilities.None)
                 {
                     // IVstHostSequencer.UpdatePluginIO works
-                    if (HostCommandStub.CanDo(VstHostCanDo.AcceptIOChanges) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.AcceptIOChanges)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.AcceptIoChanges;
                     // IVstHostOfflineProcessor
-                    if (HostCommandStub.CanDo(VstHostCanDo.Offline) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.Offline)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.Offline;
                     // IVstHostShell.OpenFileSelector
-                    if (HostCommandStub.CanDo(VstHostCanDo.OpenFileSelector) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.OpenFileSelector)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.OpenFileSelector;
                     // IVstMidiProcessor implemented on Host
-                    if (HostCommandStub.CanDo(VstHostCanDo.ReceiveVstEvents) == VstCanDoResult.Yes &&
-                        HostCommandStub.CanDo(VstHostCanDo.ReceiveVstMidiEvent) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.ReceiveMidiEvents;
                     // will call IVstPluginConnections
-                    if (HostCommandStub.CanDo(VstHostCanDo.ReportConnectionChanges) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReportConnectionChanges)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.ReportConnectionChanges;
                     // will call IVstMidiProcessor implemented on plugin
-                    if (HostCommandStub.CanDo(VstHostCanDo.SendVstEvents) == VstCanDoResult.Yes &&
-                        HostCommandStub.CanDo(VstHostCanDo.SendVstMidiEvent) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstMidiEvent)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.SendMidiEvents;
                     // Realtime flag set in VstMidiEvent
-                    if (HostCommandStub.CanDo(VstHostCanDo.SendVstMidiEventFlagIsRealtime) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstMidiEventFlagIsRealtime)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.RealtimeMidiFlag;
                     // GetTimeInfo works?
-                    if (HostCommandStub.CanDo(VstHostCanDo.SendVstTimeInfo) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstTimeInfo)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.SendTimeInfo;
                     // will call IVstPluginHost
-                    if (HostCommandStub.CanDo(VstHostCanDo.ShellCategory) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ShellCategory)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.PluginHost;
                     // IVstHostShell.SizeWindow works
-                    if (HostCommandStub.CanDo(VstHostCanDo.SizeWindow) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SizeWindow)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.SizeWindow;
                     // will call IVstPluginProcess
-                    if (HostCommandStub.CanDo(VstHostCanDo.StartStopProcess) == VstCanDoResult.Yes)
+                    if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.StartStopProcess)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.StartStopProcess;
                 }
 

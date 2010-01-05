@@ -82,7 +82,7 @@
         private IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
         {
             if (instance == null &&
-                _host.HostCommandStub.CanDo(VstHostCanDo.ReceiveVstMidiEvent) != VstCanDoResult.No)
+                _host.HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) != VstCanDoResult.No)
             {
                 return new VstHostMidiProcessor(_host);
             }
