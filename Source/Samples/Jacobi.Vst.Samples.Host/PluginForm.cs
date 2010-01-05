@@ -123,6 +123,7 @@ namespace Jacobi.Vst.Samples.Host
             // plugin does not support processing audio
             if ((PluginContext.PluginInfo.Flags & VstPluginFlags.CanReplacing) == 0)
             {
+                MessageBox.Show(this, "This plugin does not process any audio.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -145,11 +146,32 @@ namespace Jacobi.Vst.Samples.Host
             }
 
             PluginContext.PluginCommandStub.SetBlockSize(blockSize);
-            PluginContext.PluginCommandStub.SetSampleRate(44.8f);
+            PluginContext.PluginCommandStub.SetSampleRate(44100f);
+
+            VstAudioBuffer[] inputBuffers = inputMgr.ToArray();
+            VstAudioBuffer[] outputBuffers = outputMgr.ToArray();
 
             PluginContext.PluginCommandStub.StartProcess();
-            PluginContext.PluginCommandStub.ProcessReplacing(inputMgr.ToArray(), outputMgr.ToArray());
+            PluginContext.PluginCommandStub.ProcessReplacing(inputBuffers, outputBuffers);
             PluginContext.PluginCommandStub.StopProcess();
+
+
+            for (int i = 0; i < inputBuffers.Length && i < outputBuffers.Length; i++)
+            {
+                for (int j = 0; j < blockSize; j++)
+                {
+                    if (inputBuffers[i][j] != outputBuffers[i][j])
+                    {
+                        if (outputBuffers[i][j] != 0.0)
+                        {
+                            MessageBox.Show(this, "The plugin has processed the audio.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            MessageBox.Show(this, "The plugin has passed the audio unchanged to its outputs.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }
