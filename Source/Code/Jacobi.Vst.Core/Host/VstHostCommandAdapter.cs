@@ -177,7 +177,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="cando">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstCanDoResult CanDo(VstHostCanDo cando)
+        public VstCanDoResult CanDo(string cando)
         {
             return _hostCmdStub.CanDo(cando);
         }

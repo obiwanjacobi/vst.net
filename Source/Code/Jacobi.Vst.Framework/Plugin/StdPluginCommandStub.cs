@@ -839,7 +839,7 @@
         {
             VstCanDoResult result = VstCanDoResult.No;
             
-            VstPluginCanDo candoEnum = ParsePluginCanDo(cando);
+            VstPluginCanDo candoEnum = VstCanDoHelper.ParsePluginCanDo(cando);
 
             switch (candoEnum)
             {
@@ -1441,31 +1441,7 @@
         /// <returns>Returning null will abort loading the plugin.</returns>
         protected abstract IVstPlugin CreatePluginInstance();
 
-        /// <summary>
-        /// Attempts to parse the <paramref name="cando"/> string.
-        /// </summary>
-        /// <param name="cando">Must not be null or empty.</param>
-        /// <returns>Returns <see cref="VstPluginCanDo.Unknown"/> when string did not match an enum value.</returns>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="cando"/> is not set to an instance of an object.</exception>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="cando"/> is an empty string.</exception>
-        protected VstPluginCanDo ParsePluginCanDo(string cando)
-        {
-            Throw.IfArgumentIsNullOrEmpty(cando, "cando");
-
-            VstPluginCanDo result = VstPluginCanDo.Unknown;
-            Type enumType = typeof(VstPluginCanDo);
-            
-            foreach(string name in Enum.GetNames(enumType))
-            {
-                if(name.Equals(cando, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    result = (VstPluginCanDo)Enum.Parse(enumType, cando, true);
-                    break;
-                }
-            }
-
-            return result;
-        }
+        
 
         /// <summary>
         /// Creates summary info based on the <paramref name="plugin"/>.

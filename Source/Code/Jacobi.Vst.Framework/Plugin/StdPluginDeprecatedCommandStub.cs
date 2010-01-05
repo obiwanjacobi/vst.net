@@ -37,7 +37,7 @@
             if (programs != null && programs.ActiveProgram != null)
             {
                 VstProgram targetProgram = programs.Programs[programIndex];
-                // targetProgram.Categories is alwasy the same between programs
+                // targetProgram.Categories is always the same between programs
                 targetProgram.Name = programs.ActiveProgram.Name;
 
                 // copy parameter values.

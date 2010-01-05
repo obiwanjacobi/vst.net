@@ -135,7 +135,7 @@ namespace Plugin {
         /// </summary>
         /// <param name="cando">A host capability.</param>
 		/// <returns>Returns <see cref="Jacobi::Vst::Core::VstCanDoResult"/><b>.Yes</b> if the host supports the capability.</returns>
-		virtual Jacobi::Vst::Core::VstCanDoResult CanDo(Jacobi::Vst::Core::VstHostCanDo cando);
+		virtual Jacobi::Vst::Core::VstCanDoResult CanDo(System::String^ cando);
 		/// <summary>
         /// Retrieves the localized langauge of the host.
         /// </summary>
