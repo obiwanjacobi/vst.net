@@ -59,6 +59,12 @@
     <Compile Include="..\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
+    <Compile Include="EditorFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorFrame.Designer.cs">
+      <DependentUpon>EditorFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="HostCommandStub.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -74,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EditorFrame.resx">
+      <DependentUpon>EditorFrame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

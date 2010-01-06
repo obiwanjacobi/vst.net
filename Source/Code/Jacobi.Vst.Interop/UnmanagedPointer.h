@@ -8,9 +8,27 @@ template<class T>
 class UnmanagedPointer
 {
 public:
-	UnmanagedPointer(){ _instance = new T(); }
-	UnmanagedPointer(T* instance){ _instance = instance; }
-	virtual ~UnmanagedPointer(){ delete _instance; }
+	UnmanagedPointer()
+	{ 
+		_instance = new T();
+		_owned = true;
+	}
+	
+	UnmanagedPointer(T* instance)
+	{
+		_instance = instance;
+		_owned = (instance != NULL);
+	}
+	
+	virtual ~UnmanagedPointer()
+	{
+		if(_owned)
+		{
+			delete _instance;
+		}
+
+		_instance = NULL;
+	}
 
 	T** operator &()
 	{
@@ -29,6 +47,7 @@ public:
 
 protected:
 	T* _instance;
+	bool _owned;
 };
 
 }}} // Jacobi::Vst::Interop
