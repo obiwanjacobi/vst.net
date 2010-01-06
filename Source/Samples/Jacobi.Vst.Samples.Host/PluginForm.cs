@@ -174,5 +174,13 @@ namespace Jacobi.Vst.Samples.Host
             MessageBox.Show(this, "The plugin has passed the audio unchanged to its outputs.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void EditorBtn_Click(object sender, EventArgs e)
+        {
+            EditorFrame dlg = new EditorFrame();
+            dlg.PluginCommandStub = PluginContext.PluginCommandStub;
+
+            dlg.ShowDialog(this);
+        }
+
     }
 }
