@@ -42,6 +42,7 @@
             this.ProgramIndexNud = new System.Windows.Forms.NumericUpDown();
             this.OKBtn = new System.Windows.Forms.Button();
             this.GenerateNoiseBtn = new System.Windows.Forms.Button();
+            this.EditorBtn = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
@@ -179,11 +180,22 @@
             this.GenerateNoiseBtn.UseVisualStyleBackColor = true;
             this.GenerateNoiseBtn.Click += new System.EventHandler(this.GenerateNoiseBtn_Click);
             // 
+            // EditorBtn
+            // 
+            this.EditorBtn.Location = new System.Drawing.Point(110, 362);
+            this.EditorBtn.Name = "EditorBtn";
+            this.EditorBtn.Size = new System.Drawing.Size(75, 23);
+            this.EditorBtn.TabIndex = 5;
+            this.EditorBtn.Text = "Editor...";
+            this.EditorBtn.UseVisualStyleBackColor = true;
+            this.EditorBtn.Click += new System.EventHandler(this.EditorBtn_Click);
+            // 
             // PluginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(421, 394);
+            this.Controls.Add(this.EditorBtn);
             this.Controls.Add(this.GenerateNoiseBtn);
             this.Controls.Add(this.OKBtn);
             this.Controls.Add(groupBox2);
@@ -217,5 +229,6 @@
         private System.Windows.Forms.ColumnHeader ParameterLabelHdr;
         private System.Windows.Forms.ColumnHeader ParameterShortLabelHdr;
         private System.Windows.Forms.Button GenerateNoiseBtn;
+        private System.Windows.Forms.Button EditorBtn;
     }
 }

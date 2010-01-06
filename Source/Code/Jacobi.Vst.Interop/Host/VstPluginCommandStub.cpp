@@ -164,9 +164,12 @@ void VstPluginCommandStub::MainsChanged(System::Boolean onoff)
 
 System::Boolean VstPluginCommandStub::EditorGetRect([System::Runtime::InteropServices::Out] System::Drawing::Rectangle% rect)
 {
-	UnmanagedPointer<ERect> unmanagedRect(false);
+	UnmanagedPointer<ERect> unmanagedRect(NULL);
 
-	if(CallDispatch(effEditGetRect, 0, 0, &unmanagedRect, 0) != 0)
+	// some plugins return zero even when succesful.
+	CallDispatch(effEditGetRect, 0, 0, &unmanagedRect, 0);
+
+	if(unmanagedRect->bottom != 0 || unmanagedRect->right != 0)
 	{
 		rect = TypeConverter::ToManagedRectangle(unmanagedRect);
 		return true;

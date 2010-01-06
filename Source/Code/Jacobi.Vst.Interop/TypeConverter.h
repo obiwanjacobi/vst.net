@@ -61,7 +61,7 @@ public:
 	// converts an unmanaged ERect* to a Rectangle. 
 	static System::Drawing::Rectangle ToManagedRectangle(ERect* pRect)
 	{
-		System::Drawing::Rectangle rect(pRect->top, pRect->left, pRect->bottom, pRect->right);
+		System::Drawing::Rectangle rect(pRect->top, pRect->left, pRect->right, pRect->bottom);
 
 		return rect;
 	}

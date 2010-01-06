@@ -40,17 +40,25 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jacobi.Vst.Core, Version=0.8.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
+    <Reference Include="Jacobi.Vst.Core, Version=0.9.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Jacobi.Vst.Framework, Version=0.8.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
+    <Reference Include="Jacobi.Vst.Framework, Version=0.9.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="Jacobi" />
+    <Import Include="Jacobi.Vst" />
+    <Import Include="Jacobi.Vst.Core" />
+    <Import Include="Jacobi.Vst.Core.Plugin" />
+    <Import Include="Jacobi.Vst.Framework" />
+    <Import Include="Jacobi.Vst.Framework.Common" />
+    <Import Include="Jacobi.Vst.Framework.Plugin" />
+    <Import Include="Jacobi.Vst.Framework.Plugin.IO" />
     <Import Include="Microsoft.VisualBasic" />
   </ItemGroup>
   <ItemGroup>
