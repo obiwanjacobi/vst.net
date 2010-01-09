@@ -29,10 +29,10 @@ namespace Host
 			// allocate the buffers in one call
 			float* pBuffer = _unmanagedBuffers.GetArray(bufferCount * bufferSize);
 
-			for(int n = 1; n <= bufferCount; n++)
+			for(int n = 0; n < bufferCount; n++)
 			{
 				_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioBuffer(pBuffer, bufferSize, true));
-				pBuffer += n * bufferSize;
+				pBuffer += bufferSize;
 			}
 		}
 	}
