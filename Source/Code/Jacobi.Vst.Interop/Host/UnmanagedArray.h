@@ -50,7 +50,7 @@ public:
 			DeleteArray();
 		}
 
-		if(_array == NULL)
+		if(_array == NULL && length > 0)
 		{
 			AllocateArray(length);
 		}

@@ -32,7 +32,7 @@ namespace Host
 			for(int n = 1; n <= bufferCount; n++)
 			{
 				_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioPrecisionBuffer(pBuffer, bufferSize, true));
-				pBuffer += n * bufferSize;
+				pBuffer += bufferSize;
 			}
 		}
 	}
