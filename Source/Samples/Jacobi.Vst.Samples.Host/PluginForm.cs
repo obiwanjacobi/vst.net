@@ -151,10 +151,11 @@ namespace Jacobi.Vst.Samples.Host
             VstAudioBuffer[] inputBuffers = inputMgr.ToArray();
             VstAudioBuffer[] outputBuffers = outputMgr.ToArray();
 
+            PluginContext.PluginCommandStub.MainsChanged(true);
             PluginContext.PluginCommandStub.StartProcess();
             PluginContext.PluginCommandStub.ProcessReplacing(inputBuffers, outputBuffers);
             PluginContext.PluginCommandStub.StopProcess();
-
+            PluginContext.PluginCommandStub.MainsChanged(false);
 
             for (int i = 0; i < inputBuffers.Length && i < outputBuffers.Length; i++)
             {
@@ -179,7 +180,9 @@ namespace Jacobi.Vst.Samples.Host
             EditorFrame dlg = new EditorFrame();
             dlg.PluginCommandStub = PluginContext.PluginCommandStub;
 
+            PluginContext.PluginCommandStub.MainsChanged(true);
             dlg.ShowDialog(this);
+            PluginContext.PluginCommandStub.MainsChanged(false);
         }
 
     }
