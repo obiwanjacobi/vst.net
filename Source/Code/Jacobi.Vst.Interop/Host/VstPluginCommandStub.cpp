@@ -33,12 +33,6 @@ void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioBuf
 	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
 	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
 
-	/*if(inputSampleCount != outputSampleCount)
-	{
-		throw gcnew System::ArgumentException(
-			Jacobi::Vst::Interop::Properties::Resources::VstPluginCommandStub_SampleCountMismatch);
-	}*/
-
 	CallProcess32(ppInputs, ppOutputs, max(inputSampleCount, outputSampleCount));
 }
 
@@ -49,12 +43,6 @@ void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioPre
 
 	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
 	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
-
-	/*if(inputSampleCount != outputSampleCount)
-	{
-		throw gcnew System::ArgumentException(
-			Jacobi::Vst::Interop::Properties::Resources::VstPluginCommandStub_SampleCountMismatch);
-	}*/
 
 	CallProcess64(ppInputs, ppOutputs, max(inputSampleCount, outputSampleCount));
 }
@@ -568,12 +556,6 @@ void VstPluginCommandStub::ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^
 
 	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
 	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
-
-	if(inputSampleCount != outputSampleCount)
-	{
-		throw gcnew System::ArgumentException(
-			Jacobi::Vst::Interop::Properties::Resources::VstPluginCommandStub_SampleCountMismatch);
-	}
 
 	CallProcess32Acc(ppInputs, ppOutputs, inputSampleCount);
 }
