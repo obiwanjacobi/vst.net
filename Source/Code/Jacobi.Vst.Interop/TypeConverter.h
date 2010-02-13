@@ -260,14 +260,26 @@ public:
 		{
 			if(pEvents->events[n]->flags == kVstSysExType)
 			{
+				// delete the sysex buffer
 				::VstMidiSysexEvent* pMidiEvent = (::VstMidiSysexEvent*)pEvents->events[n];
 				delete[] pMidiEvent->sysexDump;
-			}
 
-			delete pEvents->events[n];
+				// delete the event
+				delete pEvents->events[n];
+			}
+			else if(pEvents->events[n]->flags == kVstMidiType)
+			{
+				// delete the midi event
+				delete pEvents->events[n];
+			}
+			else // deprecated generic events
+			{
+				delete[] pEvents->events[n];
+			}
 		}
 
-		delete pEvents;
+		// delete the array of events
+		delete[] pEvents;
 	}
 
 	// Assigns the values of the managed pinProps to the unmanaged pProps fields.
