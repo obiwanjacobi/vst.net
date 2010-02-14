@@ -19,16 +19,28 @@ VstPluginCommandStub::VstPluginCommandStub(::AEffect* pEffect)
 	}
 
 	_pEffect = pEffect;
+	_emptyAudio32 = new float*[0];
+	_emptyAudio64 = new double*[0];
+	
 	_memoryTracker = gcnew MemoryTracker();
 
 	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.PluginCommandStub", Jacobi::Vst::Core::Host::IVstPluginCommandStub::typeid);
 }
 
+void VstPluginCommandStub::ClearCurrentEvents()
+{
+	if(_currentEvents != NULL)
+	{
+		TypeConverter::DeleteUnmanagedEvents(_currentEvents);
+		_currentEvents = NULL;
+	}
+}
+
 // IVstPluginCommandsBase
 void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs)
 {
-	float** ppInputs = _audioInputs.GetArray(inputs->Length);
-	float** ppOutputs = _audioOutputs.GetArray(outputs->Length);
+	float** ppInputs = inputs->Length == 0 ? _emptyAudio32 : _audioInputs.GetArray(inputs->Length);
+	float** ppOutputs = outputs->Length == 0 ? _emptyAudio32 : _audioOutputs.GetArray(outputs->Length);
 
 	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
 	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
@@ -38,8 +50,8 @@ void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioBuf
 
 void VstPluginCommandStub::ProcessReplacing(array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputs)
 {
-	double** ppInputs = _precisionInputs.GetArray(inputs->Length);
-	double** ppOutputs = _precisionOutputs.GetArray(outputs->Length);
+	double** ppInputs = inputs->Length == 0 ? _emptyAudio64 : _precisionInputs.GetArray(inputs->Length);
+	double** ppOutputs = outputs->Length == 0 ? _emptyAudio64 : _precisionOutputs.GetArray(outputs->Length);
 
 	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
 	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
@@ -65,8 +77,10 @@ void VstPluginCommandStub::Open()
 
 void VstPluginCommandStub::Close()
 {
-	_memoryTracker->ClearAll();
 	CallDispatch(effClose, 0, 0, 0, 0);
+
+	_memoryTracker->ClearAll();
+	ClearCurrentEvents();
 }
 
 void VstPluginCommandStub::SetProgram(System::Int32 programNumber)
@@ -211,16 +225,11 @@ System::Int32 VstPluginCommandStub::SetChunk(array<System::Byte>^ data, System::
 // IVstPluginCommands20
 System::Boolean VstPluginCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)
 {
-	::VstEvents* pEvents = TypeConverter::AllocUnmanagedEvents(events);
+	ClearCurrentEvents();
 
-	try
-	{
-		return (CallDispatch(effProcessEvents, 0, 0, pEvents, 0) != 0);
-	}
-	finally
-	{
-		TypeConverter::DeleteUnmanagedEvents(pEvents);
-	}
+	_currentEvents = TypeConverter::AllocUnmanagedEvents(events);
+
+	return (CallDispatch(effProcessEvents, 0, 0, _currentEvents, 0) != 0);
 }
 
 System::Boolean VstPluginCommandStub::CanParameterBeAutomated(System::Int32 index)
@@ -551,8 +560,8 @@ System::Int32 VstPluginCommandStub::GetNumberOfMidiOutputChannels()
 // IVstPluginCommandsDeprecatedBase
 void VstPluginCommandStub::ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs)
 {
-	float** ppInputs = _audioInputs.GetArray(inputs->Length);
-	float** ppOutputs = _audioOutputs.GetArray(outputs->Length);
+	float** ppInputs = inputs->Length == 0 ? _emptyAudio32 : _audioInputs.GetArray(inputs->Length);
+	float** ppOutputs = outputs->Length == 0 ? _emptyAudio32 : _audioOutputs.GetArray(outputs->Length);
 
 	VstInt32 inputSampleCount = CopyBufferPointers(ppInputs, inputs);
 	VstInt32 outputSampleCount = CopyBufferPointers(ppOutputs, outputs);
