@@ -20,9 +20,17 @@ ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub,
 	Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20, System::IDisposable
 {
 public:
-	//VstPluginCommandStub() { _pEffect = NULL; }
-	~VstPluginCommandStub() { this->!VstPluginCommandStub(); }
-	!VstPluginCommandStub() { _memoryTracker->ClearAll(); }
+	~VstPluginCommandStub()
+	{
+		this->!VstPluginCommandStub();
+	}
+	!VstPluginCommandStub()
+	{
+		_memoryTracker->ClearAll();
+		ClearCurrentEvents();
+		delete[] _emptyAudio32;
+		delete[] _emptyAudio64;
+	}
 
 	// IVstPluginCommandsBase
 	/// <summary>
@@ -518,8 +526,16 @@ internal:
 	VstPluginCommandStub(::AEffect* pEffect);
 
 private:
-	::AEffect* _pEffect;
+	::AEffect* _pEffect;	// the unmanaged Effect structure
 
+	// unmanaged events passed in during ProcessEvents. Will be deleted after the processing call.
+	::VstEvents* _currentEvents;
+	void ClearCurrentEvents();
+
+	// an empty audio buffer array
+	float** _emptyAudio32;	
+
+	// unmanaged audio buffers
 	UnmanagedArray<float*> _audioInputs;
 	UnmanagedArray<float*> _audioOutputs;
 	
@@ -543,6 +559,10 @@ private:
 		return sampleCount;
 	}
 
+	// an empty precision audio buffer array
+	double** _emptyAudio64;
+
+	// unmanaged precision audio buffers
 	UnmanagedArray<double*> _precisionInputs;
 	UnmanagedArray<double*> _precisionOutputs;
 
