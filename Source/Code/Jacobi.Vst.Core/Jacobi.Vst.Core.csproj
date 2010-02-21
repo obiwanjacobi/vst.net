@@ -122,8 +122,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Deprecated.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Diagnostics.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Enums.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Host.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Interfaces.cd" />
+    <None Include="Class Diagrams\Jacobi.Vst.Core.Plugin.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Types.cd" />
     <Compile Include="Diagnostics\TraceContext.OpcodeInfo.cs" />
     <Compile Include="VstCanDoHelper.cs" />
