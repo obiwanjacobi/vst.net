@@ -69,9 +69,9 @@ namespace Jacobi.Vst.Core
         {
             string result = cando.ToString();
 
-            if (result[0] == '_')
+            if (result[0] == 'x')
             {
-                // strip of leading underscore
+                // strip of leading 'x'
                 result = result.Substring(1);
             }
             else

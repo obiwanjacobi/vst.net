@@ -14,6 +14,7 @@
         /// <param name="buffer">The buffer as specified by the host. Must not be null.</param>
         /// <param name="length">The length of the <paramref name="buffer"/>.</param>
         /// <param name="canWrite">An indaction if the buffer content can be changed by plugin.</param>
+        [System.CLSCompliant(false)]
         public VstAudioPrecisionBuffer(double* buffer, int length, bool canWrite)
         {
             Buffer = buffer;

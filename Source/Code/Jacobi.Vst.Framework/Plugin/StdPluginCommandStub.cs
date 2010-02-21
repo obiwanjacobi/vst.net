@@ -837,7 +837,7 @@
         /// <seealso cref="ParsePluginCanDo"/></remarks>
         public virtual VstCanDoResult CanDo(string cando)
         {
-            VstCanDoResult result = VstCanDoResult.No;
+            VstCanDoResult result = VstCanDoResult.Unknown;
             
             VstPluginCanDo candoEnum = VstCanDoHelper.ParsePluginCanDo(cando);
 
@@ -849,9 +849,10 @@
                 case VstPluginCanDo.MidiProgramNames:
                     result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
-                //case VstPluginCanDo.Offline:
+                case VstPluginCanDo.Offline:
                     //result = _pluginCtx.Plugin.Supports<IVstPluginOfflineProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
-                    //break;
+                    result = VstCanDoResult.No;
+                    break;
                 case VstPluginCanDo.ReceiveVstEvents:
                 case VstPluginCanDo.ReceiveVstMidiEvent:
                     result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
