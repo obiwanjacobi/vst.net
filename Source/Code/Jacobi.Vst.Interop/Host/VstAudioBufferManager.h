@@ -16,6 +16,7 @@ namespace Host
 	/// unmanaged memory that backs up the buffers is coupled to the life time of the
 	/// VstAudioBufferManager instance. Calling the <see cref="Dispose"/> method will free
 	/// the unmanaged memory.</remarks>
+	[System::CLSCompliant(true)]
 	public ref class VstAudioBufferManager : System::IDisposable
 	{
 	public:
