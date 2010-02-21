@@ -128,6 +128,7 @@
     <Compile Include="VstConnectionInfoCollection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Class Diagrams\Jacobi.Vst.Framework.PluginBaseClasses.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Framework._HostCommandProxy.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Framework.InterfaceManager.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Framework.Interfaces.cd" />

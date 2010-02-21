@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Core.Diagnostics.ErrorHelper">
+    <Position X="3" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Diagnostics\ErrorHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.Diagnostics.TraceContext">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Diagnostics\TraceContext.OpcodeInfo.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAABCAIAABCQAAAAAAAAAAAAMAAgEAgAAAAAQA=</HashCode>
+      <FileName>Diagnostics\TraceContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

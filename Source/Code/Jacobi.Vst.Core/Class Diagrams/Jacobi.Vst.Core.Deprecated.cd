@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Core.Deprecated.VstGenericEvent">
+    <Position X="0.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Deprecated\VstGenericEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter">
+    <Position X="10.25" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>MRAAAAoAgCAAAAAAAIAAQCAACAAEAAAggACCAIAAAAA=</HashCode>
+      <FileName>Deprecated\VstHostCommandDeprecatedAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter">
+    <Position X="7" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAAABAQAgAAUAQQBAAAAAAAAAIAgAIgAAAKQEIAAA=</HashCode>
+      <FileName>Deprecated\VstPluginCommandDeprecatedAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedInfo">
+    <Position X="4" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAAAAAAAAAAAAAAAAABAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Deprecated\VstPluginDeprecatedInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.Plugin.VstPluginInfo">
+    <Position X="4" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQBQEAAgAAAAAAAAAAAAAAAAAAAAAIAAgAAAAABAA=</HashCode>
+      <FileName>Plugin\VstPluginInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstEvent">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated10">
+    <Position X="4" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Deprecated\IVstHostCommandsDeprecated.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20">
+    <Position X="4" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>MRAAAAoAgAAAAAAAAIAAQAAACAAEAAAgAACCAIAAAAA=</HashCode>
+      <FileName>Deprecated\IVstHostCommandsDeprecated.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecatedBase">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Deprecated\IVstPluginCommandsDeprecated.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10">
+    <Position X="0.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAQAAAAAAAAAAAAAAAIAAAAIAEAAAA=</HashCode>
+      <FileName>Deprecated\IVstPluginCommandsDeprecated.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20">
+    <Position X="0.5" Y="3.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAABAQAgAAQAAQBAAAAAAAAAIAgAAAAAACQAIAAA=</HashCode>
+      <FileName>Deprecated\IVstPluginCommandsDeprecated.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags">
+    <Position X="6.75" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAACQAAEQAAAAAAAAAAAAAAAAAAAAAAQAAAAAEAAAA=</HashCode>
+      <FileName>Deprecated\VstPluginDeprecatedInfo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

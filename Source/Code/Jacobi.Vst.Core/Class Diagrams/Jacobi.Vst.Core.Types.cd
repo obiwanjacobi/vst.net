@@ -3,7 +3,7 @@
   <Class Name="Jacobi.Vst.Core.VstAudioBuffer">
     <Position X="0.5" Y="10.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAASAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <HashCode>AAAAAAAASAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>VstAudioBuffer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="Jacobi.Vst.Core.VstAudioPrecisionBuffer">
     <Position X="3.5" Y="10.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <HashCode>AAAAAAQAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>VstAudioPrecisionBuffer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -154,15 +154,22 @@
       <FileName>VstFileSelect.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Core.Plugin.ManagedPluginFactory">
-    <Position X="0.5" Y="13" Width="3.5" />
+  <Class Name="Jacobi.Vst.Core.VstCanDoHelper">
+    <Position X="3.5" Y="13.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstCanDoHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Jacobi.Vst.Core.FourCharacterCode">
+    <Position X="0.5" Y="13.5" Width="2.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAAABAAAAAEAAAABACAAAAAAAAAAAA=</HashCode>
-      <FileName>Plugin\ManagedPluginFactory.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAwIAAAAAA=</HashCode>
+      <FileName>FourCharacterCode.cs</FileName>
     </TypeIdentifier>
-  </Class>
+  </Struct>
   <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>
