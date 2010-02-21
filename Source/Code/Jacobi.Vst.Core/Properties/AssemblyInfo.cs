@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 // The core assembly is not CLS compliant.
-[assembly: CLSCompliant(false)]
+[assembly: CLSCompliant(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("c6828713-feb9-4185-992f-6f34caaa932d")]

@@ -3,6 +3,7 @@
     /// <summary>
     /// Provides unmanged buffer access to an audio buffer
     /// </summary>
+    [System.CLSCompliant(false)]
     public unsafe interface IDirectBufferAccess32
     {
         /// <summary>
@@ -18,6 +19,7 @@
     /// <summary>
     /// Provides unmanged buffer access to an audio buffer
     /// </summary>
+    [System.CLSCompliant(false)]
     public unsafe interface IDirectBufferAccess64
     {
         /// <summary>
