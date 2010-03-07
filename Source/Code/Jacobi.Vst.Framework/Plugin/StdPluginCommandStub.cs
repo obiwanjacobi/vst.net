@@ -834,7 +834,7 @@
         /// <returns>Returns an indication if the capability is supported.</returns>
         /// <remarks>The implementation handles all options in the <see cref="VstPluginCanDo"/> enum.
         /// Override in derived class to implement custom cando behavior.
-        /// <seealso cref="ParsePluginCanDo"/></remarks>
+        /// <seealso cref="VstCanDoHelper.ParsePluginCanDo"/></remarks>
         public virtual VstCanDoResult CanDo(string cando)
         {
             VstCanDoResult result = VstCanDoResult.Unknown;
