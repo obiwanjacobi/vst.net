@@ -8,6 +8,7 @@ namespace Jacobi.Vst.Core
     /// </summary>
     public static class VstCanDoHelper
     {
+        private const char _digitEscapeChar = 'x';
         /// <summary>
         /// Attempts to parse the <paramref name="cando"/> string.
         /// </summary>
@@ -21,6 +22,11 @@ namespace Jacobi.Vst.Core
 
             VstPluginCanDo result = VstPluginCanDo.Unknown;
             Type enumType = typeof(VstPluginCanDo);
+
+            if (Char.IsDigit(cando[0]))
+            {
+                cando = _digitEscapeChar + cando;
+            }
 
             foreach (string name in Enum.GetNames(enumType))
             {
@@ -69,16 +75,8 @@ namespace Jacobi.Vst.Core
         {
             string result = cando.ToString();
 
-            if (result[0] == 'x')
-            {
-                // strip of leading 'x'
-                result = result.Substring(1);
-            }
-            else
-            {
-                // lower case on first character
-                result = char.ToLowerInvariant(result[0]) + result.Substring(1);
-            }
+            // lower case on first character
+            result = char.ToLowerInvariant(result[0]) + result.Substring(1);
 
             return result;
         }
@@ -92,8 +90,16 @@ namespace Jacobi.Vst.Core
         {
             string result = cando.ToString();
 
-            // lower case on first character
-            result = char.ToLowerInvariant(result[0]) + result.Substring(1);
+            if (result[0] == _digitEscapeChar)
+            {
+                // strip of leading digit escape char
+                result = result.Substring(1);
+            }
+            else
+            {
+                // lower case on first character
+                result = char.ToLowerInvariant(result[0]) + result.Substring(1);
+            }
 
             return result;
         }

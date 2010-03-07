@@ -10,16 +10,10 @@ namespace Jacobi.Vst.Core
         /// </summary>
         /// <param name="deltaFrames">The number of frame from the start of the current cycle.</param>
         /// <param name="sysexData">The raw system exclusive data.</param>
-        public VstMidiSysExEvent(int deltaFrames,
-            byte[] sysexData)
-            : base(VstEventTypes.MidiSysExEvent, deltaFrames)
+        public VstMidiSysExEvent(int deltaFrames, byte[] sysexData)
+            : base(VstEventTypes.MidiSysExEvent, deltaFrames, sysexData)
         {
-            SysExData = sysexData;
+            Throw.IfArgumentIsNull(sysexData, "sysexData");
         }
-
-        /// <summary>
-        /// Gets the System Exclusive data.
-        /// </summary>
-        public byte[] SysExData { get; private set; }
     }
 }

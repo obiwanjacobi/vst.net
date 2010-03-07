@@ -18,13 +18,13 @@ namespace Jacobi.Vst.Core
         /// <param name="noteOffVelocity">Velocity for when the note is done.</param>
         public VstMidiEvent(int deltaFrames,
             int noteLength, int noteOffset, byte[] midiData, short detune, byte noteOffVelocity)
-            : base(VstEventTypes.MidiEvent, deltaFrames)
+            : base(VstEventTypes.MidiEvent, deltaFrames, midiData)
         {
+            Throw.IfArgumentIsNull(midiData, "midiData");
             Throw.IfArgumentNotInRange<short>(detune, -64, 63, "detune");
 
             NoteLength = noteLength;
             NoteOffset = noteOffset;
-            MidiData = midiData;
             Detune = detune;
             NoteOffVelocity = noteOffVelocity;
         }
@@ -38,12 +38,7 @@ namespace Jacobi.Vst.Core
         /// Gets the offset of the note.
         /// </summary>
         public int NoteOffset { get; private set; }
-        
-        /// <summary>
-        /// Gets the addition midi event data.
-        /// </summary>
-        public byte[] MidiData { get; private set; }
-        
+                
         /// <summary>
         /// Gets the detune value.
         /// </summary>
