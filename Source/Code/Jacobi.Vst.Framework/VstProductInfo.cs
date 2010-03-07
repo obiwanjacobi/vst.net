@@ -40,11 +40,11 @@
         protected virtual string FormatVersion(int version)
         {
             int major = version/1000;
-            version -= major;
+            version -= major * 1000;
             int minor = version/100;
-            version -= minor;
+            version -= minor * 100;
             int build = version/10;
-            version -= build;
+            version -= build * 10;
 
             return String.Format("{0}.{1}.{2}.{3}", major, minor, build, version);
         }

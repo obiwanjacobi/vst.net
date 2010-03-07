@@ -14,20 +14,13 @@
         /// <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
         /// <param name="data">The associated data for this event.</param>
         public VstGenericEvent(VstEventTypes eventType, int deltaFrames, byte[] data)
-            : base(eventType, deltaFrames)
+            : base(eventType, deltaFrames, data)
         {
             if (eventType == VstEventTypes.MidiEvent || 
                 eventType == VstEventTypes.MidiSysExEvent)
             {
                 throw new ArgumentException(Properties.Resources.VstGenericEvent_InvalidEventType, "eventType");
             }
-
-            Data = data;
         }
-
-        /// <summary>
-        /// Gets the generic data.
-        /// </summary>
-        public byte[] Data { get; private set; }
     }
 }

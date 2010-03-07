@@ -28,11 +28,12 @@ namespace Host
 		{
 			// allocate the buffers in one call
 			float* pBuffer = _unmanagedBuffers.GetArray(bufferCount * bufferSize);
+			ClearAllBuffers();
 
 			for(int n = 0; n < bufferCount; n++)
 			{
-				_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioBuffer(pBuffer, bufferSize, true));
-				pBuffer += bufferSize;
+				float* pRunning = pBuffer + (bufferSize * n);
+				_managedBuffers->Add(gcnew Jacobi::Vst::Core::VstAudioBuffer(pRunning, bufferSize, true));
 			}
 		}
 	}
@@ -76,7 +77,7 @@ namespace Host
 
 	void VstAudioBufferManager::ClearAllBuffers()
 	{
-		ClearBuffer(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetByteLength());
+		ClearBuffer(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetLength());
 	}
 
 }}}} // namespace Jacobi.Vst.Interop.Host

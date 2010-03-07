@@ -13,7 +13,7 @@ namespace Jacobi.Vst.Core
         /// </summary>
         /// <param name="eventType">The type of event.</param>
         /// <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
-        protected VstEvent(VstEventTypes eventType, int deltaFrames)
+        protected VstEvent(VstEventTypes eventType, int deltaFrames, byte[] data)
         {
             if (eventType == VstEventTypes.Unknown)
             {
@@ -22,6 +22,7 @@ namespace Jacobi.Vst.Core
 
             EventType = eventType;
             DeltaFrames = deltaFrames;
+            Data = data;
         }
 
         /// <summary>
@@ -32,6 +33,11 @@ namespace Jacobi.Vst.Core
         /// Gets the number of frames.
         /// </summary>
         public int DeltaFrames { get; private set; }
+
+        /// <summary>
+        /// Gets the event data.
+        /// </summary>
+        public byte[] Data { get; private set; }
     }
 
     /// <summary>
