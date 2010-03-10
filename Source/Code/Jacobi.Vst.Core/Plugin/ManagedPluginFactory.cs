@@ -36,23 +36,19 @@
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, "interopAssemblyPath");
 
             string dir = Path.GetDirectoryName(interopAssemblyPath);
-            string filePath = Path.Combine(dir, Path.GetFileNameWithoutExtension(interopAssemblyPath));
+            string fileName = Path.GetFileNameWithoutExtension(interopAssemblyPath);
 
-            // default .net.dll extension
-            string dotNetFile = filePath + DefaultManagedExtension;
-
-            // fallback to .net.vstdll
-            if (!File.Exists(dotNetFile))
+            if (!AssemblyLoader.Current.PrivateProbePaths.Contains(dir))
             {
-                dotNetFile = filePath + AlternateManagedExtension;
+                AssemblyLoader.Current.PrivateProbePaths.Add(dir);
             }
 
-            if (!File.Exists(dotNetFile))
-            {
-                throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, filePath);
-            }
+            _assembly = AssemblyLoader.Current.LoadAssembly(fileName, new string[] { DefaultManagedExtension, AlternateManagedExtension });
 
-            _assembly = Assembly.LoadFile(dotNetFile);
+            if(_assembly == null)
+            {
+                throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, Path.Combine(dir, fileName));
+            }
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "AssemblyLoader.h"
+//#include "AssemblyLoader.h"
 #include "Plugin/PluginCommandProxy.h"
 #include "Plugin/HostCommandStub.h"
 #include "TimeCriticalScope.h"
@@ -24,7 +24,7 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
 
 	// pass the assembly loader the vst plugin directory
-	AssemblyLoader::Initialize(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
+	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
 
 	//
 	// We have boot-strapped the AssemblyLoader (above).
