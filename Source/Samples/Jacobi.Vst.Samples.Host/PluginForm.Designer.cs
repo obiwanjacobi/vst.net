@@ -182,6 +182,7 @@
             // 
             // EditorBtn
             // 
+            this.EditorBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.EditorBtn.Location = new System.Drawing.Point(110, 362);
             this.EditorBtn.Name = "EditorBtn";
             this.EditorBtn.Size = new System.Drawing.Size(75, 23);

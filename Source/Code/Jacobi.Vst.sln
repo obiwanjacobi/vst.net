@@ -49,11 +49,13 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Any CPU.Build.0 = Debug|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Win32.ActiveCfg = Debug|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Debug|Win32.Build.0 = Debug|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Any CPU.ActiveCfg = Release|Win32
+		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Any CPU.Build.0 = Release|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}.Release|Win32.ActiveCfg = Release|Win32

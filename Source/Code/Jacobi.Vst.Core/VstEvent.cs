@@ -13,6 +13,7 @@ namespace Jacobi.Vst.Core
         /// </summary>
         /// <param name="eventType">The type of event.</param>
         /// <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
+        /// <param name="data">A byte buffer of event data.</param>
         protected VstEvent(VstEventTypes eventType, int deltaFrames, byte[] data)
         {
             if (eventType == VstEventTypes.Unknown)

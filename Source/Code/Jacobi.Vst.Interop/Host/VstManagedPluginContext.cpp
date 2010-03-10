@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "VstManagedPluginContext.h"
-#include "..\AssemblyLoader.h"
+//#include "..\AssemblyLoader.h"
 #include "..\Properties\Resources.h"
 
 namespace Jacobi {
@@ -15,17 +15,14 @@ namespace Host {
 
 	VstPluginContext^ VstManagedPluginContext::CreateInternal(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
-		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
-		System::String^ baseName = System::IO::Path::GetFileNameWithoutExtension(pluginPath);
-		System::String^ fileName = System::IO::Path::Combine(basePath, baseName);
-		System::String^ filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension;
+		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		if(!System::IO::File::Exists(filePath))
-		{
-			filePath = fileName + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension;
-		}
+		Jacobi::Vst::Core::Plugin::FileFinder^ fileFinder = Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->CreateFileFinder();
+		fileFinder->Paths->Insert(0, System::IO::Path::GetDirectoryName(pluginPath));
+		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension);
+		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension);
 
-		if(System::IO::File::Exists(filePath))
+		if(!System::String::IsNullOrEmpty(fileFinder->Find(System::IO::Path::GetFileNameWithoutExtension(pluginPath))))
 		{
 			return gcnew Jacobi::Vst::Interop::Host::VstManagedPluginContext(hostCmdStub);
 		}
@@ -39,7 +36,7 @@ namespace Host {
 
 		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
-		Jacobi::Vst::Interop::AssemblyLoader::Initialize(basePath);
+		Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(basePath);
 
 		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory =
 			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(pluginPath);
