@@ -130,6 +130,8 @@
     <None Include="Class Diagrams\Jacobi.Vst.Core.Plugin.cd" />
     <None Include="Class Diagrams\Jacobi.Vst.Core.Types.cd" />
     <Compile Include="Diagnostics\TraceContext.OpcodeInfo.cs" />
+    <Compile Include="Plugin\AssemblyLoader.cs" />
+    <Compile Include="Plugin\FileFinder.cs" />
     <Compile Include="VstCanDoHelper.cs" />
   </ItemGroup>
   <ItemGroup>
