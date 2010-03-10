@@ -45,21 +45,21 @@
 
                     // pass note on and note off to the sample manager
 
-                    if ((midiEvent.MidiData[0] & 0xF0) == 0x80)
+                    if ((midiEvent.Data[0] & 0xF0) == 0x80)
                     {
-                        _plugin.SampleManager.ProcessNoteOffEvent(midiEvent.MidiData[1]);
+                        _plugin.SampleManager.ProcessNoteOffEvent(midiEvent.Data[1]);
                     }
 
-                    if ((midiEvent.MidiData[0] & 0xF0) == 0x90)
+                    if ((midiEvent.Data[0] & 0xF0) == 0x90)
                     {
                         // note on with velocity = 0 is a note off
-                        if (midiEvent.MidiData[2] == 0)
+                        if (midiEvent.Data[2] == 0)
                         {
-                            _plugin.SampleManager.ProcessNoteOffEvent(midiEvent.MidiData[1]);
+                            _plugin.SampleManager.ProcessNoteOffEvent(midiEvent.Data[1]);
                         }
                         else
                         {
-                            _plugin.SampleManager.ProcessNoteOnEvent(midiEvent.MidiData[1]);
+                            _plugin.SampleManager.ProcessNoteOnEvent(midiEvent.Data[1]);
                         }
                     }
                 }
