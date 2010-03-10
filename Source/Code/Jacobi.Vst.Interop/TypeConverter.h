@@ -191,9 +191,9 @@ public:
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
 				pMidiEvent->type = (VstInt32)midiEvent->EventType;
 
-				for(int i = 0; i < midiEvent->MidiData->Length && i < 4; i++)
+				for(int i = 0; i < midiEvent->Data->Length && i < 4; i++)
 				{
-					pMidiEvent->midiData[i] = midiEvent->MidiData[i];
+					pMidiEvent->midiData[i] = midiEvent->Data[i];
 				}
 
 				pMidiEvent->detune = (char)midiEvent->Detune;
@@ -213,12 +213,12 @@ public:
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
 				pMidiEvent->type = (VstInt32)midiEvent->EventType;
 
-				pMidiEvent->dumpBytes = midiEvent->SysExData->Length;
-				pMidiEvent->sysexDump = new char[midiEvent->SysExData->Length];
+				pMidiEvent->dumpBytes = midiEvent->Data->Length;
+				pMidiEvent->sysexDump = new char[midiEvent->Data->Length];
 
-				for(int i = 0; i < midiEvent->SysExData->Length; i++)
+				for(int i = 0; i < midiEvent->Data->Length; i++)
 				{
-					pMidiEvent->sysexDump[i] = (char)midiEvent->SysExData[i];
+					pMidiEvent->sysexDump[i] = (char)midiEvent->Data[i];
 				}
 
 				pEvents->events[index] = (::VstEvent*)pMidiEvent;
