@@ -55,14 +55,14 @@
                 VstMidiEvent midiEvent = (VstMidiEvent)evnt;
                 VstMidiEvent mappedEvent = null;
 
-                if ( ((midiEvent.MidiData[0] & 0xF0) == 0x80 || (midiEvent.MidiData[0] & 0xF0) == 0x90))
+                if ( ((midiEvent.Data[0] & 0xF0) == 0x80 || (midiEvent.Data[0] & 0xF0) == 0x90))
                 {
-                    if(_plugin.NoteMap.Contains(midiEvent.MidiData[1]))
+                    if(_plugin.NoteMap.Contains(midiEvent.Data[1]))
                     {
                         byte[] midiData = new byte[4];
-                        midiData[0] = midiEvent.MidiData[0];
-                        midiData[1] = _plugin.NoteMap[midiEvent.MidiData[1]].OutputNoteNumber;
-                        midiData[2] = midiEvent.MidiData[2];
+                        midiData[0] = midiEvent.Data[0];
+                        midiData[1] = _plugin.NoteMap[midiEvent.Data[1]].OutputNoteNumber;
+                        midiData[2] = midiEvent.Data[2];
 
                         mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames, 
                             midiEvent.NoteLength, 
@@ -74,11 +74,11 @@
                         Events.Add(mappedEvent);
 
                         // add raw note-on note numbers to the queue
-                        if((midiEvent.MidiData[0] & 0xF0) == 0x90)
+                        if((midiEvent.Data[0] & 0xF0) == 0x90)
                         {
                             lock (((ICollection)NoteOnEvents).SyncRoot)
                             {
-                                NoteOnEvents.Enqueue(midiEvent.MidiData[1]);
+                                NoteOnEvents.Enqueue(midiEvent.Data[1]);
                             }
                         }
                     }
