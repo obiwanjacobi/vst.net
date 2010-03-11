@@ -230,6 +230,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Bootstrapper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\dllmain.cpp"
 				>
 				<FileConfiguration
@@ -329,6 +333,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\Bootstrapper.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Plugin\HostCommandStub.h"
 				>

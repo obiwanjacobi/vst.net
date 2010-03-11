@@ -48,24 +48,30 @@
         /// <param name="e">Must not be null.</param>
         private static void BuildExceptionText(StringBuilder text, Exception e)
         {
-            text.AppendFormat("{0}: {1}", e.GetType(), e.Message);
-            text.AppendLine();
-
-            text.AppendLine(e.StackTrace.ToString());
-
-            if (e.Data.Count > 0)
+            if (e != null)
             {
-                foreach(KeyValuePair<string, object> item in e.Data)
+                text.AppendFormat("{0}: {1}", e.GetType(), e.Message);
+                text.AppendLine();
+
+                if (!String.IsNullOrEmpty(e.StackTrace))
                 {
-                    text.AppendFormat("Key={0}, Value={1}", item.Key, item.Value);
-                    text.AppendLine();
+                    text.AppendLine(e.StackTrace);
                 }
-            }
 
-            if(!String.IsNullOrEmpty(e.HelpLink))
-            {
-                text.Append("Help link: ");
-                text.AppendLine(e.HelpLink);
+                if (e.Data != null && e.Data.Count > 0)
+                {
+                    foreach (KeyValuePair<string, object> item in e.Data)
+                    {
+                        text.AppendFormat("Key={0}, Value={1}", item.Key, item.Value);
+                        text.AppendLine();
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(e.HelpLink))
+                {
+                    text.Append("Help link: ");
+                    text.AppendLine(e.HelpLink);
+                }
             }
         }
 
@@ -82,7 +88,6 @@
                 {
                     foreach (Exception le in rtle.LoaderExceptions)
                     {
-                        text.AppendLine();
                         text.AppendLine("Loader Exception -----------------------");
 
                         BuildExceptionText(text, le);

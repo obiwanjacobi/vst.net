@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-//#include "AssemblyLoader.h"
+#include "Bootstrapper.h"
 #include "Plugin/PluginCommandProxy.h"
 #include "Plugin/HostCommandStub.h"
 #include "TimeCriticalScope.h"
@@ -14,8 +14,8 @@ namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
-// fwd refs
-AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback);
+// fwd ref
+AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback hostCallback);
 
 // main exported method called by host to create the plugin
 AEffect* VSTPluginMain (audioMasterCallback hostCallback)
@@ -23,30 +23,37 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 	// retrieve the current plugin file name (interop)
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
 
+	// create the bootstrapper and register with the AssemlbyResolve event
+	Bootstrapper^ bootstrapper = gcnew Bootstrapper(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
+
+	//
+	// We have boot-strapped (above).
+	// Now call the actual VST main.
+	//
+	return VSTPluginMainInternal(bootstrapper, hostCallback);
+}
+
+// fwd ref
+AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
+
+AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback hostCallback)
+{
+	// The method dependencies has brought in the Core assembly. 
+	// Now we unregister the bootstrapper and turn it over to the AssemblyLoader (located in the Core Assembly).
+	delete bootstrapper;
+
+	// retrieve the current plugin file name (interop)
+	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+
 	// pass the assembly loader the vst plugin directory
 	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
 
-	//
-	// We have boot-strapped the AssemblyLoader (above).
-	// Now call the actual VST main.
-	//
-	return VSTPluginMainInternal(hostCallback);
-}
-
-// fwd refs
-AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
-
-AEffect* VSTPluginMainInternal (audioMasterCallback hostCallback)
-{
 	// create the host command stub (sends commands to host)
 	Jacobi::Vst::Interop::Plugin::HostCommandStub^ hostStub = 
 		gcnew Jacobi::Vst::Interop::Plugin::HostCommandStub(hostCallback);
 
 	try
 	{
-		// retrieve the current plugin file name (interop)
-		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
-
 		// create the plugin (command stub) factory
 		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
 			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(interopAssemblyFileName);
