@@ -34,9 +34,9 @@ namespace Jacobi.Vst.Core.Plugin
             fileFinder.Extensions.Add(".dll");
 
             AssemblyName assName = new AssemblyName(args.Name);
-            string fileName = Path.GetFileNameWithoutExtension(assName.Name);
+            string filePath = fileFinder.Find(assName.Name);
 
-            return Assembly.LoadFile(fileFinder.Find(fileName));
+            return Assembly.LoadFile(filePath);
         }
 
         /// <summary>
