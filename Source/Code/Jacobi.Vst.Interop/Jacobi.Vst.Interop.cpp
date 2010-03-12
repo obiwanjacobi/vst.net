@@ -20,17 +20,33 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 // main exported method called by host to create the plugin
 AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 {
-	// retrieve the current plugin file name (interop)
-	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+	try
+	{
+		// retrieve the current plugin file name (interop)
+		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
 
-	// create the bootstrapper and register with the AssemlbyResolve event
-	Bootstrapper^ bootstrapper = gcnew Bootstrapper(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
+		// try to locate the plugin specific config file
+		Jacobi::Vst::Interop::Plugin::Configuration^ config = 
+			gcnew Jacobi::Vst::Interop::Plugin::Configuration(interopAssemblyFileName);
 
-	//
-	// We have boot-strapped (above).
-	// Now call the actual VST main.
-	//
-	return VSTPluginMainInternal(bootstrapper, hostCallback);
+		// create the bootstrapper and register with the AssemlbyResolve event
+		Bootstrapper^ bootstrapper = 
+			gcnew Bootstrapper(System::IO::Path::GetDirectoryName(interopAssemblyFileName), config);
+
+		//
+		// We have boot-strapped (above).
+		// Now call the actual VST main.
+		//
+		return VSTPluginMainInternal(bootstrapper, hostCallback);
+	}
+	catch(System::Exception^ exc)
+	{
+		// cannot use the Utils::ShowError method here, cause it depends on Core.
+		System::Windows::Forms::MessageBox::Show(nullptr, exc->ToString(), "VST.NET Bootstrapper Error", 
+			System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+	}
+
+	return NULL;
 }
 
 // fwd ref
@@ -38,15 +54,22 @@ AEffect* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginI
 
 AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback hostCallback)
 {
+	// retrieve the plugin config
+	Jacobi::Vst::Interop::Plugin::Configuration^ config = bootstrapper->Configuration;
+
 	// The method dependencies has brought in the Core assembly. 
 	// Now we unregister the bootstrapper and turn it over to the AssemblyLoader (located in the Core Assembly).
 	delete bootstrapper;
 
 	// retrieve the current plugin file name (interop)
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+	System::String^ basePath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
-	// pass the assembly loader the vst plugin directory
-	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(System::IO::Path::GetDirectoryName(interopAssemblyFileName));
+	// add the vst plugin directory to the assembly loader
+	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(basePath);
+
+	// add the probe paths from the plugin config to the assembly loader
+	Utils::AddPaths(Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths, config->ProbePaths, basePath);
 
 	// create the host command stub (sends commands to host)
 	Jacobi::Vst::Interop::Plugin::HostCommandStub^ hostStub = 
@@ -56,13 +79,26 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 	{
 		// create the plugin (command stub) factory
 		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
-			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(interopAssemblyFileName);
+			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
 		
+		// load the managed plugin assembly either by a specific name from config or default name
+		if(!System::String::IsNullOrEmpty(config->ManagedAssemlbyName))
+		{
+			factory->LoadAssembly(config->ManagedAssemlbyName);
+		}
+		else
+		{
+			factory->LoadAssemblyByDefaultName(interopAssemblyFileName);
+		}
+
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
 		
 		if(commandStub)
 		{
+			// assign config to commandStub (can be null)
+			commandStub->PluginConfiguration = config->PluginConfig;
+
 			// retrieve the plugin info
 			Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
 
@@ -99,6 +135,11 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 		delete hostStub;
 
 		Utils::ShowError(exc);
+	}
+	finally
+	{
+		// make sure the private paths are cleared once the plugin is fully loaded.
+		Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Clear();
 	}
 
 	return NULL;

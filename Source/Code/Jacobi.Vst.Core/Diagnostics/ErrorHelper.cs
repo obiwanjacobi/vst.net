@@ -4,6 +4,7 @@
     using System.Text;
     using System.Collections.Generic;
     using System.Reflection;
+    using System.IO;
 
     /// <summary>
     /// Helper class for formatting errors.
@@ -29,6 +30,9 @@
 
                 BuildReflectionTypeLoadExceptionText(text, e as ReflectionTypeLoadException);
 
+                BuildFileNotFoundExceptionText(text, e as FileNotFoundException);
+
+                // recurse for inner exceptions
                 if (e.InnerException != null)
                 {
                     text.AppendLine();
@@ -100,9 +104,30 @@
 
                     foreach (Type loadedType in rtle.Types)
                     {
-                        text.Append("\t");
-                        text.AppendLine(loadedType.FullName);
+                        if (loadedType != null)
+                        {
+                            text.Append("\t");
+                            text.AppendLine(loadedType.FullName);
+                        }
                     }
+                }
+            }
+        }
+
+        private static void BuildFileNotFoundExceptionText(StringBuilder text, FileNotFoundException fnfe)
+        {
+            if (fnfe != null)
+            {
+                if (!String.IsNullOrEmpty(fnfe.FileName))
+                {
+                    text.AppendFormat("File name = '{0}'.", fnfe.FileName);
+                    text.AppendLine();
+                }
+
+                if (!String.IsNullOrEmpty(fnfe.FusionLog))
+                {
+                    text.AppendFormat("Fusion Log = '{0}'.", fnfe.FusionLog);
+                    text.AppendLine();
                 }
             }
         }

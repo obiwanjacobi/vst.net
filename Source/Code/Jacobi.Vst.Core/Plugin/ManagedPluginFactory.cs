@@ -23,7 +23,7 @@
         public const string AlternateManagedExtension = ".net.vstdll";
 
         /// <summary>
-        /// Constructs a new instance.
+        /// Loads the managed plugin assembly with the same name as the specified <paramref name="interopAssemblyPath"/>.
         /// </summary>
         /// <param name="interopAssemblyPath">The full file path to the interop assembly. Must not be null or empty.</param>
         /// <exception cref="ArgumentNullException">Thrown when the <paramref name="interopAssemblyPath"/> is null.</exception>
@@ -31,7 +31,7 @@
         /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
         /// <remarks>Note that the managed plugin assembly must be named exactly the same as the <paramref name="interopAssemblyPath"/>
         /// but with a <b>.net.dll</b> or a <b>.net.vstdll</b> extension.</remarks>
-        public ManagedPluginFactory(string interopAssemblyPath)
+        public void LoadAssemblyByDefaultName(string interopAssemblyPath)
         {
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, "interopAssemblyPath");
 
@@ -43,11 +43,23 @@
                 AssemblyLoader.Current.PrivateProbePaths.Add(dir);
             }
 
-            _assembly = AssemblyLoader.Current.LoadAssembly(fileName, new string[] { DefaultManagedExtension, AlternateManagedExtension });
+            LoadAssembly(fileName);
+        }
 
-            if(_assembly == null)
+        /// <summary>
+        /// Attempts to load the assembly by the <paramref name="assemblyName"/>.
+        /// </summary>
+        /// <param name="assemblyName">The name of the assembly, without a path indication or file extension. Must not be null or empty.</param>
+        /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
+        public void LoadAssembly(string assemblyName)
+        {
+            Throw.IfArgumentIsNullOrEmpty(assemblyName, "assemblyName");
+
+            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new string[] { DefaultManagedExtension, AlternateManagedExtension });
+
+            if (_assembly == null)
             {
-                throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, Path.Combine(dir, fileName));
+                throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, assemblyName);
             }
         }
 

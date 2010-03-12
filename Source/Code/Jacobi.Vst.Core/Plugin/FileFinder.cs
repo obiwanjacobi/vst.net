@@ -50,6 +50,8 @@ namespace Jacobi.Vst.Core.Plugin
         /// <returns>Returns null if no file was found. Otherwise the full file path is returned.</returns>
         public string Find(string fileNameWithoutExtension)
         {
+            Throw.IfArgumentIsNullOrEmpty(fileNameWithoutExtension, "fileNameWithoutExtension");
+
             foreach (string path in Paths)
             {
                 foreach (string ext in Extensions)

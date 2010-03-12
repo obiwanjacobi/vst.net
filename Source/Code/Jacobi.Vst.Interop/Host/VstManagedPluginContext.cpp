@@ -38,8 +38,11 @@ namespace Host {
 
 		Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(basePath);
 
+		// TODO: add use of plugin config probe paths
+
 		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory =
-			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory(pluginPath);
+			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
+		factory->LoadAssemblyByDefaultName(pluginPath);
 
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = factory->CreatePluginCommandStub();
 
