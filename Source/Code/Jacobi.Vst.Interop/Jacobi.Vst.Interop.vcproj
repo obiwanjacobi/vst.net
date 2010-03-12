@@ -234,6 +234,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Plugin\Configuration.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\dllmain.cpp"
 				>
 				<FileConfiguration
@@ -335,6 +339,10 @@
 			>
 			<File
 				RelativePath=".\Bootstrapper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Plugin\Configuration.h"
 				>
 			</File>
 			<File
