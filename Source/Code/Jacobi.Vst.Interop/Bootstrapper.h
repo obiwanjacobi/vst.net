@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Plugin/Configuration.h"
+
 namespace Jacobi {
 namespace Vst {
 namespace Interop {
@@ -17,15 +19,23 @@ public:
 	/// Constructs a new instance initialized with the specified <paramref name="basePath"/>
 	/// as well as the paths loaded from the "vstnetProbePaths" config appSettings.
 	/// </summary>
-	Bootstrapper(System::String^ basePath);
+	Bootstrapper(System::String^ basePath, Jacobi::Vst::Interop::Plugin::Configuration^ config);
+	/// <summary>
+	/// Destructor.
+	/// </summary>
+	~Bootstrapper();
 	/// <summary>
 	/// Unregisters the bootstrapper from the AssemlbyResolve event.
 	/// </summary>
-	~Bootstrapper();
+	!Bootstrapper();
 
-	
+	property Jacobi::Vst::Interop::Plugin::Configuration^ Configuration
+	{ Jacobi::Vst::Interop::Plugin::Configuration^ get() { return _config; } }
 
 private:
+	// plugin specific config
+	Jacobi::Vst::Interop::Plugin::Configuration^ _config;
+
 	// contains the private probe paths
 	System::Collections::Generic::List<System::String^>^ _paths;
 

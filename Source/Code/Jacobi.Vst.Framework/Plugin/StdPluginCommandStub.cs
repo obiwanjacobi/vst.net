@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Framework.Plugin
 {
     using System;
+    using System.Configuration;
     using System.IO;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
@@ -47,6 +48,12 @@
 
             return null;
         }
+
+        /// <summary>
+        /// Gets or sets the custom plugin specific configuration object.
+        /// </summary>
+        /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
+        public Configuration PluginConfiguration { get; set; }
 
         #endregion
 
@@ -1441,8 +1448,6 @@
         /// </summary>
         /// <returns>Returning null will abort loading the plugin.</returns>
         protected abstract IVstPlugin CreatePluginInstance();
-
-        
 
         /// <summary>
         /// Creates summary info based on the <paramref name="plugin"/>.

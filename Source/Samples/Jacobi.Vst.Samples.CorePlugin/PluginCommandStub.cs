@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Samples.CorePlugin
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
@@ -34,6 +35,9 @@
 
             return _pluginInfo;
         }
+
+        /// <inheritdoc />
+        public Configuration PluginConfiguration { get; set; }
 
         private void Log(string text)
         {

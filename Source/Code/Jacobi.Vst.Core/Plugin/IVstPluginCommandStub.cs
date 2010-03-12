@@ -1,4 +1,5 @@
-﻿namespace Jacobi.Vst.Core.Plugin
+﻿using System.Configuration;
+namespace Jacobi.Vst.Core.Plugin
 {
     /// <summary>
     /// The Plugin Command Stub called by the Interop.
@@ -12,5 +13,11 @@
         /// <returns>Returns an instance with the plugin info filled in. 
         /// If null is returned the plugin load sequence is aborted.</returns>
         VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub);
+
+        /// <summary>
+        /// Gets or sets the custom plugin specific configuration object.
+        /// </summary>
+        /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
+        Configuration PluginConfiguration { get; set; }
     }
 }

@@ -15,6 +15,8 @@ public:
 
 	static System::String^ GetPluginName()
 	{ return System::IO::Path::GetFileNameWithoutExtension(GetCurrentFileName()); }
+
+	static System::Boolean AddPaths(System::Collections::Generic::List<System::String^>^ pathList, System::String^ paths, System::String^ basePath);
 };
 
 }}} // Jacobi::Vst::Interop

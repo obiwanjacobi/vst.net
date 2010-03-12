@@ -40,9 +40,10 @@ namespace Jacobi.Vst.Core.Plugin
         }
 
         /// <summary>
-        /// 
+        /// Instantiates a new instance of the <see cref="FileFinder"/> class with its <see cref="Paths"/> 
+        /// collection filled with the <see cref="GlobalProbePaths"/> and <see cref="PrivateProbePaths"/> paths.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Never returns null.</returns>
         public FileFinder CreateFileFinder()
         {
             FileFinder fileFinder = new FileFinder();
@@ -72,17 +73,24 @@ namespace Jacobi.Vst.Core.Plugin
         /// Attempts to load an assembly using the <paramref name="fileName"/> and the list of <paramref name="extensions"/> 
         /// as well as the <see cref="PrivateProbePaths"/> and the <see cref="GlobalProbePaths"/>.
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="extensions"></param>
-        /// <returns></returns>
+        /// <param name="fileName">Name of the assembly file without extension. Must not be null or empty.</param>
+        /// <param name="extensions">A list of extensions to check for. Must not be null.</param>
+        /// <returns>Returns null if no suitable assembly file was found.</returns>
         public Assembly LoadAssembly(string fileName, IEnumerable<string> extensions)
         {
+            Throw.IfArgumentIsNull(extensions, "extensions");
+
             FileFinder fileFinder = CreateFileFinder();
             fileFinder.Extensions.AddRange(extensions);
 
             string filePath = fileFinder.Find(fileName);
 
-            return Assembly.LoadFile(filePath);
+            if (!String.IsNullOrEmpty(filePath))
+            {
+                return Assembly.LoadFile(filePath);
+            }
+
+            return null;
         }
     }
 }
