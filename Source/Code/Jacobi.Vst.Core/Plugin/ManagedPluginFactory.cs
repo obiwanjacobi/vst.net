@@ -55,7 +55,8 @@
         {
             Throw.IfArgumentIsNullOrEmpty(assemblyName, "assemblyName");
 
-            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new string[] { DefaultManagedExtension, AlternateManagedExtension });
+            // include an empty string as extension to allow to look for the war assemblyName
+            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new string[] { DefaultManagedExtension, AlternateManagedExtension, String.Empty });
 
             if (_assembly == null)
             {
