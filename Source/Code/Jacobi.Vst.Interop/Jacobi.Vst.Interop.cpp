@@ -63,13 +63,7 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 
 	// retrieve the current plugin file name (interop)
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
-	System::String^ basePath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
-
-	// add the vst plugin directory to the assembly loader
-	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(basePath);
-
-	// add the probe paths from the plugin config to the assembly loader
-	Utils::AddPaths(Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths, config->ProbePaths, basePath);
+	//System::String^ basePath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
 	// create the host command stub (sends commands to host)
 	Jacobi::Vst::Interop::Plugin::HostCommandStub^ hostStub = 
@@ -77,28 +71,11 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 
 	try
 	{
-		// create the plugin (command stub) factory
-		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
-			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
-		
-		// load the managed plugin assembly either by a specific name from config or default name
-		if(!System::String::IsNullOrEmpty(config->ManagedAssemlbyName))
-		{
-			factory->LoadAssembly(config->ManagedAssemlbyName);
-		}
-		else
-		{
-			factory->LoadAssemblyByDefaultName(interopAssemblyFileName);
-		}
-
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName, config);
 		
 		if(commandStub)
 		{
-			// assign config to commandStub (can be null)
-			commandStub->PluginConfiguration = config->PluginConfig;
-
 			// retrieve the plugin info
 			Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
 

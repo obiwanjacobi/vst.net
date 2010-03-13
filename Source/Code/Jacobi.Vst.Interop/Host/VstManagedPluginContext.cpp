@@ -1,7 +1,9 @@
 #include "StdAfx.h"
 #include "VstManagedPluginContext.h"
-//#include "..\AssemblyLoader.h"
+#include "..\Plugin\Configuration.h"
 #include "..\Properties\Resources.h"
+#include "..\Bootstrapper.h"
+#include "..\Utils.h"
 
 namespace Jacobi {
 namespace Vst {
@@ -34,17 +36,8 @@ namespace Host {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
-
-		Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(basePath);
-
-		// TODO: add use of plugin config probe paths
-
-		Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory =
-			gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
-		factory->LoadAssemblyByDefaultName(pluginPath);
-
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = factory->CreatePluginCommandStub();
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
+			Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath));
 
 		if(pluginCmdStub == nullptr)
 		{
