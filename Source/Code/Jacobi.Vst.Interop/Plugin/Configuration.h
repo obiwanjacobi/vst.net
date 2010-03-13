@@ -37,8 +37,8 @@ public:
 	/// <summary>
 	/// The managed assembly name override. Can be null.
 	/// </summary>
-	property System::String^ ManagedAssemlbyName
-	{ System::String^ get() { return GetAppSetting(VstNetManagedAssemlbyName); } }
+	property System::String^ ManagedAssemblyName
+	{ System::String^ get() { return GetAppSetting(VstNetManagedAssemblyName); } }
 
 	/// <summary>
 	/// The appSettgins config setting 'vstnetProbePaths'.
@@ -48,7 +48,7 @@ public:
 	/// <summary>
 	/// The appSettgins config setting 'vstnetManagedAssemblyName'.
 	/// </summary>
-	static System::String^ VstNetManagedAssemlbyName = "vstnetManagedAssemblyName";
+	static System::String^ VstNetManagedAssemblyName = "vstnetManagedAssemblyName";
 
 private:
 	System::Configuration::Configuration^ _config;
