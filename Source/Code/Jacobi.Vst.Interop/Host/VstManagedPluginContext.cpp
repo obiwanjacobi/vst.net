@@ -36,24 +36,32 @@ namespace Host {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-			Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath));
-
-		if(pluginCmdStub == nullptr)
+		try
 		{
-			throw gcnew System::EntryPointNotFoundException(
-				System::String::Format(
-					Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
-					pluginPath));
+			Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
+				Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath));
+
+			if(pluginCmdStub == nullptr)
+			{
+				throw gcnew System::EntryPointNotFoundException(
+					System::String::Format(
+						Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
+						pluginPath));
+			}
+
+			Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
+				Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
+
+			PluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
+
+			PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
+			PluginCommandStub->PluginContext = this;
 		}
-
-		Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
-			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
-
-		PluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
-
-		PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
-		PluginCommandStub->PluginContext = this;
+		finally
+		{
+			// make sure the private paths are cleared once the plugin is fully loaded.
+			Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Clear();
+		}
 	}
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
