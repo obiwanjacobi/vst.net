@@ -32,6 +32,10 @@ public:
 	property Jacobi::Vst::Interop::Plugin::Configuration^ Configuration
 	{ Jacobi::Vst::Interop::Plugin::Configuration^ get() { return _config; } }
 
+	// helper
+	static Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ LoadManagedPlugin(System::String^ pluginPath, 
+		Jacobi::Vst::Interop::Plugin::Configuration^ config);
+
 private:
 	// plugin specific config
 	Jacobi::Vst::Interop::Plugin::Configuration^ _config;

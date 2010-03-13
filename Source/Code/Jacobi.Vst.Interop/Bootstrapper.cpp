@@ -67,4 +67,41 @@ System::Reflection::Assembly^ Bootstrapper::LoadAssembly(System::String^ fileNam
 	return nullptr;
 }
 
+// static helper method
+Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Jacobi::Vst::Interop::Plugin::Configuration^ config)
+{
+	System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+
+	// add the vst plugin directory to the assembly loader
+	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Add(basePath);
+
+	// add the probe paths from the plugin config to the assembly loader
+	Utils::AddPaths(Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths, config->ProbePaths, basePath);
+
+	// create the plugin (command stub) factory
+	Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
+		gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
+	
+	// load the managed plugin assembly either by a specific name from config or default name
+	if(!System::String::IsNullOrEmpty(config->ManagedAssemblyName))
+	{
+		factory->LoadAssembly(config->ManagedAssemblyName);
+	}
+	else
+	{
+		factory->LoadAssemblyByDefaultName(pluginPath);
+	}
+
+	// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
+	Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = factory->CreatePluginCommandStub();
+	
+	if(commandStub != nullptr)
+	{
+		// assign config to commandStub (can be null)
+		commandStub->PluginConfiguration = config->PluginConfig;
+	}
+
+	return commandStub;
+}
+
 }}} // Jacobi::Vst::Interop
