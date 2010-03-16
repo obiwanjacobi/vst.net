@@ -20,6 +20,8 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 // main exported method called by host to create the plugin
 AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 {
+	Bootstrapper^ bootstrapper = nullptr;
+
 	try
 	{
 		// retrieve the current plugin file name (interop)
@@ -30,8 +32,7 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 			gcnew Jacobi::Vst::Interop::Plugin::Configuration(interopAssemblyFileName);
 
 		// create the bootstrapper and register with the AssemlbyResolve event
-		Bootstrapper^ bootstrapper = 
-			gcnew Bootstrapper(System::IO::Path::GetDirectoryName(interopAssemblyFileName), config);
+		bootstrapper = gcnew Bootstrapper(System::IO::Path::GetDirectoryName(interopAssemblyFileName), config);
 
 		//
 		// We have boot-strapped (above).
@@ -41,6 +42,11 @@ AEffect* VSTPluginMain (audioMasterCallback hostCallback)
 	}
 	catch(System::Exception^ exc)
 	{
+		if(bootstrapper != nullptr)
+		{
+			delete bootstrapper;
+		}
+
 		// cannot use the Utils::ShowError method here, cause it depends on Core.
 		System::Windows::Forms::MessageBox::Show(nullptr, exc->ToString(), "VST.NET Bootstrapper Error", 
 			System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
