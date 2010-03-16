@@ -36,7 +36,12 @@ namespace Jacobi.Vst.Core.Plugin
             AssemblyName assName = new AssemblyName(args.Name);
             string filePath = fileFinder.Find(assName.Name);
 
-            return Assembly.LoadFile(filePath);
+            if (!String.IsNullOrEmpty(filePath))
+            {
+                return Assembly.LoadFile(filePath);
+            }
+
+            return null;
         }
 
         /// <summary>
