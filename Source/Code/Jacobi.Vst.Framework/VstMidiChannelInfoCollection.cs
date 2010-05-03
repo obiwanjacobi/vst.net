@@ -1,11 +1,11 @@
 ﻿namespace Jacobi.Vst.Framework
 {
-    using System.Collections.ObjectModel;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstMidiChannelInfo"/> instances.
     /// </summary>
-    public class VstMidiChannelInfoCollection : Collection<VstMidiChannelInfo>
+    public class VstMidiChannelInfoCollection : ObservableCollection<VstMidiChannelInfo>
     {
     }
 }

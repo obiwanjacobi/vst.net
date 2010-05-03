@@ -8,14 +8,6 @@
         /// <summary>
         /// Gets the current activation state (true).
         /// </summary>
-        bool IsActive { get; }
-        /// <summary>
-        /// Activates the object (does nothing when already active).
-        /// </summary>
-        void Activate();
-        /// <summary>
-        /// Deactivates the object (does nothing when already inactive).
-        /// </summary>
-        void Deactivate();
+        bool IsActive { get; set; }
     }
 }

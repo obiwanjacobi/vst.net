@@ -2,11 +2,12 @@
 {
     using System;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Contains information about a Midi Program.
     /// </summary>
-    public class VstMidiProgram
+    public class VstMidiProgram : ObservableObject
     {
         private static readonly string[] KeyNames = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
@@ -22,32 +23,62 @@
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxMidiNameLength, "Name");
 
-                _name = value;
-                
-                OnNameChanged();
+                SetProperty(value, ref _name, "Name");
             }
         }
 
+        private byte _programChange;
         /// <summary>
         /// Gets or sets the Midi Program Change message value.
         /// </summary>
-        public byte ProgramChange { get; set; }
-        
+        public byte ProgramChange
+        {
+            get { return _programChange; }
+            set
+            {
+                SetProperty(value, ref _programChange, "ProgramChange");
+            }
+        }
+
+        private byte _bankSelectMsb;
         /// <summary>
         /// Gets or sets the Most Significant Byte (Hi) value of the Midi Bank Select message.
         /// </summary>
-        public byte BankSelectMsb { get; set; }
+        public byte BankSelectMsb
+        {
+            get { return _bankSelectMsb; }
+            set
+            {
+                SetProperty(value, ref _bankSelectMsb, "BankSelectMsb");
+            }
+        }
         
+        private byte _bankSelectLsb;
         /// <summary>
         /// Gets or sets the Least Significant Byte (Lo) value of the Midi Bank Select message.
         /// </summary>
-        public byte BankSelectLsb { get; set; }
+        public byte BankSelectLsb
+        {
+            get { return _bankSelectLsb; }
+            set
+            {
+                SetProperty(value, ref _bankSelectLsb, "BankSelectLsb");
+            }
+        }
 
+        public VstMidiCategory _category;
         /// <summary>
         /// Gets or sets the <see cref="VstMidiCategory"/> instance this Midi program is part of.
         /// </summary>
         /// <remarks>Can be null.</remarks>
-        public VstMidiCategory ParentCategory { get; set; }
+        public VstMidiCategory Category
+        {
+            get { return _category; }
+            set
+            {
+                SetProperty(value, ref _category, "Category");
+            }
+        }
 
         /// <summary>
         /// Retrieves the name of the specified <paramref name="keyNumber"/>.
@@ -61,25 +92,5 @@
 
             return KeyNames[note] + (octave - 2);
         }
-
-        /// <summary>
-        /// Fires the NameChanged event.
-        /// </summary>
-        /// <remarks>Also call this method in you custom implementation of 
-        /// <see cref="GetKeyName"/> when (and if) the key names change.</remarks>
-        protected virtual void OnNameChanged()
-        {
-            EventHandler<EventArgs> temp = NameChanged;
-
-            if (temp != null)
-            {
-                temp(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Fires when the <see cref="Name"/> or <b>Key Name</b>s change.
-        /// </summary>
-        public event EventHandler<EventArgs> NameChanged;
     }
 }

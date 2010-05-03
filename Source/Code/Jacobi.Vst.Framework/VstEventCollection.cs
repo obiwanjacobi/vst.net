@@ -1,14 +1,16 @@
 namespace Jacobi.Vst.Framework
 {
+    using System;
     using System.Collections.Generic;
     using Jacobi.Vst.Core;
-    using System;
+    using Jacobi.Vst.Framework.Common;
+    using System.Collections;
 
     /// <summary>
     /// Manages a collection of <see cref="VstEvent"/> instances.
     /// </summary>
     /// <remarks>The collection can be read-only or writable.</remarks>
-    public class VstEventCollection : IList<VstEvent>
+    public class VstEventCollection : NotifyCollectionChangedBase, IList<VstEvent>
     {
         private List<VstEvent> _list;
 
@@ -40,10 +42,9 @@ namespace Jacobi.Vst.Framework
         {
             Throw.IfArgumentIsNull(events, "events");
 
-            foreach (VstEvent evnt in events)
-            {
-                Add(evnt);
-            }
+            _list.AddRange(events);
+
+            OnCollectionChanged(NotifyColletionChangedAction.Add, new List<VstEvent>(events), null);
         }
 
         /// <summary>
@@ -78,6 +79,8 @@ namespace Jacobi.Vst.Framework
             ThrowIfReadOnly();
 
             _list.Insert(index, item);
+
+            OnCollectionChanged(NotifyColletionChangedAction.Add, item, null);
         }
 
         /// <summary>
@@ -89,7 +92,11 @@ namespace Jacobi.Vst.Framework
         {
             ThrowIfReadOnly();
 
+            VstEvent oldItem = _list[index];
+
             _list.RemoveAt(index);
+
+            OnCollectionChanged(NotifyColletionChangedAction.Remove, null, oldItem);
         }
 
         /// <summary>
@@ -108,7 +115,11 @@ namespace Jacobi.Vst.Framework
             {
                 ThrowIfReadOnly();
 
+                VstEvent oldItem = _list[index];
+
                 _list[index] = value;
+
+                OnCollectionChanged(NotifyColletionChangedAction.Replace, value, oldItem);
             }
         }
 
@@ -126,6 +137,8 @@ namespace Jacobi.Vst.Framework
             ThrowIfReadOnly();
 
             _list.Add(item);
+
+            OnCollectionChanged(NotifyColletionChangedAction.Add, item, null);
         }
 
         /// <summary>
@@ -136,7 +149,11 @@ namespace Jacobi.Vst.Framework
         {
             ThrowIfReadOnly();
 
+            VstEvent[] oldItems = _list.ToArray();
+
             _list.Clear();
+
+            OnCollectionChanged(NotifyColletionChangedAction.Reset, null, oldItems);
         }
 
         /// <summary>
@@ -189,7 +206,11 @@ namespace Jacobi.Vst.Framework
         {
             ThrowIfReadOnly();
 
-            return _list.Remove(item);
+            bool result = _list.Remove(item);
+
+            OnCollectionChanged(NotifyColletionChangedAction.Remove, null, item);
+
+            return result;
         }
 
         #endregion

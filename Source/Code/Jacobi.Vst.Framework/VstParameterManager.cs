@@ -1,12 +1,14 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System;
+    using System.ComponentModel;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// catches parameter changes and communicates these back to the source component
     /// </summary>
-    public class VstParameterManager
+    public class VstParameterManager : ObservableObject
     {
         /// <summary>
         /// Constructs a new instance based on the parameter type information.
@@ -25,18 +27,45 @@
         /// Gets the meta data for the parameter this instance manages.
         /// </summary>
         public VstParameterInfo ParameterInfo { get; private set; }
+
+        private VstParameter _activeParameter;
         /// <summary>
         /// Get the current active parameter instance.
         /// </summary>
-        public VstParameter ActiveParameter { get; private set; }
+        public VstParameter ActiveParameter
+        {
+            get { return _activeParameter; }
+            private set
+            {
+                SetProperty(value, ref _activeParameter, "ActiveParameter");
+            }
+        }
+
+        private float _currentValue;
         /// <summary>
         /// Gets the current parameter value.
         /// </summary>
-        public float CurrentValue { get; private set; }
+        public float CurrentValue
+        {
+            get { return _currentValue; }
+            private set
+            {
+                SetProperty(value, ref _currentValue, "CurrentValue");
+            }
+        }
+
+        private float _previousValue;
         /// <summary>
         /// Gets the previous parameter value.
         /// </summary>
-        public float PreviousValue { get; private set; }
+        public float PreviousValue
+        {
+            get { return _previousValue; }
+            private set
+            {
+                SetProperty(value, ref _previousValue, "PreviousValue");
+            }
+        }
 
         /// <summary>
         /// Subscribes to the events of the <paramref name="parameter"/>.
@@ -46,8 +75,7 @@
         {
             Throw.IfArgumentIsNull(parameter, "parameter");
 
-            parameter.ValueChangedCallback = new EventHandler<EventArgs>(Parameter_ValueChanged);
-            parameter.ActivationChangedCallback = new EventHandler<EventArgs>(Parameter_ActivationChanged);
+            parameter.PropertyChanged += new PropertyChangedEventHandler(Parameter_PropertyChanged);
         }
 
         /// <summary>
@@ -58,62 +86,32 @@
         {
             PreviousValue = CurrentValue;
             CurrentValue = newValue;
-
-            OnValueChanged();
         }
 
-        /// <summary>
-        /// The ValueChanged event is raised after the parameter value has changed on the manager.
-        /// </summary>
-        public event EventHandler<EventArgs> ValueChanged;
-
-        /// <summary>
-        /// Raises the <see cref="ValueChanged"/> event.
-        /// </summary>
-        protected virtual void OnValueChanged()
-        {
-            EventHandler<EventArgs> handler = ValueChanged;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Handles the changing of the normalized value.
-        /// </summary>
-        /// <param name="sender">A reference to VstParameter.</param>
-        /// <param name="e"><see cref="EventArgs.Empty"/>.</param>
-        private void Parameter_ValueChanged(object sender, EventArgs e)
+        private void Parameter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             VstParameter currentParameter = sender as VstParameter;
 
-            // early exit when change is done on an inactive parameter
-            if(currentParameter != ActiveParameter) return;
-
-            ChangeValue(currentParameter.Value);
-        }
-
-        /// <summary>
-        /// Handles the (de)activation of parameter instances.
-        /// </summary>
-        /// <param name="sender">A reference to VstParameter.</param>
-        /// <param name="e"><see cref="EventArgs.Empty"/>.</param>
-        private void Parameter_ActivationChanged(object sender, EventArgs e)
-        {
-            VstParameter currentParameter = sender as VstParameter;
-
-            if (currentParameter == ActiveParameter && !currentParameter.IsActive)
+            switch (e.PropertyName)
             {
-                ActiveParameter = null;
-                ChangeValue(0.0f);
-            }
+                case "Value":
+                    if (currentParameter != ActiveParameter) return;
 
-            if (ActiveParameter == null && currentParameter.IsActive)
-            {
-                ActiveParameter = currentParameter;
-                ChangeValue(currentParameter.Value);
+                    ChangeValue(currentParameter.Value);
+                    break;
+                case "IsActive":
+                    if (currentParameter == ActiveParameter && !currentParameter.IsActive)
+                    {
+                        ActiveParameter = null;
+                        ChangeValue(0.0f);
+                    }
+
+                    if (ActiveParameter == null && currentParameter.IsActive)
+                    {
+                        ActiveParameter = currentParameter;
+                        ChangeValue(currentParameter.Value);
+                    }
+                    break;
             }
         }
     }

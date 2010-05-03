@@ -1,11 +1,12 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// The VstConnectionInfo class represents information about a plugin connection pin.
     /// </summary>
-    public class VstConnectionInfo
+    public class VstConnectionInfo : ObservableObject
     {
         private string _label;
         /// <summary>
@@ -19,7 +20,7 @@
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, "Label");
 
-                _label = value;
+                SetProperty(value, ref _label, "Label");
             }
         }
 
@@ -35,13 +36,21 @@
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, "ShortLabel");
 
-                _shortLabel = value;
+                SetProperty(value, ref _shortLabel, "ShortLabel");
             }
         }
 
+        private VstSpeakerArrangementType _speakerArrangementType;
         /// <summary>
         /// Gets or sets the speaker arrangement type.
         /// </summary>
-        public VstSpeakerArrangementType SpeakerArrangementType { get; set; }
+        public VstSpeakerArrangementType SpeakerArrangementType
+        {
+            get { return _speakerArrangementType; }
+            set
+            {
+                SetProperty(value, ref _speakerArrangementType, "SpeakerArrangementType");
+            }
+        }
     }
 }

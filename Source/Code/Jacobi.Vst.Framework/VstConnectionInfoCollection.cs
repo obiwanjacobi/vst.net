@@ -1,11 +1,11 @@
 ﻿namespace Jacobi.Vst.Framework
 {
-    using System.Collections.ObjectModel;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstConnectionInfo"/> instances.
     /// </summary>
-    public class VstConnectionInfoCollection : Collection<VstConnectionInfo>
+    public class VstConnectionInfoCollection : ObservableCollection<VstConnectionInfo>
     {
     }
 }

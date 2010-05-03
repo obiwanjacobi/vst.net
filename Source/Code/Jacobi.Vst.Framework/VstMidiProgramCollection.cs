@@ -1,12 +1,13 @@
 ﻿namespace Jacobi.Vst.Framework
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstMidiProgram"/> instances.
     /// </summary>
-    public class VstMidiProgramCollection : KeyedCollection<string, VstMidiProgram>
+    public class VstMidiProgramCollection : ObservableKeyedCollection<string, VstMidiProgram>
     {
         /// <summary>
         /// Returns a unique key for the specified <paramref name="item"/>.
@@ -26,7 +27,7 @@
         {
             foreach (VstMidiProgram old in this)
             {
-                old.NameChanged -= new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+                old.PropertyChanged -= new PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
             }
 
             base.ClearItems();
@@ -40,7 +41,7 @@
         /// <remarks>The implementation adds an event handler to the <see cref="VstMidiProgram.NameChanged"/> event.</remarks>
         protected override void InsertItem(int index, VstMidiProgram item)
         {
-            item.NameChanged += new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+            item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
             base.InsertItem(index, item);
         }
@@ -55,9 +56,9 @@
         protected override void SetItem(int index, VstMidiProgram item)
         {
             VstMidiProgram old = this[index];
-            old.NameChanged -= new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+            old.PropertyChanged -= new PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
-            item.NameChanged += new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+            item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
             base.SetItem(index, item);
         }
@@ -70,7 +71,7 @@
         protected override void RemoveItem(int index)
         {
             VstMidiProgram old = this[index];
-            old.NameChanged -= new EventHandler<EventArgs>(VstMidiProgram_NameChanged);
+            old.PropertyChanged -= new PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
             base.RemoveItem(index);
         }
@@ -95,10 +96,13 @@
             }
         }
 
-        // event handler that receives NameChanged events from the VstMidiProgram instances.
-        private void VstMidiProgram_NameChanged(object sender, EventArgs e)
+        //// event handler that receives Changed events from the VstMidiProgram instances.
+        private void VstMidiProgram_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnMidiProgramNameChanged(sender);
+            if (e.PropertyName == "Name")
+            {
+                OnMidiProgramNameChanged(sender);
+            }
         }
     }
 }
