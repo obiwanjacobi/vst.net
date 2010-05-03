@@ -367,9 +367,9 @@
                 midiProgramName.MidiBankMSB = program.BankSelectMsb;
                 midiProgramName.MidiBankLSB = program.BankSelectLsb;
 
-                if (program.ParentCategory != null)
+                if (program.Category != null)
                 {
-                    midiProgramName.ParentCategoryIndex = channelInfo.Categories.IndexOf(program.ParentCategory);
+                    midiProgramName.ParentCategoryIndex = channelInfo.Categories.IndexOf(program.Category);
                 }
                 else
                 {
@@ -404,10 +404,10 @@
                     midiProgramName.MidiBankMSB = channelInfo.ActiveProgram.BankSelectMsb;
                     midiProgramName.MidiBankLSB = channelInfo.ActiveProgram.BankSelectLsb;
 
-                    if (channelInfo.ActiveProgram.ParentCategory != null)
+                    if (channelInfo.ActiveProgram.Category != null)
                     {
                         midiProgramName.ParentCategoryIndex = 
-                            channelInfo.Categories.IndexOf(channelInfo.ActiveProgram.ParentCategory);
+                            channelInfo.Categories.IndexOf(channelInfo.ActiveProgram.Category);
                     }
                     else
                     {

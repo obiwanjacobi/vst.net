@@ -3,13 +3,13 @@ namespace Jacobi.Vst.Framework
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstParameter"/> instances.
     /// </summary>
-    public class VstParameterCollection : KeyedCollection<string, VstParameter>, IActivatable
+    public class VstParameterCollection : ObservableKeyedCollection<string, VstParameter>, IActivatable
     {
         /// <summary>
         /// Adds a range of <paramref name="paremeters"/> to the collection.
@@ -68,19 +68,6 @@ namespace Jacobi.Vst.Framework
             }
 
             base.ClearItems();
-            OnChanged();
-        }
-
-        /// <summary>
-        /// Override to trigger the <see cref="Changed"/> event.
-        /// </summary>
-        /// <param name="index">A zero-based index the new <paramref name="item"/> will be inserted at.</param>
-        /// <param name="item">The item to insert. Can be null.</param>
-        protected override void InsertItem(int index, VstParameter item)
-        {
-            base.InsertItem(index, item);
-
-            OnChanged();
         }
 
         /// <summary>
@@ -94,8 +81,6 @@ namespace Jacobi.Vst.Framework
             base.RemoveItem(index);
 
             parameter.Dispose();
-
-            OnChanged();
         }
 
         /// <summary>
@@ -113,64 +98,28 @@ namespace Jacobi.Vst.Framework
             }
 
             base.SetItem(index, item);
-
-            OnChanged();
         }
 
         #region IActivatable Members
 
+        private bool _isActive;
         /// <summary>
         /// Gets the parameter collection status.
         /// </summary>
-        public bool IsActive { get; private set; }
-
-        /// <summary>
-        /// Activates all parameters in the collection.
-        /// </summary>
-        public void Activate()
+        public bool IsActive
         {
-            foreach (VstParameter param in this.Items)
+            get { return _isActive; }
+            set
             {
-                param.Activate();
-            }
+                _isActive = value;
 
-            IsActive = true;
-        }
-
-        /// <summary>
-        /// Deactivates all parameters in the collection.
-        /// </summary>
-        public void Deactivate()
-        {
-            foreach (VstParameter param in this.Items)
-            {
-                param.Deactivate();
-            }
-
-            IsActive = false;
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        /// <summary>
-        /// Fires after a <see cref="VstParameter"/> has been added or removed from the collection.
-        /// </summary>
-        public event EventHandler<EventArgs> Changed;
-
-        /// <summary>
-        /// Raises the <see cref="Changed"/> event.
-        /// </summary>
-        protected virtual void OnChanged()
-        {
-            EventHandler<EventArgs> temp = Changed;
-
-            if (temp != null)
-            {
-                temp(this, EventArgs.Empty);
+                foreach (VstParameter param in this.Items)
+                {
+                    param.IsActive = value;
+                }
             }
         }
+
         #endregion
     }
 }

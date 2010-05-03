@@ -1,11 +1,11 @@
 ﻿namespace Jacobi.Vst.Framework
 {
-    using System.Collections.ObjectModel;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstMidiCategory"/> instances.
     /// </summary>
-    public class VstMidiCategoryCollection : KeyedCollection<string, VstMidiCategory>
+    public class VstMidiCategoryCollection : ObservableKeyedCollection<string, VstMidiCategory>
     {
         /// <summary>
         /// Returns a unique key for the specified <paramref name="item"/>.

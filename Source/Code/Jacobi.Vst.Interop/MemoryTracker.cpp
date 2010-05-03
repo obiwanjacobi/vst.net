@@ -31,14 +31,22 @@ void MemoryTracker::ClearAll()
 {
 	for each(System::IntPtr ptr in _memPtrs)
 	{
-		delete ptr.ToPointer();
+		void* p = ptr.ToPointer();
+		if(p != NULL)
+		{
+			delete p;
+		}
 	}
 
 	_memPtrs->Clear();
 
 	for each(System::IntPtr ptr in _arrPtrs)
 	{
-		delete[] ptr.ToPointer();
+		void* p = ptr.ToPointer();
+		if(p != NULL)
+		{
+			delete[] p;
+		}
 	}
 
 	_arrPtrs->Clear();

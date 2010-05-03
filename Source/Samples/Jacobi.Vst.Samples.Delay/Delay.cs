@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
+    using System.ComponentModel;
     using Jacobi.Vst.Framework;
 
     /// <summary>
@@ -89,14 +90,24 @@
 
             #endregion
 
-            _delayTimeMgr.ValueChanged += new System.EventHandler<System.EventArgs>(_delayTimeMgr_ValueChanged);
+            //_delayTimeMgr.ValueChanged += new System.EventHandler<System.EventArgs>(_delayTimeMgr_ValueChanged);
+            _delayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(_delayTimeMgr_PropertyChanged);
         }
 
-        private void _delayTimeMgr_ValueChanged(object sender, System.EventArgs e)
+        private void _delayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            VstParameterManager paramMgr = (VstParameterManager)sender;
-            _bufferLength = (int)(paramMgr.CurrentValue * _sampleRate / 1000);
+            if (e.PropertyName == "CurrentValue")
+            {
+                VstParameterManager paramMgr = (VstParameterManager)sender;
+                _bufferLength = (int)(paramMgr.CurrentValue * _sampleRate / 1000);
+            }
         }
+
+        //private void _delayTimeMgr_ValueChanged(object sender, System.EventArgs e)
+        //{
+        //    VstParameterManager paramMgr = (VstParameterManager)sender;
+        //    _bufferLength = (int)(paramMgr.CurrentValue * _sampleRate / 1000);
+        //}
 
         private VstParameterInfoCollection _paramInfos;
         /// <summary>

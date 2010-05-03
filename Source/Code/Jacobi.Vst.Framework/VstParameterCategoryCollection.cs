@@ -1,13 +1,12 @@
 ﻿namespace Jacobi.Vst.Framework
 {
-    using System.Collections.ObjectModel;
-    
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstParameterCategory"/> instances.
     /// </summary>
-    public class VstParameterCategoryCollection : KeyedCollection<string, VstParameterCategory>
+    public class VstParameterCategoryCollection : ObservableKeyedCollection<string, VstParameterCategory>
     {
         /// <summary>
         /// Returns a unique key for the specified <paramref name="item"/>.

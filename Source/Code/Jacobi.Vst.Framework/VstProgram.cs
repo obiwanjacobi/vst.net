@@ -2,13 +2,14 @@
 {
     using System;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// The VstProgram class represents one plugin program.
     /// </summary>
     /// <remarks>A plugin program contains all plugin parameter but with different values than other programs.
     /// For this reason the VstProgram implements the <see cref="IVstPluginParameters"/> interface.</remarks>
-    public class VstProgram : IVstPluginParameters, IDisposable
+    public class VstProgram : ObservableObject, IVstPluginParameters, IDisposable
     {
         /// <summary>
         /// Constructs a new instance.
@@ -18,7 +19,8 @@
         public VstProgram()
         {
             Categories = new VstParameterCategoryCollection();
-            Parameters.Changed += new EventHandler<EventArgs>(Parameters_Changed);
+
+            Parameters.CollectionChanged += new EventHandler<NotifyCollectionChangedEventArgs>(Parameters_CollectionChanged);
         }
 
         /// <summary>
@@ -44,7 +46,7 @@
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxProgramNameLength, "Name");
 
-                _name = value;
+                SetProperty(value, ref _name, "Name");
             }
         }
 
@@ -96,8 +98,11 @@
 
         #endregion
 
-        private void Parameters_Changed(object sender, EventArgs e)
+        private void Parameters_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            // TODO: this will trigger a lot of CollectionChanged events...
+            Categories.Clear();
+
             foreach (VstParameter parameter in Parameters)
             {
                 if (parameter.Info.Category != null)

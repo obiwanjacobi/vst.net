@@ -56,8 +56,13 @@
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
     <Compile Include="Common\ExtensibleInterfaceRef.cs" />
+    <Compile Include="Common\INotifyCollectionChanged.cs" />
     <Compile Include="Common\InterfaceManager.cs" />
     <Compile Include="Common\NativeMethods.cs" />
+    <Compile Include="Common\NotifyCollectionChangedBase.cs" />
+    <Compile Include="Common\ObservableCollection.cs" />
+    <Compile Include="Common\ObservableKeyedCollection.cs" />
+    <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Host\VstHost.cs" />
     <Compile Include="Host\VstHostAutomation.cs" />
     <Compile Include="Host\VstHostInterfaceManager.cs" />

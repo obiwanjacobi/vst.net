@@ -2,11 +2,12 @@ namespace Jacobi.Vst.Framework
 {
     using System;
     using Jacobi.Vst.Core;
+using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// The VstParameter represents a parameter value for one plugin parameter.
     /// </summary>
-    public class VstParameter : IActivatable, IDisposable
+    public class VstParameter : ObservableObject, IActivatable, IDisposable
     {
         /// <summary>
         /// Constructs a new instance based on the parameter meta info.
@@ -23,7 +24,7 @@ namespace Jacobi.Vst.Framework
                 Info.ParameterManager.SubscribeTo(this);
             }
 
-            // set default value (raise a changed event?)
+            // set default value
             Value = Info.DefaultValue;
         }
 
@@ -41,12 +42,7 @@ namespace Jacobi.Vst.Framework
             get { return _value; }
             set
             {
-                if (_value != value)
-                {
-                    _value = value;
-
-                    OnValueChanged();
-                }
+                SetProperty(value, ref _value, "Value");
             }
         }
 
@@ -98,7 +94,7 @@ namespace Jacobi.Vst.Framework
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, "DisplayValue");
 
-                _displayValue = value;
+                SetProperty(value, ref _displayValue, "DisplayValue");
             }
         }
 
@@ -121,70 +117,22 @@ namespace Jacobi.Vst.Framework
             return false;
         }
 
-        /// <summary>
-        /// Gets or sets the callback delegate that is called when the parameter value changes.
-        /// </summary>
-        public EventHandler<EventArgs> ValueChangedCallback { get; set; }
-
-        /// <summary>
-        /// Gets or sets the callback delegate that is called when the parameter activation changes.
-        /// </summary>
-        public EventHandler<EventArgs> ActivationChangedCallback { get; set; }
-
         #region IActivatable Members
 
+        private bool _isActive;
         /// <summary>
         /// Gets the active state for this parameter.
         /// </summary>
-        public bool IsActive { get; private set; }
-
-        /// <summary>
-        /// Activates the parameter instance.
-        /// </summary>
-        public void Activate()
+        public bool IsActive
         {
-            IsActive = true;
-
-            OnActivationChanged();
-        }
-
-        /// <summary>
-        /// deactivates the parameter instance.
-        /// </summary>
-        public void Deactivate()
-        {
-            IsActive = false;
-
-            OnActivationChanged();
+            get { return _isActive; }
+            set
+            {
+                SetProperty(value, ref _isActive, "IsActive");
+            }
         }
 
         #endregion
-
-        /// <summary>
-        /// Called to raise the ValueChanged event.
-        /// </summary>
-        protected virtual void OnValueChanged()
-        {
-            EventHandler<EventArgs> handler = ValueChangedCallback;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// Called to raise the ActivationChanged event.
-        /// </summary>
-        protected virtual void OnActivationChanged()
-        {
-            EventHandler<EventArgs> handler = ActivationChangedCallback;
-
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
-        }
 
         #region IDisposable Members
 
@@ -210,8 +158,6 @@ namespace Jacobi.Vst.Framework
                 // clear all references
                 DisplayValue = null;
                 Info = null;
-                ValueChangedCallback = null;
-                ActivationChangedCallback = null;
             }
         }
         #endregion
