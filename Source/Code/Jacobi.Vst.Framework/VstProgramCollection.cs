@@ -1,12 +1,13 @@
 ﻿namespace Jacobi.Vst.Framework
 {
-    using System.Collections.ObjectModel;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Manages a collection of <see cref="VstProgram"/> instances.
     /// </summary>
-    public class VstProgramCollection : Collection<VstProgram>
+    public class VstProgramCollection : ObservableCollection<VstProgram>
     {
         /// <summary>
         /// Adds a range of <see cref="VstProgram"/> instances to the collection.
@@ -27,12 +28,14 @@
         /// </summary>
         protected override void ClearItems()
         {
-            foreach (VstProgram program in this)
+            List<VstProgram> programs = new List<VstProgram>(this);
+
+            base.ClearItems();
+
+            foreach (VstProgram program in programs)
             {
                 program.Dispose();
             }
-
-            base.ClearItems();
         }
 
         /// <summary>
@@ -57,12 +60,12 @@
         {
             VstProgram program = this[index];
 
+            base.SetItem(index, item);
+
             if (program != item)
             {
                 program.Dispose();
             }
-
-            base.SetItem(index, item);
         }
     }
 }

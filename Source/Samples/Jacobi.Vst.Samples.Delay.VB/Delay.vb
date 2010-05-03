@@ -1,5 +1,5 @@
 ﻿Imports System
-
+Imports System.ComponentModel
 Imports Jacobi.Vst.Framework
 
 Namespace Jacobi.Vst.Samples.Delay.VB
@@ -82,10 +82,18 @@ Namespace Jacobi.Vst.Samples.Delay.VB
 
         End Sub
 
-        Private Sub _delayTimeMgr_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles _delayTimeMgr.ValueChanged
-            Dim paramMgr As VstParameterManager = CType(sender, VstParameterManager)
-            _bufferLength = CType(paramMgr.CurrentValue * _sampleRate / 1000, Integer)
+        Private Sub _delayTimeMgr_PropertyChanged(ByVal sender As Object, ByVal e As PropertyChangedEventArgs) Handles _delayTimeMgr.PropertyChanged
+
+            If e.PropertyName = "CurrentValue" Then
+                Dim paramMgr As VstParameterManager = CType(sender, VstParameterManager)
+                _bufferLength = CType(paramMgr.CurrentValue * _sampleRate / 1000, Integer)
+            End If
         End Sub
+
+        'Private Sub _delayTimeMgr_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles _delayTimeMgr.ValueChanged
+        '    Dim paramMgr As VstParameterManager = CType(sender, VstParameterManager)
+        '    _bufferLength = CType(paramMgr.CurrentValue * _sampleRate / 1000, Integer)
+        'End Sub
 
         Private _paramInfos As VstParameterInfoCollection
         Public ReadOnly Property ParameterInfos() As VstParameterInfoCollection

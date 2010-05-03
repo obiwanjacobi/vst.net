@@ -1,13 +1,13 @@
 ﻿namespace Jacobi.Vst.Framework
 {
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Manages a collection of <see cref="VstParameterInfo"/> instances.
     /// </summary>
-    public class VstParameterInfoCollection : Collection<VstParameterInfo>
+    public class VstParameterInfoCollection : ObservableCollection<VstParameterInfo>
     {
         /// <summary>
         /// Adds a range of <see cref="VstParameterInfo"/> instances to the collection.

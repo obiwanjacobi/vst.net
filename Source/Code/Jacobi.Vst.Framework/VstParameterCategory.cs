@@ -2,11 +2,12 @@
 {
     using System;
     using Jacobi.Vst.Core;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// Names a parameter category.
     /// </summary>
-    public class VstParameterCategory
+    public class VstParameterCategory : ObservableObject
     {
         private string _name;
         /// <summary>
@@ -20,7 +21,7 @@
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxCategoryLabelLength, "Name");
 
-                _name = value;
+                SetProperty(value, ref _name, "Name");
             }
         }
     }

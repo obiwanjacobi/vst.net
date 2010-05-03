@@ -48,14 +48,14 @@ namespace Jacobi.Vst.Framework.Plugin
                 {
                     if (_activeProgram != null)
                     {
-                        _activeProgram.Parameters.Deactivate();
+                        _activeProgram.Parameters.IsActive = false;
                     }
 
                     _activeProgram = value;
 
                     if (_activeProgram != null)
                     {
-                        _activeProgram.Parameters.Activate();
+                        _activeProgram.Parameters.IsActive = true;
                     }
                 }
             }
