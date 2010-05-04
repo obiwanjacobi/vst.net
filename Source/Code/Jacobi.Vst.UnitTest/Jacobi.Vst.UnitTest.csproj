@@ -63,6 +63,7 @@
     <Compile Include="Core\VstEventTest.cs" />
     <Compile Include="Core\VstPatchChunkInfoTest.cs" />
     <Compile Include="Framework\VstProductInfoTest.cs" />
+    <Compile Include="Framework\VstEventCollectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj">
