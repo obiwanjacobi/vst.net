@@ -6,7 +6,7 @@
     public interface IActivatable
     {
         /// <summary>
-        /// Gets the current activation state (true).
+        /// Gets or sets the current activation state.
         /// </summary>
         bool IsActive { get; set; }
     }

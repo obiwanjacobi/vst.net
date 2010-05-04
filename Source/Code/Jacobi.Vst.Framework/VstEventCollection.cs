@@ -1,10 +1,10 @@
 namespace Jacobi.Vst.Framework
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework.Common;
-    using System.Collections;
 
     /// <summary>
     /// Manages a collection of <see cref="VstEvent"/> instances.
@@ -44,7 +44,7 @@ namespace Jacobi.Vst.Framework
 
             _list.AddRange(events);
 
-            OnCollectionChanged(NotifyColletionChangedAction.Add, new List<VstEvent>(events), null);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, new List<VstEvent>(events), null);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Jacobi.Vst.Framework
 
             _list.Insert(index, item);
 
-            OnCollectionChanged(NotifyColletionChangedAction.Add, item, null);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, item, null);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Jacobi.Vst.Framework
 
             _list.RemoveAt(index);
 
-            OnCollectionChanged(NotifyColletionChangedAction.Remove, null, oldItem);
+            OnCollectionChanged(NotifyCollectionChangedAction.Remove, null, oldItem);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Jacobi.Vst.Framework
 
                 _list[index] = value;
 
-                OnCollectionChanged(NotifyColletionChangedAction.Replace, value, oldItem);
+                OnCollectionChanged(NotifyCollectionChangedAction.Replace, value, oldItem);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Jacobi.Vst.Framework
 
             _list.Add(item);
 
-            OnCollectionChanged(NotifyColletionChangedAction.Add, item, null);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, item, null);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Jacobi.Vst.Framework
 
             _list.Clear();
 
-            OnCollectionChanged(NotifyColletionChangedAction.Reset, null, oldItems);
+            OnCollectionChanged(NotifyCollectionChangedAction.Reset, null, oldItems);
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace Jacobi.Vst.Framework
 
             bool result = _list.Remove(item);
 
-            OnCollectionChanged(NotifyColletionChangedAction.Remove, null, item);
+            OnCollectionChanged(NotifyCollectionChangedAction.Remove, null, item);
 
             return result;
         }
