@@ -596,6 +596,8 @@ private:
 			::VstIntPtr result = _pEffect->dispatcher(_pEffect, opcode, index, value, ptr, opt);
 
 			_traceCtx->WriteDispatchEnd(System::IntPtr(result));
+
+			return result;
 		}
 
 		return 0;
