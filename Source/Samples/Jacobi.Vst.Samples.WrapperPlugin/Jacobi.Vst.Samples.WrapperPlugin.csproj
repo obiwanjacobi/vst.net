@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Jacobi.Vst.Samples.WrapperPlugin.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Jacobi.Vst.Core, Version=0.9.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">

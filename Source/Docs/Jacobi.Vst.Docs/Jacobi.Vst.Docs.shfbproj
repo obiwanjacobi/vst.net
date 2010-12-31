@@ -18,14 +18,15 @@
     <HtmlHelpName>Jacobi.Vst.Docs</HtmlHelpName>
     <ApiFilter>
       <Filter entryType="Namespace" fullName="" isExposed="False" />
-<Filter entryType="Namespace" fullName="&lt;CppImplementationDetails&gt;" isExposed="False" />
-<Filter entryType="Namespace" fullName="&lt;CrtImplementationDetails&gt;" isExposed="False" />
-<Filter entryType="Namespace" fullName="Jacobi.Vst.Interop.Host" isExposed="True">
-  <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;double *&gt;" filterName="UnmanagedArray&lt;double *&gt;" isExposed="False" />
-  <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;float *&gt;" filterName="UnmanagedArray&lt;float *&gt;" isExposed="False" />
-</Filter>
-<Filter entryType="Namespace" fullName="Jacobi.Vst.Samples.Delay.VB.My" isExposed="False" />
-<Filter entryType="Namespace" fullName="vc_attributes" isExposed="False" /></ApiFilter>
+      <Filter entryType="Namespace" fullName="&lt;CppImplementationDetails&gt;" isExposed="False" />
+      <Filter entryType="Namespace" fullName="&lt;CrtImplementationDetails&gt;" isExposed="False" />
+      <Filter entryType="Namespace" fullName="Jacobi.Vst.Interop.Host" isExposed="True">
+        <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;double *&gt;" filterName="UnmanagedArray&lt;double *&gt;" isExposed="False" />
+        <Filter entryType="Class" fullName="Jacobi.Vst.Interop.Host.UnmanagedArray&lt;float *&gt;" filterName="UnmanagedArray&lt;float *&gt;" isExposed="False" />
+      </Filter>
+      <Filter entryType="Namespace" fullName="Jacobi.Vst.Samples.Delay.VB.My" isExposed="False" />
+      <Filter entryType="Namespace" fullName="vc_attributes" isExposed="False" />
+    </ApiFilter>
     <ProjectSummary>VST.NET %28Jacobi.Vst%29 is a code library that allows developer to create managed VST Plugins quickly. It takes care of marshalling calls between .NET and C++ and visa versa. There is also Interop support for creating managed Hosts.</ProjectSummary>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
     <VisibleItems>ExplicitInterfaceImplementations, InheritedMembers, Internals, Protected, ProtectedInternalAsProtected, SealedProtected</VisibleItems>
@@ -42,9 +43,9 @@
     </BuildLogFile>
     <CppCommentsFixup>True</CppCommentsFixup>
     <FrameworkVersion>2.0.50727</FrameworkVersion>
-    <HelpTitle>VST.NET 0.8 Documentation</HelpTitle>
+    <HelpTitle>VST.NET 0.9 Documentation</HelpTitle>
     <CopyrightHref>http://vstnet.codeplex.com</CopyrightHref>
-    <CopyrightText>Copyright 2008-2009 Jacobi Software, all rights reserved.</CopyrightText>
+    <CopyrightText>Copyright 2000-2011 Jacobi Software, all rights reserved.</CopyrightText>
     <FeedbackEMailAddress>obiwanjacobi%40hotmail.com</FeedbackEMailAddress>
     <FooterText>VST is a trademark of Steinberg Media Technologies GmbH.</FooterText>
     <PresentationStyle>vs2005</PresentationStyle>
@@ -120,7 +121,9 @@
 <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" />
 <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.xml" />
 <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" /></DocumentationSources>
+<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" />
+<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.WrapperPlugin\bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.dll" />
+<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.WrapperPlugin\bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.XML" /></DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="True">The global namespace contains the classes that are used internally by the Interop assembly.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="&lt;CppImplementationDetails&gt;" isDocumented="False" />
