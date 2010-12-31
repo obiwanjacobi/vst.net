@@ -2,8 +2,6 @@
 Imports System.ComponentModel
 Imports Jacobi.Vst.Framework
 
-Namespace Jacobi.Vst.Samples.Delay.VB
-
     Friend Class Delay
 
         Private _delayBuffer As Single()
@@ -136,5 +134,3 @@ Namespace Jacobi.Vst.Samples.Delay.VB
         End Function
 
     End Class
-
-End Namespace
