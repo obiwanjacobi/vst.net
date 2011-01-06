@@ -169,7 +169,7 @@ public:
 		int length = events->Length;
 		if(length > 2) length -= 2;
 		
-		int totalLength = sizeof(VstEvent) + (length * sizeof(VstEvent*));
+		int totalLength = sizeof(VstEvents) + (length * sizeof(VstEvent*));
 
 		::VstEvents* pEvents = (::VstEvents*)new char[totalLength];
 		ZeroMemory(pEvents, totalLength);
@@ -186,7 +186,7 @@ public:
 				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiEvent^)evnt;
 				::VstMidiEvent* pMidiEvent = new ::VstMidiEvent();
 
-				pMidiEvent->byteSize = sizeof(::VstMidiEvent) - (2 * sizeof(VstInt32));
+				pMidiEvent->byteSize = sizeof(::VstMidiEvent);
 				pMidiEvent->flags = 0;
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
 				pMidiEvent->type = (VstInt32)midiEvent->EventType;
@@ -208,7 +208,7 @@ public:
 				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiSysExEvent^)evnt;
 				::VstMidiSysexEvent* pMidiEvent = new ::VstMidiSysexEvent();
 
-				pMidiEvent->byteSize = sizeof(::VstMidiSysexEvent) - (2 * sizeof(VstInt32));
+				pMidiEvent->byteSize = sizeof(::VstMidiSysexEvent);
 				pMidiEvent->flags = 0;
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
 				pMidiEvent->type = (VstInt32)midiEvent->EventType;
@@ -227,7 +227,9 @@ public:
 			{
 				// deprecated event types support
 				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Deprecated::VstGenericEvent^)evnt;
+				// incl. deltaFrames and flags
 				int dataLength = genericEvent->Data->Length + (2 * sizeof(VstInt32));
+				// incl.  type and byteSize
 				int structLength = dataLength + (2 * sizeof(VstInt32));
 
 				::VstEvent* pEvent = (::VstEvent*)new char[structLength];
