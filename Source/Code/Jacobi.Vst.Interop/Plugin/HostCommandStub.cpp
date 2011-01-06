@@ -21,7 +21,7 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 	_hostCallback = hostCallback;
 	_pluginInfo = NULL;
 
-	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(Utils::GetPluginName() + "Plugin.HostCommandStub", Jacobi::Vst::Core::Plugin::IVstHostCommandStub::typeid);
+	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(Utils::GetPluginName() + ".Plugin.HostCommandStub", Jacobi::Vst::Core::Plugin::IVstHostCommandStub::typeid);
 }
 
 // destructor. See Finalizer
@@ -69,8 +69,6 @@ void HostCommandStub::SetParameterAutomated(System::Int32 index, System::Single 
 
 System::Int32 HostCommandStub::GetVersion()
 {
-	//ThrowIfNotInitialized();
-
 	VstInt32 version = CallHost(audioMasterVersion, 0, 0, 0, 0);
 
 	if(version == 0)	// old host
@@ -81,8 +79,6 @@ System::Int32 HostCommandStub::GetVersion()
 
 System::Int32 HostCommandStub::GetCurrentPluginID()
 {
-	//ThrowIfNotInitialized();
-
 	return CallHost(audioMasterCurrentId, 0, 0, 0, 0);
 }
 
@@ -123,57 +119,41 @@ System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent
 
 System::Boolean HostCommandStub::IoChanged()
 {
-	//ThrowIfNotInitialized();
-
 	return (CallHost(audioMasterIOChanged, 0, 0, 0, 0) != 0);
 }
 
 System::Boolean HostCommandStub::SizeWindow(System::Int32 width, System::Int32 height)
 {
-	//ThrowIfNotInitialized();
-	
 	return (CallHost(audioMasterSizeWindow, width, height, 0, 0) != 0);
 }
 
 System::Single HostCommandStub::GetSampleRate()
 {
-	//ThrowIfNotInitialized();
-	
 	return safe_cast<System::Single>(CallHost(audioMasterGetSampleRate, 0, 0, 0, 0));
 }
 
 System::Int32 HostCommandStub::GetBlockSize()
 {
-	//ThrowIfNotInitialized();
-
 	return CallHost(audioMasterGetBlockSize, 0, 0, 0, 0);
 }
 
 System::Int32 HostCommandStub::GetInputLatency()
 {
-	//ThrowIfNotInitialized();
-	
 	return CallHost(audioMasterGetInputLatency, 0, 0, 0, 0);
 }
 
 System::Int32 HostCommandStub::GetOutputLatency()
 {
-	//ThrowIfNotInitialized();
-
 	return CallHost(audioMasterGetOutputLatency, 0, 0, 0, 0);
 }
 
 Jacobi::Vst::Core::VstProcessLevels HostCommandStub::GetProcessLevel()
 {
-	//ThrowIfNotInitialized();
-	
 	return safe_cast<Jacobi::Vst::Core::VstProcessLevels>(CallHost(audioMasterGetCurrentProcessLevel, 0, 0, 0, 0));
 }
 
 Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 {
-	//ThrowIfNotInitialized();
-	
 	return safe_cast<Jacobi::Vst::Core::VstAutomationStates>(CallHost(audioMasterGetAutomationState, 0, 0, 0, 0));
 }
 
@@ -313,6 +293,8 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 	catch(...)
 	{
 		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
+
+		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Error, "Error in OpenFileSelector.");
 	}
 
 	return false;
