@@ -38,7 +38,7 @@
         /// </summary>
         /// <param name="index">Zero-based position into the collection.</param>
         /// <param name="item">The item to insert.</param>
-        /// <remarks>The implementation adds an event handler to the <see cref="VstMidiProgram.NameChanged"/> event.</remarks>
+        /// <remarks>The implementation adds an event handler to the <see cref="ObservableObject.PropertyChanged"/> event.</remarks>
         protected override void InsertItem(int index, VstMidiProgram item)
         {
             item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="index">Zero-based position into the collection.</param>
         /// <param name="item">The item to set.</param>
-        /// <remarks>The implementation adds an event handler to the <see cref="VstMidiProgram.NameChanged"/> 
+        /// <remarks>The implementation adds an event handler to the <see cref="ObservableObject.PropertyChanged"/> 
         /// event and remove the event handler from the old item that is replaced.</remarks>
         protected override void SetItem(int index, VstMidiProgram item)
         {
@@ -77,13 +77,13 @@
         }
 
         /// <summary>
-        /// Event is raised when a <see cref="VstMidiProgram.NameChanged"/> event is raised.
+        /// Event is raised when a <see cref="ObservableObject.PropertyChanged"/> event is raised.
         /// </summary>
         public event EventHandler<EventArgs> MidiProgramNameChanged;
 
         /// <summary>
         /// Raises the <see cref="MidiProgramNameChanged"/> event when a
-        /// <see cref="VstMidiProgram.NameChanged"/> event is fired.
+        /// <see cref="ObservableObject.PropertyChanged"/> event is fired.
         /// </summary>
         /// <param name="sender">The original <see cref="VstMidiProgram"/> that fired the event.</param>
         protected virtual void OnMidiProgramNameChanged(object sender)

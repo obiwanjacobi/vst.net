@@ -14,11 +14,10 @@ namespace Host {
 	{
 	public:
 		/// <summary>
-		/// Not implemented.
+		/// Copies the new values provided by the Plugin to the <see cref="PluginInfo"/> property.
 		/// </summary>
-		/// <param name="raiseEvents">Not used.</param>
-		/// <remarks>The managed plugin context sets new <see cref="Jacobi::Vst::Core::Plugin::VstPluginInfo"/> using the
-		/// setter of the <see cref="PluginInfo"/> property.</remarks>
+		/// <param name="raiseEvents">When true the <see cref="PropertyChanged"/> event will be raised for each property that has changed.</param>
+		/// <remarks>All property names will be prefixed with 'PluginInfo.' to indicate the path to the property.</remarks>
 		virtual void AcceptPluginInfoData(System::Boolean raiseEvents) override;
 
 	internal:
@@ -44,6 +43,8 @@ namespace Host {
 		/// 'VSTPluginMain' function). Must not be null or empty.</param>
 		virtual void Initialize(System::String^ pluginPath) override;
 
+	private:
+		Jacobi::Vst::Core::Plugin::VstPluginInfo^ _internalPluginInfo;
 	};
 
 }}}} // namespace Jacobi::Vst::Interop::Host

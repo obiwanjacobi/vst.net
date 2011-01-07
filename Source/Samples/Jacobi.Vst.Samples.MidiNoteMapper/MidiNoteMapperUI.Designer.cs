@@ -47,10 +47,11 @@
             this.MapListVw.FullRowSelect = true;
             this.MapListVw.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.MapListVw.HideSelection = false;
-            this.MapListVw.Location = new System.Drawing.Point(3, 3);
+            this.MapListVw.Location = new System.Drawing.Point(4, 4);
+            this.MapListVw.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MapListVw.MultiSelect = false;
             this.MapListVw.Name = "MapListVw";
-            this.MapListVw.Size = new System.Drawing.Size(316, 176);
+            this.MapListVw.Size = new System.Drawing.Size(420, 216);
             this.MapListVw.TabIndex = 0;
             this.MapListVw.UseCompatibleStateImageBehavior = false;
             this.MapListVw.View = System.Windows.Forms.View.Details;
@@ -72,9 +73,10 @@
             // AddBtn
             // 
             this.AddBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddBtn.Location = new System.Drawing.Point(4, 185);
+            this.AddBtn.Location = new System.Drawing.Point(4, 226);
+            this.AddBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AddBtn.Name = "AddBtn";
-            this.AddBtn.Size = new System.Drawing.Size(75, 23);
+            this.AddBtn.Size = new System.Drawing.Size(100, 28);
             this.AddBtn.TabIndex = 1;
             this.AddBtn.Text = "Add...";
             this.AddBtn.UseVisualStyleBackColor = true;
@@ -83,9 +85,10 @@
             // EditBtn
             // 
             this.EditBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditBtn.Location = new System.Drawing.Point(86, 184);
+            this.EditBtn.Location = new System.Drawing.Point(115, 226);
+            this.EditBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(75, 23);
+            this.EditBtn.Size = new System.Drawing.Size(100, 28);
             this.EditBtn.TabIndex = 2;
             this.EditBtn.Text = "Edit...";
             this.EditBtn.UseVisualStyleBackColor = true;
@@ -94,9 +97,10 @@
             // DeleteBtn
             // 
             this.DeleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteBtn.Location = new System.Drawing.Point(168, 183);
+            this.DeleteBtn.Location = new System.Drawing.Point(224, 225);
+            this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(75, 23);
+            this.DeleteBtn.Size = new System.Drawing.Size(100, 28);
             this.DeleteBtn.TabIndex = 3;
             this.DeleteBtn.Text = "Delete...";
             this.DeleteBtn.UseVisualStyleBackColor = true;
@@ -104,15 +108,16 @@
             // 
             // MidiNoteMapperUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.EditBtn);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.MapListVw);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MidiNoteMapperUI";
-            this.Size = new System.Drawing.Size(322, 211);
+            this.Size = new System.Drawing.Size(429, 260);
             this.Load += new System.EventHandler(this.MidiNoteMapperUI_Load);
             this.ResumeLayout(false);
 

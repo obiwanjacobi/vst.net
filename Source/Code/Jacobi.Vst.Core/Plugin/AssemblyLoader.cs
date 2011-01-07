@@ -45,7 +45,7 @@ namespace Jacobi.Vst.Core.Plugin
         }
 
         /// <summary>
-        /// Instantiates a new instance of the <see cref="FileFinder"/> class with its <see cref="Paths"/> 
+        /// Instantiates a new instance of the <see cref="FileFinder"/> class with its <see cref="P:FileFinder.Paths"/> 
         /// collection filled with the <see cref="GlobalProbePaths"/> and <see cref="PrivateProbePaths"/> paths.
         /// </summary>
         /// <returns>Never returns null.</returns>
