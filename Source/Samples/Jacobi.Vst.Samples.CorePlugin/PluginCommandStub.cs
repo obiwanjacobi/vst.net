@@ -290,7 +290,7 @@
         public string GetVendorString()
         {
             Log("GetVendorString");
-            return "Jacobi Software (c) 2009";
+            return "Jacobi Software (c) 2011";
         }
 
         /// <inheritdoc />

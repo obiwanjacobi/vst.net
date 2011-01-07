@@ -16,7 +16,7 @@
         /// </summary>
         public FxTestPlugin()
             : base("VST.NET Delay Plugin", 
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2009", 1000),
+                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011", 1000),
                 VstPluginCategory.RoomFx, VstPluginCapabilities.None, 0, 0x3A3A3A3A)
         {
             _intfMgr = new FxPluginInterfaceManager(this);

@@ -78,25 +78,25 @@
 	    Multipass,
         /// <summary></summary>
 	    Metapass,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x1in1out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x1in2out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x2in1out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x2in2out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x2in4out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x4in2out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x4in4out,
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x4in8out,	// 4:2 matrix to surround bus
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x8in4out,	// surround bus to 4:2 matrix
-        /// <summary>Strip of underscore.</summary>
+        /// <summary>Strip of x.</summary>
 	    x8in8out,
         /// <summary>plug-in supports function #getMidiProgramName().</summary>
         MidiProgramNames,
