@@ -61,7 +61,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 				delete this;
 				break;
 			case effSetProgram:
-				_commandStub->SetProgram(value);
+				_commandStub->SetProgram((::VstInt32)value);
 				result = 1;
 				break;
 			case effGetProgram:
@@ -92,7 +92,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 				result = 1;
 				break;
 			case effSetBlockSize:
-				_commandStub->SetBlockSize(value);
+				_commandStub->SetBlockSize((::VstInt32)value);
 				result = 1;
 				break;
 			case effMainsChanged:
@@ -135,7 +135,7 @@ VstIntPtr PluginCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPt
 			}	break;
 			case effSetChunk:
 			{
-				array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, value);
+				array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, (::VstInt32)value);
 				result = _commandStub->SetChunk(buffer, index != 0) ? 1 : 0;
 			}	break;
 			case effProcessEvents:

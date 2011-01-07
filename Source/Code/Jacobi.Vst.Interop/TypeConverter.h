@@ -638,7 +638,7 @@ public:
 		else if(fileSelect->ReturnPaths != nullptr && fileSelect->ReturnPaths->Length > 0)
 		{
 			pFileSelect->returnPath = AllocateString(fileSelect->ReturnPaths[0]);
-			pFileSelect->sizeReturnPath = strlen(pFileSelect->returnPath) + 1;
+			pFileSelect->sizeReturnPath = (::VstInt32)strlen(pFileSelect->returnPath) + 1;
 		}
 	}
 

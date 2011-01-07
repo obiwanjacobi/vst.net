@@ -6,7 +6,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAIAAAACAEAAAAAAAAAASAAAAAEAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAACAEAAAIAAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
       <FileName>VstProgram.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -24,8 +24,11 @@
   </Class>
   <Class Name="Jacobi.Vst.Framework.VstParameterCollection">
     <Position X="7" Y="0.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAABAAQBARADAFAAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAARACAEIAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
       <FileName>VstParameterCollection.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -36,7 +39,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ABAAAAAAACBAAABAEAAAAAgAAAABAAEAABAgAEAICAA=</HashCode>
+      <HashCode>ABAAAAAAACAAAAAAEIAAAAgAAAABAAAAAAAggEAACAA=</HashCode>
       <FileName>VstParameter.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -50,7 +53,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>CAIAMAAAEAAACAAAIBIBAAwCACBAAMJAAAAAAAAACAA=</HashCode>
+      <HashCode>CAIYMAIAMAAADAAAIBIBAAwKACBAAMJAAAAgEABgmAA=</HashCode>
       <FileName>VstParameterInfo.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -60,11 +63,14 @@
   </Class>
   <Class Name="Jacobi.Vst.Framework.VstParameterManager">
     <Position X="6.5" Y="5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <AssociationLine Name="ActiveParameter" Type="Jacobi.Vst.Framework.VstParameter" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6.938" Y="5" />
-        <Point X="6.938" Y="4.625" />
-        <Point X="1.688" Y="4.625" />
+        <Point X="6.938" Y="4.75" />
+        <Point X="1.688" Y="4.75" />
         <Point X="1.688" Y="5" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
@@ -72,7 +78,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QEASAAAAAAAAAAAAAAABBCAAAEAAAAEAAACAAAAAAAA=</HashCode>
+      <HashCode>QEACAAQgAAAAAAAAAAABACAAQEAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>VstParameterManager.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -93,7 +99,7 @@
   <Class Name="Jacobi.Vst.Framework.VstParameterCategoryCollection">
     <Position X="3.5" Y="3.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>VstParameterCategoryCollection.cs</FileName>
     </TypeIdentifier>
   </Class>

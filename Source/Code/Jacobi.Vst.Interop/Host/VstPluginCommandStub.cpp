@@ -90,7 +90,7 @@ void VstPluginCommandStub::SetProgram(System::Int32 programNumber)
 
 System::Int32 VstPluginCommandStub::GetProgram()
 {
-	return CallDispatch(effGetProgram, 0, 0, 0, 0);
+	return (::VstInt32)CallDispatch(effGetProgram, 0, 0, 0, 0);
 }
 
 void VstPluginCommandStub::SetProgramName(System::String^ name)
@@ -109,7 +109,8 @@ void VstPluginCommandStub::SetProgramName(System::String^ name)
 
 System::String^ VstPluginCommandStub::GetProgramName()
 {
-	UnmanagedString progName(kVstMaxProgNameLen);
+	//UnmanagedString progName(kVstMaxProgNameLen);
+	UnmanagedString progName(128);
 
 	CallDispatch(effGetProgramName, 0, 0, progName, 0);
 
@@ -202,7 +203,7 @@ array<System::Byte>^ VstPluginCommandStub::GetChunk(System::Boolean isPreset)
 	// we don't own the memory passed to us
 	char* pBuffer = NULL;
 	
-	VstInt32 length = CallDispatch(effGetChunk, isPreset ? 1 : 0, 0, &pBuffer, 0);
+	VstInt32 length = (::VstInt32)CallDispatch(effGetChunk, isPreset ? 1 : 0, 0, &pBuffer, 0);
 	
 	if(length > 0)
 	{
@@ -253,7 +254,8 @@ System::Boolean VstPluginCommandStub::String2Parameter(System::Int32 index, Syst
 
 System::String^ VstPluginCommandStub::GetProgramNameIndexed(System::Int32 index)
 {
-	UnmanagedString progName(kVstMaxProgNameLen);
+	//UnmanagedString progName(kVstMaxProgNameLen);
+	UnmanagedString progName(128);
 
 	CallDispatch(effGetProgramNameIndexed, index, 0, progName, 0);
 
@@ -311,7 +313,8 @@ System::Boolean VstPluginCommandStub::SetBypass(System::Boolean bypass)
 
 System::String^ VstPluginCommandStub::GetEffectName()
 {
-	UnmanagedString effectName(kVstMaxEffectNameLen);
+	//UnmanagedString effectName(kVstMaxEffectNameLen);
+	UnmanagedString effectName(128);
 
 	CallDispatch(effGetEffectName, 0, 0, effectName, 0);
 
@@ -320,7 +323,8 @@ System::String^ VstPluginCommandStub::GetEffectName()
 
 System::String^ VstPluginCommandStub::GetVendorString()
 {
-	UnmanagedString vendor(kVstMaxVendorStrLen);
+	//UnmanagedString vendor(kVstMaxVendorStrLen);
+	UnmanagedString vendor(128);
 
 	CallDispatch(effGetVendorString, 0, 0, vendor, 0);
 
@@ -329,7 +333,8 @@ System::String^ VstPluginCommandStub::GetVendorString()
 
 System::String^ VstPluginCommandStub::GetProductString()
 {
-	UnmanagedString product(kVstMaxProductStrLen);
+	//UnmanagedString product(kVstMaxProductStrLen);
+	UnmanagedString product(128);
 
 	if(CallDispatch(effGetProductString, 0, 0, product, 0) != 0)
 	{
@@ -513,7 +518,7 @@ Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadBank(Jacobi::Vs
 {
 	UnmanagedPointer<::VstPatchChunkInfo> pChunkInfo;
 
-	VstInt32 result = CallDispatch(effBeginLoadBank, 0, 0, pChunkInfo, 0);
+	VstInt32 result = (::VstInt32)CallDispatch(effBeginLoadBank, 0, 0, pChunkInfo, 0);
 
 	if(result != 0)
 	{
@@ -527,7 +532,7 @@ Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadProgram(Jacobi:
 {
 	UnmanagedPointer<::VstPatchChunkInfo> pChunkInfo;
 
-	VstInt32 result = CallDispatch(effBeginLoadProgram, 0, 0, pChunkInfo, 0);
+	VstInt32 result = (::VstInt32)CallDispatch(effBeginLoadProgram, 0, 0, pChunkInfo, 0);
 
 	if(result != 0)
 	{
@@ -668,6 +673,5 @@ System::Boolean VstPluginCommandStub::KeysRequired()
 	// NOTE: 0=Require keys, 1=dont need.
 	return (CallDispatch(DECLARE_VST_DEPRECATED (effKeysRequired), 0, 0, 0, 0) == 0);
 }
-
 
 }}}} // Jacobi::Vst::Interop::Host

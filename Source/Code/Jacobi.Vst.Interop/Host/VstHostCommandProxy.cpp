@@ -103,7 +103,7 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 				break;
 			case audioMasterSizeWindow:
 				// [index]: new width [value]: new height [return value]: 1 if supported  @see AudioEffectX::sizeWindow
-				result = _hostCmdStub->SizeWindow(index, value) ? 1 : 0;
+				result = _hostCmdStub->SizeWindow(index, (::VstInt32)value) ? 1 : 0;
 				break;
 			case audioMasterGetSampleRate:
 				// [return value]: current sample rate  @see AudioEffectX::updateSampleRate

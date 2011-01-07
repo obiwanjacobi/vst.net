@@ -69,7 +69,7 @@ void HostCommandStub::SetParameterAutomated(System::Int32 index, System::Single 
 
 System::Int32 HostCommandStub::GetVersion()
 {
-	VstInt32 version = CallHost(audioMasterVersion, 0, 0, 0, 0);
+	VstInt32 version = (::VstInt32)CallHost(audioMasterVersion, 0, 0, 0, 0);
 
 	if(version == 0)	// old host
 		version = 1;
@@ -79,7 +79,7 @@ System::Int32 HostCommandStub::GetVersion()
 
 System::Int32 HostCommandStub::GetCurrentPluginID()
 {
-	return CallHost(audioMasterCurrentId, 0, 0, 0, 0);
+	return (::VstInt32)CallHost(audioMasterCurrentId, 0, 0, 0, 0);
 }
 
 void HostCommandStub::ProcessIdle()
@@ -134,17 +134,17 @@ System::Single HostCommandStub::GetSampleRate()
 
 System::Int32 HostCommandStub::GetBlockSize()
 {
-	return CallHost(audioMasterGetBlockSize, 0, 0, 0, 0);
+	return (::VstInt32)CallHost(audioMasterGetBlockSize, 0, 0, 0, 0);
 }
 
 System::Int32 HostCommandStub::GetInputLatency()
 {
-	return CallHost(audioMasterGetInputLatency, 0, 0, 0, 0);
+	return (::VstInt32)CallHost(audioMasterGetInputLatency, 0, 0, 0, 0);
 }
 
 System::Int32 HostCommandStub::GetOutputLatency()
 {
-	return CallHost(audioMasterGetOutputLatency, 0, 0, 0, 0);
+	return (::VstInt32)CallHost(audioMasterGetOutputLatency, 0, 0, 0, 0);
 }
 
 Jacobi::Vst::Core::VstProcessLevels HostCommandStub::GetProcessLevel()
@@ -223,7 +223,7 @@ System::String^ HostCommandStub::GetProductString()
 
 System::Int32 HostCommandStub::GetVendorVersion()
 {
-	return CallHost(audioMasterGetVendorVersion, 0, 0, 0, 0);
+	return (::VstInt32)CallHost(audioMasterGetVendorVersion, 0, 0, 0, 0);
 }
 
 Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(System::String^ cando)
@@ -294,7 +294,8 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 	{
 		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
 
-		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Error, "Error in OpenFileSelector.");
+		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Error, 
+			"Error in Jacobi.Vst.Interop.Plugin.HostCommandStub.OpenFileSelector.");
 	}
 
 	return false;

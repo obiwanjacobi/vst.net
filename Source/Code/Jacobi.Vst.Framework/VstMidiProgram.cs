@@ -66,7 +66,7 @@
             }
         }
 
-        public VstMidiCategory _category;
+        private VstMidiCategory _category;
         /// <summary>
         /// Gets or sets the <see cref="VstMidiCategory"/> instance this Midi program is part of.
         /// </summary>

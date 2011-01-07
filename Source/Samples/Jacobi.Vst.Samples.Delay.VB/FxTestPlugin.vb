@@ -10,7 +10,7 @@ Friend Class FxTestPlugin
     Public Sub New()
 
         MyBase.New("VST.NET Delay Plugin", _
-                New VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2009", 1000), _
+                New VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011", 1000), _
                 VstPluginCategory.RoomFx, VstPluginCapabilities.None, 0, &H3A3A3A3A)
 
         _intfMgr = New FxPluginInterfaceManager(Me)
