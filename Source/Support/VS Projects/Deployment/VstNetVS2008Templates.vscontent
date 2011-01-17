@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSContent xmlns="http://schemas.microsoft.com/developer/vscontent/2005">
+  <Content>
+    <FileName>CSharp\AudioProcessor.zip</FileName>
+    <DisplayName>VST.NET AudioProcessor</DisplayName>
+    <Description>A VST.NET IVstPluginAudioProcessor skeleton implementation.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Item"/>
+    </Attributes>
+  </Content>
+  <Content>
+    <FileName>CSharp\Plugin.zip</FileName>
+    <DisplayName>VST.NET Plugin</DisplayName>
+    <Description>A VST.NET IVstPlugin skeleton implementation.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Item"/>
+    </Attributes>
+  </Content>
+  <Content>
+    <FileName>CSharp\PluginCommandStub.zip</FileName>
+    <DisplayName>VST.NET PluginCommandStub</DisplayName>
+    <Description>A VST.NET PluginCommandStub default implementation.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Item"/>
+    </Attributes>
+  </Content>
+  <Content>
+    <FileName>CSharp\PluginEditor.zip</FileName>
+    <DisplayName>VST.NET PluginEditor</DisplayName>
+    <Description>A VST.NET IVstPluginEditor skeleton implementation.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Item"/>
+    </Attributes>
+  </Content>
+  <Content>
+    <FileName>CSharp\PluginPrograms.zip</FileName>
+    <DisplayName>VST.NET PluginPrograms</DisplayName>
+    <Description>A VST.NET IVstPluginPrograms implementation.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Item"/>
+    </Attributes>
+  </Content>
+  <Content>
+    <FileName>CSharp\VstNetAudioPlugin.zip</FileName>
+    <DisplayName>VST.NET Audio Plugin</DisplayName>
+    <Description>A VST.NET implementation of an audio effect plugin.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Project"/>
+    </Attributes>
+  </Content>
+  <Content>
+    <FileName>CSharp\VstNetMidiPlugin.zip</FileName>
+    <DisplayName>VST.NET Midi Plugin</DisplayName>
+    <Description>A VST.NET implementation of Midi plugin.</Description>
+    <FileContentType>VSTemplate</FileContentType>
+    <ContentVersion>1.0</ContentVersion>
+    <Attributes>
+      <Attribute name="ProjectType" value="Visual C#"/>
+      <Attribute name="ProjectSubType" value="VST.NET"/>
+      <Attribute name="TemplateType" value="Project"/>
+    </Attributes>
+  </Content>
+</VSContent>
