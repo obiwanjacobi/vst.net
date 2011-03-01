@@ -26,7 +26,7 @@
         /// <returns>Returns the normalized parameter value that ranges from 0.0 to 1.0.</returns>
         public float GetNormalizedValue(float rawValue)
         {
-            return (rawValue / ScaleFactor) + NullOffset;
+            return (rawValue + NullOffset) / ScaleFactor;
         }
 
         /// <summary>
