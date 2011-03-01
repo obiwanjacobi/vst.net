@@ -1,11 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Jacobi.Vst.Core;
+﻿using Jacobi.Vst.Core;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Core
 {
-    
-    
     /// <summary>
     ///This is a test class for FourCharacterCodeTest and is intended
     ///to contain all FourCharacterCodeTest Unit Tests
@@ -13,8 +10,6 @@ namespace Jacobi.Vst.UnitTest.Core
     [TestClass()]
     public class FourCharacterCodeTest
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
