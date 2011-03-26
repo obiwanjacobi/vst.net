@@ -39,6 +39,11 @@
             return null;
         }
 
+        public void SetParameterAutomated(int parameterIndex, float value)
+        {
+            _host.HostCommandStub.SetParameterAutomated(parameterIndex, value);
+        }
+
         #endregion
 
         //---------------------------------------------------------------------
