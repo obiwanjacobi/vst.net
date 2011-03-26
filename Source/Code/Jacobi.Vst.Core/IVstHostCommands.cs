@@ -8,7 +8,7 @@
         /// <summary>
         /// Notifies the Host that the value of the parameter at <paramref name="index"/> has a new <paramref name="value"/>.
         /// </summary>
-        /// <param name="index">Must be greater than zero and smaller than the parameter count.</param>
+        /// <param name="index">Must be greater/equal to zero and smaller than the parameter count.</param>
         /// <param name="value">The new value assigned to the parameter.</param>
         /// <remarks>The plugin can call this method to allow the parameter value change to be automated by the host.</remarks>
         void SetParameterAutomated(int index, float value);
