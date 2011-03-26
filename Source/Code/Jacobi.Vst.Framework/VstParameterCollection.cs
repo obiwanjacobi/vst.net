@@ -98,7 +98,28 @@ namespace Jacobi.Vst.Framework
             }
 
             base.SetItem(index, item);
+
+            if (item != null && item.Parent == null)
+            {
+                item.Parent = this;
+            }
         }
+
+        /// <summary>
+        /// Override to set the <see cref="VstParameter.Index"/> property.
+        /// </summary>
+        /// <param name="index">zero based index into the collection.</param>
+        /// <param name="item">Must not be null.</param>
+        protected override void InsertItem(int index, VstParameter item)
+        {
+            base.InsertItem(index, item);
+
+            if (item != null && item.Parent == null)
+            {
+                item.Parent = this;
+            }
+        }
+
 
         #region IActivatable Members
 
