@@ -82,7 +82,12 @@
         /// Changes the <see cref="CurrentValue"/> and <see cref="PreviousValue"/> properties.
         /// </summary>
         /// <param name="newValue">The new value of the parameter.</param>
-        public void ChangeValue(float newValue)
+        /// <remarks>
+        /// If you wish to implement parameter value smoothing 
+        /// (where changes in value are smoothed out over time),
+        /// this is the place to call the smoothing logic.
+        /// </remarks>
+        protected virtual void ChangeValue(float newValue)
         {
             PreviousValue = CurrentValue;
             CurrentValue = newValue;
