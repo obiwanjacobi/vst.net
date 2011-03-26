@@ -1,9 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Jacobi.Vst.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Jacobi.Vst.Framework;
 
 namespace Jacobi.Vst.UnitTest.Framework
 {

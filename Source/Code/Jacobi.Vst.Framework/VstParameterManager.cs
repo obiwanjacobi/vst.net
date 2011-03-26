@@ -100,23 +100,41 @@
             switch (e.PropertyName)
             {
                 case "Value":
-                    if (currentParameter != ActiveParameter) return;
-
-                    ChangeValue(currentParameter.Value);
+                    HandleParameterValueChanged(currentParameter);
                     break;
                 case "IsActive":
-                    if (currentParameter == ActiveParameter && !currentParameter.IsActive)
-                    {
-                        ActiveParameter = null;
-                        ChangeValue(0.0f);
-                    }
-
-                    if (ActiveParameter == null && currentParameter.IsActive)
-                    {
-                        ActiveParameter = currentParameter;
-                        ChangeValue(currentParameter.Value);
-                    }
+                    HandleParameterActivityChanged(currentParameter);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Called when any parameter managed by this instance has changed value.
+        /// </summary>
+        /// <param name="parameter">Must not be null.</param>
+        protected virtual void HandleParameterValueChanged(VstParameter parameter)
+        {
+            if (parameter != ActiveParameter) return;
+
+            ChangeValue(parameter.Value);
+        }
+
+        /// <summary>
+        /// Called when any parameter managed by this instance has changed the <see cref="IActivatable.IsActive"/> property.
+        /// </summary>
+        /// <param name="parameter">Must not be null.</param>
+        protected virtual void HandleParameterActivityChanged(VstParameter parameter)
+        {
+            if (parameter == ActiveParameter && !parameter.IsActive)
+            {
+                ActiveParameter = null;
+                ChangeValue(0.0f);
+            }
+
+            if (ActiveParameter == null && parameter.IsActive)
+            {
+                ActiveParameter = parameter;
+                ChangeValue(parameter.Value);
             }
         }
     }
