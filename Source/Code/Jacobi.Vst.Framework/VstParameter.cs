@@ -33,6 +33,27 @@ using Jacobi.Vst.Framework.Common;
         /// </summary>
         public VstParameterInfo Info { get; private set; }
 
+        /// <summary>
+        /// Gets or set a reference to the (first) collection this parameter is in.
+        /// </summary>
+        internal protected VstParameterCollection Parent { get; set; }
+
+        /// <summary>
+        /// Gets the zero-based index this parameter has in the parameter collection.
+        /// </summary>
+        public int Index
+        {
+            get
+            {
+                if (Parent != null)
+                {
+                    return Parent.IndexOf(this);
+                }
+
+                return -1;
+            }
+        }
+
         private float _value;
         /// <summary>
         /// Gets or sets the numberical value of the parameter.
@@ -40,10 +61,7 @@ using Jacobi.Vst.Framework.Common;
         public float Value
         {
             get { return _value; }
-            set
-            {
-                SetProperty(value, ref _value, "Value");
-            }
+            set { SetProperty(value, ref _value, "Value"); }
         }
 
         /// <summary>
@@ -126,10 +144,7 @@ using Jacobi.Vst.Framework.Common;
         public bool IsActive
         {
             get { return _isActive; }
-            set
-            {
-                SetProperty(value, ref _isActive, "IsActive");
-            }
+            set { SetProperty(value, ref _isActive, "IsActive"); }
         }
 
         #endregion
@@ -158,6 +173,7 @@ using Jacobi.Vst.Framework.Common;
                 // clear all references
                 DisplayValue = null;
                 Info = null;
+                Parent = null;
             }
         }
         #endregion

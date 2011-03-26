@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Jacobi.Vst.Framework;
 using Jacobi.Vst.Core;
+using Jacobi.Vst.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Framework
 {
@@ -14,13 +11,6 @@ namespace Jacobi.Vst.UnitTest.Framework
     [TestClass]
     public class MaxLengthTest
     {
-        public MaxLengthTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
         private TestContext testContextInstance;
 
         /// <summary>

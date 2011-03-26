@@ -29,19 +29,23 @@
             get { return _host.HostCommandStub.GetAutomationState(); }
         }
 
-        public IDisposable EditParameter(int parameterIndex)
+        public IDisposable BeginEditParameter(VstParameter parameter)
         {
-            if (_host.HostCommandStub.BeginEdit(parameterIndex))
+            Throw.IfArgumentIsNull(parameter, "parameter");
+
+            if (_host.HostCommandStub.BeginEdit(parameter.Index))
             {
-                return new EditParameterScope(_host, parameterIndex);
+                return new EditParameterScope(_host, parameter.Index);
             }
 
             return null;
         }
 
-        public void SetParameterAutomated(int parameterIndex, float value)
+        public void NotifyParameterValueChange(VstParameter parameter)
         {
-            _host.HostCommandStub.SetParameterAutomated(parameterIndex, value);
+            Throw.IfArgumentIsNull(parameter, "parameter");
+
+            _host.HostCommandStub.SetParameterAutomated(parameter.Index, parameter.Value);
         }
 
         #endregion
@@ -49,7 +53,7 @@
         //---------------------------------------------------------------------
 
         /// <summary>
-        /// Implements the scope for <see cref="EditParameter"/>.
+        /// Implements the scope for <see cref="BeginEditParameter"/>.
         /// </summary>
         private class EditParameterScope : IDisposable
         {
