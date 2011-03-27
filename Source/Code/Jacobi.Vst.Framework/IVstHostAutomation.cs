@@ -31,6 +31,6 @@ namespace Jacobi.Vst.Framework
         /// Assign the new value to the <see cref="VstParameter"/> instance and pass it to this method to notify
         /// the host of the value change.
         /// </remarks>
-        void NotifyParameterValueChange(VstParameter parameter);
+        void NotifyParameterValueChanged(VstParameter parameter);
     }
 }
