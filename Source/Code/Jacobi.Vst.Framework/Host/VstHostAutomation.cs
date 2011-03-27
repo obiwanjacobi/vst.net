@@ -41,7 +41,7 @@
             return null;
         }
 
-        public void NotifyParameterValueChange(VstParameter parameter)
+        public void NotifyParameterValueChanged(VstParameter parameter)
         {
             Throw.IfArgumentIsNull(parameter, "parameter");
 

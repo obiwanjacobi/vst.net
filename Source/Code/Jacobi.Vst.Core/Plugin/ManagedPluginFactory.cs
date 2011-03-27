@@ -91,7 +91,8 @@
                 {
                     foreach (Type intfType in type.GetInterfaces())
                     {
-                        if (intfType.FullName.Equals(typeOfInterface.FullName))
+                        if (!string.IsNullOrEmpty(intfType.FullName) &&
+                            intfType.FullName.Equals(typeOfInterface.FullName))
                         {
                             return type;
                         }
