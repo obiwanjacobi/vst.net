@@ -11,18 +11,19 @@ namespace VstNetMidiPlugin
     internal sealed class MidiProcessor : IVstMidiProcessor, IVstPluginMidiSource
     {
         private Plugin _plugin;
-        private Gain _gain;
-        private Transpose _transpose;
 
         public MidiProcessor(Plugin plugin)
         {
             _plugin = plugin;
-            _gain = new Gain(plugin);
-            _transpose = new Transpose(plugin);
+            Gain = new Gain(plugin);
+            Transpose = new Transpose(plugin);
 
             // for most host midi output is expected during the audio processing cycle.
             SyncWithAudioProcessor = true;
         }
+
+        internal Gain Gain { get; private set; }
+        internal Transpose Transpose { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating to sync with audio processing.
@@ -78,8 +79,8 @@ namespace VstNetMidiPlugin
                     {
                         VstMidiEvent midiEvent = (VstMidiEvent)evnt;
 
-                        midiEvent = _gain.ProcessEvent(midiEvent);
-                        midiEvent = _transpose.ProcessEvent(midiEvent);
+                        midiEvent = Gain.ProcessEvent(midiEvent);
+                        midiEvent = Transpose.ProcessEvent(midiEvent);
 
                         outEvents.Add(midiEvent);
                     }

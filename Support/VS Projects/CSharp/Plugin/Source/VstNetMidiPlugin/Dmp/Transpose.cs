@@ -6,8 +6,6 @@ namespace VstNetMidiPlugin.Dmp
     {
         private static readonly string ParameterCategoryName = "Trasnpose";
 
-        private VstParameterManager _transposeMgr;
-
         private Plugin _plugin;
 
         public Transpose(Plugin plugin)
@@ -16,6 +14,8 @@ namespace VstNetMidiPlugin.Dmp
 
             InitializeParameters();
         }
+
+        public VstParameterManager TransposeMgr { get; private set; }
 
         private void InitializeParameters()
         {
@@ -39,7 +39,7 @@ namespace VstNetMidiPlugin.Dmp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 2.0f;
             paramInfo.DefaultValue = 0.0f;
-            _transposeMgr = new VstParameterManager(paramInfo);
+            TransposeMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -55,7 +55,7 @@ namespace VstNetMidiPlugin.Dmp
             byte[] outData = new byte[4];
             inEvent.Data.CopyTo(outData, 0);
 
-            outData[1] += (byte)_transposeMgr.CurrentValue;
+            outData[1] += (byte)TransposeMgr.CurrentValue;
 
             if (outData[1] > 127)
             {

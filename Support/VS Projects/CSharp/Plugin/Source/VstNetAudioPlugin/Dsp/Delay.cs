@@ -14,11 +14,6 @@ namespace VstNetAudioPlugin.Dsp
         private int _bufferIndex;
         private int _bufferLength;
 
-        private VstParameterManager _delayTimeMgr;
-        private VstParameterManager _feedbackMgr;
-        private VstParameterManager _dryLevelMgr;
-        private VstParameterManager _wetLevelMgr;
-
         private Plugin _plugin;
         /// <summary>
         /// Constructs a new instance.
@@ -30,8 +25,13 @@ namespace VstNetAudioPlugin.Dsp
             InitializeParameters();
 
             // when the delay time parameter value changes, we like to know about it.
-            _delayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(_delayTimeMgr_PropertyChanged);
+            DelayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(DelayTimeMgr_PropertyChanged);
         }
+
+        internal VstParameterManager DelayTimeMgr { get; private set; }
+        internal VstParameterManager FeedbackMgr { get; private set; }
+        internal VstParameterManager DryLevelMgr { get; private set; }
+        internal VstParameterManager WetLevelMgr { get; private set; }
 
         // This method initializes the plugin parameters this Dsp component owns.
         private void InitializeParameters()
@@ -56,7 +56,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 200f;
-            _delayTimeMgr = new VstParameterManager(paramInfo);
+            DelayTimeMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -72,7 +72,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.2f;
-            _feedbackMgr = new VstParameterManager(paramInfo);
+            FeedbackMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -88,7 +88,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.8f;
-            _dryLevelMgr = new VstParameterManager(paramInfo);
+            DryLevelMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -104,13 +104,13 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.4f;
-            _wetLevelMgr = new VstParameterManager(paramInfo);
+            WetLevelMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
         }
 
-        private void _delayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DelayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "CurrentValue")
             {
@@ -131,10 +131,10 @@ namespace VstNetAudioPlugin.Dsp
                 _sampleRate = value;
 
                 // allocate buffer for max delay time
-                int bufferLength = (int)(_delayTimeMgr.ParameterInfo.MaxInteger * _sampleRate / 1000);
+                int bufferLength = (int)(DelayTimeMgr.ParameterInfo.MaxInteger * _sampleRate / 1000);
                 _delayBuffer = new float[bufferLength];
 
-                _bufferLength = (int)(_delayTimeMgr.CurrentValue * _sampleRate / 1000);
+                _bufferLength = (int)(DelayTimeMgr.CurrentValue * _sampleRate / 1000);
             }
         }
 
@@ -148,10 +148,10 @@ namespace VstNetAudioPlugin.Dsp
             if (_delayBuffer == null) return sample;
 
             // process output
-            float output = (_dryLevelMgr.CurrentValue * sample) + (_wetLevelMgr.CurrentValue * _delayBuffer[_bufferIndex]);
+            float output = (DryLevelMgr.CurrentValue * sample) + (WetLevelMgr.CurrentValue * _delayBuffer[_bufferIndex]);
 
             // process delay buffer
-            _delayBuffer[_bufferIndex] = sample + (_feedbackMgr.CurrentValue * _delayBuffer[_bufferIndex]);
+            _delayBuffer[_bufferIndex] = sample + (FeedbackMgr.CurrentValue * _delayBuffer[_bufferIndex]);
 
             _bufferIndex++;
 

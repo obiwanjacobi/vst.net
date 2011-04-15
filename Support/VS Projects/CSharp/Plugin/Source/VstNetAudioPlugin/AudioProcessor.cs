@@ -23,7 +23,6 @@ namespace VstNetAudioPlugin
         /// </summary>
         private static readonly int InitialTailSize = 0;
 
-        private Delay _delay;
         private Plugin _plugin;
 
         /// <summary>
@@ -33,16 +32,18 @@ namespace VstNetAudioPlugin
             : base(AudioInputCount, AudioOutputCount, InitialTailSize)
         {
             _plugin = plugin;
-            _delay = new Delay(plugin);
+            Delay = new Delay(plugin);
         }
+
+        internal Delay Delay { get; private set; }
 
         /// <summary>
         /// Override the default implementation to pass it through to the delay.
         /// </summary>
         public override float SampleRate
         {
-            get { return _delay.SampleRate; }
-            set { _delay.SampleRate = value; }
+            get { return Delay.SampleRate; }
+            set { Delay.SampleRate = value; }
         }
 
         /// <summary>
@@ -78,7 +79,7 @@ namespace VstNetAudioPlugin
         {
             for (int i = 0; i < input.SampleCount; i++)
             {
-                output[i] = _delay.ProcessSample(input[i]);
+                output[i] = Delay.ProcessSample(input[i]);
             }
         }
 
