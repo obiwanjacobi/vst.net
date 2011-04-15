@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using Jacobi.Vst.Core;
 using Jacobi.Vst.Framework;
@@ -49,12 +50,24 @@ namespace VstNetAudioPlugin
 
         public void Open(IntPtr hWnd)
         {
+            // make a list of parameters to pass to the dlg.
+            var paramList = new List<VstParameterManager>()
+                {
+                    _plugin.AudioProcessor.Delay.DelayTimeMgr,
+                    _plugin.AudioProcessor.Delay.FeedbackMgr,
+                    _plugin.AudioProcessor.Delay.DryLevelMgr,
+                    _plugin.AudioProcessor.Delay.WetLevelMgr
+                };
+
+            _view.SafeInstance.InitializeParameters(paramList);
+
             _view.Open(hWnd);
         }
 
         public void ProcessIdle()
         {
             // keep your processing short!
+            _view.SafeInstance.ProcessIdle();
         }
     }
 }

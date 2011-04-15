@@ -4,6 +4,7 @@ using Jacobi.Vst.Core;
 using Jacobi.Vst.Framework;
 using Jacobi.Vst.Framework.Common;
 using VstNetMidiPlugin.UI;
+using System.Collections.Generic;
 
 namespace VstNetMidiPlugin
 {
@@ -49,12 +50,22 @@ namespace VstNetMidiPlugin
 
         public void Open(IntPtr hWnd)
         {
+            // make a list of parameters to pass to the dlg.
+            var paramList = new List<VstParameterManager>()
+                {
+                    _plugin.MidiProcessor.Gain.GainMgr,
+                    _plugin.MidiProcessor.Transpose.TransposeMgr,
+                };
+
+            _view.SafeInstance.InitializeParameters(paramList);
+
             _view.Open(hWnd);
         }
 
         public void ProcessIdle()
         {
             // keep your processing short!
+            _view.SafeInstance.ProcessIdle();
         }
     }
 }
