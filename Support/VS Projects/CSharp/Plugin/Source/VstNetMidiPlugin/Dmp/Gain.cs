@@ -6,8 +6,6 @@ namespace VstNetMidiPlugin.Dmp
     {
         private static readonly string ParameterCategoryName = "Gain";
 
-        private VstParameterManager _gainMgr;
-
         private Plugin _plugin;
 
         public Gain(Plugin plugin)
@@ -16,6 +14,8 @@ namespace VstNetMidiPlugin.Dmp
 
             InitializeParameters();
         }
+
+        public VstParameterManager GainMgr { get; private set; }
 
         private void InitializeParameters()
         {
@@ -39,7 +39,7 @@ namespace VstNetMidiPlugin.Dmp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 0.0f;
-            _gainMgr = new VstParameterManager(paramInfo);
+            GainMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -55,7 +55,7 @@ namespace VstNetMidiPlugin.Dmp
             byte[] outData = new byte[4];
             inEvent.Data.CopyTo(outData, 0);
 
-            outData[2] += (byte)_gainMgr.CurrentValue;
+            outData[2] += (byte)GainMgr.CurrentValue;
 
             if (outData[2] > 127)
             {
