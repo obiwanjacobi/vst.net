@@ -16,19 +16,19 @@ namespace VstNetAudioPlugin
         /// <summary>
         /// TODO: assign a plugin name.
         /// </summary>
-        private static readonly string PluginName = "MyPluginName";
+        private const string PluginName = "MyPluginName";
         /// <summary>
         /// TODO: assign a product name.
         /// </summary>
-        private static readonly string ProductName = "MyProduct";
+        private const string ProductName = "MyProduct";
         /// <summary>
         /// TODO: assign a vendor name.
         /// </summary>
-        private static readonly string VendorName = "MyVendor";
+        private const string VendorName = "MyVendor";
         /// <summary>
         /// TODO: assign a plugin version.
         /// </summary>
-        private static readonly int PluginVersion = 0000;
+        private const int PluginVersion = 0000;
 
         /// <summary>
         /// Initializes the one an only instance of the Plugin root object.
@@ -127,6 +127,7 @@ namespace VstNetAudioPlugin
                 return new PluginPrograms(this);
             }
 
+            // TODO: implement a thread-safe wrapper.
             return base.CreatePrograms(instance);
         }
     }

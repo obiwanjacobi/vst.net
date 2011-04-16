@@ -8,6 +8,10 @@
     /// </summary>
     public class VstConnectionInfo : ObservableObject
     {
+        public const string LabelPropertyName = "Label";
+        public const string ShortLabelPropertyName = "ShortLabel";
+        public const string SpeakerArrangementTypePropertyName = "SpeakerArrangementType";
+
         private string _label;
         /// <summary>
         /// Gets or sets the label for this connection pin.
@@ -18,9 +22,9 @@
             get { return _label; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, "Label");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, LabelPropertyName);
 
-                SetProperty(value, ref _label, "Label");
+                SetProperty(value, ref _label, LabelPropertyName);
             }
         }
 
@@ -34,9 +38,9 @@
             get { return _shortLabel; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, "ShortLabel");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, ShortLabelPropertyName);
 
-                SetProperty(value, ref _shortLabel, "ShortLabel");
+                SetProperty(value, ref _shortLabel, ShortLabelPropertyName);
             }
         }
 
@@ -49,7 +53,7 @@
             get { return _speakerArrangementType; }
             set
             {
-                SetProperty(value, ref _speakerArrangementType, "SpeakerArrangementType");
+                SetProperty(value, ref _speakerArrangementType, SpeakerArrangementTypePropertyName);
             }
         }
     }

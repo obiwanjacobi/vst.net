@@ -16,14 +16,14 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Starts an 'edit parameter' scope.
         /// </summary>
-        /// <param name="parameter">The parameter to notify the host for.</param>
+        /// <param name="parameter">The parameter to notify the host for. Must not be null.</param>
         /// <returns>Returns a tracker object to mark the end of the edit scope. 
         /// Can return null if the host does not support this.</returns>
         /// <remarks>Call <see cref="IDisposable.Dispose"/> on the return value to end the scope.</remarks>
         IDisposable BeginEditParameter(VstParameter parameter);
 
         /// <summary>
-        /// Notifies the Host that the value of the parameter at <paramref name="parameterIndex"/> has a new <paramref name="value"/>.
+        /// Notifies the Host that the value of the <paramref name="parameter"/>.
         /// </summary>
         /// <param name="parameter">Must not be null.</param>
         /// <remarks>

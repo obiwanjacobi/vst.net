@@ -1,5 +1,6 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Framework;
+
 namespace VstNetMidiPlugin.Dmp
 {
     internal sealed class Gain
@@ -39,7 +40,7 @@ namespace VstNetMidiPlugin.Dmp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 0.0f;
-            GainMgr = new VstParameterManager(paramInfo);
+            GainMgr = new VstParameterManager(paramInfo, _plugin.Host.GetInstance<IVstHostAutomation>());
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);

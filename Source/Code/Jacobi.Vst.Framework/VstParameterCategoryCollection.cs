@@ -15,6 +15,8 @@
         /// <returns>Returns the <see cref="VstParameterCategory.Name"/> property.</returns>
         protected override string GetKeyForItem(VstParameterCategory item)
         {
+            if (item == null) return null;
+
             return item.Name;
         }
 

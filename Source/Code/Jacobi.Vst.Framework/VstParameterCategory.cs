@@ -9,6 +9,8 @@
     /// </summary>
     public class VstParameterCategory : ObservableObject
     {
+        public const string NamePropertyName = "Name";
+
         private string _name;
         /// <summary>
         /// Gets or sets the name of the parameter category.
@@ -19,9 +21,9 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxCategoryLabelLength, "Name");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxCategoryLabelLength, NamePropertyName);
 
-                SetProperty(value, ref _name, "Name");
+                SetProperty(value, ref _name, NamePropertyName);
             }
         }
     }

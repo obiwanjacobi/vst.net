@@ -1,5 +1,6 @@
 ﻿using Jacobi.Vst.Framework;
 using Jacobi.Vst.Core;
+
 namespace VstNetMidiPlugin.Dmp
 {
     internal sealed class Transpose
@@ -39,7 +40,7 @@ namespace VstNetMidiPlugin.Dmp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 2.0f;
             paramInfo.DefaultValue = 0.0f;
-            TransposeMgr = new VstParameterManager(paramInfo);
+            TransposeMgr = new VstParameterManager(paramInfo, _plugin.Host.GetInstance<IVstHostAutomation>());
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);

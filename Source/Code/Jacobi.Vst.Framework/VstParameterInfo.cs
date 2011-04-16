@@ -9,6 +9,25 @@
     /// </summary>
     public class VstParameterInfo : ObservableObject
     {
+        public const string NormalizationInfoPropertyName = "NormalizationInfo";
+        public const string ParameterManagerPropertyName = "ParameterManager";
+        public const string CategoryPropertyName = "Category";
+        public const string DefaultValuePropertyName = "DefaultValue";
+        public const string NullValuePropertyName = "NullValue";
+        public const string CanBeAutomatedPropertyName = "CanBeAutomated";
+        public const string IsSwitchPropertyName = "IsSwitch";
+        public const string CanRampPropertyName = "CanRamp";
+        public const string NamePropertyName = "Name";
+        public const string LabelPropertyName = "Label";
+        public const string ShortLabelPropertyName = "ShortLabel";
+        public const string MinIntegerPropertyName = "MinInteger";
+        public const string MaxIntegerPropertyName = "MaxInteger";
+        public const string StepIntegerPropertyName = "StepInteger";
+        public const string LargeStepIntegerPropertyName = "LargeStepInteger";
+        public const string StepFloatPropertyName = "StepFloat";
+        public const string SmallStepFloatPropertyName = "SmallStepFloat";
+        public const string LargeStepFloatPropertyName = "LargeStepFloat";
+
         /// <summary>
         /// Constructs a new instance and sets the <see cref="MaxInteger"/> property to 1.
         /// </summary>
@@ -28,7 +47,7 @@
             get { return _normalizationInfo; }
             set
             {
-                SetProperty(value, ref _normalizationInfo, "NormalizationInfo");
+                SetProperty(value, ref _normalizationInfo, NormalizationInfoPropertyName);
             }
         }
 
@@ -47,10 +66,10 @@
             {
                 if (value != null && value.ParameterInfo != this)
                 {
-                    throw new ArgumentException(Properties.Resources.VstParameterInfo_ParameterManagerNotLinked, "ParameterManager");
+                    throw new ArgumentException(Properties.Resources.VstParameterInfo_ParameterManagerNotLinked, ParameterManagerPropertyName);
                 }
 
-                SetProperty(value, ref _paramMgr, "ParameterManager");
+                SetProperty(value, ref _paramMgr, ParameterManagerPropertyName);
             }
         }
 
@@ -63,7 +82,7 @@
             get { return _category; }
             set
             {
-                SetProperty(value, ref _category, "Category");
+                SetProperty(value, ref _category, CategoryPropertyName);
             }
         }
 
@@ -76,7 +95,20 @@
             get { return _defaultValue; }
             set
             {
-                SetProperty(value, ref _defaultValue, "DefaultValue");
+                SetProperty(value, ref _defaultValue, DefaultValuePropertyName);
+            }
+        }
+
+        private float _nullValue;
+        /// <summary>
+        /// Gets or sets the null value used when the <see cref="VstParameterManager"/> switches active parameters.
+        /// </summary>
+        public float NullValue
+        {
+            get { return _nullValue; }
+            set
+            {
+                SetProperty(value, ref _nullValue, NullValuePropertyName);
             }
         }
 
@@ -89,7 +121,7 @@
             get { return _canBeAutomated; }
             set
             {
-                SetProperty(value, ref _canBeAutomated, "CanBeAutomated");
+                SetProperty(value, ref _canBeAutomated, CanBeAutomatedPropertyName);
             }
         }
 
@@ -102,7 +134,7 @@
             get { return _isSwitch; }
             set
             {
-                SetProperty(value, ref _isSwitch, "IsSwitch");
+                SetProperty(value, ref _isSwitch, IsSwitchPropertyName);
             }
         }
 
@@ -115,7 +147,7 @@
             get { return _canRamp; }
             set
             {
-                SetProperty(value, ref _canRamp, "CanRamp");
+                SetProperty(value, ref _canRamp, CanRampPropertyName);
             }
         }
 
@@ -130,9 +162,9 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, "Name");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, NamePropertyName);
 
-                SetProperty(value, ref _name, "Name");
+                SetProperty(value, ref _name, NamePropertyName);
             }
         }
 
@@ -142,14 +174,14 @@
         /// </summary>
         /// <remarks>The Label cannot exceed 63 characters</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
-        public string Label 
+        public string Label
         {
             get { return _label; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, "Label");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxLabelLength, LabelPropertyName);
 
-                SetProperty(value, ref _label, "Label");
+                SetProperty(value, ref _label, LabelPropertyName);
             }
         }
 
@@ -164,9 +196,9 @@
             get { return _shortLabel; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, "ShortLabel");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxShortLabelLength, ShortLabelPropertyName);
 
-                SetProperty(value, ref _shortLabel, "ShortLabel");
+                SetProperty(value, ref _shortLabel, ShortLabelPropertyName);
             }
         }
 
@@ -188,7 +220,7 @@
             get { return _minInteger; }
             set
             {
-                SetProperty(value, ref _minInteger, "MinInteger");
+                SetProperty(value, ref _minInteger, MinIntegerPropertyName);
             }
         }
 
@@ -201,7 +233,7 @@
             get { return _maxInteger; }
             set
             {
-                SetProperty(value, ref _maxInteger, "MaxInteger");
+                SetProperty(value, ref _maxInteger, MaxIntegerPropertyName);
             }
         }
 
@@ -223,7 +255,7 @@
             get { return _stepInteger; }
             set
             {
-                SetProperty(value, ref _stepInteger, "StepInteger");
+                SetProperty(value, ref _stepInteger, StepIntegerPropertyName);
             }
         }
 
@@ -236,7 +268,7 @@
             get { return _largeStepInteger; }
             set
             {
-                SetProperty(value, ref _largeStepInteger, "LargeStepInteger");
+                SetProperty(value, ref _largeStepInteger, LargeStepIntegerPropertyName);
             }
         }
 
@@ -258,7 +290,7 @@
             get { return _stepFloat; }
             set
             {
-                SetProperty(value, ref _stepFloat, "StepFloat");
+                SetProperty(value, ref _stepFloat, StepFloatPropertyName);
             }
         }
 
@@ -271,7 +303,7 @@
             get { return _smallStepFloat; }
             set
             {
-                SetProperty(value, ref _smallStepFloat, "SmallStepFloat");
+                SetProperty(value, ref _smallStepFloat, SmallStepFloatPropertyName);
             }
         }
 
@@ -284,7 +316,7 @@
             get { return _largeStepFloat; }
             set
             {
-                SetProperty(value, ref _largeStepFloat, "LargeStepFloat");
+                SetProperty(value, ref _largeStepFloat, LargeStepFloatPropertyName);
             }
         }
     }
