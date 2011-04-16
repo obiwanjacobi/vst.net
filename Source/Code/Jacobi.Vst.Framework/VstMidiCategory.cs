@@ -8,6 +8,9 @@
     /// </summary>
     public class VstMidiCategory : ObservableObject
     {
+        public const string NamePropertyName = "Name";
+        public const string ParentCategoryPropertyName = "ParentCategory";
+
         private string _name;
         /// <summary>
         /// Gets or sets the category name.
@@ -18,9 +21,9 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxMidiNameLength, "Name");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxMidiNameLength, NamePropertyName);
 
-                SetProperty(value, ref _name, "Name");
+                SetProperty(value, ref _name, NamePropertyName);
             }
         }
 
@@ -34,7 +37,7 @@
             get { return _parentCategory; }
             set
             {
-                SetProperty(value, ref _parentCategory, "ParentCategory");
+                SetProperty(value, ref _parentCategory, ParentCategoryPropertyName);
             }
         }
     }

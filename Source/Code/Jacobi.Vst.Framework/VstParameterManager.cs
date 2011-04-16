@@ -10,6 +10,12 @@
     /// </summary>
     public class VstParameterManager : ObservableObject
     {
+        private IVstHostAutomation _hostAutomation;
+
+        public const string ActiveParameterPropertyName = "ActiveParameter";
+        public const string CurrentValuePropertyName = "CurrentValue";
+        public const string PreviousValuePropertyName = "PreviousValue";
+
         /// <summary>
         /// Constructs a new instance based on the parameter type information.
         /// </summary>
@@ -21,6 +27,19 @@
 
             ParameterInfo = parameterInfo;
             ParameterInfo.ParameterManager = this;
+        }
+
+        /// <summary>
+        /// Constructs a new instance based on the parameter type information.
+        /// </summary>
+        /// <param name="parameterInfo">Must not be null.</param>
+        /// <param name="hostAutomation">An optional reference to the host automation interface.</param>
+        /// <remarks>The <see cref="VstParameterInfo.ParameterManager"/> property is set to <b>this</b> instance.
+        /// When <paramref name="hostAutomation"/> is non-null it is used to notify the host of parameter value changes.</remarks>
+        public VstParameterManager(VstParameterInfo parameterInfo, IVstHostAutomation hostAutomation)
+            : this(parameterInfo)
+        {
+            _hostAutomation = hostAutomation;
         }
 
         /// <summary>
@@ -37,7 +56,7 @@
             get { return _activeParameter; }
             private set
             {
-                SetProperty(value, ref _activeParameter, "ActiveParameter");
+                SetProperty(value, ref _activeParameter, ActiveParameterPropertyName);
             }
         }
 
@@ -50,7 +69,7 @@
             get { return _currentValue; }
             private set
             {
-                SetProperty(value, ref _currentValue, "CurrentValue");
+                SetProperty(value, ref _currentValue, CurrentValuePropertyName);
             }
         }
 
@@ -63,7 +82,7 @@
             get { return _previousValue; }
             private set
             {
-                SetProperty(value, ref _previousValue, "PreviousValue");
+                SetProperty(value, ref _previousValue, PreviousValuePropertyName);
             }
         }
 
@@ -91,6 +110,11 @@
         {
             PreviousValue = CurrentValue;
             CurrentValue = newValue;
+
+            if (_hostAutomation != null && ActiveParameter != null)
+            {
+                _hostAutomation.NotifyParameterValueChanged(ActiveParameter);
+            }
         }
 
         private void Parameter_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -128,7 +152,7 @@
             if (parameter == ActiveParameter && !parameter.IsActive)
             {
                 ActiveParameter = null;
-                ChangeValue(0.0f);
+                ChangeValue(ParameterInfo.NullValue);
             }
 
             if (ActiveParameter == null && parameter.IsActive)

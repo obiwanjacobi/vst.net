@@ -11,6 +11,12 @@
     {
         private static readonly string[] KeyNames = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
+        public const string NamePropertyName = "Name";
+        public const string ProgramChangePropertyName = "ProgramChange";
+        public const string BankSelectMsbPropertyName = "BankSelectMsb";
+        public const string BankSelectLsbPropertyName = "BankSelectLsb";
+        public const string CategoryPropertyName = "Category";
+
         private string _name;
         /// <summary>
         /// Gets or sets the name of the Midi program.
@@ -21,9 +27,9 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxMidiNameLength, "Name");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxMidiNameLength, NamePropertyName);
 
-                SetProperty(value, ref _name, "Name");
+                SetProperty(value, ref _name, NamePropertyName);
             }
         }
 
@@ -36,7 +42,7 @@
             get { return _programChange; }
             set
             {
-                SetProperty(value, ref _programChange, "ProgramChange");
+                SetProperty(value, ref _programChange, ProgramChangePropertyName);
             }
         }
 
@@ -49,7 +55,7 @@
             get { return _bankSelectMsb; }
             set
             {
-                SetProperty(value, ref _bankSelectMsb, "BankSelectMsb");
+                SetProperty(value, ref _bankSelectMsb, BankSelectMsbPropertyName);
             }
         }
         
@@ -62,7 +68,7 @@
             get { return _bankSelectLsb; }
             set
             {
-                SetProperty(value, ref _bankSelectLsb, "BankSelectLsb");
+                SetProperty(value, ref _bankSelectLsb, BankSelectLsbPropertyName);
             }
         }
 
@@ -76,7 +82,7 @@
             get { return _category; }
             set
             {
-                SetProperty(value, ref _category, "Category");
+                SetProperty(value, ref _category, CategoryPropertyName);
             }
         }
 

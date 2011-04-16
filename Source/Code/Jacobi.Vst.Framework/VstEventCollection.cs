@@ -28,6 +28,8 @@ namespace Jacobi.Vst.Framework
         /// <param name="events">Must not be null.</param>
         public VstEventCollection(VstEvent[] events)
         {
+            Throw.IfArgumentIsNull(events, "events");
+
             _list = new List<VstEvent>(events);
             _isReadOnly = true;
         }
