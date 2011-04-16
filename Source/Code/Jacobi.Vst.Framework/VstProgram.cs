@@ -11,6 +11,8 @@
     /// For this reason the VstProgram implements the <see cref="IVstPluginParameters"/> interface.</remarks>
     public class VstProgram : ObservableObject, IVstPluginParameters, IDisposable
     {
+        public const string NamePropertyName = "Name";
+
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
@@ -44,9 +46,9 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Core.Constants.MaxProgramNameLength, "Name");
+                Throw.IfArgumentTooLong(value, Core.Constants.MaxProgramNameLength, NamePropertyName);
 
-                SetProperty(value, ref _name, "Name");
+                SetProperty(value, ref _name, NamePropertyName);
             }
         }
 

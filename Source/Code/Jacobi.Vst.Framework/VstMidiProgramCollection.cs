@@ -16,6 +16,8 @@
         /// <returns>Returns the <see cref="VstMidiProgram.Name"/> property.</returns>
         protected override string GetKeyForItem(VstMidiProgram item)
         {
+            if (item == null) return null;
+
             return item.Name;
         }
 
@@ -41,7 +43,7 @@
         /// <remarks>The implementation adds an event handler to the <see cref="ObservableObject.PropertyChanged"/> event.</remarks>
         protected override void InsertItem(int index, VstMidiProgram item)
         {
-            item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
+            item.PropertyChanged += new PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
             base.InsertItem(index, item);
         }
@@ -58,7 +60,7 @@
             VstMidiProgram old = this[index];
             old.PropertyChanged -= new PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
-            item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
+            item.PropertyChanged += new PropertyChangedEventHandler(VstMidiProgram_PropertyChanged);
 
             base.SetItem(index, item);
         }
@@ -88,11 +90,11 @@
         /// <param name="sender">The original <see cref="VstMidiProgram"/> that fired the event.</param>
         protected virtual void OnMidiProgramNameChanged(object sender)
         {
-            EventHandler<EventArgs> temp = MidiProgramNameChanged;
+            EventHandler<EventArgs> handler = MidiProgramNameChanged;
 
-            if (temp != null)
+            if (handler != null)
             {
-                temp(sender, EventArgs.Empty);
+                handler(sender, EventArgs.Empty);
             }
         }
 

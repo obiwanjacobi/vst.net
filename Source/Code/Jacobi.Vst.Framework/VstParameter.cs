@@ -2,13 +2,17 @@ namespace Jacobi.Vst.Framework
 {
     using System;
     using Jacobi.Vst.Core;
-using Jacobi.Vst.Framework.Common;
+    using Jacobi.Vst.Framework.Common;
 
     /// <summary>
     /// The VstParameter represents a parameter value for one plugin parameter.
     /// </summary>
     public class VstParameter : ObservableObject, IActivatable, IDisposable
     {
+        public const string ValuePropertyName = "Value";
+        public const string DisplayValuePropertyName = "DisplayValue";
+        public const string IsActivePropertyName = "IsActive";
+
         /// <summary>
         /// Constructs a new instance based on the parameter meta info.
         /// </summary>
@@ -97,7 +101,7 @@ using Jacobi.Vst.Framework.Common;
         /// </summary>
         /// <remarks>Derived classes can set this property but the length should not exceed 7 characters. 
         /// By default the <see cref="Value"/> property is returned as string (untill you set a non-null value).</remarks>
-        public virtual string DisplayValue 
+        public virtual string DisplayValue
         {
             get
             {
@@ -112,7 +116,7 @@ using Jacobi.Vst.Framework.Common;
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxParameterStringLength, "DisplayValue");
 
-                SetProperty(value, ref _displayValue, "DisplayValue");
+                SetProperty(value, ref _displayValue, DisplayValuePropertyName);
             }
         }
 
@@ -144,7 +148,7 @@ using Jacobi.Vst.Framework.Common;
         public bool IsActive
         {
             get { return _isActive; }
-            set { SetProperty(value, ref _isActive, "IsActive"); }
+            set { SetProperty(value, ref _isActive, IsActivePropertyName); }
         }
 
         #endregion

@@ -11,6 +11,9 @@
     /// of one VstMidiChannelInfo instance for multiple channels.</remarks>
     public class VstMidiChannelInfo : ObservableObject
     {
+        public const string ActiveProgramPropertyName = "ActiveProgram";
+        public const string HaveNamesChangedPropertyName = "HaveNamesChanged";
+
         private VstMidiCategoryCollection _categories;
         /// <summary>
         /// Gets the collection of <see cref="VstMidiCategory"/>s.
@@ -55,7 +58,7 @@
             get { return _activeProgram; }
             set
             {
-                SetProperty(value, ref _activeProgram, "ActiveProgram");
+                SetProperty(value, ref _activeProgram, ActiveProgramPropertyName);
             }
         }
 
@@ -70,7 +73,7 @@
             get { return _haveNamesChanged; }
             set
             {
-                SetProperty(value, ref _haveNamesChanged, "HaveNamesChanged");
+                SetProperty(value, ref _haveNamesChanged, HaveNamesChangedPropertyName);
             }
         }
 

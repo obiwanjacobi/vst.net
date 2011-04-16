@@ -43,6 +43,8 @@ namespace VstNetAudioPlugin.Dsp
             VstParameterCategory paramCategory = 
                 _plugin.PluginPrograms.GetParameterCategory(ParameterCategoryName);
 
+            var hostAutomation = _plugin.Host.GetInstance<IVstHostAutomation>();
+
             // delay time parameter
             VstParameterInfo paramInfo = new VstParameterInfo();
             paramInfo.Category = paramCategory;
@@ -56,7 +58,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 200f;
-            DelayTimeMgr = new VstParameterManager(paramInfo);
+            DelayTimeMgr = new VstParameterManager(paramInfo, hostAutomation);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -72,7 +74,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.2f;
-            FeedbackMgr = new VstParameterManager(paramInfo);
+            FeedbackMgr = new VstParameterManager(paramInfo, hostAutomation);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -88,7 +90,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.8f;
-            DryLevelMgr = new VstParameterManager(paramInfo);
+            DryLevelMgr = new VstParameterManager(paramInfo, hostAutomation);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -104,7 +106,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.4f;
-            WetLevelMgr = new VstParameterManager(paramInfo);
+            WetLevelMgr = new VstParameterManager(paramInfo, hostAutomation);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);

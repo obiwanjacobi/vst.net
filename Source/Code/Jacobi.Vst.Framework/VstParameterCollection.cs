@@ -54,6 +54,8 @@ namespace Jacobi.Vst.Framework
         /// <returns>Returns the <see cref="VstParameterInfo.Name"/> property.</returns>
         protected override string GetKeyForItem(VstParameter item)
         {
+            if (item == null) return null;
+
             return item.Info.Name;
         }
 
