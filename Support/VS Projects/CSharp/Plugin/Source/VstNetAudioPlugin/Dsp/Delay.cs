@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Jacobi.Vst.Framework;
 
 namespace VstNetAudioPlugin.Dsp
@@ -22,10 +23,14 @@ namespace VstNetAudioPlugin.Dsp
         {
             _plugin = plugin;
 
+            _plugin.Opened += new EventHandler(Plugin_Opened);
+        }
+
+        private void Plugin_Opened(object sender, System.EventArgs e)
+        {
             InitializeParameters();
 
-            // when the delay time parameter value changes, we like to know about it.
-            DelayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(DelayTimeMgr_PropertyChanged);
+            _plugin.Opened -= new EventHandler(Plugin_Opened);
         }
 
         internal VstParameterManager DelayTimeMgr { get; private set; }
@@ -110,6 +115,9 @@ namespace VstNetAudioPlugin.Dsp
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
+
+            // when the delay time parameter value changes, we like to know about it.
+            DelayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(DelayTimeMgr_PropertyChanged);
         }
 
         private void DelayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
