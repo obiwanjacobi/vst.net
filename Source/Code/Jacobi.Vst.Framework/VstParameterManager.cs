@@ -123,10 +123,10 @@
 
             switch (e.PropertyName)
             {
-                case "Value":
+                case VstParameter.ValuePropertyName:
                     HandleParameterValueChanged(currentParameter);
                     break;
-                case "IsActive":
+                case VstParameter.IsActivePropertyName:
                     HandleParameterActivityChanged(currentParameter);
                     break;
             }
