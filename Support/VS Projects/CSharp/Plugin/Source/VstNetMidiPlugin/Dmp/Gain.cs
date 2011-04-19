@@ -13,12 +13,14 @@ namespace VstNetMidiPlugin.Dmp
         {
             _plugin = plugin;
 
+            InitializeParameters();
+
             _plugin.Opened += new System.EventHandler(Plugin_Opened);
         }
 
         private void Plugin_Opened(object sender, System.EventArgs e)
         {
-            InitializeParameters();
+            GainMgr.HostAutomation = _plugin.Host.GetInstance<IVstHostAutomation>();
 
             _plugin.Opened -= new System.EventHandler(Plugin_Opened);
         }
@@ -47,7 +49,7 @@ namespace VstNetMidiPlugin.Dmp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 0.0f;
-            GainMgr = new VstParameterManager(paramInfo, _plugin.Host.GetInstance<IVstHostAutomation>());
+            GainMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);

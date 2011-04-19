@@ -10,8 +10,6 @@
     /// </summary>
     public class VstParameterManager : ObservableObject
     {
-        private IVstHostAutomation _hostAutomation;
-
         public const string ActiveParameterPropertyName = "ActiveParameter";
         public const string CurrentValuePropertyName = "CurrentValue";
         public const string PreviousValuePropertyName = "PreviousValue";
@@ -30,17 +28,12 @@
         }
 
         /// <summary>
-        /// Constructs a new instance based on the parameter type information.
+        /// When <paramref name="hostAutomation"/> is non-null it is used to notify the host of parameter value changes.
         /// </summary>
-        /// <param name="parameterInfo">Must not be null.</param>
-        /// <param name="hostAutomation">An optional reference to the host automation interface.</param>
-        /// <remarks>The <see cref="VstParameterInfo.ParameterManager"/> property is set to <b>this</b> instance.
-        /// When <paramref name="hostAutomation"/> is non-null it is used to notify the host of parameter value changes.</remarks>
-        public VstParameterManager(VstParameterInfo parameterInfo, IVstHostAutomation hostAutomation)
-            : this(parameterInfo)
-        {
-            _hostAutomation = hostAutomation;
-        }
+        /// <remarks>
+        /// Set this property when the Opened event is triggered on the plugin root base class(es).
+        /// </remarks>
+        public IVstHostAutomation HostAutomation { get; set; }
 
         /// <summary>
         /// Gets the meta data for the parameter this instance manages.
@@ -111,9 +104,9 @@
             PreviousValue = CurrentValue;
             CurrentValue = newValue;
 
-            if (_hostAutomation != null && ActiveParameter != null)
+            if (HostAutomation != null && ActiveParameter != null)
             {
-                _hostAutomation.NotifyParameterValueChanged(ActiveParameter);
+                HostAutomation.NotifyParameterValueChanged(ActiveParameter);
             }
         }
 
