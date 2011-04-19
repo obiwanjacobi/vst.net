@@ -13,7 +13,14 @@ namespace VstNetMidiPlugin.Dmp
         {
             _plugin = plugin;
 
+            _plugin.Opened += new System.EventHandler(Plugin_Opened);
+        }
+
+        private void Plugin_Opened(object sender, System.EventArgs e)
+        {
             InitializeParameters();
+
+            _plugin.Opened -= new System.EventHandler(Plugin_Opened);
         }
 
         public VstParameterManager GainMgr { get; private set; }

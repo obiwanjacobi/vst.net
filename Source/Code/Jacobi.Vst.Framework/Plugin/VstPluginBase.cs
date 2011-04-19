@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Framework.Plugin
 {
+    using System;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Deprecated;
 
@@ -79,6 +80,8 @@
         public virtual void Open(IVstHost host)
         {
             Host = host;
+
+            OnOpened();
         }
 
         /// <summary>
@@ -152,5 +155,24 @@
         /// </summary>
         /// <remarks>This member can be null. It is set after a call to <see cref="Open"/>.</remarks>
         public IVstHost Host { get; private set; }
+
+        /// <summary>
+        /// Triggered when the <see cref="M:Open"/> method is called.
+        /// </summary>
+        /// <remarks>At this point the <see cref="P:Host"/> property is available.</remarks>
+        public event EventHandler Opened;
+
+        /// <summary>
+        /// Triggers the <see cref="Opened"/> event.
+        /// </summary>
+        protected virtual void OnOpened()
+        {
+            var handler = Opened;
+
+            if(handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
     }
 }
