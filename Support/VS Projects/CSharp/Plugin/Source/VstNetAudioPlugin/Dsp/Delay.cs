@@ -23,12 +23,22 @@ namespace VstNetAudioPlugin.Dsp
         {
             _plugin = plugin;
 
+            InitializeParameters();
+
+            // when the delay time parameter value changes, we like to know about it.
+            DelayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(DelayTimeMgr_PropertyChanged);
+
             _plugin.Opened += new EventHandler(Plugin_Opened);
         }
 
         private void Plugin_Opened(object sender, System.EventArgs e)
         {
-            InitializeParameters();
+            var hostAutomation = _plugin.Host.GetInstance<IVstHostAutomation>();
+
+            DelayTimeMgr.HostAutomation = hostAutomation;
+            FeedbackMgr.HostAutomation = hostAutomation;
+            DryLevelMgr.HostAutomation = hostAutomation;
+            WetLevelMgr.HostAutomation = hostAutomation;
 
             _plugin.Opened -= new EventHandler(Plugin_Opened);
         }
@@ -48,8 +58,6 @@ namespace VstNetAudioPlugin.Dsp
             VstParameterCategory paramCategory = 
                 _plugin.PluginPrograms.GetParameterCategory(ParameterCategoryName);
 
-            var hostAutomation = _plugin.Host.GetInstance<IVstHostAutomation>();
-
             // delay time parameter
             VstParameterInfo paramInfo = new VstParameterInfo();
             paramInfo.Category = paramCategory;
@@ -63,7 +71,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 1.0f;
             paramInfo.StepFloat = 10.0f;
             paramInfo.DefaultValue = 200f;
-            DelayTimeMgr = new VstParameterManager(paramInfo, hostAutomation);
+            DelayTimeMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -79,7 +87,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.2f;
-            FeedbackMgr = new VstParameterManager(paramInfo, hostAutomation);
+            FeedbackMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -95,7 +103,7 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.8f;
-            DryLevelMgr = new VstParameterManager(paramInfo, hostAutomation);
+            DryLevelMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
@@ -111,13 +119,10 @@ namespace VstNetAudioPlugin.Dsp
             paramInfo.SmallStepFloat = 0.01f;
             paramInfo.StepFloat = 0.05f;
             paramInfo.DefaultValue = 0.4f;
-            WetLevelMgr = new VstParameterManager(paramInfo, hostAutomation);
+            WetLevelMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             parameterInfos.Add(paramInfo);
-
-            // when the delay time parameter value changes, we like to know about it.
-            DelayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(DelayTimeMgr_PropertyChanged);
         }
 
         private void DelayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
