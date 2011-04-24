@@ -136,6 +136,9 @@
         /// <returns>Returns true when the type <typeparamref name="T"/> is supported.</returns>
         public bool Supports<T>() where T : class
         {
+            if (typeof(IVstHostCommandStub).IsAssignableFrom(typeof(T))) 
+                return ((HostCommandStub as T) != null);
+
             return _intfMgr.Supports<T>();
         }
 
@@ -146,6 +149,9 @@
         /// <returns>Returns null when <typeparamref name="T"/> is not supported.</returns>
         public T GetInstance<T>() where T : class
         {
+            if (typeof(IVstHostCommandStub).IsAssignableFrom(typeof(T))) 
+                return HostCommandStub as T;
+
             return _intfMgr.GetInstance<T>();
         }
 
