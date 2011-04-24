@@ -1344,13 +1344,21 @@
                             {
                                 VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
 
-                                pluginPrograms.Programs.Add(prog);
-                                pluginPrograms.ActiveProgram = prog;
-
-                                // remove the previously active program that has now been replaced
                                 if (formerActiveProg != null)
                                 {
+                                    int index = pluginPrograms.Programs.IndexOf(formerActiveProg);
+                                    pluginPrograms.Programs.Insert(index, prog);
+
+                                    pluginPrograms.ActiveProgram = prog;
+
+                                    // remove the previously active program that has now been replaced
                                     pluginPrograms.Programs.Remove(formerActiveProg);
+
+                                }
+                                else
+                                {
+                                    pluginPrograms.Programs.Add(prog);
+                                    pluginPrograms.ActiveProgram = prog;
                                 }
                             }
                         }
