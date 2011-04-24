@@ -7,15 +7,22 @@
     /// <summary>
     /// Contains information about a Midi Program.
     /// </summary>
-    public class VstMidiProgram : ObservableObject
+    public class VstMidiProgram : ObservableObject, IActivatable
     {
         private static readonly string[] KeyNames = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
+        /// <summary>Name</summary>
         public const string NamePropertyName = "Name";
+        /// <summary>ProgramChange</summary>
         public const string ProgramChangePropertyName = "ProgramChange";
+        /// <summary>BankSelectMsb</summary>
         public const string BankSelectMsbPropertyName = "BankSelectMsb";
+        /// <summary>BankSelectLsb</summary>
         public const string BankSelectLsbPropertyName = "BankSelectLsb";
+        /// <summary>Category</summary>
         public const string CategoryPropertyName = "Category";
+        /// <summary>IsActive</summary>
+        public const string IsActivePropertyName = "IsActive";
 
         private string _name;
         /// <summary>
@@ -98,5 +105,23 @@
 
             return KeyNames[note] + (octave - 2);
         }
+
+        #region IActivatable Members
+
+        private bool _isActive;
+
+        /// <summary>
+        /// Gets or sets an indication if this instance is currently the active MidiProgram.
+        /// </summary>
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set
+            {
+                SetProperty(value, ref _isActive, IsActivePropertyName);
+            }
+        }
+
+        #endregion
     }
 }

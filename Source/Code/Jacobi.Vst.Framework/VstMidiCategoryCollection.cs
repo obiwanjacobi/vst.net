@@ -14,6 +14,8 @@
         /// <returns>Returns the <see cref="VstMidiCategory.Name"/> property.</returns>
         protected override string GetKeyForItem(VstMidiCategory item)
         {
+            if (item == null) return null;
+
             return item.Name;
         }
     }
