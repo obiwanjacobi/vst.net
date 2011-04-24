@@ -9,6 +9,7 @@
     /// </summary>
     public class VstParameterCategory : ObservableObject
     {
+        /// <summary>Name</summary>
         public const string NamePropertyName = "Name";
 
         private string _name;

@@ -10,8 +10,11 @@
     /// </summary>
     public class VstParameterManager : ObservableObject
     {
+        /// <summary>ActiveParameter</summary>
         public const string ActiveParameterPropertyName = "ActiveParameter";
+        /// <summary>CurrentValue</summary>
         public const string CurrentValuePropertyName = "CurrentValue";
+        /// <summary>PreviousValue</summary>
         public const string PreviousValuePropertyName = "PreviousValue";
 
         /// <summary>

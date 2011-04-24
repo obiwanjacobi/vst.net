@@ -9,8 +9,11 @@ namespace Jacobi.Vst.Framework
     /// </summary>
     public class VstParameter : ObservableObject, IActivatable, IDisposable
     {
+        /// <summary>Value</summary>
         public const string ValuePropertyName = "Value";
+        /// <summary>DisplayValue</summary>
         public const string DisplayValuePropertyName = "DisplayValue";
+        /// <summary>IsActive</summary>
         public const string IsActivePropertyName = "IsActive";
 
         /// <summary>
