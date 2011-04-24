@@ -9,23 +9,41 @@
     /// </summary>
     public class VstParameterInfo : ObservableObject
     {
+        /// <summary>NormalizationInfo</summary>
         public const string NormalizationInfoPropertyName = "NormalizationInfo";
+        /// <summary>ParameterManager</summary>
         public const string ParameterManagerPropertyName = "ParameterManager";
+        /// <summary>Category</summary>
         public const string CategoryPropertyName = "Category";
+        /// <summary>DefaultValue</summary>
         public const string DefaultValuePropertyName = "DefaultValue";
+        /// <summary>NullValue</summary>
         public const string NullValuePropertyName = "NullValue";
+        /// <summary>CanBeAutomated</summary>
         public const string CanBeAutomatedPropertyName = "CanBeAutomated";
+        /// <summary>IsSwitch</summary>
         public const string IsSwitchPropertyName = "IsSwitch";
+        /// <summary>CanRamp</summary>
         public const string CanRampPropertyName = "CanRamp";
+        /// <summary>Name</summary>
         public const string NamePropertyName = "Name";
+        /// <summary>Label</summary>
         public const string LabelPropertyName = "Label";
+        /// <summary>ShortLabel</summary>
         public const string ShortLabelPropertyName = "ShortLabel";
+        /// <summary>MinInteger</summary>
         public const string MinIntegerPropertyName = "MinInteger";
+        /// <summary>MaxInteger</summary>
         public const string MaxIntegerPropertyName = "MaxInteger";
+        /// <summary>StepInteger</summary>
         public const string StepIntegerPropertyName = "StepInteger";
+        /// <summary>LargeStepInteger</summary>
         public const string LargeStepIntegerPropertyName = "LargeStepInteger";
+        /// <summary>StepFloat</summary>
         public const string StepFloatPropertyName = "StepFloat";
+        /// <summary>SmallStepFloat</summary>
         public const string SmallStepFloatPropertyName = "SmallStepFloat";
+        /// <summary>LargeStepFloat</summary>
         public const string LargeStepFloatPropertyName = "LargeStepFloat";
 
         /// <summary>

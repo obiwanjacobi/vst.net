@@ -8,7 +8,9 @@
     /// </summary>
     public class VstMidiCategory : ObservableObject
     {
+        /// <summary>Name</summary>
         public const string NamePropertyName = "Name";
+        /// <summary>ParentCategory</summary>
         public const string ParentCategoryPropertyName = "ParentCategory";
 
         private string _name;

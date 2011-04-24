@@ -473,10 +473,10 @@
             {
                 VstMidiChannelInfo channelInfo = midiPrograms.ChannelInfos[channel];
 
-                bool changed = channelInfo.HaveNamesChanged;
+                bool changed = channelInfo.HasChanged;
                 
                 // reset dirty flag
-                channelInfo.HaveNamesChanged = false;
+                channelInfo.HasChanged = false;
                 
                 return changed;
             }

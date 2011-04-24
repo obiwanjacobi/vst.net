@@ -8,8 +8,11 @@
     /// </summary>
     public class VstConnectionInfo : ObservableObject
     {
+        /// <summary>Label</summary>
         public const string LabelPropertyName = "Label";
+        /// <summary>ShortLabel</summary>
         public const string ShortLabelPropertyName = "ShortLabel";
+        /// <summary>SpeakerArrangementType</summary>
         public const string SpeakerArrangementTypePropertyName = "SpeakerArrangementType";
 
         private string _label;

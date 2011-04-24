@@ -1,6 +1,7 @@
 ﻿ namespace Jacobi.Vst.Framework
 {
     using System;
+    using System.Collections;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Framework.Common;
 
@@ -9,8 +10,9 @@
     /// </summary>
     /// <remarks>A plugin program contains all plugin parameter but with different values than other programs.
     /// For this reason the VstProgram implements the <see cref="IVstPluginParameters"/> interface.</remarks>
-    public class VstProgram : ObservableObject, IVstPluginParameters, IDisposable
+    public class VstProgram : ObservableObject, IVstPluginParameters, IActivatable, IDisposable
     {
+        /// <summary>Name</summary>
         public const string NamePropertyName = "Name";
 
         /// <summary>
@@ -102,10 +104,21 @@
 
         private void Parameters_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // TODO: this will trigger a lot of CollectionChanged events...
-            Categories.Clear();
+            IEnumerable parameters = null;
 
-            foreach (VstParameter parameter in Parameters)
+            if (e.NewItems != null)
+            {
+                parameters = e.NewItems;
+            }
+            else
+            {
+                parameters = Parameters;
+
+                // TODO: this will trigger a lot of CollectionChanged events...
+                Categories.Clear();
+            }
+
+            foreach (VstParameter parameter in parameters)
             {
                 if (parameter.Info.Category != null)
                 {
@@ -117,5 +130,24 @@
                 }
             }
         }
+
+        #region IActivatable Members
+
+        /// <summary>
+        /// Gets or sets an indication if the program is active (true).
+        /// </summary>
+        public bool IsActive
+        {
+            get
+            {
+                return Parameters.IsActive;
+            }
+            set
+            {
+                Parameters.IsActive = value;
+            }
+        }
+
+        #endregion
     }
 }
