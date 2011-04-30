@@ -471,11 +471,9 @@ public:
 		pChunkInfo->numElements = chunkInfo->ElementCount;
 	}
 
-	// Converts the unmanaged pTimeInfo to the managed VstTimeInfo.
-	static Jacobi::Vst::Core::VstTimeInfo^ ToManagedTimeInfo(::VstTimeInfo* pTimeInfo)
+	// Assigns the field values of the unmanaged pTimeInfo to the managed VstTimeInfo.
+	static void ToManagedTimeInfo(Jacobi::Vst::Core::VstTimeInfo^ timeInfo, ::VstTimeInfo* pTimeInfo)
 	{
-		Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
-
 		timeInfo->BarStartPosition = pTimeInfo->barStartPos;
 		timeInfo->CycleStartPosition = pTimeInfo->cycleStartPos;
 		timeInfo->CycleEndPosition = pTimeInfo->cycleEndPos;
@@ -490,8 +488,6 @@ public:
 		timeInfo->Tempo = pTimeInfo->tempo;
 		timeInfo->TimeSignatureDenominator = pTimeInfo->timeSigDenominator;
 		timeInfo->TimeSignatureNumerator = pTimeInfo->timeSigNumerator;
-
-		return timeInfo;
 	}
 
 	// assigns the field values of the managed timeInfo to the unmanaged pTimeInfo fields.

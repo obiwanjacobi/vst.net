@@ -55,7 +55,7 @@
         {
             Throw.IfArgumentIsNullOrEmpty(assemblyName, "assemblyName");
 
-            // include an empty string as extension to allow to look for the war assemblyName
+            // include an empty string as extension to allow to look for the raw assemblyName
             _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new string[] { DefaultManagedExtension, AlternateManagedExtension, String.Empty });
 
             if (_assembly == null)
@@ -91,6 +91,7 @@
                 {
                     foreach (Type intfType in type.GetInterfaces())
                     {
+                        // Generic types can have no FullName.
                         if (!string.IsNullOrEmpty(intfType.FullName) &&
                             intfType.FullName.Equals(typeOfInterface.FullName))
                         {

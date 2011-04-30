@@ -21,6 +21,7 @@ HostCommandStub::HostCommandStub(::audioMasterCallback hostCallback)
 	_hostCallback = hostCallback;
 	_pluginInfo = NULL;
 
+	_timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
 	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(Utils::GetPluginName() + ".Plugin.HostCommandStub", Jacobi::Vst::Core::Plugin::IVstHostCommandStub::typeid);
 }
 
@@ -46,13 +47,23 @@ HostCommandStub::!HostCommandStub()
 // Updates the passed pluginInfo in with the host.
 System::Boolean HostCommandStub::UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
-	if(pluginInfo)
+	if(_pluginInfo && pluginInfo)
 	{
 		// overwrite the AEffect values with the new values supplied by pluginInfo.
-		_pluginInfo->numInputs = pluginInfo->AudioInputCount;
-		_pluginInfo->numOutputs = pluginInfo->AudioOutputCount;
 		_pluginInfo->numParams = pluginInfo->ParameterCount;
 		_pluginInfo->numPrograms = pluginInfo->ProgramCount;
+
+		if (_pluginInfo->numInputs != pluginInfo->AudioInputCount ||
+			_pluginInfo->numOutputs != pluginInfo->AudioOutputCount ||
+			_pluginInfo->initialDelay != pluginInfo->InitialDelay)
+		{
+			_pluginInfo->numInputs = pluginInfo->AudioInputCount;
+			_pluginInfo->numOutputs = pluginInfo->AudioOutputCount;
+			_pluginInfo->initialDelay = pluginInfo->InitialDelay;
+
+			return IoChanged();
+		}
+
 		return true;
 	}
 
@@ -96,7 +107,9 @@ Jacobi::Vst::Core::VstTimeInfo^ HostCommandStub::GetTimeInfo(Jacobi::Vst::Core::
 
 	::VstTimeInfo* pTimeInfo = (::VstTimeInfo*)CallHost(audioMasterGetTime, 0, safe_cast<VstInt32>(filterFlags), 0, 0);
 
-	return TypeConverter::ToManagedTimeInfo(pTimeInfo);
+	TypeConverter::ToManagedTimeInfo(_timeInfo, pTimeInfo);
+
+	return _timeInfo;
 }
 
 System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)

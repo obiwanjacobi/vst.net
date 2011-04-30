@@ -242,7 +242,8 @@ VstIntPtr VstHostCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 inde
 		// VST 2.0
 		case DECLARE_VST_DEPRECATED (audioMasterSetTime):
 		{
-			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = TypeConverter::ToManagedTimeInfo((::VstTimeInfo*)ptr);
+			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
+			TypeConverter::ToManagedTimeInfo(timeInfo, (::VstTimeInfo*)ptr);
 			Jacobi::Vst::Core::VstTimeInfoFlags filterFlags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value);
 
 			result = _deprecatedCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;

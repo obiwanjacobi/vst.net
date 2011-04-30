@@ -3,6 +3,7 @@
     using System;
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
+    using Jacobi.Vst.Core.Deprecated;
 
     /// <summary>
     /// Implements the proxy to the vst host.
@@ -136,8 +137,7 @@
         /// <returns>Returns true when the type <typeparamref name="T"/> is supported.</returns>
         public bool Supports<T>() where T : class
         {
-            if (typeof(IVstHostCommandStub).IsAssignableFrom(typeof(T))) 
-                return ((HostCommandStub as T) != null);
+            if ((HostCommandStub as T) != null) return true;
 
             return _intfMgr.Supports<T>();
         }
@@ -149,8 +149,8 @@
         /// <returns>Returns null when <typeparamref name="T"/> is not supported.</returns>
         public T GetInstance<T>() where T : class
         {
-            if (typeof(IVstHostCommandStub).IsAssignableFrom(typeof(T))) 
-                return HostCommandStub as T;
+            T refT = HostCommandStub as T;
+            if (refT != null) return refT;
 
             return _intfMgr.GetInstance<T>();
         }
@@ -180,6 +180,5 @@
         }
 
         #endregion
-
     }
 }
