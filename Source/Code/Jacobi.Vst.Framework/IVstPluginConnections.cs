@@ -9,15 +9,22 @@
     public interface IVstPluginConnections
     {
         /// <summary>
-        /// Gets or sets the input speaker arrangement.
+        /// Called by the host to propose a new speaker arrangement.
         /// </summary>
-        /// <remarks>Still under construction.</remarks>
-        VstSpeakerArrangement InputSpeakerArrangement {get; set;}
+        /// <param name="input">Must not be null.</param>
+        /// <param name="output">Must not be null.</param>
+        /// <returns>Returns true when the plugin accepts the proposed arrangements.</returns>
+        bool AcceptNewArrangement(VstSpeakerArrangement input, VstSpeakerArrangement output);
         /// <summary>
-        /// Gets or sets the output speaker arrangement.
+        /// Gets the input speaker arrangement.
         /// </summary>
         /// <remarks>Still under construction.</remarks>
-        VstSpeakerArrangement OutputSpeakerArrangement { get; set; }
+        VstSpeakerArrangement InputSpeakerArrangement { get; }
+        /// <summary>
+        /// Gets the output speaker arrangement.
+        /// </summary>
+        /// <remarks>Still under construction.</remarks>
+        VstSpeakerArrangement OutputSpeakerArrangement { get; }
         /// <summary>
         /// Gets the collection of connection information for the inputs.
         /// </summary>

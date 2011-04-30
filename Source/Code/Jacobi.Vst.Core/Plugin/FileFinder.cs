@@ -35,7 +35,7 @@ namespace Jacobi.Vst.Core.Plugin
         /// <summary>
         /// Gets the list of file extensions to try.
         /// </summary>
-        /// <remarks>Inlcude the '.' in each extension.</remarks>
+        /// <remarks>Include the '.' in each extension.</remarks>
         public List<string> Extensions { get; private set; }
 
         /// <summary>

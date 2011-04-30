@@ -750,7 +750,7 @@
         #endregion
 
         /// <summary>
-        /// Under Construction
+        /// Called by the host to propose a new speaker arrangement.
         /// </summary>
         /// <param name="saInput">Must not be null.</param>
         /// <param name="saOutput">Must not be null.</param>
@@ -761,9 +761,7 @@
 
             if (pluginConnections != null)
             {
-                pluginConnections.InputSpeakerArrangement = saInput;
-                pluginConnections.OutputSpeakerArrangement = saOutput;
-                return true;
+                return pluginConnections.AcceptNewArrangement(saInput, saOutput);
             }
 
             return false;
