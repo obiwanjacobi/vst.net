@@ -30,6 +30,7 @@ namespace Plugin {
 		/// Updates the unmanaged <b>AEffect</b> structure with the new values in the <paramref name="pluginInfo"/>.
 		/// </summary>
 		/// <param name="pluginInfo">Must not be null.</param>
+		/// <remarks>When AudioInputCount, AudioOutputCount or InitialDelay have changed the IoChanged() method is called automatically.</remarks>
 		virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 		
 		// IVstHostCommands10
@@ -311,6 +312,7 @@ namespace Plugin {
 			return result;
 		}
 
+		Jacobi::Vst::Core::VstTimeInfo^ _timeInfo;
 		Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 	};
 
