@@ -24,6 +24,8 @@ namespace VstNetAudioPlugin
         private static readonly int InitialTailSize = 0;
 
         private Plugin _plugin;
+        private IVstHostSequencer _sequencer;
+        private VstTimeInfoFlags _defaultTimeInfoFlags;
 
         /// <summary>
         /// Default constructor.
@@ -32,7 +34,12 @@ namespace VstNetAudioPlugin
             : base(AudioInputCount, AudioOutputCount, InitialTailSize)
         {
             _plugin = plugin;
+            _sequencer = _plugin.Host.GetInstance<IVstHostSequencer>();
+
             Delay = new Delay(plugin);
+
+            // TODO: change this to your specific needs.
+            _defaultTimeInfoFlags = VstTimeInfoFlags.ClockValid;
         }
 
         internal Delay Delay { get; private set; }
@@ -46,6 +53,24 @@ namespace VstNetAudioPlugin
             set { Delay.SampleRate = value; }
         }
 
+        private VstTimeInfo _timeInfo;
+        /// <summary>
+        /// Gets the current time info.
+        /// </summary>
+        /// <remarks>The Time Info is refreshed with each call to Process.</remarks>
+        protected VstTimeInfo TimeInfo
+        {
+            get
+            {
+                if (_timeInfo == null && _sequencer != null)
+                {
+                    _timeInfo = _sequencer.GetTime(_defaultTimeInfoFlags);
+                }
+
+                return _timeInfo;
+            }
+        }
+
         /// <summary>
         /// Called by the host to allow the plugin to process audio samples.
         /// </summary>
@@ -53,6 +78,9 @@ namespace VstNetAudioPlugin
         /// <param name="outChannels">Never null.</param>
         public override void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
+            // by resetting the time info each cycle, accessing the TimeInfo property will fetch new info.
+            _timeInfo = null;
+
             if (!Bypass)
             {
                 // TODO: Implement your audio (effect) processing here.
