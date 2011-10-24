@@ -49,7 +49,7 @@ public:
 	}
 
 
-	// Converts a managed rect to an unmanaged ppRect
+	// Converts a managed rect to an unmanaged ERect*
 	static void ToUnmanagedRectangle(ERect* pRect, System::Drawing::Rectangle rect)
 	{
 		pRect->top = rect.Top;
