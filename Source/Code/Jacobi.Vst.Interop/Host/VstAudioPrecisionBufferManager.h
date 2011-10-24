@@ -31,6 +31,7 @@ namespace Host
 
 		/// <summary>Retrieves the buffers objects, one for each buffer.</summary>
 		/// <returns>Returns an array of <see cref="Jacobi::Vst::Core::VstAudioPrecisionBuffer"/> instances.</returns>
+		[System::Obsolete("Use the IEnumerable<> interface instead.", false)]
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ ToArray();
 
 		/// <summary>Clears (set all values to 0.0) a single buffer.</summary>
@@ -44,12 +45,14 @@ namespace Host
 		/// <summary>Gets the size of a single buffer.</summary>
 		property System::Int32 BufferSize { System::Int32 get() { return _bufferSize; } }
 
+		/// <summary>Retrieves the enumerator object to retrieve <see cref="Jacobi.Vst.Core.VstAudioPrecisionBuffer"/>'s.</summary>
 		virtual System::Collections::Generic::IEnumerator<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ GetEnumerator()
 		{
 			return _managedBuffers->GetEnumerator();
 		}
 
-		virtual System::Collections::IEnumerator^ GetObjectEnumerator() new sealed = 
+		/// <summary>Object based enumerator.</summary>
+		virtual System::Collections::IEnumerator^ GetObjectEnumerator() sealed = 
 			System::Collections::IEnumerable::GetEnumerator
 		{
 			return GetEnumerator();
