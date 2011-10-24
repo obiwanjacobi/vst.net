@@ -18,7 +18,8 @@ namespace Host
 	/// VstAudioPrecisionBufferManager instance. Calling the <see cref="Dispose"/> method will free
 	/// the unmanaged memory.</remarks>
 	[System::CLSCompliant(true)]
-	public ref class VstAudioPrecisionBufferManager : System::IDisposable
+	public ref class VstAudioPrecisionBufferManager : System::IDisposable, 
+		System::Collections::Generic::IEnumerable<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>
 	{
 	public:
 		/// <summary>Constructs a new instance for the specified number and size of buffers.</summary>
@@ -42,6 +43,17 @@ namespace Host
 		property System::Int32 BufferCount { System::Int32 get() { return _bufferCount; } }
 		/// <summary>Gets the size of a single buffer.</summary>
 		property System::Int32 BufferSize { System::Int32 get() { return _bufferSize; } }
+
+		virtual System::Collections::Generic::IEnumerator<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ GetEnumerator()
+		{
+			return _managedBuffers->GetEnumerator();
+		}
+
+		virtual System::Collections::IEnumerator^ GetObjectEnumerator() new sealed = 
+			System::Collections::IEnumerable::GetEnumerator
+		{
+			return GetEnumerator();
+		}
 
 	private:
 		System::Int32 _bufferCount;
