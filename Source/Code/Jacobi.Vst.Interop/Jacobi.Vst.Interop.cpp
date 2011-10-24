@@ -63,13 +63,12 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 	// retrieve the plugin config
 	Jacobi::Vst::Interop::Plugin::Configuration^ config = bootstrapper->Configuration;
 
-	// The method dependencies has brought in the Core assembly. 
+	// The method dependencies have brought in the Core assembly. 
 	// Now we unregister the bootstrapper and turn it over to the AssemblyLoader (located in the Core Assembly).
 	delete bootstrapper;
 
 	// retrieve the current plugin file name (interop)
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
-	//System::String^ basePath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
 	// create the host command stub (sends commands to host)
 	Jacobi::Vst::Interop::Plugin::HostCommandStub^ hostStub = 
@@ -80,7 +79,7 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName, config);
 		
-		if(commandStub)
+		if(commandStub != nullptr)
 		{
 			// retrieve the plugin info
 			Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
@@ -96,7 +95,8 @@ AEffect* VSTPluginMainInternal (Bootstrapper^ bootstrapper, audioMasterCallback 
 				// connect the plugin command stub to the command proxy and construct a handle
 				System::Runtime::InteropServices::GCHandle proxyHandle = 
 					System::Runtime::InteropServices::GCHandle::Alloc(
-						gcnew Jacobi::Vst::Interop::Plugin::PluginCommandProxy(commandStub), System::Runtime::InteropServices::GCHandleType::Normal);
+						gcnew Jacobi::Vst::Interop::Plugin::PluginCommandProxy(commandStub), 
+						System::Runtime::InteropServices::GCHandleType::Normal);
 
 				// maintain the proxy reference as part of the effect struct
 				pEffect->user = System::Runtime::InteropServices::GCHandle::ToIntPtr(proxyHandle).ToPointer();
