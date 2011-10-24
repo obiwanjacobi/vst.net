@@ -133,5 +133,19 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
             AssertAllBuffersHasValue(bufferMgr, 0);
         }
+
+        [TestMethod]
+        public void Test_VstAudioBufferManager_EnumerateBuffers()
+        {
+            VstAudioPrecisionBufferManager bufferMgr = CreateNew(_testValue);
+
+            int counter = 0;
+            foreach (VstAudioPrecisionBuffer buffer in bufferMgr)
+            {
+                counter++;
+            }
+
+            Assert.AreEqual(_bufferCount, counter, "The number of buffers in the enumerator do not match.");
+        }
     }
 }
