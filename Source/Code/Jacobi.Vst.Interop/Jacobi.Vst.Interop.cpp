@@ -8,7 +8,7 @@
 #include "TimeCriticalScope.h"
 #include "Utils.h"
 #include "Properties/Resources.h"
-#include<vcclr.h>
+//#include <vcclr.h>
 
 namespace Jacobi {
 namespace Vst {

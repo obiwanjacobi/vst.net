@@ -44,7 +44,7 @@ namespace Host
 		/// <summary>Gets the size of a single buffer.</summary>
 		property System::Int32 BufferSize { System::Int32 get() { return _bufferSize; } }
 
-		/// <summary>Retrieves the enumerator object to retrieve <see cref="Jacobi.Vst.Core.VstAudioBuffer"/>'s.</summary>
+		/// <summary>Retrieves the enumerator object to retrieve <see cref="Jacobi::Vst::Core::VstAudioBuffer"/>'s.</summary>
 		virtual System::Collections::Generic::IEnumerator<Jacobi::Vst::Core::VstAudioBuffer^>^ GetEnumerator()
 		{
 			return _managedBuffers->GetEnumerator();

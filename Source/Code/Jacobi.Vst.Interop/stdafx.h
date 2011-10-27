@@ -10,7 +10,7 @@
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
 #include <windows.h>
-#include <stddef.h>
+//#include <stddef.h>
 
 // VST interface header files
 #include "_vst\aeffect.h"
