@@ -13,3 +13,5 @@ cd ..
 cd Samples
 CALL ..\..\CreateCLRDirs.cmd
 cd ..
+
+cd ..

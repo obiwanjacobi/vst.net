@@ -1,4 +1,4 @@
-CALL Create_PackageDir.cmd
+CALL Create_PackagesDir.cmd
 
 cd Code
 CALL CleanAll.cmd
