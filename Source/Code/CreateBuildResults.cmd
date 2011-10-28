@@ -58,3 +58,6 @@ cd Win32
 md Debug
 md Release
 cd ..
+
+cd ..
+cd ..
