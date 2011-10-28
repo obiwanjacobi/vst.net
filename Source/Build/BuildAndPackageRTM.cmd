@@ -1,9 +1,9 @@
 CALL Create_PackagesDir.cmd
 
 cd Code
-CALL CleanAll.cmd
+CALL CleanBuildResults.cmd
 CALL BuildRTM.cmd
-CALL PackageCopyRTM.cmd
+CALL PackageCopyAll.cmd
 cd ..
 
 cd Samples
