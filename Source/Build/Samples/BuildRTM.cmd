@@ -1,6 +1,5 @@
-cd ..\..\Code
+cd ..\..\Samples
 CALL CreateBuildResults.cmd
-cd ..\Build\Code
+cd ..\Build\Samples
 
 CALL Build_CLR2_RTM.cmd
-CALL Build_CLR4_RTM.cmd
