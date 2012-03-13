@@ -160,6 +160,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
+del "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\$(TargetName).vshost.*"
+copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
