@@ -7,7 +7,9 @@ CALL PackageCopyAll.cmd
 cd ..
 
 cd Samples
-
+CALL CleanBuildResults.cmd
+CALL BuildRTM.cmd
+CALL PackageCopyAll.cmd
 cd ..
 
 del *.zip
