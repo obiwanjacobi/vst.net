@@ -15,7 +15,7 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Gets or sets the knob mode.
         /// </summary>
-        /// <remarks>The host call into the plugin to set the knob mode, which ends up here.</remarks>
+        /// <remarks>The host calls into the plugin to set the knob mode, which ends up here.</remarks>
         VstKnobMode KnobMode { get; set; }
         /// <summary>
         /// Gets the dimensions of the UI form.

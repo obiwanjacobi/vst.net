@@ -16,7 +16,7 @@ namespace Jacobi.Vst.Framework
         /// </summary>
         int ChannelCount { get; }
         /// <summary>
-        /// Called to process the sepcified Midi <paramref name="events"/>.
+        /// Called to process the specified Midi <paramref name="events"/>.
         /// </summary>
         /// <param name="events">Must not be null.</param>
         void Process(VstEventCollection events);

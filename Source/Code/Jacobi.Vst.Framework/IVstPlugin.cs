@@ -39,9 +39,9 @@ namespace Jacobi.Vst.Framework
         /// The host will call this method when the plugin is loaded and should open its resources.
         /// </summary>
         /// <param name="host">A reference to the Host root interface. This reference can be used to 
-        /// query for other host interfaces.Must not be null.</param>
+        /// query for other host interfaces. Must not be null.</param>
         /// <remarks>Open is a good time to allocate large memory blocks when you use a pre-allocated 
-        /// memory schema in your plugin. The <see cref="IDisposable.Dispose"/> method will be called just before 
+        /// memory scheme in your plugin. The <see cref="IDisposable.Dispose"/> method will be called just before 
         /// your plugin is unloaded to release allocated resources.</remarks>
         void Open(IVstHost host);
         /// <summary>
