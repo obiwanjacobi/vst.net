@@ -31,7 +31,7 @@
         }
 
         /// <summary>
-        /// When <paramref name="hostAutomation"/> is non-null it is used to notify the host of parameter value changes.
+        /// When <see cref="HostAutomation"/> is non-null it is used to notify the host of parameter value changes.
         /// </summary>
         /// <remarks>
         /// Set this property when the Opened event is triggered on the plugin root base class(es).
