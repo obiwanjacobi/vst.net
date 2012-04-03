@@ -93,6 +93,9 @@ namespace VstNetMidiPlugin
 
                 midiHost.Process(outEvents);
             }
+
+            // Clear the cache, we've processed the events.
+            CurrentEvents = null;
         }
 
         #region IVstPluginMidiSource Members
