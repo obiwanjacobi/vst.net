@@ -12,7 +12,7 @@ namespace Jacobi.Vst.Framework
     public class VstParameterCollection : ObservableKeyedCollection<string, VstParameter>, IActivatable
     {
         /// <summary>
-        /// Adds a range of <paramref name="paremeters"/> to the collection.
+        /// Adds a range of <paramref name="parameters"/> to the collection.
         /// </summary>
         /// <param name="parameters">Must not be null.</param>
         public void AddRange(IEnumerable<VstParameter> parameters)
