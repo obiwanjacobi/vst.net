@@ -13,15 +13,15 @@ namespace VstNetAudioPlugin
         /// <summary>
         /// TODO: assign the input count.
         /// </summary>
-        private static readonly int AudioInputCount = 2;
+        private const int AudioInputCount = 2;
         /// <summary>
         /// TODO: assign the output count.
         /// </summary>
-        private static readonly int AudioOutputCount = 2;
+        private const int AudioOutputCount = 2;
         /// <summary>
         /// TODO: assign the tail size.
         /// </summary>
-        private static readonly int InitialTailSize = 0;
+        private const int InitialTailSize = 0;
 
         private Plugin _plugin;
         private IVstHostSequencer _sequencer;
@@ -36,6 +36,8 @@ namespace VstNetAudioPlugin
             _plugin = plugin;
             _sequencer = _plugin.Host.GetInstance<IVstHostSequencer>();
 
+            // TODO: We use one delay object to process two audio channels.
+            // Typically you would use dedicated DSP objects for each channel.
             Delay = new Delay(plugin);
 
             // TODO: change this to your specific needs.
