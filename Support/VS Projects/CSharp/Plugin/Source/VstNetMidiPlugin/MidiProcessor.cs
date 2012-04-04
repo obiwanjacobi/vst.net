@@ -12,13 +12,17 @@ namespace VstNetMidiPlugin
     {
         private Plugin _plugin;
 
+        /// <summary>
+        /// Constructs a new Midi Processor.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
         public MidiProcessor(Plugin plugin)
         {
             _plugin = plugin;
             Gain = new Gain(plugin);
             Transpose = new Transpose(plugin);
 
-            // for most host midi output is expected during the audio processing cycle.
+            // for most hosts, midi output is expected during the audio processing cycle.
             SyncWithAudioProcessor = true;
         }
 
@@ -75,19 +79,20 @@ namespace VstNetMidiPlugin
                 // NOTE: other types of events could be in the collection!
                 foreach (VstEvent evnt in CurrentEvents)
                 {
-                    if (evnt.EventType == VstEventTypes.MidiEvent)
+                    switch (evnt.EventType)
                     {
-                        VstMidiEvent midiEvent = (VstMidiEvent)evnt;
+                        case VstEventTypes.MidiEvent:
+                            VstMidiEvent midiEvent = (VstMidiEvent)evnt;
 
-                        midiEvent = Gain.ProcessEvent(midiEvent);
-                        midiEvent = Transpose.ProcessEvent(midiEvent);
+                            midiEvent = Gain.ProcessEvent(midiEvent);
+                            midiEvent = Transpose.ProcessEvent(midiEvent);
 
-                        outEvents.Add(midiEvent);
-                    }
-                    else
-                    {
-                        // non VstMidiEvent
-                        outEvents.Add(evnt);
+                            outEvents.Add(midiEvent);
+                            break;
+                        default:
+                            // non VstMidiEvent
+                            outEvents.Add(evnt);
+                            break;
                     }
                 }
 

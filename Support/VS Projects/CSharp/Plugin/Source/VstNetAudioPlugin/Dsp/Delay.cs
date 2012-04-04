@@ -9,7 +9,7 @@ namespace VstNetAudioPlugin.Dsp
     /// </summary>
     internal sealed class Delay
     {
-        private static readonly string ParameterCategoryName = "Delay";
+        private const string ParameterCategoryName = "Delay";
 
         private float[] _delayBuffer;
         private int _bufferIndex;

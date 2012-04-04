@@ -9,10 +9,10 @@ namespace VstNetMidiPlugin
     /// </summary>
     internal sealed class DummyAudioProcessor : VstPluginAudioProcessorBase
     {
-        // some defaults
-        private static readonly int AudioInputCount = 2;
-        private static readonly int AudioOutputCount = 2;
-        private static readonly int InitialTailSize = 0;
+        // TODO: set some defaults
+        private const int AudioInputCount = 2;
+        private const int AudioOutputCount = 2;
+        private const int InitialTailSize = 0;
 
         private Plugin _plugin;
 
