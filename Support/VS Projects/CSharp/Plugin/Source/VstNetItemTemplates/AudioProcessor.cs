@@ -12,15 +12,15 @@ namespace VstNetItemTemplates
         /// <summary>
         /// TODO: assign the input count.
         /// </summary>
-        private static readonly int AudioInputCount = 2;
+        private const int AudioInputCount = 2;
         /// <summary>
         /// TODO: assign the output count.
         /// </summary>
-        private static readonly int AudioOutputCount = 2;
+        private const int AudioOutputCount = 2;
         /// <summary>
         /// TODO: assign the tail size.
         /// </summary>
-        private static readonly int InitialTailSize = 0;
+        private const int InitialTailSize = 0;
 
         private Plugin _plugin;
 
