@@ -12,7 +12,7 @@ namespace VstNetItemTemplates
         /// <summary>
         /// TODO: assign a unique plugin.
         /// </summary>
-        private const int UniquePluginId = new FourCharacterCode("1234").ToInt32();
+        private static readonly int UniquePluginId = new FourCharacterCode("1234").ToInt32();
         /// <summary>
         /// TODO: assign a plugin name.
         /// </summary>

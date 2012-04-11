@@ -34,7 +34,6 @@ namespace VstNetAudioPlugin
             : base(AudioInputCount, AudioOutputCount, InitialTailSize)
         {
             _plugin = plugin;
-            _sequencer = _plugin.Host.GetInstance<IVstHostSequencer>();
 
             // TODO: We use one delay object to process two audio channels.
             // Typically you would use dedicated DSP objects for each channel.
@@ -64,6 +63,11 @@ namespace VstNetAudioPlugin
         {
             get
             {
+                if (_sequencer == null && _plugin.Host != null)
+                {
+                    _sequencer = _plugin.Host.GetInstance<IVstHostSequencer>();
+                }
+
                 if (_timeInfo == null && _sequencer != null)
                 {
                     _timeInfo = _sequencer.GetTime(_defaultTimeInfoFlags);
