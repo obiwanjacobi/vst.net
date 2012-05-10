@@ -30,7 +30,7 @@ namespace Jacobi.Vst.Core
         /// <param name="midiData">The additional midi event data.</param>
         /// <param name="detune">A detune value. Must lie within [-64,63] range.</param>
         /// <param name="noteOffVelocity">Velocity for when the note is done.</param>
-        /// <param name="flags">Option flags for this Midi Event.</param>
+        /// <param name="isRealtime">True if the Midi Event was received in real time.</param>
         public VstMidiEvent(int deltaFrames,
             int noteLength, int noteOffset, byte[] midiData, short detune, byte noteOffVelocity, bool isRealtime)
             : base(VstEventTypes.MidiEvent, deltaFrames, midiData)
