@@ -38,6 +38,14 @@
             Categories = categories;
         }
 
+        /// <summary>
+        /// True if the program is a readonly factory preset.
+        /// </summary>
+        /// <remarks>
+        /// Read-only programs do not allow their parameters to change value.
+        /// </remarks>
+        public bool IsReadOnly { get; set; }
+
         private string _name;
         /// <summary>
         /// Gets or sets the name of the plugin program.
