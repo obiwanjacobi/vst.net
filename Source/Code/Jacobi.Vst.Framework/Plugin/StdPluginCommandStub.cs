@@ -1047,13 +1047,17 @@
         /// Assign a new name to the current/active program.
         /// </summary>
         /// <param name="name">The new program name.</param>
-        /// <remarks>The implementation uses the <see cref="IVstPluginPrograms.ActiveProgram"/> to set the name.</remarks>
+        /// <remarks>
+        /// The implementation uses the <see cref="IVstPluginPrograms.ActiveProgram"/> to set the name.
+        /// The name will not be set when the active program (preset) is read-only.
+        /// </remarks>
         public virtual void SetProgramName(string name)
         {
             IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null &&
-                pluginPrograms.ActiveProgram != null)
+                pluginPrograms.ActiveProgram != null &&
+                !pluginPrograms.ActiveProgram.IsReadOnly)
             {
                 pluginPrograms.ActiveProgram.Name = name;
             }
@@ -1416,12 +1420,25 @@
         /// </summary>
         /// <param name="index">A zero-base index into the parameters collection.</param>
         /// <param name="value">The new value for the parameter.</param>
+        /// <remarks>
+        /// The method will silently fail to change the parameter value if the current Program is read-only.
+        /// </remarks>
         public virtual void SetParameter(int index, float value)
         {
             IVstPluginParameters pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParams != null)
             {
+                IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+
+                if (pluginPrograms != null && 
+                    pluginPrograms.ActiveProgram != null && 
+                    pluginPrograms.ActiveProgram.IsReadOnly)
+                {
+                    // do not allow the parameter to change value when the current program/preset is readonly.
+                    return;
+                }
+
                 VstParameter parameter = pluginParams.Parameters[index];
 
                 parameter.NormalizedValue = value;
