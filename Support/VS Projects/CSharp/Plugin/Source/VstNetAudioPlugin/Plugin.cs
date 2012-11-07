@@ -38,7 +38,7 @@ namespace VstNetAudioPlugin
             new VstProductInfo(ProductName, VendorName, PluginVersion),
                 // TODO: what type of plugin are your making?
                 VstPluginCategory.Effect,
-                VstPluginCapabilities.NoSoundInStop,
+                VstPluginCapabilities.NoSoundInStop | VstPluginCapabilities.ReceiveTimeInfo,
                 // initial delay: number of samples your plugin lags behind.
                 0, 
                 UniquePluginId)
