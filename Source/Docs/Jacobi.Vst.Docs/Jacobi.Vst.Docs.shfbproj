@@ -43,9 +43,9 @@
     </BuildLogFile>
     <CppCommentsFixup>True</CppCommentsFixup>
     <FrameworkVersion>2.0.50727</FrameworkVersion>
-    <HelpTitle>VST.NET 0.9 Documentation</HelpTitle>
+    <HelpTitle>VST.NET 1.0 Documentation</HelpTitle>
     <CopyrightHref>http://vstnet.codeplex.com</CopyrightHref>
-    <CopyrightText>Copyright 2000-2011 Jacobi Software, all rights reserved.</CopyrightText>
+    <CopyrightText>Copyright 2000-2012 Jacobi Software, all rights reserved.</CopyrightText>
     <FeedbackEMailAddress>obiwanjacobi%40hotmail.com</FeedbackEMailAddress>
     <FooterText>VST is a trademark of Steinberg Media Technologies GmbH.</FooterText>
     <PresentationStyle>vs2005</PresentationStyle>
@@ -108,22 +108,23 @@
     </ComponentConfigurations>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.dll" />
-<DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.xml" />
-<DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.dll" />
-<DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.xml" />
-<DocumentationSource sourceFile="..\..\Code\Debug\Jacobi.Vst.Interop.dll" />
-<DocumentationSource sourceFile="..\..\Code\Debug\Jacobi.Vst.Interop.xml" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.xml" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay.VB\bin\Debug\Jacobi.Vst.Samples.Delay.VB.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.xml" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.xml" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.WrapperPlugin\bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.dll" />
-<DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.WrapperPlugin\bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.XML" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Core\bin\Debug\Jacobi.Vst.Core.xml" />
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.dll" />
+      <DocumentationSource sourceFile="..\..\Code\Jacobi.Vst.Framework\bin\Debug\Jacobi.Vst.Framework.xml" />
+      <DocumentationSource sourceFile="..\..\Code\Debug\Jacobi.Vst.Interop.dll" />
+      <DocumentationSource sourceFile="..\..\Code\Debug\Jacobi.Vst.Interop.xml" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.dll" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.CorePlugin\bin\Debug\Jacobi.Vst.Samples.CorePlugin.xml" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.dll" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay.VB\bin\Debug\Jacobi.Vst.Samples.Delay.VB.dll" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.Delay\bin\Debug\Jacobi.Vst.Samples.Delay.xml" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.dll" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteMapper\bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.xml" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.dll" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.MidiNoteSampler\bin\Debug\Jacobi.Vst.Samples.MidiNoteSampler.xml" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.WrapperPlugin\bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.dll" />
+      <DocumentationSource sourceFile="..\..\Samples\Jacobi.Vst.Samples.WrapperPlugin\bin\Debug\Jacobi.Vst.Samples.WrapperPlugin.XML" />
+    </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="True">The global namespace contains the classes that are used internally by the Interop assembly.</NamespaceSummaryItem>
       <NamespaceSummaryItem name="&lt;CppImplementationDetails&gt;" isDocumented="False" />
@@ -151,6 +152,7 @@
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
+    <HeaderText>Note that some of the documentation may be out of date.</HeaderText>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
