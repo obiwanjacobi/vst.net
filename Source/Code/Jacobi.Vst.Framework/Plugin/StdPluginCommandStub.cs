@@ -789,7 +789,7 @@
         /// Called by the host to retrieve the name of plugin.
         /// </summary>
         /// <returns>Returns the value of <see cref="IVstPlugin.Name"/>.</returns>
-        /// <remarks>The plugin name should not exceed 31 characters.</remarks>
+        /// <remarks>The plugin name should not exceed 32 characters.</remarks>
         /// <exception cref="InvalidOperationException">Thrown when the name exceeds 31 characters.</exception>
         public virtual string GetEffectName()
         {

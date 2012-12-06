@@ -16,7 +16,7 @@
         /// <summary>
         /// The name or label of the connection pin.
         /// </summary>
-        /// <remarks>The value must not exceed 63 characters.</remarks>
+        /// <remarks>The value must not exceed 64 characters.</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         public string Label
         {
@@ -33,7 +33,7 @@
         /// <summary>
         /// The short label of the connection pin.
         /// </summary>
-        /// <remarks>The value must not exceed 7 characters.</remarks>
+        /// <remarks>The value must not exceed 8 characters.</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
         public string ShortLabel
         {
