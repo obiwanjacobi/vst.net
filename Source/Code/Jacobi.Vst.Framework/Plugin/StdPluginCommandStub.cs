@@ -1367,8 +1367,22 @@
                         else
                         {
                             pluginPrograms.ActiveProgram = null;
-                            pluginPrograms.Programs.Clear();
-                            pluginPrograms.Programs.AddRange(programs);
+
+                            if (programs.Count != pluginPrograms.Programs.Count)
+                            {
+                                int count = Math.Min(programs.Count, pluginPrograms.Programs.Count);
+
+                                // replace the range of programs that overlap.
+                                for (int i = 0; i < count; i++)
+                                {
+                                    pluginPrograms.Programs[i] = programs[i];
+                                }
+                            }
+                            else
+                            {
+                                pluginPrograms.Programs.Clear();
+                                pluginPrograms.Programs.AddRange(programs);
+                            }
                         }
                     }
 
