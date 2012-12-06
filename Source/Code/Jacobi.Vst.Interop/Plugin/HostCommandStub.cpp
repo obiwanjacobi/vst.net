@@ -212,7 +212,7 @@ Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 
 System::String^ HostCommandStub::GetVendorString()
 {
-	UnmanagedString pText(kVstMaxVendorStrLen);
+	UnmanagedString pText(kVstMaxVendorStrLen + 1);
 
 	if(CallHost(audioMasterGetVendorString, 0, 0, pText, 0) != 0)
 	{
@@ -224,7 +224,7 @@ System::String^ HostCommandStub::GetVendorString()
 
 System::String^ HostCommandStub::GetProductString()
 {
-	UnmanagedString pText(kVstMaxProductStrLen);
+	UnmanagedString pText(kVstMaxProductStrLen + 1);
 
 	if(CallHost(audioMasterGetProductString, 0, 0, pText, 0) != 0)
 	{
@@ -241,7 +241,7 @@ System::Int32 HostCommandStub::GetVendorVersion()
 
 Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(System::String^ cando)
 {
-	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength);
+	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
 
 	TypeConverter::StringToChar(cando, pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
 

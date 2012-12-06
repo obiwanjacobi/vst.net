@@ -14,7 +14,7 @@
         /// <summary>
         /// Filled by the plugin with the name of the <see cref="CurrentCategoryIndex"/>.
         /// </summary>
-        /// <remarks>The value must not exceed 63 characters.</remarks>
+        /// <remarks>The value must not exceed 64 characters.</remarks>
         /// <exception cref="System.ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         public string Name
         {

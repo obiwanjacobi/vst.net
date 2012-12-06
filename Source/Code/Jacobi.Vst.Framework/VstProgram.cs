@@ -50,7 +50,7 @@
         /// <summary>
         /// Gets or sets the name of the plugin program.
         /// </summary>
-        /// <remarks>The Name must not exceed 23 characters.</remarks>
+        /// <remarks>The Name must not exceed 24 characters.</remarks>
         public string Name
         {
             get { return _name; }

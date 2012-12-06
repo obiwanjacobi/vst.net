@@ -174,7 +174,7 @@
         /// Gets or sets the name of the parameter.
         /// </summary>
         /// <remarks>The Name cannot exceed 7 characters.</remarks>
-        /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 8 characters.</exception>
         public string Name
         {
             get { return _name; }
@@ -190,7 +190,7 @@
         /// <summary>
         /// Gets or sets the label of the parameter.
         /// </summary>
-        /// <remarks>The Label cannot exceed 63 characters</remarks>
+        /// <remarks>The Label cannot exceed 64 characters</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         public string Label
         {
@@ -207,8 +207,8 @@
         /// <summary>
         /// Gets or sets the short label of the parameter.
         /// </summary>
-        /// <remarks>The ShortLabel cannot exceed 7 characters</remarks>
-        /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
+        /// <remarks>The ShortLabel cannot exceed 8 characters</remarks>
+        /// <exception cref="ArgumentException">Thrown when the value exceeds 8 characters.</exception>
         public string ShortLabel
         {
             get { return _shortLabel; }
