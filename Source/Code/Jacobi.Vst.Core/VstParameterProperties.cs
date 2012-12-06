@@ -51,7 +51,7 @@
         /// <summary>
         /// The label for the parameter.
         /// </summary>
-        /// <remarks>The value must not exceed 63 characters.</remarks>
+        /// <remarks>The value must not exceed 64 characters.</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         public string Label
         {
@@ -68,7 +68,7 @@
         /// <summary>
         /// A short label for the parameter.
         /// </summary>
-        /// <remarks>The value must not exceed 7 characters.</remarks>
+        /// <remarks>The value must not exceed 8 characters.</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 7 characters.</exception>
         public string ShortLabel
         {
@@ -104,7 +104,7 @@
         /// <summary>
         /// The label for the category.
         /// </summary>
-        /// <remarks>The value must not exceed 23 characters.</remarks>
+        /// <remarks>The value must not exceed 24 characters.</remarks>
         /// <exception cref="ArgumentException">Thrown when the value exceeds 23 characters.</exception>
         public string CategoryLabel
         {

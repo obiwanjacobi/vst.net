@@ -28,7 +28,7 @@
         /// <summary>
         /// Gets or sets the name of the Midi program.
         /// </summary>
-        /// <remarks>The Name cannot exceed 63 characters.</remarks>
+        /// <remarks>The Name cannot exceed 64 characters.</remarks>
         public string Name
         {
             get { return _name; }

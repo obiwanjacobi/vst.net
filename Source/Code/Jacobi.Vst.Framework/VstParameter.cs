@@ -102,7 +102,7 @@ namespace Jacobi.Vst.Framework
         /// <summary>
         /// Gets the value of the parameter formatted for displaying.
         /// </summary>
-        /// <remarks>Derived classes can set this property but the length should not exceed 7 characters. 
+        /// <remarks>Derived classes can set this property but the length should not exceed 8 characters. 
         /// By default the <see cref="Value"/> property is returned as string (untill you set a non-null value).</remarks>
         public virtual string DisplayValue
         {

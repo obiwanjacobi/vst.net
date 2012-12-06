@@ -16,7 +16,7 @@
         /// <summary>
         /// Gets or sets the name of the parameter category.
         /// </summary>
-        /// <remarks>The Name cannot exceed 23 characters.</remarks>
+        /// <remarks>The Name cannot exceed 24 characters.</remarks>
         public string Name
         {
             get { return _name; }

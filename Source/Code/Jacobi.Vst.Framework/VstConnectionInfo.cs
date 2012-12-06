@@ -19,7 +19,7 @@
         /// <summary>
         /// Gets or sets the label for this connection pin.
         /// </summary>
-        /// <remarks>The label cannot be more than 63 characters.</remarks>
+        /// <remarks>The label cannot be more than 64 characters.</remarks>
         public string Label
         {
             get { return _label; }
@@ -35,7 +35,7 @@
         /// <summary>
         /// Gets or sets the short label for the connection pin.
         /// </summary>
-        /// <remarks>The short label cannot exceed 7 characters.</remarks>
+        /// <remarks>The short label cannot exceed 8 characters.</remarks>
         public string ShortLabel
         {
             get { return _shortLabel; }

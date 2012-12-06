@@ -110,7 +110,7 @@ void VstPluginCommandStub::SetProgramName(System::String^ name)
 System::String^ VstPluginCommandStub::GetProgramName()
 {
 	//UnmanagedString progName(kVstMaxProgNameLen);
-	UnmanagedString progName(128);
+	UnmanagedString progName(129);
 
 	CallDispatch(effGetProgramName, 0, 0, progName, 0);
 
@@ -121,7 +121,7 @@ System::String^ VstPluginCommandStub::GetParameterLabel(System::Int32 index)
 {
 	//UnmanagedString paramLabel(kVstMaxParamStrLen);
 	// Some plugin don't have 8 character param labels
-	UnmanagedString paramLabel(64);
+	UnmanagedString paramLabel(65);
 
 	CallDispatch(effGetParamLabel, index, 0, paramLabel, 0);
 
@@ -132,7 +132,7 @@ System::String^ VstPluginCommandStub::GetParameterDisplay(System::Int32 index)
 {
 	//UnmanagedString paramLabel(kVstMaxParamStrLen);
 	// Some plugin don't have 8 character param display values
-	UnmanagedString paramLabel(64);
+	UnmanagedString paramLabel(65);
 
 	CallDispatch(effGetParamDisplay, index, 0, paramLabel, 0);
 
@@ -143,7 +143,7 @@ System::String^ VstPluginCommandStub::GetParameterName(System::Int32 index)
 {
 	//UnmanagedString paramName(kVstMaxParamStrLen);
 	// Some plugin don't have 8 character param names
-	UnmanagedString paramName(64);
+	UnmanagedString paramName(65);
 
 	CallDispatch(effGetParamName, index, 0, paramName, 0);
 
@@ -255,7 +255,7 @@ System::Boolean VstPluginCommandStub::String2Parameter(System::Int32 index, Syst
 System::String^ VstPluginCommandStub::GetProgramNameIndexed(System::Int32 index)
 {
 	//UnmanagedString progName(kVstMaxProgNameLen);
-	UnmanagedString progName(128);
+	UnmanagedString progName(129);
 
 	CallDispatch(effGetProgramNameIndexed, index, 0, progName, 0);
 
@@ -324,7 +324,7 @@ System::String^ VstPluginCommandStub::GetEffectName()
 System::String^ VstPluginCommandStub::GetVendorString()
 {
 	//UnmanagedString vendor(kVstMaxVendorStrLen);
-	UnmanagedString vendor(128);
+	UnmanagedString vendor(129);
 
 	CallDispatch(effGetVendorString, 0, 0, vendor, 0);
 
@@ -334,7 +334,7 @@ System::String^ VstPluginCommandStub::GetVendorString()
 System::String^ VstPluginCommandStub::GetProductString()
 {
 	//UnmanagedString product(kVstMaxProductStrLen);
-	UnmanagedString product(128);
+	UnmanagedString product(129);
 
 	if(CallDispatch(effGetProductString, 0, 0, product, 0) != 0)
 	{
@@ -642,7 +642,7 @@ System::Boolean VstPluginCommandStub::SetBlockSizeAndSampleRate(System::Int32 bl
 
 System::String^ VstPluginCommandStub::GetErrorText()
 {
-	UnmanagedString pText(256);
+	UnmanagedString pText(257);
 
 	if(CallDispatch(DECLARE_VST_DEPRECATED (effGetErrorText), 0, 0, 0, 0) != 0)
 	{
