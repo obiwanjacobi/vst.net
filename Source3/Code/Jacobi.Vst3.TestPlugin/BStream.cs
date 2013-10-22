@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Jacobi.Vst3.Interop;
 
 namespace Jacobi.Vst3.TestPlugin
 {
+    [ClassInterface(ClassInterfaceType.None)]
     public class BStream : Stream, IBStream
     {
         // TODO: cannot implement IBStream and wrap in one class!
