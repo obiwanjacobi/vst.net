@@ -16,7 +16,7 @@ namespace Jacobi.Vst3.TestPlugin
 
         #region IPluginFactory Members
 
-        public Int32 GetFactoryInfo(ref PFactoryInfo info)
+        public int GetFactoryInfo(ref PFactoryInfo info)
         {
             info.Flags = PFactoryInfo.FactoryFlags.Unicode;
             info.SafeSetEmail("obiwanjacobi@hotmail.com");
@@ -31,7 +31,7 @@ namespace Jacobi.Vst3.TestPlugin
             return 1;
         }
 
-        public Int32 GetClassInfo(int index, ref PClassInfo info)
+        public int GetClassInfo(int index, ref PClassInfo info)
         {
             if (index == 0)
             {
@@ -46,7 +46,7 @@ namespace Jacobi.Vst3.TestPlugin
             return TResult.S_False;
         }
 
-        public Int32 CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
+        public int CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
         {
             if (instance != IntPtr.Zero)
             {
@@ -65,7 +65,7 @@ namespace Jacobi.Vst3.TestPlugin
 
                 try
                 {
-                    return Marshal.QueryInterface(unk, ref interfaceId, out instance);
+                    return TResult.FromInt32(Marshal.QueryInterface(unk, ref interfaceId, out instance));
                 }
                 finally
                 {
