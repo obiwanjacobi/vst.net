@@ -1,0 +1,13 @@
+* Turn on Managed Debug Assistants (MDA) in VS (Exceptions dialog).
+
+* Make sure your build platform for the Plugin assembly is explicit (x86/x64). AnyCPU is not supported.
+* Use DllExport to export the GetPluginFactory export method that is called by the host. Retrieve through NuGet "Unmanaged Exports".
+
+* First interface in class implementation is default COM interface. Make sure the order is correct: class MyFactory : IPluginFactory, IPluginFactory2, IPluginFactory3 {}.
+	- This does not seem to matter much
+* Apply the ClassInterface(ClassInterface.None) attribute to your implementation code. This makes sure no class members are exposed to COM.
+	- probably only really needed when doing genuine COM interop.
+* Guid type is represented as a byte[16]. Call the ToByteArray() method on the Guid or use the Guid(byte[]) constructor.
+* Structures in .NET can not be inherited. You have to repeat the member of the 'base class' in the new struct definition. These must match exactly.
+* Interfaces for COM exposure cannot be inherited (even when the COM representation is). Also repeat all inherited members (top-base intf) and do not derive from interface.
+
