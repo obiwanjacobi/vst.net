@@ -12,7 +12,10 @@ namespace Jacobi.Vst3.TestPlugin
     [ClassInterface(ClassInterfaceType.None)]
     class PluginFactory : IPluginFactory, IPluginFactory2, IPluginFactory3
     {
-        private Guid classGuid = Guid.NewGuid();
+        private Guid classGuid = new Guid("75E327FB-D8FB-468E-B2DC-3234D5D72770");
+
+        private const string AudioModuleClass = "Audio Module Class";
+        private const string ComponentControllerClass = "Component Controller Class";
 
         #region IPluginFactory Members
 
@@ -36,7 +39,7 @@ namespace Jacobi.Vst3.TestPlugin
             if (index == 0)
             {
                 info.Cardinality = Constants.ClassCardinalityManyInstances;
-                info.Category = "Audio Effect";
+                info.Category = AudioModuleClass;
                 info.ClassId = classGuid;
                 info.Name = "VST.NET 3 Test Plugin";
 
@@ -48,15 +51,13 @@ namespace Jacobi.Vst3.TestPlugin
 
         public int CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
         {
-            if (instance != IntPtr.Zero)
-            {
-                return TResult.E_Pointer;
-            }
+            //if (instance != IntPtr.Zero)
+            //{
+            //    return TResult.E_Pointer;
+            //}
 
             if (this.classGuid == classId)
             {
-                
-    
                 // substitute your actual object creation code for CreateObject
                 object obj = new PluginComponent();
 
@@ -86,10 +87,11 @@ namespace Jacobi.Vst3.TestPlugin
             if (index == 0)
             {
                 info.Cardinality = Constants.ClassCardinalityManyInstances;
-                info.Category = "Audio Effect";
+                info.Category = AudioModuleClass;
+                info.SubCategories = "Fx";
                 info.ClassId = classGuid;
                 info.Name = "VST.NET 3 Test Plugin";
-                info.ClassFlags = 1;
+                info.ClassFlags = 0;
                 info.Vendor = "Jacobi Software";
                 info.Version = "1.0";
                 info.SdkVersion = "3.5.2";
@@ -110,10 +112,11 @@ namespace Jacobi.Vst3.TestPlugin
             if (index == 0)
             {
                 info.Cardinality = Constants.ClassCardinalityManyInstances;
-                info.Category.Value = "Audio Effect";
+                info.Category.Value = AudioModuleClass;
+                info.SubCategories.Value = "Fx";
                 info.ClassId = classGuid;
                 info.Name = "VST.NET 3 Test Plugin";
-                info.ClassFlags = 1;
+                info.ClassFlags = 0;
                 info.Vendor = "Jacobi Software";
                 info.Version = "1.0";
                 info.SdkVersion = "3.5.2";
