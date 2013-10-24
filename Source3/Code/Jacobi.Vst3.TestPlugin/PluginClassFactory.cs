@@ -194,7 +194,7 @@ namespace Jacobi.Vst3.TestPlugin
             info.ClassFlags = reg.ClassFlags;
             info.ClassId = new Guid(GetGuidFromType(reg.ClassType));
             info.Name = GetNameFromType(reg.ClassType);
-            info.SdkVersion = SdkVersion.ToString();
+            info.SdkVersion = "VST " + SdkVersion.ToString();
             info.SubCategories = string.Join("|", reg.SubCategories.ToArray());
             info.Vendor = reg.Vendor ?? Vendor;
             info.Version = reg.Version.ToString();
@@ -216,7 +216,7 @@ namespace Jacobi.Vst3.TestPlugin
             info.ClassFlags = reg.ClassFlags;
             info.ClassId = new Guid(GetGuidFromType(reg.ClassType));
             info.Name = GetNameFromType(reg.ClassType);
-            info.SdkVersion = SdkVersion.ToString();
+            info.SdkVersion = "VST " + SdkVersion.ToString();
             info.SubCategories.Value = string.Join("|", reg.SubCategories.ToArray());
             info.Vendor = reg.Vendor ?? Vendor;
             info.Version = reg.Version.ToString();

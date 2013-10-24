@@ -36,17 +36,32 @@ namespace Jacobi.Vst3.TestPlugin
 
         public int SetIoMode(IoModes mode)
         {
-            return TResult.E_NotImplemented;
+            return TResult.S_False;
         }
 
         public int GetBusCount(MediaTypes type, BusDirections dir)
         {
+            if (type == MediaTypes.Audio && dir == BusDirections.Input)
+                return 1;
+
             return 0;
         }
 
-        public int GetBusInfo(MediaTypes type, BusDirections dir, int index, ref BusInfo bus)
+        public int GetBusInfo(MediaTypes type, BusDirections dir, int index, ref BusInfo busInfo)
         {
-            return TResult.E_NotImplemented;
+            if (type == MediaTypes.Audio && dir == BusDirections.Input && index == 0)
+            {
+                busInfo.BusType = BusTypes.Main;
+                busInfo.ChannelCount = 1;
+                busInfo.Direction = dir;
+                busInfo.Flags = BusInfo.BusFlags.DefaultActive;
+                busInfo.MediaType = type;
+                busInfo.Name = "Input";
+
+                return TResult.S_OK;
+            }
+
+            return TResult.E_Unexpected;
         }
 
         public int GetRoutingInfo(ref RoutingInfo inInfo, ref RoutingInfo outInfo)
@@ -56,12 +71,17 @@ namespace Jacobi.Vst3.TestPlugin
 
         public int ActivateBus(MediaTypes type, BusDirections dir, int index, bool state)
         {
-            return TResult.E_NotImplemented;
+            if (type == MediaTypes.Audio && dir == BusDirections.Input && index == 0)
+            {
+                return TResult.S_OK;
+            }
+
+            return TResult.E_Fail;
         }
 
         public int SetActive(bool state)
         {
-            return TResult.E_NotImplemented;
+            return TResult.S_OK;
         }
 
         public int SetState(IBStream state)
