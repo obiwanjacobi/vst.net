@@ -10,7 +10,7 @@ namespace Jacobi.Vst3.TestPlugin
     [System.ComponentModel.DisplayName("My Plugin Component")]
     [Guid("599B4AD4-932E-4B35-B8A7-E01508FD1AAB")]
     [ClassInterface(ClassInterfaceType.None)]
-    class PluginComponent : IComponent
+    class PluginComponent : IComponent, IAudioProcessor
     {
         #region IPluginBase Members
 
@@ -92,6 +92,45 @@ namespace Jacobi.Vst3.TestPlugin
         public int GetState(IBStream state)
         {
             return TResult.E_NotImplemented;
+        }
+
+        #endregion
+
+        #region IAudioProcessor Members
+
+        public int SetBusArrangements(ulong[] inputs, int numIns, ulong[] outputs, int numOuts)
+        {
+            return TResult.E_NotImplemented;
+        }
+
+        public int GetBusArrangement(BusDirections dir, int index, ref ulong arr)
+        {
+            return TResult.E_NotImplemented;
+        }
+
+        public int CanProcessSampleSize(int symbolicSampleSize)
+        {
+            return TResult.S_OK;
+        }
+
+        public uint GetLatencySamples()
+        {
+            return 0;
+        }
+
+        public int SetupProcessing(ref ProcessSetup setup)
+        {
+            return TResult.S_OK;
+        }
+
+        public int SetProcessing(byte state)
+        {
+            return TResult.E_NotImplemented;
+        }
+
+        public int Process(ref ProcessData data)
+        {
+            return TResult.S_OK;
         }
 
         #endregion
