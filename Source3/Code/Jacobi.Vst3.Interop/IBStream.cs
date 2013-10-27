@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Jacobi.Vst3.Interop
 {
     [ComImport]
-    [Guid(Interfaces.FUnknown)]
+    [Guid(Interfaces.IBStream)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IBStream
     {
