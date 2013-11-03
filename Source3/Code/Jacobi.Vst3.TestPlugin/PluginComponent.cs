@@ -101,14 +101,21 @@ namespace Jacobi.Vst3.TestPlugin
 
         #region IAudioProcessor Members
 
-        public int SetBusArrangements(ulong[] inputs, int numIns, ulong[] outputs, int numOuts)
+        public int SetBusArrangements(SpeakerArrangement[] inputs, int numIns, SpeakerArrangement[] outputs, int numOuts)
         {
             return TResult.E_NotImplemented;
         }
 
-        public int GetBusArrangement(BusDirections dir, int index, ref ulong arr)
+        public int GetBusArrangement(BusDirections dir, int index, ref SpeakerArrangement arr)
         {
-            return TResult.E_NotImplemented;
+            if (dir == BusDirections.Input && index == 0)
+            {
+                arr = SpeakerArrangement.ArrMono;
+
+                return TResult.S_OK;
+            }
+
+            return TResult.E_Unexpected;
         }
 
         public int CanProcessSampleSize(int symbolicSampleSize)
