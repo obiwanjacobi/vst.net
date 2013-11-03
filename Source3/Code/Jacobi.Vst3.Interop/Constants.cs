@@ -16,6 +16,8 @@ namespace Jacobi.Vst3.Interop
         public const int MaxSizeSubCategories = 128;
         public const int MaxSizeBusName = 128;
 
+        public const int Fixed128 = 128;
+
         public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
     }
 }

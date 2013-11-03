@@ -10,7 +10,7 @@ namespace Jacobi.Vst3.TestPlugin
     [System.ComponentModel.DisplayName("My Plugin Component")]
     [Guid("599B4AD4-932E-4B35-B8A7-E01508FD1AAB")]
     [ClassInterface(ClassInterfaceType.None)]
-    class PluginComponent : IComponent, IAudioProcessor
+    class PluginComponent : IPluginBase, IComponent, IAudioProcessor
     {
         #region IPluginBase Members
 
