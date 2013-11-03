@@ -36,7 +36,7 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 Process(ref ProcessData data);
+        Int32 Process([MarshalAs(UnmanagedType.Struct), In] ref ProcessData data);
 
     }
 }
