@@ -76,15 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BStream.cs" />
-    <Compile Include="ClassRegistration.cs" />
+    <Compile Include="EditController.cs" />
     <Compile Include="Exports.cs" />
-    <Compile Include="PluginClassFactory.cs" />
     <Compile Include="PluginComponent.cs" />
     <Compile Include="PluginFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceContainer.cs" />
-    <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

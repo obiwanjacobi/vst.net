@@ -1,21 +1,29 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Jacobi.Vst3.Interop;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
-namespace Jacobi.Vst3.TestPlugin
+namespace Jacobi.Vst3.Interop.Plugin
 {
     [ClassInterface(ClassInterfaceType.None)]
     public class PluginClassFactory : IPluginFactory, IPluginFactory2, IPluginFactory3
     {
         private List<ClassRegistration> _registrations = new List<ClassRegistration>();
-        
+
+        public const string AudioModuleClassCategory = "Audio Module Class";
+        public const string ComponentControllerClassCategory = "Component Controller Class";
+
+        public PluginClassFactory(string vendor, string email, string url)
+            : this(vendor, email, url, PFactoryInfo.FactoryFlags.NoFlags)
+        { }
+
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags)
-            : this(vendor, email, url, flags, new Version(3, 5, 2, null))
+            : this(vendor, email, url, flags, new Version(3, 5, 2))
         { }
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags, Version sdkVersion)
@@ -25,6 +33,8 @@ namespace Jacobi.Vst3.TestPlugin
             Url = url;
             Flags = flags | PFactoryInfo.FactoryFlags.Unicode;
             SdkVersion = sdkVersion;
+
+            DefaultVersion = ReflectionExtensions.GetExportAssembly().GetAssemblyVersion();
         }
 
         public string Vendor { get; private set; }
@@ -50,17 +60,19 @@ namespace Jacobi.Vst3.TestPlugin
 
         public void Register(ClassRegistration registration)
         {
-            if (GetGuidFromType(registration.ClassType) == null)
+            if (registration.ClassType.GetGuidFromType() == null)
                 throw new ArgumentException("The specified type does not have a GuidAttribute set.", "ClassType");
-            if (GetNameFromType(registration.ClassType) == null)
+            if (registration.ClassType.GetNameFromType() == null)
                 throw new ArgumentException("The specified type does not have a DisplayNameAttribute set.", "ClassType");
+
+            EnrichRegistration(registration);
 
             _registrations.Add(registration);
         }
 
         public bool Unregister(Type classType)
         {
-            var guid = GetGuidFromType(classType);
+            var guid = classType.GetGuidFromType();
 
             if (guid != null && _registrations.Count > 0)
             {
@@ -79,10 +91,10 @@ namespace Jacobi.Vst3.TestPlugin
 
         public ClassRegistration Find(Guid classId)
         {
-            var guid = classId.ToString();
+            var guid = classId.ToString().ToUpperInvariant();
 
             return (from reg in _registrations
-                    where GetGuidFromType(reg.ClassType) == guid
+                    where reg.ClassType.GetGuidFromType() == guid
                     select reg).FirstOrDefault();
         }
 
@@ -96,31 +108,22 @@ namespace Jacobi.Vst3.TestPlugin
             return Activator.CreateInstance(registration.ClassType);
         }
 
-        private static string GetGuidFromType(Type classType)
+        protected virtual void EnrichRegistration(ClassRegistration registration)
         {
-            var attrs = classType.GetCustomAttributes(typeof(GuidAttribute), true);
-
-            if (attrs != null && attrs.Length > 0)
+            if (String.IsNullOrEmpty(registration.Vendor))
             {
-                var guidAttr = (GuidAttribute)attrs[0];
-                return guidAttr.Value;
+                registration.Vendor = this.Vendor;
             }
 
-            return null;
-        }
-
-        private static string GetNameFromType(Type classType)
-        {
-            var attrs = classType.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-
-            if (attrs != null && attrs.Length > 0)
+            if (registration.Version == null)
             {
-                var guidAttr = (DisplayNameAttribute)attrs[0];
-                return guidAttr.DisplayName;
+                registration.Version = DefaultVersion;
             }
-
-            return null;
         }
+
+        public Version DefaultVersion { get; private set; }
+
+        
 
         #region IPluginFactory Members
 
@@ -146,18 +149,18 @@ namespace Jacobi.Vst3.TestPlugin
             var reg = _registrations[index];
             info.Cardinality = Constants.ClassCardinalityManyInstances;
             info.Category = reg.Category;
-            info.ClassId = new Guid(GetGuidFromType(reg.ClassType));
-            info.Name = GetNameFromType(reg.ClassType);
+            info.ClassId = new Guid(reg.ClassType.GetGuidFromType());
+            info.Name = reg.ClassType.GetNameFromType();
 
             return TResult.S_OK;
         }
 
         public int CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
         {
-            if (instance != IntPtr.Zero)
-            {
-                return TResult.E_Pointer;
-            }
+            //if (instance != IntPtr.Zero)
+            //{
+            //    return TResult.E_Pointer;
+            //}
 
             var reg = Find(classId);
 
@@ -192,8 +195,8 @@ namespace Jacobi.Vst3.TestPlugin
             info.Cardinality = Constants.ClassCardinalityManyInstances;
             info.Category = reg.Category;
             info.ClassFlags = reg.ClassFlags;
-            info.ClassId = new Guid(GetGuidFromType(reg.ClassType));
-            info.Name = GetNameFromType(reg.ClassType);
+            info.ClassId = new Guid(reg.ClassType.GetGuidFromType());
+            info.Name = reg.ClassType.GetNameFromType();
             info.SdkVersion = "VST " + SdkVersion.ToString();
             info.SubCategories = string.Join("|", reg.SubCategories.ToArray());
             info.Vendor = reg.Vendor ?? Vendor;
@@ -214,8 +217,8 @@ namespace Jacobi.Vst3.TestPlugin
             info.Cardinality = Constants.ClassCardinalityManyInstances;
             info.Category.Value = reg.Category;
             info.ClassFlags = reg.ClassFlags;
-            info.ClassId = new Guid(GetGuidFromType(reg.ClassType));
-            info.Name = GetNameFromType(reg.ClassType);
+            info.ClassId = new Guid(reg.ClassType.GetGuidFromType());
+            info.Name = reg.ClassType.GetNameFromType();
             info.SdkVersion = "VST " + SdkVersion.ToString();
             info.SubCategories.Value = string.Join("|", reg.SubCategories.ToArray());
             info.Vendor = reg.Vendor ?? Vendor;
@@ -232,7 +235,7 @@ namespace Jacobi.Vst3.TestPlugin
                 return TResult.S_OK;
             }
 
-            return TResult.E_Fail;
+            return TResult.E_Unexpected;
         }
 
         #endregion
