@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.Interop
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = Platform.StructurePack)]
     public struct BusInfo
     {
         [MarshalAs(UnmanagedType.I4)]
