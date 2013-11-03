@@ -110,6 +110,8 @@
     <Compile Include="ProcessData.cs" />
     <Compile Include="ProcessSetup.cs" />
     <Compile Include="RoutingInfo.cs" />
+    <Compile Include="SpeakerArrangement.cs" />
+    <Compile Include="Speakers.cs" />
     <Compile Include="TResult.cs" />
     <None Include="_ITemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

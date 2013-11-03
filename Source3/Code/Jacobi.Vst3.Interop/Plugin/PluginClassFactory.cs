@@ -157,6 +157,7 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public int CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
         {
+            // seems not every host is programmed defensively...
             //if (instance != IntPtr.Zero)
             //{
             //    return TResult.E_Pointer;
