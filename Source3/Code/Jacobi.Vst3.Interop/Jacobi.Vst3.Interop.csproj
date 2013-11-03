@@ -82,8 +82,8 @@
     <Compile Include="BusInfo.cs" />
     <Compile Include="BusTypes.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Convert.cs" />
     <Compile Include="Guard.cs" />
+    <Compile Include="Host\BStream.cs" />
     <Compile Include="IAudioProcessor.cs" />
     <Compile Include="IBStream.cs" />
     <Compile Include="IComponent.cs" />
@@ -101,6 +101,11 @@
     <Compile Include="PClassInfo.cs" />
     <Compile Include="PFactoryInfo.cs" />
     <Compile Include="Platform.cs" />
+    <Compile Include="Plugin\ReflectionExtensions.cs" />
+    <Compile Include="Plugin\BStream.cs" />
+    <Compile Include="Plugin\ClassRegistration.cs" />
+    <Compile Include="Plugin\PluginClassFactory.cs" />
+    <Compile Include="Plugin\ServiceContainer.cs" />
     <Compile Include="ProcessContext.cs" />
     <Compile Include="ProcessData.cs" />
     <Compile Include="ProcessSetup.cs" />
@@ -109,10 +114,7 @@
     <None Include="_ITemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Host\" />
-    <Folder Include="Plugin\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

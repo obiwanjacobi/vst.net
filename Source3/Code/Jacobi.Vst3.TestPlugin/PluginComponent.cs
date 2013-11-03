@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Jacobi.Vst3.Interop;
+using Jacobi.Vst3.Interop.Plugin;
 using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.TestPlugin
@@ -31,7 +32,9 @@ namespace Jacobi.Vst3.TestPlugin
 
         public int GetControllerClassId(ref Guid controllerClassId)
         {
-            return TResult.E_NotImplemented;
+            controllerClassId = new Guid(typeof(EditController).GetGuidFromType());
+
+            return TResult.S_OK;
         }
 
         public int SetIoMode(IoModes mode)
