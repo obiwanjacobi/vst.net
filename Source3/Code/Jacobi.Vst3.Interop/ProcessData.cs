@@ -7,41 +7,49 @@ namespace Jacobi.Vst3.Interop
     public struct ProcessData
     {
         [MarshalAs(UnmanagedType.I4)]
-        Int32 ProcessMode;			///< processing mode - value of \ref ProcessModes
+        public ProcessModes ProcessMode;			///< processing mode - value of \ref ProcessModes
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 SymbolicSampleSize;   ///< sample size - value of \ref SymbolicSampleSizes
+        public SymbolicSampleSizes SymbolicSampleSize;   ///< sample size - value of \ref SymbolicSampleSizes
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 NumSamples;			///< number of samples to process
+        public Int32 NumSamples;			///< number of samples to process
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 NumInputs;			///< number of audio input buses
+        public Int32 NumInputs;			///< number of audio input buses
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 NumOutputs;			///< number of audio output buses
+        public Int32 NumOutputs;			///< number of audio output buses
         
-        // AudioBusBuffers pointers
+        // AudioBusBuffers Inputs[NumBuses]
         [MarshalAs(UnmanagedType.SysInt)]
-        IntPtr Inputs;	///< buffers of input buses
-        
+        public IntPtr Inputs;	///< buffers of input buses
+        //public unsafe AudioBusBuffers* Inputs;
+
+        // AudioBusBuffers Outputs[NumBuses]
         [MarshalAs(UnmanagedType.SysInt)]
-        IntPtr Outputs;	///< buffers of output buses
+        public IntPtr Outputs;	///< buffers of output buses
+        //public unsafe AudioBusBuffers* Outputs;
 
         [MarshalAs(UnmanagedType.Interface)]
-        IParameterChanges InputParameterChanges;	///< incoming parameter changes for this block 
+        public IParameterChanges InputParameterChanges;	///< incoming parameter changes for this block 
         
         [MarshalAs(UnmanagedType.Interface)]
-        IParameterChanges OutputParameterChanges;	///< outgoing parameter changes for this block (optional)
+        public IParameterChanges OutputParameterChanges;	///< outgoing parameter changes for this block (optional)
 
         [MarshalAs(UnmanagedType.Interface)]
-        IEventList InputEvents;				///< incoming events for this block (optional)
+        public IEventList InputEvents;				///< incoming events for this block (optional)
 
         [MarshalAs(UnmanagedType.Interface)]
-        IEventList OutputEvents;				///< outgoing events for this block (optional)
+        public IEventList OutputEvents;				///< outgoing events for this block (optional)
         
         // ProcessContext pointer
         [MarshalAs(UnmanagedType.SysInt)]
-        IntPtr ProcessContext;			///< processing context (optional, but most welcome)
+        public IntPtr ProcessContext;			///< processing context (optional, but most welcome)
+
+        public ProcessContext GetProcessContext()
+        {
+            return (ProcessContext)Marshal.PtrToStructure(ProcessContext, typeof(ProcessContext));
+        }
     }
 }

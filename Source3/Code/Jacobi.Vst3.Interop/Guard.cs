@@ -17,7 +17,13 @@ namespace Jacobi.Vst3.Interop
             }
         }
 
-
-
+        public static void ThrowIfOutOfRange<T>(string parameterName, IComparable<T> value, T minValue, T maxValue)
+        {
+            if (value.CompareTo(minValue) < 0 || value.CompareTo(maxValue) > 0)
+            {
+                throw new ArgumentOutOfRangeException(parameterName, value,
+                    String.Format("The value '{0}' is not within range of {1}-{2}.", value, minValue, maxValue));
+            }
+        }
     }
 }
