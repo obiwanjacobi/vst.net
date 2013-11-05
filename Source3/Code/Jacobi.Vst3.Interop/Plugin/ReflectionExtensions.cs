@@ -13,10 +13,10 @@ namespace Jacobi.Vst3.Interop.Plugin
         {
             var stack = new StackTrace();
 
-            var result = (from sf in stack.GetFrames()
+            var result = (from sf in stack.GetFrames().Reverse()
                          let m = sf.GetMethod()
                          where m != null && m.DeclaringType != null && m.DeclaringType.Assembly != null
-                         select m.DeclaringType.Assembly).LastOrDefault();
+                         select m.DeclaringType.Assembly).FirstOrDefault();
 
             return result;
         }
