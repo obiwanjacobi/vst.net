@@ -24,11 +24,5 @@ namespace Jacobi.Vst3.Interop
         public const Int32 E_Unexpected = -2147418113;
         public const Int32 E_OutOfMemory = -2147024882;
         public const Int32 E_Abort = -2147467260;
-
-        public static Int32 FromInt32(Int32 code)
-        {
-            return code;
-        }
-
     }
 }

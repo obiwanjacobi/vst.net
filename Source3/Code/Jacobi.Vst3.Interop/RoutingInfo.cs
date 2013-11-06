@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.Interop
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
+    [StructLayout(LayoutKind.Sequential, Pack = Platform.StructurePack)]
     public struct RoutingInfo
     {
         [MarshalAs(UnmanagedType.I4)]

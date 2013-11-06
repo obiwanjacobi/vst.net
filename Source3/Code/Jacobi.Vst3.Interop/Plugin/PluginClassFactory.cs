@@ -47,7 +47,7 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public Version SdkVersion { get; private set; }
 
-        protected ServiceContainer ServiceContainer { get; private set; }
+        protected ServiceContainer ServiceContainer { get; set; }
 
         public void Register(Type classType, string category)
         {
@@ -72,17 +72,12 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public bool Unregister(Type classType)
         {
-            var guid = classType.GetGuidFromType();
-
-            if (guid != null && _registrations.Count > 0)
+            foreach (var reg in _registrations)
             {
-                foreach (var reg in _registrations)
+                if (reg.ClassType.FullName == classType.FullName)
                 {
-                    if (reg.ClassType.FullName == classType.FullName)
-                    {
-                        _registrations.Remove(reg);
-                        return true;
-                    }
+                    _registrations.Remove(reg);
+                    return true;
                 }
             }
 
@@ -123,8 +118,6 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public Version DefaultVersion { get; private set; }
 
-        
-
         #region IPluginFactory Members
 
         public int GetFactoryInfo(ref PFactoryInfo info)
@@ -144,7 +137,10 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public int GetClassInfo(int index, ref PClassInfo info)
         {
-            //Guard.ThrowIfNotInRange(index, "index", 0, _registrations.Count);
+            if (index < 0 || index > _registrations.Count)
+            {
+                return TResult.E_InvalidArg;
+            }
 
             var reg = _registrations[index];
             info.Cardinality = Constants.ClassCardinalityManyInstances;
@@ -172,7 +168,7 @@ namespace Jacobi.Vst3.Interop.Plugin
 
                 try
                 {
-                    return TResult.FromInt32(Marshal.QueryInterface(unk, ref interfaceId, out instance));
+                    return Marshal.QueryInterface(unk, ref interfaceId, out instance);
                 }
                 finally
                 {
@@ -190,7 +186,10 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public int GetClassInfo2(int index, ref PClassInfo2 info)
         {
-            //Guard.ThrowIfNotInRange(index, "index", 0, _registrations.Count);
+            if (index < 0 || index > _registrations.Count)
+            {
+                return TResult.E_InvalidArg;
+            }
 
             var reg = _registrations[index];
             info.Cardinality = Constants.ClassCardinalityManyInstances;
@@ -212,7 +211,10 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public int GetClassInfoUnicode(int index, ref PClassInfoW info)
         {
-            //Guard.ThrowIfNotInRange(index, "index", 0, _registrations.Count);
+            if (index < 0 || index > _registrations.Count)
+            {
+                return TResult.E_InvalidArg;
+            }
 
             var reg = _registrations[index];
             info.Cardinality = Constants.ClassCardinalityManyInstances;

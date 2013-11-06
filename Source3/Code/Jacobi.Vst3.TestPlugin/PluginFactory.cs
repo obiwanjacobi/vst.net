@@ -66,7 +66,7 @@ namespace Jacobi.Vst3.TestPlugin
 
                 try
                 {
-                    return TResult.FromInt32(Marshal.QueryInterface(unk, ref interfaceId, out instance));
+                    return Marshal.QueryInterface(unk, ref interfaceId, out instance);
                 }
                 finally
                 {
