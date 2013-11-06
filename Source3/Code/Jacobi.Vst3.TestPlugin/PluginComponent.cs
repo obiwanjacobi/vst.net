@@ -118,9 +118,9 @@ namespace Jacobi.Vst3.TestPlugin
             return TResult.E_Unexpected;
         }
 
-        public int CanProcessSampleSize(int symbolicSampleSize)
+        public int CanProcessSampleSize(SymbolicSampleSizes symbolicSampleSize)
         {
-            return TResult.S_OK;
+            return symbolicSampleSize == SymbolicSampleSizes.Sample32 ? TResult.S_OK : TResult.S_False;
         }
 
         public uint GetLatencySamples()

@@ -20,7 +20,7 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 CanProcessSampleSize([MarshalAs(UnmanagedType.I4), In] Int32 symbolicSampleSize);
+        Int32 CanProcessSampleSize([MarshalAs(UnmanagedType.I4), In] SymbolicSampleSizes symbolicSampleSize);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.U4)]
