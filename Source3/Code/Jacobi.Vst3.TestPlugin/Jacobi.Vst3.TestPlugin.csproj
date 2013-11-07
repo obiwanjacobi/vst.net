@@ -76,6 +76,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioBus.cs" />
+    <Compile Include="AudioEffect.cs" />
+    <Compile Include="Bus.cs" />
+    <Compile Include="BusCollection.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="ComponentBase.cs" />
     <Compile Include="EditController.cs" />
     <Compile Include="Exports.cs" />
     <Compile Include="PluginComponent.cs" />

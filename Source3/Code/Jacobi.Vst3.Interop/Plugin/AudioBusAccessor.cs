@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.Interop.Plugin
 {
-    public class AudioBus
+    public class AudioBusAccessor
     {
         private static int SizeOfAudioBusBuffers = Marshal.SizeOf(typeof(AudioBusBuffers));
         private static int SizeOfSinglePtr = Marshal.SizeOf(typeof(Single*));
@@ -17,7 +17,7 @@ namespace Jacobi.Vst3.Interop.Plugin
         private BusDirections _busDir;
         private int _numSamples;
 
-        public AudioBus(ref ProcessData processData, BusDirections busDir, int busIndex)
+        public AudioBusAccessor(ref ProcessData processData, BusDirections busDir, int busIndex)
         {
             _busDir = busDir;
             _numSamples = processData.NumSamples;

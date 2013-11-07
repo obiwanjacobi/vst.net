@@ -11,138 +11,39 @@ namespace Jacobi.Vst3.TestPlugin
     [System.ComponentModel.DisplayName("My Plugin Component")]
     [Guid("599B4AD4-932E-4B35-B8A7-E01508FD1AAB")]
     [ClassInterface(ClassInterfaceType.None)]
-    class PluginComponent : IPluginBase, IComponent, IAudioProcessor
+    class PluginComponent : AudioEffect, IAudioProcessor, IComponent, IPluginBase
     {
-        #region IPluginBase Members
+        private BusCollection _audioInputs = new BusCollection(MediaTypes.Audio, BusDirections.Input);
+        private BusCollection _audioOutputs = new BusCollection(MediaTypes.Audio, BusDirections.Output);
 
-        public int Initialize(object context)
+        public PluginComponent()
         {
-            return TResult.S_OK;
+            this.ControlledClassId = new Guid(typeof(EditController).GetClassGuid());
+
+            _audioInputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Input", BusTypes.Main, BusInfo.BusFlags.DefaultActive));
+            _audioOutputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Output", BusTypes.Main, BusInfo.BusFlags.DefaultActive));
         }
 
-        public int Terminate()
+        public override int CanProcessSampleSize(SymbolicSampleSizes symbolicSampleSize)
         {
-            return TResult.S_OK;
+            return symbolicSampleSize == SymbolicSampleSizes.Sample32 ? TResult.S_True : TResult.S_False;
         }
 
-        #endregion
-
-        #region IComponent Members
-
-
-        public int GetControllerClassId(ref Guid controllerClassId)
+        public override int Process(ref ProcessData data)
         {
-            controllerClassId = new Guid(typeof(EditController).GetGuidFromType());
+            // TODO
 
-            return TResult.S_OK;
+            return TResult.E_NotImplemented;
         }
 
-        public int SetIoMode(IoModes mode)
+        protected override BusCollection GetBusCollection(MediaTypes mediaType, BusDirections busDir)
         {
-            return TResult.S_False;
-        }
-
-        public int GetBusCount(MediaTypes type, BusDirections dir)
-        {
-            if (type == MediaTypes.Audio && dir == BusDirections.Input)
-                return 1;
-
-            return 0;
-        }
-
-        public int GetBusInfo(MediaTypes type, BusDirections dir, int index, ref BusInfo busInfo)
-        {
-            if (type == MediaTypes.Audio && dir == BusDirections.Input && index == 0)
+            if (mediaType == MediaTypes.Audio)
             {
-                busInfo.BusType = BusTypes.Main;
-                busInfo.ChannelCount = 1;
-                busInfo.Direction = dir;
-                busInfo.Flags = BusInfo.BusFlags.DefaultActive;
-                busInfo.MediaType = type;
-                busInfo.Name = "Input";
-
-                return TResult.S_OK;
+                return busDir == BusDirections.Input ? _audioInputs : _audioOutputs;
             }
 
-            return TResult.E_Unexpected;
+            return null;
         }
-
-        public int GetRoutingInfo(ref RoutingInfo inInfo, ref RoutingInfo outInfo)
-        {
-            return TResult.E_NotImplemented;
-        }
-
-        public int ActivateBus(MediaTypes type, BusDirections dir, int index, bool state)
-        {
-            if (type == MediaTypes.Audio && dir == BusDirections.Input && index == 0)
-            {
-                return TResult.S_OK;
-            }
-
-            return TResult.E_Fail;
-        }
-
-        public int SetActive(bool state)
-        {
-            return TResult.S_OK;
-        }
-
-        public int SetState(IBStream state)
-        {
-            return TResult.E_NotImplemented;
-        }
-
-        public int GetState(IBStream state)
-        {
-            return TResult.E_NotImplemented;
-        }
-
-        #endregion
-
-        #region IAudioProcessor Members
-
-        public int SetBusArrangements(SpeakerArrangement[] inputs, int numIns, SpeakerArrangement[] outputs, int numOuts)
-        {
-            return TResult.E_NotImplemented;
-        }
-
-        public int GetBusArrangement(BusDirections dir, int index, ref SpeakerArrangement arr)
-        {
-            if (dir == BusDirections.Input && index == 0)
-            {
-                arr = SpeakerArrangement.ArrMono;
-
-                return TResult.S_OK;
-            }
-
-            return TResult.E_Unexpected;
-        }
-
-        public int CanProcessSampleSize(SymbolicSampleSizes symbolicSampleSize)
-        {
-            return symbolicSampleSize == SymbolicSampleSizes.Sample32 ? TResult.S_OK : TResult.S_False;
-        }
-
-        public uint GetLatencySamples()
-        {
-            return 0;
-        }
-
-        public int SetupProcessing(ref ProcessSetup setup)
-        {
-            return TResult.S_OK;
-        }
-
-        public int SetProcessing(byte state)
-        {
-            return TResult.E_NotImplemented;
-        }
-
-        public int Process(ref ProcessData data)
-        {
-            return TResult.S_OK;
-        }
-
-        #endregion
     }
 }
