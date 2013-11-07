@@ -31,9 +31,53 @@ namespace Jacobi.Vst3.TestPlugin
 
         public override int Process(ref ProcessData data)
         {
-            // TODO
+            // flushing parameters
+            if (data.NumInputs == 0 || data.NumOutputs == 0)
+            {
+                return TResult.S_False;
+            }
+            
+            if (data.NumInputs != _audioInputs.Count || data.NumOutputs != _audioOutputs.Count)
+            {
+                return TResult.E_Unexpected;
+            }
 
-            return TResult.E_NotImplemented;
+            var inputBusInfo = _audioInputs[0];
+            var outputBusInfo = _audioOutputs[0];
+
+            if (!inputBusInfo.IsActive || !outputBusInfo.IsActive)
+            {
+                return TResult.S_False;
+            }
+
+            // hard-coded on one stereo input and one stereo output bus
+            var inputBus = new AudioBusAccessor(ref data, BusDirections.Input, 0);
+            var outputBus = new AudioBusAccessor(ref data, BusDirections.Output, 0);
+
+            unsafe
+            {
+                // can return null!
+                var inputLeft = inputBus.GetUnsafeBuffer32(0);
+                var inputRight = inputBus.GetUnsafeBuffer32(1);
+
+                var outputLeft = outputBus.GetUnsafeBuffer32(0);
+                var outputRight = outputBus.GetUnsafeBuffer32(1);
+
+                // copy samples
+                for (int i = 0; i < outputBus.SampleCount; i++)
+                {
+                    if (outputLeft != null && inputLeft != null)
+                    {
+                        outputLeft[i] = inputLeft[i];
+                    }
+                    if (outputRight != null && inputRight != null)
+                    {
+                        outputRight[i] = inputRight[i];
+                    }
+                }
+            }
+
+            return TResult.S_OK;
         }
 
         protected override BusCollection GetBusCollection(MediaTypes mediaType, BusDirections busDir)

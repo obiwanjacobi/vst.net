@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace Jacobi.Vst3.Interop
 {
     [StructLayout(LayoutKind.Explicit, Pack = Platform.StructurePack)]
-    public struct AudioBusBuffers
+    public class AudioBusBuffers
     {
         [FieldOffset(0)]
         [MarshalAs(UnmanagedType.I4)]
