@@ -79,9 +79,15 @@ namespace Jacobi.Vst3.Interop.Plugin
             }
             Guard.ThrowIfOutOfRange("channel", channelIndex, 0, _audioBuffers.NumChannels);
 
-            IntPtr bufferPtr = IntPtr.Add(_audioBuffers.ChannelBuffers32, channelIndex * SizeOfSinglePtr);
+            if (_audioBuffers.ChannelBuffers32 != IntPtr.Zero &&
+                !IsChannelSilent(channelIndex))
+            {
+                IntPtr bufferPtr = IntPtr.Add(_audioBuffers.ChannelBuffers32, channelIndex * SizeOfSinglePtr);
 
-            return (float*)bufferPtr.ToPointer();
+                return (float*)bufferPtr.ToPointer();
+            }
+
+            return null;
         }
 
         public unsafe double* GetUnsafeBuffer64(int channelIndex)
@@ -92,9 +98,15 @@ namespace Jacobi.Vst3.Interop.Plugin
             }
             Guard.ThrowIfOutOfRange("channel", channelIndex, 0, _audioBuffers.NumChannels);
 
-            IntPtr bufferPtr = IntPtr.Add(_audioBuffers.ChannelBuffers64, channelIndex * SizeOfDoublePtr);
+            if (_audioBuffers.ChannelBuffers64 != IntPtr.Zero &&
+                !IsChannelSilent(channelIndex))
+            {
+                IntPtr bufferPtr = IntPtr.Add(_audioBuffers.ChannelBuffers64, channelIndex * SizeOfDoublePtr);
 
-            return (double*)bufferPtr.ToPointer();
+                return (double*)bufferPtr.ToPointer();
+            }
+
+            return null;
         }
     }
 }
