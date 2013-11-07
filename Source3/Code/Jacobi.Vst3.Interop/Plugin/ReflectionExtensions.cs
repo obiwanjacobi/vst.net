@@ -26,8 +26,15 @@ namespace Jacobi.Vst3.Interop.Plugin
             return assembly.GetName().Version;
         }
 
-        public static string GetGuidFromType(this Type classType)
+        public static string GetClassGuid(this Type classType)
         {
+            // .NET takes the GuidAttribute value and puts it in the GUID property on Type.
+            if (classType.GUID != Guid.Empty)
+            {
+                return classType.GUID.ToString().ToUpperInvariant();
+            }
+
+            // get the Guid Attibute
             var attrs = classType.GetCustomAttributes(typeof(GuidAttribute), true);
 
             if (attrs != null && attrs.Length > 0)
@@ -39,7 +46,7 @@ namespace Jacobi.Vst3.Interop.Plugin
             return null;
         }
 
-        public static string GetNameFromType(this Type classType)
+        public static string GetDisplayName(this Type classType)
         {
             var attrs = classType.GetCustomAttributes(typeof(DisplayNameAttribute), true);
 
