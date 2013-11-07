@@ -101,12 +101,14 @@
     <Compile Include="PClassInfo.cs" />
     <Compile Include="PFactoryInfo.cs" />
     <Compile Include="Platform.cs" />
-    <Compile Include="Plugin\AudioBus.cs" />
+    <Compile Include="Plugin\AudioBusAccessor.cs" />
+    <Compile Include="Plugin\IServiceContainerSite.cs" />
     <Compile Include="Plugin\ReflectionExtensions.cs" />
     <Compile Include="Plugin\BStream.cs" />
     <Compile Include="Plugin\ClassRegistration.cs" />
     <Compile Include="Plugin\PluginClassFactory.cs" />
     <Compile Include="Plugin\ServiceContainer.cs" />
+    <Compile Include="Plugin\VstExtensions.cs" />
     <Compile Include="ProcessContext.cs" />
     <Compile Include="ProcessData.cs" />
     <Compile Include="ProcessModes.cs" />

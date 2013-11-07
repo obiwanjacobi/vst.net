@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace Jacobi.Vst3.Interop.Plugin
 {
     [ClassInterface(ClassInterfaceType.None)]
-    public class PluginClassFactory : IPluginFactory, IPluginFactory2, IPluginFactory3
+    public class PluginClassFactory : IPluginFactory, IPluginFactory2, IPluginFactory3, IServiceContainerSite
     {
         private List<ClassRegistration> _registrations = new List<ClassRegistration>();
 
@@ -35,6 +35,8 @@ namespace Jacobi.Vst3.Interop.Plugin
             SdkVersion = sdkVersion;
 
             DefaultVersion = ReflectionExtensions.GetExportAssembly().GetAssemblyVersion();
+
+            ServiceContainer = new ServiceContainer();
         }
 
         public string Vendor { get; private set; }
@@ -47,7 +49,7 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public Version SdkVersion { get; private set; }
 
-        protected ServiceContainer ServiceContainer { get; set; }
+        public ServiceContainer ServiceContainer { get; protected set; }
 
         public void Register(Type classType, string category)
         {
@@ -60,9 +62,9 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public void Register(ClassRegistration registration)
         {
-            if (registration.ClassType.GetGuidFromType() == null)
+            if (registration.ClassType.GetClassGuid() == null)
                 throw new ArgumentException("The specified type does not have a GuidAttribute set.", "ClassType");
-            if (registration.ClassType.GetNameFromType() == null)
+            if (registration.ClassType.GetDisplayName() == null)
                 throw new ArgumentException("The specified type does not have a DisplayNameAttribute set.", "ClassType");
 
             EnrichRegistration(registration);
@@ -89,18 +91,32 @@ namespace Jacobi.Vst3.Interop.Plugin
             var guid = classId.ToString().ToUpperInvariant();
 
             return (from reg in _registrations
-                    where reg.ClassType.GetGuidFromType() == guid
+                    where reg.ClassType.GetClassGuid() == guid
                     select reg).FirstOrDefault();
         }
 
         protected virtual object CreateInstance(ClassRegistration registration)
         {
+            object instance = null;
+
             if (registration.CreatorCallback != null)
             {
-                return registration.CreatorCallback(ServiceContainer, registration.ClassType);
+                instance = registration.CreatorCallback(ServiceContainer, registration.ClassType);
+            }
+            else
+            {
+                instance = Activator.CreateInstance(registration.ClassType);
             }
 
-            return Activator.CreateInstance(registration.ClassType);
+            // link-up service container hierarchy
+            var site = instance as IServiceContainerSite;
+
+            if (site != null && site.ServiceContainer != null)
+            {
+                site.ServiceContainer.ParentContainer = this.ServiceContainer;
+            }
+
+            return instance;
         }
 
         protected virtual void EnrichRegistration(ClassRegistration registration)
@@ -145,8 +161,8 @@ namespace Jacobi.Vst3.Interop.Plugin
             var reg = _registrations[index];
             info.Cardinality = Constants.ClassCardinalityManyInstances;
             info.Category = reg.Category;
-            info.ClassId = new Guid(reg.ClassType.GetGuidFromType());
-            info.Name = reg.ClassType.GetNameFromType();
+            info.ClassId = new Guid(reg.ClassType.GetClassGuid());
+            info.Name = reg.ClassType.GetDisplayName();
 
             return TResult.S_OK;
         }
@@ -195,8 +211,8 @@ namespace Jacobi.Vst3.Interop.Plugin
             info.Cardinality = Constants.ClassCardinalityManyInstances;
             info.Category = reg.Category;
             info.ClassFlags = reg.ClassFlags;
-            info.ClassId = new Guid(reg.ClassType.GetGuidFromType());
-            info.Name = reg.ClassType.GetNameFromType();
+            info.ClassId = new Guid(reg.ClassType.GetClassGuid());
+            info.Name = reg.ClassType.GetDisplayName();
             info.SdkVersion = "VST " + SdkVersion.ToString();
             info.SubCategories = string.Join("|", reg.SubCategories.ToArray());
             info.Vendor = reg.Vendor ?? Vendor;
@@ -220,8 +236,8 @@ namespace Jacobi.Vst3.Interop.Plugin
             info.Cardinality = Constants.ClassCardinalityManyInstances;
             info.Category.Value = reg.Category;
             info.ClassFlags = reg.ClassFlags;
-            info.ClassId = new Guid(reg.ClassType.GetGuidFromType());
-            info.Name = reg.ClassType.GetNameFromType();
+            info.ClassId = new Guid(reg.ClassType.GetClassGuid());
+            info.Name = reg.ClassType.GetDisplayName();
             info.SdkVersion = "VST " + SdkVersion.ToString();
             info.SubCategories.Value = string.Join("|", reg.SubCategories.ToArray());
             info.Vendor = reg.Vendor ?? Vendor;
@@ -232,13 +248,8 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public int SetHostContext(object context)
         {
-            if (ServiceContainer == null)
-            {
-                ServiceContainer = new ServiceContainer(context);
-                return TResult.S_OK;
-            }
-
-            return TResult.E_Unexpected;
+            ServiceContainer.Unknown = context;
+            return TResult.S_OK;
         }
 
         #endregion
