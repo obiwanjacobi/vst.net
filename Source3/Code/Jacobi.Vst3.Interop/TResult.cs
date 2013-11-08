@@ -24,5 +24,25 @@ namespace Jacobi.Vst3.Interop
         public const Int32 E_Unexpected = -2147418113;
         public const Int32 E_OutOfMemory = -2147024882;
         public const Int32 E_Abort = -2147467260;
+
+        public static bool Succeeded(int result)
+        {
+            return result >= 0;
+        }
+
+        public static bool Failed(int result)
+        {
+            return result < 0;
+        }
+
+        public static bool IsTrue(int result)
+        {
+            return result == S_True;
+        }
+
+        public static bool IsFalse(int result)
+        {
+            return result == S_False;
+        }
     }
 }
