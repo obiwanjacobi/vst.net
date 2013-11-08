@@ -31,12 +31,31 @@ namespace Jacobi.Vst3.TestPlugin
 
         public override int Process(ref ProcessData data)
         {
+            int result = ProcessInParameters(ref data);
+
+            if (TResult.Failed(result))
+            {
+                return result;
+            }
+
+            return ProcessAudio(ref data);
+        }
+
+        private int ProcessInParameters(ref ProcessData data)
+        {
+            // TODO: Parameter handling
+
+            return TResult.S_OK;
+        }
+
+        private int ProcessAudio(ref ProcessData data)
+        {
             // flushing parameters
             if (data.NumInputs == 0 || data.NumOutputs == 0)
             {
                 return TResult.S_False;
             }
-            
+
             if (data.NumInputs != _audioInputs.Count || data.NumOutputs != _audioOutputs.Count)
             {
                 return TResult.E_Unexpected;
@@ -62,6 +81,10 @@ namespace Jacobi.Vst3.TestPlugin
 
                 var outputLeft = outputBus.GetUnsafeBuffer32(0);
                 var outputRight = outputBus.GetUnsafeBuffer32(1);
+
+                // silent inputs result in silent outputs
+                outputBus.SetChannelSilent(0, inputLeft == null);
+                outputBus.SetChannelSilent(1, inputRight == null);
 
                 // copy samples
                 for (int i = 0; i < outputBus.SampleCount; i++)
