@@ -18,10 +18,10 @@ namespace Jacobi.Vst3.TestPlugin
 
         public PluginComponent()
         {
-            this.ControlledClassId = new Guid(typeof(EditController).GetClassGuid());
+            this.ControlledClassId = typeof(EditController).GUID;
 
-            _audioInputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Input", BusTypes.Main, BusInfo.BusFlags.DefaultActive));
-            _audioOutputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Output", BusTypes.Main, BusInfo.BusFlags.DefaultActive));
+            _audioInputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Input", BusTypes.Main));
+            _audioOutputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Output", BusTypes.Main));
         }
 
         public override int CanProcessSampleSize(SymbolicSampleSizes symbolicSampleSize)

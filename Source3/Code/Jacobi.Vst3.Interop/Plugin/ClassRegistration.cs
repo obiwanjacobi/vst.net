@@ -4,10 +4,12 @@ using System.ComponentModel.Design;
 
 namespace Jacobi.Vst3.Interop.Plugin
 {
-    public delegate object ObjectCreatorCallback(IServiceProvider svcProvider, Type classType);
-
     public class ClassRegistration
     {
+        // internals
+        internal string DisplayName { get; set; }
+        internal Guid ClassTypeId { get; set; }
+
         // optional
         public ObjectCreatorCallback CreatorCallback { get; set; }
 
@@ -16,17 +18,17 @@ namespace Jacobi.Vst3.Interop.Plugin
         /// </summary>
         public Type ClassType { get; set; }
 
-        public string Category { get; set; }
+        public ObjectClasses ObjectClass { get; set; }
 
-        private IList<string> _subCategories;
+        private SubCategoryCollection _subCategories;
 
-        public IList<string> SubCategories
+        public SubCategoryCollection SubCategories
         {
             get
             {
                 if (_subCategories == null)
                 {
-                    _subCategories = new List<string>();
+                    _subCategories = new SubCategoryCollection();
                 }
 
                 return _subCategories;
@@ -46,5 +48,12 @@ namespace Jacobi.Vst3.Interop.Plugin
         public string Vendor { get; set; }
 
         public Version Version { get; set; }
+
+        public enum ObjectClasses
+        {
+            Unknown,
+            AudioModuleClass,
+            ComponentControllerClass
+        }
     }
 }
