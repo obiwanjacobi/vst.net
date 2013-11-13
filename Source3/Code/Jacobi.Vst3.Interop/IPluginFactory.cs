@@ -24,7 +24,8 @@ namespace Jacobi.Vst3.Interop
         /// <returns>Returns a standard result code.</returns>
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetFactoryInfo([MarshalAs(UnmanagedType.Struct), In, Out] ref PFactoryInfo info);
+        Int32 GetFactoryInfo(
+            [MarshalAs(UnmanagedType.Struct), In, Out] ref PFactoryInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.I4)]
@@ -32,11 +33,16 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetClassInfo([MarshalAs(UnmanagedType.I4), In] Int32 index, [MarshalAs(UnmanagedType.Struct), In, Out] ref PClassInfo info);
+        Int32 GetClassInfo(
+            [MarshalAs(UnmanagedType.I4), In] Int32 index, 
+            [MarshalAs(UnmanagedType.Struct), In, Out] ref PClassInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 CreateInstance([In] ref Guid classId, [In] ref Guid interfaceId, [MarshalAs(UnmanagedType.SysInt, IidParameterIndex = 1), In, Out] ref IntPtr instance);
+        Int32 CreateInstance(
+            [In] ref Guid classId, 
+            [In] ref Guid interfaceId, 
+            [MarshalAs(UnmanagedType.SysInt, IidParameterIndex = 1), In, Out] ref IntPtr instance);
     }
 
     [ComImport]
@@ -47,7 +53,8 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetFactoryInfo([MarshalAs(UnmanagedType.Struct)] ref PFactoryInfo info);
+        Int32 GetFactoryInfo(
+            [MarshalAs(UnmanagedType.Struct)] ref PFactoryInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.I4)]
@@ -55,11 +62,16 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetClassInfo(Int32 index, [MarshalAs(UnmanagedType.Struct)] ref PClassInfo info);
+        Int32 GetClassInfo(
+            [MarshalAs(UnmanagedType.I4), In] Int32 index, 
+            [MarshalAs(UnmanagedType.Struct)] ref PClassInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 CreateInstance([In] ref Guid classId, [In] ref Guid interfaceId, [MarshalAs(UnmanagedType.SysInt, IidParameterIndex = 1), In, Out] ref IntPtr instance);
+        Int32 CreateInstance(
+            [In] ref Guid classId, 
+            [In] ref Guid interfaceId, 
+            [MarshalAs(UnmanagedType.SysInt, IidParameterIndex = 1), In, Out] ref IntPtr instance);
 
 
         //---------------------------------------------------------------------
@@ -67,7 +79,9 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetClassInfo2(Int32 index, [MarshalAs(UnmanagedType.Struct)] ref PClassInfo2 info);
+        Int32 GetClassInfo2(
+            [MarshalAs(UnmanagedType.I4), In] Int32 index, 
+            [MarshalAs(UnmanagedType.Struct)] ref PClassInfo2 info);
 
     }
 
@@ -78,7 +92,8 @@ namespace Jacobi.Vst3.Interop
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetFactoryInfo([MarshalAs(UnmanagedType.Struct)] ref PFactoryInfo info);
+        Int32 GetFactoryInfo(
+            [MarshalAs(UnmanagedType.Struct)] ref PFactoryInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.I4)]
@@ -86,11 +101,16 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetClassInfo(Int32 index, [MarshalAs(UnmanagedType.Struct)] ref PClassInfo info);
+        Int32 GetClassInfo(
+            [MarshalAs(UnmanagedType.I4), In] Int32 index, 
+            [MarshalAs(UnmanagedType.Struct)] ref PClassInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 CreateInstance([In] ref Guid classId, [In] ref Guid interfaceId, [MarshalAs(UnmanagedType.SysInt, IidParameterIndex = 1), In, Out] ref IntPtr instance);
+        Int32 CreateInstance(
+            [In] ref Guid classId, 
+            [In] ref Guid interfaceId, 
+            [MarshalAs(UnmanagedType.SysInt, IidParameterIndex = 1), In, Out] ref IntPtr instance);
 
 
         //---------------------------------------------------------------------
@@ -98,7 +118,9 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetClassInfo2(Int32 index, [MarshalAs(UnmanagedType.Struct)] ref PClassInfo2 info);
+        Int32 GetClassInfo2(
+            [MarshalAs(UnmanagedType.I4), In] Int32 index, 
+            [MarshalAs(UnmanagedType.Struct)] ref PClassInfo2 info);
 
 
         //---------------------------------------------------------------------
@@ -106,10 +128,13 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetClassInfoUnicode(Int32 index, [MarshalAs(UnmanagedType.Struct)] ref PClassInfoW info);
+        Int32 GetClassInfoUnicode(
+            [MarshalAs(UnmanagedType.I4), In] Int32 index, 
+            [MarshalAs(UnmanagedType.Struct)] ref PClassInfoW info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 SetHostContext([MarshalAs(UnmanagedType.IUnknown), In] object context);
+        Int32 SetHostContext(
+            [MarshalAs(UnmanagedType.IUnknown), In] Object context);
     }
 }

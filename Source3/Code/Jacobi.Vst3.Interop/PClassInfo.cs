@@ -15,10 +15,10 @@ namespace Jacobi.Vst3.Interop
         public Int32 Cardinality;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeCategory)]
-        public string Category;
+        public String Category;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
-        public string Name;
+        public String Name;
     }
 
     [NativeCppClass]
@@ -32,10 +32,10 @@ namespace Jacobi.Vst3.Interop
         public Int32 Cardinality;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeCategory)]
-        public string Category;
+        public String Category;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
-        public string Name;
+        public String Name;
 
         // --------------------------------------------------------------------
 
@@ -43,16 +43,16 @@ namespace Jacobi.Vst3.Interop
         public UInt32 ClassFlags;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeSubCategories)]
-        public string SubCategories;
+        public String SubCategories;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVendor)]
-        public string Vendor;
+        public String Vendor;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVersion)]
-        public string Version;
+        public String Version;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVersion)]
-        public string SdkVersion;
+        public String SdkVersion;
     }
 
     [NativeCppClass]
@@ -68,7 +68,7 @@ namespace Jacobi.Vst3.Interop
         public AnsiCategory Category;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
-        public string Name;
+        public String Name;
 
         // --------------------------------------------------------------------
 
@@ -78,13 +78,13 @@ namespace Jacobi.Vst3.Interop
         public AnsiSubCategories SubCategories;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVendor)]
-        public string Vendor;
+        public String Vendor;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVersion)]
-        public string Version;
+        public String Version;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVersion)]
-        public string SdkVersion;
+        public String SdkVersion;
 
         //---------------------------------------------------------------------
         // need extra structs to solve mixed Ansi/Unicode strings
@@ -94,7 +94,7 @@ namespace Jacobi.Vst3.Interop
         public struct AnsiCategory
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeCategory)]
-            public string Value;
+            public String Value;
         }
 
         [NativeCppClass]
@@ -102,7 +102,7 @@ namespace Jacobi.Vst3.Interop
         public struct AnsiSubCategories
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeSubCategories)]
-            public string Value;
+            public String Value;
         }
     }
 }
