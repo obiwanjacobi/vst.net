@@ -7,7 +7,7 @@ namespace Jacobi.Vst3.Interop
     [ComImport]
     [Guid(Interfaces.IEditController)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IEditController : IPluginBase
+    public interface IEditController
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
