@@ -155,13 +155,6 @@ namespace Jacobi.Vst3.Plugin
             };
         }
 
-        private class ServiceRegistration
-        {
-            public Type ServiceType;
-            public object Instance;
-            public ObjectCreatorCallback Callback;
-        }
-
         #region IDisposable Members
 
         public void Dispose()
@@ -179,8 +172,19 @@ namespace Jacobi.Vst3.Plugin
             _registrations.Clear();
             Unknown = null;
             ParentContainer = null;
+
+            GC.SuppressFinalize(this);
         }
 
         #endregion
+
+        //---------------------------------------------------------------------
+
+        private class ServiceRegistration
+        {
+            public Type ServiceType;
+            public object Instance;
+            public ObjectCreatorCallback Callback;
+        }
     }
 }

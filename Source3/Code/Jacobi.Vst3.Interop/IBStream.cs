@@ -8,9 +8,9 @@ namespace Jacobi.Vst3.Interop
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IBStream
     {
-        Int32 Read(byte[] buffer, Int32 numBytes, ref Int32 numBytesRead);
+        Int32 Read(Byte[] buffer, Int32 numBytes, ref Int32 numBytesRead);
 
-        Int32 Write (byte[] buffer, Int32 numBytes, ref Int32 numBytesWritten);
+        Int32 Write (Byte[] buffer, Int32 numBytes, ref Int32 numBytesWritten);
 
         Int32 Seek (Int64 pos, IStreamSeekMode mode, ref Int64 result);
 
