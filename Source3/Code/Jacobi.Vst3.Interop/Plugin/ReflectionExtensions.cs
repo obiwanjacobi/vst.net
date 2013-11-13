@@ -1,11 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
     internal static class ReflectionExtensions
     {

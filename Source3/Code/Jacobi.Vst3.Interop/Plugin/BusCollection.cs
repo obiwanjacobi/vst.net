@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Jacobi.Vst3.Interop;
 
-namespace Jacobi.Vst3.TestPlugin
+namespace Jacobi.Vst3.Plugin
 {
     // BusList
     public sealed class BusCollection : KeyedCollection<string, Bus>

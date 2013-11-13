@@ -1,7 +1,7 @@
 ﻿using System;
 using Jacobi.Vst3.Interop;
 
-namespace Jacobi.Vst3.TestPlugin
+namespace Jacobi.Vst3.Plugin
 {
     public abstract class Bus
     {

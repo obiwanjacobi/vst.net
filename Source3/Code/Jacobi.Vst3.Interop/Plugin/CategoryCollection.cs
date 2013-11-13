@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
-    public sealed class SubCategoryCollection : Collection<string>
+    public sealed class CategoryCollection : Collection<string>
     {
-        public SubCategoryCollection()
+        public CategoryCollection()
         {
         }
 
-        public SubCategoryCollection(string parse)
+        public CategoryCollection(string parse)
         {
             var cats = parse.Split(new [] {'|'}, StringSplitOptions.RemoveEmptyEntries);
 

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
     public sealed class ServiceContainer : IServiceProvider, IDisposable
     {

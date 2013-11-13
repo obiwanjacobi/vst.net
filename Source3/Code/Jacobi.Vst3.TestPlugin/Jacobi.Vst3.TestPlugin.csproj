@@ -78,16 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyDependencyResourceLoader.cs" />
-    <Compile Include="AudioBus.cs" />
-    <Compile Include="AudioEffect.cs" />
-    <Compile Include="Bus.cs" />
-    <Compile Include="BusCollection.cs" />
-    <Compile Include="Component.cs" />
-    <Compile Include="ComponentBase.cs" />
     <Compile Include="EditController.cs" />
     <Compile Include="Exports.cs" />
     <Compile Include="PluginComponent.cs" />
-    <Compile Include="PluginFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
