@@ -7,7 +7,7 @@ namespace Jacobi.Vst3.TestPlugin
     {
         protected abstract BusCollection GetBusCollection(MediaTypes mediaType, BusDirections busDir);
 
-        public Guid ControlledClassId { get; set; }
+        public Guid ControlledClassId { get; protected set; }
 
         public bool IsActive { get; protected set; }
 

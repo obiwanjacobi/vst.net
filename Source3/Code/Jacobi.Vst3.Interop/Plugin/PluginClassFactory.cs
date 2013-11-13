@@ -10,9 +10,9 @@ using System.Diagnostics;
 namespace Jacobi.Vst3.Interop.Plugin
 {
     [ClassInterface(ClassInterfaceType.None)]
-    public class PluginClassFactory : IPluginFactory, IPluginFactory2, IPluginFactory3, IServiceContainerSite
+    public class PluginClassFactory : IPluginFactory, IPluginFactory2, IPluginFactory3, IServiceContainerSite, IDisposable
     {
-        private List<ClassRegistration> _registrations = new List<ClassRegistration>();
+        private readonly List<ClassRegistration> _registrations = new List<ClassRegistration>();
 
         public const string AudioModuleClassCategory = "Audio Module Class";
         public const string ComponentControllerClassCategory = "Component Controller Class";
@@ -20,7 +20,6 @@ namespace Jacobi.Vst3.Interop.Plugin
         public PluginClassFactory(string vendor, string email, string url)
             : this(vendor, email, url, PFactoryInfo.FactoryFlags.NoFlags)
         { }
-
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags)
             : this(vendor, email, url, flags, new Version(3, 5, 2))
@@ -51,18 +50,18 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public ServiceContainer ServiceContainer { get; protected set; }
 
-        public void Register(Type classType, string category)
+        public void Register(Type classType, ClassRegistration.ObjectClasses objClass)
         {
             Register(new ClassRegistration
                 {
                      ClassType = classType,
-                     Category = category,
+                     ObjectClass = objClass,
                 });
         }
 
         public void Register(ClassRegistration registration)
         {
-            if (registration.ClassType.GetClassGuid() == null)
+            if (registration.ClassType.GUID == Guid.Empty)
                 throw new ArgumentException("The specified type does not have a GuidAttribute set.", "ClassType");
             if (registration.ClassType.GetDisplayName() == null)
                 throw new ArgumentException("The specified type does not have a DisplayNameAttribute set.", "ClassType");
@@ -88,14 +87,12 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public ClassRegistration Find(Guid classId)
         {
-            var guid = classId.ToString().ToUpperInvariant();
-
             return (from reg in _registrations
-                    where reg.ClassType.GetClassGuid() == guid
+                    where reg.ClassTypeId == classId
                     select reg).FirstOrDefault();
         }
 
-        protected virtual object CreateInstance(ClassRegistration registration)
+        protected virtual object CreateObjectInstance(ClassRegistration registration)
         {
             object instance = null;
 
@@ -121,6 +118,10 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         protected virtual void EnrichRegistration(ClassRegistration registration)
         {
+            // internals
+            registration.ClassTypeId = registration.ClassType.GUID;
+            registration.DisplayName = registration.ClassType.GetDisplayName();
+
             if (String.IsNullOrEmpty(registration.Vendor))
             {
                 registration.Vendor = this.Vendor;
@@ -136,7 +137,7 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         #region IPluginFactory Members
 
-        public int GetFactoryInfo(ref PFactoryInfo info)
+        public virtual int GetFactoryInfo(ref PFactoryInfo info)
         {
             info.Email = Email;
             info.Flags = Flags;
@@ -146,28 +147,34 @@ namespace Jacobi.Vst3.Interop.Plugin
             return TResult.S_OK;
         }
 
-        public int CountClasses()
+        public virtual int CountClasses()
         {
             return _registrations.Count;
         }
 
-        public int GetClassInfo(int index, ref PClassInfo info)
+        public virtual int GetClassInfo(int index, ref PClassInfo info)
         {
-            if (index < 0 || index > _registrations.Count)
+            if (!IsValidRegIndex(index))
             {
                 return TResult.E_InvalidArg;
             }
 
             var reg = _registrations[index];
-            info.Cardinality = Constants.ClassCardinalityManyInstances;
-            info.Category = reg.Category;
-            info.ClassId = new Guid(reg.ClassType.GetClassGuid());
-            info.Name = reg.ClassType.GetDisplayName();
+
+            FillClassInfo(ref info, reg);
 
             return TResult.S_OK;
         }
 
-        public int CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
+        protected virtual void FillClassInfo(ref PClassInfo info, ClassRegistration reg)
+        {
+            info.Cardinality = Constants.ClassCardinalityManyInstances;
+            info.Category = ObjectClassToCategory(reg.ObjectClass);
+            info.ClassId = reg.ClassTypeId;
+            info.Name = reg.DisplayName;
+        }
+
+        public virtual int CreateInstance(ref Guid classId, ref Guid interfaceId, ref IntPtr instance)
         {
             // seems not every host is programmed defensively...
             //if (instance != IntPtr.Zero)
@@ -179,7 +186,7 @@ namespace Jacobi.Vst3.Interop.Plugin
 
             if (reg != null)
             {
-                object obj = CreateInstance(reg);
+                object obj = CreateObjectInstance(reg);
                 IntPtr unk = Marshal.GetIUnknownForObject(obj);
 
                 try
@@ -200,58 +207,115 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         #region IPluginFactory2 Members
 
-        public int GetClassInfo2(int index, ref PClassInfo2 info)
+        public virtual int GetClassInfo2(int index, ref PClassInfo2 info)
         {
-            if (index < 0 || index > _registrations.Count)
+            if (!IsValidRegIndex(index))
             {
                 return TResult.E_InvalidArg;
             }
 
             var reg = _registrations[index];
-            info.Cardinality = Constants.ClassCardinalityManyInstances;
-            info.Category = reg.Category;
-            info.ClassFlags = reg.ClassFlags;
-            info.ClassId = new Guid(reg.ClassType.GetClassGuid());
-            info.Name = reg.ClassType.GetDisplayName();
-            info.SdkVersion = "VST " + SdkVersion.ToString();
-            info.SubCategories = string.Join("|", reg.SubCategories.ToArray());
-            info.Vendor = reg.Vendor ?? Vendor;
-            info.Version = reg.Version.ToString();
+
+            FillClassInfo2(ref info, reg);
 
             return TResult.S_OK;
+        }
+
+        protected virtual void FillClassInfo2(ref PClassInfo2 info, ClassRegistration reg)
+        {
+            info.Cardinality = Constants.ClassCardinalityManyInstances;
+            info.Category = ObjectClassToCategory(reg.ObjectClass);
+            info.ClassFlags = reg.ClassFlags;
+            info.ClassId = reg.ClassTypeId;
+            info.Name = reg.DisplayName;
+            info.SdkVersion = FormatSdkVersionString(SdkVersion);
+            info.SubCategories = reg.SubCategories.ToString();
+            info.Vendor = reg.Vendor;
+            info.Version = reg.Version.ToString();
         }
 
         #endregion
 
         #region IPluginFactory3 Members
 
-        public int GetClassInfoUnicode(int index, ref PClassInfoW info)
+        public virtual int GetClassInfoUnicode(int index, ref PClassInfoW info)
         {
-            if (index < 0 || index > _registrations.Count)
+            if (!IsValidRegIndex(index))
             {
                 return TResult.E_InvalidArg;
             }
 
             var reg = _registrations[index];
-            info.Cardinality = Constants.ClassCardinalityManyInstances;
-            info.Category.Value = reg.Category;
-            info.ClassFlags = reg.ClassFlags;
-            info.ClassId = new Guid(reg.ClassType.GetClassGuid());
-            info.Name = reg.ClassType.GetDisplayName();
-            info.SdkVersion = "VST " + SdkVersion.ToString();
-            info.SubCategories.Value = string.Join("|", reg.SubCategories.ToArray());
-            info.Vendor = reg.Vendor ?? Vendor;
-            info.Version = reg.Version.ToString();
+
+            FillClassInfoW(ref info, reg);
 
             return TResult.S_OK;
         }
 
-        public int SetHostContext(object context)
+        protected virtual void FillClassInfoW(ref PClassInfoW info, ClassRegistration reg)
+        {
+            info.Cardinality = Constants.ClassCardinalityManyInstances;
+            info.Category.Value = ObjectClassToCategory(reg.ObjectClass);
+            info.ClassFlags = reg.ClassFlags;
+            info.ClassId = reg.ClassType.GUID;
+            info.Name = reg.DisplayName;
+            info.SdkVersion = FormatSdkVersionString(SdkVersion);
+            info.SubCategories.Value = reg.SubCategories.ToString();
+            info.Vendor = reg.Vendor;
+            info.Version = reg.Version.ToString();
+        }
+
+        public virtual int SetHostContext(object context)
         {
             ServiceContainer.Unknown = context;
             return TResult.S_OK;
         }
 
         #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposeAll)
+        {
+            this._registrations.Clear();
+
+            if (this.ServiceContainer != null)
+            {
+                this.ServiceContainer.Dispose();
+            }
+        }
+
+        #endregion
+
+        private bool IsValidRegIndex(int index)
+        {
+            return (index >= 0 && index < _registrations.Count);
+        }
+
+        private string FormatSdkVersionString(Version sdkVersion)
+        {
+            return "VST " + sdkVersion.ToString();
+        }
+
+        private string ObjectClassToCategory(ClassRegistration.ObjectClasses objClass)
+        {
+            switch (objClass)
+            {
+                case ClassRegistration.ObjectClasses.AudioModuleClass:
+                    return AudioModuleClassCategory;
+
+                case ClassRegistration.ObjectClasses.ComponentControllerClass:
+                    return ComponentControllerClassCategory;
+
+                default:
+                    throw new InvalidEnumArgumentException("objClass", (int)objClass, typeof(ClassRegistration.ObjectClasses));
+            }
+        }
     }
 }

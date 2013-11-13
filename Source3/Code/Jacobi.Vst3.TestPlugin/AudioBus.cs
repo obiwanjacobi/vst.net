@@ -6,6 +6,12 @@ namespace Jacobi.Vst3.TestPlugin
 {
     public class AudioBus : Bus
     {
+        public AudioBus(SpeakerArrangement speakerArr, string name, BusTypes busType)
+            : base(name, busType, BusInfo.BusFlags.DefaultActive)
+        {
+            SpeakerArrangement = speakerArr;
+        }
+
         public AudioBus(SpeakerArrangement speakerArr, string name, BusTypes busType, BusInfo.BusFlags flags)
             : base(name, busType, flags)
         {
