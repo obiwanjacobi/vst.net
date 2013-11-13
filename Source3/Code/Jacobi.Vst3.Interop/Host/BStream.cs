@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using Jacobi.Vst3.Interop;
 
-namespace Jacobi.Vst3.Interop.Host
+namespace Jacobi.Vst3.Host
 {
     public class BStream : IBStream
     {
