@@ -3,11 +3,10 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
+using Jacobi.Vst3.Interop;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
     [ClassInterface(ClassInterfaceType.None)]
     public class PluginClassFactory : IPluginFactory, IPluginFactory2, IPluginFactory3, IServiceContainerSite, IDisposable
@@ -50,6 +49,8 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public ServiceContainer ServiceContainer { get; protected set; }
 
+        public Version DefaultVersion { get; set; }
+
         public void Register(Type classType, ClassRegistration.ObjectClasses objClass)
         {
             Register(new ClassRegistration
@@ -61,10 +62,10 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public void Register(ClassRegistration registration)
         {
-            if (registration.ClassType.GUID == Guid.Empty)
-                throw new ArgumentException("The specified type does not have a GuidAttribute set.", "ClassType");
-            if (registration.ClassType.GetDisplayName() == null)
-                throw new ArgumentException("The specified type does not have a DisplayNameAttribute set.", "ClassType");
+            if (registration.ClassTypeId == Guid.Empty && registration.ClassType.GUID == Guid.Empty)
+                throw new ArgumentException("The ClassTypeId property is not set and the ClassType (class) does not have a GuidAttribute set.", "ClassType");
+            if (String.IsNullOrEmpty(registration.DisplayName) && registration.ClassType.GetDisplayName() == null)
+                throw new ArgumentException("The DisplayName property is not set and the ClassType (class) does not have a DisplayNameAttribute set.", "ClassType");
 
             EnrichRegistration(registration);
 
@@ -119,8 +120,16 @@ namespace Jacobi.Vst3.Interop.Plugin
         protected virtual void EnrichRegistration(ClassRegistration registration)
         {
             // internals
-            registration.ClassTypeId = registration.ClassType.GUID;
-            registration.DisplayName = registration.ClassType.GetDisplayName();
+
+            if (registration.ClassTypeId == Guid.Empty)
+            {
+                registration.ClassTypeId = registration.ClassType.GUID;
+            }
+
+            if (String.IsNullOrEmpty(registration.DisplayName))
+            {
+                registration.DisplayName = registration.ClassType.GetDisplayName();
+            }
 
             if (String.IsNullOrEmpty(registration.Vendor))
             {
@@ -132,8 +141,6 @@ namespace Jacobi.Vst3.Interop.Plugin
                 registration.Version = DefaultVersion;
             }
         }
-
-        public Version DefaultVersion { get; private set; }
 
         #region IPluginFactory Members
 
@@ -229,7 +236,7 @@ namespace Jacobi.Vst3.Interop.Plugin
             info.ClassId = reg.ClassTypeId;
             info.Name = reg.DisplayName;
             info.SdkVersion = FormatSdkVersionString(SdkVersion);
-            info.SubCategories = reg.SubCategories.ToString();
+            info.SubCategories = reg.Categories.ToString();
             info.Vendor = reg.Vendor;
             info.Version = reg.Version.ToString();
         }
@@ -260,7 +267,7 @@ namespace Jacobi.Vst3.Interop.Plugin
             info.ClassId = reg.ClassType.GUID;
             info.Name = reg.DisplayName;
             info.SdkVersion = FormatSdkVersionString(SdkVersion);
-            info.SubCategories.Value = reg.SubCategories.ToString();
+            info.SubCategories.Value = reg.Categories.ToString();
             info.Vendor = reg.Vendor;
             info.Version = reg.Version.ToString();
         }
