@@ -15,22 +15,17 @@ namespace Jacobi.Vst3.Host
 
         #region IBStream Members
 
-        public int Read(byte[] buffer, int numBytes, ref int numBytesRead)
+        public int Read(IntPtr buffer, int numBytes, ref int numBytesRead)
         {
-            numBytesRead = BaseStream.Read(buffer, 0, numBytes);
-            
-            return TResult.S_OK;
+            throw new NotImplementedException();
         }
 
-        public int Write(byte[] buffer, int numBytes, ref int numBytesWritten)
+        public int Write(IntPtr buffer, int numBytes, ref int numBytesWritten)
         {
-            BaseStream.Write(buffer, 0, numBytes);
-            numBytesWritten = numBytes;
-
-            return TResult.S_OK;
+            throw new NotImplementedException();
         }
 
-        public int Seek(long pos, IStreamSeekMode mode, ref long result)
+        public int Seek(long pos, StreamSeekMode mode, ref long result)
         {
             throw new NotImplementedException();
         }

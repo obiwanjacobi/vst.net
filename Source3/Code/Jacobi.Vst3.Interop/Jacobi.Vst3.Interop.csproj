@@ -94,7 +94,10 @@
     <Compile Include="IComponent.cs" />
     <Compile Include="IComponentHandler.cs" />
     <Compile Include="IComponentHandler2.cs" />
+    <Compile Include="IComponentHandler3.cs" />
     <Compile Include="IConnectionPoint.cs" />
+    <Compile Include="IContextMenu.cs" />
+    <Compile Include="IContextMenuTarget.cs" />
     <Compile Include="IEditController.cs" />
     <Compile Include="IEditController2.cs" />
     <Compile Include="IEventList.cs" />

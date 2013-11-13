@@ -8,19 +8,37 @@ namespace Jacobi.Vst3.Interop
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IBStream
     {
-        Int32 Read(Byte[] buffer, Int32 numBytes, ref Int32 numBytesRead);
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Error)]
+        Int32 Read(
+            [MarshalAs(UnmanagedType.SysInt), In] IntPtr buffer,
+            [MarshalAs(UnmanagedType.I4), In] Int32 numBytes,
+            [MarshalAs(UnmanagedType.I4), In, Out] ref Int32 numBytesRead);
 
-        Int32 Write (Byte[] buffer, Int32 numBytes, ref Int32 numBytesWritten);
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Error)]
+        Int32 Write (
+            [MarshalAs(UnmanagedType.SysInt), In] IntPtr buffer,
+            [MarshalAs(UnmanagedType.I4), In] Int32 numBytes,
+            [MarshalAs(UnmanagedType.I4), In, Out] ref Int32 numBytesWritten);
 
-        Int32 Seek (Int64 pos, IStreamSeekMode mode, ref Int64 result);
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Error)]
+        Int32 Seek (
+            [MarshalAs(UnmanagedType.I8), In] Int64 pos,
+            [MarshalAs(UnmanagedType.I4), In] StreamSeekMode mode,
+            [MarshalAs(UnmanagedType.I8), In, Out] ref Int64 result);
 
-        Int32 Tell (ref Int64 pos);
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Error)]
+        Int32 Tell (
+            [MarshalAs(UnmanagedType.I8), In] ref Int64 pos);
     }
 
-    public enum IStreamSeekMode
+    public enum StreamSeekMode
     {
-        IBSeekSet = 0, ///< set absolute seek position
-        IBSeekCur,     ///< set seek position relative to current position
-        IBSeekEnd      ///< set seek position relative to stream end
+        SeekSet = 0, ///< set absolute seek position
+        SeekCur,     ///< set seek position relative to current position
+        SeekEnd      ///< set seek position relative to stream end
     };
 }

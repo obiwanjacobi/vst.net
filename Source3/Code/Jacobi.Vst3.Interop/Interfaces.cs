@@ -31,6 +31,8 @@ namespace Jacobi.Vst3.Interop
         // UI interfaces
         public const string IPlugView = "5BC32507-D060-49EA-A615-1B522B755B29";
         public const string IPlugFrame = "367FAF01-AFA9-4693-8D4D-A2A0ED0882A3";
+        public const string IContextMenu = "2E93C863-0C9C-4588-97DB-ECF5AD17817D";
+        public const string IContextMenuTarget = "3CDF2E75-85D3-4144-BF86-D36BD7C4894D";
 
         // host interfaces
         public const string IHostApplication = "58E595CC-DB2D-4969-8B6A-AF8C36A664E5";

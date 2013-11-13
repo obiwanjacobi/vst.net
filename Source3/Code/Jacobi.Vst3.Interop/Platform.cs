@@ -8,8 +8,6 @@ namespace Jacobi.Vst3.Interop
 {
     public static class Platform
     {
-        public const int GuidByteSize = 16;
-
         public const int StructurePack = 1;
         public const CharSet CharacterSet = CharSet.Unicode;
         public const CallingConvention DefaultCallingConvention = CallingConvention.StdCall;
