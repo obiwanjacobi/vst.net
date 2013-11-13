@@ -7,15 +7,17 @@ namespace Jacobi.Vst3.TestPlugin
 {
     public static class Exports
     {
-        private static PluginClassFactory _factory = 
-            new PluginClassFactory("Jacobi Software", "obiwanjacobi@hotmail.com", "http://vstnet.codeplex.com");
+        // This will automatically load dependent assemblies that were added as embedded resource to the project (root).
+        private static readonly AssemblyDependencyResourceLoader _dependencyLoader = new AssemblyDependencyResourceLoader();
+        private static PluginClassFactory _factory; // singleton
 
         [DllExport(ExportName = "InitDll", CallingConvention = Platform.DefaultCallingConvention)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static bool InitDll()
         {
-            _factory.Register(typeof(PluginComponent), PluginClassFactory.AudioModuleClassCategory);
-            _factory.Register(typeof(EditController), PluginClassFactory.ComponentControllerClassCategory);
+            _factory = new PluginClassFactory("Jacobi Software", "obiwanjacobi@hotmail.com", "http://vstnet.codeplex.com");
+            _factory.Register(typeof(PluginComponent), ClassRegistration.ObjectClasses.AudioModuleClass);
+            _factory.Register(typeof(EditController), ClassRegistration.ObjectClasses.ComponentControllerClass);
 
             return true;
         }
@@ -23,14 +25,14 @@ namespace Jacobi.Vst3.TestPlugin
         [DllExport(ExportName = "ExitDll", CallingConvention = Platform.DefaultCallingConvention)]
         public static void ExitDll()
         {
-            //_factory.Dispose();
+            _factory.Dispose();
+            _factory = null;
         }
 
         [DllExport(ExportName = "GetPluginFactory", CallingConvention = Platform.DefaultCallingConvention)]
         [return: MarshalAs(UnmanagedType.Interface)]
         public static IPluginFactory GetPluginFactory()
         {
-            //return new PluginFactory();
             return _factory;
         }
     }
