@@ -52,7 +52,8 @@ namespace Jacobi.Vst3.Plugin
         {
             None,
             AudioModuleClass,
-            ComponentControllerClass
+            ComponentControllerClass,
+            TestClass   // validator and test host
         }
     }
 }

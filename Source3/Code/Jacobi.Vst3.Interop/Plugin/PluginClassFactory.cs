@@ -15,6 +15,7 @@ namespace Jacobi.Vst3.Plugin
 
         public const string AudioModuleClassCategory = "Audio Module Class";
         public const string ComponentControllerClassCategory = "Component Controller Class";
+        public const string TestClassCategory = "Test Class";
 
         public PluginClassFactory(string vendor, string email, string url)
             : this(vendor, email, url, PFactoryInfo.FactoryFlags.NoFlags)
@@ -319,6 +320,9 @@ namespace Jacobi.Vst3.Plugin
 
                 case ClassRegistration.ObjectClasses.ComponentControllerClass:
                     return ComponentControllerClassCategory;
+
+                case ClassRegistration.ObjectClasses.TestClass:
+                    return TestClassCategory;
 
                 default:
                     throw new InvalidEnumArgumentException("objClass", (int)objClass, typeof(ClassRegistration.ObjectClasses));

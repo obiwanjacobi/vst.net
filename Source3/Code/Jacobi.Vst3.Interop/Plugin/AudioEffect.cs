@@ -81,7 +81,11 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int SetupProcessing(ref ProcessSetup setup)
         {
-            if (CanProcessSampleSize(setup.SymbolicSampleSize) != TResult.S_True)
+            if (this.IsActive)
+            {
+                return TResult.E_Unexpected;
+            }
+            if (!TResult.IsTrue(CanProcessSampleSize(setup.SymbolicSampleSize)))
             {
                 return TResult.S_False;
             }
@@ -96,7 +100,10 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int SetProcessing(byte state)
         {
-            if (!this.IsActive) return TResult.E_Unexpected;
+            if (!this.IsActive)
+            {
+                return TResult.E_Unexpected;
+            }
 
             this.IsProcessing = state != 0;
 
@@ -106,7 +113,5 @@ namespace Jacobi.Vst3.Plugin
         public abstract int Process(ref ProcessData data);
 
         #endregion
-
-        
     }
 }

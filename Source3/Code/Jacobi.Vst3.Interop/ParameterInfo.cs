@@ -10,13 +10,13 @@ namespace Jacobi.Vst3.Interop
         public UInt32 ParamId;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
-        public string Title;
+        public String Title;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
-        public string ShortTitle;
+        public String ShortTitle;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
-        public string Units;
+        public String Units;
 
         [MarshalAs(UnmanagedType.I4)]
         public Int32 StepCount;
@@ -28,7 +28,7 @@ namespace Jacobi.Vst3.Interop
         public Int32 UnitId;
 
         [MarshalAs(UnmanagedType.I4)]
-        ParameterFlags Flags;
+        public ParameterFlags Flags;
 
         [Flags]
         public enum ParameterFlags

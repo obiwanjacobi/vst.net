@@ -10,13 +10,13 @@ namespace Jacobi.Vst3.Interop
     public struct PFactoryInfo
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVendor)]
-        public string Vendor;
+        public String Vendor;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeUrl)]
-        public string Url;
+        public String Url;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeEmail)]
-        public string Email;
+        public String Email;
 
         [MarshalAs(UnmanagedType.I4)]
         public FactoryFlags Flags;

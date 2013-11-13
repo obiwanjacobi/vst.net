@@ -5,21 +5,35 @@ using System.Text;
 namespace Jacobi.Vst3.Interop
 {
     [ComImport]
-    [Guid(Interfaces.FUnknown)]
+    [Guid(Interfaces.IEditController)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    public interface IEditController
+    public interface IEditController : IPluginBase
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 SetComponentState([MarshalAs(UnmanagedType.Interface), In] IBStream state);
+        Int32 Initialize(
+            [MarshalAs(UnmanagedType.IUnknown), In] Object context);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 SetState([MarshalAs(UnmanagedType.Interface), In] IBStream state);
+        Int32 Terminate();
+
+        //---------------------------------------------------------------------
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetState([MarshalAs(UnmanagedType.Interface), In] IBStream state);
+        Int32 SetComponentState(
+            [MarshalAs(UnmanagedType.Interface), In] IBStream state);
+
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Error)]
+        Int32 SetState(
+            [MarshalAs(UnmanagedType.Interface), In] IBStream state);
+
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Error)]
+        Int32 GetState(
+            [MarshalAs(UnmanagedType.Interface), In] IBStream state);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.I4)]
@@ -27,40 +41,55 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetParameterInfo([MarshalAs(UnmanagedType.I4), In] Int32 paramIndex, [MarshalAs(UnmanagedType.Struct), In, Out] ref ParameterInfo info);
+        Int32 GetParameterInfo(
+            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex, 
+            [MarshalAs(UnmanagedType.Struct), In, Out] ref ParameterInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetParamStringByValue([MarshalAs(UnmanagedType.U4), In] UInt32 paramId, [MarshalAs(UnmanagedType.R8), In] Double valueNormalized, 
-                                  [MarshalAs(UnmanagedType.LPTStr, SizeConst = Constants.Fixed128), Out] StringBuilder @string);
+        Int32 GetParamStringByValue(
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.R8), In] Double valueNormalized, 
+            [MarshalAs(UnmanagedType.LPWStr, SizeConst = Constants.Fixed128), Out] StringBuilder @string);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 GetParamValueByString([MarshalAs(UnmanagedType.U4), In] UInt32 paramId, [MarshalAs(UnmanagedType.LPTStr, SizeConst = Constants.Fixed128), In] String @string,
-                                  [MarshalAs(UnmanagedType.R8), In, Out] ref Double valueNormalized);
+        Int32 GetParamValueByString(
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.LPWStr, SizeConst = Constants.Fixed128), In] String @string,
+            [MarshalAs(UnmanagedType.R8), In, Out] ref Double valueNormalized);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.R8)]
-        Double NormalizedParamToPlain([MarshalAs(UnmanagedType.U4), In] UInt32 paramId, [MarshalAs(UnmanagedType.R8), In] Double valueNormalized);
+        Double NormalizedParamToPlain(
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.R8), In] Double valueNormalized);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.R8)]
-        Double PlainParamToNormalized([MarshalAs(UnmanagedType.U4), In] UInt32 paramId, [MarshalAs(UnmanagedType.R8), In] Double plainValue);
+        Double PlainParamToNormalized(
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.R8), In] Double plainValue);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.R8)]
-        Double GetParamNormalized([MarshalAs(UnmanagedType.U4), In] UInt32 paramId);
+        Double GetParamNormalized(
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 SetParamNormalized([MarshalAs(UnmanagedType.I4), In] Int32 paramIndex, [MarshalAs(UnmanagedType.R8), In] Double value);
+        Int32 SetParamNormalized(
+            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex, 
+            [MarshalAs(UnmanagedType.R8), In] Double value);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 SetComponentHandler([MarshalAs(UnmanagedType.Interface), In] IComponentHandler handler);
+        Int32 SetComponentHandler(
+            [MarshalAs(UnmanagedType.Interface), In] IComponentHandler handler);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Interface)]
-        IPlugView CreateView([MarshalAs(UnmanagedType.LPTStr), In] String name);
+        IPlugView CreateView(
+            [MarshalAs(UnmanagedType.LPTStr), In] String name);
     }
 }

@@ -1,12 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Jacobi.Vst3.Interop;
+using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.Plugin
 {
     public static class VstExtensions
     {
+        public static IMessage CreateMessage(this IHostApplication host)
+        {
+            if (host == null)
+            {
+                throw new ArgumentException("host");
+            }
+
+            var msgType = typeof(IMessage);
+            var iid = msgType.GUID;
+            IntPtr ptr = IntPtr.Zero;
+
+            if (TResult.Succeeded(host.CreateInstance(ref iid, ref iid, ref ptr)))
+            {
+                return (IMessage)Marshal.GetTypedObjectForIUnknown(ptr, msgType);
+            }
+
+            return null;
+        }
+
         public static uint NumberOfSetBits(uint value)
         {
             // don't ask...
