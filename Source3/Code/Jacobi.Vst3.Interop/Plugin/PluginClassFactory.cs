@@ -56,8 +56,8 @@ namespace Jacobi.Vst3.Plugin
         {
             Register(new ClassRegistration
                 {
-                     ClassType = classType,
-                     ObjectClass = objClass,
+                    ClassType = classType,
+                    ObjectClass = objClass,
                 });
         }
 

@@ -38,7 +38,7 @@ namespace Jacobi.Vst3.Plugin
         private void InitializeAudioBuffers(IntPtr arrayPtr, int index)
         {
             IntPtr bufferPtr = IntPtr.Add(arrayPtr, index * SizeOfAudioBusBuffers);
-            
+
             Marshal.PtrToStructure(bufferPtr, _audioBuffers);
         }
 
@@ -74,7 +74,7 @@ namespace Jacobi.Vst3.Plugin
             Guard.ThrowIfOutOfRange("channel", channelIndex, 0, _audioBuffers.NumChannels);
 
             ulong mask = (ulong)(1 << channelIndex);
-            
+
             // reset (not-silent)
             _audioBuffers.SilenceFlags &= ~mask;
 

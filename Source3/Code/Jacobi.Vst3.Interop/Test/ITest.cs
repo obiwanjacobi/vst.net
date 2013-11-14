@@ -14,11 +14,11 @@ namespace Jacobi.Vst3.Interop.Test
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Bool)]
-    	bool Run ([MarshalAs(UnmanagedType.Interface), In] ITestResult testResult);
+        bool Run([MarshalAs(UnmanagedType.Interface), In] ITestResult testResult);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Bool)]
-    	bool Teardown();
+        bool Teardown();
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.LPWStr)]

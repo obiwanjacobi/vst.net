@@ -51,7 +51,7 @@ namespace Jacobi.Vst3.Plugin
             if (FindRegistration(svcType) == null)
             {
                 var svcReg = CreateServiceRegistration(svcType, null, null);
-                
+
                 _registrations.Add(svcType, svcReg);
 
                 return true;
