@@ -13,11 +13,11 @@ namespace Jacobi.Vst3.Interop
         String GetMessageID();
 
         [PreserveSig]
-	    void SetMessageID(
+        void SetMessageID(
             [MarshalAs(UnmanagedType.LPWStr), In] String id);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Interface)]
-	    IAttributeList GetAttributes();
+        IAttributeList GetAttributes();
     }
 }

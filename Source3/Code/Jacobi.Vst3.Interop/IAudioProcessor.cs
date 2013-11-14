@@ -11,15 +11,15 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 SetBusArrangements(
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), In] SpeakerArrangement[] inputs, 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), In] SpeakerArrangement[] inputs,
             [MarshalAs(UnmanagedType.I4), In] Int32 numIns,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3), In] SpeakerArrangement[] outputs, 
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3), In] SpeakerArrangement[] outputs,
             [MarshalAs(UnmanagedType.I4), In] Int32 numOuts);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 GetBusArrangement(
-            [MarshalAs(UnmanagedType.I4), In] BusDirections dir, 
+            [MarshalAs(UnmanagedType.I4), In] BusDirections dir,
             [MarshalAs(UnmanagedType.I4), In] Int32 index,
             [MarshalAs(UnmanagedType.U8), In, Out] ref SpeakerArrangement arr);
 

@@ -16,7 +16,7 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 PerformEdit(
-            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId,
             [MarshalAs(UnmanagedType.R8), In] Double valueNormalized);
 
         [PreserveSig]

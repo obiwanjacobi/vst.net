@@ -11,7 +11,7 @@ namespace Jacobi.Vst3.Interop
         Int32 BeginEditFromHost(
             [MarshalAs(UnmanagedType.U4), In] UInt32 paramID);
 
-    	Int32 EndEditFromHost(
+        Int32 EndEditFromHost(
             [MarshalAs(UnmanagedType.U4), In] UInt32 paramID);
     }
 }

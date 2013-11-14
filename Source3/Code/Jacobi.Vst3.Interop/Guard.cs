@@ -12,7 +12,7 @@ namespace Jacobi.Vst3.Interop
             if (value != null &&
                 value.Length < minLength || value.Length > maxLength)
             {
-                throw new ArgumentOutOfRangeException(parameterName, value, 
+                throw new ArgumentOutOfRangeException(parameterName, value,
                     String.Format("The length of the value '{0}' is not within range of {1}-{2}.", value, minLength, maxLength));
             }
         }

@@ -9,7 +9,7 @@ namespace Jacobi.Vst3.Interop
         [FieldOffset(0)]
         [MarshalAs(UnmanagedType.I4)]
         public Int32 NumChannels;		///< number of audio channels in bus
-        
+
         [FieldOffset(4)]
         [MarshalAs(UnmanagedType.U8)]
         public UInt64 SilenceFlags;	///< Bitset of silence state per channel
@@ -27,5 +27,5 @@ namespace Jacobi.Vst3.Interop
         //public Double** ChannelBuffers64;	///< sample buffers to process with 64-bit precision
     }
 
-    
+
 }

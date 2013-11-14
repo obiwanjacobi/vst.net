@@ -6,19 +6,18 @@ namespace Jacobi.Vst3.Interop
     [StructLayout(LayoutKind.Sequential, Pack = Platform.StructurePack)]
     public struct ProcessContext
     {
-        
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 State;					///< a combination of the values from \ref StatesAndFlags
 
         [MarshalAs(UnmanagedType.R8)]
         public Double SampleRate;				///< current sample rate (always valid)
-        
+
         [MarshalAs(UnmanagedType.I8)]
         public Int64 ProjectTimeSamples;	///< project time in samples (always valid)
 
         [MarshalAs(UnmanagedType.I8)]
         public Int64 SystemTime;				///< system time in nanoseconds (optional)
-        
+
         [MarshalAs(UnmanagedType.I8)]
         public Int64 ContinousTimeSamples;	///< project time, without loop (optional)
 
@@ -36,10 +35,10 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.R8)]
         public Double Tempo;					///< tempo in BPM (Beats Per Minute)
-        
+
         [MarshalAs(UnmanagedType.I4)]
         public Int32 TimeSigNumerator;			///< time signature numerator (e.g. 3 for 3/4)
-        
+
         [MarshalAs(UnmanagedType.I4)]
         public Int32 TimeSigDenominator;		///< time signature denominator (e.g. 4 for 3/4)
 
@@ -48,7 +47,7 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.I4)]
         public Int32 SmpteOffsetSubframes;		///< SMPTE (sync) offset in subframes (1/80 of frame)
-        
+
         [MarshalAs(UnmanagedType.Struct)]
         public FrameRate FrameRate;			///< frame rate
 

@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace Jacobi.Vst3.Interop
 {
     [NativeCppClass]
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Ansi, Pack=Platform.StructurePack)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
     public struct PClassInfo
     {
         public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
