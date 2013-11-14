@@ -112,6 +112,11 @@ namespace Jacobi.Vst3.Plugin
 
         public abstract int Process(ref ProcessData data);
 
+        public uint GetTailSamples()
+        {
+            return Constants.NoTailSamples;
+        }
+
         #endregion
     }
 }

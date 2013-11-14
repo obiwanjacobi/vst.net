@@ -176,7 +176,7 @@ namespace Jacobi.Vst3.Plugin
 
         protected virtual void FillClassInfo(ref PClassInfo info, ClassRegistration reg)
         {
-            info.Cardinality = Constants.ClassCardinalityManyInstances;
+            info.Cardinality = PClassInfo.ClassCardinalityManyInstances;
             info.Category = ObjectClassToCategory(reg.ObjectClass);
             info.ClassId = reg.ClassTypeId;
             info.Name = reg.DisplayName;
@@ -231,7 +231,7 @@ namespace Jacobi.Vst3.Plugin
 
         protected virtual void FillClassInfo2(ref PClassInfo2 info, ClassRegistration reg)
         {
-            info.Cardinality = Constants.ClassCardinalityManyInstances;
+            info.Cardinality = PClassInfo2.ClassCardinalityManyInstances;
             info.Category = ObjectClassToCategory(reg.ObjectClass);
             info.ClassFlags = reg.ClassFlags;
             info.ClassId = reg.ClassTypeId;
@@ -262,7 +262,7 @@ namespace Jacobi.Vst3.Plugin
 
         protected virtual void FillClassInfoW(ref PClassInfoW info, ClassRegistration reg)
         {
-            info.Cardinality = Constants.ClassCardinalityManyInstances;
+            info.Cardinality = PClassInfoW.ClassCardinalityManyInstances;
             info.Category.Value = ObjectClassToCategory(reg.ObjectClass);
             info.ClassFlags = reg.ClassFlags;
             info.ClassId = reg.ClassType.GUID;
