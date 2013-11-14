@@ -10,7 +10,7 @@ namespace Jacobi.Vst3.Interop.Test
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 AddTest ([MarshalAs(UnmanagedType.LPWStr), In] string name, [MarshalAs(UnmanagedType.Interface), In] ITest test);
+        Int32 AddTest([MarshalAs(UnmanagedType.LPWStr), In] string name, [MarshalAs(UnmanagedType.Interface), In] ITest test);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]

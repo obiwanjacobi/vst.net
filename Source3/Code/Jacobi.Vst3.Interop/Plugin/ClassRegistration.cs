@@ -38,7 +38,7 @@ namespace Jacobi.Vst3.Plugin
 
             protected set
             {
-                if (_categories != null) 
+                if (_categories != null)
                     throw new InvalidOperationException("Categories is already initialized.");
 
                 _categories = value;
