@@ -23,14 +23,14 @@ namespace Jacobi.Vst3.Plugin
         public virtual int Initialize(object context)
         {
             ServiceContainer.Unknown = context;
-            
+
             return TResult.S_OK;
         }
 
         public virtual int Terminate()
         {
             ServiceContainer.Dispose();
-            
+
             return TResult.S_OK;
         }
 

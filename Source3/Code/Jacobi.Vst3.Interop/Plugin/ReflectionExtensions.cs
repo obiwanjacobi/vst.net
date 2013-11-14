@@ -15,9 +15,9 @@ namespace Jacobi.Vst3.Plugin
 
             // TODO: this will probably fail when running in a managed host!
             var result = (from sf in stack.GetFrames().Reverse()
-                         let m = sf.GetMethod()
-                         where m != null && m.DeclaringType != null && m.DeclaringType.Assembly != null
-                         select m.DeclaringType.Assembly).FirstOrDefault();
+                          let m = sf.GetMethod()
+                          where m != null && m.DeclaringType != null && m.DeclaringType.Assembly != null
+                          select m.DeclaringType.Assembly).FirstOrDefault();
 
             return result;
         }
