@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Jacobi.Vst3.Interop;
 
 namespace Jacobi.Vst3.Plugin
 {
@@ -16,7 +17,7 @@ namespace Jacobi.Vst3.Plugin
         // maps to Category
         public ObjectClasses ObjectClass { get; set; }
 
-        public uint ClassFlags { get; set; }
+        public ComponentClassFlags ClassFlags { get; set; }
 
         // DisplayName on ClassType
         public string DisplayName { get; set; }

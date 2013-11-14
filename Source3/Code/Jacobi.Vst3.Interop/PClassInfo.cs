@@ -8,6 +8,8 @@ namespace Jacobi.Vst3.Interop
     [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Ansi, Pack=Platform.StructurePack)]
     public struct PClassInfo
     {
+        public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
+
         [MarshalAs(UnmanagedType.Struct)]
         public Guid ClassId;
 
@@ -25,6 +27,8 @@ namespace Jacobi.Vst3.Interop
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
     public struct PClassInfo2
     {
+        public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
+
         [MarshalAs(UnmanagedType.Struct)]
         public Guid ClassId;
 
@@ -40,7 +44,7 @@ namespace Jacobi.Vst3.Interop
         // --------------------------------------------------------------------
 
         [MarshalAs(UnmanagedType.U4)]
-        public UInt32 ClassFlags;
+        public ComponentClassFlags ClassFlags;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeSubCategories)]
         public String SubCategories;
@@ -55,10 +59,19 @@ namespace Jacobi.Vst3.Interop
         public String SdkVersion;
     }
 
+    public enum ComponentClassFlags
+    {
+        None = 0,
+        Distributable = 1 << 0,	///< Component can be run on remote computer
+        SimpleModeSupported = 1 << 1	///< Component supports simple IO mode (or works in simple mode anyway) see \ref vst3IoMode
+    }
+
     [NativeCppClass]
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = Platform.StructurePack)]
     public struct PClassInfoW
     {
+        public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
+
         [MarshalAs(UnmanagedType.Struct)]
         public Guid ClassId;
 
@@ -73,7 +86,7 @@ namespace Jacobi.Vst3.Interop
         // --------------------------------------------------------------------
 
         [MarshalAs(UnmanagedType.U4)]
-        public UInt32 ClassFlags;
+        public ComponentClassFlags ClassFlags;
 
         public AnsiSubCategories SubCategories;
 

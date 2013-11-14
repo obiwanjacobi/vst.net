@@ -7,22 +7,28 @@ namespace Jacobi.Vst3.Interop
 {
     internal static class Interfaces
     {
-        // factory interfaces
+        // base interfaces
+        public const string IPluginBase = "22888DDB-156E-45AE-8358-B34808190625";
         public const string IPluginFactory = "7A4D811C-5211-4A1F-AED9-D2EE0B43BF9F";
         public const string IPluginFactory2 = "0007B650-F24B-4C0B-A464-EDB9F00B2ABB";
         public const string IPluginFactory3 = "4555A2AB-C123-4E57-9B12-291036878931";
 
         // plugin interfaces
-        public const string IPluginBase = "22888DDB-156E-45AE-8358-B34808190625";
         public const string IComponent = "E831FF31-F2D5-4301-928E-BBEE25697802";
         public const string IAudioProcessor = "42043F99-B7DA-453C-A569-E79D9AAEC33D";
+        public const string IAudioPresentationLatency = "309ECE78-EB7D-4FAE-8B22-25D909FD08B6";
         public const string IEditController = "DCD7BBE3-7742-448D-A874-AACC979C759E";
         public const string IEditController2 = "7F4EFE59-F320-4967-AC27-A3AEAFB63038";
         public const string IBStream = "C3BF6EA2-3099-4752-9B6B-F9901EE33E9B";
         public const string IParameterChanges = "A4779663-0BB6-4A56-B443-84A8466FEB9D";
         public const string IParamValueQueue = "01263A18-ED07-4F6F-98C9-D3564686F9BA";
         public const string IEventList = "3A2C4214-3463-49FE-B2C4-F397B9695A44";
-        
+        public const string IMidiMapping = "DF0FF9F7-49B7-4669-B63A-B7327ADBF5E5";
+        public const string IEditControllerHostEditing = "C1271208-7059-4098-B9DD-34B36BB0195E";
+        public const string IUnitInfo = "3D4BD6B5-913A-4FD2-A886-E768A5EB92C1";
+        public const string IProgramListData = "8683B01F-7B35-4F70-A265-1DEC353AF4FF";
+        public const string IUnitData = "6C389611-D391-455D-B870-B83394A0EFDD";
+
         // messaging interfaces
         public const string IConnectionPoint = "70A4156F-6E6E-4026-9891-48BFAA60D8D1";
         public const string IMessage = "936F033B-C6C0-47DB-BB08-82F813C1E613";
@@ -39,6 +45,7 @@ namespace Jacobi.Vst3.Interop
         public const string IComponentHandler = "93A0BEA3-0BD0-45DB-8E89-0B0CC1E46AC6";
         public const string IComponentHandler2 = "F040B4B3-A360-45EC-ABCD-C045B4D5A2CC";
         public const string IComponentHandler3 = "69F11617-D26B-400D-A4B6-B9647B6EBBAB";
+        public const string IUnitHandler = "4B5147F8-4654-486B-8DAB-30BA163A3C56";
 
         // marker interfaces
         public const string IVst3ToVst2Wrapper = "29633AEC-1D1C-47E2-BB85-B97BD36EAC61";

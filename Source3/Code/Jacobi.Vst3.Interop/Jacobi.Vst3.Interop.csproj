@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeIds.cs" />
     <Compile Include="AudioBusBuffers.cs" />
     <Compile Include="BusDirections.cs" />
     <Compile Include="BusInfo.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Guard.cs" />
     <Compile Include="Host\BStream.cs" />
     <Compile Include="IAttributeList.cs" />
+    <Compile Include="IAudioPresentationLatency.cs" />
     <Compile Include="IAudioProcessor.cs" />
     <Compile Include="IBStream.cs" />
     <Compile Include="IComponent.cs" />
@@ -100,9 +102,11 @@
     <Compile Include="IContextMenuTarget.cs" />
     <Compile Include="IEditController.cs" />
     <Compile Include="IEditController2.cs" />
+    <Compile Include="IEditControllerHostEditing.cs" />
     <Compile Include="IEventList.cs" />
     <Compile Include="IHostApplication.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IMidiMapping.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="IoModes.cs" />
     <Compile Include="IParameterChanges.cs" />
@@ -111,10 +115,18 @@
     <Compile Include="IPluginBase.cs" />
     <Compile Include="IPluginFactory.cs" />
     <Compile Include="IPlugView.cs" />
+    <Compile Include="IProgramListData.cs" />
+    <Compile Include="IUnitData.cs" />
+    <Compile Include="IUnitHandler.cs" />
+    <Compile Include="IUnitInfo.cs" />
     <Compile Include="IVst3ToAUWrapper.cs" />
     <Compile Include="IVst3ToVst2Wrapper.cs" />
+    <Compile Include="KeyModifier.cs" />
     <Compile Include="KnobMode.cs" />
     <Compile Include="MediaTypes.cs" />
+    <Compile Include="MusicalCharacter.cs" />
+    <Compile Include="MusicalInstrument.cs" />
+    <Compile Include="MusicalStyle.cs" />
     <Compile Include="NoteExpressionTextEvent.cs" />
     <Compile Include="NoteExpressionValueEvent.cs" />
     <Compile Include="NoteOffEvent.cs" />
@@ -145,9 +157,12 @@
     <Compile Include="ProcessData.cs" />
     <Compile Include="ProcessModes.cs" />
     <Compile Include="ProcessSetup.cs" />
+    <Compile Include="ProgramListInfo.cs" />
     <Compile Include="RestartFlags.cs" />
     <Compile Include="RoutingInfo.cs" />
     <Compile Include="SpeakerArrangement.cs" />
+    <Compile Include="SpeakerArrangementSpeakersNames.cs" />
+    <Compile Include="SpeakerArrangementNamess.cs" />
     <Compile Include="Speakers.cs" />
     <Compile Include="SymbolicSampleSizes.cs" />
     <Compile Include="Test\ITest.cs" />
@@ -155,7 +170,9 @@
     <Compile Include="Test\ITestResult.cs" />
     <Compile Include="Test\ITestSuite.cs" />
     <Compile Include="TResult.cs" />
+    <Compile Include="UnitInfo.cs" />
     <Compile Include="ViewRect.cs" />
+    <Compile Include="VirtualKeyCodes.cs" />
     <None Include="_ITemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
