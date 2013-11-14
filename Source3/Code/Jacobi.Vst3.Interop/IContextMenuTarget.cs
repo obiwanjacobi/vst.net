@@ -10,7 +10,7 @@ namespace Jacobi.Vst3.Interop
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 ExecuteMenuItem (
+        Int32 ExecuteMenuItem(
             [MarshalAs(UnmanagedType.I4), In]Int32 tag);
     }
 }

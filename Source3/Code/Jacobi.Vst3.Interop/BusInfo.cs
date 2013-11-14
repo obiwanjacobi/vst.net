@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.Interop
@@ -26,11 +23,11 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.I4)]
         public BusFlags Flags;				///< flags - a combination of \ref BusFlags
-        
+
         public enum BusFlags
         {
             None = 0,
             DefaultActive = 1 << 0	///< bus active per default
-        };		
+        };
     }
 }

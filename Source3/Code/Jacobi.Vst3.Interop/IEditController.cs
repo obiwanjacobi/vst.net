@@ -42,33 +42,33 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 GetParameterInfo(
-            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex, 
+            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex,
             [MarshalAs(UnmanagedType.Struct), In, Out] ref ParameterInfo info);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 GetParamStringByValue(
-            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
-            [MarshalAs(UnmanagedType.R8), In] Double valueNormalized, 
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId,
+            [MarshalAs(UnmanagedType.R8), In] Double valueNormalized,
             [MarshalAs(UnmanagedType.LPWStr, SizeConst = Constants.Fixed128), Out] StringBuilder @string);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 GetParamValueByString(
-            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId,
             [MarshalAs(UnmanagedType.LPWStr, SizeConst = Constants.Fixed128), In] String @string,
             [MarshalAs(UnmanagedType.R8), In, Out] ref Double valueNormalized);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.R8)]
         Double NormalizedParamToPlain(
-            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId,
             [MarshalAs(UnmanagedType.R8), In] Double valueNormalized);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.R8)]
         Double PlainParamToNormalized(
-            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId, 
+            [MarshalAs(UnmanagedType.U4), In] UInt32 paramId,
             [MarshalAs(UnmanagedType.R8), In] Double plainValue);
 
         [PreserveSig]
@@ -79,7 +79,7 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 SetParamNormalized(
-            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex, 
+            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex,
             [MarshalAs(UnmanagedType.R8), In] Double value);
 
         [PreserveSig]

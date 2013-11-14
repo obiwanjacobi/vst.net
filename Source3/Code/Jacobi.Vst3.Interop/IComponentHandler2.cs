@@ -15,15 +15,15 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 RequestOpenEditor(
+        Int32 RequestOpenEditor(
             [MarshalAs(UnmanagedType.LPStr), In] String name);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 StartGroupEdit();
+        Int32 StartGroupEdit();
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 FinishGroupEdit();
+        Int32 FinishGroupEdit();
     }
 }

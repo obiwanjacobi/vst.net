@@ -12,17 +12,17 @@ namespace Jacobi.Vst3.Interop
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 ProgramDataSupported(
             [MarshalAs(UnmanagedType.I4), In] Int32 listId);
-	
-	    [PreserveSig]
+
+        [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 GetProgramData(
+        Int32 GetProgramData(
             [MarshalAs(UnmanagedType.I4), In] Int32 listId,
             [MarshalAs(UnmanagedType.I4), In] Int32 programIndex,
             [MarshalAs(UnmanagedType.Interface), In] IBStream data);
-	
-	    [PreserveSig]
+
+        [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 SetProgramData(
+        Int32 SetProgramData(
             [MarshalAs(UnmanagedType.I4), In] Int32 listId,
             [MarshalAs(UnmanagedType.I4), In] Int32 programIndex,
             [MarshalAs(UnmanagedType.Interface), In] IBStream data);

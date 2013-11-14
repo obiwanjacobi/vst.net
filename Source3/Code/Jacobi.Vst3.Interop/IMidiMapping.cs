@@ -13,7 +13,7 @@ namespace Jacobi.Vst3.Interop
         Int32 GetMidiControllerAssignment(
             [MarshalAs(UnmanagedType.I4), In] Int32 busIndex,
             [MarshalAs(UnmanagedType.I2), In] Int16 channel,
-            [MarshalAs(UnmanagedType.I2), In] Int16 midiControllerNumber, 
+            [MarshalAs(UnmanagedType.I2), In] Int16 midiControllerNumber,
             [MarshalAs(UnmanagedType.U4), In, Out] ref UInt32 paramId);
     }
 }

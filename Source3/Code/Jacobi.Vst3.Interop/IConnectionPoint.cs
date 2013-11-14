@@ -10,14 +10,14 @@ namespace Jacobi.Vst3.Interop
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 Connect (
+        Int32 Connect(
             [MarshalAs(UnmanagedType.Interface), In] IConnectionPoint other);
 
-	    [PreserveSig]
+        [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 Disconnect(
             [MarshalAs(UnmanagedType.Interface), In] IConnectionPoint other);
-	    
+
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 Notify(

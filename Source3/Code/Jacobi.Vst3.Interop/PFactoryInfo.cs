@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 namespace Jacobi.Vst3.Interop
 {
     // Note CharSet is not the same as the platform global value.
-    [NativeCppClass]
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
     public struct PFactoryInfo
     {

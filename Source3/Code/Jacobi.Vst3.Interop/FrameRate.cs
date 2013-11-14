@@ -8,10 +8,10 @@ namespace Jacobi.Vst3.Interop
     {
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 framesPerSecond;		///< frame rate
-        
+
         [MarshalAs(UnmanagedType.U4)]
         public FrameRateFlags flags;				///< flags #FrameRateFlags
-        
+
         public enum FrameRateFlags
         {
             kPullDownRate = 1 << 0, ///< for ex. HDTV: 23.976 fps with 24 as frame rate
