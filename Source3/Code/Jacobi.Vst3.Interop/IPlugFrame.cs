@@ -11,7 +11,7 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 ResizeView(
-            [MarshalAs(UnmanagedType.Interface), In] IPlugView view, 
+            [MarshalAs(UnmanagedType.Interface), In] IPlugView view,
             [MarshalAs(UnmanagedType.Struct), In] ref ViewRect newSize);
     }
 }

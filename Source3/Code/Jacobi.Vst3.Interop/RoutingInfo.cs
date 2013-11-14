@@ -8,10 +8,10 @@ namespace Jacobi.Vst3.Interop
     {
         [MarshalAs(UnmanagedType.I4)]
         public MediaTypes MediaType;	///< media type see \ref MediaTypes
-                                        ///
+
         [MarshalAs(UnmanagedType.I4)]
         public Int32 BusIndex;			///< bus index
-                                        ///
+
         [MarshalAs(UnmanagedType.I4)]
         public Int32 Channel;			///< channel (-1 for all channels)
     }

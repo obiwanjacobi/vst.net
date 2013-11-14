@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Jacobi.Vst3.Interop
+﻿namespace Jacobi.Vst3.Interop
 {
     public static class Constants
     {
@@ -26,6 +21,6 @@ namespace Jacobi.Vst3.Interop
         public const string EditorViewType = "editor";
 
         // IUnitHandler.NotifyProgramListChange
-        public const Int32 AllProgramInvalid = -1;		///< all program information is invalid
+        public const int AllProgramInvalid = -1;		///< all program information is invalid
     }
 }

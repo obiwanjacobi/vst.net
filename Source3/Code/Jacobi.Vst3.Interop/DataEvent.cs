@@ -8,7 +8,7 @@ namespace Jacobi.Vst3.Interop
     {
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 Size;			///< size of the bytes
-	    
+
         [MarshalAs(UnmanagedType.U4)]
         public DataTypes Type;			///< type of this data block (see \ref DataTypes)
 
@@ -16,8 +16,8 @@ namespace Jacobi.Vst3.Interop
         public IntPtr Bytes;		///< pointer to the data block
 
         public enum DataTypes
-	    {
-		    MidiSysEx = 0		///< for MIDI system exclusive message
-	    };
+        {
+            MidiSysEx = 0		///< for MIDI system exclusive message
+        };
     }
 }

@@ -17,7 +17,7 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.I4)]
         Int32 ParentUnitId;			///< identifier of parent unit (kNoParentUnitId: does not apply, this unit is the root)
-        
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
         String Name;					///< name, optional for the root component, required otherwise
 

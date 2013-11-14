@@ -17,21 +17,21 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 Write (
+        Int32 Write(
             [MarshalAs(UnmanagedType.SysInt), In] IntPtr buffer,
             [MarshalAs(UnmanagedType.I4), In] Int32 numBytes,
             [MarshalAs(UnmanagedType.I4), In, Out] ref Int32 numBytesWritten);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 Seek (
+        Int32 Seek(
             [MarshalAs(UnmanagedType.I8), In] Int64 pos,
             [MarshalAs(UnmanagedType.I4), In] StreamSeekMode mode,
             [MarshalAs(UnmanagedType.I8), In, Out] ref Int64 result);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 Tell (
+        Int32 Tell(
             [MarshalAs(UnmanagedType.I8), In] ref Int64 pos);
     }
 

@@ -20,7 +20,7 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.I4)]
         public Int32 NumOutputs;			///< number of audio output buses
-        
+
         // AudioBusBuffers Inputs[NumBuses]
         [MarshalAs(UnmanagedType.SysInt)]
         public IntPtr Inputs;	///< buffers of input buses
@@ -33,7 +33,7 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.Interface)]
         public IParameterChanges InputParameterChanges;	///< incoming parameter changes for this block 
-        
+
         [MarshalAs(UnmanagedType.Interface)]
         public IParameterChanges OutputParameterChanges;	///< outgoing parameter changes for this block (optional)
 
@@ -42,7 +42,7 @@ namespace Jacobi.Vst3.Interop
 
         [MarshalAs(UnmanagedType.Interface)]
         public IEventList OutputEvents;				///< outgoing events for this block (optional)
-        
+
         // ProcessContext pointer
         [MarshalAs(UnmanagedType.SysInt)]
         public IntPtr ProcessContext;			///< processing context (optional, but most welcome)

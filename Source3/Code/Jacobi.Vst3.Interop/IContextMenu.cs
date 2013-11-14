@@ -10,30 +10,30 @@ namespace Jacobi.Vst3.Interop
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.I4)]
-    	Int32 GetItemCount();
+        Int32 GetItemCount();
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 GetItem(
+        Int32 GetItem(
             [MarshalAs(UnmanagedType.I4), In] Int32 index,
             [MarshalAs(UnmanagedType.Struct), In, Out] ref ContextMenuItem item,
             [MarshalAs(UnmanagedType.Interface), In, Out] ref IContextMenuTarget target);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 AddItem(
+        Int32 AddItem(
             [MarshalAs(UnmanagedType.Struct), In] ref ContextMenuItem item,
             [MarshalAs(UnmanagedType.Interface), In] IContextMenuTarget target);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 RemoveItem(
+        Int32 RemoveItem(
             [MarshalAs(UnmanagedType.Struct), In] ref ContextMenuItem item,
             [MarshalAs(UnmanagedType.Interface), In] IContextMenuTarget target);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 Popup(
+        Int32 Popup(
             [MarshalAs(UnmanagedType.I4), In] Int32 x,
             [MarshalAs(UnmanagedType.I4), In] Int32 y);
     }

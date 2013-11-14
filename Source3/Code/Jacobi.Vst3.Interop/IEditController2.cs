@@ -15,12 +15,12 @@ namespace Jacobi.Vst3.Interop
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-	    Int32 OpenHelp(
+        Int32 OpenHelp(
             [MarshalAs(UnmanagedType.U1), In] Boolean onlyCheck);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-    	Int32 OpenAboutBox(
+        Int32 OpenAboutBox(
             [MarshalAs(UnmanagedType.U1), In] Boolean onlyCheck);
     }
 }

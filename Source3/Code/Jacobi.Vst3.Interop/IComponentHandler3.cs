@@ -11,7 +11,7 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Interface)]
         IContextMenu CreateContextMenu(
-            [MarshalAs(UnmanagedType.Interface), In] IPlugView plugView, 
+            [MarshalAs(UnmanagedType.Interface), In] IPlugView plugView,
             [MarshalAs(UnmanagedType.U4), In, Out] ref UInt32 paramID);
     }
 }
