@@ -11,7 +11,7 @@ namespace Jacobi.Vst3.TestPlugin
         private static readonly AssemblyDependencyResourceLoader _dependencyLoader = new AssemblyDependencyResourceLoader();
         private static PluginClassFactory _factory; // singleton
 
-        [DllExport(ExportName = "InitDll", CallingConvention = Platform.DefaultCallingConvention)]
+        [DllExport(ExportName = "InitDll", CallingConvention = Platform.CallingConvention)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static bool InitDll()
         {
@@ -22,14 +22,14 @@ namespace Jacobi.Vst3.TestPlugin
             return true;
         }
 
-        [DllExport(ExportName = "ExitDll", CallingConvention = Platform.DefaultCallingConvention)]
+        [DllExport(ExportName = "ExitDll", CallingConvention = Platform.CallingConvention)]
         public static void ExitDll()
         {
             _factory.Dispose();
             _factory = null;
         }
 
-        [DllExport(ExportName = "GetPluginFactory", CallingConvention = Platform.DefaultCallingConvention)]
+        [DllExport(ExportName = "GetPluginFactory", CallingConvention = Platform.CallingConvention)]
         [return: MarshalAs(UnmanagedType.Interface)]
         public static IPluginFactory GetPluginFactory()
         {
