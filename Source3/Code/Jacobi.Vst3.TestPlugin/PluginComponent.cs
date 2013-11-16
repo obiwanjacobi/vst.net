@@ -50,7 +50,7 @@ namespace Jacobi.Vst3.TestPlugin
             // flushing parameters
             if (data.NumInputs == 0 || data.NumOutputs == 0)
             {
-                return TResult.S_False;
+                return TResult.S_OK;
             }
 
             if (data.NumInputs != _audioInputs.Count || data.NumOutputs != _audioOutputs.Count)
