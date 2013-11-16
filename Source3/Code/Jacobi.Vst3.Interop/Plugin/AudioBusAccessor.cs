@@ -11,7 +11,7 @@ namespace Jacobi.Vst3.Plugin
         private static int SizeOfDoublePtr = Marshal.SizeOf(typeof(Double*));
 
         private SymbolicSampleSizes _sampleSize;
-        private AudioBusBuffers _audioBuffers = new AudioBusBuffers();
+        private AudioBusBuffers _audioBuffers;
         private BusDirections _busDir;
         private int _numSamples;
 
@@ -39,7 +39,7 @@ namespace Jacobi.Vst3.Plugin
         {
             IntPtr bufferPtr = IntPtr.Add(arrayPtr, index * SizeOfAudioBusBuffers);
 
-            Marshal.PtrToStructure(bufferPtr, _audioBuffers);
+            _audioBuffers = (AudioBusBuffers)Marshal.PtrToStructure(bufferPtr, typeof(AudioBusBuffers));
         }
 
         public BusDirections BusDirection

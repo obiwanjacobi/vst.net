@@ -34,6 +34,7 @@
         public const string IDependent = "F52B7AAE-DE72-416d-8AF1-8ACE9DD7BD5E";
         public const string INoteExpressionController = "B7F8F859-4123-4872-9116-95814F3721A3";
         public const string IKeyswitchController = "1F2F76D3-BFFB-4B96-B995-27A55EBCCEF4";
+        public const string IXmlRepresentationController = "A81A0471-48C3-4DC4-AC30-C9E13C8393D5";
 
         // messaging interfaces
         public const string IConnectionPoint = "70A4156F-6E6E-4026-9891-48BFAA60D8D1";
