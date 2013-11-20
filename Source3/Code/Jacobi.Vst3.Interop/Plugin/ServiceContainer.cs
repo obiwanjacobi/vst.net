@@ -88,7 +88,6 @@ namespace Jacobi.Vst3.Plugin
             return false;
         }
 
-
         #region IServiceProvider Members
 
         public object GetService(Type serviceType)
@@ -148,11 +147,11 @@ namespace Jacobi.Vst3.Plugin
         private ServiceRegistration CreateServiceRegistration(Type svcType, object instance, ObjectCreatorCallback callback)
         {
             return new ServiceRegistration()
-            {
-                ServiceType = svcType,
-                Instance = instance,
-                Callback = callback,
-            };
+                {
+                    ServiceType = svcType,
+                    Instance = instance,
+                    Callback = callback,
+                };
         }
 
         #region IDisposable Members

@@ -22,6 +22,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int Initialize(object context)
         {
+            System.Diagnostics.Trace.WriteLine("IPluginBase.Initialize");
+
             ServiceContainer.Unknown = context;
 
             return TResult.S_OK;
@@ -29,6 +31,10 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int Terminate()
         {
+            System.Diagnostics.Trace.WriteLine("IPluginBase.Terminate");
+
+            _peer = null;
+
             ServiceContainer.Dispose();
 
             return TResult.S_OK;
@@ -40,6 +46,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int Connect(IConnectionPoint other)
         {
+            System.Diagnostics.Trace.WriteLine("IConnectionPoint.Connect");
+
             if (other == null)
             {
                 return TResult.E_InvalidArg;
@@ -56,6 +64,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int Disconnect(IConnectionPoint other)
         {
+            System.Diagnostics.Trace.WriteLine("IConnectionPoint.Disconnect");
+
             if (_peer != null && _peer == other)
             {
                 _peer = null;
@@ -68,6 +78,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int Notify(IMessage message)
         {
+            System.Diagnostics.Trace.WriteLine("IConnectionPoint.Notify");
+
             if (message == null)
             {
                 return TResult.E_InvalidArg;

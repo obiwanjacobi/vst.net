@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://tempuri.org/VST-Remote-1.1" elementFormDefault="qualified" targetNamespace="http://tempuri.org/VST-Remote-1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns="http://dtd.steinberg.de/VST-Remote-1.1" elementFormDefault="qualified" targetNamespace="http://dtd.steinberg.de/VST-Remote-1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="plugin">
     <xs:complexType>
       <xs:attribute name="classID" type="xs:string" use="required" />

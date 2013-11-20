@@ -52,13 +52,17 @@ namespace Jacobi.Vst3.Plugin
 
         public Version DefaultVersion { get; set; }
 
-        public void Register(Type classType, ClassRegistration.ObjectClasses objClass)
+        public ClassRegistration Register(Type classType, ClassRegistration.ObjectClasses objClass)
         {
-            Register(new ClassRegistration
+            var reg = new ClassRegistration
                 {
                     ClassType = classType,
                     ObjectClass = objClass,
-                });
+                };
+
+            Register(reg);
+
+            return reg;
         }
 
         public void Register(ClassRegistration registration)

@@ -11,6 +11,6 @@ namespace Jacobi.Vst3.Interop
         public const int StructurePack = 16;
 #endif
         public const CharSet CharacterSet = CharSet.Unicode;
-        public const CallingConvention CallingConvention = CallingConvention.StdCall;
+        public const CallingConvention DefaultCallingConvention = CallingConvention.StdCall;
     }
 }

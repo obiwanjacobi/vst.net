@@ -90,6 +90,6 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Interface)]
         IPlugView CreateView(
-            [MarshalAs(UnmanagedType.LPTStr), In] String name);
+            [MarshalAs(UnmanagedType.LPStr), In] String name);
     }
 }

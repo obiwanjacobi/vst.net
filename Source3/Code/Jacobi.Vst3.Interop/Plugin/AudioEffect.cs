@@ -19,6 +19,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int SetBusArrangements(SpeakerArrangement[] inputs, int numIns, SpeakerArrangement[] outputs, int numOuts)
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.SetBusArrangements");
+
             int index = 0;
             var busses = GetBusCollection(MediaTypes.Audio, BusDirections.Input);
 
@@ -56,6 +58,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int GetBusArrangement(BusDirections dir, int index, ref SpeakerArrangement arr)
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.GetBusArrangement(" + dir + ", " + index + ")");
+
             var busses = GetBusCollection(MediaTypes.Audio, dir);
 
             if (busses == null)
@@ -76,11 +80,15 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual uint GetLatencySamples()
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.CanProcessSampleSize");
+
             return 0;
         }
 
         public virtual int SetupProcessing(ref ProcessSetup setup)
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.SetupProcessing");
+
             if (this.IsActive)
             {
                 return TResult.E_Unexpected;
@@ -98,14 +106,16 @@ namespace Jacobi.Vst3.Plugin
             return TResult.S_True;
         }
 
-        public virtual int SetProcessing(byte state)
+        public virtual int SetProcessing(bool state)
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.SetProcessing(" + state + ")");
+
             if (!this.IsActive)
             {
                 return TResult.E_Unexpected;
             }
 
-            this.IsProcessing = state != 0;
+            this.IsProcessing = state;
 
             return TResult.S_OK;
         }
@@ -114,6 +124,8 @@ namespace Jacobi.Vst3.Plugin
 
         public uint GetTailSamples()
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.GetTailSamples");
+
             return Constants.NoTailSamples;
         }
 

@@ -220,9 +220,9 @@ namespace Jacobi.Vst3.Plugin
             if (_audioBuffers.ChannelBuffers32 != IntPtr.Zero &&
                 !IsChannelSilent(channelIndex))
             {
-                IntPtr bufferPtr = IntPtr.Add(_audioBuffers.ChannelBuffers32, channelIndex * SizeOfSinglePtr);
+                float** ptr = (float**)_audioBuffers.ChannelBuffers32.ToPointer();
 
-                return (float*)bufferPtr.ToPointer();
+                return ptr[channelIndex];
             }
 
             return null;
@@ -239,9 +239,9 @@ namespace Jacobi.Vst3.Plugin
             if (_audioBuffers.ChannelBuffers64 != IntPtr.Zero &&
                 !IsChannelSilent(channelIndex))
             {
-                IntPtr bufferPtr = IntPtr.Add(_audioBuffers.ChannelBuffers64, channelIndex * SizeOfDoublePtr);
+                double** ptr = (double**)_audioBuffers.ChannelBuffers64.ToPointer();
 
-                return (double*)bufferPtr.ToPointer();
+                return ptr[channelIndex];
             }
 
             return null;
