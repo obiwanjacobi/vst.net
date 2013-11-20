@@ -9,19 +9,20 @@ namespace Jacobi.Vst3.Interop.Test
     public interface ITest
     {
         [PreserveSig]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        bool Setup();
+        [return: MarshalAs(UnmanagedType.U1)]
+        Boolean Setup();
 
         [PreserveSig]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        bool Run([MarshalAs(UnmanagedType.Interface), In] ITestResult testResult);
+        [return: MarshalAs(UnmanagedType.U1)]
+        Boolean Run(
+            [MarshalAs(UnmanagedType.Interface), In] ITestResult testResult);
 
         [PreserveSig]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        bool Teardown();
+        [return: MarshalAs(UnmanagedType.U1)]
+        Boolean Teardown();
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.LPWStr)]
-        string GetDescription();
+        String GetDescription();
     }
 }

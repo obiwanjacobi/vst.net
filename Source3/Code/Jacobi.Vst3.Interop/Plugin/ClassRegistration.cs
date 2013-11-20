@@ -36,7 +36,7 @@ namespace Jacobi.Vst3.Plugin
                 return _categories;
             }
 
-            protected set
+            set
             {
                 if (_categories != null)
                     throw new InvalidOperationException("Categories is already initialized.");
@@ -54,7 +54,7 @@ namespace Jacobi.Vst3.Plugin
             None,
             AudioModuleClass,
             ComponentControllerClass,
-            TestClass   // validator and test host
+            TestClass   // validator (and test host?)
         }
     }
 }

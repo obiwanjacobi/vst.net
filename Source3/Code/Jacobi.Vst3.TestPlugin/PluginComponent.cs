@@ -8,14 +8,14 @@ namespace Jacobi.Vst3.TestPlugin
     [System.ComponentModel.DisplayName("My Plugin Component")]
     [Guid("599B4AD4-932E-4B35-B8A7-E01508FD1AAB")]
     [ClassInterface(ClassInterfaceType.None)]
-    class PluginComponent : AudioEffect, IAudioProcessor, IComponent, IPluginBase
+    class PluginComponent : AudioEffect
     {
         private BusCollection _audioInputs = new BusCollection(MediaTypes.Audio, BusDirections.Input);
         private BusCollection _audioOutputs = new BusCollection(MediaTypes.Audio, BusDirections.Output);
 
         public PluginComponent()
         {
-            this.ControlledClassId = typeof(EditController).GUID;
+            this.ControlledClassId = typeof(MyEditController).GUID;
 
             _audioInputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Input", BusTypes.Main));
             _audioOutputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Output", BusTypes.Main));
@@ -23,11 +23,17 @@ namespace Jacobi.Vst3.TestPlugin
 
         public override int CanProcessSampleSize(SymbolicSampleSizes symbolicSampleSize)
         {
+            System.Diagnostics.Trace.WriteLine("IAudioProcessor.CanProcessSampleSize(" + symbolicSampleSize + ")");
+
             return symbolicSampleSize == SymbolicSampleSizes.Sample32 ? TResult.S_True : TResult.S_False;
         }
 
         public override int Process(ref ProcessData data)
         {
+            //System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: numSamples=" + data.NumSamples);
+
+            return TResult.S_OK;
+
             int result = ProcessInParameters(ref data);
 
             if (TResult.Failed(result))
@@ -80,21 +86,21 @@ namespace Jacobi.Vst3.TestPlugin
                 var outputRight = outputBus.GetUnsafeBuffer32(1);
 
                 // silent inputs result in silent outputs
-                outputBus.SetChannelSilent(0, inputLeft == null);
-                outputBus.SetChannelSilent(1, inputRight == null);
+                //outputBus.SetChannelSilent(0, inputLeft == null);
+                //outputBus.SetChannelSilent(1, inputRight == null);
 
                 // copy samples
-                for (int i = 0; i < outputBus.SampleCount; i++)
-                {
-                    if (outputLeft != null && inputLeft != null)
-                    {
-                        outputLeft[i] = inputLeft[i];
-                    }
-                    if (outputRight != null && inputRight != null)
-                    {
-                        outputRight[i] = inputRight[i];
-                    }
-                }
+                //for (int i = 0; i < outputBus.SampleCount; i++)
+                //{
+                //    if (outputLeft != null && inputLeft != null)
+                //    {
+                //        outputLeft[i] = inputLeft[i];
+                //    }
+                //    if (outputRight != null && inputRight != null)
+                //    {
+                //        outputRight[i] = inputRight[i];
+                //    }
+                //}
             }
 
             return TResult.S_OK;

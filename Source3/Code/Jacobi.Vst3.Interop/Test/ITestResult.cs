@@ -9,9 +9,9 @@ namespace Jacobi.Vst3.Interop.Test
     public interface ITestResult
     {
         [PreserveSig]
-        void AddErrorMessage([MarshalAs(UnmanagedType.LPWStr), In]string msg);
+        void AddErrorMessage([MarshalAs(UnmanagedType.LPWStr), In] String msg);
 
         [PreserveSig]
-        void AddMessage([MarshalAs(UnmanagedType.LPWStr), In]string msg);
+        void AddMessage([MarshalAs(UnmanagedType.LPWStr), In] String msg);
     }
 }

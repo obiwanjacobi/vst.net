@@ -113,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyDependencyResourceLoader.cs" />
-    <Compile Include="EditController.cs" />
+    <Compile Include="MyEditController.cs" />
     <Compile Include="Exports.cs" />
     <Compile Include="PluginComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,7 +137,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="../packages/UnmanagedExports.1.2.4.23262/tools/RGiesecke.DllExport.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(TargetDir)Jacobi.Vst3.TestPlugin.*" "D:\Program Files\Steinberg\VST3PluginTestHost\VST3\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y "$(TargetDir)Jacobi.Vst3.TestPlugin.*" "D:\Program Files\Steinberg\VST3PluginTestHost\VST3\"
+xcopy /Y "D:\Program Files\Steinberg\VST3PluginTestHost\VST3\"$(TargetFileName) "D:\Program Files\Steinberg\VST3PluginTestHost\VST3\"$(TargetName)".vst3"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
