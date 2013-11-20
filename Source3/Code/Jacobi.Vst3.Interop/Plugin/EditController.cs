@@ -25,65 +25,84 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int SetComponentState(IBStream state)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController.SetComponentState");
+
             return TResult.E_NotImplemented;
         }
 
         public virtual int SetState(IBStream state)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController.SetState");
+
             return TResult.E_NotImplemented;
         }
 
         public virtual int GetState(IBStream state)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController.GetState");
+
             return TResult.E_NotImplemented;
         }
 
         public virtual int GetParameterCount()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParameterCount");
+
+            return 0;
         }
 
         public virtual int GetParameterInfo(int paramIndex, ref ParameterInfo info)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParameterInfo");
+
+            return TResult.E_NotImplemented;
         }
 
         public virtual int GetParamStringByValue(uint paramId, double valueNormalized, System.Text.StringBuilder @string)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamStringByValue");
+
+            return TResult.E_NotImplemented;
         }
 
         public virtual int GetParamValueByString(uint paramId, string @string, ref double valueNormalized)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamValueByString");
+
+            return TResult.E_NotImplemented;
         }
 
         public virtual double NormalizedParamToPlain(uint paramId, double valueNormalized)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.NormalizedParamToPlain");
+
+            return valueNormalized;
         }
 
         public virtual double PlainParamToNormalized(uint paramId, double plainValue)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.PlainParamToNormalized");
+
+            return plainValue;
         }
 
         public virtual double GetParamNormalized(uint paramId)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamNormalized");
+
+            return 0.0;
         }
 
         public virtual int SetParamNormalized(int paramIndex, double value)
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Trace.WriteLine("IEditController.SetParamNormalized");
+
+            return TResult.E_NotImplemented;
         }
 
         public virtual int SetComponentHandler(IComponentHandler handler)
         {
-            if (handler == null)
-            {
-                return TResult.E_InvalidArg;
-            }
+            System.Diagnostics.Trace.WriteLine("IEditController.SetComponentHandler");
 
             this.ComponentHandler = handler;
             this.ComponentHandler2 = handler as IComponentHandler2;
@@ -94,6 +113,8 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual IPlugView CreateView(string name)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController.CreateView");
+
             return null;
         }
 
@@ -101,18 +122,24 @@ namespace Jacobi.Vst3.Plugin
 
         #region IEditController2 Members
 
-        public int SetKnobMode(KnobModes mode)
+        public virtual int SetKnobMode(KnobModes mode)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController2.SetKnobMode");
+
             return TResult.E_NotImplemented;
         }
 
-        public int OpenHelp(bool onlyCheck)
+        public virtual int OpenHelp(bool onlyCheck)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController2.OpenHelp");
+
             return TResult.E_NotImplemented;
         }
 
-        public int OpenAboutBox(bool onlyCheck)
+        public virtual int OpenAboutBox(bool onlyCheck)
         {
+            System.Diagnostics.Trace.WriteLine("IEditController2.OpenAboutBox");
+
             return TResult.E_NotImplemented;
         }
 

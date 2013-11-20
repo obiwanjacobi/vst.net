@@ -40,7 +40,7 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 SetProcessing(
-            [MarshalAs(UnmanagedType.U1), In]Byte state);
+            [MarshalAs(UnmanagedType.U1), In]Boolean state);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]

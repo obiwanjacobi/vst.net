@@ -10,6 +10,8 @@ namespace Jacobi.Vst3.Interop.Test
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 CreateTests([MarshalAs(UnmanagedType.IUnknown), In] object context, [MarshalAs(UnmanagedType.Interface), In] ITestSuite parentSuite);
+        Int32 CreateTests(
+            [MarshalAs(UnmanagedType.IUnknown), In] Object context, 
+            [MarshalAs(UnmanagedType.Interface), In] ITestSuite parentSuite);
     }
 }

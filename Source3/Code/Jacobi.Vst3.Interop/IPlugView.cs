@@ -55,7 +55,7 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 OnFocus(
-            [MarshalAs(UnmanagedType.U1), In] bool state);
+            [MarshalAs(UnmanagedType.U1), In] Boolean state);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
