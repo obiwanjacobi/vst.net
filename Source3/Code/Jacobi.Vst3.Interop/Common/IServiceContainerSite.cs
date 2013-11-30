@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst3.Plugin
+﻿namespace Jacobi.Vst3.Common
 {
     public interface IServiceContainerSite
     {

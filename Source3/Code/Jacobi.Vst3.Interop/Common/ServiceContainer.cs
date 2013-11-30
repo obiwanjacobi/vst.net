@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
-namespace Jacobi.Vst3.Plugin
+namespace Jacobi.Vst3.Common
 {
     public sealed class ServiceContainer : IServiceProvider, IDisposable
     {
@@ -27,7 +27,20 @@ namespace Jacobi.Vst3.Plugin
             ParentContainer = parentContainer;
         }
 
-        public object Unknown { get; set; }
+        private ComRef<object> _unknown;
+
+        public object Unknown
+        {
+            get 
+            {
+                return ComRef<object>.GetInstance(this._unknown);
+            }
+            set
+            {
+                ComRef<object>.Dispose(ref this._unknown);
+                this._unknown = ComRef<object>.Create(value);
+            }
+        }
 
         public ServiceContainer ParentContainer { get; set; }
 
@@ -160,17 +173,13 @@ namespace Jacobi.Vst3.Plugin
         {
             foreach (var svcReg in _registrations.Values)
             {
-                var disposable = svcReg.Instance as IDisposable;
-
-                if (disposable != null)
-                {
-                    disposable.Dispose();
-                }
+                svcReg.Dispose();
             }
 
             _registrations.Clear();
-            Unknown = null;
             ParentContainer = null;
+
+            ComRef<object>.Dispose(ref _unknown);
 
             GC.SuppressFinalize(this);
         }
@@ -179,11 +188,31 @@ namespace Jacobi.Vst3.Plugin
 
         //---------------------------------------------------------------------
 
-        private class ServiceRegistration
+        private class ServiceRegistration : IDisposable
         {
             public Type ServiceType;
             public object Instance;
             public ObjectCreatorCallback Callback;
+
+            public void Dispose()
+            {
+                if (ServiceType.IsCOMObject)
+                {
+                    if (Instance != null)
+                    {
+                        Marshal.FinalReleaseComObject(Instance);
+                    }
+                }
+                else
+                {
+                    var disposable = Instance as IDisposable;
+
+                    if (disposable != null)
+                    {
+                        disposable.Dispose();
+                    }
+                }
+            }
         }
     }
 }

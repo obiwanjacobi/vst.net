@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using Jacobi.Vst3.Common;
 using Jacobi.Vst3.Interop;
 
 namespace Jacobi.Vst3.Plugin
