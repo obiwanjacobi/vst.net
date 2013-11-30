@@ -1,27 +1,39 @@
 ﻿using System;
 using Jacobi.Vst3.Interop;
+using Jacobi.Vst3.Common;
 
 namespace Jacobi.Vst3.Plugin
 {
     public class EditController : ComponentBase, IEditController, IEditController2
     {
-        public IComponentHandler ComponentHandler { get; private set; }
+        private ComRef<IComponentHandler> _componentHandler;
+        public IComponentHandler ComponentHandler
+        {
+            get { return ComRef<IComponentHandler>.GetInstance(_componentHandler); }
+        }
 
-        public IComponentHandler2 ComponentHandler2 { get; private set; }
+        private ComRef<IComponentHandler2> _componentHandler2;
+        public IComponentHandler2 ComponentHandler2
+        {
+            get { return ComRef<IComponentHandler2>.GetInstance(_componentHandler2); }
+        }
 
-        public IComponentHandler3 ComponentHandler3 { get; private set; }
+        private ComRef<IComponentHandler3> _componentHandler3;
+        public IComponentHandler3 ComponentHandler3
+        {
+            get { return ComRef<IComponentHandler3>.GetInstance(_componentHandler3); }
+        }
 
         public override int Terminate()
         {
-            this.ComponentHandler = null;
-            this.ComponentHandler2 = null;
-            this.ComponentHandler3 = null;
+            ComRef<IComponentHandler>.Dispose(ref this._componentHandler);
+            ComRef<IComponentHandler2>.Dispose(ref this._componentHandler2);
+            ComRef<IComponentHandler3>.Dispose(ref this._componentHandler3);
 
             return base.Terminate();
         }
 
         #region IEditController Members
-
 
         public virtual int SetComponentState(IBStream state)
         {
@@ -104,9 +116,9 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IEditController.SetComponentHandler");
 
-            this.ComponentHandler = handler;
-            this.ComponentHandler2 = handler as IComponentHandler2;
-            this.ComponentHandler3 = handler as IComponentHandler3;
+            this._componentHandler = ComRef<IComponentHandler>.Create(handler);
+            this._componentHandler2 = ComRef<IComponentHandler2>.Create(handler as IComponentHandler2);
+            this._componentHandler3 = ComRef<IComponentHandler3>.Create(handler as IComponentHandler3);
 
             return TResult.S_OK;
         }

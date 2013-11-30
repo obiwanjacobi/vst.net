@@ -5,8 +5,6 @@ namespace Jacobi.Vst3.Plugin
 {
     public abstract class AudioEffect : Component, IAudioProcessor, IComponent, IPluginBase
     {
-        #region IAudioProcessor Members
-
         public bool IsProcessing { get; set; }
 
         public ProcessModes ProcessMode { get; set; }
@@ -16,6 +14,8 @@ namespace Jacobi.Vst3.Plugin
         public int MaxSamplesPerBlock { get; set; }
 
         public double SampleRate { get; set; }
+
+        #region IAudioProcessor Members
 
         public virtual int SetBusArrangements(SpeakerArrangement[] inputs, int numIns, SpeakerArrangement[] outputs, int numOuts)
         {

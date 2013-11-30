@@ -1,11 +1,12 @@
 ﻿using System;
 using Jacobi.Vst3.Interop;
+using Jacobi.Vst3.Common;
 
 namespace Jacobi.Vst3.Plugin
 {
     public abstract class ComponentBase : IPluginBase, IConnectionPoint, IServiceContainerSite
     {
-        private IConnectionPoint _peer;
+        private ComRef<IConnectionPoint> _peer;
 
         protected ComponentBase()
         {
@@ -33,7 +34,7 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IPluginBase.Terminate");
 
-            _peer = null;
+            ComRef<IConnectionPoint>.Dispose(ref this._peer);
 
             ServiceContainer.Dispose();
 
@@ -57,7 +58,7 @@ namespace Jacobi.Vst3.Plugin
                 return TResult.S_False;
             }
 
-            _peer = other;
+            _peer = ComRef<IConnectionPoint>.Create(other);
 
             return TResult.S_OK;
         }
@@ -66,9 +67,9 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IConnectionPoint.Disconnect");
 
-            if (_peer != null && _peer == other)
+            if (_peer != null && _peer.Instance == other)
             {
-                _peer = null;
+                ComRef<IConnectionPoint>.Dispose(ref this._peer);
 
                 return TResult.S_OK;
             }

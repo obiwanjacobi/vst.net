@@ -1,23 +1,25 @@
 ﻿using System;
 using System.IO;
-using Jacobi.Vst3.Interop;
 using System.Runtime.InteropServices;
+using Jacobi.Vst3.Common;
+using Jacobi.Vst3.Interop;
 
 namespace Jacobi.Vst3.Plugin
 {
     public sealed class BStream : Stream
     {
+        private ComRef<IBStream> _bStream;
         private int _unmanagedBufferSize;
         private IntPtr _unmanagedBuffer;
 
         public BStream(IBStream streamToWrap)
         {
-            BaseStream = streamToWrap;
+            _bStream = new ComRef<IBStream>(streamToWrap);
         }
 
         public BStream(IBStream streamToWrap, int unmanagedBufferSize)
         {
-            BaseStream = streamToWrap;
+            _bStream = new ComRef<IBStream>(streamToWrap);
 
             if (unmanagedBufferSize > 0)
             {
@@ -27,8 +29,10 @@ namespace Jacobi.Vst3.Plugin
             }
         }
 
-        protected IBStream BaseStream { get; private set; }
-
+        protected IBStream BaseStream
+        {
+            get { return _bStream.Instance; }
+        }
 
         public override bool CanRead
         {
@@ -186,6 +190,9 @@ namespace Jacobi.Vst3.Plugin
                     _unmanagedBuffer = IntPtr.Zero;
                     _unmanagedBufferSize = 0;
                 }
+
+                _bStream.Dispose();
+                _bStream = null;
             }
             finally
             {

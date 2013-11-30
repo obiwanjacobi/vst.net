@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Jacobi.Vst3.Common;
 using Jacobi.Vst3.Interop;
 
 namespace Jacobi.Vst3.Plugin
@@ -39,7 +40,9 @@ namespace Jacobi.Vst3.Plugin
             set
             {
                 if (_categories != null)
+                {
                     throw new InvalidOperationException("Categories is already initialized.");
+                }
 
                 _categories = value;
             }

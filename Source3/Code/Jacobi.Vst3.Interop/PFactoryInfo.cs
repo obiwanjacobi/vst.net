@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using Jacobi.Vst3.Common;
 
 namespace Jacobi.Vst3.Interop
 {
