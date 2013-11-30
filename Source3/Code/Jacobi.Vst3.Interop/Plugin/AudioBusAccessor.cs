@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Jacobi.Vst3.Common;
 using Jacobi.Vst3.Interop;
 
 namespace Jacobi.Vst3.Plugin
