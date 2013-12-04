@@ -53,6 +53,8 @@ namespace Jacobi.Vst3.TestPlugin
 
         private int ProcessAudio(ref ProcessData data)
         {
+            return TResult.S_OK;
+
             // flushing parameters
             if (data.NumInputs == 0 || data.NumOutputs == 0)
             {
@@ -66,6 +68,8 @@ namespace Jacobi.Vst3.TestPlugin
 
             var inputBusInfo = _audioInputs[0];
             var outputBusInfo = _audioOutputs[0];
+
+           
 
             if (!inputBusInfo.IsActive || !outputBusInfo.IsActive)
             {

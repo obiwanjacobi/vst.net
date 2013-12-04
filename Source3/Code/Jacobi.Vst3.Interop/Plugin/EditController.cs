@@ -6,29 +6,17 @@ namespace Jacobi.Vst3.Plugin
 {
     public class EditController : ComponentBase, IEditController, IEditController2
     {
-        private ComRef<IComponentHandler> _componentHandler;
-        public IComponentHandler ComponentHandler
-        {
-            get { return ComRef<IComponentHandler>.GetInstance(_componentHandler); }
-        }
+        public IComponentHandler ComponentHandler { get; private set; }
+        
+        public IComponentHandler2 ComponentHandler2 { get; private set; }
 
-        private ComRef<IComponentHandler2> _componentHandler2;
-        public IComponentHandler2 ComponentHandler2
-        {
-            get { return ComRef<IComponentHandler2>.GetInstance(_componentHandler2); }
-        }
-
-        private ComRef<IComponentHandler3> _componentHandler3;
-        public IComponentHandler3 ComponentHandler3
-        {
-            get { return ComRef<IComponentHandler3>.GetInstance(_componentHandler3); }
-        }
+        public IComponentHandler3 ComponentHandler3 { get; private set; }
 
         public override int Terminate()
         {
-            ComRef<IComponentHandler>.Dispose(ref this._componentHandler);
-            ComRef<IComponentHandler2>.Dispose(ref this._componentHandler2);
-            ComRef<IComponentHandler3>.Dispose(ref this._componentHandler3);
+            this.ComponentHandler = null;
+            this.ComponentHandler2 = null;
+            this.ComponentHandler3 = null;
 
             return base.Terminate();
         }
@@ -65,67 +53,74 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int GetParameterInfo(int paramIndex, ref ParameterInfo info)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.GetParameterInfo");
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParameterInfo " + paramIndex);
 
             return TResult.E_NotImplemented;
         }
 
         public virtual int GetParamStringByValue(uint paramId, double valueNormalized, System.Text.StringBuilder @string)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.GetParamStringByValue");
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamStringByValue " + paramId + ", " + valueNormalized);
 
             return TResult.E_NotImplemented;
         }
 
         public virtual int GetParamValueByString(uint paramId, string @string, ref double valueNormalized)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.GetParamValueByString");
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamValueByString " + paramId + ", " + @string);
 
             return TResult.E_NotImplemented;
         }
 
         public virtual double NormalizedParamToPlain(uint paramId, double valueNormalized)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.NormalizedParamToPlain");
+            System.Diagnostics.Trace.WriteLine("IEditController.NormalizedParamToPlain " + paramId + ", " + valueNormalized);
 
             return valueNormalized;
         }
 
         public virtual double PlainParamToNormalized(uint paramId, double plainValue)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.PlainParamToNormalized");
+            System.Diagnostics.Trace.WriteLine("IEditController.PlainParamToNormalized " + paramId + ", " + plainValue);
 
             return plainValue;
         }
 
         public virtual double GetParamNormalized(uint paramId)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.GetParamNormalized");
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamNormalized " + paramId);
 
             return 0.0;
         }
 
         public virtual int SetParamNormalized(int paramIndex, double value)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.SetParamNormalized");
+            System.Diagnostics.Trace.WriteLine("IEditController.SetParamNormalized " + paramIndex + ", " + value);
 
             return TResult.E_NotImplemented;
         }
 
         public virtual int SetComponentHandler(IComponentHandler handler)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.SetComponentHandler");
+            if (handler == null)
+            {
+                System.Diagnostics.Trace.WriteLine("IEditController.SetComponentHandler [null]");
+            }
+            else
+            {
+                System.Diagnostics.Trace.WriteLine("IEditController.SetComponentHandler [ptr]");
+            }
 
-            this._componentHandler = ComRef<IComponentHandler>.Create(handler);
-            this._componentHandler2 = ComRef<IComponentHandler2>.Create(handler as IComponentHandler2);
-            this._componentHandler3 = ComRef<IComponentHandler3>.Create(handler as IComponentHandler3);
+            this.ComponentHandler = handler;
+            this.ComponentHandler2 = handler as IComponentHandler2;
+            this.ComponentHandler3 = handler as IComponentHandler3;
 
             return TResult.S_OK;
         }
 
         public virtual IPlugView CreateView(string name)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.CreateView");
+            System.Diagnostics.Trace.WriteLine("IEditController.CreateView " + name);
 
             return null;
         }
@@ -136,7 +131,7 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int SetKnobMode(KnobModes mode)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController2.SetKnobMode");
+            System.Diagnostics.Trace.WriteLine("IEditController2.SetKnobMode " + mode);
 
             return TResult.E_NotImplemented;
         }
