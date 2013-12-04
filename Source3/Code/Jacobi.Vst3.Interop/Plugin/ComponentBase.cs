@@ -6,7 +6,7 @@ namespace Jacobi.Vst3.Plugin
 {
     public abstract class ComponentBase : IPluginBase, IConnectionPoint, IServiceContainerSite
     {
-        private ComRef<IConnectionPoint> _peer;
+        private IConnectionPoint _peer;
 
         protected ComponentBase()
         {
@@ -34,7 +34,7 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IPluginBase.Terminate");
 
-            ComRef<IConnectionPoint>.Dispose(ref this._peer);
+            this._peer = null;
 
             ServiceContainer.Dispose();
 
@@ -58,7 +58,7 @@ namespace Jacobi.Vst3.Plugin
                 return TResult.S_False;
             }
 
-            _peer = ComRef<IConnectionPoint>.Create(other);
+            _peer = other;
 
             return TResult.S_OK;
         }
@@ -67,9 +67,9 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IConnectionPoint.Disconnect");
 
-            if (_peer != null && _peer.Instance == other)
+            if (_peer != null && _peer == other)
             {
-                ComRef<IConnectionPoint>.Dispose(ref this._peer);
+                this._peer = null;
 
                 return TResult.S_OK;
             }
@@ -79,17 +79,43 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual int Notify(IMessage message)
         {
-            System.Diagnostics.Trace.WriteLine("IConnectionPoint.Notify");
-
             if (message == null)
             {
                 return TResult.E_InvalidArg;
             }
 
+            System.Diagnostics.Trace.WriteLine("IConnectionPoint.Notify " + message.GetMessageID());
+
             return OnMessageReceived(new MessageEventArgs(message)) ? TResult.S_OK : TResult.S_False;
         }
 
         #endregion
+
+        // use funcBeforeSend to populate message.
+        protected virtual bool SendMessage(Action<IMessage> funcBeforeSend)
+        {
+            Guard.ThrowIfNull("funcBeforeSend", funcBeforeSend);
+
+            if (_peer == null) return false;
+
+            var host = this.ServiceContainer.GetService<IHostApplication>();
+
+            if (host != null)
+            {
+                var msg = host.CreateMessage();
+
+                if (msg != null)
+                {
+                    funcBeforeSend(msg);
+
+                    var result = this._peer.Notify(msg);
+
+                    return TResult.Succeeded(result);
+                }
+            }
+
+            return false;
+        }
 
         protected virtual bool OnMessageReceived(MessageEventArgs messageEventArgs)
         {

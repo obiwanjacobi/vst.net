@@ -8,18 +8,18 @@ namespace Jacobi.Vst3.Plugin
 {
     public sealed class BStream : Stream
     {
-        private ComRef<IBStream> _bStream;
+        private IBStream _bStream;
         private int _unmanagedBufferSize;
         private IntPtr _unmanagedBuffer;
 
         public BStream(IBStream streamToWrap)
         {
-            _bStream = new ComRef<IBStream>(streamToWrap);
+            _bStream = streamToWrap;
         }
 
         public BStream(IBStream streamToWrap, int unmanagedBufferSize)
         {
-            _bStream = new ComRef<IBStream>(streamToWrap);
+            _bStream = streamToWrap;
 
             if (unmanagedBufferSize > 0)
             {
@@ -31,7 +31,7 @@ namespace Jacobi.Vst3.Plugin
 
         protected IBStream BaseStream
         {
-            get { return _bStream.Instance; }
+            get { return _bStream; }
         }
 
         public override bool CanRead
@@ -191,7 +191,6 @@ namespace Jacobi.Vst3.Plugin
                     _unmanagedBufferSize = 0;
                 }
 
-                _bStream.Dispose();
                 _bStream = null;
             }
             finally

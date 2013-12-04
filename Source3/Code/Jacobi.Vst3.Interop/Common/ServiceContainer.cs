@@ -8,62 +8,32 @@ namespace Jacobi.Vst3.Common
     {
         private Dictionary<Type, ServiceRegistration> _registrations = new Dictionary<Type, ServiceRegistration>();
 
-        public ServiceContainer()
-        { }
-
-        public ServiceContainer(object unknown)
-        {
-            Unknown = unknown;
-        }
-
-        public ServiceContainer(ServiceContainer parentContainer)
-        {
-            ParentContainer = parentContainer;
-        }
-
-        public ServiceContainer(object unknown, ServiceContainer parentContainer)
-        {
-            Unknown = unknown;
-            ParentContainer = parentContainer;
-        }
-
-        private ComRef<object> _unknown;
-
-        public object Unknown
-        {
-            get 
-            {
-                return ComRef<object>.GetInstance(this._unknown);
-            }
-            set
-            {
-                ComRef<object>.Dispose(ref this._unknown);
-                this._unknown = ComRef<object>.Create(value);
-            }
-        }
+        public object Unknown { get; set; }
 
         public ServiceContainer ParentContainer { get; set; }
 
-        public bool Register<T>()
+        public bool Register<T>(Scope scope = Scope.Singleton)
         {
-            return Register(typeof(T));
+            return Register(typeof(T), scope);
         }
 
-        public bool Register<T>(object instance)
+        public bool Register<T>(T instance, Scope scope = Scope.Singleton)
         {
-            return Register(typeof(T), instance);
+            return Register(typeof(T), instance, scope);
         }
 
-        public bool Register<T>(ObjectCreatorCallback callback)
+        public bool Register<T>(ObjectCreatorCallback callback, Scope scope = Scope.Singleton)
         {
-            return Register(typeof(T), callback);
+            return Register(typeof(T), callback, scope);
         }
 
-        public bool Register(Type svcType)
+        public bool Register(Type svcType, Scope scope = Scope.Singleton)
         {
+            Guard.ThrowIfNull("svcType", svcType);
+
             if (FindRegistration(svcType) == null)
             {
-                var svcReg = CreateServiceRegistration(svcType, null, null);
+                var svcReg = CreateServiceRegistration(svcType, null, null, scope);
 
                 _registrations.Add(svcType, svcReg);
 
@@ -73,11 +43,22 @@ namespace Jacobi.Vst3.Common
             return false;
         }
 
-        public bool Register(Type svcType, object instance)
+        public bool Register(Type svcType, object instance, Scope scope = Scope.Singleton)
         {
+            Guard.ThrowIfNull("svcType", svcType);
+            Guard.ThrowIfNull("instance", instance);
+            if (!svcType.IsAssignableFrom(instance.GetType()))
+            {
+                throw new ArgumentException("The instance does not implement the specified service type: " + svcType.FullName, "instance");
+            }
+            if (scope != Scope.Singleton && instance as ICloneable == null)
+            {
+                throw new ArgumentException("The instance needs to implement IClonable if to use with a PerCall scope.", "instance");
+            }
+
             if (FindRegistration(svcType) == null)
             {
-                var svcReg = CreateServiceRegistration(svcType, instance, null);
+                var svcReg = CreateServiceRegistration(svcType, instance, null, scope);
 
                 _registrations.Add(svcType, svcReg);
 
@@ -87,11 +68,14 @@ namespace Jacobi.Vst3.Common
             return false;
         }
 
-        public bool Register(Type svcType, ObjectCreatorCallback callback)
+        public bool Register(Type svcType, ObjectCreatorCallback callback, Scope scope = Scope.Singleton)
         {
+            Guard.ThrowIfNull("svcType", svcType);
+            Guard.ThrowIfNull("callback", callback);
+
             if (FindRegistration(svcType) == null)
             {
-                var svcReg = CreateServiceRegistration(svcType, null, callback);
+                var svcReg = CreateServiceRegistration(svcType, null, callback, scope);
 
                 _registrations.Add(svcType, svcReg);
 
@@ -99,6 +83,11 @@ namespace Jacobi.Vst3.Common
             }
 
             return false;
+        }
+
+        public T GetService<T>()
+        {
+            return (T)GetService(typeof(T));
         }
 
         #region IServiceProvider Members
@@ -142,28 +131,49 @@ namespace Jacobi.Vst3.Common
 
         private object GetInstance(ServiceRegistration svcReg)
         {
+            object instance = null;
+
             if (svcReg.Instance == null)
             {
                 if (svcReg.Callback != null)
                 {
-                    svcReg.Instance = svcReg.Callback(this, svcReg.ServiceType);
+                    instance = svcReg.Callback(this, svcReg.ServiceType);
                 }
                 else
                 {
-                    svcReg.Instance = Activator.CreateInstance(svcReg.ServiceType);
+                    instance = Activator.CreateInstance(svcReg.ServiceType);
+                }
+
+                if (svcReg.Scope == Scope.Singleton)
+                {
+                    svcReg.Instance = instance;
+                }
+            }
+            else // Instance != null
+            {
+                if (svcReg.Scope == Scope.PerCall)
+                {
+                    var cloneable = svcReg.Instance as ICloneable;
+
+                    instance = cloneable.Clone();
+                }
+                else
+                {
+                    instance = svcReg.Instance;
                 }
             }
 
-            return svcReg.Instance;
+            return instance;
         }
 
-        private ServiceRegistration CreateServiceRegistration(Type svcType, object instance, ObjectCreatorCallback callback)
+        private ServiceRegistration CreateServiceRegistration(Type svcType, object instance, ObjectCreatorCallback callback, Scope scope)
         {
             return new ServiceRegistration()
                 {
                     ServiceType = svcType,
                     Instance = instance,
                     Callback = callback,
+                    Scope = scope,
                 };
         }
 
@@ -177,9 +187,9 @@ namespace Jacobi.Vst3.Common
             }
 
             _registrations.Clear();
-            ParentContainer = null;
 
-            ComRef<object>.Dispose(ref _unknown);
+            ParentContainer = null;
+            Unknown = null;
 
             GC.SuppressFinalize(this);
         }
@@ -188,29 +198,28 @@ namespace Jacobi.Vst3.Common
 
         //---------------------------------------------------------------------
 
+        public enum Scope
+        {
+            Singleton,
+            PerCall,
+        }
+
+        //---------------------------------------------------------------------
+
         private class ServiceRegistration : IDisposable
         {
             public Type ServiceType;
             public object Instance;
             public ObjectCreatorCallback Callback;
+            public Scope Scope { get; set; }
 
             public void Dispose()
             {
-                if (ServiceType.IsCOMObject)
-                {
-                    if (Instance != null)
-                    {
-                        Marshal.FinalReleaseComObject(Instance);
-                    }
-                }
-                else
-                {
-                    var disposable = Instance as IDisposable;
+                var disposable = Instance as IDisposable;
 
-                    if (disposable != null)
-                    {
-                        disposable.Dispose();
-                    }
+                if (disposable != null)
+                {
+                    disposable.Dispose();
                 }
             }
         }
