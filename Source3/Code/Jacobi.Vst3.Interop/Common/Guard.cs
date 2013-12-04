@@ -7,6 +7,14 @@ namespace Jacobi.Vst3.Common
 {
     public static class Guard
     {
+        public static void ThrowIfNull<T>(string parameterName, T value) where T : class
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+        }
+
         public static void ThrowIfTooLong(string parameterName, string value, int minLength, int maxLength)
         {
             if (value != null &&

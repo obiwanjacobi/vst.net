@@ -131,7 +131,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Jacobi.Vst3.Interop\bin\x86\Debug\Jacobi.Vst3.Interop.dll">
+    <EmbeddedResource Include="..\_SharedAssemblies\Jacobi.Vst3.Interop.dll">
       <Link>Jacobi.Vst3.Interop.dll</Link>
     </EmbeddedResource>
   </ItemGroup>
