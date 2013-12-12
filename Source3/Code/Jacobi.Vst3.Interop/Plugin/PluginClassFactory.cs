@@ -23,7 +23,7 @@ namespace Jacobi.Vst3.Plugin
         { }
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags)
-            : this(vendor, email, url, flags, new Version(3, 5, 2))
+            : this(vendor, email, url, flags, new Version(3, 6, 0))
         { }
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags, Version sdkVersion)

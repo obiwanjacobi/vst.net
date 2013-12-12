@@ -99,19 +99,15 @@ namespace Jacobi.Vst3.Plugin
             if (_peer == null) return false;
 
             var host = this.ServiceContainer.GetService<IHostApplication>();
+            var msg = host.CreateMessage();
 
-            if (host != null)
+            if (msg != null)
             {
-                var msg = host.CreateMessage();
+                funcBeforeSend(msg);
 
-                if (msg != null)
-                {
-                    funcBeforeSend(msg);
+                var result = this._peer.Notify(msg);
 
-                    var result = this._peer.Notify(msg);
-
-                    return TResult.Succeeded(result);
-                }
+                return TResult.Succeeded(result);
             }
 
             return false;

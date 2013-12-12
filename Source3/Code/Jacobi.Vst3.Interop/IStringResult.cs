@@ -9,7 +9,6 @@ namespace Jacobi.Vst3.Interop
     public interface IStringResult
     {
         [PreserveSig]
-        [return: MarshalAs(UnmanagedType.Error)]
         void SetText(
             [MarshalAs(UnmanagedType.LPStr), In] String text);
     }
