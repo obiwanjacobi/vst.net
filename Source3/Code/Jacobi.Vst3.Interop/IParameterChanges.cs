@@ -12,9 +12,13 @@ namespace Jacobi.Vst3.Interop
         [return: MarshalAs(UnmanagedType.I4)]
         Int32 GetParameterCount();
 
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Interface)]
         IParamValueQueue GetParameterData(
             [MarshalAs(UnmanagedType.I4), In] Int32 index);
 
+        [PreserveSig]
+        [return: MarshalAs(UnmanagedType.Interface)]
         IParamValueQueue AddParameterData(
             [MarshalAs(UnmanagedType.U4), In] UInt32 id,
             [MarshalAs(UnmanagedType.I4), In, Out] ref Int32 index);

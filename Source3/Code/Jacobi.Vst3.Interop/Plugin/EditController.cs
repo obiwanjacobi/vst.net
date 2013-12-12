@@ -1,11 +1,20 @@
 ﻿using System;
 using Jacobi.Vst3.Interop;
 using Jacobi.Vst3.Common;
+using Jacobi.Vst3.Interop.Plugin;
+using System.Text;
 
 namespace Jacobi.Vst3.Plugin
 {
     public class EditController : ComponentBase, IEditController, IEditController2
     {
+        protected EditController()
+        {
+            Parameters = new ParameterCollection();
+        }
+
+        protected ParameterCollection Parameters { get; private set; }
+
         public IComponentHandler ComponentHandler { get; private set; }
         
         public IComponentHandler2 ComponentHandler2 { get; private set; }
@@ -48,47 +57,106 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IEditController.GetParameterCount");
 
-            return 0;
+            return this.Parameters.Count;
         }
 
         public virtual int GetParameterInfo(int paramIndex, ref ParameterInfo info)
         {
             System.Diagnostics.Trace.WriteLine("IEditController.GetParameterInfo " + paramIndex);
 
-            return TResult.E_NotImplemented;
+            if (paramIndex >= 0 && paramIndex < this.Parameters.Count)
+            {
+                var param = this.Parameters[paramIndex];
+
+                info.DefaultNormalizedValue = param.ValueInfo.ParameterInfo.DefaultNormalizedValue;
+                info.Flags = param.ValueInfo.ParameterInfo.Flags;
+                info.ParamId = param.ValueInfo.ParameterInfo.ParamId;
+                info.ShortTitle = param.ValueInfo.ParameterInfo.ShortTitle;
+                info.StepCount = param.ValueInfo.ParameterInfo.StepCount;
+                info.Title = param.ValueInfo.ParameterInfo.Title;
+                info.UnitId = param.ValueInfo.ParameterInfo.UnitId;
+                info.Units = param.ValueInfo.ParameterInfo.Units;
+
+                return TResult.S_OK;
+            }
+
+            return TResult.E_InvalidArg;
         }
 
-        public virtual int GetParamStringByValue(uint paramId, double valueNormalized, System.Text.StringBuilder @string)
+        public virtual int GetParamStringByValue(uint paramId, double valueNormalized, StringBuilder str)
         {
             System.Diagnostics.Trace.WriteLine("IEditController.GetParamStringByValue " + paramId + ", " + valueNormalized);
 
-            return TResult.E_NotImplemented;
+            if (this.Parameters.Contains(paramId))
+            {
+                var param = this.Parameters[paramId];
+
+                str.Append(param.ToString(valueNormalized));
+            }
+
+            return TResult.E_InvalidArg;
         }
 
-        public virtual int GetParamValueByString(uint paramId, string @string, ref double valueNormalized)
+        public virtual int GetParamValueByString(uint paramId, string str, ref double valueNormalized)
         {
-            System.Diagnostics.Trace.WriteLine("IEditController.GetParamValueByString " + paramId + ", " + @string);
+            System.Diagnostics.Trace.WriteLine("IEditController.GetParamValueByString " + paramId + ", " + str);
 
-            return TResult.E_NotImplemented;
+            if (this.Parameters.Contains(paramId))
+            {
+                var param = this.Parameters[paramId];
+
+                double val;
+                if (param.TryParse(str, out val))
+                {
+                    valueNormalized = val;
+
+                    return TResult.S_OK;
+                }
+
+                return TResult.S_False;
+            }
+
+            return TResult.E_InvalidArg;
         }
 
         public virtual double NormalizedParamToPlain(uint paramId, double valueNormalized)
         {
             System.Diagnostics.Trace.WriteLine("IEditController.NormalizedParamToPlain " + paramId + ", " + valueNormalized);
 
-            return valueNormalized;
+            if (this.Parameters.Contains(paramId))
+            {
+                var param = this.Parameters[paramId];
+
+                return param.ToPlain(valueNormalized);
+            }
+
+            return 0.0;
         }
 
         public virtual double PlainParamToNormalized(uint paramId, double plainValue)
         {
             System.Diagnostics.Trace.WriteLine("IEditController.PlainParamToNormalized " + paramId + ", " + plainValue);
 
-            return plainValue;
+            if (this.Parameters.Contains(paramId))
+            {
+                var param = this.Parameters[paramId];
+
+                return param.ToNormalized(plainValue);
+            }
+
+            return 0.0;
         }
 
         public virtual double GetParamNormalized(uint paramId)
         {
             System.Diagnostics.Trace.WriteLine("IEditController.GetParamNormalized " + paramId);
+
+            if (this.Parameters.Contains(paramId))
+            {
+                var param = this.Parameters[paramId];
+
+                return param.NormalizedValue;
+            }
 
             return 0.0;
         }
@@ -97,7 +165,16 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IEditController.SetParamNormalized " + paramIndex + ", " + value);
 
-            return TResult.E_NotImplemented;
+            if (paramIndex >= 0 && paramIndex < this.Parameters.Count)
+            {
+                var param = this.Parameters[paramIndex];
+
+                param.NormalizedValue = value;
+
+                return TResult.S_OK;
+            }
+
+            return TResult.E_InvalidArg;
         }
 
         public virtual int SetComponentHandler(IComponentHandler handler)

@@ -35,7 +35,7 @@ namespace Jacobi.Vst3.Interop
         {
             None = 0,
             CanAutomate = 1 << 0,
-            IsReadONly = 1 << 1,
+            IsReadOnly = 1 << 1,
             IsWrapAround = 1 << 2,
             IsList = 1 << 3,
 
