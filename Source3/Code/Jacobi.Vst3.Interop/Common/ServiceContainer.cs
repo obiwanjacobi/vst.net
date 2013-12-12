@@ -51,7 +51,7 @@ namespace Jacobi.Vst3.Common
             {
                 throw new ArgumentException("The instance does not implement the specified service type: " + svcType.FullName, "instance");
             }
-            if (scope != Scope.Singleton && instance as ICloneable == null)
+            if (scope != Scope.Singleton && instance as ICloneable == null && instance as Jacobi.Vst3.Interop.ICloneable == null)
             {
                 throw new ArgumentException("The instance needs to implement IClonable if to use with a PerCall scope.", "instance");
             }
@@ -90,9 +90,12 @@ namespace Jacobi.Vst3.Common
             return (T)GetService(typeof(T));
         }
 
-        #region IServiceProvider Members
+        public T TryGetService<T>()
+        {
+            return (T)TryGetService(typeof(T));
+        }
 
-        public object GetService(Type serviceType)
+        public object TryGetService(Type serviceType)
         {
             var svcReg = FindRegistration(serviceType);
 
@@ -113,6 +116,20 @@ namespace Jacobi.Vst3.Common
             }
 
             return null;
+        }
+
+        #region IServiceProvider Members
+
+        public object GetService(Type serviceType)
+        {
+            var instance = TryGetService(serviceType);
+
+            if (instance == null)
+            {
+                throw new ArgumentException("The requested Service Type '" + serviceType.FullName + "' was not found.", "serviceType");
+            }
+
+            return instance;
         }
 
         #endregion
@@ -154,8 +171,21 @@ namespace Jacobi.Vst3.Common
                 if (svcReg.Scope == Scope.PerCall)
                 {
                     var cloneable = svcReg.Instance as ICloneable;
+                    var comCloneable = svcReg.Instance as Jacobi.Vst3.Interop.ICloneable;
 
-                    instance = cloneable.Clone();
+                    if (cloneable != null)
+                    {
+                        instance = cloneable.Clone();
+                    }
+                    else if (comCloneable != null)
+                    {
+                        instance = comCloneable.Clone();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Cannot clone Service instance for PerCall service request.");
+                        //instance = svcReg.Instance;
+                    }
                 }
                 else
                 {

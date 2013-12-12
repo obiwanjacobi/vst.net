@@ -16,7 +16,6 @@ namespace Jacobi.Vst3.Interop
         void SetText16(
             [MarshalAs(UnmanagedType.LPWStr), In] String text);
 
-
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.LPStr)]
         String GetText8();
@@ -24,7 +23,6 @@ namespace Jacobi.Vst3.Interop
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.LPWStr)]
         String GetText16();
-
 
         [PreserveSig]
         void Take(

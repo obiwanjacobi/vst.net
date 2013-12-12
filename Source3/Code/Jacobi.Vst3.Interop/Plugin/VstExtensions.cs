@@ -1,6 +1,7 @@
 ﻿using System;
 using Jacobi.Vst3.Interop;
 using System.Runtime.InteropServices;
+using Jacobi.Vst3.Common;
 
 namespace Jacobi.Vst3.Plugin
 {
@@ -8,16 +9,15 @@ namespace Jacobi.Vst3.Plugin
     {
         public static IMessage CreateMessage(this IHostApplication host)
         {
-            if (host == null)
-            {
-                throw new ArgumentException("host");
-            }
+            Guard.ThrowIfNull("host", host);
 
             var msgType = typeof(IMessage);
             var iid = msgType.GUID;
             IntPtr ptr = IntPtr.Zero;
 
-            if (TResult.Succeeded(host.CreateInstance(ref iid, ref iid, ref ptr)))
+            var result = host.CreateInstance(ref iid, ref iid, ref ptr);
+
+            if (TResult.Succeeded(result))
             {
                 return (IMessage)Marshal.GetTypedObjectForIUnknown(ptr, msgType);
             }

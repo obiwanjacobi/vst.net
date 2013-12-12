@@ -10,18 +10,18 @@ namespace Jacobi.Vst3.Interop
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 unitDataSupported(
+        Int32 UnitDataSupported(
             [MarshalAs(UnmanagedType.I4), In] Int32 unitID);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 getUnitData(
+        Int32 GetUnitData(
             [MarshalAs(UnmanagedType.I4), In] Int32 unitId,
             [MarshalAs(UnmanagedType.Interface), In] IBStream data);
 
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
-        Int32 setUnitData(
+        Int32 SetUnitData(
             [MarshalAs(UnmanagedType.I4), In] Int32 unitId,
             [MarshalAs(UnmanagedType.Interface), In] IBStream data);
     }
