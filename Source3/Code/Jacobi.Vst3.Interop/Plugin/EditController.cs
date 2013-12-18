@@ -1,19 +1,18 @@
 ﻿using System;
 using Jacobi.Vst3.Interop;
 using Jacobi.Vst3.Common;
-using Jacobi.Vst3.Interop.Plugin;
 using System.Text;
 
 namespace Jacobi.Vst3.Plugin
 {
-    public class EditController : ComponentBase, IEditController, IEditController2
+    public abstract class EditController : ComponentBase, IEditController, IEditController2
     {
         protected EditController()
         {
             Parameters = new ParameterCollection();
         }
 
-        protected ParameterCollection Parameters { get; private set; }
+        public ParameterCollection Parameters { get; private set; }
 
         public IComponentHandler ComponentHandler { get; private set; }
         
@@ -106,6 +105,7 @@ namespace Jacobi.Vst3.Plugin
                 var param = this.Parameters[paramId];
 
                 double val;
+
                 if (param.TryParse(str, out val))
                 {
                     valueNormalized = val;

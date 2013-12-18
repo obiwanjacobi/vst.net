@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
     public class ParameterCollection : KeyedCollection<UInt32, Parameter>
     {

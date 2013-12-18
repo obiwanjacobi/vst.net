@@ -4,7 +4,7 @@ using Jacobi.Vst3.Common;
 
 namespace Jacobi.Vst3.Plugin
 {
-    public abstract class ComponentBase : IPluginBase, IConnectionPoint, IServiceContainerSite
+    public abstract class ComponentBase : ObservableObject, IPluginBase, IConnectionPoint, IServiceContainerSite
     {
         private IConnectionPoint _peer;
 

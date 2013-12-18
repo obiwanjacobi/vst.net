@@ -1,11 +1,11 @@
-﻿using Jacobi.Vst3.Interop.Common;
+﻿using Jacobi.Vst3.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
     public class Parameter : ObservableObject
     {
@@ -19,7 +19,7 @@ namespace Jacobi.Vst3.Interop.Plugin
             SetValue(this.ValueInfo.ParameterInfo.DefaultNormalizedValue, null, false);
         }
 
-        public ParameterValueInfo ValueInfo { get; private set; }
+        public ParameterValueInfo ValueInfo { get; protected set; }
 
         public uint Id
         {
@@ -141,7 +141,16 @@ namespace Jacobi.Vst3.Interop.Plugin
                 }
             }
 
-            return normValue.ToString();
+            var value = ToPlain(normValue);
+
+            if (this.ValueInfo.Precision > 0)
+            {
+                string format = new string('#', this.ValueInfo.Precision);
+
+                return value.ToString("0." + format);
+            }
+
+            return value.ToString();
         }
 
         public virtual bool TryParse(string displayValue, out double normValue)
