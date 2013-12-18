@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Jacobi.Vst3.Interop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Jacobi.Vst3.Interop.Plugin
+namespace Jacobi.Vst3.Plugin
 {
     public class ParameterValueInfo
     {
@@ -20,10 +21,10 @@ namespace Jacobi.Vst3.Interop.Plugin
 
         public ParameterInfo ParameterInfo;
 
-        public double MinValue { get; protected set; }
+        public double MinValue { get; set; }
 
-        public double MaxValue { get; protected set; }
+        public double MaxValue { get; set; }
 
-        public int Precision { get; protected set; }
+        public int Precision { get; set; }
     }
 }

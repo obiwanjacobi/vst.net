@@ -126,6 +126,7 @@
     <Compile Include="BusTypes.cs" />
     <Compile Include="Chord.cs" />
     <None Include="Common\ComRef.cs" />
+    <Compile Include="Common\KeyedCollectionWithIndex.cs" />
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataEvent.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Plugin\ComponentBase.cs" />
     <Compile Include="Plugin\EditController.cs" />
     <Compile Include="Common\IServiceContainerSite.cs" />
+    <Compile Include="Plugin\EditControllerWithUnits.cs" />
     <Compile Include="Plugin\EnumParameter.cs" />
     <Compile Include="Plugin\ListParameter.cs" />
     <Compile Include="Plugin\MessageEventArgs.cs" />
@@ -213,7 +215,10 @@
     <Compile Include="Plugin\ParameterCollection.cs" />
     <Compile Include="Plugin\ParameterFactory.cs" />
     <Compile Include="Plugin\ParameterValueInfo.cs" />
+    <Compile Include="Plugin\Program.cs" />
+    <Compile Include="Plugin\ProgramList.cs" />
     <Compile Include="Plugin\ProgramParameter.cs" />
+    <Compile Include="Plugin\ProgramWithPitchNames.cs" />
     <Compile Include="Plugin\RangeParameter.cs" />
     <Compile Include="Plugin\ReflectionExtensions.cs" />
     <Compile Include="Plugin\BStream.cs" />
@@ -222,6 +227,8 @@
     <Compile Include="Common\ServiceContainer.cs" />
     <Compile Include="Plugin\CategoryCollection.cs" />
     <Compile Include="Plugin\SingleComponentEffect.cs" />
+    <Compile Include="Plugin\Unit.cs" />
+    <Compile Include="Plugin\UnitCollection.cs" />
     <Compile Include="Plugin\VstExtensions.cs" />
     <Compile Include="PolyPressureEvent.cs" />
     <Compile Include="ProcessContext.cs" />

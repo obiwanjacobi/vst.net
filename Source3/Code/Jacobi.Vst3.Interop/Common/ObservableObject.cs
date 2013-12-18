@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Jacobi.Vst3.Interop.Common
+namespace Jacobi.Vst3.Common
 {
     public abstract class ObservableObject : INotifyPropertyChanged
     {

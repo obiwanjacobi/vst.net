@@ -13,15 +13,15 @@ namespace Jacobi.Vst3.Interop
         public const Int32 NoProgramListId = -1;	///< no programs are used in the unit.
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 Id;						///< unit identifier
+        public Int32 Id;						///< unit identifier
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 ParentUnitId;			///< identifier of parent unit (kNoParentUnitId: does not apply, this unit is the root)
+        public Int32 ParentUnitId;			///< identifier of parent unit (kNoParentUnitId: does not apply, this unit is the root)
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
-        String Name;					///< name, optional for the root component, required otherwise
+        public String Name;					///< name, optional for the root component, required otherwise
 
         [MarshalAs(UnmanagedType.I4)]
-        Int32 ProgramListId;	///< id of program list used in unit (kNoProgramListId = no programs used in this unit)
+        public Int32 ProgramListId;	///< id of program list used in unit (kNoProgramListId = no programs used in this unit)
     }
 }
