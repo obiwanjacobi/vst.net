@@ -4,7 +4,7 @@ namespace Jacobi.Vst3.Plugin
 {
     public class Unit
     {
-        protected Unit(string name, int id, int parentId, int programListId)
+        protected Unit(int id, string name, int parentId, int programListId)
         {
             this.Info.Id = id;
             this.Info.Name = name;
@@ -12,16 +12,18 @@ namespace Jacobi.Vst3.Plugin
             this.Info.ProgramListId = programListId;
         }
 
-        public Unit(string name, int id, Unit parent, ProgramList programList)
-            : this(name, id, 
+        public Unit(int id, string name, Unit parent, ProgramList programList)
+            : this(id, name, 
                     parent == null ? UnitInfo.NoParentUnitId : parent.Info.Id, 
                     programList == null ? UnitInfo.NoProgramListId : programList.Id)
         {
             if (parent != null)
             {
-                this.Parent = parent;
+                //this.Parent = parent; // collection takes care of this
                 parent.Children.Add(this);
             }
+
+            ProgramList = programList;
         }
 
         public UnitInfo Info;
@@ -36,7 +38,7 @@ namespace Jacobi.Vst3.Plugin
             {
                 if (_children == null)
                 {
-                    _children = new UnitCollection();
+                    Children = new UnitCollection();
                 }
 
                 return _children;
@@ -44,7 +46,14 @@ namespace Jacobi.Vst3.Plugin
             protected set
             {
                 _children = value;
+
+                if (_children != null)
+                {
+                    _children.Parent = this;
+                }
             }
         }
+
+        public ProgramList ProgramList { get; protected set; }
     }
 }
