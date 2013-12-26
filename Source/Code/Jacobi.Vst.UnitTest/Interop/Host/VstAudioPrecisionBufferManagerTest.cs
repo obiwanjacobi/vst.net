@@ -72,7 +72,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         {
             VstAudioPrecisionBufferManager bufferMgr = CreateNew();
 
-            foreach (VstAudioPrecisionBuffer buffer in bufferMgr.ToArray())
+            foreach (VstAudioPrecisionBuffer buffer in bufferMgr)
             {
                 for (int i = 0; i < buffer.SampleCount; i++)
                 {
@@ -85,7 +85,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
         private void AssertAllBuffersHasValue(VstAudioPrecisionBufferManager bufferMgr, float value)
         {
-            foreach (VstAudioPrecisionBuffer buffer in bufferMgr.ToArray())
+            foreach (VstAudioPrecisionBuffer buffer in bufferMgr)
             {
                 AssertBufferHasValue(buffer, value);
             }
@@ -126,7 +126,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
             AssertAllBuffersHasValue(bufferMgr, _testValue);
 
-            foreach (VstAudioPrecisionBuffer buffer in bufferMgr.ToArray())
+            foreach (VstAudioPrecisionBuffer buffer in bufferMgr)
             {
                 bufferMgr.ClearBuffer(buffer);
             }
