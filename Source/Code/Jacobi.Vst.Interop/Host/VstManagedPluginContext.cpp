@@ -69,6 +69,8 @@ namespace Host {
 
 			PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
 			PluginCommandStub->PluginContext = this;
+
+			Set(VstPluginContext::PluginPathContextVar, pluginPath);
 		}
 		finally
 		{

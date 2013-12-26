@@ -31,6 +31,25 @@ namespace Host {
 		return gcnew VstUnmanagedPluginContext(hostCmdStub);
 	}
 
+	VstPluginContext^ VstUnmanagedPluginContext::ShellCreate(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+	{
+		VstUnmanagedPluginContext^ newCtx = gcnew VstUnmanagedPluginContext(hostCmdStub);
+		System::String^ pluginPath = Find<System::String^>(VstPluginContext::PluginPathContextVar);
+
+		try
+		{
+			newCtx->Initialize(pluginPath);
+		}
+		catch(...)
+		{
+			delete newCtx;
+
+			throw;
+		}
+
+		return newCtx;
+	}
+
 	void VstUnmanagedPluginContext::Uninitialize()
 	{
 		this->!VstUnmanagedPluginContext();
@@ -63,17 +82,17 @@ namespace Host {
 						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_LoadPluginFailed,
 						pluginPath));
 			}
-
+				
 			// check entry point
-			VSTPluginMain pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "VSTPluginMain");
+			_pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "VSTPluginMain");
 
-			if(pluginMain == NULL)
+			if(_pluginMain == NULL)
 			{
 				// check old entry point
-				pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "main");
+				_pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "main");
 			}
 
-			if(pluginMain == NULL)
+			if(_pluginMain == NULL)
 			{
 				throw gcnew System::EntryPointNotFoundException(
 					System::String::Format(
@@ -84,7 +103,7 @@ namespace Host {
 			LoadingPlugin = this;
 
 			// call main and retrieve AEffect*
-			_pEffect = pluginMain(&DispatchCallback);
+			_pEffect = _pluginMain(&DispatchCallback);
 
 			if(_pEffect == NULL)
 			{
@@ -132,6 +151,8 @@ namespace Host {
 			}
 
 			AcceptPluginInfoData(false);
+
+			Set(VstPluginContext::PluginPathContextVar, pluginPath);
 		}
 		catch(...)
 		{
