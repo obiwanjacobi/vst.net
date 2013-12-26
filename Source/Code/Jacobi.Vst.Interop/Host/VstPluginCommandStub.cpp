@@ -495,11 +495,18 @@ System::Boolean VstPluginCommandStub::GetSpeakerArrangement([System::Runtime::In
 }
 
 // Offline processing not implemented
-//System::Int32 SetTotalSamplesToProcess(System::Int32 numberOfSamples);
+//System::Int32 VstPluginCommandStub::SetTotalSamplesToProcess(System::Int32 numberOfSamples);
 
-System::Int32 GetNextPlugin([System::Runtime::InteropServices::Out] System::String^% name)
+System::Int32 VstPluginCommandStub::GetNextPlugin([System::Runtime::InteropServices::Out] System::String^% name)
 {
-	return 0;
+	//UnmanagedString pName(kVstMaxProductStrLen);
+	UnmanagedString pName(129);
+
+	VstInt32 pluginId = CallDispatch(effShellGetNextPlugin, 0, 0, &pName, 0.0);
+	
+	name = TypeConverter::CharToString(pName);
+
+	return pluginId;
 }
 
 System::Int32 VstPluginCommandStub::StartProcess()
