@@ -169,25 +169,17 @@
         //}
         #endregion
 
-        #region Plugin Host/Shell not implemented
-        ///// <summary>
-        ///// Under construction.
-        ///// </summary>
-        ///// <param name="name"></param>
-        ///// <returns></returns>
-        //public virtual int GetNextPlugin(out string name)
-        //{
-        //    IVstPluginHost pluginHost = _pluginCtx.Plugin.GetInstance<IVstPluginHost>();
-
-        //    if (pluginHost != null)
-        //    {
-
-        //    }
-
-        //    name = null;
-        //    return 0;
-        //}
-        #endregion
+        /// <summary>
+        /// Not implemented for managed plugins!
+        /// </summary>
+        /// <param name="name">Filled with the name of the next sub-plugin.</param>
+        /// <returns>Returns the unique id of the next sub-plugin.</returns>
+        public virtual int GetNextPlugin(out string name)
+        {
+            // not implemented for managed plugins!
+            name = null;
+            return 0;
+        }
 
         /// <summary>
         /// Called just before Process cycle is started.

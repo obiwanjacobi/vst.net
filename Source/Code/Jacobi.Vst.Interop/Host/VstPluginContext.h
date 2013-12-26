@@ -39,9 +39,20 @@ namespace Host {
 		/// <exception cref="System::OperationCanceledException">Thrown when the library does not return 
 		/// an ::EAffect pointer from its exported main function.</exception>
 		/// <exception cref="System::NotSupportedException">Thrown when the library does not specify the correct magic number
-		/// in the ::EAffect structure or when it does not support VST version 2.4.</exception>
+		/// in the ::EAffect structure.</exception>
 		static VstPluginContext^ Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub);
 		
+		/// <summary>
+		/// Creates a context for s sub-plugin from an *unmanaged* shell plugin (this).
+		/// </summary>
+		/// <param name="hostCmdStub">A reference to a host supplied implementation of the host command stub. Must not be null.</param>
+		/// <remarks>The <paramref name="hostCmdStub"/>'s GetCurrentPluginID() method MUST return one of the unique plugin IDs that were 
+		/// retrieved by calling the <see cref="Jacobi::Vst::Core::IVstPluginCommands23::GetNextPlugin"/> method.</remarks>
+		virtual VstPluginContext^ ShellCreate(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
+		{
+			throw gcnew System::NotSupportedException("Shell Plugin support is only available for unmanaged plugins.");
+		}
+
 		// IVstPluginContext interface implementation
 		/// <summary>
 		/// Sets a new <paramref name="value"/> for the <paramref name="keyName"/> property.
@@ -55,6 +66,7 @@ namespace Host {
 		/// </remarks>
 		generic<typename T> 
 		virtual void Set(System::String^ keyName, T value);
+
 		/// <summary>
 		/// Retrieves the value for the <paramref name="keyName"/> property.
 		/// </summary>
@@ -64,6 +76,7 @@ namespace Host {
 		/// or default(T) when it was not found.</returns>
 		generic<typename T> 
 		virtual T Find(System::String^ keyName);
+
 		/// <summary>
 		/// Removes the <paramref name="keyName"/> property from the plugin context.
 		/// </summary>
@@ -71,6 +84,7 @@ namespace Host {
 		/// <remarks><see cref="System::IDisposable::Dispose"/> is <b>NOT</b> called on the property.</remarks>
 		virtual void Remove(System::String^ keyName)
 		{ _props->Remove(keyName); }
+
 		/// <summary>
 		/// Deletes the <paramref name="keyName"/> property and removes it from the plugin context.
 		/// </summary>
@@ -122,6 +136,9 @@ namespace Host {
 		/// </summary>
 		virtual event System::ComponentModel::PropertyChangedEventHandler^ PropertyChanged;
 
+		/// <summary>The key name that stores the path of the plugin dll in the context.</summary>
+		static System::String^ PluginPathContextVar = "_PluginPath";
+
 	protected:
 		/// <summary>Constructor for derived classes.</summary>
 		/// <param name="hostCmdStub">Reference is stored at the <see cref="HostCommandStub"/> property 
@@ -137,6 +154,7 @@ namespace Host {
 		/// <summary>Implemented by derived classes to initialize the instance.</summary>
 		/// <param name="pluginPath">An absolute path the the plugin dll. Must not be null or empty.</param>
 		virtual void Initialize(System::String^ pluginPath) {}
+
 		/// <summary>Implemented by derived classes to clean up resources.</summary>
 		virtual void Uninitialize() {}
 

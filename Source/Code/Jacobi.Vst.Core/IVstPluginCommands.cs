@@ -421,16 +421,12 @@
 
         #endregion Offline processing not implemented
 
-        #region Plugin Host/Shell not implemented
-
-        ///// <summary>
-        ///// Under construction.
-        ///// </summary>
-        ///// <param name="name"></param>
-        ///// <returns></returns>
-        //int GetNextPlugin(out string name);
-
-        #endregion Plugin Host/Shell not implemented
+        /// <summary>
+        /// Retrieves the unique plugin Id and the name of the next (sub) plugin.
+        /// </summary>
+        /// <param name="name">Filled with the name of the next sub-plugin</param>
+        /// <returns>Returns the unique plugin id.</returns>
+        int GetNextPlugin(out string name);
 
         /// <summary>
         /// Called just before the first call to Process is made.

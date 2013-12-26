@@ -78,6 +78,15 @@ namespace Jacobi.Vst.Core.Host
         /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
+        public int GetNextPlugin(out string name)
+        {
+            return _pluginCmdStub.GetNextPlugin(out name);
+        }
+
+        /// <summary>
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
+        /// </summary>
+        /// <returns>Returns the value returned from the forwarded call.</returns>
         public int StartProcess()
         {
             return _pluginCmdStub.StartProcess();
