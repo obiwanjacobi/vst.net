@@ -28,7 +28,7 @@ namespace Jacobi.Vst.Core
         /// <param name="noteLength">The length of the note (when the event is a midi note event).</param>
         /// <param name="noteOffset">The offset of the note.</param>
         /// <param name="midiData">The additional midi event data.</param>
-        /// <param name="detune">A detune value. Must lie within [-64,63] range.</param>
+        /// <param name="detune">A detune value. Should lie within [-64,63] range (not checked).</param>
         /// <param name="noteOffVelocity">Velocity for when the note is done.</param>
         /// <param name="isRealtime">True if the Midi Event was received in real time.</param>
         public VstMidiEvent(int deltaFrames,
@@ -36,7 +36,7 @@ namespace Jacobi.Vst.Core
             : base(VstEventTypes.MidiEvent, deltaFrames, midiData)
         {
             Throw.IfArgumentIsNull(midiData, "midiData");
-            Throw.IfArgumentNotInRange<short>(detune, -64, 63, "detune");
+            //Throw.IfArgumentNotInRange<short>(detune, -64, 63, "detune"); // caused problems in Sonar X2. Issue: 10054
 
             NoteLength = noteLength;
             NoteOffset = noteOffset;
