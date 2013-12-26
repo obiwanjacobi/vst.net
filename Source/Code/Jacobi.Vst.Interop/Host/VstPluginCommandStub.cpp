@@ -496,8 +496,11 @@ System::Boolean VstPluginCommandStub::GetSpeakerArrangement([System::Runtime::In
 
 // Offline processing not implemented
 //System::Int32 SetTotalSamplesToProcess(System::Int32 numberOfSamples);
-// Plugin Host/Shell not implemented
-//System::Int32 GetNextPlugin([System::Runtime::InteropServices::Out] System::String^% name);
+
+System::Int32 GetNextPlugin([System::Runtime::InteropServices::Out] System::String^% name)
+{
+	return 0;
+}
 
 System::Int32 VstPluginCommandStub::StartProcess()
 {
