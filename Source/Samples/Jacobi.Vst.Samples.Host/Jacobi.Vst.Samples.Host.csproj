@@ -80,7 +80,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jacobi.Vst.Core, Version=0.6.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
+    <Reference Include="Jacobi.Vst.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
     </Reference>
