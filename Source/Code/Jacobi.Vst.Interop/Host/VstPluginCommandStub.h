@@ -346,10 +346,17 @@ public:
     /// <returns>Returns false when not implemented.</returns>
 	virtual System::Boolean GetSpeakerArrangement([System::Runtime::InteropServices::Out] Jacobi::Vst::Core::VstSpeakerArrangement^% input, 
 		[System::Runtime::InteropServices::Out] Jacobi::Vst::Core::VstSpeakerArrangement^% output);
-    // Offline processing not implemented
+    
+	// Offline processing not implemented
     //virtual System::Int32 SetTotalSamplesToProcess(System::Int32 numberOfSamples);
-    // Plugin Host/Shell not implemented
-    //virtual System::Int32 GetNextPlugin(([System::Runtime::InteropServices::Out] System::String^% name);
+
+    /// <summary>
+    /// Enumerate the plugins contained in the Shell plugin.
+    /// </summary>
+	/// <param name="name">Filled with the name of the next plugin.</param>
+    /// <returns>Returns the unique plugin Id.</returns>
+    virtual System::Int32 GetNextPlugin([System::Runtime::InteropServices::Out] System::String^% name);
+
     /// <summary>
     /// Called just before the first call to Process is made.
     /// </summary>
