@@ -38,11 +38,11 @@
             this.ParameterValueHdr = new System.Windows.Forms.ColumnHeader();
             this.ParameterLabelHdr = new System.Windows.Forms.ColumnHeader();
             this.ParameterShortLabelHdr = new System.Windows.Forms.ColumnHeader();
-            this.ProgramNameTxt = new System.Windows.Forms.TextBox();
             this.ProgramIndexNud = new System.Windows.Forms.NumericUpDown();
             this.OKBtn = new System.Windows.Forms.Button();
             this.GenerateNoiseBtn = new System.Windows.Forms.Button();
             this.EditorBtn = new System.Windows.Forms.Button();
+            this.ProgramListCmb = new System.Windows.Forms.ComboBox();
             groupBox1 = new System.Windows.Forms.GroupBox();
             groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
@@ -94,8 +94,8 @@
             // 
             groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox2.Controls.Add(this.ProgramListCmb);
             groupBox2.Controls.Add(this.PluginParameterListVw);
-            groupBox2.Controls.Add(this.ProgramNameTxt);
             groupBox2.Controls.Add(this.ProgramIndexNud);
             groupBox2.Location = new System.Drawing.Point(13, 177);
             groupBox2.Name = "groupBox2";
@@ -143,13 +143,6 @@
             // 
             this.ParameterShortLabelHdr.Text = "Short Lbl";
             // 
-            // ProgramNameTxt
-            // 
-            this.ProgramNameTxt.Location = new System.Drawing.Point(54, 20);
-            this.ProgramNameTxt.Name = "ProgramNameTxt";
-            this.ProgramNameTxt.Size = new System.Drawing.Size(226, 20);
-            this.ProgramNameTxt.TabIndex = 1;
-            // 
             // ProgramIndexNud
             // 
             this.ProgramIndexNud.Location = new System.Drawing.Point(7, 20);
@@ -191,6 +184,14 @@
             this.EditorBtn.UseVisualStyleBackColor = true;
             this.EditorBtn.Click += new System.EventHandler(this.EditorBtn_Click);
             // 
+            // ProgramListCmb
+            // 
+            this.ProgramListCmb.FormattingEnabled = true;
+            this.ProgramListCmb.Location = new System.Drawing.Point(54, 19);
+            this.ProgramListCmb.Name = "ProgramListCmb";
+            this.ProgramListCmb.Size = new System.Drawing.Size(335, 21);
+            this.ProgramListCmb.TabIndex = 3;
+            // 
             // PluginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,7 +211,6 @@
             this.Load += new System.EventHandler(this.PluginForm_Load);
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProgramIndexNud)).EndInit();
             this.ResumeLayout(false);
 
@@ -222,7 +222,6 @@
         private System.Windows.Forms.ColumnHeader PropertyNameHdr;
         private System.Windows.Forms.ColumnHeader PropertyValueHdr;
         private System.Windows.Forms.ListView PluginParameterListVw;
-        private System.Windows.Forms.TextBox ProgramNameTxt;
         private System.Windows.Forms.NumericUpDown ProgramIndexNud;
         private System.Windows.Forms.Button OKBtn;
         private System.Windows.Forms.ColumnHeader ParameterNameHdr;
@@ -231,5 +230,6 @@
         private System.Windows.Forms.ColumnHeader ParameterShortLabelHdr;
         private System.Windows.Forms.Button GenerateNoiseBtn;
         private System.Windows.Forms.Button EditorBtn;
+        private System.Windows.Forms.ComboBox ProgramListCmb;
     }
 }

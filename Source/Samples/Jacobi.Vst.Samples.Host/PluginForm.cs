@@ -18,6 +18,7 @@ namespace Jacobi.Vst.Samples.Host
         private void DataToForm()
         {
             FillPropertyList();
+            FillProgramList();
             FillProgram();
             FillParameterList();
         }
@@ -83,10 +84,21 @@ namespace Jacobi.Vst.Samples.Host
             PluginPropertyListVw.Items.Add(lvItem);
         }
 
+        private void FillProgramList()
+        {
+            ProgramListCmb.Items.Clear();
+
+            for (int index = 0; index < PluginContext.PluginInfo.ProgramCount; index++)
+            {
+                ProgramListCmb.Items.Add(
+                    PluginContext.PluginCommandStub.GetProgramNameIndexed(index));
+            }
+        }
+
         private void FillProgram()
         {
             ProgramIndexNud.Value = PluginContext.PluginCommandStub.GetProgram();
-            ProgramNameTxt.Text = PluginContext.PluginCommandStub.GetProgramName();
+            ProgramListCmb.Text = PluginContext.PluginCommandStub.GetProgramName();
         }
 
         private void FillParameterList()
