@@ -1,7 +1,8 @@
-﻿using System.Runtime.InteropServices;
-using Jacobi.Vst3.Interop;
-using RGiesecke.DllExport;
+﻿using Jacobi.Vst3.Interop;
 using Jacobi.Vst3.Plugin;
+using RGiesecke.DllExport;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Jacobi.Vst3.TestPlugin
 {

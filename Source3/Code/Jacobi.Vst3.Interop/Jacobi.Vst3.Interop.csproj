@@ -126,6 +126,7 @@
     <Compile Include="BusTypes.cs" />
     <Compile Include="Chord.cs" />
     <None Include="Common\ComRef.cs" />
+    <Compile Include="Common\IMarshal.cs" />
     <Compile Include="Common\KeyedCollectionWithIndex.cs" />
     <Compile Include="Common\ObservableObject.cs" />
     <Compile Include="Constants.cs" />
