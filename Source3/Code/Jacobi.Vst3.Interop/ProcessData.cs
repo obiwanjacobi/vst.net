@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Jacobi.Vst3.Common;
+using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Jacobi.Vst3.Interop
 {
@@ -31,8 +33,26 @@ namespace Jacobi.Vst3.Interop
         public IntPtr Outputs;	///< buffers of output buses
         //public unsafe AudioBusBuffers* Outputs;
 
-        [MarshalAs(UnmanagedType.Interface)]
-        public IParameterChanges InputParameterChanges;	///< incoming parameter changes for this block 
+        //[MarshalAs(UnmanagedType.Interface)]
+        //public IParameterChanges InputParameterChanges;	///< incoming parameter changes for this block 
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr InputParameterChangesPtr;
+
+        public IParameterChanges GetInputParameterChanges()
+        {
+            var unknown = Marshal.GetObjectForIUnknown(InputParameterChangesPtr);
+
+            //if (unknown is IMarshal)
+            //{
+            //    System.Diagnostics.Trace.WriteLine("Proxy!");
+            //}
+            //else
+            //{
+            //    System.Diagnostics.Trace.WriteLine("Apartment State: " + Thread.CurrentThread.GetApartmentState());
+            //}
+
+            return unknown as IParameterChanges;
+        }
 
         [MarshalAs(UnmanagedType.Interface)]
         public IParameterChanges OutputParameterChanges;	///< outgoing parameter changes for this block (optional)

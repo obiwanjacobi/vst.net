@@ -32,8 +32,6 @@ namespace Jacobi.Vst3.TestPlugin
         {
             //System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: numSamples=" + data.NumSamples);
 
-            return TResult.S_OK;
-
             int result = ProcessInParameters(ref data);
 
             if (TResult.Failed(result))
@@ -48,13 +46,21 @@ namespace Jacobi.Vst3.TestPlugin
         {
             // TODO: Parameter handling
 
+            var paramCount = data.GetInputParameterChanges().GetParameterCount();
+            //var paramCount = data.OutputParameterChanges.GetParameterCount();
+            //var paramCount = data.InputEvents.GetEventCount();
+            //var paramCount = data.OutputEvents.GetEventCount();
+
+            if (paramCount > 0)
+            {
+                System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: InputParameterChanges.GetParameterCount() = " + paramCount);
+            }
+
             return TResult.S_OK;
         }
 
         private int ProcessAudio(ref ProcessData data)
         {
-            return TResult.S_OK;
-
             // flushing parameters
             if (data.NumInputs == 0 || data.NumOutputs == 0)
             {
@@ -68,8 +74,6 @@ namespace Jacobi.Vst3.TestPlugin
 
             var inputBusInfo = _audioInputs[0];
             var outputBusInfo = _audioOutputs[0];
-
-           
 
             if (!inputBusInfo.IsActive || !outputBusInfo.IsActive)
             {
@@ -90,21 +94,35 @@ namespace Jacobi.Vst3.TestPlugin
                 var outputRight = outputBus.GetUnsafeBuffer32(1);
 
                 // silent inputs result in silent outputs
-                //outputBus.SetChannelSilent(0, inputLeft == null);
-                //outputBus.SetChannelSilent(1, inputRight == null);
+                outputBus.SetChannelSilent(0, inputLeft == null);
+                outputBus.SetChannelSilent(1, inputRight == null);
 
-                // copy samples
-                //for (int i = 0; i < outputBus.SampleCount; i++)
-                //{
-                //    if (outputLeft != null && inputLeft != null)
-                //    {
-                //        outputLeft[i] = inputLeft[i];
-                //    }
-                //    if (outputRight != null && inputRight != null)
-                //    {
-                //        outputRight[i] = inputRight[i];
-                //    }
-                //}
+                if (outputLeft != null && inputLeft != null &&
+                    outputRight != null && inputRight != null)
+                {
+                    // copy samples
+                    for (int i = 0; i < outputBus.SampleCount; i++)
+                    {
+                        outputLeft[i] = inputLeft[i];
+                        outputRight[i] = inputRight[i];
+                    }
+                }
+                else if (outputLeft != null && inputLeft != null)
+                {
+                    // copy samples
+                    for (int i = 0; i < outputBus.SampleCount; i++)
+                    {
+                        outputLeft[i] = inputLeft[i];
+                    }
+                }
+                else if (outputRight != null && inputRight != null)
+                {
+                    // copy samples
+                    for (int i = 0; i < outputBus.SampleCount; i++)
+                    {
+                        outputRight[i] = inputRight[i];
+                    }
+                }
             }
 
             return TResult.S_OK;
