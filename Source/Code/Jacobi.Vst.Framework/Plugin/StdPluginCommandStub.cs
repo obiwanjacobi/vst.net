@@ -293,8 +293,7 @@
 
             if (pluginEditor != null)
             {
-                pluginEditor.KeyDown(ascii, virtualKey, modifers);
-                return true;
+                return pluginEditor.KeyDown(ascii, virtualKey, modifers);
             }
 
             return false;
@@ -315,8 +314,7 @@
 
             if (pluginEditor != null)
             {
-                pluginEditor.KeyUp(ascii, virtualKey, modifers);
-                return true;
+                return pluginEditor.KeyUp(ascii, virtualKey, modifers);
             }
 
             return false;
