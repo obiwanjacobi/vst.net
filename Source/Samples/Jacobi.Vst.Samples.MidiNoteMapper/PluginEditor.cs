@@ -34,14 +34,16 @@
             _uiWrapper.Close();
         }
 
-        public void KeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
+        public bool KeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
             // no-op
+            return false;
         }
 
-        public void KeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
+        public bool KeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
             // no-op
+            return false;
         }
 
         public VstKnobMode KnobMode { get; set; }
