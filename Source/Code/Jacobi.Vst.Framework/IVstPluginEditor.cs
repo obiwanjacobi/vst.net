@@ -42,6 +42,7 @@ namespace Jacobi.Vst.Framework
         /// <param name="ascii">The identification of the key.</param>
         /// <param name="virtualKey">Virtual key information.</param>
         /// <param name="modifers">Additional keys pressed.</param>
+        /// <returns>Returns true if the key is handled.</returns>
         /// <remarks>Typically this method requires no implementation when using WinForms.</remarks>
         bool KeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
         /// <summary>
@@ -50,6 +51,7 @@ namespace Jacobi.Vst.Framework
         /// <param name="ascii">The identification of the key.</param>
         /// <param name="virtualKey">Virtual key information.</param>
         /// <param name="modifers">Additional keys pressed.</param>
+        /// <returns>Returns true if the key is handled.</returns>
         /// <remarks>Typically this method requires no implementation when using WinForms.</remarks>
         bool KeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers);
     }
