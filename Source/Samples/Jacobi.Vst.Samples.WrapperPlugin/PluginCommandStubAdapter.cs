@@ -94,6 +94,11 @@ namespace Jacobi.Vst.Samples.WrapperPlugin
             return _pluginCtx.PluginCommandStub.StopProcess();
         }
 
+        public int GetNextPlugin(out string name)
+        {
+            return _pluginCtx.PluginCommandStub.GetNextPlugin(out name);
+        }
+
         #endregion
 
         #region IVstPluginCommands21 Members
@@ -356,5 +361,6 @@ namespace Jacobi.Vst.Samples.WrapperPlugin
         }
 
         #endregion
+
     }
 }
