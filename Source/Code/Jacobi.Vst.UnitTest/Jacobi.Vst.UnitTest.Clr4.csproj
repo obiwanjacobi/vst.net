@@ -134,12 +134,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.Clr4.csproj">
-      <Project>{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}</Project>
-      <Name>Jacobi.Vst.Core</Name>
+      <Project>{5950f8a9-f413-4ace-b6e0-6f458b4c26f9}</Project>
+      <Name>Jacobi.Vst.Core.Clr4</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jacobi.Vst.Framework\Jacobi.Vst.Framework.Clr4.csproj">
-      <Project>{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}</Project>
-      <Name>Jacobi.Vst.Framework</Name>
+      <Project>{f9f64e8a-8739-4da0-b0e0-8e3ca106cd6f}</Project>
+      <Name>Jacobi.Vst.Framework.Clr4</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Interop.Clr4.vcxproj">
       <Project>{e0cc0ccf-a40d-4a53-8fac-b6af7e76eb08}</Project>
