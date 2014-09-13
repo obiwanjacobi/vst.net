@@ -1,44 +1,45 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jacobi.Vst.Interop", "Jacobi.Vst.Interop\Jacobi.Vst.Interop.vcproj", "{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jacobi.Vst.Interop.Clr2", "Jacobi.Vst.Interop\Jacobi.Vst.Interop.Clr2.vcxproj", "{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Core", "Jacobi.Vst.Core\Jacobi.Vst.Core.csproj", "{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Core.Clr2", "Jacobi.Vst.Core\Jacobi.Vst.Core.Clr2.csproj", "{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Framework", "Jacobi.Vst.Framework\Jacobi.Vst.Framework.csproj", "{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Framework.Clr2", "Jacobi.Vst.Framework\Jacobi.Vst.Framework.Clr2.csproj", "{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8750DF37-C0F1-4957-A891-38CD9043D2BF}"
 	ProjectSection(SolutionItems) = preProject
 		AssemblyInfo.Version.cpp = AssemblyInfo.Version.cpp
 		AssemblyInfo.Version.cs = AssemblyInfo.Version.cs
 		CreateBuildResults.cmd = CreateBuildResults.cmd
-		Jacobi.Vst.vsmdi = Jacobi.Vst.vsmdi
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		Jacobi.Vst.Clr2.vsmdi = Jacobi.Vst.Clr2.vsmdi
+		LocalTestRun.Clr2.testrunconfig = LocalTestRun.Clr2.testrunconfig
+		LocalTestRun.Clr4.testrunconfig = LocalTestRun.Clr4.testrunconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.UnitTest", "Jacobi.Vst.UnitTest\Jacobi.Vst.UnitTest.csproj", "{2500BA53-FD00-4B76-AFE3-AC68C055BA86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.UnitTest.Clr2", "Jacobi.Vst.UnitTest\Jacobi.Vst.UnitTest.Clr2.csproj", "{2500BA53-FD00-4B76-AFE3-AC68C055BA86}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS06
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs06
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = Jacobi.Vst.Core\\Jacobi.Vst.Core.csproj
+		SccProjectUniqueName1 = Jacobi.Vst.Core\\Jacobi.Vst.Core.Clr2.csproj
 		SccProjectName1 = Jacobi.Vst.Core
 		SccLocalPath1 = Jacobi.Vst.Core
-		SccProjectUniqueName2 = Jacobi.Vst.Framework\\Jacobi.Vst.Framework.csproj
+		SccProjectUniqueName2 = Jacobi.Vst.Framework\\Jacobi.Vst.Framework.Clr2.csproj
 		SccProjectName2 = Jacobi.Vst.Framework
 		SccLocalPath2 = Jacobi.Vst.Framework
-		SccProjectUniqueName3 = Jacobi.Vst.Interop\\Jacobi.Vst.Interop.vcproj
+		SccProjectUniqueName3 = Jacobi.Vst.Interop\\Jacobi.Vst.Interop.Clr2.vcxproj
 		SccProjectName3 = Jacobi.Vst.Interop
 		SccLocalPath3 = Jacobi.Vst.Interop
-		SccProjectUniqueName4 = Jacobi.Vst.UnitTest\\Jacobi.Vst.UnitTest.csproj
+		SccProjectUniqueName4 = Jacobi.Vst.UnitTest\\Jacobi.Vst.UnitTest.Clr2.csproj
 		SccProjectName4 = Jacobi.Vst.UnitTest
 		SccLocalPath4 = Jacobi.Vst.UnitTest
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Jacobi.Vst.vsmdi
+		CategoryFile = Jacobi.Vst.Clr2.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU (RTM) = Debug|Any CPU (RTM)
