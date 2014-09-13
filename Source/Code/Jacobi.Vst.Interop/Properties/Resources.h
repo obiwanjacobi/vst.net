@@ -136,7 +136,7 @@ namespace Properties {
 			{
 				if(_rescMgr == nullptr)
 				{
-					_rescMgr = gcnew System::Resources::ResourceManager("JacobiVstInterop.Resources", 
+					_rescMgr = gcnew System::Resources::ResourceManager("JacobiVstInterop.Properties.Resources", 
 						System::Reflection::Assembly::GetExecutingAssembly());
 				}
 

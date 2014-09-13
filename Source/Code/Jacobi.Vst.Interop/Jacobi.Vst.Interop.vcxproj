@@ -124,6 +124,7 @@
       <AssemblyDebug>true</AssemblyDebug>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\"
