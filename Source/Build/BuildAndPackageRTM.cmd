@@ -1,4 +1,5 @@
 CALL Create_PackagesDir.cmd
+CALL IncludeVsTools.cmd
 
 cd Code
 CALL CleanBuildResults.cmd
