@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -18,6 +18,11 @@
     <SccProvider>SAK</SccProvider>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\..\..\..\..\_keyfile\Jacobi.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -115,6 +120,9 @@
     <Compile Include="Host\VstHostAutomation.cs" />
     <Compile Include="Host\VstHostInterfaceManager.cs" />
     <Compile Include="Host\VstHostMidiProcessor.cs" />
+    <None Include="..\LocalTestRun.Clr4.testrunconfig">
+      <Link>LocalTestRun.Clr4.testrunconfig</Link>
+    </None>
     <None Include="Host\VstHostOfflineProcessor.cs" />
     <Compile Include="Host\VstHostShell.cs" />
     <Compile Include="IActivatable.cs" />
@@ -194,7 +202,7 @@
     <None Include="Class Diagrams\Jacobi.Vst.Framework.Types.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj">
+    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.Clr2.csproj">
       <Project>{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}</Project>
       <Name>Jacobi.Vst.Core</Name>
     </ProjectReference>
@@ -220,7 +228,7 @@
   -->
   <PropertyGroup>
     <WindowsSdkDir>%WindowsSdkDir%</WindowsSdkDir>
-    <PostBuildEvent>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
-copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\" /F /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

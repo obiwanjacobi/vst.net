@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,15 +10,33 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Jacobi.Vst.UnitTest</RootNamespace>
     <AssemblyName>Jacobi.Vst.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TargetFrameworkSubset>
-    </TargetFrameworkSubset>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,7 +96,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -96,8 +115,10 @@
     <Compile Include="Core\MaxLengthTest.cs" />
     <Compile Include="Framework\MaxLengthTest.cs" />
     <Compile Include="Framework\VstParameterNormalizationInfoTest.cs" />
+    <Compile Include="Interop\Host\StubHostCommandStub.cs" />
     <Compile Include="Interop\Host\VstAudioBufferManagerTest.cs" />
     <Compile Include="Interop\Host\VstAudioPrecisionBufferManagerTest.cs" />
+    <Compile Include="Interop\Host\VstPluginContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\VstCanDoHelperTest.cs" />
     <Compile Include="Core\VstEventTest.cs" />
@@ -107,21 +128,46 @@
     <Compile Include="Framework\VstParameterCollectionTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj">
+    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.Clr2.csproj">
       <Project>{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}</Project>
       <Name>Jacobi.Vst.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jacobi.Vst.Framework\Jacobi.Vst.Framework.csproj">
+    <ProjectReference Include="..\Jacobi.Vst.Framework\Jacobi.Vst.Framework.Clr2.csproj">
       <Project>{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}</Project>
       <Name>Jacobi.Vst.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Interop.vcproj">
+    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Interop.Clr2.vcxproj">
       <Project>{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}</Project>
       <Name>Jacobi.Vst.Interop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\LocalTestRun.Clr4.testrunconfig">
+      <Link>LocalTestRun.Clr4.testrunconfig</Link>
+    </None>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
