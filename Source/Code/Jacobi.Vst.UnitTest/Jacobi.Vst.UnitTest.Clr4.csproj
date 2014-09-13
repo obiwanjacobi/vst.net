@@ -141,9 +141,9 @@
       <Project>{F9F64E8A-8739-4DA0-B0E0-8E3CA106CD6F}</Project>
       <Name>Jacobi.Vst.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Interop.vcxproj">
-      <Project>{E0CC0CCF-A40D-4A53-8FAC-B6AF7E76EB08}</Project>
-      <Name>Jacobi.Vst.Interop</Name>
+    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Interop.Clr4.vcxproj">
+      <Project>{e0cc0ccf-a40d-4a53-8fac-b6af7e76eb08}</Project>
+      <Name>Jacobi.Vst.Interop.Clr4</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
