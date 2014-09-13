@@ -120,6 +120,8 @@
     <Compile Include="Core\MaxLengthTest.cs" />
     <Compile Include="Framework\MaxLengthTest.cs" />
     <Compile Include="Framework\VstParameterNormalizationInfoTest.cs" />
+    <Compile Include="Interop\Host\StubHostCommandStub.cs" />
+    <Compile Include="Interop\Host\VstPluginContextTest.cs" />
     <Compile Include="Interop\Host\VstAudioBufferManagerTest.cs" />
     <Compile Include="Interop\Host\VstAudioPrecisionBufferManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
