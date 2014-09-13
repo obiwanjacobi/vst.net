@@ -218,12 +218,6 @@
     <None Include="Class Diagrams\Jacobi.Vst.Framework.Types.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.Clr4.csproj">
-      <Project>{5950F8A9-F413-4ACE-B6E0-6F458B4C26F9}</Project>
-      <Name>Jacobi.Vst.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="..\..\..\..\..\..\_keyfile\Jacobi.snk">
       <Link>Jacobi.snk</Link>
     </Content>
@@ -250,6 +244,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.Clr4.csproj">
+      <Project>{5950f8a9-f413-4ace-b6e0-6f458b4c26f9}</Project>
+      <Name>Jacobi.Vst.Core.Clr4</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
