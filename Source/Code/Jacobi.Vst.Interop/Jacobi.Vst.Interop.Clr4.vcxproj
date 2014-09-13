@@ -129,8 +129,7 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
-xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y
-</Command>
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,9 +157,8 @@ xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\"
-copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\"
-</Command>
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -187,9 +185,8 @@ copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\"
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\"
-copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\"
-</Command>
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -216,9 +213,8 @@ copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\"
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\"
-copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\"
-</Command>
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
