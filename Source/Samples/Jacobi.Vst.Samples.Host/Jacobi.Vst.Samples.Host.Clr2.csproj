@@ -194,6 +194,6 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
 del "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\$(TargetName).vshost.*"
-copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetFileName)"</PostBuildEvent>
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetFileName)" /F /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
