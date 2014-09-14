@@ -11,7 +11,7 @@
     <AssemblyName>Jacobi.Vst.Samples.Delay.VB</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -193,8 +193,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll"
-copy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)"
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll"
+xcopy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)"
 copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
 copy /Y "$(SolutionDir)..\_SharedAssemblies\$(TargetName).*"  "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
 </PostBuildEvent>
