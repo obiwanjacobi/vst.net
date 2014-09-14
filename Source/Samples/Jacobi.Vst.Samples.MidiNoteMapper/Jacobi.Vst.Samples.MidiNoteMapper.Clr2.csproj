@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B9963370-6AC6-4EFA-ABC3-02102ECF2EC2}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{9EA73A6E-92BF-4D4C-A5A0-34950230F48E}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jacobi.Vst.Samples.Host</RootNamespace>
-    <AssemblyName>Jacobi.Vst.Samples.Host</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>Jacobi.Vst.Samples.MidiNoteMapper</RootNamespace>
+    <AssemblyName>Jacobi.Vst.Samples.MidiNoteMapper</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -46,7 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.Host.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,12 +55,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Jacobi.Vst.Samples.MidiNoteMapper.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.Host.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.XML</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
@@ -70,6 +71,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\Jacobi.Vst.Samples.MidiNoteMapper.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -81,7 +83,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.Host.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Jacobi.Vst.Samples.MidiNoteMapper.XML</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
@@ -91,6 +93,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\Jacobi.Vst.Samples.MidiNoteMapper.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -99,19 +102,18 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jacobi.Vst.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
+    <Reference Include="Jacobi.Vst.Core, Version=0.3.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Jacobi.Vst.Interop, Version=0.6.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=x86">
+    <Reference Include="Jacobi.Vst.Framework, Version=0.3.0.0, Culture=neutral, PublicKeyToken=fa678e13c1efc859, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Interop.dll</HintPath>
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\_AssemblyInfo\AssemblyInfo.General.cs">
@@ -120,56 +122,35 @@
     <Compile Include="..\AssemblyInfo.Version.cs">
       <Link>Properties\AssemblyInfo.Version.cs</Link>
     </Compile>
-    <Compile Include="EditorFrame.cs">
+    <Compile Include="AudioProcessor.cs" />
+    <Compile Include="MapNoteDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditorFrame.Designer.cs">
-      <DependentUpon>EditorFrame.cs</DependentUpon>
+    <Compile Include="MapNoteDetails.Designer.cs">
+      <DependentUpon>MapNoteDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="HostCommandStub.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="MapNoteItem.cs" />
+    <Compile Include="MidiNoteMapperUI.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="MidiNoteMapperUI.Designer.cs">
+      <DependentUpon>MidiNoteMapperUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="PluginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PluginForm.Designer.cs">
-      <DependentUpon>PluginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="MidiProcessor.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="PluginCommandStub.cs" />
+    <Compile Include="PluginEditor.cs" />
+    <Compile Include="PluginPersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EditorFrame.resx">
-      <DependentUpon>EditorFrame.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PluginForm.resx">
-      <DependentUpon>PluginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapNoteDetails.resx">
+      <DependentUpon>MapNoteDetails.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <EmbeddedResource Include="MidiNoteMapperUI.resx">
+      <DependentUpon>MidiNoteMapperUI.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -192,8 +173,10 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
-del "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\$(TargetName).vshost.*"
-copy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetFileName)"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll"
+xcopy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)"
+copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
+copy /Y "$(SolutionDir)..\_SharedAssemblies\$(TargetName).*"  "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
