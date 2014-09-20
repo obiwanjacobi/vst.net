@@ -112,7 +112,6 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <WarningLevel>Level3</WarningLevel>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -124,8 +123,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
-xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)..\BuildResults\CLR2\$(PlatformTarget)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -153,8 +152,8 @@ xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
-xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)..\BuildResults\CLR2\$(PlatformTarget)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -171,7 +170,7 @@ xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll
       <PrecompiledHeader>Use</PrecompiledHeader>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <WarningLevel>Level3</WarningLevel>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
@@ -182,8 +181,8 @@ xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
-xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)..\BuildResults\CLR2\$(PlatformTarget)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -211,8 +210,8 @@ xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR2\$(Platform)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
-xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" /F /Y
+      <Command>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)..\BuildResults\CLR2\$(PlatformTarget)\$(Configuration)\Jacobi.Vst.Interop.*" /F /Y
+xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
