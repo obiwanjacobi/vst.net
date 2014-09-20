@@ -101,7 +101,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RGiesecke.DllExport.Metadata">
-      <HintPath>..\packages\UnmanagedExports.1.2.4.23262\lib\net\RGiesecke.DllExport.Metadata.dll</HintPath>
+      <HintPath>..\packages\UnmanagedExports.1.2.6\lib\net\RGiesecke.DllExport.Metadata.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -120,9 +120,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Jacobi.Vst3.Interop\Jacobi.Vst3.Interop.csproj">
       <Project>{33E7E3E3-9547-4001-AE7A-7D44DFEADE3B}</Project>
       <Name>Jacobi.Vst3.Interop</Name>
@@ -135,12 +132,15 @@
       <Link>Jacobi.Vst3.Interop.dll</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="../packages/UnmanagedExports.1.2.4.23262/tools/RGiesecke.DllExport.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(TargetDir)Jacobi.Vst3.TestPlugin.*" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\"
-xcopy /Y "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\$(TargetFileName)" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\$(TargetName).vst3"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)Jacobi.Vst3.TestPlugin.*" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\" /F /Y
+xcopy "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\$(TargetFileName)" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\$(TargetName).vst3" /F /Y</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="../packages/UnmanagedExports.1.2.6/tools/RGiesecke.DllExport.targets" Condition="Exists('../packages/UnmanagedExports.1.2.6/tools/RGiesecke.DllExport.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
