@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>VST.NET.x86</id>
+    <version>1.1</version>
+    <authors>Marc Jacobi</authors>
+    <owners>Jacobi Software</owners>
+    <licenseUrl>https://vstnet.codeplex.com/license</licenseUrl>
+    <projectUrl>https://vstnet.codeplex.com/</projectUrl>
+    <!--<iconUrl>http://download-codeplex.sec.s-msft.com/Download?ProjectName=vstnet&DownloadId=34897</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>VST.NET 1.1 primary assemblies 32-bits</description>
+    <releaseNotes>
+      The major change that has been done is that all project files are now VS2012. Because VS2012 does not support targeting a C++ (Jacobi.Vst.Interop) on CLR2 that has been dropped from the release.
+      This also means that the Jacobi.Vst.Interop assembly now requires the VS2012 version of the VC CRT dependency (redistributable package). All VST.NET client machines must have this installed: http://www.microsoft.com/en-us/download/details.aspx?id=30679
+
+      Refer to VST.NET 1.0 release for other non-binary packages.
+
+      Other additions:
+      *Read-only Programs
+      *Change in IVstPluginEditor interface
+      *Host can load (unmanaged) shell-plugins, managed not supported.
+    </releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>VST CLR4 x86</tags>
+    <dependencies />
+  </metadata>
+</package>
