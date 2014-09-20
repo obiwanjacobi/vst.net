@@ -194,6 +194,6 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll" /F /Y
 xcopy "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll" "$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)" /F /Y
-xcopy "$(SolutionDir)..\_SharedAssemblies\$(TargetName).*"  "$(SolutionDir)BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\" /F /Y</PostBuildEvent>
+xcopy "$(SolutionDir)..\_SharedAssemblies\$(TargetName).*"  "$(SolutionDir)..\BuildResults\CLR2\$(PlatformName)\$(ConfigurationName)\" /F /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
