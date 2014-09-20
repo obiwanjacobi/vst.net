@@ -167,7 +167,7 @@ namespace Jacobi.Vst.Samples.Host
             {
                 using (VstAudioBufferManager outputMgr = new VstAudioBufferManager(outputCount, blockSize))
                 {
-                    foreach (VstAudioBuffer buffer in inputMgr.ToArray())
+                    foreach (VstAudioBuffer buffer in inputMgr)
                     {
                         Random rnd = new Random((int)DateTime.Now.Ticks);
 
