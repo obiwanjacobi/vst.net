@@ -261,7 +261,7 @@
   -->
   <PropertyGroup>
     <WindowsSdkDir>%WindowsSdkDir%</WindowsSdkDir>
-    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)BuildResults\CLR4\$(PlatformName)\$(ConfigurationName)\" /F /Y
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)..\BuildResults\CLR4\$(PlatformName)\$(ConfigurationName)\" /F /Y
 xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\" /F /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
