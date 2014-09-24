@@ -1,6 +1,7 @@
 ﻿using Jacobi.Vst3.Interop;
 using Jacobi.Vst3.Plugin;
 using RGiesecke.DllExport;
+using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -10,12 +11,14 @@ namespace Jacobi.Vst3.TestPlugin
     {
         // This will automatically load dependent assemblies that were added as embedded resource to the project (root).
         private static readonly AssemblyDependencyResourceLoader _dependencyLoader = new AssemblyDependencyResourceLoader();
-        private static PluginClassFactory _factory; // singleton
+        private static PluginClassFactory _factory;
 
         [DllExport(ExportName = "InitDll", CallingConvention = Platform.DefaultCallingConvention)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static bool InitDll()
         {
+            System.Diagnostics.Trace.WriteLine("COM thread: " + System.Threading.Thread.CurrentThread.GetApartmentState());
+
             _factory = new PluginClassFactory("Jacobi Software", "obiwanjacobi@hotmail.com", "http://vstnet.codeplex.com");
             var reg = _factory.Register(typeof(PluginComponent), ClassRegistration.ObjectClasses.AudioModuleClass);
             reg.Categories = new CategoryCollection(CategoryCollection.Fx);
