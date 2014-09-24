@@ -37,12 +37,17 @@ namespace Jacobi.Vst3.TestPlugin
 
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
             {
-                Byte[] assemblyData = new Byte[stream.Length];
+                if (stream != null)
+                {
+                    Byte[] assemblyData = new Byte[stream.Length];
 
-                stream.Read(assemblyData, 0, assemblyData.Length);
+                    stream.Read(assemblyData, 0, assemblyData.Length);
 
-                return Assembly.Load(assemblyData);
+                    return Assembly.Load(assemblyData);
+                }
             }
+
+            return null;
         }
     }
 }

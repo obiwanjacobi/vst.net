@@ -18,7 +18,8 @@ void Test_IPluginFactory(IPluginFactory* pFactory)
 		return;
 	}
 
-	printf("Factory: %s - %s - %s\n", factoryInfo.vendor, factoryInfo.url, factoryInfo.email);
+	printf("Factory: %s - %s - %s\n", 
+		factoryInfo.vendor, factoryInfo.url, factoryInfo.email);
 
 	int nrOfClasses = pFactory->countClasses();
 	printf("The factory supports %i classes.\n", nrOfClasses);
@@ -84,7 +85,8 @@ void Test_IPluginFactory2(IPluginFactory* pFactory)
 			return;
 		}
 
-		printf("Class2: %s - %s - %s - %s\n", classInfo.name, classInfo.category, classInfo.vendor, classInfo.version);
+		printf("Class2: %s - %s - %s - %s\n", 
+			classInfo.name, classInfo.category, classInfo.vendor, classInfo.version);
 	}
 }
 
@@ -113,7 +115,8 @@ void Test_IPluginFactory3(IPluginFactory* pFactory)
 			return;
 		}
 
-		printf("Class3: %ws - %s - %ws - %ws\n", classInfo.name, classInfo.category, classInfo.vendor, classInfo.version);
+		printf("Class3: %ws - %s - %ws - %ws\n", 
+			classInfo.name, classInfo.category, classInfo.vendor, classInfo.version);
 	}
 }
 
@@ -131,12 +134,20 @@ int _tmain(int argc, _TCHAR* argv[])
 		loader = new AssemblyLoader();
 	}
 
+	if (!loader->IsValid())
+	{
+		DWORD err = GetLastError();
+		
+		printf("Could not load TestPlugin (%i).\n", err);
+		return -1;
+	}
+
 	GetFactoryProc proc = loader->GetPluginFactoryProcedure();
 
 	if (proc == NULL)
 	{
-		printf("Could not load TestPlugin or no export-method was found.\n");
-		return -1;
+		printf("No export-method was found.\n");
+		return -2;
 	}
 
 	/*SHOW_DEFINE(INIT_CLASS_IID);
@@ -150,7 +161,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	if (pFactory == NULL)
 	{
 		printf("The GetPluginFactory method returned NULL.\n");
-		return -2;
+		return -3;
 	}
 
 	Test_IPluginFactory(pFactory);

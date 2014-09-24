@@ -116,6 +116,7 @@
     <Compile Include="AssemblyDependencyResourceLoader.cs" />
     <Compile Include="MyEditController.cs" />
     <Compile Include="Exports.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="PluginComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -137,10 +138,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)Jacobi.Vst3.TestPlugin.*" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\" /F /Y
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).*" "$(SolutionDir)_SharedAssemblies\" /F /Y
+xcopy "$(TargetDir)Jacobi.Vst3.TestPlugin.*" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\" /F /Y
 xcopy "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\$(TargetFileName)" "C:\Program Files\Steinberg\VST3PluginTestHost\VST3\$(TargetName).vst3" /F /Y</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="../packages/UnmanagedExports.1.2.6/tools/RGiesecke.DllExport.targets" Condition="Exists('../packages/UnmanagedExports.1.2.6/tools/RGiesecke.DllExport.targets')" />
+  <Import Project="../packages/UnmanagedExports.1.2.6/tools/RGiesecke.DllExport.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
