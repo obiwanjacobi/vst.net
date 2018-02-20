@@ -8,7 +8,6 @@ VST.NET targets the 4.0 framework (runtime). The code was written with VS2012.
 It is very much appreciated if you ...
 [<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif">](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTE6LFLSC8RPL&lc=US&item_name=Jacobi%20Software&item_number=VST%2eNET&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
-- [Wiki](wiki)
 - [Using VST.NET](https://github.com/RocketStormNet/vst.net/wiki)
 - [VST.NET Samples](https://github.com/RocketStormNet/vst.net/wiki/Samples)
 - [Building the Source Code](https://github.com/RocketStormNet/vst.net/wiki/Build-Source-Code)
