@@ -8,6 +8,7 @@ These files are 6 levels up the folder hierarchy (relative to the project file) 
 **Visual Studio Express editions**
 I have written down the steps you need to take to adapt the source code to the Visual Studio Express Editions (VS2008).
 
+* Download the Steinberg VST SDK and copy the aeffect.h and aeffectx.h files into Jacobi.Vst.Interop/\_vst folder. These files are also in the VST3 SDK.
 * Create a 'Debug' and 'Release' directory at 'Code' level (where the .sln file is).
 
 * Load solution in C# Express
