@@ -19,7 +19,7 @@ It is very much appreciated if you ...
 - [Products made with VST.NET](doc/Products_made_with_VST.NET.md)
 
 ## Resources
-- [Products made with VST.NET](Products-made-with-VST.NET.md)
+- [VST.NET Resources](doc/VST_Resources.md)
 - I have recently started a new project: **MIDI.NET** [https://github.com/obiwanjacobi/midi.net](https://github.com/obiwanjacobi/midi.net)
 - Visit the VST.NET facebook page. ![](doc/media/Home_facebook_logo_48x48.jpg)
 [http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174](http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174)
