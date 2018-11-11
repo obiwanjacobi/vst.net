@@ -24,11 +24,6 @@ It is very much appreciated if you ...
 - Visit the VST.NET facebook page. ![](doc/media/Home_facebook_logo_48x48.jpg)
 [http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174](http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174)
 
-NDepend.com has sponsored me with a free license for the NDepend Pro edition.
-![](doc/media/Home_NDepend_logo.jpg)
-[http://ndepend.com](http://ndepend.com)
-Thank you!
-
 ![](doc/media/Home_VstLogoAlpha92x54.png) VST is a trademark of Steinberg Media Technologies GmbH. 
 
 
