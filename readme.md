@@ -12,18 +12,21 @@ NOTICE: The Steinberg SDK files in Interop are removed. You have put these back 
 It is very much appreciated if you ...
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTE6LFLSC8RPL&lc=US&item_name=Jacobi%20Software&item_number=VST%2eNET&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
-
 ## Documentation Index
 
-- [Documentation Index](doc/Home.md)
-- [Products made with VST.NET](doc/Products_made_with_VST.NET.md)
+- [Documentation Index](docs/Home.md)
+- [Products made with VST.NET](docs/Products_made_with_VST.NET.md)
 
 ## Resources
-- [VST.NET Resources](doc/VST_Resources.md)
-- I have recently started a new project: **MIDI.NET** [https://github.com/obiwanjacobi/midi.net](https://github.com/obiwanjacobi/midi.net)
-- Visit the VST.NET facebook page. ![](doc/media/Home_facebook_logo_48x48.jpg)
+- [VST.NET Resources](docs/VST_Resources.md)
+- There is also this project: **MIDI.NET** [https://github.com/obiwanjacobi/midi.net](https://github.com/obiwanjacobi/midi.net)
+- Visit the VST.NET facebook page. ![](docs/media/Home_facebook_logo_48x48.jpg)
 [http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174](http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174)
 
-![](doc/media/Home_VstLogoAlpha92x54.png) VST is a trademark of Steinberg Media Technologies GmbH. 
+## License
 
+[LGPL Version 2.1](license.md)
 
+---
+
+![](docs/media/Home_VstLogoAlpha92x54.png) VST is a trademark of Steinberg Media Technologies GmbH.
