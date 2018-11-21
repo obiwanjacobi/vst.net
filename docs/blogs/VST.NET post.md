@@ -1,6 +1,4 @@
 # VST.NET
-Original blog post is [here](http://obiwanjacobi.blogspot.com/2008/05/vstnet.html)
-
 I have recently started an open source project that aims to bring Virtual Studio Technology (VST) - an audio and midi processing Plugin interface standard owned by Steinberg - to the .NET world.
 
 The native VST interface consists of a C++ SDK on top of a C procedural interface. The actual interchange of information between Host (for instance a sequencer application like Cubase) and the Plugin takes place through function pointers using opcodes. An opcode is basically a message identifier that states the action to be taken, either by the Host or the Plugin.
