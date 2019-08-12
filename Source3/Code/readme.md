@@ -1,4 +1,4 @@
-#OBOLETE
+#OBSOLETE
 
 This folder contains code for an attempt to support VST3.x.
 
