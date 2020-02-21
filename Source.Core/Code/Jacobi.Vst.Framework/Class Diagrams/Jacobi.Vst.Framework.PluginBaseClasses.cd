@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginAudioPrecisionProcessorBase">
+    <Position X="0.5" Y="3.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plugin\VstPluginAudioPrecisionProcessorBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginAudioProcessorBase">
+    <Position X="0.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAhAAAAAACAAAAAAAAAAAACAAQIA=</HashCode>
+      <FileName>Plugin\VstPluginAudioProcessorBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginPersistenceBase">
+    <Position X="4.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAICAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Plugin\VstPluginPersistenceBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginProgramsBase">
+    <Position X="4.75" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAAAAIAAAAAAIAAAAAABgAACAAAAAAA=</HashCode>
+      <FileName>Plugin\VstPluginProgramsBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.IO.VstProgramReaderBase">
+    <Position X="7.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAAAAAAAABAAAAAAAAAAAAAAQAAAAABAAAABABAA=</HashCode>
+      <FileName>Plugin\IO\VstProgramReaderBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Plugin.IO.VstProgramWriter">
+    <Position X="7.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Plugin\IO\VstProgramWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
