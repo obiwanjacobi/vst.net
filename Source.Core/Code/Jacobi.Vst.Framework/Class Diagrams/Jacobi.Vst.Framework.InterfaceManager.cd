@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Framework.Plugin.PluginInterfaceManagerBase">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <AssociationLine Name="_audioprecision" Type="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.982" />
+        <Point X="4.75" Y="1.982" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_audioProcessor" Type="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.334" />
+        <Point X="4.75" Y="1.334" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_bypass" Type="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.565" />
+        <Point X="4.75" Y="1.565" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_editor" Type="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.797" />
+        <Point X="4.75" Y="1.797" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_midiProcessor" Type="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.056" />
+        <Point X="4.75" Y="1.056" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAQCEACgGAAAAAIBCAAAABIAIAAAgAIQogIQCBAI=</HashCode>
+      <FileName>Plugin\PluginInterfaceManagerBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_audioprecision" />
+      <Field Name="_audioProcessor" />
+      <Field Name="_bypass" />
+      <Field Name="_connections" />
+      <Field Name="_editor" />
+      <Field Name="_midiProcessor" />
+      <Field Name="_midiPrograms" />
+      <Field Name="_midiSource" />
+      <Field Name="_parameters" />
+      <Field Name="_persistence" />
+      <Field Name="_process" />
+      <Field Name="_programs" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;">
+    <Position X="4.75" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Jacobi.Vst.Framework.Common.InterfaceManager&lt;T&gt;.CreateInterface" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Common\InterfaceManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAABAACAAAEAAAAAAAAAAAAABAAAAAAAAAAAgAAg=</HashCode>
+      <FileName>Common\InterfaceManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_interfaceRef" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Framework.Common.ExtensibleInterfaceRef&lt;T&gt;">
+    <Position X="8" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAGAAwAACQACAAAAAAAAAgAAQAgAAQAQAAAAAAAAQA=</HashCode>
+      <FileName>Common\ExtensibleInterfaceRef.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
