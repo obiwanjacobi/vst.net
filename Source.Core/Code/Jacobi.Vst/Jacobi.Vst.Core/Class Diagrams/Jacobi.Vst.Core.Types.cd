@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Jacobi.Vst.Core.VstAudioBuffer">
+    <Position X="0.5" Y="10.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAASAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>VstAudioBuffer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstAudioPrecisionBuffer">
+    <Position X="3.5" Y="10.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAQAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>VstAudioPrecisionBuffer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstEvent">
+    <Position X="1.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstMidiEvent">
+    <Position X="0.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAkAAAACAAAAAAAAAAAAAAAAABAAAAAAEAAAAA=</HashCode>
+      <FileName>VstMidiEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstMidiKeyName">
+    <Position X="7.25" Y="4.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>VstMidiKeyName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstMidiProgramCategory">
+    <Position X="7.25" Y="2.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAACAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>VstMidiProgramCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstMidiProgramName">
+    <Position X="4" Y="6.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAJAAAACAAAAAAAAAAAAQAAACAAACAAAAAAAAAAgA=</HashCode>
+      <FileName>VstMidiProgramName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstMidiSysExEvent">
+    <Position X="2.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstMidiSysExEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstParameterProperties">
+    <Position X="4.5" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIABAAAkAAAAAAAIBIBAgACAABAAQJAABAAAAAACAA=</HashCode>
+      <FileName>VstParameterProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstPatchChunkInfo">
+    <Position X="7.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAAAgAAAAAAAA=</HashCode>
+      <FileName>VstPatchChunkInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstPinProperties">
+    <Position X="0.5" Y="6.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIABAAAEAAAAAAAABABAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstPinProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstSpeakerArrangement">
+    <Position X="0.5" Y="5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQ=</HashCode>
+      <FileName>VstSpeakerArrangement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Speakers" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstSpeakerProperties">
+    <Position X="4.25" Y="4.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAIIAACAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>VstSpeakerProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstTimeInfo">
+    <Position X="6.5" Y="6.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BAIAtAABgAAAAABACAAAAEAAEAAAAAAAAAQQAAAAAAA=</HashCode>
+      <FileName>VstTimeInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.Plugin.VstPluginInfo">
+    <Position X="6.75" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQBQEAAgAAAAAAAAAAAAAAAAAAAAAIAAgAAAAABAA=</HashCode>
+      <FileName>Plugin\VstPluginInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstFileSelect">
+    <Position X="0.5" Y="8.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAIgAAEAAAAAABAAAAAAEAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>VstFileSelect.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="FileTypes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstFileType">
+    <Position X="4.75" Y="9" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAQAAAIAAAAAAAAA=</HashCode>
+      <FileName>VstFileSelect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstCanDoHelper">
+    <Position X="3.5" Y="13.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstCanDoHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Jacobi.Vst.Core.FourCharacterCode">
+    <Position X="0.5" Y="13.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAwIAAAAAA=</HashCode>
+      <FileName>FourCharacterCode.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
