@@ -21,4 +21,8 @@
     <Compile Remove="Properties\AssemblyInfo.General.cs" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\&quot; /F /Y" />
+  </Target>
+
 </Project>
