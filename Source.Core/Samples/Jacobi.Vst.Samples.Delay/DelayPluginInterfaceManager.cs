@@ -1,0 +1,55 @@
+﻿namespace Jacobi.Vst.Samples.Delay
+{
+    /// <summary>
+    /// This class manages the interface references used by the plugin.
+    /// </summary>
+    class DelayPluginInterfaceManager : PluginInterfaceManagerBase
+    {
+        private Plugin _plugin;
+
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="plugin">Must not be null.</param>
+        public DelayPluginInterfaceManager(Plugin plugin)
+        {
+            _plugin = plugin;
+        }
+
+        /// <summary>
+        /// Creates a default instance and reuses that for all threads.
+        /// </summary>
+        /// <param name="instance">A reference to the default instance or null.</param>
+        /// <returns>Returns the default instance.</returns>
+        protected override IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
+        {
+            if (instance == null) return new AudioProcessor(_plugin);
+
+            return instance;    // reuse initial instance
+        }
+
+        /// <summary>
+        /// Creates a default instance and reuses that for all threads.
+        /// </summary>
+        /// <param name="instance">A reference to the default instance or null.</param>
+        /// <returns>Returns the default instance.</returns>
+        protected override IVstPluginPrograms CreatePrograms(IVstPluginPrograms instance)
+        {
+            if (instance == null) return new PluginPrograms(_plugin);
+
+            return instance;    // reuse initial instance
+        }
+
+        /// <summary>
+        /// Creates a default instance and reuses that for all threads.
+        /// </summary>
+        /// <param name="instance">A reference to the default instance or null.</param>
+        /// <returns>Returns the default instance.</returns>
+        protected override IVstPluginPersistence CreatePersistence(IVstPluginPersistence instance)
+        {
+            if (instance == null) return new PluginPersistence(_plugin);
+
+            return instance;
+        }
+    }
+}
