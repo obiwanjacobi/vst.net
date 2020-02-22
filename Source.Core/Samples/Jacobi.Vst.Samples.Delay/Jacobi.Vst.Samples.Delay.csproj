@@ -4,4 +4,17 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Jacobi.Vst.Core">
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Jacobi.Vst.Framework">
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll&quot; /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)*&quot; /F /Y&#xD;&#xA;" />
+  </Target>
+
 </Project>

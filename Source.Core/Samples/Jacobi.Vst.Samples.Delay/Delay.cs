@@ -1,21 +1,21 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
-    using System.ComponentModel;
     using Jacobi.Vst.Framework;
+    using System.ComponentModel;
 
     /// <summary>
     /// This class implements a DPS routine that acts as a delay.
     /// </summary>
-    internal class Delay
+    internal sealed class Delay
     {
         private float[] _delayBuffer;
         private int _bufferIndex;
         private int _bufferLength;
 
-        private VstParameterManager _delayTimeMgr;
-        private VstParameterManager _feedbackMgr;
-        private VstParameterManager _dryLevelMgr;
-        private VstParameterManager _wetLevelMgr;
+        private readonly VstParameterManager _delayTimeMgr;
+        private readonly VstParameterManager _feedbackMgr;
+        private readonly VstParameterManager _dryLevelMgr;
+        private readonly VstParameterManager _wetLevelMgr;
 
         /// <summary>
         /// Constructs a new instance.
@@ -27,62 +27,70 @@
             #region Initialize Parameters
 
             // delay time parameter
-            VstParameterInfo paramInfo = new VstParameterInfo();
-            paramInfo.CanBeAutomated = true;
-            paramInfo.Name = "dt";
-            paramInfo.Label = "Delay Time";
-            paramInfo.ShortLabel = "T-Dly:";
-            paramInfo.MinInteger = 0;
-            paramInfo.MaxInteger = 1000;
-            paramInfo.LargeStepFloat = 100.0f;
-            paramInfo.SmallStepFloat = 1.0f;
-            paramInfo.StepFloat = 10.0f;
-            paramInfo.DefaultValue = 200f;
+            VstParameterInfo paramInfo = new VstParameterInfo
+            {
+                CanBeAutomated = true,
+                Name = "dt",
+                Label = "Delay Time",
+                ShortLabel = "T-Dly:",
+                MinInteger = 0,
+                MaxInteger = 1000,
+                LargeStepFloat = 100.0f,
+                SmallStepFloat = 1.0f,
+                StepFloat = 10.0f,
+                DefaultValue = 200f
+            };
             _delayTimeMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
             // feedback parameter
-            paramInfo = new VstParameterInfo();
-            paramInfo.CanBeAutomated = true;
-            paramInfo.Name = "fb";
-            paramInfo.Label = "Feedback";
-            paramInfo.ShortLabel = "Feedbk:";
-            paramInfo.LargeStepFloat = 0.1f;
-            paramInfo.SmallStepFloat = 0.01f;
-            paramInfo.StepFloat = 0.05f;
-            paramInfo.DefaultValue = 0.2f;
+            paramInfo = new VstParameterInfo
+            {
+                CanBeAutomated = true,
+                Name = "fb",
+                Label = "Feedback",
+                ShortLabel = "Feedbk:",
+                LargeStepFloat = 0.1f,
+                SmallStepFloat = 0.01f,
+                StepFloat = 0.05f,
+                DefaultValue = 0.2f
+            };
             _feedbackMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
             // dry Level parameter
-            paramInfo = new VstParameterInfo();
-            paramInfo.CanBeAutomated = true;
-            paramInfo.Name = "dl";
-            paramInfo.Label = "Dry Level";
-            paramInfo.ShortLabel = "DryLvl:";
-            paramInfo.LargeStepFloat = 0.1f;
-            paramInfo.SmallStepFloat = 0.01f;
-            paramInfo.StepFloat = 0.05f;
-            paramInfo.DefaultValue = 0.8f;
+            paramInfo = new VstParameterInfo
+            {
+                CanBeAutomated = true,
+                Name = "dl",
+                Label = "Dry Level",
+                ShortLabel = "DryLvl:",
+                LargeStepFloat = 0.1f,
+                SmallStepFloat = 0.01f,
+                StepFloat = 0.05f,
+                DefaultValue = 0.8f
+            };
             _dryLevelMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
             _paramInfos.Add(paramInfo);
 
             // wet Level parameter
-            paramInfo = new VstParameterInfo();
-            paramInfo.CanBeAutomated = true;
-            paramInfo.Name = "wl";
-            paramInfo.Label = "Wet Level";
-            paramInfo.ShortLabel = "WetLvl:";
-            paramInfo.LargeStepFloat = 0.1f;
-            paramInfo.SmallStepFloat = 0.01f;
-            paramInfo.StepFloat = 0.05f;
-            paramInfo.DefaultValue = 0.4f;
+            paramInfo = new VstParameterInfo
+            {
+                CanBeAutomated = true,
+                Name = "wl",
+                Label = "Wet Level",
+                ShortLabel = "WetLvl:",
+                LargeStepFloat = 0.1f,
+                SmallStepFloat = 0.01f,
+                StepFloat = 0.05f,
+                DefaultValue = 0.4f
+            };
             _wetLevelMgr = new VstParameterManager(paramInfo);
             VstParameterNormalizationInfo.AttachTo(paramInfo);
 
@@ -90,7 +98,6 @@
 
             #endregion
 
-            //_delayTimeMgr.ValueChanged += new System.EventHandler<System.EventArgs>(_delayTimeMgr_ValueChanged);
             _delayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(_delayTimeMgr_PropertyChanged);
         }
 
@@ -103,13 +110,7 @@
             }
         }
 
-        //private void _delayTimeMgr_ValueChanged(object sender, System.EventArgs e)
-        //{
-        //    VstParameterManager paramMgr = (VstParameterManager)sender;
-        //    _bufferLength = (int)(paramMgr.CurrentValue * _sampleRate / 1000);
-        //}
-
-        private VstParameterInfoCollection _paramInfos;
+        private readonly VstParameterInfoCollection _paramInfos;
         /// <summary>
         /// Gets the Parameter definitions that originate here.
         /// </summary>
