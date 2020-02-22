@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+
+    <Version>2.0.0</Version>
+
+    <Authors>Marc Jacobi</Authors>
+
+    <Company>Jacobi Software</Company>
+
+    <Product>VST.NET</Product>
+
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
+    <ProjectReference Include="..\Jacobi.Vst.Framework\Jacobi.Vst.Framework.csproj" />
+    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Interop.vcxproj" />
+  </ItemGroup>
+
+</Project>
