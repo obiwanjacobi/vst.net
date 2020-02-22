@@ -1,21 +1,25 @@
-﻿namespace Jacobi.Vst.Samples.Delay
+﻿using Jacobi.Vst.Core;
+using Jacobi.Vst.Framework;
+using Jacobi.Vst.Framework.Plugin;
+
+namespace Jacobi.Vst.Samples.Delay
 {
     /// <summary>
     /// The Plugin root class.
     /// </summary>
-    internal class DelayPlugin : VstPluginBase
+    internal sealed class DelayPlugin : VstPluginBase
     {
-        private DelayPluginInterfaceManager _intfMgr;
+        private InterfaceManager _intfMgr;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         public DelayPlugin()
             : base("VST.NET Delay Plugin",
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011", 1000),
+                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2020", 1000),
                 VstPluginCategory.RoomFx, VstPluginCapabilities.None, 0, 0x3A3A3A3A)
         {
-            _intfMgr = new DelayPluginInterfaceManager(this);
+            _intfMgr = new InterfaceManager(this);
             ParameterFactory = new PluginParameterFactory();
 
             AudioProcessor audioProcessor = _intfMgr.GetInstance<AudioProcessor>();
@@ -53,15 +57,16 @@
         #endregion
 
         #region IDisposable Members
+
         /// <summary>
         /// Dispose the plugin.
         /// </summary>
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
             _intfMgr.Dispose();
             _intfMgr = null;
 
-            base.Dispose();
+            base.Dispose(disposing);
         }
 
         #endregion
