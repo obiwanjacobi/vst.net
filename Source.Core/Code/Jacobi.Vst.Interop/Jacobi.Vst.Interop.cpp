@@ -1,6 +1,3 @@
-// Jacobi.Vst.Interop.cpp : Defines the exported functions for the DLL application.
-//
-
 #include "pch.h"
 #include "Bootstrapper.h"
 #include "Plugin/PluginCommandProxy.h"
@@ -8,7 +5,6 @@
 #include "TimeCriticalScope.h"
 #include "Utils.h"
 #include "Properties/Resources.h"
-//#include <vcclr.h>
 
 namespace Jacobi {
 namespace Vst {
