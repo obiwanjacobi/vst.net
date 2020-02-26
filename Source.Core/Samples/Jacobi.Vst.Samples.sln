@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.Delay", "Jacobi.Vst.Samples.Delay\Jacobi.Vst.Samples.Delay.csproj", "{C27128D2-3E63-47D9-9AA0-8AF10DE26A7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.MidiNoteMapper", "Jacobi.Vst.Samples.MidiNoteMapper\Jacobi.Vst.Samples.MidiNoteMapper.csproj", "{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{C27128D2-3E63-47D9-9AA0-8AF10DE26A7E}.Release|x64.Build.0 = Release|Any CPU
 		{C27128D2-3E63-47D9-9AA0-8AF10DE26A7E}.Release|x86.ActiveCfg = Release|Any CPU
 		{C27128D2-3E63-47D9-9AA0-8AF10DE26A7E}.Release|x86.Build.0 = Release|Any CPU
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Debug|x64.ActiveCfg = Debug|x64
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Debug|x64.Build.0 = Debug|x64
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Debug|x86.ActiveCfg = Debug|x86
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Debug|x86.Build.0 = Debug|x86
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Release|x64.ActiveCfg = Release|Any CPU
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Release|x64.Build.0 = Release|Any CPU
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Release|x86.ActiveCfg = Release|Any CPU
+		{E93A09AB-E7E8-4CBE-A5F7-97ADE34F276C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
