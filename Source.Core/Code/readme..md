@@ -31,6 +31,7 @@ https://www.youtube.com/watch?v=GTq03YpWUoY
 https://github.com/dotnet/runtime/blob/master/docs/design/features/IJW-activation.md
 https://natemcmaster.com/blog/2017/12/21/netcore-primitives/
 https://github.com/dotnet/cli/blob/v2.0.0/Documentation/specs/corehost.md
+https://docs.microsoft.com/en-us/dotnet/core/tutorials/creating-app-with-plugin-support#load-plugins
 
 You can collect the native hosting trace - run the process with environment: COREHOST_TRACE=1 and COREHOST_TRACEFILE=t.txt.
 It should produce t.txt in the current directory with lot of info about the native hosting side.
