@@ -7,16 +7,16 @@ namespace Jacobi.Vst.Samples.Delay
     /// <summary>
     /// The Plugin root class.
     /// </summary>
-    internal sealed class DelayPlugin : VstPluginBase
+    internal sealed class Plugin : VstPluginBase
     {
         private InterfaceManager _intfMgr;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public DelayPlugin()
+        public Plugin()
             : base("VST.NET Delay Plugin",
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2020", 1000),
+                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011-2020", 1000),
                 VstPluginCategory.RoomFx, VstPluginCapabilities.None, 0, 0x3A3A3A3A)
         {
             _intfMgr = new InterfaceManager(this);

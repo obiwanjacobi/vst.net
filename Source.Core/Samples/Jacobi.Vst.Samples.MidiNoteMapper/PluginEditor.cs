@@ -11,6 +11,7 @@
     class PluginEditor : IVstPluginEditor
     {
         private readonly Plugin _plugin;
+
         private readonly WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper = new WinFormsControlWrapper<MidiNoteMapperUI>();
 
         /// <summary>

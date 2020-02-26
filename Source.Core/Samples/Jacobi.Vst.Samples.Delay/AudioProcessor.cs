@@ -8,14 +8,14 @@ namespace Jacobi.Vst.Samples.Delay
     /// </summary>
     internal sealed class AudioProcessor : VstPluginAudioProcessorBase
     {
-        private readonly DelayPlugin _plugin;
+        private readonly Plugin _plugin;
         private readonly Delay _delay;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public AudioProcessor(DelayPlugin plugin)
+        public AudioProcessor(Plugin plugin)
             : base(1, 1, 0)
         {
             _plugin = plugin;

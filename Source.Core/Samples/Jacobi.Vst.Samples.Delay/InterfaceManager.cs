@@ -8,13 +8,13 @@ namespace Jacobi.Vst.Samples.Delay
     /// </summary>
     internal sealed class InterfaceManager : PluginInterfaceManagerBase
     {
-        private readonly DelayPlugin _plugin;
+        private readonly Plugin _plugin;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public InterfaceManager(DelayPlugin plugin)
+        public InterfaceManager(Plugin plugin)
         {
             _plugin = plugin;
         }

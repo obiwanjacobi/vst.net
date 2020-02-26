@@ -12,13 +12,13 @@
     /// </summary>
     internal sealed class PluginPersistence : VstPluginPersistenceBase
     {
-        private readonly DelayPlugin _plugin;
+        private readonly Plugin _plugin;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public PluginPersistence(DelayPlugin plugin)
+        public PluginPersistence(Plugin plugin)
         {
             _plugin = plugin;
         }
@@ -30,9 +30,9 @@
 
         private sealed class DelayProgramReader : VstProgramReaderBase
         {
-            private readonly DelayPlugin _plugin;
+            private readonly Plugin _plugin;
 
-            public DelayProgramReader(DelayPlugin plugin, Stream input, Encoding encoding)
+            public DelayProgramReader(Plugin plugin, Stream input, Encoding encoding)
                 : base(input, encoding)
             {
                 _plugin = plugin;
