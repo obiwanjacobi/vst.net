@@ -30,6 +30,10 @@
     <Compile Remove="Properties\AssemblyInfo.General.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\&quot; /F /Y" />
   </Target>

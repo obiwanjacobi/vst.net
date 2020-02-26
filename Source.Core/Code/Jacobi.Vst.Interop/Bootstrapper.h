@@ -44,7 +44,8 @@ private:
 	System::Collections::Generic::List<System::String^>^ _paths;
 
 	// AppDomain::AssemlbyResolve event handler
-	System::Reflection::Assembly^ ResolveAssembly(System::Object^ sender, System::ResolveEventArgs^ e);
+	System::Reflection::Assembly^ ResolveAssembly(System::Runtime::Loader::AssemblyLoadContext^ assemblyLoadContext, 
+		System::Reflection::AssemblyName^ assemblyName);
 	// helper method to load the assembly using the probe paths
 	System::Reflection::Assembly^ LoadAssembly(System::String^ fileName);
 };

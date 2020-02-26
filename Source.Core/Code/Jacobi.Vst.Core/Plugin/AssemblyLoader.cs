@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 
 namespace Jacobi.Vst.Core.Plugin
 {
@@ -22,20 +24,18 @@ namespace Jacobi.Vst.Core.Plugin
                 GlobalProbePaths.AddRange(paths.Split(';'));
             }
 
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+            AssemblyLoadContext.Default.Resolving += DefaultContext_ResolvingAssembly;
         }
 
-        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        private Assembly DefaultContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
         {
-            FileFinder fileFinder = CreateFileFinder();
-            fileFinder.Extensions.Add(".dll");
+            FileFinder fileFinder = CreateFileFinder(".dll");
 
-            AssemblyName assName = new AssemblyName(args.Name);
-            string filePath = fileFinder.Find(assName.Name);
+            string filePath = fileFinder.Find(assemblyName.Name);
 
             if (!String.IsNullOrEmpty(filePath))
             {
-                return Assembly.Load(filePath);
+                return AssemblyLoadContext.Default.LoadFromAssemblyPath(filePath);
             }
 
             return null;
@@ -46,12 +46,16 @@ namespace Jacobi.Vst.Core.Plugin
         /// collection filled with the <see cref="GlobalProbePaths"/> and <see cref="PrivateProbePaths"/> paths.
         /// </summary>
         /// <returns>Never returns null.</returns>
-        public FileFinder CreateFileFinder()
+        public FileFinder CreateFileFinder(params string[] extensions)
         {
             FileFinder fileFinder = new FileFinder();
             fileFinder.Paths.AddRange(PrivateProbePaths);
             fileFinder.Paths.AddRange(GlobalProbePaths);
 
+            if (extensions != null)
+            {
+                fileFinder.Extensions.AddRange(extensions);
+            }
             return fileFinder;
         }
 
@@ -82,14 +86,14 @@ namespace Jacobi.Vst.Core.Plugin
         {
             Throw.IfArgumentIsNull(extensions, nameof(extensions));
 
-            FileFinder fileFinder = CreateFileFinder();
-            fileFinder.Extensions.AddRange(extensions);
+            FileFinder fileFinder = CreateFileFinder(extensions.ToArray());
 
             string filePath = fileFinder.Find(fileName);
 
             if (!String.IsNullOrEmpty(filePath))
             {
-                return Assembly.Load(filePath);
+                System.Diagnostics.Debug.WriteLine(String.Format("AssemblyLoader loading Assembly: {0}.", filePath));
+                return AssemblyLoadContext.Default.LoadFromAssemblyPath(filePath);
             }
 
             return null;

@@ -80,7 +80,10 @@
                     String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
             }
 
-            return (IVstPluginCommandStub)Activator.CreateInstance(pluginType);
+            // https://docs.microsoft.com/en-us/dotnet/core/dependency-loading/understanding-assemblyloadcontext
+            // FIXME: CastException
+            var plugin = Activator.CreateInstance(pluginType);
+            return (IVstPluginCommandStub)plugin;
         }
 
         private Type LocateTypeByInterface(Type typeOfInterface)
@@ -92,7 +95,7 @@
                     foreach (Type intfType in type.GetInterfaces())
                     {
                         // Generic types can have no FullName.
-                        if (!string.IsNullOrEmpty(intfType.FullName) &&
+                        if (!String.IsNullOrEmpty(intfType.FullName) &&
                             intfType.FullName.Equals(typeOfInterface.FullName))
                         {
                             return type;

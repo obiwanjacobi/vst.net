@@ -29,10 +29,16 @@ Bootstrapper::Bootstrapper(System::String^ basePath, Jacobi::Vst::Interop::Plugi
 	Jacobi::Vst::Interop::Utils::AddPaths(_paths, paths, basePath);
 
 	// add (optional) global (exe)config probe paths
-	paths = System::Configuration::ConfigurationManager::AppSettings[Jacobi::Vst::Interop::Plugin::Configuration::VstNetProbePaths];
-	Jacobi::Vst::Interop::Utils::AddPaths(_paths, paths, basePath);
+	// FIXME:
+	//paths = System::Configuration::ConfigurationManager::AppSettings[Jacobi::Vst::Interop::Plugin::Configuration::VstNetProbePaths];
+	//Jacobi::Vst::Interop::Utils::AddPaths(_paths, paths, basePath);
 
-	System::AppDomain::CurrentDomain->AssemblyResolve += gcnew System::ResolveEventHandler(this, &Bootstrapper::ResolveAssembly);
+	System::Runtime::Loader::AssemblyLoadContext::Default->Resolving += 
+		gcnew System::Func<System::Runtime::Loader::AssemblyLoadContext^,
+			System::Reflection::AssemblyName^, System::Reflection::Assembly^>(this, &Bootstrapper::ResolveAssembly);
+
+	// trigger loading core
+	LoadAssembly("Jacobi.Vst.Core.dll");
 }
 
 Bootstrapper::~Bootstrapper()
@@ -42,13 +48,14 @@ Bootstrapper::~Bootstrapper()
 
 Bootstrapper::!Bootstrapper()
 {
-	System::AppDomain::CurrentDomain->AssemblyResolve -= gcnew System::ResolveEventHandler(this, &Bootstrapper::ResolveAssembly);
+	System::Runtime::Loader::AssemblyLoadContext::Default->Resolving -=
+		gcnew System::Func<System::Runtime::Loader::AssemblyLoadContext^,
+			System::Reflection::AssemblyName^, System::Reflection::Assembly^>(this, &Bootstrapper::ResolveAssembly);
 }
 
-System::Reflection::Assembly^ Bootstrapper::ResolveAssembly(System::Object^ sender, System::ResolveEventArgs^ e)
+System::Reflection::Assembly^ Bootstrapper::ResolveAssembly(System::Runtime::Loader::AssemblyLoadContext^ assemblyLoadContext, 
+	System::Reflection::AssemblyName^ assemblyName)
 {
-	System::Reflection::AssemblyName^ assemblyName = gcnew System::Reflection::AssemblyName(e->Name);
-
 	return LoadAssembly(assemblyName->Name + ".dll");
 }
 
@@ -60,7 +67,8 @@ System::Reflection::Assembly^ Bootstrapper::LoadAssembly(System::String^ fileNam
 
 		if(System::IO::File::Exists(filePath))
 		{
-			return System::Reflection::Assembly::LoadFile(filePath);
+			System::Diagnostics::Debug::WriteLine(System::String::Format("Bootsrapper loading Assembly: {0}.", filePath));
+			return System::Runtime::Loader::AssemblyLoadContext::Default->LoadFromAssemblyPath(filePath);
 		}
 	}
 
@@ -98,6 +106,7 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 	if(commandStub != nullptr)
 	{
 		// assign config to commandStub (can be null)
+		// FIXME:
 		//commandStub->PluginConfiguration = config->PluginConfig;
 	}
 
