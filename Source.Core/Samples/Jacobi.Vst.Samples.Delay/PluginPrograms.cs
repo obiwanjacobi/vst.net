@@ -8,13 +8,13 @@
     /// </summary>
     internal sealed class PluginPrograms : VstPluginProgramsBase
     {
-        readonly DelayPlugin _plugin;
+        readonly Plugin _plugin;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public PluginPrograms(DelayPlugin plugin)
+        public PluginPrograms(Plugin plugin)
         {
             _plugin = plugin;
         }
