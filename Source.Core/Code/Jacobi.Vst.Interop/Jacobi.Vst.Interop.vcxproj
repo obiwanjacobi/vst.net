@@ -103,7 +103,9 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y</Command>
+      <Command>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y
+xcopy "$(projectdir)runtimeconfig.json" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.runtimeconfig.json*" /F /Y
+xcopy "$(TargetDir)ijwhost.dll" "$(SolutionDir)..\_SharedAssemblies\ijwhost.dll*" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,7 +126,9 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y</Command>
+      <Command>xcopy "$(TargetPath)" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll*" /F /Y
+xcopy "$(projectdir)runtimeconfig.json" "$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.runtimeconfig.json*" /F /Y
+xcopy "$(TargetDir)ijwhost.dll" "$(SolutionDir)..\_SharedAssemblies\ijwhost.dll*" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

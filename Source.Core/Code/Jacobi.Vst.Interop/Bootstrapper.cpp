@@ -33,12 +33,9 @@ Bootstrapper::Bootstrapper(System::String^ basePath, Jacobi::Vst::Interop::Plugi
 	//paths = System::Configuration::ConfigurationManager::AppSettings[Jacobi::Vst::Interop::Plugin::Configuration::VstNetProbePaths];
 	//Jacobi::Vst::Interop::Utils::AddPaths(_paths, paths, basePath);
 
-	System::Runtime::Loader::AssemblyLoadContext::Default->Resolving += 
+	/*System::Runtime::Loader::AssemblyLoadContext::Default->Resolving += 
 		gcnew System::Func<System::Runtime::Loader::AssemblyLoadContext^,
-			System::Reflection::AssemblyName^, System::Reflection::Assembly^>(this, &Bootstrapper::ResolveAssembly);
-
-	// trigger loading core
-	LoadAssembly("Jacobi.Vst.Core.dll");
+			System::Reflection::AssemblyName^, System::Reflection::Assembly^>(this, &Bootstrapper::ResolveAssembly);*/
 }
 
 Bootstrapper::~Bootstrapper()
@@ -48,9 +45,9 @@ Bootstrapper::~Bootstrapper()
 
 Bootstrapper::!Bootstrapper()
 {
-	System::Runtime::Loader::AssemblyLoadContext::Default->Resolving -=
+	/*System::Runtime::Loader::AssemblyLoadContext::Default->Resolving -=
 		gcnew System::Func<System::Runtime::Loader::AssemblyLoadContext^,
-			System::Reflection::AssemblyName^, System::Reflection::Assembly^>(this, &Bootstrapper::ResolveAssembly);
+			System::Reflection::AssemblyName^, System::Reflection::Assembly^>(this, &Bootstrapper::ResolveAssembly);*/
 }
 
 System::Reflection::Assembly^ Bootstrapper::ResolveAssembly(System::Runtime::Loader::AssemblyLoadContext^ assemblyLoadContext, 
@@ -67,8 +64,10 @@ System::Reflection::Assembly^ Bootstrapper::LoadAssembly(System::String^ fileNam
 
 		if(System::IO::File::Exists(filePath))
 		{
-			System::Diagnostics::Debug::WriteLine(System::String::Format("Bootsrapper loading Assembly: {0}.", filePath));
-			return System::Runtime::Loader::AssemblyLoadContext::Default->LoadFromAssemblyPath(filePath);
+			System::Diagnostics::Debug::WriteLine(System::String::Format("Bootstrapper loading Assembly: {0}.", filePath));
+			System::Runtime::Loader::AssemblyLoadContext^ loadContext =
+				System::Runtime::Loader::AssemblyLoadContext::Default;
+			return loadContext->LoadFromAssemblyPath(filePath);
 		}
 	}
 

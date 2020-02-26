@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll&quot; /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)*&quot; /F /Y&#xD;&#xA;" />
+    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll&quot; /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)*&quot; /F /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.runtimeconfig.json&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName).runtimeconfig.json*&quot; /F /Y" />
   </Target>
 
 </Project>
