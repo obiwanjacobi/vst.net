@@ -24,7 +24,7 @@ namespace Jacobi.Vst.Core.Plugin
                 GlobalProbePaths.AddRange(paths.Split(';'));
             }
 
-            AssemblyLoadContext.Default.Resolving += DefaultContext_ResolvingAssembly;
+            //AssemblyLoadContext.Default.Resolving += DefaultContext_ResolvingAssembly;
         }
 
         private Assembly DefaultContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
@@ -35,7 +35,8 @@ namespace Jacobi.Vst.Core.Plugin
 
             if (!String.IsNullOrEmpty(filePath))
             {
-                return AssemblyLoadContext.Default.LoadFromAssemblyPath(filePath);
+                var loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
+                return loadContext.LoadFromAssemblyPath(filePath);
             }
 
             return null;
@@ -93,7 +94,8 @@ namespace Jacobi.Vst.Core.Plugin
             if (!String.IsNullOrEmpty(filePath))
             {
                 System.Diagnostics.Debug.WriteLine(String.Format("AssemblyLoader loading Assembly: {0}.", filePath));
-                return AssemblyLoadContext.Default.LoadFromAssemblyPath(filePath);
+                var loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
+                return loadContext.LoadFromAssemblyPath(filePath);
             }
 
             return null;
