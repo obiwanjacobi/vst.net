@@ -14,7 +14,8 @@ The dotnet-core version of VST.NET.
 * [Interop] remove config for assembly probing. Can be replaced with netcore .deps.json file
 * [All] rename all Depricated to Legacy (less confusing)
 * [Framework] remove thread management from interface manager (simplifies the class)
-* [Interop] split interop for plugin and host into separate assemblies.
+* [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
+* [Core/Framework] merge all managed code into one assembly?
 * [Interop/Core] Use new/different managed vst.net dll extensions (remove: .net.dll   .net.vstdll is ok    add: .net.vst2 or .netcore.vst2?)
 * [DevOps] automate CI build on github
 * [Core/Framework] is there a better wording for stub and proxy? (CommandStub / CommandProxy)
