@@ -8,7 +8,7 @@
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
     <Version>2.0.0-alpha</Version>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

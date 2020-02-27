@@ -63,7 +63,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				delete this;
 				break;
 			case Vst2PluginCommands::ProgramSet:
-				_commandStub->SetProgram((::int32_t)value);
+				_commandStub->SetProgram(safe_cast<System::Int32>(value));
 				result = 1;
 				break;
 			case Vst2PluginCommands::ProgramGet:
@@ -94,7 +94,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				result = 1;
 				break;
 			case Vst2PluginCommands::BlockSizeSet:
-				_commandStub->SetBlockSize((int32_t)value);
+				_commandStub->SetBlockSize(safe_cast<System::Int32>(value));
 				result = 1;
 				break;
 			case Vst2PluginCommands::OnOff:
@@ -137,7 +137,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			}	break;
 			case Vst2PluginCommands::ChunkSet:
 			{
-				array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, (::int32_t)value);
+				array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, safe_cast<System::Int32>(value));
 				result = _commandStub->SetChunk(buffer, index != 0) ? 1 : 0;
 			}	break;
 			case Vst2PluginCommands::ProcessEvents:
