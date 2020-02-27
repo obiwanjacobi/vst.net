@@ -11,7 +11,7 @@
     <NeutralLanguage>None</NeutralLanguage>
     <SignAssembly>false</SignAssembly>
     <Version>2.0.0-alpha</Version>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

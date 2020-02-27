@@ -80,10 +80,7 @@
                     String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
             }
 
-            // https://docs.microsoft.com/en-us/dotnet/core/dependency-loading/understanding-assemblyloadcontext
-            // FIXME: CastException
-            var plugin = Activator.CreateInstance(pluginType);
-            return (IVstPluginCommandStub)plugin;
+            return (IVstPluginCommandStub)Activator.CreateInstance(pluginType);
         }
 
         private Type LocateTypeByInterface(Type typeOfInterface)

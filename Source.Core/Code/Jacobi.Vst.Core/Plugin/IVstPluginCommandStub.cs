@@ -17,6 +17,6 @@
         /// Gets or sets the custom plugin specific configuration object.
         /// </summary>
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
-        //Configuration PluginConfiguration { get; set; }
+        //FIXME: Configuration PluginConfiguration { get; set; }
     }
 }

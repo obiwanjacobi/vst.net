@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.MidiNote
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.MidiNoteSampler", "Jacobi.Vst.Samples.MidiNoteSampler\Jacobi.Vst.Samples.MidiNoteSampler.csproj", "{6F384536-57BF-423E-99C5-CB9A5D83E3CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.WrapperPlugin", "Jacobi.Vst.Samples.WrapperPlugin\Jacobi.Vst.Samples.WrapperPlugin.csproj", "{A228357F-A392-44C6-B975-1CF9B59E1646}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.WrapperPlugin", "Jacobi.Vst.Samples.WrapperPlugin\Jacobi.Vst.Samples.WrapperPlugin.csproj", "{A228357F-A392-44C6-B975-1CF9B59E1646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

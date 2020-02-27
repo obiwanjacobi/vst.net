@@ -5,14 +5,16 @@ The dotnet-core version of VST.NET.
 ## Issues
 
 * Replace Configuration/AppSettings (with what? see ConfigurationBuilder)
-* Will AppDomain (now AssemblyLoadContext?) and dynamic assembly loading still work?
-* Remove WinForms dependency from Interop
+    => https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1
+* [Done] Will AppDomain (now AssemblyLoadContext?) and dynamic assembly loading still work? => Yes.
+* Self-Contained-Deployment - how to set that up?
 
 
 ## Refactor wishes
 
+* [Interop] Remove WinForms dependency from Interop? Still require 'windoswdesktop'...
 * [Interop] remove config for assembly probing. Can be replaced with netcore .deps.json file
-* [All] rename all Depricated to Legacy (less confusing)
+* [All] rename all Deprecated to Legacy (less confusing)
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
 * [Core/Framework] merge all managed code into one assembly?

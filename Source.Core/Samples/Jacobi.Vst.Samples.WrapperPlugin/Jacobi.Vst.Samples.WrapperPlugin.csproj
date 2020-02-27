@@ -6,12 +6,8 @@
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET Samples</Product>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Jacobi.Vst.Core">
