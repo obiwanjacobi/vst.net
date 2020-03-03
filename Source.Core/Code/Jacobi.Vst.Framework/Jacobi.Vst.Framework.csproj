@@ -10,14 +10,16 @@
     <Version>2.0.0-alpha</Version>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
-  </ItemGroup>
   
   <ItemGroup>
     <!-- Reference all of Windows Forms -->
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="Jacobi.Vst.Core">
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

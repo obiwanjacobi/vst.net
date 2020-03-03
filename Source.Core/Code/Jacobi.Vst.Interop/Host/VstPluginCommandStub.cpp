@@ -493,7 +493,7 @@ System::Int32 VstPluginCommandStub::GetNextPlugin([System::Runtime::InteropServi
 	//UnmanagedString pName(Vst2MaxProductStrLen);
 	UnmanagedString pName(129);
 
-	int32_t pluginId = CallDispatch(Vst2PluginCommands::GetNextPlugin, 0, 0, &pName, 0.0);
+	System::Int32 pluginId = safe_cast<System::Int32>(CallDispatch(Vst2PluginCommands::GetNextPlugin, 0, 0, &pName, 0.0));
 	
 	name = TypeConverter::CharToString(pName);
 
