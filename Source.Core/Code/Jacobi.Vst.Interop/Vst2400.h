@@ -2,7 +2,8 @@
 
 #include <stdint.h>
 
-#ifdef  WIN32
+// WIN32 is not reliable
+#ifdef  X86
 #pragma pack(push)
 #pragma pack(8)
 #define Vst2Handler __cdecl
@@ -10,7 +11,7 @@ typedef int32_t Vst2IntPtr;
 #else
 #define Vst2Handler
 typedef int64_t Vst2IntPtr;
-#endif // WIN32
+#endif // X86
 
 
 constexpr int32_t Vst2Version = 2400;
@@ -725,15 +726,6 @@ struct Vst2FileSelect
     uint8_t filler[116];
 };
 
-
-
-
-
-
-
-
-
-
-#ifdef WIN32
+#ifdef X86
 #pragma pack(pop)
-#endif // WIN32
+#endif // x86

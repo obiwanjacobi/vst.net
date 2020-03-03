@@ -6,6 +6,7 @@ The dotnet-core version of VST.NET.
 
 * Replace Configuration/AppSettings (with what? see ConfigurationBuilder)
     => https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1
+    => https://csharp.christiannagel.com/2016/08/02/netcoreconfiguration/
 * [Done] Will AppDomain (now AssemblyLoadContext?) and dynamic assembly loading still work? => Yes.
 * Self-Contained-Deployment - how to set that up?
 
@@ -20,6 +21,7 @@ The dotnet-core version of VST.NET.
 * [Core/Framework] merge all managed code into one assembly?
 * [Interop/Core] Use new/different managed vst.net dll extensions (remove: .net.dll   .net.vstdll is ok    add: .net.vst2 or .netcore.vst2?)
 * [DevOps] automate CI build on github
+    => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
 * [Core/Framework] is there a better wording for stub and proxy? (CommandStub / CommandProxy)
 
 ## References
