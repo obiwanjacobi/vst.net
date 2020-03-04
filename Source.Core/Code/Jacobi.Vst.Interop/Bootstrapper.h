@@ -20,14 +20,6 @@ public:
 	/// as well as the paths loaded from the "vstnetProbePaths" config appSettings.
 	/// </summary>
 	Bootstrapper(System::String^ basePath, Jacobi::Vst::Interop::Plugin::Configuration^ config);
-	/// <summary>
-	/// Destructor.
-	/// </summary>
-	~Bootstrapper();
-	/// <summary>
-	/// Unregisters the bootstrapper from the AssemlbyResolve event.
-	/// </summary>
-	!Bootstrapper();
 
 	property Jacobi::Vst::Interop::Plugin::Configuration^ Configuration
 	{ Jacobi::Vst::Interop::Plugin::Configuration^ get() { return _config; } }
@@ -42,12 +34,6 @@ private:
 
 	// contains the private probe paths
 	System::Collections::Generic::List<System::String^>^ _paths;
-
-	// AppDomain::AssemlbyResolve event handler
-	System::Reflection::Assembly^ ResolveAssembly(System::Runtime::Loader::AssemblyLoadContext^ assemblyLoadContext, 
-		System::Reflection::AssemblyName^ assemblyName);
-	// helper method to load the assembly using the probe paths
-	System::Reflection::Assembly^ LoadAssembly(System::String^ fileName);
 };
 
 }}} // Jacobi::Vst::Interop
