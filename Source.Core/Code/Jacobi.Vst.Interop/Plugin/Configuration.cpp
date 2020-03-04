@@ -16,4 +16,19 @@ Configuration::Configuration(System::String^ exeFilePath)
 	}
 }
 
+System::String^ Configuration::GetAppSetting(System::String^ key)
+{
+	if (_config != nullptr)
+	{
+		System::Configuration::KeyValueConfigurationElement^ element = _config->AppSettings->Settings[key];
+
+		if (element != nullptr)
+		{
+			return element->Value;
+		}
+	}
+
+	return nullptr;
+}
+
 }}}} // Jacobi::Vst::Interop::Plugin

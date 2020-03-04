@@ -53,20 +53,7 @@ public:
 private:
 	System::Configuration::Configuration^ _config;
 
-	System::String^ GetAppSetting(System::String^ key)
-	{
-		if(_config != nullptr)
-		{
-			System::Configuration::KeyValueConfigurationElement^ element = _config->AppSettings->Settings[key];
-
-			if(element != nullptr)
-			{
-				return element->Value;
-			}
-		}
-
-		return nullptr;
-	}
+	System::String^ GetAppSetting(System::String^ key);
 };
 
 }}}} // Jacobi::Vst::Interop::Plugin
