@@ -686,7 +686,7 @@ struct Vst2PatchChunkInfo
     int32_t version;
     int32_t pluginUniqueID;
     int32_t pluginVersion;
-    int32_t numElements;
+    int32_t elementCount;
     uint8_t filler[48];
 };
 
@@ -714,18 +714,18 @@ struct Vst2FileSelect
     Vst2FileSelectCommand command;
     int32_t type;
     int32_t macCreator;
-    int32_t nbFileTypes;
+    int32_t fileTypesLength;
     Vst2FileType* fileTypes;
     char title[1024];
     char* initialPath;
     char* returnPath;
     int32_t sizeReturnPath;
     char** returnMultiplePaths;
-    int32_t nbReturnPath;
+    int32_t returnPathLength;
     Vst2IntPtr reserved;
     uint8_t filler[116];
 };
 
 #ifdef X86
 #pragma pack(pop)
-#endif // x86
+#endif // X86

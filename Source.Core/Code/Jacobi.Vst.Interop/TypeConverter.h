@@ -456,7 +456,7 @@ public:
 				pChunkInfo->version,
 				pChunkInfo->pluginUniqueID,
 				pChunkInfo->pluginVersion,
-				pChunkInfo->numElements);
+				pChunkInfo->elementCount);
 
 		return patchChunkInfo;
 	}
@@ -467,7 +467,7 @@ public:
 		pChunkInfo->version = chunkInfo->Version;
 		pChunkInfo->pluginUniqueID = chunkInfo->PluginID;
 		pChunkInfo->pluginVersion = chunkInfo->PluginVersion;
-		pChunkInfo->numElements = chunkInfo->ElementCount;
+		pChunkInfo->elementCount = chunkInfo->ElementCount;
 	}
 
 	// Assigns the field values of the unmanaged pTimeInfo to the managed VstTimeInfo.
@@ -560,7 +560,7 @@ public:
 		pFileSelect->command = safe_cast<Vst2FileSelectCommand>(fileSelect->Command);
 		pFileSelect->initialPath = AllocateString(fileSelect->InitialPath);
 
-		pFileSelect->nbFileTypes = fileSelect->FileTypes->Length;
+		pFileSelect->fileTypesLength = fileSelect->FileTypes->Length;
 		pFileSelect->fileTypes = new ::Vst2FileType[fileSelect->FileTypes->Length];
 
 		// clear allocated file type structures
@@ -592,10 +592,10 @@ public:
 
 		fileSelect->Command = safe_cast<Jacobi::Vst::Core::VstFileSelectCommand>(pFileSelect->command);
 		fileSelect->InitialPath = CharToString(pFileSelect->initialPath);
-		fileSelect->FileTypes = gcnew array<Jacobi::Vst::Core::VstFileType^>(pFileSelect->nbFileTypes);
+		fileSelect->FileTypes = gcnew array<Jacobi::Vst::Core::VstFileType^>(pFileSelect->fileTypesLength);
 
 		// copy file types
-		for(int index = 0; index < pFileSelect->nbFileTypes; index++)
+		for(int index = 0; index < pFileSelect->fileTypesLength; index++)
 		{
 			fileSelect->FileTypes[index]->Extension = CharToString(pFileSelect->fileTypes[index].dosType);
 			fileSelect->FileTypes[index]->Name = CharToString(pFileSelect->fileTypes[index].name);
@@ -623,7 +623,7 @@ public:
 		{
 			// allocate the pointers slots
 			pFileSelect->returnMultiplePaths = new char*[fileSelect->ReturnPaths->Length];
-			pFileSelect->nbReturnPath = fileSelect->ReturnPaths->Length;
+			pFileSelect->returnPathLength = fileSelect->ReturnPaths->Length;
 
 			for(int index = 0; index < fileSelect->ReturnPaths->Length; index++)
 			{
@@ -647,9 +647,9 @@ public:
 		}
 		else if(pFileSelect->returnMultiplePaths != NULL)
 		{
-			fileSelect->ReturnPaths = gcnew array<System::String^>(pFileSelect->nbReturnPath);
+			fileSelect->ReturnPaths = gcnew array<System::String^>(pFileSelect->returnPathLength);
 
-			for(int index = 0; index < pFileSelect->nbReturnPath; index++)
+			for(int index = 0; index < pFileSelect->returnPathLength; index++)
 			{
 				fileSelect->ReturnPaths[index] = CharToString(pFileSelect->returnMultiplePaths[index]);
 			}
@@ -679,14 +679,14 @@ public:
 	{
 		if(pFileSelect->returnMultiplePaths != NULL)
 		{
-			for(int index = 0; index < pFileSelect->nbReturnPath; index++)
+			for(int index = 0; index < pFileSelect->returnPathLength; index++)
 			{
 				DeallocateString(pFileSelect->returnMultiplePaths[index]);
 			}
 
 			delete [] pFileSelect->returnMultiplePaths;
 			pFileSelect->returnMultiplePaths = NULL;
-			pFileSelect->nbReturnPath = 0;
+			pFileSelect->returnPathLength = 0;
 		}
 
 		if(pFileSelect->returnPath != NULL)
