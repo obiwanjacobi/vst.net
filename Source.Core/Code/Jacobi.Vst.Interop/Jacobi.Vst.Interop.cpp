@@ -22,13 +22,14 @@ Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 	{
 		// retrieve the current plugin file name (interop)
 		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+		System::String^ pluginPath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
 		// try to locate the plugin specific config file
 		Jacobi::Vst::Interop::Plugin::Configuration^ config = 
-			gcnew Jacobi::Vst::Interop::Plugin::Configuration(interopAssemblyFileName);
+			gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath);
 
 		// create the bootstrapper and register with the AssemlbyResolve event
-		bootstrapper = gcnew Bootstrapper(System::IO::Path::GetDirectoryName(interopAssemblyFileName), config);
+		bootstrapper = gcnew Bootstrapper(pluginPath, config);
 
 		//
 		// We have boot-strapped (above).

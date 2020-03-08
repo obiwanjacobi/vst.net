@@ -18,6 +18,7 @@
         /// Constructs a new instance on the passed <paramref name="pluginCmdStub"/>.
         /// </summary>
         /// <param name="pluginCmdStub">An implementation of the <see cref="IVstPluginCommandsDeprecated20"/> interface. Must not be null.</param>
+        [CLSCompliant(false)]
         public VstPluginCommandDeprecatedAdapter(Plugin.IVstPluginCommandStub pluginCmdStub)
             : base(pluginCmdStub)
         {

@@ -1,8 +1,12 @@
-﻿namespace Jacobi.Vst.Core.Plugin
+﻿using Microsoft.Extensions.Configuration;
+using System;
+
+namespace Jacobi.Vst.Core.Plugin
 {
     /// <summary>
     /// The Plugin Command Stub called by the Interop.
     /// </summary>
+    [CLSCompliant(false)]
     public interface IVstPluginCommandStub : IVstPluginCommands24
     {
         /// <summary>
@@ -17,6 +21,6 @@
         /// Gets or sets the custom plugin specific configuration object.
         /// </summary>
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
-        //FIXME: Configuration PluginConfiguration { get; set; }
+        public IConfiguration PluginConfiguration { get; set; }
     }
 }

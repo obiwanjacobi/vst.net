@@ -2,15 +2,6 @@
 
 The dotnet-core version of VST.NET.
 
-## Issues
-
-* Replace Configuration/AppSettings (with what? see ConfigurationBuilder)
-    => https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1
-    => https://csharp.christiannagel.com/2016/08/02/netcoreconfiguration/
-* [Done] Will AppDomain (now AssemblyLoadContext?) and dynamic assembly loading still work? => Yes.
-* Self-Contained-Deployment - how to set that up?
-
-
 ## Refactor wishes
 
 * [Interop] Remove WinForms dependency from Interop? Still require 'windoswdesktop'...
@@ -23,23 +14,18 @@ The dotnet-core version of VST.NET.
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
 * [Core/Framework] is there a better wording for stub and proxy? (CommandStub / CommandProxy)
+* [Core] Remove Offline types (VstOfflineTask)
 
 ## References
 
-Dotnet core hosting
-https://docs.microsoft.com/en-us/dotnet/core/tutorials/netcore-hosting
-https://github.com/dotnet/core-setup/blob/master/Documentation/design-docs/native-hosting.md
-https://github.com/dotnet/samples/tree/master/core/hosting
-https://github.com/dotnet/runtime/blob/master/src/coreclr/src/hosts/inc/coreclrhost.h
-https://github.com/mjrousos/SampleCoreCLRHost
-https://www.youtube.com/watch?v=GTq03YpWUoY
 https://github.com/dotnet/runtime/blob/master/docs/design/features/IJW-activation.md
 https://natemcmaster.com/blog/2017/12/21/netcore-primitives/
-https://github.com/dotnet/cli/blob/v2.0.0/Documentation/specs/corehost.md
 https://docs.microsoft.com/en-us/dotnet/core/tutorials/creating-app-with-plugin-support#load-plugins
 
 You can collect the native hosting trace - run the process with environment: COREHOST_TRACE=1 and COREHOST_TRACEFILE=t.txt.
 It should produce t.txt in the current directory with lot of info about the native hosting side.
+
+## Research
 
 COM (VST3?)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
