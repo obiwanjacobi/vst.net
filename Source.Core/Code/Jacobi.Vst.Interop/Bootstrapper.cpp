@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Utils.h"
 #include "Bootstrapper.h"
+#using <Microsoft.Extensions.Configuration.dll>
+#using <Microsoft.Extensions.Configuration.Abstractions.dll>
 
 namespace Jacobi {
 namespace Vst {
@@ -60,8 +62,7 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 	if(commandStub != nullptr)
 	{
 		// assign config to commandStub (can be null)
-		// FIXME:
-		// commandStub->PluginConfiguration = config->PluginConfig;
+		commandStub->PluginConfiguration = config->PluginConfig;
 	}
 
 	return commandStub;

@@ -119,6 +119,7 @@ xcopy "$(TargetDir)ijwhost.dll" "$(SolutionDir)..\_SharedAssemblies\ijwhost.dll*
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
+      <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -227,6 +228,7 @@ xcopy "$(TargetDir)ijwhost.dll" "$(SolutionDir)..\_SharedAssemblies\ijwhost.dll*
   </ItemGroup>
   <ItemGroup>
     <None Include="Jacobi.Vst.Interop.def" />
+    <None Include="readme.md" />
     <None Include="runtimeconfig.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

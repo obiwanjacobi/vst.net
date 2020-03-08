@@ -15,6 +15,7 @@ namespace Jacobi.Vst.Core.Host
         /// Constructs a new instance based on the <paramref name="pluginCmdStub"/>
         /// </summary>
         /// <param name="pluginCmdStub">Will be used to forward calls to. Must not be null.</param>
+        [CLSCompliant(false)]
         public VstPluginCommandAdapter(Plugin.IVstPluginCommandStub pluginCmdStub)
         {
             Throw.IfArgumentIsNull(pluginCmdStub, nameof(pluginCmdStub));
@@ -632,6 +633,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="pluginCmdStub">A reference to the plugin command stub. Must not be null.</param>
         /// <returns>Returns an instance of <see cref="Deprecated.VstPluginCommandDeprecatedAdapter"/> when the <paramref name="pluginCmdStub"/> supports deprecated methods.</returns>
+        [CLSCompliant(false)]
         public static VstPluginCommandAdapter Create(Plugin.IVstPluginCommandStub pluginCmdStub)
         {
             if (pluginCmdStub is Deprecated.IVstPluginCommandsDeprecated20)

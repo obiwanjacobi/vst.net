@@ -1,5 +1,8 @@
 #pragma once
 
+#using <Microsoft.Extensions.Configuration.dll>
+#using <Microsoft.Extensions.Configuration.Abstractions.dll>
+
 namespace Jacobi {
 namespace Vst {
 namespace Interop {
@@ -25,8 +28,8 @@ public:
 	/// <summary>
 	/// The loaded configuration object. Can be null.
 	/// </summary>
-	property System::Configuration::Configuration^ PluginConfig
-	{ System::Configuration::Configuration^ get() { return _config; } }
+	property Microsoft::Extensions::Configuration::IConfigurationRoot^ PluginConfig
+	{ Microsoft::Extensions::Configuration::IConfigurationRoot^ get() { return _config; } }
 
 	/// <summary>
 	/// The probe path config setting. Can be null.
@@ -51,7 +54,7 @@ public:
 	static System::String^ VstNetManagedAssemblyName = "vstnetManagedAssemblyName";
 
 private:
-	System::Configuration::Configuration^ _config;
+	Microsoft::Extensions::Configuration::IConfigurationRoot^ _config;
 
 	System::String^ GetAppSetting(System::String^ key);
 };

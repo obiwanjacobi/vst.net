@@ -2,8 +2,8 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
+    using Microsoft.Extensions.Configuration;
     using System;
-    using System.Configuration;
     using System.IO;
 
     /// <summary>
@@ -55,7 +55,8 @@
         /// Gets or sets the custom plugin specific configuration object.
         /// </summary>
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
-        public Configuration PluginConfiguration { get; set; }
+        [CLSCompliant(false)]
+        public IConfiguration PluginConfiguration { get; set; }
 
         #endregion
 

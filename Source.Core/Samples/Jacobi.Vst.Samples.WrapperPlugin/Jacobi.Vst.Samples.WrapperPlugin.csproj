@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Jacobi.Vst.Core">
       <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
     </Reference>
