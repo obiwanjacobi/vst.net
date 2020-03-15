@@ -4,15 +4,19 @@ The dotnet-core version of VST.NET.
 
 ## Issues
 
-* External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
 * Deployment is a mess
   https://github.com/dotnet/sdk/issues/6688
   https://github.com/NuGet/Home/issues/6645
   https://github.com/NuGet/Home/issues/8623
   https://github.com/dotnet/runtime/issues/18527
   https://github.com/natemcmaster/DotNetCorePlugins
-  Goal is to make a Jacobi.Vst package that can be included in plugin and host projects...
+  Goal is to 
+  1. make a Jacobi.Vst package that can be included in plugin and host projects...
   Interop project is not seen/included. Looking for workaround/manual options...
+  2. allow plugin to publish all dependencies to folder - incl. interop rename etc.
+
+* [Fixed] External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
+    => Forgot Recursive dependencies. Will popup msgbox with missing dll.
 
 ## Refactor wishes
 
