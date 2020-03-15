@@ -24,10 +24,11 @@ namespace Jacobi.Vst.Core.Plugin
                 GlobalProbePaths.AddRange(paths.Split(';'));
             }
 
-            //AssemblyLoadContext.Default.Resolving += DefaultContext_ResolvingAssembly;
+            var loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
+            loadContext.Resolving += LoadContext_ResolvingAssembly;
         }
 
-        private Assembly DefaultContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
+        private Assembly LoadContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
         {
             FileFinder fileFinder = CreateFileFinder(".dll");
 
