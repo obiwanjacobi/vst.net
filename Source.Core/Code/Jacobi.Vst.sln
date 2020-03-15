@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.UnitTest", "Jaco
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78E1AA3A-44D0-4A1E-860A-0EF5048ED6F9}"
 	ProjectSection(SolutionItems) = preProject
-		readme..md = readme..md
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Core", "Jacobi.Vst.Core\Jacobi.Vst.Core.csproj", "{045C7E3F-F200-43FE-9F7D-FEA7695D2E5F}"
