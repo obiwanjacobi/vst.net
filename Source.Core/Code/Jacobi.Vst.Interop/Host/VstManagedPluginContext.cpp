@@ -38,8 +38,10 @@ namespace Host {
 
 		try
 		{
+			System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+
 			Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-				Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath));
+				Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(basePath));
 
 			if(pluginCmdStub == nullptr)
 			{
@@ -87,71 +89,71 @@ namespace Host {
 		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInternalInfo =
 			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
 
-		System::Collections::Generic::List<System::String^> changedPropNames = 
+		System::Collections::Generic::List<System::String^>^ changedPropNames = 
 			gcnew System::Collections::Generic::List<System::String^>();
 
 		if(raiseEvents)
 		{
 			if(PluginInfo->Flags != safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_internalPluginInfo->Flags))
 			{
-				changedPropNames.Add("PluginInfo.Flags");
+				changedPropNames->Add("PluginInfo.Flags");
 			}
 
 			if(PluginInfo->ProgramCount != _internalPluginInfo->ProgramCount)
 			{
-				changedPropNames.Add("PluginInfo.ProgramCount");
+				changedPropNames->Add("PluginInfo.ProgramCount");
 			}
 
 			if(PluginInfo->ParameterCount != _internalPluginInfo->ParameterCount)
 			{
-				changedPropNames.Add("PluginInfo.ParameterCount");
+				changedPropNames->Add("PluginInfo.ParameterCount");
 			}
 
 			if(PluginInfo->AudioInputCount != _internalPluginInfo->AudioInputCount)
 			{
-				changedPropNames.Add("PluginInfo.AudioInputCount");
+				changedPropNames->Add("PluginInfo.AudioInputCount");
 			}
 
 			if(PluginInfo->AudioOutputCount != _internalPluginInfo->AudioOutputCount)
 			{
-				changedPropNames.Add("PluginInfo.AudioOutputCount");
+				changedPropNames->Add("PluginInfo.AudioOutputCount");
 			}
 
 			if(PluginInfo->InitialDelay != _internalPluginInfo->InitialDelay)
 			{
-				changedPropNames.Add("PluginInfo.InitialDelay");
+				changedPropNames->Add("PluginInfo.InitialDelay");
 			}
 			
 			if(PluginInfo->PluginID != _internalPluginInfo->PluginID)
 			{
-				changedPropNames.Add("PluginInfo.PluginID");
+				changedPropNames->Add("PluginInfo.PluginID");
 			}
 
 			if(PluginInfo->PluginVersion != _internalPluginInfo->PluginVersion)
 			{
-				changedPropNames.Add("PluginInfo.PluginVersion");
+				changedPropNames->Add("PluginInfo.PluginVersion");
 			}
 
 			if(deprecatedInfo != nullptr)
 			{
 				if(deprecatedInfo->DeprecatedFlags != deprecatedInternalInfo->DeprecatedFlags)
 				{
-					changedPropNames.Add("PluginInfo.DeprecatedFlags");
+					changedPropNames->Add("PluginInfo.DeprecatedFlags");
 				}
 
 				if(deprecatedInfo->RealQualities != deprecatedInternalInfo->RealQualities)
 				{
-					changedPropNames.Add("PluginInfo.RealQualities");
+					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
 				if(deprecatedInfo->OfflineQualities != deprecatedInternalInfo->OfflineQualities)
 				{
-					changedPropNames.Add("PluginInfo.OfflineQualities");
+					changedPropNames->Add("PluginInfo.OfflineQualities");
 				}
 
 				if(deprecatedInfo->IoRatio != deprecatedInternalInfo->IoRatio)
 				{
-					changedPropNames.Add("PluginInfo.IoRatio");
+					changedPropNames->Add("PluginInfo.IoRatio");
 				}
 			}
 		}
