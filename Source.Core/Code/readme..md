@@ -2,6 +2,18 @@
 
 The dotnet-core version of VST.NET.
 
+## Issues
+
+* External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
+* Deployment is a mess
+  https://github.com/dotnet/sdk/issues/6688
+  https://github.com/NuGet/Home/issues/6645
+  https://github.com/NuGet/Home/issues/8623
+  https://github.com/dotnet/runtime/issues/18527
+  https://github.com/natemcmaster/DotNetCorePlugins
+  Goal is to make a Jacobi.Vst package that can be included in plugin and host projects...
+  Interop project is not seen/included. Looking for workaround/manual options...
+
 ## Refactor wishes
 
 * [Interop] Remove WinForms dependency from Interop? Still require 'windoswdesktop'...
