@@ -23,6 +23,7 @@ The dotnet-core version of VST.NET.
 * [Interop] Remove WinForms dependency from Interop? Still require 'windoswdesktop'...
 * [Interop] remove config for assembly probing. Can be replaced with netcore .deps.json file
 * [All] rename all Deprecated to Legacy (less confusing)
+* [All] remove all [Obsolete] API.
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
 * [Core/Framework] merge all managed code into one assembly?

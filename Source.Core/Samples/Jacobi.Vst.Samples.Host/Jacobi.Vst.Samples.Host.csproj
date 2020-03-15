@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>2.0.0</Version>
+    <Authors>Marc Jacobi</Authors>
+    <Company>Jacobi Software</Company>
+    <Product>VST.NET Samples</Product>
+    <Platforms>x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Jacobi.Vst.Core">
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Jacobi.Vst.Interop">
+      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Interop.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(SolutionDir)..\_SharedAssemblies\ijwhost.dll&quot; &quot;$(TargetDir)&quot;  /Y" />
+  </Target>
+
+</Project>
