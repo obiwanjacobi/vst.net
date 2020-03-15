@@ -13,14 +13,24 @@ namespace Plugin {
 
 Configuration::Configuration(System::String^ filePath)
 {
-	auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
-	Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, filePath);
-	Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json");
-	_config = builder->Build();
+	_basePath = filePath;
+}
+
+void Configuration::EnsureConfig()
+{
+	if (_config == nullptr)
+	{
+		auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
+		Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, _basePath);
+		Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json", true);
+		_config = builder->Build();
+	}
 }
 
 System::String^ Configuration::GetAppSetting(System::String^ key)
 {
+	EnsureConfig();
+
 	if (_config != nullptr)
 	{
 		return _config->default[key];

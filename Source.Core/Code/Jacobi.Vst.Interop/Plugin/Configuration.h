@@ -20,16 +20,10 @@ public:
 	Configuration(System::String^ exeFilePath);
 
 	/// <summary>
-	/// 
-	/// </summary>
-	property System::Boolean IsValid 
-	{ System::Boolean get() { return (_config != nullptr); } }
-
-	/// <summary>
 	/// The loaded configuration object. Can be null.
 	/// </summary>
 	property Microsoft::Extensions::Configuration::IConfigurationRoot^ PluginConfig
-	{ Microsoft::Extensions::Configuration::IConfigurationRoot^ get() { return _config; } }
+	{ Microsoft::Extensions::Configuration::IConfigurationRoot^ get() { EnsureConfig(); return _config; } }
 
 	/// <summary>
 	/// The probe path config setting. Can be null.
@@ -55,6 +49,9 @@ public:
 
 private:
 	Microsoft::Extensions::Configuration::IConfigurationRoot^ _config;
+	void EnsureConfig();
+
+	System::String^ _basePath;
 
 	System::String^ GetAppSetting(System::String^ key);
 };
