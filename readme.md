@@ -9,6 +9,10 @@ VST.NET targets the 4.0 framework (runtime). The code was written with VS2012.
 
 NOTICE: The Steinberg SDK files in Interop are removed. You have put these back if you are to build the project!
 
+
+New: Discuss on the VST.NET Discord Server: https://discord.gg/rHBVGx
+
+
 It is very much appreciated if you ...
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTE6LFLSC8RPL&lc=US&item_name=Jacobi%20Software&item_number=VST%2eNET&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
