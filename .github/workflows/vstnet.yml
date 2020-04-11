@@ -1,27 +1,29 @@
-# This is a basic workflow to help you get started with Actions
+name: VST.NET Core3
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
     runs-on: windows-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.0
     - name: Build
-      run: msbuild Source/Code/Jacobi.Vst.Clr4.sln /t:Build /p:Configuration=Release
+      run: msbuild Source/Code/Jacobi.Vst.sln /t:Build /p:Configuration=Release
