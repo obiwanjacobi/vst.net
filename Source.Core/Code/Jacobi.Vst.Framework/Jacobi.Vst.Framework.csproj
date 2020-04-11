@@ -9,6 +9,9 @@
     <Product>VST.NET</Product>
     <Version>2.0.0-alpha</Version>
     <Platforms>x64;x86</Platforms>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>../../../../../../_keyfile/Jacobi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <ItemGroup>

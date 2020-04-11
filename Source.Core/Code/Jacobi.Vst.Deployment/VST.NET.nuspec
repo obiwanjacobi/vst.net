@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Jacobi.Vst</id>
+    <title>VST.NET 2.0</title>
+    <version>2.0.0-alpha</version>
+    <authors>Marc Jacobi</authors>
+    <owners>Jacobi Software</owners>
+    <license type="expression">LGPL-2.1-only</license>
+    <projectUrl>https://github.com/obiwanjacobi/vst.net</projectUrl>
+    <!--<icon></icon>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>VST.NET dotnet-core primary assemblies.</description>
+    <releaseNotes>
+    </releaseNotes>
+    <copyright>Copyright © 2020 Jacobi Software</copyright>
+    <tags>vst</tags>
+    <dependencies>
+      <group targetFramework="netcoreapp3.1">
+        <dependency id="Microsoft.Extensions.Configuration" version="3.1.2" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
