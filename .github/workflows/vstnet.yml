@@ -24,4 +24,4 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.0
     - name: Build
-      run: msbuild Jacobi.Vst.Clr4.sln /t:Build /p:Configuration=Release
+      run: msbuild Source/Code/Jacobi.Vst.Clr4.sln /t:Build /p:Configuration=Release
