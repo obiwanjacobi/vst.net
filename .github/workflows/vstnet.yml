@@ -2,9 +2,9 @@ name: VST.NET Core3
 
 on:
   push:
-    branches: [ master ]
+    branches: [ core3 ]
   pull_request:
-    branches: [ master ]
+    branches: [ core3 ]
 
 jobs:
   build:
