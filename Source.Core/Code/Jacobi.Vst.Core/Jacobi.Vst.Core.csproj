@@ -9,11 +9,15 @@
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
     <Platforms>x64;x86</Platforms>
+    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>../../../../../../_keyfile/Jacobi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -31,7 +35,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\&quot; /F /Y" />
+    <Exec Command="::xcopy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\&quot; /F /Y" />
   </Target>
 
   <ItemGroup>

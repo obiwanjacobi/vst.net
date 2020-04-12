@@ -13,7 +13,7 @@
     <description>VST.NET dotnet-core primary assemblies.</description>
     <releaseNotes>
     </releaseNotes>
-    <copyright>Copyright © 2020 Jacobi Software</copyright>
+    <copyright>Copyright © 2008-2020 Jacobi Software</copyright>
     <tags>vst</tags>
     <dependencies>
       <group targetFramework="netcoreapp3.1">
