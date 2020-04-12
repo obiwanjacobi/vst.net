@@ -1,0 +1,1 @@
+nuget push Jacobi.Vst.2.0.0-alpha.nupkg -src LocalPackageTest
