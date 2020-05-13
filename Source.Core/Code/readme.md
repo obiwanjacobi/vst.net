@@ -14,6 +14,7 @@ The dotnet-core version of VST.NET.
   1. make a Jacobi.Vst package that can be included in plugin and host projects...
   Interop project is not seen/included. Looking for workaround/manual options...
   2. allow plugin to publish all dependencies to folder - incl. interop rename etc.
+  https://github.com/dotnet/sdk/blob/master/src/Tasks/Microsoft.NET.Build.Tasks/ResolvePackageDependencies.cs
 
 * [Fixed] External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
     => Forgot Recursive dependencies. Will popup msgbox with missing dll.
@@ -91,5 +92,5 @@ Install VST.NET dotnet core nuget package into your host project.
 
 You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
 
-* `ijwhost.dll` needs to be present in the same folder your managed plugin dll is installed to. 
+* `ijwhost.dll` needs to be present in the same folder your managed host exe is installed to. 
 There is a x86 and a x64 version - match it with your host.
