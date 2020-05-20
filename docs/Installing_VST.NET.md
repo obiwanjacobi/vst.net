@@ -6,7 +6,7 @@ VST.NET consists of 3 assemblies, one of which is optional (the framework):
 * Jacobi.Vst.Core.dll
 * Jacobi.Vst.Framework.dll
 
-The Jacobi.Vst.Interop.dll contains the exported VSTMain function that is called by the Host application. So this dll should impersonate the actual managed plugin and should therefor be renamed to the desired snap in name. Note that there are some hosts that take the snap in name from the name of the dll. The actual managed plugin dll should have the exact same name as the renamed Jacobi.Vst.Interop.dll assembly but with a .net postfix.
+The Jacobi.Vst.Interop.dll contains the exported VSTMain function that is called by the Host application. So this dll should impersonate the actual managed plugin and should therefore be renamed to the desired snap in name. Note that there are some hosts that take the snap in name from the name of the dll. The actual managed plugin dll should have the exact same name as the renamed Jacobi.Vst.Interop.dll assembly but with a .net postfix.
 
 If the plugin name is for example: "MySynth". You should rename the Jacobi.Vst.Interop.dll to MySynth.dll and the rename managed assembly that contains the actual plugin to MySynth.net.dll.
 
