@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Jacobi.Vst.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "publish C:\\Users\\marc\\Documents\\temp\\Jacobi.Vst.Samples.Delay\\bin\\x64\\Debug\\netcoreapp3.1\\Jacobi.Vst.Samples.Delay.dll"
+    }
+  }
+}

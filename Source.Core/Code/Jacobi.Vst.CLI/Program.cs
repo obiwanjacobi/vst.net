@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 
 namespace Jacobi.Vst.CLI
 {
@@ -7,38 +6,46 @@ namespace Jacobi.Vst.CLI
     {
         public static void Main(string[] args)
         {
-            // var cmdLine = new CommandLineArgs(args);
+            DisplayVersion();
+            CommandLineArgs cmdLine;
 
-            var deployPath = @".\deploy";
-            EnsureDirectoryExists(deployPath);
-
-            Publish(deployPath, args[0]);
-        }
-
-        private static void Publish(string deployPath, string fileName)
-        {
-            var cmd = new PublishCommand
+            try
             {
-                NuGetPath = GetNuGetLocation(),
-                DeployPath = deployPath,
-                FilePath = fileName
-            };
-
-            cmd.Execute();
-        }
-
-        private static string GetNuGetLocation()
-        {
-            var userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            return Path.Combine(userPath, ".nuget", "packages");
-        }
-
-        private static void EnsureDirectoryExists(string path)
-        {
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
+                cmdLine = new CommandLineArgs(args);
             }
+            catch (InvalidOperationException e)
+            {
+                ConsoleOutput.Error(e.Message);
+                return;
+            }
+
+            if (cmdLine.Command != null)
+            {
+                try
+                {
+                    if (!cmdLine.Command.Execute())
+                    {
+                        ConsoleOutput.NewLine();
+                        ConsoleOutput.Error("Command failed.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    ConsoleOutput.Error("Command failed.");
+                    ConsoleOutput.Error($"{e.Message}");
+                }
+            }
+            else
+            {
+                CommandLineArgs.Help();
+            }
+        }
+
+        private static void DisplayVersion()
+        {
+            ConsoleOutput.Information("VST.NET Command Line Interface.");
+            ConsoleOutput.Information("Copyright © 2008-2020 Jacobi Software.");
+            ConsoleOutput.NewLine();
         }
     }
 }
