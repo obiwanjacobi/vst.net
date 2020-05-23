@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Jacobi.Vst.Interop.def" />
-    <None Include="runtimeconfig.json" />
     <None Include="readme.md" />
   </ItemGroup>
 </Project>
