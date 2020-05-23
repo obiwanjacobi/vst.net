@@ -7,20 +7,24 @@ namespace Jacobi.Vst.CLI
     {
         public static void Main(string[] args)
         {
-            var deployPath = ".\\deploy";
+            // var cmdLine = new CommandLineArgs(args);
+
+            var deployPath = @".\deploy";
             EnsureDirectoryExists(deployPath);
 
+            Publish(deployPath, args[0]);
+        }
+
+        private static void Publish(string deployPath, string fileName)
+        {
             var cmd = new PublishCommand
             {
                 NuGetPath = GetNuGetLocation(),
-                DeployPath = deployPath
+                DeployPath = deployPath,
+                FilePath = fileName
             };
 
-            foreach (var fileName in Directory.EnumerateFiles(".", "*.deps.json"))
-            {
-                Console.WriteLine($"Publishing {fileName}.");
-                cmd.Publish(fileName);
-            }
+            cmd.Execute();
         }
 
         private static string GetNuGetLocation()
