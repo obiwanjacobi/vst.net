@@ -12,28 +12,41 @@ namespace Jacobi.Vst.CLI
             Console.ForegroundColor = color;
         }
 
-        public static void Warning(string error)
+        public static void Warning(string warning)
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(error);
+            Console.WriteLine(warning);
             Console.ForegroundColor = color;
         }
 
-        public static void Progress(string error)
+        public static void Progress(string progress)
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(error);
+            Console.WriteLine(progress);
             Console.ForegroundColor = color;
         }
 
-        public static void Help(string error)
+        public static void Help(string help)
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(error);
+            Console.WriteLine(help);
             Console.ForegroundColor = color;
+        }
+
+        public static void Information(string information)
+        {
+            Console.WriteLine(information);
+        }
+
+        public static void NewLine(int numberOfNewLines = 1)
+        {
+            while (numberOfNewLines-- > 0)
+            {
+                Console.WriteLine();
+            }
         }
     }
 }

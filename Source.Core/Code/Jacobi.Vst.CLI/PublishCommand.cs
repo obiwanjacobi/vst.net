@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 
@@ -20,8 +21,18 @@ namespace Jacobi.Vst.CLI
             @"Microsoft.Extensions.FileProviders.Abstractions\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll",
         };
 
-        public void Execute()
+        public bool Execute()
         {
+            if (String.IsNullOrEmpty(NuGetPath))
+            {
+                NuGetPath = FileExtensions.GetNuGetLocation();
+            }
+            if (String.IsNullOrEmpty(DeployPath))
+            {
+                DeployPath = @".\deploy";
+                FileExtensions.EnsureDirectoryExists(DeployPath);
+            }
+
             var depsFile = GetDepsFile();
             if (depsFile == null)
             {
@@ -38,23 +49,22 @@ namespace Jacobi.Vst.CLI
             if (plugin != null)
             {
                 PublishPlugin(plugin);
-                return;
+                return true;
             }
 
             if (host != null)
             {
                 PublishHost(host);
-                return;
+                return true;
             }
 
             if (depsFile != null)
             {
                 ConsoleOutput.Warning($"Unable to find the code file (.dll/.exe) based on {FilePath}. Cannot perform code publication.");
+                return true;
             }
-            else
-            {
-                ConsoleOutput.Help(CommandInstructions);
-            }
+
+            return false;
         }
 
         public string NuGetPath { get; set; }
@@ -91,14 +101,14 @@ namespace Jacobi.Vst.CLI
             var managed = Path.Combine(DeployPath, $"{name}.net.vstdll");
             // copy over and rename the managed plugin dll.
             File.Copy(pluginPath, managed, overwrite: true);
-            ConsoleOutput.Progress($"Renaming managed plugin: {managed}");
+            ConsoleOutput.Progress($"Renaming managed plugin: {pluginPath} => {managed}");
 
             var interop = Path.Combine(DeployPath, "Jacobi.Vst.Interop.dll");
             var entry = Path.Combine(DeployPath, $"{name}.dll");
             // rename Jacobi.Vst.Interop to plugin name
             File.Copy(interop, entry, overwrite: true);
             File.Delete(interop);
-            ConsoleOutput.Progress($"Creating unmanged plugin: {entry}");
+            ConsoleOutput.Progress($"Creating unmanged plugin: {interop} => {entry}");
 
             // copy in all other plugin related file (Debug?)
             //foreach (var sourceFile in Directory.EnumerateFiles(path, $"{name}.*"))
