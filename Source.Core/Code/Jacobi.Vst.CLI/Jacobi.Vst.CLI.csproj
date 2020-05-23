@@ -4,6 +4,25 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>vstnet</AssemblyName>
+    <Version>2.0.0-alpha</Version>
+    <Authors>Marc Jacobi</Authors>
+    <Company>Jacobi Software</Company>
+    <Product>VST.NET</Product>
+    <Description>VST.NET Command Line Interface</Description>
+    <Copyright>Copyright © 2008-2020 Jacobi Software</Copyright>
+    <PackageTags>vst vstnet cli</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/obiwanjacobi/vst.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageId>Jacobi.Vst.CLI</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>../../../../../../_keyfile/Jacobi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,10 +31,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="runtimeconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0-preview.3-runtime.20214.6" />
   </ItemGroup>
 
 </Project>

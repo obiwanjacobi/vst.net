@@ -48,7 +48,6 @@ It should produce t.txt in the current directory with lot of info about the nati
 COM (VST3?)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
 
-
 ---
 
 ## VST.NET Plugin
@@ -63,22 +62,9 @@ Install VST.NET dotnet core nuget package into your plugin project.
 
 You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
 
-> You can run `dotnet publish -o deployment` to get a start on finding the dependencies.
+> You can run `vstnet publish <targetpath> -o <out folder>` to get all the dependencies into one folder.
 
-* `ijwhost.dll` needs to be present in the same folder your managed plugin dll is installed to. 
-There is a x86 and a x64 version - match it with your plugin.
-* Rename your plugin to end with either the `.net.dll` or `.net.vstdll` extension.
-* Jacobi.Vst.Interop.dll needs to be renamed to the same (orignal) name of your plugin.
-* Rename the Jacobi.Vst.Interop.runtimeconfig.json to match your plugin: `[myplugin].runtimeconfig.json`
-
-You should now be able to load your plugin in the host. 
-VST.NET will show bootstrap errors with messages telling you which assemblies were not found (FileNotFoundException).
-These assemblies have to be added to your 'deployment' folder.
-Once you can load you plugin in the host without it showing errors 
--click through your plugin, assemblies may be lazy loaded- 
-you have the set of files you need to deploy in order for your plugin to work on another machine.
-
-An alternative way to find all assembly dependencies is to follow all [assembly].deps.json files.
+You should now be able to load your plugin in the host.
 
 ## VST.NET Host
 
@@ -92,5 +78,5 @@ Install VST.NET dotnet core nuget package into your host project.
 
 You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
 
-* `ijwhost.dll` needs to be present in the same folder your managed host exe is installed to. 
+* `ijwhost.dll` needs to be present in the same folder your managed host exe is installed to.
 There is a x86 and a x64 version - match it with your host.

@@ -15,10 +15,5 @@
     </releaseNotes>
     <copyright>Copyright © 2008-2020 Jacobi Software</copyright>
     <tags>vst</tags>
-    <dependencies>
-      <group targetFramework="netcoreapp3.1">
-        <dependency id="Microsoft.Extensions.Configuration" version="3.1.2" />
-      </group>
-    </dependencies>
   </metadata>
 </package>

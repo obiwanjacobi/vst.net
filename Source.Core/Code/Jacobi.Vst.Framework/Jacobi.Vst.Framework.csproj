@@ -30,8 +30,4 @@
     <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
   </ItemGroup>
   
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="::xcopy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\&quot; /F /Y" />
-  </Target>
-  
 </Project>
