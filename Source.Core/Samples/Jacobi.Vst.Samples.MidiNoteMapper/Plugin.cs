@@ -13,7 +13,8 @@
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
-            : base("VST.NET Midi Note Mapper", new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011-2020", 1000),
+            : base("VST.NET Midi Note Mapper",
+                  new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011-2020", 2000),
                 VstPluginCategory.Synth, VstPluginCapabilities.NoSoundInStop, 0, 0x30313233)
         {
             NoteMap = new MapNoteItemList();

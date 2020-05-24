@@ -10,20 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Jacobi.Vst" Version="2.0.0-alpha" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Jacobi.Vst.Core">
-      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Jacobi.Vst.Interop">
-      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Interop.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName).net.vstdll&quot; /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.dll&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName)$(TargetExt)*&quot; /F /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\_SharedAssemblies\Jacobi.Vst.Interop.runtimeconfig.json&quot; &quot;$(SolutionDir)..\_SharedAssemblies\$(TargetName).runtimeconfig.json*&quot; /F /Y" />
-  </Target>
 
 </Project>

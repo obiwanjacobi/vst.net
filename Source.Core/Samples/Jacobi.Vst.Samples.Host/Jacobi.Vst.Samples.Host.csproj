@@ -12,16 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Jacobi.Vst.Core">
-      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Jacobi.Vst.Interop">
-      <HintPath>..\..\_SharedAssemblies\Jacobi.Vst.Interop.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Jacobi.Vst" Version="2.0.0-alpha" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(SolutionDir)..\_SharedAssemblies\ijwhost.dll&quot; &quot;$(TargetDir)&quot;  /Y" />
-  </Target>
 
 </Project>
