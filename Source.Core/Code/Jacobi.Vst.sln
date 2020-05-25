@@ -35,7 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.CLI", "Jacobi.Vs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pack", "pack", "{4C377D18-37F2-4CB9-B96F-75781D7B1772}"
 	ProjectSection(SolutionItems) = preProject
+		Jacobi.Vst.Deployment\pack\_._ = Jacobi.Vst.Deployment\pack\_._
+		Jacobi.Vst.Deployment\pack\readme.txt = Jacobi.Vst.Deployment\pack\readme.txt
 		Jacobi.Vst.Deployment\pack\VST.NET.nuspec = Jacobi.Vst.Deployment\pack\VST.NET.nuspec
+		Jacobi.Vst.Deployment\pack\VST.NET2.props = Jacobi.Vst.Deployment\pack\VST.NET2.props
+		Jacobi.Vst.Deployment\pack\VST.NET2.targets = Jacobi.Vst.Deployment\pack\VST.NET2.targets
 	EndProjectSection
 EndProject
 Global

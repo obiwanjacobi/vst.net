@@ -101,6 +101,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,6 +126,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,6 +153,7 @@
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,6 +163,9 @@
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>Jacobi.Vst.Interop.def</ModuleDefinitionFile>
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <CLRImageType>
+      </CLRImageType>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -175,6 +181,7 @@
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -184,6 +191,9 @@
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>Jacobi.Vst.Interop.def</ModuleDefinitionFile>
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <CLRImageType>
+      </CLRImageType>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

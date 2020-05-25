@@ -16,6 +16,22 @@
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>../../../../../../_keyfile/Jacobi.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Framework\bin\Jacobi.Vst.Framework.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Framework\bin\Jacobi.Vst.Framework.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Framework\bin\Jacobi.Vst.Framework.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Framework\bin\Jacobi.Vst.Framework.xml</DocumentationFile>
+  </PropertyGroup>
   
   <ItemGroup>
     <!-- Reference all of Windows Forms -->
