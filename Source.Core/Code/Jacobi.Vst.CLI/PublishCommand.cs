@@ -30,8 +30,8 @@ namespace Jacobi.Vst.CLI
             if (String.IsNullOrEmpty(DeployPath))
             {
                 DeployPath = @".\deploy";
-                FileExtensions.EnsureDirectoryExists(DeployPath);
             }
+            FileExtensions.EnsureDirectoryExists(DeployPath);
 
             var depsFile = GetDepsFile();
             if (depsFile == null)
@@ -73,7 +73,7 @@ namespace Jacobi.Vst.CLI
 
         private void CopyDependencies(string depsFile)
         {
-            ConsoleOutput.Progress($"Copy Dependencies to {DeployPath}");
+            ConsoleOutput.Progress($"Copying dependencies to: {DeployPath}");
             using var stream = File.OpenRead(depsFile);
             var json = Parse(stream);
             var paths = json.Targets.First().Value.GetFilePaths();
@@ -134,6 +134,7 @@ namespace Jacobi.Vst.CLI
         private void PublishHost(string hostPath)
         {
             // TODO: make sure ijwhost.dll is present
+            throw new System.NotImplementedException();
         }
 
         private string GetDepsFile()

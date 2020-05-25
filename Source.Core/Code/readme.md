@@ -16,8 +16,16 @@ The dotnet-core version of VST.NET.
   2. allow plugin to publish all dependencies to folder - incl. interop rename etc.
   https://github.com/dotnet/sdk/blob/master/src/Tasks/Microsoft.NET.Build.Tasks/ResolvePackageDependencies.cs
 
+  Nuget package platform architecture issues:
+  https://github.com/NuGet/docs.microsoft.com-nuget/issues/1083#issuecomment-597886840
+  https://github.com/dotnet/roslyn/blob/master/docs/features/refout.md
+
 * [Fixed] External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
     => Forgot Recursive dependencies. Will popup msgbox with missing dll.
+
+* Multi-target the project files for a total new v2. Make Fx and netcore as similar as possible.
+https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20
+Not sure how this will work with Interop (cpp). Probably will not work.
 
 ## Refactor wishes
 
@@ -27,7 +35,6 @@ The dotnet-core version of VST.NET.
 * [All] remove all [Obsolete] API.
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
-* [Core/Framework] merge all managed code into one assembly?
 * [Interop/Core] Use new/different managed vst.net dll extensions (remove: .net.dll   .net.vstdll is ok    add: .net.vst2 or .netcore.vst2?)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
