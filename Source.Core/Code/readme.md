@@ -40,6 +40,7 @@ Not sure how this will work with Interop (cpp). Probably will not work.
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
 * [Core/Framework] is there a better wording for stub and proxy? (CommandStub / CommandProxy)
 * [Core] Remove Offline types (VstOfflineTask)
+* .NET Core DI instead of interface manager?
 
 ## References
 
@@ -54,6 +55,10 @@ It should produce t.txt in the current directory with lot of info about the nati
 
 COM (VST3?)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
+
+- `ISSUE`: ijwhost/clr loading does not work on a .vst3 assembly extension! 
+That means the plugin wont load in the unmanage host. 
+Not sure of we can fool the vst3 DAWs to look for .dll extensions... (SymbolicLink?)
 
 ---
 

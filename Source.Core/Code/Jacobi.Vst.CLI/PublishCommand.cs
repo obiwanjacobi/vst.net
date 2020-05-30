@@ -1,26 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 
 namespace Jacobi.Vst.CLI
 {
     internal class PublishCommand : ICommand
     {
-        private const string CommandInstructions = "vstnet publish <target> -o:<path>";
-
-        // Interop mixed C++/CLR project does not publish dependencies.
-        // Manually maintain them here.
-        private static readonly string[] InteropDependencies = new[]
-        {
-            @"Microsoft.Extensions.Configuration\3.1.2\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.dll",
-            @"Microsoft.Extensions.Configuration.Abstractions\3.1.2\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll",
-            @"Microsoft.Extensions.Configuration.FileExtensions\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll",
-            @"Microsoft.Extensions.Configuration.Json\2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll",
-            @"Microsoft.Extensions.FileProviders.Physical\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
-            @"Microsoft.Extensions.FileProviders.Abstractions\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll",
-        };
-
         public bool Execute()
         {
             if (String.IsNullOrEmpty(NuGetPath))
@@ -36,15 +23,16 @@ namespace Jacobi.Vst.CLI
             var depsFile = GetDepsFile();
             if (depsFile == null)
             {
-                ConsoleOutput.Warning($"Unable to find the .deps.json file based on {FilePath}. Cannot copy dependencies.");
-            }
-            else
-            {
-                CopyDependencies(depsFile);
+                ConsoleOutput.Error($"Unable to find the .deps.json file based on {FilePath}. Cannot copy dependencies.");
+                return false;
             }
 
             var plugin = GetPluginFile();
             var host = GetHostFile();
+
+            var assemblyName = AssemblyName.GetAssemblyName(plugin ?? host);
+
+            CopyDependencies(depsFile, assemblyName.ProcessorArchitecture);
 
             if (plugin != null)
             {
@@ -58,12 +46,7 @@ namespace Jacobi.Vst.CLI
                 return true;
             }
 
-            if (depsFile != null)
-            {
-                ConsoleOutput.Warning($"Unable to find the code file (.dll/.exe) based on {FilePath}. Cannot perform code publication.");
-                return true;
-            }
-
+            ConsoleOutput.Error($"Unable to find the code file (.dll/.exe) based on {FilePath}. Cannot perform code publication.");
             return false;
         }
 
@@ -71,24 +54,28 @@ namespace Jacobi.Vst.CLI
         public string DeployPath { get; set; }
         public string FilePath { get; set; }
 
-        private void CopyDependencies(string depsFile)
+        private void CopyDependencies(string depsFile, ProcessorArchitecture processorArchitecture)
         {
             ConsoleOutput.Progress($"Copying dependencies to: {DeployPath}");
             using var stream = File.OpenRead(depsFile);
             var json = Parse(stream);
-            var paths = json.Targets.First().Value.GetFilePaths();
 
-            foreach (var path in paths.Concat(InteropDependencies).Distinct())
+            var finder = new FindFiles(NuGetPath)
             {
-                var filePath = Path.Combine(NuGetPath, path);
-                if (File.Exists(filePath))
+                ProcessorArchitecture = processorArchitecture
+            };
+            var paths = finder.GetFilePaths(json.Targets.First().Value);
+
+            foreach (var path in paths)
+            {
+                if (File.Exists(path))
                 {
-                    ConsoleOutput.Progress(filePath);
-                    File.Copy(filePath, Path.Combine(DeployPath, Path.GetFileName(filePath)), overwrite: true);
+                    ConsoleOutput.Progress(path);
+                    File.Copy(path, Path.Combine(DeployPath, Path.GetFileName(path)), overwrite: true);
                 }
                 else
                 {
-                    ConsoleOutput.Warning($"Could not find: {filePath}");
+                    ConsoleOutput.Warning($"Could not find: {path}");
                 }
             }
         }
@@ -120,15 +107,11 @@ namespace Jacobi.Vst.CLI
             //}
 
             var runtimeConfig = Path.Combine(DeployPath, $"{name}.runtimeconfig.json");
-            if (!File.Exists(runtimeConfig))
-            {
-                var assembly = typeof(PublishCommand).Assembly;
-                using var stream = assembly.GetManifestResourceStream("Jacobi.Vst.CLI.runtimeconfig.json");
-                var reader = new StreamReader(stream);
-                File.WriteAllText(runtimeConfig, reader.ReadToEnd());
-
-                ConsoleOutput.Progress($"Creating {runtimeConfig}");
-            }
+            using var stream = typeof(PublishCommand).Assembly
+                .GetManifestResourceStream("Jacobi.Vst.CLI.runtimeconfig.json");
+            var reader = new StreamReader(stream);
+            File.WriteAllText(runtimeConfig, reader.ReadToEnd());
+            ConsoleOutput.Progress($"Creating {runtimeConfig}");
         }
 
         private void PublishHost(string hostPath)
