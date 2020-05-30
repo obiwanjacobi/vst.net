@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- VST XML File DTD: VST XML
+	
+	Version 1.0 - 03/08/2007
+	Version 1.1 - 24/03/2009
+	Author: Yvan Grabit
+	
+	Copyright (c) 2009 Steinberg Media Technologies.
+	http://www.steinberg.net/
+-->
+
+<!-- a number, with format [0-9]+ -->
+<!ENTITY % number 	"NMTOKEN">
+<!-- format ex.: 0.234433   -->
+<!ENTITY % float 	"CDATA">
+<!-- format ex.: 1999-12-31 or 1999-02-01 -->
+<!ENTITY % date 	"CDATA">
+<!-- format ex.: 123        -->
+<!ENTITY % paramID 	"CDATA">
+
+<!-- header definition -->
+<!ELEMENT plugin EMPTY>
+<!ATTLIST plugin 
+	classID CDATA #REQUIRED
+	name CDATA #IMPLIED
+	vendor CDATA #IMPLIED>
+
+<!ELEMENT originator (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+
+<!-- titleDisplay definition -->
+<!ELEMENT titleDisplay (name)+>
+<!ATTLIST titleDisplay 
+	parameterID %paramID; #IMPLIED>
+
+<!-- valueDisplay definition -->
+<!ELEMENT valueDisplay (name)+>
+<!ATTLIST valueDisplay 
+	parameterID %paramID; #IMPLIED>
+
+<!-- valueList definition -->
+<!ELEMENT valueList (value)+>
+<!ELEMENT value (#PCDATA)>
+
+<!-- segment definition -->
+<!ELEMENT segment ANY>
+<!ATTLIST segment 
+	index    %number; #REQUIRED
+	order	 %float; "0.0"
+	startPoint	CDATA "0.0;0.0"
+	endPoint	CDATA "1.0;1.0">
+
+<!-- segmentList definition -->
+<!ELEMENT segmentList (segment)+>
+<!ATTLIST segmentList length CDATA #REQUIRED>
+
+<!-- curve definition -->
+<!ENTITY % curveType "step|linear|segment">
+<!ELEMENT curve (segmentList|valueList)>
+<!ATTLIST curve 
+	template CDATA #IMPLIED
+	type (%curveType;) #IMPLIED>
+
+<!-- Style definition -->
+<!-- not yet used |pushIncInc|pushIncDec|pushDecDec|pushDecInc-->
+<!-- rem: a onoff switch is a pushIncLooped with only 2 states 0 and 1 -->
+<!ENTITY % SwitchStyle "push|latch|pushInc|pushIncLooped|pushDec|pushDecLooped">
+<!ENTITY % LEDStyle "spread|wrapRight|wrapLeft|boostCut|singleDot">
+<!ENTITY % Style "inverse">
+
+<!-- Function definition -->
+<!-- Not Yet
+EqBand1:on|EqBand1:freq|EqBand1:q|EqBand1:gain|EqBand2:on....
+Reset|Gain|CutOff|Resonance
+PanCenterRotation|PanCenterLevel|PanScaleX|PanScaleY|PanDivXFront|PanDivXRear|PanDivFrontRear|
+EnableSpeakerL|EnableSpeakerR|EnableSpeakerC|EnableSpeakerLfe|
+VUMeter1|VUMeter2-->
+<!ENTITY % Function "PanLfeGain|PanPosCenterX|PanPosCenterY|PanPosFrontLeftX|PanPosFrontLeftY|PanPosFrontRightX|PanPosFrontRightY|PanRotation|PanLaw|PanMirrorMode">
+
+<!-- Layer definition -->
+<!ENTITY % layerType "knob|pressedKnob|switchKnob|switch|LED|fader|link|display">
+<!ELEMENT layer ((titleDisplay)?, (valueDisplay)?, (curve)?)>
+<!ATTLIST layer 
+	name CDATA #IMPLIED
+	template CDATA #IMPLIED
+	type (%layerType;) "knob"
+	parameterID %paramID; #IMPLIED
+	switchStyle (%SwitchStyle;) #IMPLIED
+	ledStyle (%LEDStyle;) #IMPLIED
+	style (%Style;) #IMPLIED
+	turnsPerFullRange %float; #IMPLIED
+  function (%Function;) #IMPLIED
+	linkedTo CDATA #IMPLIED>
+
+<!-- Cell definition -->
+<!ELEMENT cell (layer)*>
+<!ATTLIST cell
+	name CDATA #IMPLIED>
+
+<!-- Page definition -->
+<!ELEMENT page (cellGroup+|cell+)>
+<!ATTLIST page
+	template CDATA #IMPLIED
+	name CDATA #IMPLIED>
+
+<!-- Representation definition -->
+<!ELEMENT representation (page)+>
+<!ATTLIST representation 
+	name	CDATA #REQUIRED
+	vendor	CDATA #REQUIRED
+	host	CDATA #IMPLIED
+	version CDATA #IMPLIED>
+
+<!-- CurveTemplate definition -->
+<!ELEMENT curveTemplate (segmentList|valueList)>
+<!ATTLIST curveTemplate 
+	name CDATA #REQUIRED
+	type (%curveType;) #REQUIRED>
+
+<!-- CellGroupTemplate definition -->
+<!ELEMENT cellGroupTemplate (cell)+>
+<!ATTLIST cellGroupTemplate 
+	name CDATA #REQUIRED
+	variables CDATA #IMPLIED>
+
+<!-- Cellgroup definition -->
+<!ELEMENT cellGroup EMPTY>
+<!ATTLIST cellGroup 
+	template CDATA #REQUIRED
+	variables CDATA #IMPLIED>
+			
+<!-- PageTemplate definition -->
+<!ELEMENT pageTemplate (cellGroup|cell)+>
+<!ATTLIST pageTemplate 
+	name CDATA #REQUIRED
+	variables CDATA #IMPLIED>
+
+<!-- vstXML definition -->
+<!ELEMENT vstXML (plugin, originator, date, comment, curveTemplate*, cellGroupTemplate*, pageTemplate*, representation+)>
+<!ATTLIST vstXML version CDATA #REQUIRED>

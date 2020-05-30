@@ -13,5 +13,5 @@
 Decissions:
 * Chose to PreserveSig to give more control on what TResults are returned. Also reflects C++ VST 3 interface exactly. 
 * No docs: use the original C++ VST 3 documentation. (will copy code comments from SDK and create for support classes).
-* Method return value is Int32 in stead of TResult for performance. TResult does provide constants to return.
+* Method return value is Int32 instead of TResult for performance. TResult does provide constants to return.
 
