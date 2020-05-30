@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jacobi.Vst" Version="2.0.0-alpha" />
+    <PackageReference Include="VST.NET2" Version="2.0.0-alpha" />
   </ItemGroup>
 
 </Project>

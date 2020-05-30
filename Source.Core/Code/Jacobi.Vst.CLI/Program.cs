@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Jacobi.Vst.CLI
 {
@@ -49,7 +50,9 @@ namespace Jacobi.Vst.CLI
 
         private static void DisplayVersion()
         {
-            ConsoleOutput.Information("VST.NET Command Line Interface.");
+            var assembly = Assembly.GetExecutingAssembly();
+
+            ConsoleOutput.Information($"VST.NET Command Line Interface. Version {assembly.GetName().Version.ToString()}.");
             ConsoleOutput.Information("Copyright © 2008-2020 Jacobi Software.");
             ConsoleOutput.NewLine();
         }
