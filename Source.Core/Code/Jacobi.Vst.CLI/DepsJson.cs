@@ -14,11 +14,19 @@ namespace Jacobi.Vst.CLI
     {
         public Dictionary<string, string> Dependencies { get; set; }
         public Dictionary<string, DepInfo> Runtime { get; set; }
+        public Dictionary<string, RuntimeTarget> RuntimeTargets { get; set; }
     }
 
     internal sealed class DepInfo
     {
         public string AssemblyVersion { get; set; }
+        public string FileVersion { get; set; }
+    }
+
+    internal sealed class RuntimeTarget
+    {
+        public string RID { get; set; }
+        public string AssetType { get; set; }
         public string FileVersion { get; set; }
     }
 }

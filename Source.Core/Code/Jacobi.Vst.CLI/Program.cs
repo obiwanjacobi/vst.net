@@ -23,9 +23,15 @@ namespace Jacobi.Vst.CLI
             {
                 try
                 {
-                    if (!cmdLine.Command.Execute())
+                    var success = cmdLine.Command.Execute();
+                    ConsoleOutput.NewLine();
+
+                    if (success)
                     {
-                        ConsoleOutput.NewLine();
+                        ConsoleOutput.Information("Command finished.");
+                    }
+                    else
+                    {
                         ConsoleOutput.Error("Command failed.");
                     }
                 }
