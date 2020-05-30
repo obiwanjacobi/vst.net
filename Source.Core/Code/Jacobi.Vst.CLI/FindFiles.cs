@@ -43,7 +43,7 @@ namespace Jacobi.Vst.CLI
                             (depInfo.Value.AssemblyVersion != null ||
                             depInfo.Value.FileVersion != null))
                         {
-                            paths.Add(Path.Combine(_nugetPath, kvp.Key, depInfo.Key).Replace("/", "\\"));
+                            paths.Add(Path.Combine(_nugetPath, kvp.Key, depInfo.Key));
                         }
                     }
                 }
@@ -53,13 +53,13 @@ namespace Jacobi.Vst.CLI
 
                     // TODO: detect if the assemblies are at 'lib' or 'processor architecture' level 
                     // TODO: tfm from params (netcoreapp3.1)
-                    var path = Path.Combine(_nugetPath, kvp.Key, "lib", "netcoreapp3.1", platform).Replace("/", "\\");
+                    var path = Path.Combine(_nugetPath, kvp.Key, "lib", "netcoreapp3.1", platform);
                     paths.AddRange(Directory.EnumerateFiles(path, "*.dll"));
 
                     var rt = kvp.Value.RuntimeTargets?.Keys.FirstOrDefault(rt => rt.Contains(platform));
                     if (rt != null)
                     {
-                        paths.Add(Path.Combine(_nugetPath, kvp.Key, rt).Replace("/", "\\"));
+                        paths.Add(Path.Combine(_nugetPath, kvp.Key, rt));
                     }
                 }
             }
@@ -67,7 +67,7 @@ namespace Jacobi.Vst.CLI
             paths.AddRange(InteropDependencies
                 .Select(dep => Path.Combine(_nugetPath, dep)));
 
-            return paths.Distinct();
+            return paths.Select(p => p.Replace("/", "\\")).Distinct();
         }
 
         private static string ToString(ProcessorArchitecture processorArchitecture)

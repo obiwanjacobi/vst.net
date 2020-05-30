@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jacobi.Vst" Version="2.0.0-alpha" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-preview.4.20251.6" />
+    <PackageReference Include="VST.NET2" Version="2.0.0-alpha" />
   </ItemGroup>
 
 </Project>
