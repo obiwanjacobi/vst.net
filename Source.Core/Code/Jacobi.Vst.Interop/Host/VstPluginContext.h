@@ -81,7 +81,7 @@ namespace Host {
 		/// Removes the <paramref name="keyName"/> property from the plugin context.
 		/// </summary>
 		/// <param name="keyName">The name of the key used to identify the property.</param>
-		/// <remarks><see cref="System::IDisposable::Dispose"/> is <b>NOT</b> called on the property.</remarks>
+		/// <remarks><see cref="System::IDisposable"/> is <b>NOT</b> called on the property.</remarks>
 		virtual void Remove(System::String^ keyName)
 		{ _props->Remove(keyName); }
 
@@ -89,7 +89,7 @@ namespace Host {
 		/// Deletes the <paramref name="keyName"/> property and removes it from the plugin context.
 		/// </summary>
 		/// <param name="keyName">The name of the key used to identify the property.</param>
-		/// <remarks><see cref="System::IDisposable::Dispose"/> <i>is</i> called on the property (when implemented).</remarks>
+		/// <remarks><see cref="System::IDisposable"/> <i>is</i> called on the property (when implemented).</remarks>
 		virtual void Delete(System::String^ keyName);
 		
 		/// <summary>

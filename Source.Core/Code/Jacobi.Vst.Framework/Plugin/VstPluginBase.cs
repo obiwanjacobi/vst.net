@@ -149,6 +149,10 @@
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Called when the instance is destructed. Override to call <see cref="System.IDisposable.Dispose"/> on class members.
+        /// </summary>
+        /// <param name="disposing">If false only dispose unmanaged resourcses, otherwise also dispose managed resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             Host = null;
