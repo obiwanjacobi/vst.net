@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Topics defaultTopic="ece9a5be-249e-40c1-9846-2af35a396e02">
-  <Topic id="ece9a5be-249e-40c1-9846-2af35a396e02" visible="True" />
+<Topics>
+  <Topic id="ece9a5be-249e-40c1-9846-2af35a396e02" visible="True" isDefault="true" isSelected="true" />
   <Topic id="cf9d75ad-b917-4760-bd47-f5fc9a913c3c" visible="True" />
   <Topic id="c79af580-08ca-4efe-9afa-14053f6f69d1" visible="True" />
-  <Topic id="fca363aa-4941-4c9e-a795-2a5e9a77e52d" visible="True">
+  <Topic id="fca363aa-4941-4c9e-a795-2a5e9a77e52d" visible="True" isExpanded="true">
     <Topic id="6057b859-b117-409a-a513-8ff470348e46" visible="True" title="Prepare your Project" />
     <Topic id="3feb73bb-72dd-4618-816f-f9f1c46d7f73" visible="True" title="Implement the Plugin Command Stub" />
     <Topic id="2d6d5838-0551-4404-b5c8-698de8d41aa7" visible="True" title="Implement the Plugin Root Class" />
     <Topic id="5e94bd76-fadd-4def-9e1a-261b18a42f0e" visible="True" title="Implement an Audio Processor" />
   </Topic>
-  <Topic id="998b4a9d-b4a6-4529-93e3-6bd96e620a50" visible="True">
-    <Topic id="07589a3b-ab65-42e0-8cab-c17b5eee7579" visible="True">
+  <Topic id="998b4a9d-b4a6-4529-93e3-6bd96e620a50" visible="True" isExpanded="true">
+    <Topic id="07589a3b-ab65-42e0-8cab-c17b5eee7579" visible="True" isExpanded="true">
       <Topic id="30e478e7-4eba-4eab-8a32-f9d9a2c4d2b3" visible="True" />
       <Topic id="1386a1db-aa7f-437f-94d2-a6755e375ea6" visible="True" />
       <Topic id="4781d47a-3b7a-41a6-b632-4a6785082bfa" visible="True" />
@@ -28,7 +28,7 @@
       <Topic id="f6dfa34b-ce35-4e73-9f79-d5056050800d" visible="True" />
       <Topic id="ddbac9cc-dc13-4463-a2c3-38dd9c3ed99f" visible="True" />
     </Topic>
-    <Topic id="16abe4a9-1bab-4a49-8a33-0bad44517338" visible="True">
+    <Topic id="16abe4a9-1bab-4a49-8a33-0bad44517338" visible="True" isExpanded="true">
       <Topic id="87a12de0-71b1-4e29-b722-5ef38e1eac67" visible="True" />
     </Topic>
     <Topic id="9d7a405b-db72-4462-9dc2-37b0d3ff8b5d" visible="True">
