@@ -28,6 +28,7 @@ The dotnet-core version of VST.NET.
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Framework] .NET Core DI instead of interface manager?
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
+* [Framework] rename to Jacobi.Vst.Plugin.Framework (leaves room for a Host framework too).
 * [Interop] look into the use tracked references (%^)
 * [Interop/Core] Use new/different managed vst.net dll extensions (remove: extensions used in VST.NET1 | add: .net.vst2)
 * [DevOps] automate CI build on github
@@ -39,6 +40,9 @@ https://github.com/maxtoroq/sandcastle-md
 * Turn on nullable reference types.
 * Update code to modern constructs (linter suggestions)
 * [UnitTest] Use FluentAssertions, remove TestContext prop.
+* [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
+* [Interop] Can't remember why I needed the boostrapper to delay loading Core after config was loaded and alternate probing paths were known....?
+I don't think this is necessary anymore. Single folder deployment seems reasonable and solves a lot of problems.
 
 
 ## Decisions

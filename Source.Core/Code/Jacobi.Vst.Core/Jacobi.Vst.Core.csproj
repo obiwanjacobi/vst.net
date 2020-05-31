@@ -20,26 +20,28 @@
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Core\bin\Jacobi.Vst.Core.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Core\bin\Jacobi.Vst.Core.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Core\bin\Jacobi.Vst.Core.xml</DocumentationFile>
+    <DocumentationFile>.\bin\Jacobi.Vst.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>C:\Users\marc\Documents\MyProjects\public\Jacobi\Public\GitHub\vst.net\Source.Core\Code\Jacobi.Vst.Core\bin\Jacobi.Vst.Core.xml</DocumentationFile>
+    <DocumentationFile>.\bin\Jacobi.Vst.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
   </ItemGroup>
 
 </Project>
