@@ -23,10 +23,6 @@ The dotnet-core version of VST.NET.
 * [Fixed] External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
     => Forgot Recursive dependencies. Will popup msgbox with missing dll.
 
-* Multi-target the project files for a total new v2. Make Fx and netcore as similar as possible.
-https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20
-Not sure how this will work with Interop (cpp). Probably will not work.
-
 ## Refactor wishes
 
 * [Interop] Remove WinForms dependency from Interop? Still require 'windoswdesktop'...
@@ -35,12 +31,25 @@ Not sure how this will work with Interop (cpp). Probably will not work.
 * [All] remove all [Obsolete] API.
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
-* [Interop/Core] Use new/different managed vst.net dll extensions (remove: .net.dll   .net.vstdll is ok    add: .net.vst2 or .netcore.vst2?)
+* [Interop/Core] Use new/different managed vst.net dll extensions (remove: .net.dll   .net.vstdll is ok    add: .net.vst2, .netvst2 or .netcore.vst2?)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
 * [Core/Framework] is there a better wording for stub and proxy? (CommandStub / CommandProxy)
 * [Core] Remove Offline types (VstOfflineTask)
-* .NET Core DI instead of interface manager?
+* [Framework] .NET Core DI instead of interface manager?
+* Update docs: convert the Sandcastle .aml file to .md. Deploy source code docs (.xml) with nuget. Exit Sandcastle tool.
+https://github.com/EWSoftware/SHFB
+https://github.com/maxtoroq/sandcastle-md
+* [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
+* Turn on nullable reference types.
+* Update code to modern constructs (linter suggestions)
+
+## Decisions
+
+* Will not multitarget the projects to support both netFx and netCore. 
+Future seems to lie with netCore (.NET5) that will be VST.NET v2.
+Current v1.1 will continue to exist for current users but not be developed further (separate branch?).
+
 
 ## References
 
