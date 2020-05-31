@@ -2,53 +2,51 @@
 
 The dotnet-core version of VST.NET.
 
+## TODOs
+
+* Merge core branch into master
+
 ## Issues
 
-* Deployment is a mess
+* NuGet Deployment is a mess
   https://github.com/dotnet/sdk/issues/6688
   https://github.com/NuGet/Home/issues/6645
   https://github.com/NuGet/Home/issues/8623
   https://github.com/dotnet/runtime/issues/18527
-  https://github.com/natemcmaster/DotNetCorePlugins
-  Goal is to 
-  1. make a Jacobi.Vst package that can be included in plugin and host projects...
-  Interop project is not seen/included. Looking for workaround/manual options...
-  2. allow plugin to publish all dependencies to folder - incl. interop rename etc.
-  https://github.com/dotnet/sdk/blob/master/src/Tasks/Microsoft.NET.Build.Tasks/ResolvePackageDependencies.cs
-
   Nuget package platform architecture issues:
   https://github.com/NuGet/docs.microsoft.com-nuget/issues/1083#issuecomment-597886840
   https://github.com/dotnet/roslyn/blob/master/docs/features/refout.md
+  The VST.NET CLI can perform a publish of a plugin and gather all dependencies into folder.
+  NuGet still gives problems with x86/x64 managed assemblies.
 
-* [Fixed] External dependencies (Microsoft.Extension.Configuration) are not found during load of Interop.
-    => Forgot Recursive dependencies. Will popup msgbox with missing dll.
 
 ## Refactor wishes
 
-* [Interop] Remove WinForms dependency from Interop? Still require 'windoswdesktop'...
-* [Interop] remove config for assembly probing. Can be replaced with netcore .deps.json file
+* [Interop] Remove config for assembly probing on new settings.json.
 * [All] rename all Deprecated to Legacy (less confusing)
 * [All] remove all [Obsolete] API.
 * [Framework] remove thread management from interface manager (simplifies the class)
+* [Framework] .NET Core DI instead of interface manager?
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
-* [Interop/Core] Use new/different managed vst.net dll extensions (remove: .net.dll   .net.vstdll is ok    add: .net.vst2, .netvst2 or .netcore.vst2?)
+* [Interop] look into the use tracked references (%^)
+* [Interop/Core] Use new/different managed vst.net dll extensions (remove: extensions used in VST.NET1 | add: .net.vst2)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
-* [Core/Framework] is there a better wording for stub and proxy? (CommandStub / CommandProxy)
-* [Core] Remove Offline types (VstOfflineTask)
-* [Framework] .NET Core DI instead of interface manager?
 * Update docs: convert the Sandcastle .aml file to .md. Deploy source code docs (.xml) with nuget. Exit Sandcastle tool.
 https://github.com/EWSoftware/SHFB
 https://github.com/maxtoroq/sandcastle-md
 * [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
 * Turn on nullable reference types.
 * Update code to modern constructs (linter suggestions)
+* [UnitTest] Use FluentAssertions, remove TestContext prop.
+
 
 ## Decisions
 
 * Will not multitarget the projects to support both netFx and netCore. 
 Future seems to lie with netCore (.NET5) that will be VST.NET v2.
 Current v1.1 will continue to exist for current users but not be developed further (separate branch?).
+VST.NET1 = VST2/netFx, VST.NET2 = VST2/netCore, VST.NET3 = VST3/netCore (if we get it to work)
 
 
 ## References
@@ -65,9 +63,9 @@ It should produce t.txt in the current directory with lot of info about the nati
 COM (VST3?)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
 
-- `ISSUE`: ijwhost/clr loading does not work on a .vst3 assembly extension! 
-That means the plugin wont load in the unmanage host. 
-Not sure of we can fool the vst3 DAWs to look for .dll extensions... (SymbolicLink?)
+- `ISSUE`: ijwhost/clr loading does not work on a mixed assembly! 
+That means the plugin wont load in the unmanage host.
+
 
 ---
 
