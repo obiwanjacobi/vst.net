@@ -11,13 +11,11 @@ namespace Vst {
 namespace Interop {
 
 // fwd ref
-Vst2Plugin* VSTPluginMainInternal (Bootstrapper^, Vst2HostCommand);
+Vst2Plugin* VSTPluginMainInternal (Jacobi::Vst::Plugin::Interop::Configuration^, Vst2HostCommand);
 
 // main exported method called by host to create the plugin
 Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 {
-	Bootstrapper^ bootstrapper = nullptr;
-
 	try
 	{
 		// retrieve the current plugin file name (interop)
@@ -28,25 +26,11 @@ Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 		Jacobi::Vst::Plugin::Interop::Configuration^ config = 
 			gcnew Jacobi::Vst::Plugin::Interop::Configuration(pluginPath);
 
-		// create the bootstrapper and register with the AssemlbyResolve event
-		bootstrapper = gcnew Bootstrapper(pluginPath, config);
-
-		//
-		// We have boot-strapped (above).
-		// Now call the actual VST main.
-		//
-		return VSTPluginMainInternal(bootstrapper, hostCommandHandler);
+		return VSTPluginMainInternal(config, hostCommandHandler);
 	}
 	catch(System::Exception^ exc)
 	{
-		if(bootstrapper != nullptr)
-		{
-			delete bootstrapper;
-		}
-
-		// cannot use the Utils::ShowError method here, cause it depends on Core.
-		System::Windows::Forms::MessageBox::Show(nullptr, exc->ToString(), "VST.NET Bootstrapper Error", 
-			System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+		Utils::ShowError(exc);
 	}
 
 	return NULL;
@@ -55,15 +39,8 @@ Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 // fwd ref
 Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 
-Vst2Plugin* VSTPluginMainInternal (Bootstrapper^ bootstrapper, Vst2HostCommand hostCommandHandler)
+Vst2Plugin* VSTPluginMainInternal (Jacobi::Vst::Plugin::Interop::Configuration^ config, Vst2HostCommand hostCommandHandler)
 {
-	// retrieve the plugin config
-	Jacobi::Vst::Plugin::Interop::Configuration^ config = bootstrapper->Configuration;
-
-	// The method dependencies have brought in the Core assembly. 
-	// Now we unregister the bootstrapper and turn it over to the AssemblyLoader (located in the Core Assembly).
-	delete bootstrapper;
-
 	// retrieve the current plugin file name (interop)
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
 

@@ -2239,16 +2239,6 @@
             Access the plugin config. Returns null if no config is found.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.Configuration.ProbePaths">
-            <summary>
-            Custom plugin dependency probing paths. Can return null.
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.Configuration.ManagedAssemblyName">
-            <summary>
-            Non-standard managed plugin assembly name.
-            </summary>
-        </member>
         <member name="T:Jacobi.Vst.Core.Plugin.FileFinder">
             <summary>
             The FileFinder class locates a file on the file system based on several paths and file extensions.

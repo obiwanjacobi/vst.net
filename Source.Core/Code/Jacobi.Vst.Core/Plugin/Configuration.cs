@@ -8,9 +8,6 @@ namespace Jacobi.Vst.Core.Plugin
     /// </summary>
     public sealed class Configuration
     {
-        private const string VstNetProbePaths = "vstnetProbePaths";
-        private const string VstNetManagedAssemblyName = "vstnetManagedAssemblyName";
-
         private readonly string _basePath;
         private IConfigurationRoot _config;
 
@@ -27,25 +24,9 @@ namespace Jacobi.Vst.Core.Plugin
         /// Access the plugin config. Returns null if no config is found.
         /// </summary>
         [CLSCompliant(false)]
-        public IConfigurationRoot PluginConfig
+        public IConfiguration PluginConfig
         {
             get { EnsureConfig(); return _config; }
-        }
-
-        /// <summary>
-        /// Custom plugin dependency probing paths. Can return null.
-        /// </summary>
-        public string ProbePaths
-        {
-            get { return GetAppSetting(VstNetProbePaths); }
-        }
-
-        /// <summary>
-        /// Non-standard managed plugin assembly name.
-        /// </summary>
-        public string ManagedAssemblyName
-        {
-            get { return GetAppSetting(VstNetManagedAssemblyName); }
         }
 
         private void EnsureConfig()
@@ -53,8 +34,8 @@ namespace Jacobi.Vst.Core.Plugin
             if (_config == null)
             {
                 _config = new ConfigurationBuilder()
-                    //.SetBasePath(_basePath)
-                    //.AddJsonFile("vstsettings.json", true)
+                    .SetBasePath(_basePath)
+                    .AddJsonFile("vstsettings.json", true)
                     .Build();
             }
         }
