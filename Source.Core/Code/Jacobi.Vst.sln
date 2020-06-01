@@ -23,20 +23,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.CLI", "Jacobi.Vst.CLI\Jacobi.Vst.CLI.csproj", "{CFBE0FBA-4AFA-4F3C-8247-464463312CD9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pack", "pack", "{4C377D18-37F2-4CB9-B96F-75781D7B1772}"
-	ProjectSection(SolutionItems) = preProject
-		Jacobi.Vst.Deployment\pack\_._ = Jacobi.Vst.Deployment\pack\_._
-		Jacobi.Vst.Deployment\pack\readme.txt = Jacobi.Vst.Deployment\pack\readme.txt
-		Jacobi.Vst.Deployment\pack\VST.NET.nuspec = Jacobi.Vst.Deployment\pack\VST.NET.nuspec
-		Jacobi.Vst.Deployment\pack\VST.NET2.props = Jacobi.Vst.Deployment\pack\VST.NET2.props
-		Jacobi.Vst.Deployment\pack\VST.NET2.targets = Jacobi.Vst.Deployment\pack\VST.NET2.targets
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Plugin.Framework", "Jacobi.Vst.Plugin.Framework\Jacobi.Vst.Plugin.Framework.csproj", "{8B471C35-D9E7-474D-87FA-D946DF629560}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jacobi.Vst.Host.Interop", "Jacobi.Vst.Interop\Jacobi.Vst.Host.Interop.vcxproj", "{9D18C652-750B-4B79-AF88-67A18A1CA8D5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jacobi.Vst.Plugin.Interop", "Jacobi.Vst.Interop\Jacobi.Vst.Plugin.Interop.vcxproj", "{DC2276D2-DBF5-4DA5-A45C-52B94CC20714}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugin", "plugin", "{67D3B2B3-4BE2-421D-B4B5-78B886222864}"
+	ProjectSection(SolutionItems) = preProject
+		Jacobi.Vst.Deployment\plugin\readme.txt = Jacobi.Vst.Deployment\plugin\readme.txt
+		Jacobi.Vst.Deployment\plugin\VST.NET-Plugin.nuspec = Jacobi.Vst.Deployment\plugin\VST.NET-Plugin.nuspec
+		Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.props = Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.props
+		Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.targets = Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{0E8BB654-76C3-4C1F-B192-475DA4F581F8}"
+	ProjectSection(SolutionItems) = preProject
+		Jacobi.Vst.Deployment\host\readme.txt = Jacobi.Vst.Deployment\host\readme.txt
+		Jacobi.Vst.Deployment\host\VST.NET-Host.nuspec = Jacobi.Vst.Deployment\host\VST.NET-Host.nuspec
+		Jacobi.Vst.Deployment\host\VST.NET2-Host.props = Jacobi.Vst.Deployment\host\VST.NET2-Host.props
+		Jacobi.Vst.Deployment\host\VST.NET2-Host.targets = Jacobi.Vst.Deployment\host\VST.NET2-Host.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Plugin.Framework", "Jacobi.Vst.Plugin.Framework\Jacobi.Vst.Plugin.Framework.csproj", "{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,16 +87,6 @@ Global
 		{CFBE0FBA-4AFA-4F3C-8247-464463312CD9}.Release|x64.Build.0 = Release|Any CPU
 		{CFBE0FBA-4AFA-4F3C-8247-464463312CD9}.Release|x86.ActiveCfg = Release|Any CPU
 		{CFBE0FBA-4AFA-4F3C-8247-464463312CD9}.Release|x86.Build.0 = Release|Any CPU
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Debug|x64.ActiveCfg = Debug|x64
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Debug|x64.Build.0 = Debug|x64
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Debug|x86.ActiveCfg = Debug|x86
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Debug|x86.Build.0 = Debug|x86
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Release|Any CPU.ActiveCfg = Release|x86
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Release|x64.ActiveCfg = Release|x64
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Release|x64.Build.0 = Release|x64
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Release|x86.ActiveCfg = Release|x86
-		{8B471C35-D9E7-474D-87FA-D946DF629560}.Release|x86.Build.0 = Release|x86
 		{9D18C652-750B-4B79-AF88-67A18A1CA8D5}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{9D18C652-750B-4B79-AF88-67A18A1CA8D5}.Debug|x64.ActiveCfg = Debug|x64
 		{9D18C652-750B-4B79-AF88-67A18A1CA8D5}.Debug|x64.Build.0 = Debug|x64
@@ -110,12 +107,23 @@ Global
 		{DC2276D2-DBF5-4DA5-A45C-52B94CC20714}.Release|x64.Build.0 = Release|x64
 		{DC2276D2-DBF5-4DA5-A45C-52B94CC20714}.Release|x86.ActiveCfg = Release|Win32
 		{DC2276D2-DBF5-4DA5-A45C-52B94CC20714}.Release|x86.Build.0 = Release|Win32
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Debug|x64.ActiveCfg = Debug|x64
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Debug|x64.Build.0 = Debug|x64
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Debug|x86.ActiveCfg = Debug|x86
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Debug|x86.Build.0 = Debug|x86
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Release|Any CPU.ActiveCfg = Release|x86
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Release|x64.ActiveCfg = Release|x64
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Release|x64.Build.0 = Release|x64
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Release|x86.ActiveCfg = Release|x86
+		{7A7D5B04-5120-4DBE-9DD5-C8C0E2C17DF5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4C377D18-37F2-4CB9-B96F-75781D7B1772} = {7CBB90A0-0CBB-4380-AC6D-B9686CC17724}
+		{67D3B2B3-4BE2-421D-B4B5-78B886222864} = {7CBB90A0-0CBB-4380-AC6D-B9686CC17724}
+		{0E8BB654-76C3-4C1F-B192-475DA4F581F8} = {7CBB90A0-0CBB-4380-AC6D-B9686CC17724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F99F2617-FAC1-4436-B308-A5BD873BA453}

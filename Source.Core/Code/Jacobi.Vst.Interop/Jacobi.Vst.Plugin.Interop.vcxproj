@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{DC2276D2-DBF5-4DA5-A45C-52B94CC20714}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>JacobiVstInterop</RootNamespace>
+    <RootNamespace>JacobiVstPluginInterop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
@@ -110,7 +110,7 @@
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
-      <ProgramDataBaseFileName>$(IntDir)plugin_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,6 +118,8 @@
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>Plugin/Jacobi.Vst.Interop.def</ModuleDefinitionFile>
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+      <CLRImageType />
     </Link>
     <PostBuildEvent>
       <Command>
@@ -136,7 +138,7 @@
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
-      <ProgramDataBaseFileName>$(IntDir)plugin_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,6 +146,8 @@
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>Plugin/Jacobi.Vst.Interop.def</ModuleDefinitionFile>
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+      <CLRImageType />
     </Link>
     <PostBuildEvent>
       <Command>
@@ -164,7 +168,7 @@
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
-      <ProgramDataBaseFileName>$(IntDir)plugin_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -176,7 +180,8 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
       <CLRImageType>
       </CLRImageType>
-      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <LinkTimeCodeGeneration></LinkTimeCodeGeneration>
+      <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -193,7 +198,7 @@
       <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
-      <ProgramDataBaseFileName>$(IntDir)plugin_vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -205,7 +210,8 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
       <CLRImageType>
       </CLRImageType>
-      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <LinkTimeCodeGeneration></LinkTimeCodeGeneration>
+      <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
