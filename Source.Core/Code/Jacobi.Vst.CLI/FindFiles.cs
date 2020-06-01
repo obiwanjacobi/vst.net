@@ -18,6 +18,8 @@ namespace Jacobi.Vst.CLI
             @"Microsoft.Extensions.Configuration.Json\2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll",
             @"Microsoft.Extensions.FileProviders.Physical\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
             @"Microsoft.Extensions.FileProviders.Abstractions\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll",
+            @"microsoft.extensions.fileproviders.physical\3.1.4\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"newtonsoft.json\12.0.2\lib\netstandard2.0\Newtonsoft.Json.dll",
         };
 
         private readonly string _nugetPath;
