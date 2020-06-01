@@ -8,7 +8,7 @@ namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
-Bootstrapper::Bootstrapper(System::String^ basePath, Jacobi::Vst::Interop::Plugin::Configuration^ config)
+Bootstrapper::Bootstrapper(System::String^ basePath, Jacobi::Vst::Plugin::Interop::Configuration^ config)
 {
 	// Note: cannot use the Throw helper class, because that's in Core which isn't loaded yet.
 	if(System::String::IsNullOrEmpty(basePath))
@@ -32,7 +32,7 @@ Bootstrapper::Bootstrapper(System::String^ basePath, Jacobi::Vst::Interop::Plugi
 }
 
 // static helper method
-Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Jacobi::Vst::Interop::Plugin::Configuration^ config)
+Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Jacobi::Vst::Plugin::Interop::Configuration^ config)
 {
 	System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 

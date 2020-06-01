@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "HostCommandStub.h"
-#include "..\TypeConverter.h"
-#include "..\UnmanagedString.h"
-#include "..\Properties\Resources.h"
-#include "..\Utils.h"
+#include "../TypeConverter.h"
+#include "../UnmanagedString.h"
+#include "../Properties\Resources.h"
+#include "../Utils.h"
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Plugin {
+namespace Interop {
 
 // Creates a new instance based on a native callback function pointer.
 HostCommandStub::HostCommandStub(::Vst2HostCommand hostCommand)
@@ -23,7 +23,7 @@ HostCommandStub::HostCommandStub(::Vst2HostCommand hostCommand)
 
 	_timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
 	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(
-		Utils::GetPluginName() + ".Plugin.HostCommandStub", Jacobi::Vst::Core::Plugin::IVstHostCommandStub::typeid);
+		Jacobi::Vst::Interop::Utils::GetPluginName() + ".Plugin.HostCommandStub", Jacobi::Vst::Core::Plugin::IVstHostCommandStub::typeid);
 }
 
 // destructor. See Finalizer
@@ -109,7 +109,7 @@ Jacobi::Vst::Core::VstTimeInfo^ HostCommandStub::GetTimeInfo(Jacobi::Vst::Core::
 	::Vst2TimeInfo* pTimeInfo = (::Vst2TimeInfo*)
 		CallHost(Vst2HostCommands::GetTime, 0, safe_cast<int32_t>(filterFlags), 0, 0);
 
-	TypeConverter::ToManagedTimeInfo(_timeInfo, pTimeInfo);
+	Jacobi::Vst::Interop::TypeConverter::ToManagedTimeInfo(_timeInfo, pTimeInfo);
 
 	return _timeInfo;
 }
@@ -118,7 +118,7 @@ System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent
 {
 	ThrowIfNotInitialized();
 
-	::Vst2Events* pEvents = TypeConverter::AllocUnmanagedEvents(events);
+	::Vst2Events* pEvents = Jacobi::Vst::Interop::TypeConverter::AllocUnmanagedEvents(events);
 
 	try
 	{
@@ -126,7 +126,7 @@ System::Boolean HostCommandStub::ProcessEvents(array<Jacobi::Vst::Core::VstEvent
 	}
 	finally
 	{
-		TypeConverter::DeleteUnmanagedEvents(pEvents);
+		Jacobi::Vst::Interop::TypeConverter::DeleteUnmanagedEvents(pEvents);
 	}
 
 	return false;
@@ -176,11 +176,11 @@ Jacobi::Vst::Core::VstAutomationStates HostCommandStub::GetAutomationState()
 
 System::String^ HostCommandStub::GetVendorString()
 {
-	UnmanagedString pText(Vst2MaxVendorStrLen + 1);
+	Jacobi::Vst::Interop::UnmanagedString pText(Vst2MaxVendorStrLen + 1);
 
 	if(CallHost(Vst2HostCommands::VendorGetString, 0, 0, pText, 0) != 0)
 	{
-		return TypeConverter::CharToString(pText);
+		return Jacobi::Vst::Interop::TypeConverter::CharToString(pText);
 	}
 
 	return nullptr;
@@ -188,11 +188,11 @@ System::String^ HostCommandStub::GetVendorString()
 
 System::String^ HostCommandStub::GetProductString()
 {
-	UnmanagedString pText(Vst2MaxProductStrLen + 1);
+	Jacobi::Vst::Interop::UnmanagedString pText(Vst2MaxProductStrLen + 1);
 
 	if(CallHost(Vst2HostCommands::ProductGetString, 0, 0, pText, 0) != 0)
 	{
-		return TypeConverter::CharToString(pText);
+		return Jacobi::Vst::Interop::TypeConverter::CharToString(pText);
 	}
 
 	return nullptr;
@@ -205,9 +205,9 @@ System::Int32 HostCommandStub::GetVendorVersion()
 
 Jacobi::Vst::Core::VstCanDoResult HostCommandStub::CanDo(System::String^ cando)
 {
-	UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
+	Jacobi::Vst::Interop::UnmanagedString pText(Jacobi::Vst::Core::Constants::MaxCanDoLength + 1);
 
-	TypeConverter::StringToChar(cando, pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
+	Jacobi::Vst::Interop::TypeConverter::StringToChar(cando, pText, Jacobi::Vst::Core::Constants::MaxCanDoLength);
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(
 		CallHost(Vst2HostCommands::CanDo, 0, 0, pText, 0));
@@ -221,7 +221,7 @@ Jacobi::Vst::Core::VstHostLanguage HostCommandStub::GetLanguage()
 
 System::String^ HostCommandStub::GetDirectory()
 {
-	return TypeConverter::CharToString((char*)
+	return Jacobi::Vst::Interop::TypeConverter::CharToString((char*)
 		CallHost(Vst2HostCommands::GetDirectory, 0, 0, 0, 0));
 }
 
@@ -256,7 +256,7 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 			Jacobi::Vst::Interop::Properties::Resources::HostCommandStub_VstFileSelectAlreadyInitialized);
 	}
 
-	::Vst2FileSelect* pFileSelect = TypeConverter::AllocUnmanagedFileSelect(fileSelect);
+	::Vst2FileSelect* pFileSelect = Jacobi::Vst::Interop::TypeConverter::AllocUnmanagedFileSelect(fileSelect);
 
 	try
 	{
@@ -265,14 +265,14 @@ System::Boolean HostCommandStub::OpenFileSelector(Jacobi::Vst::Core::VstFileSele
 		if(succeeded)
 		{
 			// update the managed type with the users selections.
-			TypeConverter::UpdateManagedFileSelect(fileSelect, pFileSelect);
+			Jacobi::Vst::Interop::TypeConverter::UpdateManagedFileSelect(fileSelect, pFileSelect);
 		}
 
 		return succeeded;
 	}
 	catch(...)
 	{
-		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
+		Jacobi::Vst::Interop::TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
 
 		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Error, 
 			"Error in Jacobi.Vst.Interop.Plugin.HostCommandStub.OpenFileSelector.");
@@ -301,7 +301,7 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 	}
 	finally
 	{
-		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
+		Jacobi::Vst::Interop::TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
 		fileSelect->Reserved = System::IntPtr::Zero;
 	}
 }
@@ -325,7 +325,7 @@ System::Boolean HostCommandStub::WantMidi()
 
 System::Boolean HostCommandStub::SetTime(Jacobi::Vst::Core::VstTimeInfo^ timeInfo, Jacobi::Vst::Core::VstTimeInfoFlags filterFlags)
 {
-	::Vst2TimeInfo* pTimeInfo = TypeConverter::AllocUnmanagedTimeInfo(timeInfo);
+	::Vst2TimeInfo* pTimeInfo = Jacobi::Vst::Interop::TypeConverter::AllocUnmanagedTimeInfo(timeInfo);
 
 	try
 	{
@@ -385,7 +385,7 @@ Jacobi::Vst::Core::VstSpeakerArrangement^ HostCommandStub::GetOutputSpeakerArran
 	::Vst2SpeakerArrangement* pArrangement = (::Vst2SpeakerArrangement*)
 		CallHost(Vst2HostCommands::GetOutputSpeakerArrangement, 0, 0, 0, 0);
 
-	return TypeConverter::ToManagedSpeakerArrangement(pArrangement);
+	return Jacobi::Vst::Interop::TypeConverter::ToManagedSpeakerArrangement(pArrangement);
 }
 
 System::Boolean HostCommandStub::SetIcon(System::IntPtr icon)
@@ -405,7 +405,7 @@ System::Boolean HostCommandStub::CloseWindow(System::IntPtr wnd)
 
 System::Boolean HostCommandStub::EditFile(System::String^ xml)
 {
-	char* pXml = TypeConverter::AllocateString(xml);
+	char* pXml = Jacobi::Vst::Interop::TypeConverter::AllocateString(xml);
 
 	try
 	{
@@ -413,17 +413,17 @@ System::Boolean HostCommandStub::EditFile(System::String^ xml)
 	}
 	finally
 	{
-		TypeConverter::DeallocateString(pXml);
+		Jacobi::Vst::Interop::TypeConverter::DeallocateString(pXml);
 	}
 }
 
 System::String^ HostCommandStub::GetChunkFile()
 {
-	UnmanagedString pFile(2048);
+	Jacobi::Vst::Interop::UnmanagedString pFile(2048);
 
 	CallHost(Vst2HostCommands::GetChunkFile, 0, 0, pFile, 0);
 
-	return TypeConverter::CharToString(pFile);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(pFile);
 }
 
 Jacobi::Vst::Core::VstSpeakerArrangement^ HostCommandStub::GetInputSpeakerArrangement()
@@ -431,7 +431,7 @@ Jacobi::Vst::Core::VstSpeakerArrangement^ HostCommandStub::GetInputSpeakerArrang
 	::Vst2SpeakerArrangement* pArrangement = (::Vst2SpeakerArrangement*)
 		CallHost(Vst2HostCommands::GetInputSpeakerArrangement, 0, 0, 0, 0);
 
-	return TypeConverter::ToManagedSpeakerArrangement(pArrangement);
+	return Jacobi::Vst::Interop::TypeConverter::ToManagedSpeakerArrangement(pArrangement);
 }
 
 // Throws an InvalidOperationException if the host command stub has not been initialized.
@@ -444,4 +444,4 @@ inline void HostCommandStub::ThrowIfNotInitialized()
 	}
 }
 
-}}}} // Jacobi::Vst::Interop::Plugin
+}}}} // Jacobi::Vst::Plugin::Interop

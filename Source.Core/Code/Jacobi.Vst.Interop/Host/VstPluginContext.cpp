@@ -9,8 +9,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 	// static factory method
 	VstPluginContext^ VstPluginContext::Create(System::String^ pluginPath, Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
@@ -139,4 +139,4 @@ namespace Host {
 	}
 
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

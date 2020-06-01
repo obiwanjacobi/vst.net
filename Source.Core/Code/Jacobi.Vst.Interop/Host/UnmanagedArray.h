@@ -2,8 +2,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 /// <summary>
 /// caches an array of T and grows on demand
@@ -84,4 +84,4 @@ private:
 	}
 };
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

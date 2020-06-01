@@ -1,8 +1,8 @@
 #pragma once
 
 #include "VstPluginContext.h"
-#include "VstHostCommandProxy.h"
 #include "VstPluginCommandStub.h"
+#include "VstHostCommandProxy.h"
 
 // typedef for the main exported function from a plugin dll
 typedef ::Vst2Plugin* (*Vst2PluginMain)(::Vst2HostCallback);
@@ -12,8 +12,8 @@ static Vst2IntPtr Vst2Handler HostCommandHandler(Vst2Plugin* pPlugin, int32_t op
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 	/// <summary>
 	/// Implements a PluginContext for an unmanaged Plugin, marshalling the calls between the Context and the Plugin.
@@ -91,5 +91,5 @@ namespace Host {
 		{ if(_hLib != NULL) { ::FreeLibrary(_hLib); _hLib = NULL; } }
 	};
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
 

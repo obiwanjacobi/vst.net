@@ -8,8 +8,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 VstPluginCommandStub::VstPluginCommandStub(::Vst2Plugin* plugin)
 {
@@ -22,7 +22,7 @@ VstPluginCommandStub::VstPluginCommandStub(::Vst2Plugin* plugin)
 	_emptyAudio32 = new float*[0];
 	_emptyAudio64 = new double*[0];
 	
-	_memoryTracker = gcnew MemoryTracker();
+	_memoryTracker = gcnew Jacobi::Vst::Interop::MemoryTracker();
 
 	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.PluginCommandStub", Jacobi::Vst::Core::Host::IVstPluginCommandStub::typeid);
 }
@@ -31,7 +31,7 @@ void VstPluginCommandStub::ClearCurrentEvents()
 {
 	if(_currentEvents != NULL)
 	{
-		TypeConverter::DeleteUnmanagedEvents(_currentEvents);
+		Jacobi::Vst::Interop::TypeConverter::DeleteUnmanagedEvents(_currentEvents);
 		_currentEvents = NULL;
 	}
 }
@@ -95,7 +95,7 @@ System::Int32 VstPluginCommandStub::GetProgram()
 
 void VstPluginCommandStub::SetProgramName(System::String^ name)
 {
-	char* progName = TypeConverter::AllocateString(name);
+	char* progName = Jacobi::Vst::Interop::TypeConverter::AllocateString(name);
 
 	try
 	{
@@ -103,51 +103,51 @@ void VstPluginCommandStub::SetProgramName(System::String^ name)
 	}
 	finally
 	{
-		TypeConverter::DeallocateString(progName);
+		Jacobi::Vst::Interop::TypeConverter::DeallocateString(progName);
 	}
 }
 
 System::String^ VstPluginCommandStub::GetProgramName()
 {
 	//UnmanagedString progName(Vst2MaxProgNameLen);
-	UnmanagedString progName(129);
+	Jacobi::Vst::Interop::UnmanagedString progName(129);
 
 	CallDispatch(Vst2PluginCommands::ProgramGetName, 0, 0, progName, 0);
 
-	return TypeConverter::CharToString(progName);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(progName);
 }
 
 System::String^ VstPluginCommandStub::GetParameterLabel(System::Int32 index)
 {
 	//UnmanagedString paramLabel(Vst2MaxParamStrLen);
 	// Some plugin don't have 8 character param labels
-	UnmanagedString paramLabel(65);
+	Jacobi::Vst::Interop::UnmanagedString paramLabel(65);
 
 	CallDispatch(Vst2PluginCommands::ParameterGetLabel, index, 0, paramLabel, 0);
 
-	return TypeConverter::CharToString(paramLabel);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(paramLabel);
 }
 
 System::String^ VstPluginCommandStub::GetParameterDisplay(System::Int32 index)
 {
 	//UnmanagedString paramLabel(Vst2MaxParamStrLen);
 	// Some plugin don't have 8 character param display values
-	UnmanagedString paramLabel(65);
+	Jacobi::Vst::Interop::UnmanagedString paramLabel(65);
 
 	CallDispatch(Vst2PluginCommands::ParameterGetDisplay, index, 0, paramLabel, 0);
 
-	return TypeConverter::CharToString(paramLabel);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(paramLabel);
 }
 
 System::String^ VstPluginCommandStub::GetParameterName(System::Int32 index)
 {
 	//UnmanagedString paramName(Vst2MaxParamStrLen);
 	// Some plugin don't have 8 character param names
-	UnmanagedString paramName(65);
+	Jacobi::Vst::Interop::UnmanagedString paramName(65);
 
 	CallDispatch(Vst2PluginCommands::ParameterGetName, index, 0, paramName, 0);
 
-	return TypeConverter::CharToString(paramName);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(paramName);
 }
 
 void VstPluginCommandStub::SetSampleRate(System::Single sampleRate)
@@ -167,14 +167,14 @@ void VstPluginCommandStub::MainsChanged(System::Boolean onoff)
 
 System::Boolean VstPluginCommandStub::EditorGetRect([System::Runtime::InteropServices::Out] System::Drawing::Rectangle% rect)
 {
-	UnmanagedPointer<Vst2Rectangle> unmanagedRect(NULL);
+	Jacobi::Vst::Interop::UnmanagedPointer<Vst2Rectangle> unmanagedRect(NULL);
 
 	// some plugins return zero even when succesful.
 	CallDispatch(Vst2PluginCommands::EditorGetRectangle, 0, 0, &unmanagedRect, 0);
 
 	if(unmanagedRect->bottom != 0 || unmanagedRect->right != 0)
 	{
-		rect = TypeConverter::ToManagedRectangle(unmanagedRect);
+		rect = Jacobi::Vst::Interop::TypeConverter::ToManagedRectangle(unmanagedRect);
 		return true;
 	}
 
@@ -207,7 +207,7 @@ array<System::Byte>^ VstPluginCommandStub::GetChunk(System::Boolean isPreset)
 	
 	if(length > 0)
 	{
-		return TypeConverter::PtrToByteArray(pBuffer, length);
+		return Jacobi::Vst::Interop::TypeConverter::PtrToByteArray(pBuffer, length);
 	}
 
 	return nullptr;
@@ -215,7 +215,7 @@ array<System::Byte>^ VstPluginCommandStub::GetChunk(System::Boolean isPreset)
 
 System::Int32 VstPluginCommandStub::SetChunk(array<System::Byte>^ data, System::Boolean isPreset)
 {
-	char* dataArr = TypeConverter::ByteArrayToPtr(data);
+	char* dataArr = Jacobi::Vst::Interop::TypeConverter::ByteArrayToPtr(data);
 
 	// we need to hold on to the unmanaged memory until suspend/resume is called.
 	_memoryTracker->RegisterArray(dataArr);
@@ -228,7 +228,7 @@ System::Boolean VstPluginCommandStub::ProcessEvents(array<Jacobi::Vst::Core::Vst
 {
 	ClearCurrentEvents();
 
-	_currentEvents = TypeConverter::AllocUnmanagedEvents(events);
+	_currentEvents = Jacobi::Vst::Interop::TypeConverter::AllocUnmanagedEvents(events);
 
 	return (CallDispatch(Vst2PluginCommands::ProcessEvents, 0, 0, _currentEvents, 0) != 0);
 }
@@ -240,7 +240,7 @@ System::Boolean VstPluginCommandStub::CanParameterBeAutomated(System::Int32 inde
 
 System::Boolean VstPluginCommandStub::String2Parameter(System::Int32 index, System::String^ str)
 {
-	char* pStr = TypeConverter::AllocateString(str);
+	char* pStr = Jacobi::Vst::Interop::TypeConverter::AllocateString(str);
 
 	try
 	{
@@ -248,27 +248,27 @@ System::Boolean VstPluginCommandStub::String2Parameter(System::Int32 index, Syst
 	}
 	finally
 	{
-		TypeConverter::DeallocateString(pStr);
+		Jacobi::Vst::Interop::TypeConverter::DeallocateString(pStr);
 	}
 }
 
 System::String^ VstPluginCommandStub::GetProgramNameIndexed(System::Int32 index)
 {
 	//UnmanagedString progName(Vst2MaxProgNameLen);
-	UnmanagedString progName(129);
+	Jacobi::Vst::Interop::UnmanagedString progName(129);
 
 	CallDispatch(Vst2PluginCommands::ProgramGetNameByIndex, index, 0, progName, 0);
 
-	return TypeConverter::CharToString(progName);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(progName);
 }
 
 Jacobi::Vst::Core::VstPinProperties^ VstPluginCommandStub::GetInputProperties(System::Int32 index)
 {
-	UnmanagedPointer<Vst2PinProperties> pinProps;
+	Jacobi::Vst::Interop::UnmanagedPointer<Vst2PinProperties> pinProps;
 
 	if(CallDispatch(Vst2PluginCommands::GetInputProperties, index, 0, pinProps, 0) != 0)
 	{
-		return TypeConverter::ToManagedPinProperties(pinProps);
+		return Jacobi::Vst::Interop::TypeConverter::ToManagedPinProperties(pinProps);
 	}
 	
 	return nullptr;
@@ -276,11 +276,11 @@ Jacobi::Vst::Core::VstPinProperties^ VstPluginCommandStub::GetInputProperties(Sy
 
 Jacobi::Vst::Core::VstPinProperties^ VstPluginCommandStub::GetOutputProperties(System::Int32 index)
 {
-	UnmanagedPointer<Vst2PinProperties> pinProps;
+	Jacobi::Vst::Interop::UnmanagedPointer<Vst2PinProperties> pinProps;
 
 	if(CallDispatch(Vst2PluginCommands::GetOutputProperties, index, 0, pinProps, 0) != 0)
 	{
-		return TypeConverter::ToManagedPinProperties(pinProps);
+		return Jacobi::Vst::Interop::TypeConverter::ToManagedPinProperties(pinProps);
 	}
 
 	return nullptr;
@@ -294,8 +294,8 @@ Jacobi::Vst::Core::VstPluginCategory VstPluginCommandStub::GetCategory()
 System::Boolean VstPluginCommandStub::SetSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ saInput, 
 	Jacobi::Vst::Core::VstSpeakerArrangement^ saOutput)
 {
-	UnmanagedPointer<::Vst2SpeakerArrangement> pInput(TypeConverter::AllocUnmanagedSpeakerArrangement(saInput));
-	UnmanagedPointer<::Vst2SpeakerArrangement> pOutput(TypeConverter::AllocUnmanagedSpeakerArrangement(saOutput));
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2SpeakerArrangement> pInput(Jacobi::Vst::Interop::TypeConverter::AllocUnmanagedSpeakerArrangement(saInput));
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2SpeakerArrangement> pOutput(Jacobi::Vst::Interop::TypeConverter::AllocUnmanagedSpeakerArrangement(saOutput));
 
 	return (CallDispatch(Vst2PluginCommands::SetSpeakerArrangement, 0, (Vst2IntPtr)(::Vst2SpeakerArrangement*)pInput, pOutput, 0) != 0);
 }
@@ -308,31 +308,31 @@ System::Boolean VstPluginCommandStub::SetBypass(System::Boolean bypass)
 System::String^ VstPluginCommandStub::GetEffectName()
 {
 	//UnmanagedString name(Vst2MaxEffectNameLen);
-	UnmanagedString name(128);
+	Jacobi::Vst::Interop::UnmanagedString name(128);
 
 	CallDispatch(Vst2PluginCommands::PluginGetName, 0, 0, name, 0);
 
-	return TypeConverter::CharToString(name);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(name);
 }
 
 System::String^ VstPluginCommandStub::GetVendorString()
 {
 	//UnmanagedString vendor(Vst2MaxVendorStrLen);
-	UnmanagedString vendor(129);
+	Jacobi::Vst::Interop::UnmanagedString vendor(129);
 
 	CallDispatch(Vst2PluginCommands::VendorGetString, 0, 0, vendor, 0);
 
-	return TypeConverter::CharToString(vendor);
+	return Jacobi::Vst::Interop::TypeConverter::CharToString(vendor);
 }
 
 System::String^ VstPluginCommandStub::GetProductString()
 {
 	//UnmanagedString product(Vst2MaxProductStrLen);
-	UnmanagedString product(129);
+	Jacobi::Vst::Interop::UnmanagedString product(129);
 
 	if(CallDispatch(Vst2PluginCommands::ProductGetString, 0, 0, product, 0) != 0)
 	{
-		return TypeConverter::CharToString(product);
+		return Jacobi::Vst::Interop::TypeConverter::CharToString(product);
 	}
 
 	return nullptr;
@@ -345,7 +345,7 @@ System::Int32 VstPluginCommandStub::GetVendorVersion()
 
 Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::CanDo(System::String^ cando)
 {
-	char* pCanDo = TypeConverter::AllocateString(cando);
+	char* pCanDo = Jacobi::Vst::Interop::TypeConverter::AllocateString(cando);
 
 	try
 	{
@@ -353,7 +353,7 @@ Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::CanDo(System::String^ ca
 	}
 	finally
 	{
-		TypeConverter::DeallocateString(pCanDo);
+		Jacobi::Vst::Interop::TypeConverter::DeallocateString(pCanDo);
 	}
 }
 
@@ -364,11 +364,11 @@ System::Int32 VstPluginCommandStub::GetTailSize()
 
 Jacobi::Vst::Core::VstParameterProperties^ VstPluginCommandStub::GetParameterProperties(System::Int32 index)
 {
-	UnmanagedPointer<::Vst2ParameterProperties> pProps;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2ParameterProperties> pProps;
 
 	if(CallDispatch(Vst2PluginCommands::ParameterGetProperties, index, 0, pProps, 0))
 	{
-		return TypeConverter::ToManagedParameterProperties(pProps);
+		return Jacobi::Vst::Interop::TypeConverter::ToManagedParameterProperties(pProps);
 	}
 
 	return nullptr;
@@ -397,7 +397,7 @@ System::Boolean VstPluginCommandStub::SetEditorKnobMode(Jacobi::Vst::Core::VstKn
 
 System::Int32 VstPluginCommandStub::GetMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgram, System::Int32 channel)
 {
-	UnmanagedPointer<::Vst2MidiProgramName> pProgName;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2MidiProgramName> pProgName;
 
 	pProgName->thisProgramIndex = midiProgram->CurrentProgramIndex;
 
@@ -405,7 +405,7 @@ System::Int32 VstPluginCommandStub::GetMidiProgramName(Jacobi::Vst::Core::VstMid
 
 	if(result != 0)
 	{
-		TypeConverter::ToManagedMidiProgramName(midiProgram, pProgName);
+		Jacobi::Vst::Interop::TypeConverter::ToManagedMidiProgramName(midiProgram, pProgName);
 	}
 
 	return result;
@@ -413,13 +413,13 @@ System::Int32 VstPluginCommandStub::GetMidiProgramName(Jacobi::Vst::Core::VstMid
 
 System::Int32 VstPluginCommandStub::GetCurrentMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgram, System::Int32 channel)
 {
-	UnmanagedPointer<::Vst2MidiProgramName> pProgName;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2MidiProgramName> pProgName;
 
 	System::Int32 result = safe_cast<System::Int32>(CallDispatch(Vst2PluginCommands::MidiProgramGetCurrent, channel, 0, pProgName, 0));
 
 	if(result != 0)
 	{
-		TypeConverter::ToManagedMidiProgramName(midiProgram, pProgName);
+		Jacobi::Vst::Interop::TypeConverter::ToManagedMidiProgramName(midiProgram, pProgName);
 	}
 
 	return result;
@@ -427,13 +427,13 @@ System::Int32 VstPluginCommandStub::GetCurrentMidiProgramName(Jacobi::Vst::Core:
 
 System::Int32 VstPluginCommandStub::GetMidiProgramCategory(Jacobi::Vst::Core::VstMidiProgramCategory^ midiCat, System::Int32 channel)
 {
-	UnmanagedPointer<::Vst2MidiProgramCategory> pProgCat;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2MidiProgramCategory> pProgCat;
 
 	System::Int32 result = safe_cast<System::Int32>(CallDispatch(Vst2PluginCommands::MidiProgramGetCategory, channel, 0, pProgCat, 0));
 
 	if(result != 0)
 	{
-		TypeConverter::ToManagedMidiProgramCategory(midiCat, pProgCat);
+		Jacobi::Vst::Interop::TypeConverter::ToManagedMidiProgramCategory(midiCat, pProgCat);
 	}
 
 	return result;
@@ -446,14 +446,14 @@ System::Boolean VstPluginCommandStub::HasMidiProgramsChanged(System::Int32 chann
 
 System::Boolean VstPluginCommandStub::GetMidiKeyName(Jacobi::Vst::Core::VstMidiKeyName^ midiKeyName, System::Int32 channel)
 {
-	UnmanagedPointer<::Vst2MidiKeyName> pKeyName;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2MidiKeyName> pKeyName;
 
 	pKeyName->thisProgramIndex = midiKeyName->CurrentProgramIndex;
 	pKeyName->thisKeyNumber = midiKeyName->CurrentKeyNumber;
 
 	if(CallDispatch(Vst2PluginCommands::MidiProgramGetCategory, channel, 0, pKeyName, 0) != 0)
 	{
-		midiKeyName->Name = TypeConverter::CharToString(pKeyName->keyName);
+		midiKeyName->Name = Jacobi::Vst::Interop::TypeConverter::CharToString(pKeyName->keyName);
 		return true;
 	}
 
@@ -473,13 +473,13 @@ System::Boolean VstPluginCommandStub::EndSetProgram()
 // IVstPluginCommands23
 System::Boolean VstPluginCommandStub::GetSpeakerArrangement([System::Runtime::InteropServices::Out] Jacobi::Vst::Core::VstSpeakerArrangement^% input, [System::Runtime::InteropServices::Out] Jacobi::Vst::Core::VstSpeakerArrangement^% output)
 {
-	UnmanagedPointer<::Vst2SpeakerArrangement> pInput;
-	UnmanagedPointer<::Vst2SpeakerArrangement> pOutput;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2SpeakerArrangement> pInput;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2SpeakerArrangement> pOutput;
 
 	if(CallDispatch(Vst2PluginCommands::GetSpeakerArrangement, 0, (Vst2IntPtr)(::Vst2SpeakerArrangement*)pInput, pOutput, 0))
 	{
-		input = TypeConverter::ToManagedSpeakerArrangement(pInput);
-		output = TypeConverter::ToManagedSpeakerArrangement(pOutput);
+		input = Jacobi::Vst::Interop::TypeConverter::ToManagedSpeakerArrangement(pInput);
+		output = Jacobi::Vst::Interop::TypeConverter::ToManagedSpeakerArrangement(pOutput);
 		return true;
 	}
 
@@ -491,11 +491,11 @@ System::Boolean VstPluginCommandStub::GetSpeakerArrangement([System::Runtime::In
 System::Int32 VstPluginCommandStub::GetNextPlugin([System::Runtime::InteropServices::Out] System::String^% name)
 {
 	//UnmanagedString pName(Vst2MaxProductStrLen);
-	UnmanagedString pName(129);
+	Jacobi::Vst::Interop::UnmanagedString pName(129);
 
 	System::Int32 pluginId = safe_cast<System::Int32>(CallDispatch(Vst2PluginCommands::GetNextPlugin, 0, 0, &pName, 0.0));
 	
-	name = TypeConverter::CharToString(pName);
+	name = Jacobi::Vst::Interop::TypeConverter::CharToString(pName);
 
 	return pluginId;
 }
@@ -517,13 +517,13 @@ System::Boolean VstPluginCommandStub::SetPanLaw(Jacobi::Vst::Core::VstPanLaw typ
 
 Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadBank(Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo)
 {
-	UnmanagedPointer<::Vst2PatchChunkInfo> pChunkInfo;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2PatchChunkInfo> pChunkInfo;
 
 	int32_t result = (::int32_t)CallDispatch(Vst2PluginCommands::BeginLoadBank, 0, 0, pChunkInfo, 0);
 
 	if(result != 0)
 	{
-		TypeConverter::ToUnmanagedPatchChunkInfo(pChunkInfo, chunkInfo);
+		Jacobi::Vst::Interop::TypeConverter::ToUnmanagedPatchChunkInfo(pChunkInfo, chunkInfo);
 	}
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(result);
@@ -531,13 +531,13 @@ Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadBank(Jacobi::Vs
 
 Jacobi::Vst::Core::VstCanDoResult VstPluginCommandStub::BeginLoadProgram(Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo)
 {
-	UnmanagedPointer<::Vst2PatchChunkInfo> pChunkInfo;
+	Jacobi::Vst::Interop::UnmanagedPointer<::Vst2PatchChunkInfo> pChunkInfo;
 
 	int32_t result = (::int32_t)CallDispatch(Vst2PluginCommands::BeginLoadProgram, 0, 0, pChunkInfo, 0);
 
 	if(result != 0)
 	{
-		TypeConverter::ToUnmanagedPatchChunkInfo(pChunkInfo, chunkInfo);
+		Jacobi::Vst::Interop::TypeConverter::ToUnmanagedPatchChunkInfo(pChunkInfo, chunkInfo);
 	}
 
 	return safe_cast<Jacobi::Vst::Core::VstCanDoResult>(result);
@@ -643,11 +643,11 @@ System::Boolean VstPluginCommandStub::SetBlockSizeAndSampleRate(System::Int32 bl
 
 System::String^ VstPluginCommandStub::GetErrorText()
 {
-	UnmanagedString pText(257);
+	Jacobi::Vst::Interop::UnmanagedString pText(257);
 
 	if(CallDispatch(Vst2PluginCommands::GetErrorText, 0, 0, 0, 0) != 0)
 	{
-		return TypeConverter::CharToString(pText);
+		return Jacobi::Vst::Interop::TypeConverter::CharToString(pText);
 	}
 
 	return nullptr;
@@ -675,4 +675,4 @@ System::Boolean VstPluginCommandStub::KeysRequired()
 	return (CallDispatch(Vst2PluginCommands::KeysRequired, 0, 0, 0, 0) == 0);
 }
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

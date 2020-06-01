@@ -5,8 +5,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Plugin {
+namespace Interop {
 
 /// <summary>
 /// The Configuration class manages the plugin specific config file.
@@ -56,4 +56,4 @@ private:
 	System::String^ GetAppSetting(System::String^ key);
 };
 
-}}}} // Jacobi::Vst::Interop::Plugin
+}}}} // Jacobi::Vst::Plugin::Interop

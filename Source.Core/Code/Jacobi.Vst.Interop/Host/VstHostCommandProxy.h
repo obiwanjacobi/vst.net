@@ -2,8 +2,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 /// <summary>
 /// The VstHostCommandProxy class dispatches incoming requests from the plugin to an implementation of
@@ -44,4 +44,4 @@ private:
 	Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

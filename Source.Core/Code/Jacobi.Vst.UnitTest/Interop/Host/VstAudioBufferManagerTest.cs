@@ -1,9 +1,7 @@
-﻿using System;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+﻿
 using Jacobi.Vst.Core;
-using Jacobi.Vst.Interop.Host;
+using Jacobi.Vst.Host.Interop;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Interop.Host
 {

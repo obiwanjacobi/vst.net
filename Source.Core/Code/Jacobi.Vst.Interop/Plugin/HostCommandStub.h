@@ -2,8 +2,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Plugin {
+namespace Interop {
 
     /// <summary>
     /// The HostCommandStub calls the host callback function.
@@ -315,4 +315,4 @@ namespace Plugin {
         Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
     };
 
-}}}} // Jacobi::Vst::Interop::Plugin
+}}}} // Jacobi::Vst::Plugin::Interop

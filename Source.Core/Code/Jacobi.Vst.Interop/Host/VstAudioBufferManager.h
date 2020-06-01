@@ -4,9 +4,9 @@
 
 namespace Jacobi {
 namespace Vst {
+namespace Host {
 namespace Interop {
-namespace Host
-{
+
 	/// <summary>
 	/// The VstAudioBufferManager class manages one continues block of unmanaged memory
 	/// to service a number of audio buffers.
@@ -74,4 +74,4 @@ namespace Host
 
 	};
 
-}}}} // namespace Jacobi.Vst.Interop.Host
+}}}} // Jacobi::Vst::Host::Interop

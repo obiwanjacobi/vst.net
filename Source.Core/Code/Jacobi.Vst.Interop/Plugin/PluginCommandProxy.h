@@ -4,8 +4,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Plugin {
+namespace Interop {
 
 	/// <summary>
 	/// The PluginCommandProxy dispatches calls to the Plugin.
@@ -57,10 +57,10 @@ namespace Plugin {
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
 		Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20^ _deprecatedCmdStub;
 
-		MemoryTracker^ _memTracker;
+		Jacobi::Vst::Interop::MemoryTracker^ _memTracker;
 		Vst2Rectangle* _pEditorRect;
 
 		Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 	};
 
-}}}} // Jacobi::Vst::Interop::Plugin
+}}}} // Jacobi::Vst::Plugin::Interop

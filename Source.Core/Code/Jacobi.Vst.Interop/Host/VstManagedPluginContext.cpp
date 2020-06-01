@@ -7,8 +7,9 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
+
 
 	VstManagedPluginContext::VstManagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 		: VstPluginContext(hostCmdStub)
@@ -25,7 +26,7 @@ namespace Host {
 
 		if(!System::String::IsNullOrEmpty(fileFinder->Find(System::IO::Path::GetFileNameWithoutExtension(pluginPath))))
 		{
-			return gcnew Jacobi::Vst::Interop::Host::VstManagedPluginContext(hostCmdStub);
+			return gcnew Jacobi::Vst::Host::Interop::VstManagedPluginContext(hostCmdStub);
 		}
 
 		return nullptr;
@@ -40,7 +41,7 @@ namespace Host {
 			System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
 			Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-				Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(basePath));
+				Jacobi::Vst::Interop::Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Plugin::Interop::Configuration(basePath));
 
 			if(pluginCmdStub == nullptr)
 			{
@@ -183,4 +184,4 @@ namespace Host {
 		}
 	}
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
