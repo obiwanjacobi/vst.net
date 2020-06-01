@@ -16,8 +16,7 @@ ref class Bootstrapper
 {
 public:
 	/// <summary>
-	/// Constructs a new instance initialized with the specified <paramref name="basePath"/>
-	/// as well as the paths loaded from the "vstnetProbePaths" config appSettings.
+	/// Constructs a new instance initialized with the specified <paramref name="basePath"/>.
 	/// </summary>
 	Bootstrapper(System::String^ basePath, Jacobi::Vst::Plugin::Interop::Configuration^ config);
 
@@ -32,8 +31,8 @@ private:
 	// plugin specific config
 	Jacobi::Vst::Plugin::Interop::Configuration^ _config;
 
-	// contains the private probe paths
-	System::Collections::Generic::List<System::String^>^ _paths;
+	// the deployment folder
+	System::String^ _basePath;
 };
 
 }}} // Jacobi::Vst::Interop

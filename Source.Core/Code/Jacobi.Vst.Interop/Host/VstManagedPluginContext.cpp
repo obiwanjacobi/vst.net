@@ -20,11 +20,9 @@ namespace Interop {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		Jacobi::Vst::Core::Plugin::FileFinder^ fileFinder = Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->CreateFileFinder();
-		fileFinder->Paths->Insert(0, System::IO::Path::GetDirectoryName(pluginPath));
-		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension);
-
-		if(!System::String::IsNullOrEmpty(fileFinder->Find(System::IO::Path::GetFileNameWithoutExtension(pluginPath))))
+		if(System::IO::File::Exists(System::IO::Path::Combine(
+			System::IO::Path::GetDirectoryName(pluginPath), 
+			System::IO::Path::GetFileNameWithoutExtension(pluginPath) + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension)))
 		{
 			return gcnew Jacobi::Vst::Host::Interop::VstManagedPluginContext(hostCmdStub);
 		}
@@ -36,49 +34,41 @@ namespace Interop {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		try
+		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
+			Jacobi::Vst::Interop::Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Plugin::Interop::Configuration(basePath));
+
+		if(pluginCmdStub == nullptr)
 		{
-			System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
-
-			Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-				Jacobi::Vst::Interop::Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Plugin::Interop::Configuration(basePath));
-
-			if(pluginCmdStub == nullptr)
-			{
-				throw gcnew System::EntryPointNotFoundException(
-					System::String::Format(
-						Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
-						pluginPath));
-			}
-
-			Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
-				Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
-
-			_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
-			Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedPluginInfo = 
-				dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
-
-			if(deprecatedPluginInfo != nullptr)
-			{
-				PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
-			}
-			else
-			{
-				PluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
-			}
-
-			AcceptPluginInfoData(false);
-
-			PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
-			PluginCommandStub->PluginContext = this;
-
-			Set(VstPluginContext::PluginPathContextVar, pluginPath);
+			throw gcnew System::EntryPointNotFoundException(
+				System::String::Format(
+					Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
+					pluginPath));
 		}
-		finally
+
+		Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
+			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
+
+		_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
+		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedPluginInfo = 
+			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
+
+		if(deprecatedPluginInfo != nullptr)
 		{
-			// make sure the private paths are cleared once the plugin is fully loaded.
-			Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Clear();
+			PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
 		}
+		else
+		{
+			PluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
+		}
+
+		AcceptPluginInfoData(false);
+
+		PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
+		PluginCommandStub->PluginContext = this;
+
+		Set(VstPluginContext::PluginPathContextVar, pluginPath);
 	}
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)

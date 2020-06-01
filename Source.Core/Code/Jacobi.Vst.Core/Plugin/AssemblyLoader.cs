@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 
@@ -11,54 +10,17 @@ namespace Jacobi.Vst.Core.Plugin
     /// </summary>
     public class AssemblyLoader
     {
+        private readonly AssemblyLoadContext _loadContext;
+
         private AssemblyLoader()
         {
-            GlobalProbePaths = new List<string>();
-            PrivateProbePaths = new List<string>();
-
-            // read global (exe)config for global probe paths
-            string paths = null; // FIXME: ConfigurationManager.AppSettings["vstnetProbePaths"];
-
-            if (!String.IsNullOrEmpty(paths))
-            {
-                GlobalProbePaths.AddRange(paths.Split(';'));
-            }
-
-            var loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
-            loadContext.Resolving += LoadContext_ResolvingAssembly;
+            _loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
+            _loadContext.Resolving += LoadContext_ResolvingAssembly;
         }
 
         private Assembly LoadContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
         {
-            FileFinder fileFinder = CreateFileFinder(".dll");
-
-            string filePath = fileFinder.Find(assemblyName.Name);
-
-            if (!String.IsNullOrEmpty(filePath))
-            {
-                var loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
-                return loadContext.LoadFromAssemblyPath(filePath);
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Instantiates a new instance of the <see cref="FileFinder"/> class with its <see cref="P:FileFinder.Paths"/> 
-        /// collection filled with the <see cref="GlobalProbePaths"/> and <see cref="PrivateProbePaths"/> paths.
-        /// </summary>
-        /// <returns>Never returns null.</returns>
-        public FileFinder CreateFileFinder(params string[] extensions)
-        {
-            FileFinder fileFinder = new FileFinder();
-            fileFinder.Paths.AddRange(PrivateProbePaths);
-            fileFinder.Paths.AddRange(GlobalProbePaths);
-
-            if (extensions != null)
-            {
-                fileFinder.Extensions.AddRange(extensions);
-            }
-            return fileFinder;
+            return LoadAssembly(assemblyName.Name, ".dll");
         }
 
         private static readonly AssemblyLoader _current = new AssemblyLoader();
@@ -68,35 +30,25 @@ namespace Jacobi.Vst.Core.Plugin
         public static AssemblyLoader Current { get { return _current; } }
 
         /// <summary>
-        /// Gets a collection with global probe paths.
+        /// The root path to look for loading assemblies.
         /// </summary>
-        public List<string> GlobalProbePaths { get; private set; }
+        public string BasePath { get; set; }
 
         /// <summary>
-        /// Gets a collection with private probe paths.
-        /// </summary>
-        public List<string> PrivateProbePaths { get; private set; }
-
-        /// <summary>
-        /// Attempts to load an assembly using the <paramref name="fileName"/> and the list of <paramref name="extensions"/> 
-        /// as well as the <see cref="PrivateProbePaths"/> and the <see cref="GlobalProbePaths"/>.
+        /// Attempts to load an assembly using the <paramref name="fileName"/> and the <paramref name="extension"/>.
         /// </summary>
         /// <param name="fileName">Name of the assembly file without extension. Must not be null or empty.</param>
-        /// <param name="extensions">A list of extensions to check for. Must not be null.</param>
+        /// <param name="extension">The extensions to check for. Must not be null or empty.</param>
         /// <returns>Returns null if no suitable assembly file was found.</returns>
-        public Assembly LoadAssembly(string fileName, IEnumerable<string> extensions)
+        public Assembly LoadAssembly(string fileName, string extension)
         {
-            Throw.IfArgumentIsNull(extensions, nameof(extensions));
+            Throw.IfArgumentIsNullOrEmpty(extension, nameof(extension));
 
-            FileFinder fileFinder = CreateFileFinder(extensions.ToArray());
+            string filePath = Path.Combine(BasePath, $"{fileName}{extension}");
 
-            string filePath = fileFinder.Find(fileName);
-
-            if (!String.IsNullOrEmpty(filePath))
+            if (!String.IsNullOrEmpty(filePath) && File.Exists(filePath))
             {
-                System.Diagnostics.Debug.WriteLine(String.Format("AssemblyLoader loading Assembly: {0}.", filePath));
-                var loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
-                return loadContext.LoadFromAssemblyPath(filePath);
+                return _loadContext.LoadFromAssemblyPath(filePath);
             }
 
             return null;

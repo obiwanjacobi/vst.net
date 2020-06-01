@@ -2205,35 +2205,22 @@
             The AssemblyLoader class manages loading assemblies from non-standard probe paths.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.AssemblyLoader.CreateFileFinder(System.String[])">
-            <summary>
-            Instantiates a new instance of the <see cref="T:Jacobi.Vst.Core.Plugin.FileFinder"/> class with its <see cref="P:FileFinder.Paths"/> 
-            collection filled with the <see cref="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.GlobalProbePaths"/> and <see cref="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.PrivateProbePaths"/> paths.
-            </summary>
-            <returns>Never returns null.</returns>
-        </member>
         <member name="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.Current">
             <summary>
             Gets the current (and only) instance of the AssemblyLoader class.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.GlobalProbePaths">
+        <member name="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.BasePath">
             <summary>
-            Gets a collection with global probe paths.
+            The root path to look for loading assemblies.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.PrivateProbePaths">
+        <member name="M:Jacobi.Vst.Core.Plugin.AssemblyLoader.LoadAssembly(System.String,System.String)">
             <summary>
-            Gets a collection with private probe paths.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.AssemblyLoader.LoadAssembly(System.String,System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Attempts to load an assembly using the <paramref name="fileName"/> and the list of <paramref name="extensions"/> 
-            as well as the <see cref="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.PrivateProbePaths"/> and the <see cref="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.GlobalProbePaths"/>.
+            Attempts to load an assembly using the <paramref name="fileName"/> and the <paramref name="extension"/>.
             </summary>
             <param name="fileName">Name of the assembly file without extension. Must not be null or empty.</param>
-            <param name="extensions">A list of extensions to check for. Must not be null.</param>
+            <param name="extension">The extensions to check for. Must not be null or empty.</param>
             <returns>Returns null if no suitable assembly file was found.</returns>
         </member>
         <member name="T:Jacobi.Vst.Core.Plugin.Configuration">

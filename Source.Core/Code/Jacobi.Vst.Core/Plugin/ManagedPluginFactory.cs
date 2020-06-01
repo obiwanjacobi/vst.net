@@ -33,13 +33,8 @@
         {
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, nameof(interopAssemblyPath));
 
-            string dir = Path.GetDirectoryName(interopAssemblyPath);
             string fileName = Path.GetFileNameWithoutExtension(interopAssemblyPath);
-
-            if (!AssemblyLoader.Current.PrivateProbePaths.Contains(dir))
-            {
-                AssemblyLoader.Current.PrivateProbePaths.Add(dir);
-            }
+            AssemblyLoader.Current.BasePath = Path.GetDirectoryName(interopAssemblyPath);
 
             LoadAssembly(fileName);
         }
@@ -53,7 +48,7 @@
         {
             Throw.IfArgumentIsNullOrEmpty(assemblyName, nameof(assemblyName));
 
-            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new[] { DefaultManagedExtension });
+            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, DefaultManagedExtension);
 
             if (_assembly == null)
             {
