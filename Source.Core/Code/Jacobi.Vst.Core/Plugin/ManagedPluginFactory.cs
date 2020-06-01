@@ -17,10 +17,8 @@
     {
         private Assembly _assembly;
 
-        /// <summary>.net.dll</summary>
-        public const string DefaultManagedExtension = ".net.dll";
-        /// <summary>.net.vstdll</summary>
-        public const string AlternateManagedExtension = ".net.vstdll";
+        /// <summary>.net.vst2</summary>
+        public const string DefaultManagedExtension = ".net.vst2";
 
         /// <summary>
         /// Loads the managed plugin assembly with the same name as the specified <paramref name="interopAssemblyPath"/>.
@@ -55,8 +53,7 @@
         {
             Throw.IfArgumentIsNullOrEmpty(assemblyName, nameof(assemblyName));
 
-            // include an empty string as extension to allow to look for the raw assemblyName
-            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new string[] { DefaultManagedExtension, AlternateManagedExtension, String.Empty });
+            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new[] { DefaultManagedExtension });
 
             if (_assembly == null)
             {

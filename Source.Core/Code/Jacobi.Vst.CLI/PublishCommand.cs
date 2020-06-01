@@ -85,12 +85,12 @@ namespace Jacobi.Vst.CLI
             var name = Path.GetFileNameWithoutExtension(pluginPath);
             //var path = Path.GetDirectoryName(pluginPath);
 
-            var managed = Path.Combine(DeployPath, $"{name}.net.vstdll");
+            var managed = Path.Combine(DeployPath, $"{name}.net.vst2");
             // copy over and rename the managed plugin dll.
             File.Copy(pluginPath, managed, overwrite: true);
             ConsoleOutput.Progress($"Renaming managed plugin: {pluginPath} => {managed}");
 
-            var interop = Path.Combine(DeployPath, "Jacobi.Vst.Interop.dll");
+            var interop = Path.Combine(DeployPath, "Jacobi.Vst.Plugin.Interop.dll");
             var entry = Path.Combine(DeployPath, $"{name}.dll");
             // rename Jacobi.Vst.Interop to plugin name
             File.Copy(interop, entry, overwrite: true);

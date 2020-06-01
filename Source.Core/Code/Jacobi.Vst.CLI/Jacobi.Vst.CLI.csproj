@@ -8,7 +8,7 @@
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
-    <Description>VST.NET Command Line Interface</Description>
+    <Description>VST.NET 2 Command Line Interface</Description>
     <Copyright>Copyright © 2008-2020 Jacobi Software</Copyright>
     <PackageTags>vst vstnet cli</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/obiwanjacobi/vst.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageId>Jacobi.Vst.CLI</PackageId>
+    <PackageId>VST.NET2-CLI</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">

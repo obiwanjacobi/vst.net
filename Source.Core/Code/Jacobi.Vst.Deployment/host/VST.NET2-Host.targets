@@ -9,11 +9,8 @@
       <Reference Include="Jacobi.Vst.Core">
         <HintPath>$(MSBuildThisFileDirectory)..\lib\netcoreapp3.1\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
       </Reference>
-      <Reference Include="Jacobi.Vst.Framework">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\netcoreapp3.1\$(Platform)\Jacobi.Vst.Plugin.Framework.dll</HintPath>
-      </Reference>
-      <Reference Include="Jacobi.Vst.Interop">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\netcoreapp3.1\$(Platform)\Jacobi.Vst.Plugin.Interop.dll</HintPath>
+      <Reference Include="Jacobi.Vst.Host.Interop">
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\netcoreapp3.1\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
       </Reference>
     </ItemGroup>
   </Target>

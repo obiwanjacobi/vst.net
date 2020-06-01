@@ -22,7 +22,6 @@ namespace Host {
 		Jacobi::Vst::Core::Plugin::FileFinder^ fileFinder = Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->CreateFileFinder();
 		fileFinder->Paths->Insert(0, System::IO::Path::GetDirectoryName(pluginPath));
 		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension);
-		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension);
 
 		if(!System::String::IsNullOrEmpty(fileFinder->Find(System::IO::Path::GetFileNameWithoutExtension(pluginPath))))
 		{

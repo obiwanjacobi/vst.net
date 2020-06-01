@@ -30,12 +30,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>.\bin\Jacobi.Vst.Core.xml</DocumentationFile>
+    <DocumentationFile>Jacobi.Vst.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>.\bin\Jacobi.Vst.Core.xml</DocumentationFile>
+    <DocumentationFile>Jacobi.Vst.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
