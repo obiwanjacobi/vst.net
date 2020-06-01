@@ -12,64 +12,13 @@ namespace Jacobi.Vst.UnitTest.Framework
     [TestClass()]
     public class VstEventCollectionTest
     {
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        // 
-        //You can use the following additional attributes as you write your tests:
-        //
-        //Use ClassInitialize to run code before running the first test in the class
-        //[ClassInitialize()]
-        //public static void MyClassInitialize(TestContext testContext)
-        //{
-        //}
-        //
-        //Use ClassCleanup to run code after all tests in a class have run
-        //[ClassCleanup()]
-        //public static void MyClassCleanup()
-        //{
-        //}
-        //
-        //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
-        //
-        //Use TestCleanup to run code after each test has run
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{
-        //}
-        //
-        #endregion
-
-        /// <summary>
-        ///A test for VstEventCollection read-only Constructor
-        ///</summary>
         [TestMethod()]
         public void Test_VstEventCollection_ReadOnlyConstructor()
         {
             VstEvent[] events = new VstEvent[2];
             events[0] = new VstMidiEvent(0, 100, 0, new byte[] { 100, 110, 120 }, 0, 0);
             events[1] = new VstMidiEvent(0, 100, 0, new byte[] { 100, 110, 120 }, 0, 0);
-            
+
             VstEventCollection target = new VstEventCollection(events);
 
             Assert.AreEqual(events.Length, target.Count, "Count does not match.");
@@ -79,9 +28,6 @@ namespace Jacobi.Vst.UnitTest.Framework
             Assert.AreEqual(events[1], target[1], "Second item does not match.");
         }
 
-        /// <summary>
-        ///A test for VstEventCollection Constructor
-        ///</summary>
         [TestMethod()]
         public void Test_VstEventCollection_Constructor()
         {

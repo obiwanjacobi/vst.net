@@ -28,7 +28,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 ## Refactor wishes
 
-* [Interop] Remove config for assembly probing on new settings.json.
 * [All] rename all Deprecated to Legacy (less confusing)
 * [All] remove all [Obsolete] API.
 * [Framework] remove thread management from interface manager (simplifies the class)
