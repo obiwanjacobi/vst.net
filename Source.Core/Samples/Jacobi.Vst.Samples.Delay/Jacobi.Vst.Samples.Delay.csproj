@@ -11,7 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VST.NET2" Version="2.0.0-alpha" />
+    <Folder Include="deploy\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VST.NET2-Plugin" Version="2.0.0-alpha" />
   </ItemGroup>
 
 </Project>

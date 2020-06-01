@@ -18,7 +18,7 @@
     <tags>vst vstnet</tags>
     <dependencies>
       <group targetFramework="netcoreapp3.1">
-        <dependency id="Microsoft.Extensions.Configuration" version="3.1.2" />
+        <dependency id="Microsoft.Extensions.Configuration" version="3.1.4" />
       </group>
     </dependencies>
   </metadata>
@@ -28,25 +28,20 @@
     <file src="VST.NET2-Host.props" target="build"></file>
     
     <file src="..\..\x86\Release\Host\Jacobi.Vst.Host.Interop.dll" target="lib\netcoreapp3.1\x86"></file>
+    <file src="..\..\x86\Release\Host\Jacobi.Vst.Host.Interop.xml" target="lib\netcoreapp3.1\x86"></file>
     <file src="..\..\Jacobi.Vst.Core\bin\x86\Release\netcoreapp3.1\Jacobi.Vst.Core.dll" target="lib\netcoreapp3.1\x86"></file>
-    <!--<file src="..\..\Jacobi.Vst.Framework\bin\x86\Release\netcoreapp3.1\Jacobi.Vst.Host.Framework.dll" target="lib\netcoreapp3.1\x86"></file>-->
-
+    <file src="..\..\Jacobi.Vst.Core\bin\x86\Release\netcoreapp3.1\Jacobi.Vst.Core.xml" target="lib\netcoreapp3.1\x86"></file>
+    
     <file src="..\..\x64\Release\Host\Jacobi.Vst.Host.Interop.dll" target="lib\netcoreapp3.1\x64"></file>
+    <file src="..\..\x64\Release\Host\Jacobi.Vst.Host.Interop.xml" target="lib\netcoreapp3.1\x64"></file>
     <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\netcoreapp3.1\Jacobi.Vst.Core.dll" target="lib\netcoreapp3.1\x64"></file>
-    <!--<file src="..\..\Jacobi.Vst.Framework\bin\x64\Release\netcoreapp3.1\Jacobi.Vst.Host.Framework.dll" target="lib\netcoreapp3.1\x64"></file>-->
-    
-    <!--<file src="..\..\x86\Release\Host\Jacobi.Vst.Host.Interop.dll" target="runtimes\win10-x86\lib\netcoreapp3.1"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x86\Release\netcoreapp3.1\Jacobi.Vst.Core.dll" target="runtimes\win10-x86\lib\netcoreapp3.1"></file>
-    <file src="..\..\Jacobi.Vst.Framework\bin\x86\Release\netcoreapp3.1\Jacobi.Vst.Host.Framework.dll" target="runtimes\win10-x86\lib\netcoreapp3.1"></file>-->
+    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\netcoreapp3.1\Jacobi.Vst.Core.xml" target="lib\netcoreapp3.1\x64"></file>
+
     <file src="..\..\x86\Release\Host\ijwhost.dll" target="runtimes\win10-x86\native"></file>
-    
-    <!--<file src="..\..\x64\Release\Host\Jacobi.Vst.Host.Interop.dll" target="runtimes\win10-x64\lib\netcoreapp3.1"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\netcoreapp3.1\Jacobi.Vst.Core.dll" target="runtimes\win10-x64\lib\netcoreapp3.1"></file>
-    <file src="..\..\Jacobi.Vst.Framework\bin\x64\Release\netcoreapp3.1\Jacobi.Vst.Host.Framework.dll" target="runtimes\win10-x64\lib\netcoreapp3.1"></file>-->
     <file src="..\..\x64\Release\Host\ijwhost.dll" target="runtimes\win10-x64\native"></file>
 
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\netcoreapp3.1\vstnet.exe" target="tools"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\netcoreapp3.1\vstnet.dll" target="tools"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\netcoreapp3.1\vstnet.runtimeconfig.json" target="tools"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\netcoreapp3.1\vstnet.exe" target="tools\netcoreapp3.1"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\netcoreapp3.1\vstnet.dll" target="tools\netcoreapp3.1"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\netcoreapp3.1\vstnet.runtimeconfig.json" target="tools\netcoreapp3.1"></file>
   </files>
 </package>
