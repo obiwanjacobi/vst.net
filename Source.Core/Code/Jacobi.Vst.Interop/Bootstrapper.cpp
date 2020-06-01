@@ -8,22 +8,6 @@ namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
-Bootstrapper::Bootstrapper(System::String^ basePath, Jacobi::Vst::Plugin::Interop::Configuration^ config)
-{
-	// Note: cannot use the Throw helper class, because that's in Core which isn't loaded yet.
-	if(System::String::IsNullOrEmpty(basePath))
-	{
-		throw gcnew System::ArgumentNullException("basePath", "Argument can not be null or empty.");
-	}
-	if(config == nullptr)
-	{
-		throw gcnew System::ArgumentNullException("config");
-	}
-
-	_basePath = basePath;
-	_config = config;
-}
-
 // static helper method
 Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Jacobi::Vst::Plugin::Interop::Configuration^ config)
 {
