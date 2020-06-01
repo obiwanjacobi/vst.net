@@ -1,6 +1,6 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Core.Plugin;
-using Jacobi.Vst.Interop.Host;
+using Jacobi.Vst.Host.Interop;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Drawing;

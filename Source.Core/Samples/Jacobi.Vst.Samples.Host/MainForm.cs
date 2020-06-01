@@ -1,4 +1,4 @@
-﻿using Jacobi.Vst.Interop.Host;
+﻿using Jacobi.Vst.Host.Interop;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
