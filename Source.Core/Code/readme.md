@@ -5,6 +5,8 @@ The dotnet-core version of VST.NET.
 ## TODOs
 
 * Merge core branch into master
+* CLI needs an option to do both plugin and host (Samples.WrapperPlugin)
+
 
 ## Issues
 
