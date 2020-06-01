@@ -5,8 +5,7 @@ The dotnet-core version of VST.NET.
 ## TODOs
 
 * Merge core branch into master
-* CLI needs an option to do both plugin and host (Samples.WrapperPlugin)
-
+* CLI does not detect dependencies of dependencies (interop)
 
 ## Issues
 
@@ -21,7 +20,7 @@ The dotnet-core version of VST.NET.
   The VST.NET CLI can perform a publish of a plugin and gather all dependencies into folder.
   NuGet still gives problems with x86/x64 managed assemblies.
 
-* Add vstnet cli as build tool and add a publish command to the (plugin) project.
+* Add vstnet cli as build tool and add a publish command to the project.
 Then on a successful build a deployment will automatically be generated.
 https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 

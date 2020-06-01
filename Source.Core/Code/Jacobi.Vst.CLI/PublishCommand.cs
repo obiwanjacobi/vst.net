@@ -8,6 +8,8 @@ namespace Jacobi.Vst.CLI
 {
     internal class PublishCommand : ICommand
     {
+        private const string RuntimeConfigJson = ".runtimeconfig.json";
+
         public bool Execute()
         {
             if (String.IsNullOrEmpty(NuGetPath))
@@ -83,7 +85,7 @@ namespace Jacobi.Vst.CLI
         private void PublishPlugin(string pluginPath)
         {
             var name = Path.GetFileNameWithoutExtension(pluginPath);
-            //var path = Path.GetDirectoryName(pluginPath);
+            var path = Path.GetDirectoryName(pluginPath);
 
             var managed = Path.Combine(DeployPath, $"{name}.net.vst2");
             // copy over and rename the managed plugin dll.
@@ -106,26 +108,43 @@ namespace Jacobi.Vst.CLI
             //    ConsoleOutput.Progress($"Copy target file: {sourceFile}");
             //}
 
-            var runtimeConfig = Path.Combine(DeployPath, $"{name}.runtimeconfig.json");
+            var runtimeConfig = Path.Combine(DeployPath, $"{name}{RuntimeConfigJson}");
             using var stream = typeof(PublishCommand).Assembly
-                .GetManifestResourceStream("Jacobi.Vst.CLI.runtimeconfig.json");
+                .GetManifestResourceStream($"Jacobi.Vst.CLI{RuntimeConfigJson}");
             var reader = new StreamReader(stream);
             File.WriteAllText(runtimeConfig, reader.ReadToEnd());
             ConsoleOutput.Progress($"Creating {runtimeConfig}");
+
+            CopySettings(path);
         }
 
         private void PublishHost(string hostPath)
         {
             var name = Path.GetFileNameWithoutExtension(hostPath);
-            var sourceName = Path.Combine(Path.GetDirectoryName(hostPath), name);
+            var path = Path.GetDirectoryName(hostPath);
+            var sourceName = Path.Combine(path, name);
 
-            // copy the exe
             var targetPath = Path.Combine(DeployPath, $"{name}.exe");
             File.Copy(hostPath, targetPath, overwrite: true);
+
             targetPath = Path.Combine(DeployPath, $"{name}.dll");
             File.Copy($"{sourceName}.dll", targetPath, overwrite: true);
-            targetPath = Path.Combine(DeployPath, $"{name}.runtimeconfig.json");
-            File.Copy($"{sourceName}.runtimeconfig.json", targetPath, overwrite: true);
+
+            targetPath = Path.Combine(DeployPath, $"{name}{RuntimeConfigJson}");
+            File.Copy($"{sourceName}{RuntimeConfigJson}", targetPath, overwrite: true);
+
+            CopySettings(path);
+        }
+
+        private void CopySettings(string path)
+        {
+            foreach (var settingsFile in Directory.EnumerateFiles(path, $"*settings.json"))
+            {
+                var targetName = Path.GetFileName(settingsFile);
+                var targetFile = Path.Combine(DeployPath, targetName);
+                File.Copy(settingsFile, targetFile, overwrite: true);
+                ConsoleOutput.Progress($"Copy settings file: {settingsFile} => {targetFile}");
+            }
         }
 
         private string GetDepsFile()

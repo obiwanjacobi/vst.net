@@ -14,4 +14,10 @@
     <PackageReference Include="VST.NET2-Plugin" Version="2.0.0-alpha" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="vstsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
