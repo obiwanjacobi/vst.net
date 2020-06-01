@@ -1,5 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
 using Jacobi.Vst.Core;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace Jacobi.Vst.UnitTest.Core
@@ -10,47 +11,6 @@ namespace Jacobi.Vst.UnitTest.Core
     [TestClass]
     public class MaxLengthTest
     {
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
         private string CreateString(int length)
         {
             return new string('x', length);
@@ -61,14 +21,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstFileSelect_Title()
         {
             VstFileSelect fs = new VstFileSelect();
-            Assert.AreEqual(null, fs.Title);
+            fs.Title.Should().BeNull();
 
             fs.Title = String.Empty;
-            Assert.AreEqual(String.Empty, fs.Title);
+            fs.Title.Should().BeEmpty();
 
-            string testData = CreateString(Constants.MaxFileSelectorTitle);
+            var testData = CreateString(Constants.MaxFileSelectorTitle);
             fs.Title = testData;
-            Assert.AreEqual(testData, fs.Title);
+            fs.Title.Should().Be(testData);
 
             testData += "X";
             fs.Title = testData;
@@ -80,14 +40,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstFileType_Name()
         {
             VstFileType ft = new VstFileType();
-            Assert.AreEqual(null, ft.Name);
+            ft.Name.Should().BeNull();
 
             ft.Name = String.Empty;
-            Assert.AreEqual(String.Empty, ft.Name);
+            ft.Name.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxFileTypeName);
             ft.Name = testData;
-            Assert.AreEqual(testData, ft.Name);
+            ft.Name.Should().Be(testData);
 
             testData += "X";
             ft.Name = testData;
@@ -99,14 +59,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstFileType_Extension()
         {
             VstFileType ft = new VstFileType();
-            Assert.AreEqual(null, ft.Extension);
+            ft.Extension.Should().BeNull();
 
             ft.Extension = String.Empty;
-            Assert.AreEqual(String.Empty, ft.Extension);
+            ft.Extension.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxFileTypeExtension);
             ft.Extension = testData;
-            Assert.AreEqual(testData, ft.Extension);
+            ft.Extension.Should().Be(testData);
 
             testData += "X";
             ft.Extension = testData;
@@ -118,14 +78,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstVstMidiKeyName_Name()
         {
             VstMidiKeyName mkn = new VstMidiKeyName();
-            Assert.AreEqual(null, mkn.Name);
+            mkn.Name.Should().BeNull();
 
             mkn.Name = String.Empty;
-            Assert.AreEqual(String.Empty, mkn.Name);
+            mkn.Name.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxMidiNameLength);
             mkn.Name = testData;
-            Assert.AreEqual(testData, mkn.Name);
+            mkn.Name.Should().Be(testData);
 
             testData += "X";
             mkn.Name = testData;
@@ -137,14 +97,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstMidiProgramCategory_Name()
         {
             VstMidiProgramCategory mpc = new VstMidiProgramCategory();
-            Assert.AreEqual(null, mpc.Name);
+            mpc.Name.Should().BeNull();
 
             mpc.Name = String.Empty;
-            Assert.AreEqual(String.Empty, mpc.Name);
+            mpc.Name.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxMidiNameLength);
             mpc.Name = testData;
-            Assert.AreEqual(testData, mpc.Name);
+            mpc.Name.Should().Be(testData);
 
             testData += "X";
             mpc.Name = testData;
@@ -156,14 +116,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstMidiProgramName_Name()
         {
             VstMidiProgramName mpn = new VstMidiProgramName();
-            Assert.AreEqual(null, mpn.Name);
+            mpn.Name.Should().BeNull();
 
             mpn.Name = String.Empty;
-            Assert.AreEqual(String.Empty, mpn.Name);
+            mpn.Name.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxMidiNameLength);
             mpn.Name = testData;
-            Assert.AreEqual(testData, mpn.Name);
+            mpn.Name.Should().Be(testData);
 
             testData += "X";
             mpn.Name = testData;
@@ -175,14 +135,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstParameterProperties_Label()
         {
             VstParameterProperties mpn = new VstParameterProperties();
-            Assert.AreEqual(null, mpn.Label);
+            mpn.Label.Should().BeNull();
 
             mpn.Label = String.Empty;
-            Assert.AreEqual(String.Empty, mpn.Label);
+            mpn.Label.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxLabelLength);
             mpn.Label = testData;
-            Assert.AreEqual(testData, mpn.Label);
+            mpn.Label.Should().Be(testData);
 
             testData += "X";
             mpn.Label = testData;
@@ -194,14 +154,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstParameterProperties_ShortLabel()
         {
             VstParameterProperties mpn = new VstParameterProperties();
-            Assert.AreEqual(null, mpn.ShortLabel);
+            mpn.ShortLabel.Should().BeNull();
 
             mpn.ShortLabel = String.Empty;
-            Assert.AreEqual(String.Empty, mpn.ShortLabel);
+            mpn.ShortLabel.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxShortLabelLength);
             mpn.ShortLabel = testData;
-            Assert.AreEqual(testData, mpn.ShortLabel);
+            mpn.ShortLabel.Should().Be(testData);
 
             testData += "X";
             mpn.ShortLabel = testData;
@@ -213,14 +173,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstParameterProperties_CategoryLabel()
         {
             VstParameterProperties mpn = new VstParameterProperties();
-            Assert.AreEqual(null, mpn.CategoryLabel);
+            mpn.CategoryLabel.Should().BeNull();
 
             mpn.CategoryLabel = String.Empty;
-            Assert.AreEqual(String.Empty, mpn.CategoryLabel);
+            mpn.CategoryLabel.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxLabelLength);
             mpn.CategoryLabel = testData;
-            Assert.AreEqual(testData, mpn.CategoryLabel);
+            mpn.CategoryLabel.Should().Be(testData);
 
             testData += "X";
             mpn.CategoryLabel = testData;
@@ -232,14 +192,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstPinProperties_Label()
         {
             VstPinProperties pp = new VstPinProperties();
-            Assert.AreEqual(null, pp.Label);
+            pp.Label.Should().BeNull();
 
             pp.Label = String.Empty;
-            Assert.AreEqual(String.Empty, pp.Label);
+            pp.Label.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxLabelLength);
             pp.Label = testData;
-            Assert.AreEqual(testData, pp.Label);
+            pp.Label.Should().Be(testData);
 
             testData += "X";
             pp.Label = testData;
@@ -251,14 +211,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstPinProperties_ShortLabel()
         {
             VstPinProperties mpn = new VstPinProperties();
-            Assert.AreEqual(null, mpn.ShortLabel);
+            mpn.ShortLabel.Should().BeNull();
 
             mpn.ShortLabel = String.Empty;
-            Assert.AreEqual(String.Empty, mpn.ShortLabel);
+            mpn.ShortLabel.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxShortLabelLength);
             mpn.ShortLabel = testData;
-            Assert.AreEqual(testData, mpn.ShortLabel);
+            mpn.ShortLabel.Should().Be(testData);
 
             testData += "X";
             mpn.ShortLabel = testData;
@@ -270,14 +230,14 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstSpeakerProperties_Name()
         {
             VstSpeakerProperties mpn = new VstSpeakerProperties();
-            Assert.AreEqual(null, mpn.Name);
+            mpn.Name.Should().BeNull();
 
             mpn.Name = String.Empty;
-            Assert.AreEqual(String.Empty, mpn.Name);
+            mpn.Name.Should().BeEmpty();
 
             string testData = CreateString(Constants.MaxMidiNameLength);
             mpn.Name = testData;
-            Assert.AreEqual(testData, mpn.Name);
+            mpn.Name.Should().Be(testData);
 
             testData += "X";
             mpn.Name = testData;
