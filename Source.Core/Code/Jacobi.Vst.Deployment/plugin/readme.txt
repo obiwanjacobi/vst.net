@@ -1,4 +1,4 @@
-VST.NET 2
+VST.NET 2 - Plugin
 
 This package contains all the files needed to create VST2 plugins with VST.NET 2.
 

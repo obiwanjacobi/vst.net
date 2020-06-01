@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Jacobi.Vst.Core;
+using Jacobi.Vst.Host.Interop;
+using System;
 using System.Windows.Forms;
-
-using Jacobi.Vst.Core;
-using Jacobi.Vst.Interop.Host;
 
 namespace Jacobi.Vst.Samples.Host
 {
@@ -34,7 +33,7 @@ namespace Jacobi.Vst.Samples.Host
             AddProperty("Vendor Version", PluginContext.PluginCommandStub.GetVendorVersion().ToString());
             AddProperty("Vst Support", PluginContext.PluginCommandStub.GetVstVersion().ToString());
             AddProperty("Plugin Category", PluginContext.PluginCommandStub.GetCategory().ToString());
-            
+
             // plugin info
             AddProperty("Flags", PluginContext.PluginInfo.Flags.ToString());
             AddProperty("Plugin ID", PluginContext.PluginInfo.PluginID.ToString());
