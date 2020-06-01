@@ -33,7 +33,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 * [All] remove all [Obsolete] API.
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Framework] .NET Core DI instead of interface manager?
-* [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html

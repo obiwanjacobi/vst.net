@@ -116,11 +116,6 @@ Vst2Plugin* VSTPluginMainInternal (Bootstrapper^ bootstrapper, Vst2HostCommand h
 
 		Utils::ShowError(exc);
 	}
-	finally
-	{
-		// make sure the private paths are cleared once the plugin is fully loaded.
-		Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Clear();
-	}
 
 	return NULL;
 }
