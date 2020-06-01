@@ -5,8 +5,9 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
+
 
 	VstUnmanagedPluginContext::VstUnmanagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 		: VstPluginContext(hostCmdStub)
@@ -70,7 +71,7 @@ namespace Host {
 
 		try
 		{
-			pPluginPath = TypeConverter::AllocateString(pluginPath);
+			pPluginPath = Jacobi::Vst::Interop::TypeConverter::AllocateString(pluginPath);
 
 			// Load plugin dll
 			_hLib = ::LoadLibraryA(pPluginPath);
@@ -159,7 +160,7 @@ namespace Host {
 		{
 			if(pPluginPath != NULL)
 			{
-				TypeConverter::DeallocateString(pPluginPath);
+				Jacobi::Vst::Interop::TypeConverter::DeallocateString(pPluginPath);
 			}
 
 			LoadingPlugin = nullptr;
@@ -261,24 +262,24 @@ namespace Host {
 	}
 
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
 
 
 Vst2IntPtr HostCommandHandler(::Vst2Plugin* pPlugin, ::int32_t opcode, ::int32_t index, ::Vst2IntPtr value, void* ptr, float opt)
 {
-	Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^ context = nullptr;
+	Jacobi::Vst::Host::Interop::VstUnmanagedPluginContext^ context = nullptr;
 
 	if(pPlugin != NULL && pPlugin->reserved1 != 0)
 	{
 		// extract the reference to the VstPluginContext from the effect struct.
-		context = safe_cast<Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^>(
+		context = safe_cast<Jacobi::Vst::Host::Interop::VstUnmanagedPluginContext^>(
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr((void*)pPlugin->reserved1)).Target);
 	}
 
 	// fallback to the current loading plugin.
 	if(context == nullptr)
 	{
-		context = Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext::LoadingPlugin;
+		context = Jacobi::Vst::Host::Interop::VstUnmanagedPluginContext::LoadingPlugin;
 	}
 
 	// dispatch call to plugin context and its Host Proxy.

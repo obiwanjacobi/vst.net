@@ -5,7 +5,7 @@ The dotnet-core version of VST.NET.
 ## TODOs
 
 * Merge core branch into master
-* CLI does not detect dependencies of dependencies (interop)
+
 
 ## Issues
 
@@ -24,6 +24,7 @@ The dotnet-core version of VST.NET.
 Then on a successful build a deployment will automatically be generated.
 https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
+* CLI does not detect dependencies of dependencies (interop)
 
 ## Refactor wishes
 
@@ -33,9 +34,7 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 * [Framework] remove thread management from interface manager (simplifies the class)
 * [Framework] .NET Core DI instead of interface manager?
 * [Interop] split interop for plugin and host into separate assemblies (duplicate commonalities?).
-* [Framework] rename to Jacobi.Vst.Plugin.Framework (leaves room for a Host framework too).
 * [Interop] look into the use tracked references (%^)
-* [Interop/Core] Use new/different managed vst.net dll extensions (remove: extensions used in VST.NET1 | add: .net.vst2)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
 * Update docs: convert the Sandcastle .aml file to .md. Deploy source code docs (.xml) with nuget. Exit Sandcastle tool.

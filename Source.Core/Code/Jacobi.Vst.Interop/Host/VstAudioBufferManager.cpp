@@ -4,9 +4,9 @@
 
 namespace Jacobi {
 namespace Vst {
+namespace Host {
 namespace Interop {
-namespace Host
-{
+
 	VstAudioBufferManager::VstAudioBufferManager(System::Int32 bufferCount, System::Int32 bufferSize)
 	{
 		if(bufferCount < 0)
@@ -80,4 +80,4 @@ namespace Host
 		ClearBuffer(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetLength());
 	}
 
-}}}} // namespace Jacobi.Vst.Interop.Host
+}}}} // Jacobi::Vst::Host::Interop

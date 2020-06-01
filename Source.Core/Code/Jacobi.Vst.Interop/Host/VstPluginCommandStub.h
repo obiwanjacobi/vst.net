@@ -6,8 +6,9 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
+
 
 /// <summary>
 /// The VstPluginCommandStub class implements the <see cref="Jacobi::Vst::Core::Host::IVstPluginCommandStub"/>
@@ -659,8 +660,8 @@ private:
         }
     }
 
-    MemoryTracker^ _memoryTracker;
+    Jacobi::Vst::Interop::MemoryTracker^ _memoryTracker;
     Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

@@ -8,8 +8,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Plugin {
+namespace Interop {
 
 Configuration::Configuration(System::String^ filePath)
 {
@@ -39,4 +39,4 @@ System::String^ Configuration::GetAppSetting(System::String^ key)
 	return nullptr;
 }
 
-}}}} // Jacobi::Vst::Interop::Plugin
+}}}} // Jacobi::Vst::Plugin::Interop

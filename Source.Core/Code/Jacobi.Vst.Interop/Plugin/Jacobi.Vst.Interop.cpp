@@ -25,8 +25,8 @@ Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 		System::String^ pluginPath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
 		// try to locate the plugin specific config file
-		Jacobi::Vst::Interop::Plugin::Configuration^ config = 
-			gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath);
+		Jacobi::Vst::Plugin::Interop::Configuration^ config = 
+			gcnew Jacobi::Vst::Plugin::Interop::Configuration(pluginPath);
 
 		// create the bootstrapper and register with the AssemlbyResolve event
 		bootstrapper = gcnew Bootstrapper(pluginPath, config);
@@ -58,7 +58,7 @@ Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ plug
 Vst2Plugin* VSTPluginMainInternal (Bootstrapper^ bootstrapper, Vst2HostCommand hostCommandHandler)
 {
 	// retrieve the plugin config
-	Jacobi::Vst::Interop::Plugin::Configuration^ config = bootstrapper->Configuration;
+	Jacobi::Vst::Plugin::Interop::Configuration^ config = bootstrapper->Configuration;
 
 	// The method dependencies have brought in the Core assembly. 
 	// Now we unregister the bootstrapper and turn it over to the AssemblyLoader (located in the Core Assembly).
@@ -68,8 +68,8 @@ Vst2Plugin* VSTPluginMainInternal (Bootstrapper^ bootstrapper, Vst2HostCommand h
 	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
 
 	// create the host command stub (sends commands to host)
-	Jacobi::Vst::Interop::Plugin::HostCommandStub^ hostStub = 
-		gcnew Jacobi::Vst::Interop::Plugin::HostCommandStub(hostCommandHandler);
+	Jacobi::Vst::Plugin::Interop::HostCommandStub^ hostStub = 
+		gcnew Jacobi::Vst::Plugin::Interop::HostCommandStub(hostCommandHandler);
 
 	try
 	{
@@ -92,7 +92,7 @@ Vst2Plugin* VSTPluginMainInternal (Bootstrapper^ bootstrapper, Vst2HostCommand h
 				// connect the plugin command stub to the command proxy and construct a handle
 				System::Runtime::InteropServices::GCHandle proxyHandle = 
 					System::Runtime::InteropServices::GCHandle::Alloc(
-						gcnew Jacobi::Vst::Interop::Plugin::PluginCommandProxy(commandStub), 
+						gcnew Jacobi::Vst::Plugin::Interop::PluginCommandProxy(commandStub), 
 						System::Runtime::InteropServices::GCHandleType::Normal);
 
 				// maintain the proxy reference as part of the effect struct
@@ -130,7 +130,7 @@ Vst2IntPtr DispatcherProc(Vst2Plugin* pluginInfo, Vst2PluginCommands command, in
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		return proxy->Dispatch(safe_cast<int32_t>(command), index, value, ptr, opt);
@@ -147,7 +147,7 @@ void Process32Proc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, int3
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->inputCount, pluginInfo->outputCount);
@@ -162,7 +162,7 @@ void Process64Proc(Vst2Plugin* pluginInfo, double** inputs, double** outputs, in
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->inputCount, pluginInfo->outputCount);
@@ -174,7 +174,7 @@ void SetParameterProc(Vst2Plugin* pluginInfo, int32_t index, float value)
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->SetParameter(index, value);
@@ -186,7 +186,7 @@ float GetParameterProc(Vst2Plugin* pluginInfo, int32_t index)
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		return proxy->GetParameter(index);
@@ -203,7 +203,7 @@ void Process32AccProc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, i
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		Jacobi::Vst::Interop::Plugin::PluginCommandProxy^ proxy = (Jacobi::Vst::Interop::Plugin::PluginCommandProxy^)
+		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->ProcessAcc(inputs, outputs, sampleFrames, pluginInfo->inputCount, pluginInfo->outputCount);

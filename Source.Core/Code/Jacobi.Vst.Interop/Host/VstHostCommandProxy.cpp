@@ -5,8 +5,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 {
@@ -16,7 +16,7 @@ VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostComman
 	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^>(hostCmdStub);
 
 	// unmanaged structures
-	_pTimeInfo = new Vst2TimeInfo();
+	_pTimeInfo = new ::Vst2TimeInfo();
 	_directory = NULL;
 	_pArrangement = new ::Vst2SpeakerArrangement();
 
@@ -38,7 +38,7 @@ VstHostCommandProxy::!VstHostCommandProxy()
 
 	if(_directory != NULL)
 	{
-		TypeConverter::DeallocateString(_directory);
+		Jacobi::Vst::Interop::TypeConverter::DeallocateString(_directory);
 		_directory = NULL;
 	}
 
@@ -84,12 +84,12 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 				Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
 				if(timeInfo != nullptr)
 				{
-					TypeConverter::ToUnmanagedTimeInfo(_pTimeInfo, timeInfo);
+					Jacobi::Vst::Interop::TypeConverter::ToUnmanagedTimeInfo(_pTimeInfo, timeInfo);
 					result = (Vst2IntPtr)_pTimeInfo;
 				}
 			}	break;
 			case Vst2HostCommands::ProcessEvents:
-				_hostCmdStub->ProcessEvents(TypeConverter::ToManagedEventArray((::Vst2Events*)ptr));
+				_hostCmdStub->ProcessEvents(Jacobi::Vst::Interop::TypeConverter::ToManagedEventArray((::Vst2Events*)ptr));
 				result = 1;
 				break;
 			case Vst2HostCommands::IoChanged:
@@ -117,17 +117,17 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetAutomationState());
 				break;
 			case Vst2HostCommands::VendorGetString:
-				TypeConverter::StringToChar(_hostCmdStub->GetVendorString(), (char*)ptr, Vst2MaxVendorStrLen);
+				Jacobi::Vst::Interop::TypeConverter::StringToChar(_hostCmdStub->GetVendorString(), (char*)ptr, Vst2MaxVendorStrLen);
 				break;
 			case Vst2HostCommands::ProductGetString:
-				TypeConverter::StringToChar(_hostCmdStub->GetProductString(), (char*)ptr, Vst2MaxProductStrLen);
+				Jacobi::Vst::Interop::TypeConverter::StringToChar(_hostCmdStub->GetProductString(), (char*)ptr, Vst2MaxProductStrLen);
 				break;
 			case Vst2HostCommands::VendorGetVersion:
 				result = _hostCmdStub->GetVendorVersion();
 				break;
 			case Vst2HostCommands::CanDo:
 			{
-				System::String^ cando = TypeConverter::CharToString((char*)ptr);
+				System::String^ cando = Jacobi::Vst::Interop::TypeConverter::CharToString((char*)ptr);
 				result = safe_cast<Vst2IntPtr>(_hostCmdStub->CanDo(cando));
 			}	break;
 			case Vst2HostCommands::GetLanguage:
@@ -136,7 +136,7 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 			case Vst2HostCommands::GetDirectory:
 				if(_directory == NULL)
 				{
-					_directory = TypeConverter::AllocateString(_hostCmdStub->GetDirectory());
+					_directory = Jacobi::Vst::Interop::TypeConverter::AllocateString(_hostCmdStub->GetDirectory());
 				}
 				// return cached value
 				result = (Vst2IntPtr)_directory;
@@ -152,15 +152,15 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 				break;
 			case Vst2HostCommands::FileSelectorOpen:
 			{
-				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::ToManagedFileSelect((::Vst2FileSelect*)ptr);
+				Jacobi::Vst::Core::VstFileSelect^ fileSelect = Jacobi::Vst::Interop::TypeConverter::ToManagedFileSelect((::Vst2FileSelect*)ptr);
 				result = _hostCmdStub->OpenFileSelector(fileSelect) ? 1 : 0;
-				TypeConverter::AllocUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr, fileSelect);
+				Jacobi::Vst::Interop::TypeConverter::AllocUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr, fileSelect);
 			}	break;
 			case Vst2HostCommands::FileSelectorClose:
 			{
-				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::GetManagedFileSelect((::Vst2FileSelect*)ptr);
+				Jacobi::Vst::Core::VstFileSelect^ fileSelect = Jacobi::Vst::Interop::TypeConverter::GetManagedFileSelect((::Vst2FileSelect*)ptr);
 				result = _hostCmdStub->CloseFileSelector(fileSelect) ? 1 : 0;
-				TypeConverter::DeleteUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr);
+				Jacobi::Vst::Interop::TypeConverter::DeleteUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr);
 			}	break;
 			default:
 				result = DispatchDeprecated(command, index, value, ptr, opt);
@@ -171,7 +171,7 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 		{
 			_traceCtx->WriteError(e);
 
-			Utils::ShowError(e);
+			Jacobi::Vst::Interop::Utils::ShowError(e);
 		}
 	}
 	else
@@ -201,7 +201,7 @@ Vst2IntPtr VstHostCommandProxy::DispatchDeprecated(Vst2HostCommands command, int
 		case Vst2HostCommands::SetTime:
 		{
 			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
-			TypeConverter::ToManagedTimeInfo(timeInfo, (::Vst2TimeInfo*)ptr);
+			Jacobi::Vst::Interop::TypeConverter::ToManagedTimeInfo(timeInfo, (::Vst2TimeInfo*)ptr);
 			Jacobi::Vst::Core::VstTimeInfoFlags filterFlags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value);
 
 			result = _deprecatedCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;
@@ -232,7 +232,7 @@ Vst2IntPtr VstHostCommandProxy::DispatchDeprecated(Vst2HostCommands command, int
 			break;
 		case Vst2HostCommands::GetOutputSpeakerArrangement:
 		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetOutputSpeakerArrangement();
-			TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
+		Jacobi::Vst::Interop::TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
 			result = (Vst2IntPtr)_pArrangement;
 		}	break;
 		case Vst2HostCommands::SetIcon:
@@ -247,16 +247,16 @@ Vst2IntPtr VstHostCommandProxy::DispatchDeprecated(Vst2HostCommands command, int
 			result = _deprecatedCmdStub->CloseWindow(System::IntPtr(ptr)) ? 1 : 0;
 			break;
 		case Vst2HostCommands::EditFile:
-			result = _deprecatedCmdStub->EditFile(TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
+			result = _deprecatedCmdStub->EditFile(Jacobi::Vst::Interop::TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
 			break;
 		case Vst2HostCommands::GetChunkFile:
 		{	System::String^ path = _deprecatedCmdStub->GetChunkFile();
-			TypeConverter::StringToChar(path, (char*)ptr, 2047);
+		Jacobi::Vst::Interop::TypeConverter::StringToChar(path, (char*)ptr, 2047);
 			result = System::String::IsNullOrEmpty(path) ? 1 : 0;
 		}	break;
 		case Vst2HostCommands::GetInputSpeakerArrangement:
 		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetInputSpeakerArrangement();
-			TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
+		Jacobi::Vst::Interop::TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
 			result = (Vst2IntPtr)_pArrangement;
 		}	break;
 		default:
@@ -276,4 +276,4 @@ Vst2IntPtr VstHostCommandProxy::DispatchDeprecated(Vst2HostCommands command, int
 	return result;
 }
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
