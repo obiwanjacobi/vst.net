@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{DC2276D2-DBF5-4DA5-A45C-52B94CC20714}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>JacobiVstPluginInterop</RootNamespace>
+    <RootNamespace>JacobiVstInterop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
