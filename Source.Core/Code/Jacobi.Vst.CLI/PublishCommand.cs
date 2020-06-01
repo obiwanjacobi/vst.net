@@ -34,15 +34,15 @@ namespace Jacobi.Vst.CLI
 
             CopyDependencies(depsFile, assemblyName.ProcessorArchitecture);
 
-            if (plugin != null)
-            {
-                PublishPlugin(plugin);
-                return true;
-            }
-
             if (host != null)
             {
                 PublishHost(host);
+                return true;
+            }
+
+            if (plugin != null)
+            {
+                PublishPlugin(plugin);
                 return true;
             }
 
@@ -116,8 +116,16 @@ namespace Jacobi.Vst.CLI
 
         private void PublishHost(string hostPath)
         {
-            // TODO: make sure ijwhost.dll is present
-            throw new System.NotImplementedException();
+            var name = Path.GetFileNameWithoutExtension(hostPath);
+            var sourceName = Path.Combine(Path.GetDirectoryName(hostPath), name);
+
+            // copy the exe
+            var targetPath = Path.Combine(DeployPath, $"{name}.exe");
+            File.Copy(hostPath, targetPath, overwrite: true);
+            targetPath = Path.Combine(DeployPath, $"{name}.dll");
+            File.Copy($"{sourceName}.dll", targetPath, overwrite: true);
+            targetPath = Path.Combine(DeployPath, $"{name}.runtimeconfig.json");
+            File.Copy($"{sourceName}.runtimeconfig.json", targetPath, overwrite: true);
         }
 
         private string GetDepsFile()
