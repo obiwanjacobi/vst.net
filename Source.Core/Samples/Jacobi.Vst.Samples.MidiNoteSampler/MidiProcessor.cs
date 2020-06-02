@@ -1,12 +1,12 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteSampler
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Plugin.Framework;
 
     /// <summary>
     /// Manages incoming midi events and sents them to the <see cref="SampleManager"/>.
     /// </summary>
-    internal class MidiProcessor : IVstMidiProcessor
+    internal sealed class MidiProcessor : IVstMidiProcessor
     {
         private readonly Plugin _plugin;
 

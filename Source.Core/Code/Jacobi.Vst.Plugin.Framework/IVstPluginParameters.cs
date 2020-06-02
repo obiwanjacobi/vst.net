@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// This interface is implemented to publish information about the Parameters that control the plugin.

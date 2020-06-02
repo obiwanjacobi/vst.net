@@ -1,7 +1,7 @@
-﻿namespace Jacobi.Vst.Framework.Plugin
+﻿namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     using Jacobi.Vst.Core.Plugin;
-    using Jacobi.Vst.Framework.Host;
+    using Jacobi.Vst.Plugin.Framework.Host;
     using System;
 
     /// <summary>

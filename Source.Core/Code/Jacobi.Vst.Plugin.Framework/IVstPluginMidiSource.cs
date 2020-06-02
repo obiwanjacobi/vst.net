@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// This interface is implemented when a plugin wants to output Midi events to the host.

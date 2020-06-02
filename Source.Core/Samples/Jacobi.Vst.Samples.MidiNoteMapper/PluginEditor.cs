@@ -1,14 +1,14 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    using Jacobi.Vst.Framework.Common;
+    using Jacobi.Vst.Plugin.Framework;
+    using Jacobi.Vst.Plugin.Framework.Common;
     using System;
 
     /// <summary>
     /// Implements the custom UI editor for the plugin.
     /// </summary>
-    class PluginEditor : IVstPluginEditor
+    internal sealed class PluginEditor : IVstPluginEditor
     {
         private readonly Plugin _plugin;
 

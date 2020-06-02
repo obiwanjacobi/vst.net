@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework.Plugin
+﻿namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;

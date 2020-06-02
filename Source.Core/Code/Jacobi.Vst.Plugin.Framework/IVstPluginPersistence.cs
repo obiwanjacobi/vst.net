@@ -1,4 +1,4 @@
-namespace Jacobi.Vst.Framework
+namespace Jacobi.Vst.Plugin.Framework
 {
     using System.IO;
     using Jacobi.Vst.Core;

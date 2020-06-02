@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework.Host
+﻿namespace Jacobi.Vst.Plugin.Framework.Host
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
@@ -7,10 +7,12 @@
     /// <summary>
     /// Implements the proxy to the vst host.
     /// </summary>
-    internal class VstHost : IVstHost, IDisposable
+    internal sealed class VstHost : IVstHost, IDisposable
     {
-        /// <summary>Interface manager for the host.</summary>
-        private VstHostInterfaceManager _intfMgr;
+        private readonly IVstHostAutomation _automation;
+        private readonly IVstHostSequencer _sequencer;
+        private readonly IVstHostShell _shell;
+        private readonly IVstMidiProcessor _midiProcessor;
 
         /// <summary>
         /// Constructs a new instance of the host class based on the <paramref name="hostCmdStub"/> 
@@ -28,7 +30,10 @@
             HostCommandStub = hostCmdStub;
             Plugin = plugin;
 
-            _intfMgr = new VstHostInterfaceManager(this);
+            _automation = new VstHostAutomation(this);
+            _sequencer = new VstHostSequencer(this);
+            _shell = new VstHostShell(this);
+            _midiProcessor = new VstHostMidiProcessor(this);
         }
 
         /// <summary>
@@ -137,8 +142,7 @@
         public bool Supports<T>() where T : class
         {
             if (HostCommandStub is T) return true;
-
-            return _intfMgr.Supports<T>();
+            return GetInstance<T>() != null;
         }
 
         /// <summary>
@@ -150,7 +154,26 @@
         {
             if (HostCommandStub is T refT) return refT;
 
-            return _intfMgr.GetInstance<T>();
+            var type = typeof(T);
+
+            if (typeof(IVstHostAutomation).Equals(type))
+            {
+                return (T)_automation;
+            }
+            if (typeof(IVstHostSequencer).Equals(type))
+            {
+                return (T)_sequencer;
+            }
+            if (typeof(IVstHostShell).Equals(type))
+            {
+                return (T)_shell;
+            }
+            if (typeof(IVstMidiProcessor).Equals(type))
+            {
+                CheckMidiSource();
+                return (T)_midiProcessor;
+            }
+            return null;
         }
 
         #endregion
@@ -162,12 +185,6 @@
         /// </summary>
         public void Dispose()
         {
-            if (_intfMgr != null)
-            {
-                _intfMgr.Dispose();
-                _intfMgr = null;
-            }
-
             if (HostCommandStub != null)
             {
                 HostCommandStub.Dispose();
@@ -178,5 +195,15 @@
         }
 
         #endregion
+
+        private void CheckMidiSource()
+        {
+            if (!Plugin.Supports<IVstPluginMidiSource>())
+            {
+                // TODO: Resource?
+                throw new InvalidOperationException(
+                    "A plugin cannot send events to the host when it does not implement IVstPluginMidiSource.");
+            }
+        }
     }
 }

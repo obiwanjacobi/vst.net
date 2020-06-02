@@ -1,5 +1,5 @@
-﻿using Jacobi.Vst.Framework;
-using Jacobi.Vst.Framework.Plugin;
+﻿using Jacobi.Vst.Plugin.Framework;
+using Jacobi.Vst.Plugin.Framework.Plugin;
 
 namespace Jacobi.Vst.Samples.Delay
 {

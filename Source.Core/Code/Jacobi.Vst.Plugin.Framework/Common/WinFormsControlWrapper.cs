@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework.Common
+﻿namespace Jacobi.Vst.Plugin.Framework.Common
 {
     using System;
     using System.Drawing;

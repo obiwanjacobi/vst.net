@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework.Plugin
+﻿namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Deprecated;
@@ -9,7 +9,7 @@
     /// </summary>
     /// <remarks>Derive your plugin root class from this base class to gain a 
     /// default implementation of the <see cref="IVstPlugin"/> interface.</remarks>
-    public abstract class VstPluginBase : IVstPlugin
+    public abstract class VstPlugin : IVstPlugin
     {
         /// <summary>
         /// To be called from the default constructor of the derived plugin class
@@ -23,7 +23,7 @@
         /// <param name="pluginID">The unique Id of the plugin. <seealso cref="PluginID"/></param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="productInfo"/> or <paramref name="name"/> is not set to an instance of an object.</exception>
         /// <exception cref="System.ArgumentException">Thrown when <paramref name="name"/> is an empty string.</exception>
-        protected VstPluginBase(string name, VstProductInfo productInfo,
+        protected VstPlugin(string name, VstProductInfo productInfo,
             VstPluginCategory category, VstPluginCapabilities capabilities,
             int initialDelay, int pluginID)
         {
@@ -43,32 +43,44 @@
         /// <summary>
         /// Retrieves product information for the plugin (instance).
         /// </summary>
-        public VstProductInfo ProductInfo { get; private set; }
+        public VstProductInfo ProductInfo { get; }
 
         /// <summary>
         /// Gets the name of the plugin.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the category of the plugin.
         /// </summary>
-        public VstPluginCategory Category { get; private set; }
+        public VstPluginCategory Category { get; }
 
         /// <summary>
         /// Gets the additional capabilities of the plugin.
         /// </summary>
-        public VstPluginCapabilities Capabilities { get; private set; }
+        public VstPluginCapabilities Capabilities { get; }
 
         /// <summary>
-        /// Gets the initial delay (in samples??)
+        /// Gets the initial delay (in samples)
         /// </summary>
-        public int InitialDelay { get; private set; }
+        public int InitialDelay { get; }
 
         /// <summary>
         /// Gets the unique identifier of the plugin represented as a 4 character code.
         /// </summary>
-        public int PluginID { get; private set; }
+        public int PluginID { get; }
+
+        /// <summary>
+        /// Gets the reference to the Host root object.
+        /// </summary>
+        /// <remarks>This member can be null. It is set after a call to <see cref="Open"/>.</remarks>
+        public IVstHost Host { get; private set; }
+
+        /// <summary>
+        /// Triggered when the <see cref="M:Open"/> method is called.
+        /// </summary>
+        /// <remarks>At this point the <see cref="P:Host"/> property is available.</remarks>
+        public event EventHandler Opened;
 
         /// <summary>
         /// The host will call this method when the plugin is loaded and should open its resources.
@@ -80,8 +92,7 @@
         public virtual void Open(IVstHost host)
         {
             Host = host;
-
-            OnOpened();
+            Opened?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -122,7 +133,7 @@
         /// <remarks>The implementation check <b>this</b> instance for the specified Type.</remarks>
         public virtual bool Supports<T>() where T : class
         {
-            return (this is T);
+            return this is T;
         }
 
         /// <summary>
@@ -159,25 +170,5 @@
         }
 
         #endregion
-
-        /// <summary>
-        /// Gets the reference to the Host root object.
-        /// </summary>
-        /// <remarks>This member can be null. It is set after a call to <see cref="Open"/>.</remarks>
-        public IVstHost Host { get; private set; }
-
-        /// <summary>
-        /// Triggered when the <see cref="M:Open"/> method is called.
-        /// </summary>
-        /// <remarks>At this point the <see cref="P:Host"/> property is available.</remarks>
-        public event EventHandler Opened;
-
-        /// <summary>
-        /// Triggers the <see cref="Opened"/> event.
-        /// </summary>
-        protected virtual void OnOpened()
-        {
-            Opened?.Invoke(this, EventArgs.Empty);
-        }
     }
 }

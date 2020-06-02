@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Jacobi.Vst.Framework.Common
+namespace Jacobi.Vst.Plugin.Framework.Common
 {
     /// <summary>
     /// A base class for class that implement the <see cref="INotifyPropertyChanged"/> interface.

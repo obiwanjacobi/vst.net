@@ -1,9 +1,9 @@
 ﻿using Jacobi.Vst.Core;
-using Jacobi.Vst.Framework.Plugin.IO;
+using Jacobi.Vst.Plugin.Framework.Plugin.IO;
 using System.IO;
 using System.Text;
 
-namespace Jacobi.Vst.Framework.Plugin
+namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     /// <summary>
     /// The VstPluginPersistenceBase class implements the <see cref="IVstPluginPersistence"/>\

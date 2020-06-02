@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Jacobi.Vst.Framework.Plugin
+﻿namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     /// <summary>
     /// The VstPluginProgramsBase class implements the <see cref="IVstPluginPrograms"/>

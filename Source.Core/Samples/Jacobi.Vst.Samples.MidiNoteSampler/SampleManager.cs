@@ -7,7 +7,7 @@
     /// <summary>
     /// Manages playback, recording and storing audio samples.
     /// </summary>
-    internal class SampleManager
+    internal sealed class SampleManager
     {
         private readonly Dictionary<byte, StereoBuffer> _noteMap = new Dictionary<byte, StereoBuffer>();
 
