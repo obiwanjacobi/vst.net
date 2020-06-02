@@ -2,13 +2,14 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework.Common;
+    using System;
 
     /// <summary>
     /// Names a parameter category.
     /// </summary>
     public class VstParameterCategory : ObservableObject
     {
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Gets or sets the name of the parameter category.
         /// </summary>

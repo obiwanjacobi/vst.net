@@ -657,7 +657,7 @@
             <summary>
             This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
             </summary>
-            <param name="midiProgram">Passed with the forwarded call.</param>
+            <param name="midiProgramName">Passed with the forwarded call.</param>
             <param name="channel">Passed with the forwarded call.</param>
             <returns>Returns the value returned from the forwarded call.</returns>
         </member>
@@ -665,7 +665,7 @@
             <summary>
             This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
             </summary>
-            <param name="midiProgram">Passed with the forwarded call.</param>
+            <param name="midiProgramName">Passed with the forwarded call.</param>
             <param name="channel">Passed with the forwarded call.</param>
             <returns>Returns the value returned from the forwarded call.</returns>
         </member>
@@ -1477,7 +1477,7 @@
             <summary>
             Retrieves information about a midi program for a specific Midi <paramref name="channel"/>.
             </summary>
-            <param name="midiProgram">Must not be null.</param>
+            <param name="midiProgramName">Must not be null.</param>
             <param name="channel">The zero-based Midi channel.</param>
             <returns>Returns the number of implemented Midi programs or 0 if not implemented.</returns>
         </member>
@@ -1485,7 +1485,7 @@
             <summary>
             Retrieves information about the current midi program for a specific Midi <paramref name="channel"/>.
             </summary>
-            <param name="midiProgram">Must not be null.</param>
+            <param name="midiProgramName">Must not be null.</param>
             <param name="channel">The zero-based Midi channel.</param>
             <returns>Returns the number of implemented Midi programs or 0 if not implemented.</returns>
         </member>
@@ -1828,7 +1828,7 @@
             <summary>
             For external DSP.
             </summary>
-            <returns>Returns the destination audio buffer.</returns>
+            <returns>Returns the destination audio buffer or null if not supported.</returns>
             <remarks>The <see cref="T:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags"/>.ExtHasBuffer 
             must be set in order for this method to be called.</remarks>
         </member>

@@ -1,7 +1,7 @@
 namespace Jacobi.Vst.Plugin.Framework
 {
-    using System;
     using Jacobi.Vst.Core;
+    using System;
 
     /// <summary>
     /// Provides access to the autiomation functionality of the host.
@@ -20,7 +20,7 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <returns>Returns a tracker object to mark the end of the edit scope. 
         /// Can return null if the host does not support this.</returns>
         /// <remarks>Call <see cref="IDisposable.Dispose"/> on the return value to end the scope.</remarks>
-        IDisposable BeginEditParameter(VstParameter parameter);
+        IDisposable? BeginEditParameter(VstParameter parameter);
 
         /// <summary>
         /// Notifies the Host that the value of the <paramref name="parameter"/>.

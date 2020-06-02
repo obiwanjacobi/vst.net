@@ -31,9 +31,9 @@
         /// <remarks>The name of the program itself is also copied.</remarks>
         public virtual bool CopyCurrentProgramTo(int programIndex)
         {
-            IVstPluginPrograms programs = Plugin.GetInstance<IVstPluginPrograms>();
+            var programs = Plugin?.GetInstance<IVstPluginPrograms>();
 
-            if (programs != null && programs.ActiveProgram != null)
+            if (programs?.ActiveProgram != null)
             {
                 VstProgram targetProgram = programs.Programs[programIndex];
                 // targetProgram.Categories is always the same between programs
@@ -86,7 +86,7 @@
         /// Not implemented.
         /// </summary>
         /// <returns>Always returns null.</returns>
-        public virtual VstAudioBuffer GetDestinationBuffer()
+        public virtual VstAudioBuffer? GetDestinationBuffer()
         {
             return null;
         }
@@ -100,7 +100,7 @@
         /// When the plugin does not implement the audio processor, false is returned.</returns>
         public virtual bool SetBlockSizeAndSampleRate(int blockSize, float sampleRate)
         {
-            IVstPluginAudioProcessor audioProcessor = Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = Plugin?.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -119,7 +119,7 @@
         /// <returns>Always returns null.</returns>
         public virtual string GetErrorText()
         {
-            return null;
+            return String.Empty;
         }
 
         /// <summary>

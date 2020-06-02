@@ -28,18 +28,18 @@
         /// <remarks>
         /// Set this property when the Opened event is triggered on the plugin root base class(es).
         /// </remarks>
-        public IVstHostAutomation HostAutomation { get; set; }
+        public IVstHostAutomation? HostAutomation { get; set; }
 
         /// <summary>
         /// Gets the meta data for the parameter this instance manages.
         /// </summary>
         public VstParameterInfo ParameterInfo { get; private set; }
 
-        private VstParameter _activeParameter;
+        private VstParameter? _activeParameter;
         /// <summary>
         /// Get the current active parameter instance.
         /// </summary>
-        public VstParameter ActiveParameter
+        public VstParameter? ActiveParameter
         {
             get { return _activeParameter; }
             private set
@@ -107,7 +107,7 @@
 
         private void Parameter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            VstParameter currentParameter = sender as VstParameter;
+            if (!(sender is VstParameter currentParameter)) return;
 
             switch (e.PropertyName)
             {

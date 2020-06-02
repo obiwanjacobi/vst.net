@@ -9,7 +9,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     /// </summary>
     public abstract class VstPluginWithServices : VstPlugin
     {
-        private IServiceProvider _services;
+        private IServiceProvider? _services;
 
         /// <inheritdoc/>
         protected VstPluginWithServices(string name, VstProductInfo productInfo,
@@ -52,7 +52,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// </summary>
         /// <typeparam name="T">The interface type.</typeparam>
         /// <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
-        public override T GetInstance<T>() where T : class
+        public override T? GetInstance<T>() where T : class
         {
             var services = GetServices();
             var service = services.GetService<T>();

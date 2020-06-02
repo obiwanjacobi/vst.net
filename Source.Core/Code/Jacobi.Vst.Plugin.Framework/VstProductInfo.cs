@@ -59,7 +59,7 @@
         /// </summary>
         public string Vendor { get; private set; }
 
-        private string _formattedVersion;
+        private string? _formattedVersion;
         /// <summary>
         /// Gets the <see cref="Version"/> formatted for displaying in the UI.
         /// </summary>
@@ -72,7 +72,7 @@
                     _formattedVersion = FormatVersion(Version);
                 }
 
-                return _formattedVersion;
+                return _formattedVersion ?? String.Empty;
             }
         }
 

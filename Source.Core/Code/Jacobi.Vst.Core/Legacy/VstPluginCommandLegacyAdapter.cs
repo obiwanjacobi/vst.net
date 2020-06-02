@@ -76,7 +76,7 @@
         /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstAudioBuffer GetDestinationBuffer()
+        public VstAudioBuffer? GetDestinationBuffer()
         {
             return _deprecatedStub.GetDestinationBuffer();
         }

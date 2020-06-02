@@ -47,7 +47,7 @@
 
         #region IVstHost Members
 
-        private VstProductInfo _productInfo;
+        private VstProductInfo? _productInfo;
         /// <summary>
         /// Gets the product information of the vst host.
         /// </summary>
@@ -150,7 +150,7 @@
         /// </summary>
         /// <typeparam name="T">The type of interface or class.</typeparam>
         /// <returns>Returns null when <typeparamref name="T"/> is not supported.</returns>
-        public T GetInstance<T>() where T : class
+        public T? GetInstance<T>() where T : class
         {
             if (HostCommandStub is T refT) return refT;
 
@@ -185,13 +185,7 @@
         /// </summary>
         public void Dispose()
         {
-            if (HostCommandStub != null)
-            {
-                HostCommandStub.Dispose();
-                HostCommandStub = null;
-            }
-
-            Plugin = null;
+            HostCommandStub.Dispose();
         }
 
         #endregion

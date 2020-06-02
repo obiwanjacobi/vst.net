@@ -93,10 +93,10 @@
         /// <summary>
         /// For external DSP.
         /// </summary>
-        /// <returns>Returns the destination audio buffer.</returns>
+        /// <returns>Returns the destination audio buffer or null if not supported.</returns>
         /// <remarks>The <see cref="Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags"/>.ExtHasBuffer 
         /// must be set in order for this method to be called.</remarks>
-        VstAudioBuffer GetDestinationBuffer();
+        VstAudioBuffer? GetDestinationBuffer();
         /// <summary>
         /// Assigns a new block size and sample rate value to the plugin.
         /// </summary>

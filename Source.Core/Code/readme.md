@@ -29,7 +29,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 ## Refactor wishes
 
-* [All] rename all Deprecated to Legacy (less confusing)
 * [All] remove all [Obsolete] API.
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github

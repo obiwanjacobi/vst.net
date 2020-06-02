@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace Jacobi.Vst.Plugin.Framework.Common
 {
@@ -11,7 +10,7 @@ namespace Jacobi.Vst.Plugin.Framework.Common
     public abstract class ObservableObject : INotifyPropertyChanged
     {
         /// <inheritdoc/>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event.
@@ -52,12 +51,8 @@ namespace Jacobi.Vst.Plugin.Framework.Common
         [Conditional("DEBUG")]
         private void VerifyPropertyExists(string propertyName)
         {
-            PropertyInfo propInfo = GetType().GetProperty(propertyName);
-
-            if (propInfo == null)
-            {
-                throw new InvalidOperationException("OnPropertyChanged: Property does not exist: " + propertyName);
-            }
+            var _ = GetType().GetProperty(propertyName)
+                ?? throw new InvalidOperationException("OnPropertyChanged: Property does not exist: " + propertyName);
         }
     }
 }

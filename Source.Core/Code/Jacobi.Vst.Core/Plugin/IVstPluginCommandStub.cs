@@ -15,12 +15,12 @@ namespace Jacobi.Vst.Core.Plugin
         /// <param name="hostCmdStub">A reference to the host command stub the plugin can use to call the host. Must not be null.</param>
         /// <returns>Returns an instance with the plugin info filled in. 
         /// If null is returned the plugin load sequence is aborted.</returns>
-        VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub);
+        VstPluginInfo? GetPluginInfo(IVstHostCommandStub hostCmdStub);
 
         /// <summary>
         /// Gets or sets the custom plugin specific configuration object.
         /// </summary>
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
-        public IConfiguration PluginConfiguration { get; set; }
+        public IConfiguration? PluginConfiguration { get; set; }
     }
 }
