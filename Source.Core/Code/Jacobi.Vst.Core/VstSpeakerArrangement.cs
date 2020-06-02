@@ -9,10 +9,10 @@
         /// e.g. #kSpeakerArr51 for 5.1  @see VstSpeakerArrangementType.
         /// </summary>
         public VstSpeakerArrangementType Type { get; set; }
-        
+
         /// <summary>
         /// Variable sized speaker array.
         /// </summary>
-        public VstSpeakerProperties[] Speakers { get; set; }
+        public VstSpeakerProperties[]? Speakers { get; set; }
     }
 }

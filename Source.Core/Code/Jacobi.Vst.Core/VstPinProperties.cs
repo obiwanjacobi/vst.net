@@ -12,7 +12,7 @@
         /// </summary>
         public VstPinPropertiesFlags Flags { get; set; }
 
-        private string _label;
+        private string _label = String.Empty;
         /// <summary>
         /// The name or label of the connection pin.
         /// </summary>
@@ -29,7 +29,7 @@
             }
         }
 
-        private string _shortLabel;
+        private string _shortLabel = String.Empty;
         /// <summary>
         /// The short label of the connection pin.
         /// </summary>

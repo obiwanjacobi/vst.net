@@ -15,7 +15,7 @@
     /// </remarks>
     public class ManagedPluginFactory
     {
-        private Assembly _assembly;
+        private Assembly? _assembly;
 
         /// <summary>.net.vst2</summary>
         public const string DefaultManagedExtension = ".net.vst2";
@@ -34,7 +34,7 @@
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, nameof(interopAssemblyPath));
 
             string fileName = Path.GetFileNameWithoutExtension(interopAssemblyPath);
-            AssemblyLoader.Current.BasePath = Path.GetDirectoryName(interopAssemblyPath);
+            AssemblyLoader.Current.BasePath = Path.GetDirectoryName(interopAssemblyPath) ?? String.Empty;
 
             LoadAssembly(fileName);
         }
@@ -48,12 +48,8 @@
         {
             Throw.IfArgumentIsNullOrEmpty(assemblyName, nameof(assemblyName));
 
-            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, DefaultManagedExtension);
-
-            if (_assembly == null)
-            {
-                throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, assemblyName);
-            }
+            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, DefaultManagedExtension)
+                ?? throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, assemblyName);
         }
 
         /// <summary>
@@ -65,20 +61,28 @@
         [CLSCompliant(false)]
         public IVstPluginCommandStub CreatePluginCommandStub()
         {
-            Type pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub));
-
-            if (pluginType == null)
+            if (_assembly == null)
             {
-                throw new InvalidOperationException(
-                    String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
+                // TODO: Properties.Resources.ManagedPluginFactory_NoAssemblyLoaded, pluginType
+                throw new InvalidOperationException();
             }
 
-            return (IVstPluginCommandStub)Activator.CreateInstance(pluginType);
+            Type? pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub))
+                ?? throw new InvalidOperationException(
+                    String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
+
+            var cmdStub = (IVstPluginCommandStub?)Activator.CreateInstance(pluginType);
+            if (cmdStub == null)
+            {
+                // TODO: Properties.Resources.ManagedPluginFactory_CreationFailed, pluginType
+                throw new InvalidOperationException();
+            }
+            return cmdStub;
         }
 
-        private Type LocateTypeByInterface(Type typeOfInterface)
+        private Type? LocateTypeByInterface(Type typeOfInterface)
         {
-            foreach (Type type in _assembly.GetTypes())
+            foreach (Type type in _assembly!.GetTypes())
             {
                 if (type.IsPublic)
                 {

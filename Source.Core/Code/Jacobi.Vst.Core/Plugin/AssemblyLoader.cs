@@ -14,13 +14,20 @@ namespace Jacobi.Vst.Core.Plugin
 
         private AssemblyLoader()
         {
-            _loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
+            _loadContext = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly)
+                ?? throw new InvalidOperationException();
             _loadContext.Resolving += LoadContext_ResolvingAssembly;
+            BasePath = String.Empty;
         }
 
-        private Assembly LoadContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
+        private Assembly? LoadContext_ResolvingAssembly(AssemblyLoadContext assemblyLoadContext, AssemblyName assemblyName)
         {
-            return LoadAssembly(assemblyName.Name, ".dll");
+            var name = assemblyName.Name;
+            if (!String.IsNullOrEmpty(name))
+            {
+                return LoadAssembly(name, ".dll");
+            }
+            return null;
         }
 
         private static readonly AssemblyLoader _current = new AssemblyLoader();
@@ -40,7 +47,7 @@ namespace Jacobi.Vst.Core.Plugin
         /// <param name="fileName">Name of the assembly file without extension. Must not be null or empty.</param>
         /// <param name="extension">The extensions to check for. Must not be null or empty.</param>
         /// <returns>Returns null if no suitable assembly file was found.</returns>
-        public Assembly LoadAssembly(string fileName, string extension)
+        public Assembly? LoadAssembly(string fileName, string extension)
         {
             Throw.IfArgumentIsNullOrEmpty(extension, nameof(extension));
 

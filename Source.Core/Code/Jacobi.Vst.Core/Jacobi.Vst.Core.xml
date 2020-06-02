@@ -2845,7 +2845,7 @@
             Maintains information on the file selector provided by the host.
             </summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstFileSelect.Reserved">
+        <member name="P:Jacobi.Vst.Core.VstFileSelect.Reserved">
             <summary>Contains an unmanaged pointer.</summary>
         </member>
         <member name="P:Jacobi.Vst.Core.VstFileSelect.Command">
@@ -3054,7 +3054,7 @@
             <remarks>The value must not exceed 64 characters.</remarks>
             <exception cref="T:System.ArgumentException">Thrown when the value exceeds 63 characters.</exception>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstMidiProgramCategory.ParentCategoryIndex">
+        <member name="P:Jacobi.Vst.Core.VstMidiProgramCategory.ParentCategoryIndex">
             <summary>
             The index of the category that is parent of the <see cref="P:Jacobi.Vst.Core.VstMidiProgramCategory.CurrentCategoryIndex"/>.
             </summary>
@@ -3821,21 +3821,6 @@
         </member>
         <member name="F:Jacobi.Vst.Core.VstSmpteFrameRate.Smpte60fps">
             <summary>HDTV: 60 fps</summary>
-        </member>
-        <member name="T:Jacobi.Vst.Core.VstVariableIO">
-            <summary>
-            under construction
-            </summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.VstVariableIO.Inputs">
-            <summary>
-            Input audio buffers.
-            </summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.VstVariableIO.Outputs">
-            <summary>
-            Output audio buffers.
-            </summary>
         </member>
         <member name="T:Jacobi.Vst.Core.VstVirtualKey">
             <summary>

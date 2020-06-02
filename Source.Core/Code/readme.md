@@ -43,8 +43,7 @@ https://github.com/maxtoroq/sandcastle-md
 * Update code to modern constructs (linter suggestions)
 * [UnitTest] Use FluentAssertions, remove TestContext prop.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
-* [Interop] Can't remember why I needed the boostrapper to delay loading Core after config was loaded and alternate probing paths were known....?
-I don't think this is necessary anymore. Single folder deployment seems reasonable and solves a lot of problems.
+* [Release] have conditionals to ommit debugging/trace and checks from release builds.
 
 
 ## Decisions

@@ -1,4 +1,6 @@
-﻿namespace Jacobi.Vst.Core.Host
+﻿using System;
+
+namespace Jacobi.Vst.Core.Host
 {
     /// <summary>
     /// The VstHostCommandAdapter class implements the Plugin <see cref="Jacobi.Vst.Core.Plugin.IVstHostCommandStub"/>
@@ -7,7 +9,7 @@
     /// </summary>
     public class VstHostCommandAdapter : Plugin.IVstHostCommandStub
     {
-        private IVstHostCommandStub _hostCmdStub;
+        private IVstHostCommandStub? _hostCmdStub;
 
         /// <summary>
         /// Constructs a new instance based on the <paramref name="hostCmdStub"/>
@@ -38,7 +40,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool UpdatePluginInfo(Plugin.VstPluginInfo pluginInfo)
         {
-            _hostCmdStub.PluginContext.PluginInfo = pluginInfo;
+            ThrowIfDisposed();
+            _hostCmdStub!.PluginContext.PluginInfo = pluginInfo;
 
             return true;
         }
@@ -54,7 +57,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstTimeInfo GetTimeInfo(VstTimeInfoFlags filterFlags)
         {
-            return _hostCmdStub.GetTimeInfo(filterFlags);
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetTimeInfo(filterFlags);
         }
 
         /// <summary>
@@ -64,7 +68,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool ProcessEvents(VstEvent[] events)
         {
-            return _hostCmdStub.ProcessEvents(events);
+            ThrowIfDisposed();
+            return _hostCmdStub!.ProcessEvents(events);
         }
 
         /// <summary>
@@ -73,7 +78,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool IoChanged()
         {
-            return _hostCmdStub.IoChanged();
+            ThrowIfDisposed();
+            return _hostCmdStub!.IoChanged();
         }
 
         /// <summary>
@@ -84,7 +90,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SizeWindow(int width, int height)
         {
-            return _hostCmdStub.SizeWindow(width, height);
+            ThrowIfDisposed();
+            return _hostCmdStub!.SizeWindow(width, height);
         }
 
         /// <summary>
@@ -93,7 +100,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public float GetSampleRate()
         {
-            return _hostCmdStub.GetSampleRate();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetSampleRate();
         }
 
         /// <summary>
@@ -102,7 +110,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetBlockSize()
         {
-            return _hostCmdStub.GetBlockSize();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetBlockSize();
         }
 
         /// <summary>
@@ -111,7 +120,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetInputLatency()
         {
-            return _hostCmdStub.GetInputLatency();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetInputLatency();
         }
 
         /// <summary>
@@ -120,7 +130,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetOutputLatency()
         {
-            return _hostCmdStub.GetOutputLatency();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetOutputLatency();
         }
 
         /// <summary>
@@ -129,7 +140,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstProcessLevels GetProcessLevel()
         {
-            return _hostCmdStub.GetProcessLevel();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetProcessLevel();
         }
 
         /// <summary>
@@ -138,7 +150,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstAutomationStates GetAutomationState()
         {
-            return _hostCmdStub.GetAutomationState();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetAutomationState();
         }
 
         /// <summary>
@@ -147,7 +160,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetVendorString()
         {
-            return _hostCmdStub.GetVendorString();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetVendorString();
         }
 
         /// <summary>
@@ -156,7 +170,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetProductString()
         {
-            return _hostCmdStub.GetProductString();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetProductString();
         }
 
         /// <summary>
@@ -165,7 +180,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetVendorVersion()
         {
-            return _hostCmdStub.GetVendorVersion();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetVendorVersion();
         }
 
         /// <summary>
@@ -175,7 +191,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstCanDoResult CanDo(string cando)
         {
-            return _hostCmdStub.CanDo(cando);
+            ThrowIfDisposed();
+            return _hostCmdStub!.CanDo(cando);
         }
 
         /// <summary>
@@ -184,7 +201,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstHostLanguage GetLanguage()
         {
-            return _hostCmdStub.GetLanguage();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetLanguage();
         }
 
         /// <summary>
@@ -193,7 +211,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetDirectory()
         {
-            return _hostCmdStub.GetDirectory();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetDirectory();
         }
 
         /// <summary>
@@ -202,7 +221,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool UpdateDisplay()
         {
-            return _hostCmdStub.UpdateDisplay();
+            ThrowIfDisposed();
+            return _hostCmdStub!.UpdateDisplay();
         }
 
         /// <summary>
@@ -212,7 +232,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool BeginEdit(int index)
         {
-            return _hostCmdStub.BeginEdit(index);
+            ThrowIfDisposed();
+            return _hostCmdStub!.BeginEdit(index);
         }
 
         /// <summary>
@@ -222,7 +243,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool EndEdit(int index)
         {
-            return _hostCmdStub.EndEdit(index);
+            ThrowIfDisposed();
+            return _hostCmdStub!.EndEdit(index);
         }
 
         /// <summary>
@@ -232,7 +254,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool OpenFileSelector(VstFileSelect fileSelect)
         {
-            return _hostCmdStub.OpenFileSelector(fileSelect);
+            ThrowIfDisposed();
+            return _hostCmdStub!.OpenFileSelector(fileSelect);
         }
 
         /// <summary>
@@ -241,7 +264,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool CloseFileSelector(VstFileSelect fileSelect)
         {
-            return _hostCmdStub.CloseFileSelector(fileSelect);
+            ThrowIfDisposed();
+            return _hostCmdStub!.CloseFileSelector(fileSelect);
         }
 
         #endregion
@@ -255,7 +279,8 @@
         /// <param name="value">Passed with the forwarded call.</param>
         public void SetParameterAutomated(int index, float value)
         {
-            _hostCmdStub.SetParameterAutomated(index, value);
+            ThrowIfDisposed();
+            _hostCmdStub!.SetParameterAutomated(index, value);
         }
 
         /// <summary>
@@ -264,7 +289,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetVersion()
         {
-            return _hostCmdStub.GetVersion();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetVersion();
         }
 
         /// <summary>
@@ -273,7 +299,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetCurrentPluginID()
         {
-            return _hostCmdStub.GetCurrentPluginID();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetCurrentPluginID();
         }
 
         /// <summary>
@@ -281,7 +308,8 @@
         /// </summary>
         public void ProcessIdle()
         {
-            _hostCmdStub.ProcessIdle();
+            ThrowIfDisposed();
+            _hostCmdStub!.ProcessIdle();
         }
 
         #endregion
@@ -294,6 +322,7 @@
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -305,6 +334,14 @@
             if (disposing)
             {
                 _hostCmdStub = null;
+            }
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (_hostCmdStub == null)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
             }
         }
         #endregion

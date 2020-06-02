@@ -8,7 +8,7 @@
     public class VstFileSelect
     {
         /// <summary>Contains an unmanaged pointer.</summary>
-        public IntPtr Reserved;
+        public IntPtr Reserved { get; set; }
 
         /// <summary>
         /// The type of file selector.
@@ -20,9 +20,9 @@
         /// The file types to filter on.
         /// </summary>
         /// <remarks>Fill this field before call the OpenFileSelector method.</remarks>
-        public VstFileType[] FileTypes { get; set; }
+        public VstFileType[] FileTypes { get; set; } = Array.Empty<VstFileType>();
 
-        private String _title;
+        private String _title = String.Empty;
         /// <summary>
         /// The title displayed on the dialog.
         /// </summary>
@@ -44,13 +44,13 @@
         /// The directory initialy selected in the selector.
         /// </summary>
         /// <remarks>Fill this field before call the OpenFileSelector method.</remarks>
-        public string InitialPath { get; set; }
+        public string InitialPath { get; set; } = String.Empty;
 
         /// <summary>
         /// The paths to the files the user selected.
         /// </summary>
         /// <remarks>This field is filled with zero, one or more file paths when the OpenFileSelector method returns.</remarks>
-        public string[] ReturnPaths { get; set; }
+        public string[] ReturnPaths { get; set; } = Array.Empty<string>();
     }
 
     /// <summary>
@@ -73,7 +73,7 @@
     /// </summary>
     public class VstFileType
     {
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Gets or sets the name of the filter.
         /// </summary>
@@ -89,7 +89,7 @@
                 _name = value;
             }
         }
-        private string _extension;
+        private string _extension = String.Empty;
         /// <summary>
         /// Gets or sets the file extension for the file filter.
         /// </summary>
