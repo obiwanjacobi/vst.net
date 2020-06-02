@@ -4,6 +4,7 @@ namespace Jacobi.Vst.Framework
     using Jacobi.Vst.Framework.Common;
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
 
     /// <summary>
     /// Manages a collection of <see cref="VstEvent"/> instances.

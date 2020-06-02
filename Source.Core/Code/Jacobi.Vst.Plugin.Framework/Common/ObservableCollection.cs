@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Jacobi.Vst.Framework.Common
 {
@@ -51,7 +52,7 @@ namespace Jacobi.Vst.Framework.Common
         #region INotifyCollectionChanged Members
 
         /// <inheritdoc/>
-        public event EventHandler<NotifyCollectionChangedEventArgs> CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>
         /// Fires the <see cref="CollectionChanged"/> event using single instances.

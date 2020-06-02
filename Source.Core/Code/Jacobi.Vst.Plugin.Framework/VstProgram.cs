@@ -4,6 +4,7 @@
     using Jacobi.Vst.Framework.Common;
     using System;
     using System.Collections;
+    using System.Collections.Specialized;
 
     /// <summary>
     /// The VstProgram class represents one plugin program.
@@ -21,7 +22,7 @@
         {
             Categories = new VstParameterCategoryCollection();
 
-            Parameters.CollectionChanged += new EventHandler<NotifyCollectionChangedEventArgs>(Parameters_CollectionChanged);
+            Parameters.CollectionChanged += new NotifyCollectionChangedEventHandler(Parameters_CollectionChanged);
         }
 
         /// <summary>

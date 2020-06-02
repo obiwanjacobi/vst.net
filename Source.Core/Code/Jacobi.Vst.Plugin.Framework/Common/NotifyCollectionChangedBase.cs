@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Specialized;
 
 namespace Jacobi.Vst.Framework.Common
 {
@@ -9,7 +10,7 @@ namespace Jacobi.Vst.Framework.Common
     public abstract class NotifyCollectionChangedBase : INotifyCollectionChanged
     {
         /// <inheritdoc/>
-        public event EventHandler<NotifyCollectionChangedEventArgs> CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         /// <summary>
         /// Fires the <see cref="CollectionChanged"/> event using single instances.
@@ -23,7 +24,15 @@ namespace Jacobi.Vst.Framework.Common
 
             if (handler != null)
             {
-                handler(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
+                var args = action switch
+                {
+                    NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItem),
+                    NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItem),
+                    NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItem, oldItem),
+                    NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
+                    _ => throw new NotSupportedException()
+                };
+                handler(this, args);
             }
         }
 
@@ -39,7 +48,15 @@ namespace Jacobi.Vst.Framework.Common
 
             if (handler != null)
             {
-                handler(this, new NotifyCollectionChangedEventArgs(action, newItems, oldItems));
+                var args = action switch
+                {
+                    NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItems),
+                    NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItems),
+                    NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItems, oldItems),
+                    NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
+                    _ => throw new NotSupportedException()
+                };
+                handler(this, args);
             }
         }
     }

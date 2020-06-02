@@ -3,6 +3,7 @@
     using Jacobi.Vst.Framework.Common;
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
 
     /// <summary>
@@ -135,7 +136,7 @@
                 _addItemHandler = addHandler;
                 _removeItemHandler = removeHandler;
 
-                _collection.CollectionChanged += new EventHandler<NotifyCollectionChangedEventArgs>(Collection_CollectionChanged);
+                _collection.CollectionChanged += new NotifyCollectionChangedEventHandler(Collection_CollectionChanged);
 
                 _items = InitializeItems();
             }
