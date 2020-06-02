@@ -69,72 +69,6 @@
             but only when <see cref="P:Jacobi.Vst.Framework.Common.ExtensibleInterfaceRef`1.DisposeInstance"/> and <see cref="P:Jacobi.Vst.Framework.Common.ExtensibleInterfaceRef`1.DisposeThreadSafeInstance"/> are true.
             All internal vars are reset. This instance can no longer be used.</remarks>
         </member>
-        <member name="T:Jacobi.Vst.Framework.Common.INotifyCollectionChanged">
-            <summary>
-            Notifies of a change in the collection.
-            </summary>
-            <remarks>The interface is modelled after the interface with the same name in .NET 3.0.</remarks>
-        </member>
-        <member name="E:Jacobi.Vst.Framework.Common.INotifyCollectionChanged.CollectionChanged">
-            <summary>
-            Fires when the collection content changes.
-            </summary>
-        </member>
-        <member name="T:Jacobi.Vst.Framework.Common.NotifyCollectionChangedEventArgs">
-            <summary>
-            The event arguments that indicate what items have changed in a collection.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Framework.Common.NotifyCollectionChangedEventArgs.#ctor(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
-            <summary>
-            Constructs an instance with lists of old and new items.
-            </summary>
-            <param name="action">The type of action that caused the change.</param>
-            <param name="newItems">Can be null.</param>
-            <param name="oldItems">Can be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Framework.Common.NotifyCollectionChangedEventArgs.#ctor(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Object,System.Object)">
-            <summary>
-            Constructs an instance with a single old and new item instance.
-            </summary>
-            <param name="action">The type of action that caused the change.</param>
-            <param name="newItem">Can be null.</param>
-            <param name="oldItem">Can be null.</param>
-        </member>
-        <member name="P:Jacobi.Vst.Framework.Common.NotifyCollectionChangedEventArgs.Action">
-            <summary>
-            Gets the action that caused the collection to change.
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Framework.Common.NotifyCollectionChangedEventArgs.NewItems">
-            <summary>
-            Gets the list with items that are new to the collection.
-            </summary>
-            <remarks>Will never be null.</remarks>
-        </member>
-        <member name="P:Jacobi.Vst.Framework.Common.NotifyCollectionChangedEventArgs.OldItems">
-            <summary>
-            Gets the list with items that are old to the collection.
-            </summary>
-            <remarks>Will never be null.</remarks>
-        </member>
-        <member name="T:Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction">
-            <summary>
-            Lists the type of action that cause a collection to change.
-            </summary>
-        </member>
-        <member name="F:Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction.Add">
-            <summary>New items were added to the collection.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction.Remove">
-            <summary>Items were removed from the collection.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction.Replace">
-            <summary>Items were replaced in the collection.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction.Reset">
-            <summary>A drastic change was made to the collection (Clear() for instance).</summary>
-        </member>
         <member name="T:Jacobi.Vst.Framework.Common.InterfaceManager`1">
             <summary>
             This class manages one interface.
@@ -188,13 +122,13 @@
         </member>
         <member name="T:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase">
             <summary>
-            A base class that helps a collection implement the <see cref="T:Jacobi.Vst.Framework.Common.INotifyCollectionChanged"/> interface.
+            A base class that helps a collection implement the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> interface.
             </summary>
         </member>
         <member name="E:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.CollectionChanged">
             <inheritdoc/>
         </member>
-        <member name="M:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.OnCollectionChanged(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Object,System.Object)">
+        <member name="M:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Object,System.Object)">
             <summary>
             Fires the <see cref="E:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.CollectionChanged"/> event using single instances.
             </summary>
@@ -202,7 +136,7 @@
             <param name="newItem">Can be null.</param>
             <param name="oldItem">Can be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.OnCollectionChanged(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
+        <member name="M:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
             <summary>
             Fires the <see cref="E:Jacobi.Vst.Framework.Common.NotifyCollectionChangedBase.CollectionChanged"/> event using lists of items.
             </summary>
@@ -212,7 +146,7 @@
         </member>
         <member name="T:Jacobi.Vst.Framework.Common.ObservableCollection`1">
             <summary>
-            A collection class that implements the <see cref="T:Jacobi.Vst.Framework.Common.INotifyCollectionChanged"/> interface.
+            A collection class that implements the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> interface.
             </summary>
             <typeparam name="T">The type of collection items.</typeparam>
         </member>
@@ -231,7 +165,7 @@
         <member name="E:Jacobi.Vst.Framework.Common.ObservableCollection`1.CollectionChanged">
             <inheritdoc/>
         </member>
-        <member name="M:Jacobi.Vst.Framework.Common.ObservableCollection`1.OnCollectionChanged(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Object,System.Object)">
+        <member name="M:Jacobi.Vst.Framework.Common.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Object,System.Object)">
             <summary>
             Fires the <see cref="E:Jacobi.Vst.Framework.Common.ObservableCollection`1.CollectionChanged"/> event using single instances.
             </summary>
@@ -239,7 +173,7 @@
             <param name="newItem">Can be null.</param>
             <param name="oldItem">Can be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Framework.Common.ObservableCollection`1.OnCollectionChanged(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
+        <member name="M:Jacobi.Vst.Framework.Common.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
             <summary>
             Fires the <see cref="E:Jacobi.Vst.Framework.Common.ObservableCollection`1.CollectionChanged"/> event using lists of items.
             </summary>
@@ -249,7 +183,7 @@
         </member>
         <member name="T:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2">
             <summary>
-            A KeyedCollection base class that implements the <see cref="T:Jacobi.Vst.Framework.Common.INotifyCollectionChanged"/> interface.
+            A KeyedCollection base class that implements the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> interface.
             </summary>
             <typeparam name="KeyT">The type of collection item keys.</typeparam>
             <typeparam name="ValueT">The type of collection items.</typeparam>
@@ -269,7 +203,7 @@
         <member name="E:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2.CollectionChanged">
             <inheritdoc/>
         </member>
-        <member name="M:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2.OnCollectionChanged(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Object,System.Object)">
+        <member name="M:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Object,System.Object)">
             <summary>
             Fires the <see cref="E:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2.CollectionChanged"/> event using single instances.
             </summary>
@@ -277,7 +211,7 @@
             <param name="newItem">Can be null.</param>
             <param name="oldItem">Can be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2.OnCollectionChanged(Jacobi.Vst.Framework.Common.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
+        <member name="M:Jacobi.Vst.Framework.Common.ObservableKeyedCollection`2.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
             <summary>
             Constructs an instance with lists of old and new items.
             </summary>
