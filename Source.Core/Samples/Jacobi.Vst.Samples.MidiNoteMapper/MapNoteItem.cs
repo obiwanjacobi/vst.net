@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents one note mapping.
     /// </summary>
-    class MapNoteItem
+    internal sealed class MapNoteItem
     {
         /// <summary>
         /// Gets or sets a readable name for this mapping item.
@@ -26,7 +26,7 @@
     /// <summary>
     /// Manages a list of <see cref="MapNoteItem"/> instances.
     /// </summary>
-    class MapNoteItemList : KeyedCollection<byte, MapNoteItem>
+    internal sealed class MapNoteItemList : KeyedCollection<byte, MapNoteItem>
     {
         /// <summary>
         /// Returns <see cref="MapNoteItem.TriggerNoteNumber"/>.

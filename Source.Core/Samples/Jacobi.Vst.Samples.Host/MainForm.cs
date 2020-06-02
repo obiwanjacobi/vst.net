@@ -13,7 +13,7 @@ namespace Jacobi.Vst.Samples.Host
         public MainForm()
         {
             InitializeComponent();
-            Text = "VST.NET Dummy Host Sample";
+            Text = "VST.NET 2 Dummy Host Sample";
         }
 
         private void FillPluginList()

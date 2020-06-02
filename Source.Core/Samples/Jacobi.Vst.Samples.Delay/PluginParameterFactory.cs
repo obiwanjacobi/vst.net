@@ -1,6 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
-    using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Plugin.Framework;
 
     /// <summary>
     /// This class manages all parameters used by the plugin.

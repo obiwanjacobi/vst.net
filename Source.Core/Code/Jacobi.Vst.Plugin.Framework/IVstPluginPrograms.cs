@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// This interface should be implemented when the plugin want to support Programs.

@@ -1,4 +1,4 @@
-namespace Jacobi.Vst.Framework
+namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// This interface is implemented by plugins that allow the host to by pass them.

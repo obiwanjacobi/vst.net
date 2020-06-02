@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// This interface is implemented when the plugin whishes to receive pre and post <see cref="IVstPluginAudioProcessor.Process"/> calls.

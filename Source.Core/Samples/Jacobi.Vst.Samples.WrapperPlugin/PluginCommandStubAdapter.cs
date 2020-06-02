@@ -21,7 +21,7 @@ namespace Jacobi.Vst.Samples.WrapperPlugin
 
             if (PluginConfiguration == null)
             {
-                throw new ApplicationException("No plugin configuration found.");
+                throw new InvalidOperationException("No plugin configuration found.");
             }
 
             var pluginPath = PluginConfiguration["PluginPath"];

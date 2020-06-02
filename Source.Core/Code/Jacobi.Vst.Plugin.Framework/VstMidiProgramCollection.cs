@@ -1,6 +1,6 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
-    using Jacobi.Vst.Framework.Common;
+    using Jacobi.Vst.Plugin.Framework.Common;
     using System;
     using System.ComponentModel;
 

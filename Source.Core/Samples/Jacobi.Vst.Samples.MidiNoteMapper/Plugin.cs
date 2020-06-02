@@ -1,81 +1,33 @@
-﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
-{
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    using Jacobi.Vst.Framework.Plugin;
+﻿using Jacobi.Vst.Core;
+using Jacobi.Vst.Plugin.Framework;
+using Jacobi.Vst.Plugin.Framework.Plugin;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace Jacobi.Vst.Samples.MidiNoteMapper
+{
     /// <summary>
     /// The Plugin root class that implements the interface manager and the plugin midi source.
     /// </summary>
-    class Plugin : VstPluginWithInterfaceManagerBase, IVstPluginMidiSource
+    internal sealed class Plugin : VstPluginWithServices, IVstPluginMidiSource
     {
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
             : base("VST.NET Midi Note Mapper",
-                  new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011-2020", 2000),
+                  new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
                 VstPluginCategory.Synth, VstPluginCapabilities.NoSoundInStop, 0, 0x30313233)
         {
             NoteMap = new MapNoteItemList();
         }
 
-        /// <summary>
-        /// Creates a default instance and reuses that for all threads.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance.</returns>
-        protected override IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
+        protected override void RegisterServices(IServiceCollection services)
         {
-            if (instance == null) return new AudioProcessor(this);
-
-            return instance;
-        }
-
-        /// <summary>
-        /// Creates a default instance and reuses that for all threads.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance.</returns>
-        protected override IVstPluginEditor CreateEditor(IVstPluginEditor instance)
-        {
-            if (instance == null) return new PluginEditor(this);
-
-            return instance;
-        }
-
-        /// <summary>
-        /// Creates a default instance and reuses that for all threads.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance.</returns>
-        protected override IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
-        {
-            if (instance == null) return new MidiProcessor(this);
-
-            return instance;
-        }
-
-        /// <summary>
-        /// Creates a default instance and reuses that for all threads.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance.</returns>
-        protected override IVstPluginPersistence CreatePersistence(IVstPluginPersistence instance)
-        {
-            if (instance == null) return new PluginPersistence(this);
-
-            return instance;
-        }
-
-        /// <summary>
-        /// Always returns <b>this</b>.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance <b>this</b>.</returns>
-        protected override IVstPluginMidiSource CreateMidiSource(IVstPluginMidiSource instance)
-        {
-            return this;
+            services.AddPluginComponent(new AudioProcessor(this));
+            services.AddPluginComponent(new PluginEditor(this));
+            services.AddPluginComponent(new MidiProcessor(this));
+            services.AddPluginComponent(new PluginPersistence(this));
+            services.AddSingleton<IVstPluginMidiSource>(this);
         }
 
         #region IVstPluginMidiSource Members

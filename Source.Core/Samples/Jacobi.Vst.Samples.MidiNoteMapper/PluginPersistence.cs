@@ -1,11 +1,11 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Plugin.Framework;
     using System.IO;
     using System.Text;
 
-    class PluginPersistence : IVstPluginPersistence
+    internal sealed class PluginPersistence : IVstPluginPersistence
     {
         private readonly Plugin _plugin;
         private readonly Encoding _encoding = Encoding.ASCII;

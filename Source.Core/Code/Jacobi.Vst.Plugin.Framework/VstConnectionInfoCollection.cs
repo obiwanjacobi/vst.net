@@ -1,7 +1,7 @@
-﻿namespace Jacobi.Vst.Framework
-{
-    using Jacobi.Vst.Framework.Common;
+﻿using System.Collections.ObjectModel;
 
+namespace Jacobi.Vst.Plugin.Framework
+{
     /// <summary>
     /// Manages a collection of <see cref="VstConnectionInfo"/> instances.
     /// </summary>

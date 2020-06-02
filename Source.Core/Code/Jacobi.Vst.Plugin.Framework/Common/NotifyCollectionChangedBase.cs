@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Specialized;
 
-namespace Jacobi.Vst.Framework.Common
+namespace Jacobi.Vst.Plugin.Framework.Common
 {
     /// <summary>
     /// A base class that helps a collection implement the <see cref="INotifyCollectionChanged"/> interface.

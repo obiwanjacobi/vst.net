@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Jacobi.Vst.Framework.Properties {
+namespace Jacobi.Vst.Plugin.Framework.Properties {
     using System;
     
     

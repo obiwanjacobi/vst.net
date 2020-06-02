@@ -1,5 +1,5 @@
 ﻿using Jacobi.Vst.Core;
-using Jacobi.Vst.Framework;
+using Jacobi.Vst.Plugin.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Specialized;
 

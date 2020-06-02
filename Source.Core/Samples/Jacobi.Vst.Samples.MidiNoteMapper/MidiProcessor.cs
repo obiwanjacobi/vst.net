@@ -1,7 +1,7 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Plugin.Framework;
 
     using System.Collections;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@
     /// <summary>
     /// Implements the incoming Midi event handling for the plugin.
     /// </summary>
-    class MidiProcessor : IVstMidiProcessor
+    internal sealed class MidiProcessor : IVstMidiProcessor
     {
         private readonly Plugin _plugin;
 
@@ -55,26 +55,26 @@
                 VstMidiEvent midiEvent = (VstMidiEvent)evnt;
                 VstMidiEvent mappedEvent = null;
 
-                if ( ((midiEvent.Data[0] & 0xF0) == 0x80 || (midiEvent.Data[0] & 0xF0) == 0x90))
+                if (((midiEvent.Data[0] & 0xF0) == 0x80 || (midiEvent.Data[0] & 0xF0) == 0x90))
                 {
-                    if(_plugin.NoteMap.Contains(midiEvent.Data[1]))
+                    if (_plugin.NoteMap.Contains(midiEvent.Data[1]))
                     {
                         byte[] midiData = new byte[4];
                         midiData[0] = midiEvent.Data[0];
                         midiData[1] = _plugin.NoteMap[midiEvent.Data[1]].OutputNoteNumber;
                         midiData[2] = midiEvent.Data[2];
 
-                        mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames, 
-                            midiEvent.NoteLength, 
-                            midiEvent.NoteOffset, 
-                            midiData, 
-                            midiEvent.Detune, 
+                        mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames,
+                            midiEvent.NoteLength,
+                            midiEvent.NoteOffset,
+                            midiData,
+                            midiEvent.Detune,
                             midiEvent.NoteOffVelocity);
 
                         Events.Add(mappedEvent);
 
                         // add raw note-on note numbers to the queue
-                        if((midiEvent.Data[0] & 0xF0) == 0x90)
+                        if ((midiEvent.Data[0] & 0xF0) == 0x90)
                         {
                             lock (((ICollection)NoteOnEvents).SyncRoot)
                             {

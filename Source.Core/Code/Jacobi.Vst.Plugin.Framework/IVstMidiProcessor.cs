@@ -1,4 +1,4 @@
-namespace Jacobi.Vst.Framework
+namespace Jacobi.Vst.Plugin.Framework
 {
     // Note: this interface is NOT called IVstPluginMidiProcessor because the Host implements it too.
     

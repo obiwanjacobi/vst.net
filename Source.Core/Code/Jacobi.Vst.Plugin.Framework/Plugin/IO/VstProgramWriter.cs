@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Jacobi.Vst.Framework.Plugin.IO
+namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
 {
     /// <summary>
     /// The VstProgramWriter class writes Programs and its Parameters to a stream.

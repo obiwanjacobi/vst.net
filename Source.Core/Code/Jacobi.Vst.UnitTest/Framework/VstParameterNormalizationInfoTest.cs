@@ -1,4 +1,4 @@
-﻿using Jacobi.Vst.Framework;
+﻿using Jacobi.Vst.Plugin.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Framework

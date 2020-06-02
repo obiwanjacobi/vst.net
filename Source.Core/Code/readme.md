@@ -25,6 +25,7 @@ Then on a successful build a deployment will automatically be generated.
 https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 * CLI does not detect dependencies of dependencies (interop)
+* CLSComplient has no great support in netCore3.1. I think I will remove it too. (revisit RegisterServices)
 
 ## Refactor wishes
 
@@ -44,7 +45,7 @@ https://github.com/maxtoroq/sandcastle-md
 * [UnitTest] Use FluentAssertions, remove TestContext prop.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds.
-
+* ObservableCollection is in System.Collections.DataModel
 
 ## Decisions
 

@@ -1,7 +1,7 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework.Common;
+    using Jacobi.Vst.Plugin.Framework.Common;
 
     /// <summary>
     /// The VstMidiCategory is used by a plugin to define Midi Program Category hierarchies.

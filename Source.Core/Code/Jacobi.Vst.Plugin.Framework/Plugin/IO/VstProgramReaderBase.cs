@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Jacobi.Vst.Framework.Plugin.IO
+namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
 {
     /// <summary>
     /// The VstProgramReaderBase class provides a stream reader base class that reads

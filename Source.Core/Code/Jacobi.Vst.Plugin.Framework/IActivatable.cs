@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Framework
+﻿namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// Indicates that the object can be activated and deactivated.

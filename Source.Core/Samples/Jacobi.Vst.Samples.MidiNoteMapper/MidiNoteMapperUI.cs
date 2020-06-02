@@ -8,7 +8,7 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
     /// <summary>
     /// The plugin custom editor UI.
     /// </summary>
-    partial class MidiNoteMapperUI : UserControl
+    internal sealed partial class MidiNoteMapperUI : UserControl
     {
         /// <summary>
         /// Constructs a new instance.
