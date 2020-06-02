@@ -162,51 +162,48 @@ namespace Jacobi.Vst.Samples.Host
             int blockSize = 1024;
 
             // wrap these in using statements to automatically call Dispose and cleanup the unmanaged memory.
-            using (VstAudioBufferManager inputMgr = new VstAudioBufferManager(inputCount, blockSize))
+            using VstAudioBufferManager inputMgr = new VstAudioBufferManager(inputCount, blockSize);
+            using VstAudioBufferManager outputMgr = new VstAudioBufferManager(outputCount, blockSize);
+
+            foreach (VstAudioBuffer buffer in inputMgr)
             {
-                using (VstAudioBufferManager outputMgr = new VstAudioBufferManager(outputCount, blockSize))
+                Random rnd = new Random((int)DateTime.Now.Ticks);
+
+                for (int i = 0; i < blockSize; i++)
                 {
-                    foreach (VstAudioBuffer buffer in inputMgr)
-                    {
-                        Random rnd = new Random((int)DateTime.Now.Ticks);
-
-                        for (int i = 0; i < blockSize; i++)
-                        {
-                            // generate a value between -1.0 and 1.0
-                            buffer[i] = (float)((rnd.NextDouble() * 2.0) - 1.0);
-                        }
-                    }
-
-                    PluginContext.PluginCommandStub.SetBlockSize(blockSize);
-                    PluginContext.PluginCommandStub.SetSampleRate(44100f);
-
-                    VstAudioBuffer[] inputBuffers = inputMgr.ToArray();
-                    VstAudioBuffer[] outputBuffers = outputMgr.ToArray();
-
-                    PluginContext.PluginCommandStub.MainsChanged(true);
-                    PluginContext.PluginCommandStub.StartProcess();
-                    PluginContext.PluginCommandStub.ProcessReplacing(inputBuffers, outputBuffers);
-                    PluginContext.PluginCommandStub.StopProcess();
-                    PluginContext.PluginCommandStub.MainsChanged(false);
-
-                    for (int i = 0; i < inputBuffers.Length && i < outputBuffers.Length; i++)
-                    {
-                        for (int j = 0; j < blockSize; j++)
-                        {
-                            if (inputBuffers[i][j] != outputBuffers[i][j])
-                            {
-                                if (outputBuffers[i][j] != 0.0)
-                                {
-                                    MessageBox.Show(this, "The plugin has processed the audio.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    return;
-                                }
-                            }
-                        }
-                    }
-
-                    MessageBox.Show(this, "The plugin has passed the audio unchanged to its outputs.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // generate a value between -1.0 and 1.0
+                    buffer[i] = (float)((rnd.NextDouble() * 2.0) - 1.0);
                 }
             }
+
+            PluginContext.PluginCommandStub.SetBlockSize(blockSize);
+            PluginContext.PluginCommandStub.SetSampleRate(44100f);
+
+            VstAudioBuffer[] inputBuffers = inputMgr.Buffers.ToArray();
+            VstAudioBuffer[] outputBuffers = outputMgr.Buffers.ToArray();
+
+            PluginContext.PluginCommandStub.MainsChanged(true);
+            PluginContext.PluginCommandStub.StartProcess();
+            PluginContext.PluginCommandStub.ProcessReplacing(inputBuffers, outputBuffers);
+            PluginContext.PluginCommandStub.StopProcess();
+            PluginContext.PluginCommandStub.MainsChanged(false);
+
+            for (int i = 0; i < inputBuffers.Length && i < outputBuffers.Length; i++)
+            {
+                for (int j = 0; j < blockSize; j++)
+                {
+                    if (inputBuffers[i][j] != outputBuffers[i][j])
+                    {
+                        if (outputBuffers[i][j] != 0.0)
+                        {
+                            MessageBox.Show(this, "The plugin has processed the audio.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            MessageBox.Show(this, "The plugin has passed the audio unchanged to its outputs.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void EditorBtn_Click(object sender, EventArgs e)

@@ -12,13 +12,12 @@ namespace Interop {
 	/// to service a number of audio buffers.
 	/// </summary>
 	/// <remarks>The class is instantiated specifying the number and size of buffers that 
-	/// can be accessed using the <see cref="ToArray"/> method. The life time of the 
+	/// can be accessed using the <see cref="Buffers"/> property. The life time of the 
 	/// unmanaged memory that backs up the buffers is coupled to the life time of the
 	/// VstAudioBufferManager instance. Calling the <see cref="Dispose"/> method will free
 	/// the unmanaged memory.</remarks>
 	[System::CLSCompliant(true)]
-	public ref class VstAudioBufferManager : System::IDisposable, 
-		System::Collections::Generic::IEnumerable<Jacobi::Vst::Core::VstAudioBuffer^>
+	public ref class VstAudioBufferManager : System::IDisposable
 	{
 	public:
 		/// <summary>Constructs a new instance for the specified number and size of buffers.</summary>
@@ -29,9 +28,11 @@ namespace Interop {
 		~VstAudioBufferManager();
 
 		/// <summary>Retrieves the buffers objects, one for each buffer.</summary>
-		/// <returns>Returns an array of <see cref="Jacobi::Vst::Core::VstAudioBuffer"/> instances.</returns>
-		[System::Obsolete("Use the IEnumerable<> interface instead.", false)]
-		array<Jacobi::Vst::Core::VstAudioBuffer^>^ ToArray();
+		/// <returns>Returns an enumerable of <see cref="Jacobi::Vst::Core::VstAudioBuffer"/> instances.</returns>
+		property System::Collections::Generic::IEnumerable<Jacobi::Vst::Core::VstAudioBuffer^>^ Buffers
+		{
+			System::Collections::Generic::IEnumerable<Jacobi::Vst::Core::VstAudioBuffer^>^ get() { return _managedBuffers; }
+		}
 
 		/// <summary>Clears (set all values to 0.0) a single buffer.</summary>
 		/// <param name="buffer">The buffer to be cleared. Must not be null.</param>
@@ -43,19 +44,6 @@ namespace Interop {
 		property System::Int32 BufferCount { System::Int32 get() { return _bufferCount; } }
 		/// <summary>Gets the size of a single buffer.</summary>
 		property System::Int32 BufferSize { System::Int32 get() { return _bufferSize; } }
-
-		/// <summary>Retrieves the enumerator object to retrieve <see cref="Jacobi::Vst::Core::VstAudioBuffer"/>'s.</summary>
-		virtual System::Collections::Generic::IEnumerator<Jacobi::Vst::Core::VstAudioBuffer^>^ GetEnumerator()
-		{
-			return _managedBuffers->GetEnumerator();
-		}
-
-		/// <summary>Object based enumerator.</summary>
-		virtual System::Collections::IEnumerator^ GetObjectEnumerator() sealed = 
-			System::Collections::IEnumerable::GetEnumerator
-		{
-			return GetEnumerator();
-		}
 
 	private:
 		System::Int32 _bufferCount;

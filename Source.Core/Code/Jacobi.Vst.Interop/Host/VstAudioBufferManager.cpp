@@ -43,11 +43,6 @@ namespace Interop {
 		// destroys the contained UnmanagedArray.
 	}
 
-	array<Jacobi::Vst::Core::VstAudioBuffer^>^ VstAudioBufferManager::ToArray()
-	{
-		return _managedBuffers->ToArray();
-	}
-
 	void VstAudioBufferManager::ClearBuffer(Jacobi::Vst::Core::VstAudioBuffer^ buffer)
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNull(buffer, "buffer");

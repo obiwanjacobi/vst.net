@@ -15,12 +15,7 @@ namespace Jacobi.Vst.Samples.Host
 
         private void RaisePluginCalled(string message)
         {
-            EventHandler<PluginCalledEventArgs> handler = PluginCalled;
-
-            if (handler != null)
-            {
-                handler(this, new PluginCalledEventArgs(message));
-            }
+            PluginCalled?.Invoke(this, new PluginCalledEventArgs(message));
         }
 
         #region IVstHostCommandsStub Members
