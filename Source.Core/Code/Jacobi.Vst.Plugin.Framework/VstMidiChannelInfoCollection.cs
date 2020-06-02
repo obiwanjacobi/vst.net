@@ -1,4 +1,4 @@
-﻿using Jacobi.Vst.Plugin.Framework.Common;
+﻿using System.Collections.ObjectModel;
 
 namespace Jacobi.Vst.Plugin.Framework
 {

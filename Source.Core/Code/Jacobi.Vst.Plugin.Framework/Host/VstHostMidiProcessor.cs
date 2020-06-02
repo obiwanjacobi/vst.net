@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework.Host
 {
     using Jacobi.Vst.Core;
+    using System.Linq;
 
     /// <summary>
     /// Forwards the <see cref="IVstMidiProcessor"/> calls to the host stub.
