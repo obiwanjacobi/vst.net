@@ -11,32 +11,12 @@ namespace Vst {
 namespace Plugin {
 namespace Interop {
 
-Configuration::Configuration(System::String^ filePath)
+Microsoft::Extensions::Configuration::IConfiguration^ Configuration::OpenConfig(System::String^ basePath)
 {
-	_basePath = filePath;
-}
-
-void Configuration::EnsureConfig()
-{
-	if (_config == nullptr)
-	{
-		auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
-		Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, _basePath);
-		Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json", true);
-		_config = builder->Build();
-	}
-}
-
-System::String^ Configuration::GetAppSetting(System::String^ key)
-{
-	EnsureConfig();
-
-	if (_config != nullptr)
-	{
-		return _config->default[key];
-	}
-
-	return nullptr;
+	auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
+	Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, basePath);
+	Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json", true);
+	return builder->Build();
 }
 
 }}}} // Jacobi::Vst::Plugin::Interop

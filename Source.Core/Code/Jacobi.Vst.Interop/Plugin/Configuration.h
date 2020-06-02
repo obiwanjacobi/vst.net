@@ -15,22 +15,11 @@ ref class Configuration
 {
 public:
 	/// <summary>
-	/// Constructs a new instance based on the file path of the plugin assembly (renamed Interop).
+	/// Finds and opens the vstsettings.json.
 	/// </summary>
-	Configuration(System::String^ basePath);
+	/// <returns>Can return null if settings are not found.</returns>
+	static Microsoft::Extensions::Configuration::IConfiguration^ OpenConfig(System::String^ basePath);
 
-	/// <summary>
-	/// The loaded configuration object. Can be null.
-	/// </summary>
-	property Microsoft::Extensions::Configuration::IConfigurationRoot^ PluginConfig
-	{ Microsoft::Extensions::Configuration::IConfigurationRoot^ get() { EnsureConfig(); return _config; } }
-
-private:
-	System::String^ _basePath;
-	Microsoft::Extensions::Configuration::IConfigurationRoot^ _config;
-
-	void EnsureConfig();
-	System::String^ GetAppSetting(System::String^ key);
 };
 
 }}}} // Jacobi::Vst::Plugin::Interop

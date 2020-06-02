@@ -9,7 +9,7 @@ namespace Vst {
 namespace Interop {
 
 // static helper method
-Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Jacobi::Vst::Plugin::Interop::Configuration^ config)
+Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Microsoft::Extensions::Configuration::IConfiguration^ config)
 {
 	System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
@@ -29,7 +29,7 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 	if(commandStub != nullptr)
 	{
 		// assign config to commandStub (can be null)
-		commandStub->PluginConfiguration = config->PluginConfig;
+		commandStub->PluginConfiguration = config;
 	}
 
 	return commandStub;
