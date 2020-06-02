@@ -20,20 +20,7 @@ namespace Jacobi.Vst.Framework.Common
         /// <param name="oldItem">Can be null.</param>
         protected void OnCollectionChanged(NotifyCollectionChangedAction action, object newItem, object oldItem)
         {
-            var handler = CollectionChanged;
-
-            if (handler != null)
-            {
-                var args = action switch
-                {
-                    NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItem),
-                    NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItem),
-                    NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItem, oldItem),
-                    NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
-                    _ => throw new NotSupportedException()
-                };
-                handler(this, args);
-            }
+            CollectionChanged?.Invoke(this, CreateNotifyCollectionChangedEventArgs(action, newItem, oldItem));
         }
 
         /// <summary>
@@ -44,20 +31,31 @@ namespace Jacobi.Vst.Framework.Common
         /// <param name="oldItems">Can be null.</param>
         protected void OnCollectionChanged(NotifyCollectionChangedAction action, IList newItems, IList oldItems)
         {
-            var handler = CollectionChanged;
+            CollectionChanged?.Invoke(this, CreateNotifyCollectionChangedEventArgs(action, newItems, oldItems));
+        }
 
-            if (handler != null)
+        internal static NotifyCollectionChangedEventArgs CreateNotifyCollectionChangedEventArgs(NotifyCollectionChangedAction action, object newItem, object oldItem)
+        {
+            return action switch
             {
-                var args = action switch
-                {
-                    NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItems),
-                    NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItems),
-                    NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItems, oldItems),
-                    NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
-                    _ => throw new NotSupportedException()
-                };
-                handler(this, args);
-            }
+                NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItem),
+                NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItem),
+                NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItem, oldItem),
+                NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
+                _ => throw new NotSupportedException()
+            };
+        }
+
+        internal static NotifyCollectionChangedEventArgs CreateNotifyCollectionChangedEventArgs(NotifyCollectionChangedAction action, IList newItems, IList oldItems)
+        {
+            return action switch
+            {
+                NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItems),
+                NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItems),
+                NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItems, oldItems),
+                NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
+                _ => throw new NotSupportedException()
+            };
         }
     }
 }
