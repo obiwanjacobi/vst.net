@@ -37,7 +37,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 https://github.com/EWSoftware/SHFB
 https://github.com/maxtoroq/sandcastle-md
 * [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
-* Turn on nullable reference types.
 * Update code to modern constructs (linter suggestions)
 * [UnitTest] Use FluentAssertions.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.

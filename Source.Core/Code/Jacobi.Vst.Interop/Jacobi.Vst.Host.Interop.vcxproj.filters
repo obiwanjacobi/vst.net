@@ -11,7 +11,6 @@
     <ClInclude Include="UnmanagedString.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vst2400.h" />
-    <ClInclude Include="Plugin\Configuration.h" />
     <ClInclude Include="MemoryTracker.h" />
     <ClInclude Include="Bootstrapper.h" />
     <ClInclude Include="Host\UnmanagedArray.h" />
@@ -27,7 +26,6 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Properties\AssemblyInfo.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Plugin\Configuration.cpp" />
     <ClCompile Include="MemoryTracker.cpp" />
     <ClCompile Include="Bootstrapper.cpp" />
     <ClCompile Include="Host\VstAudioBufferManager.cpp" />

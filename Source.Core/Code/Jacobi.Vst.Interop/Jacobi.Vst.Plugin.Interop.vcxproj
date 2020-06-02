@@ -221,7 +221,6 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="MemoryTracker.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Plugin\Configuration.h" />
     <ClInclude Include="Plugin\HostCommandStub.h" />
     <ClInclude Include="Plugin\PluginCommandProxy.h" />
     <ClInclude Include="Properties\Resources.h" />
@@ -240,7 +239,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Plugin\Configuration.cpp" />
     <ClCompile Include="Plugin\HostCommandStub.cpp" />
     <ClCompile Include="Plugin\Jacobi.Vst.Interop.cpp" />
     <ClCompile Include="Plugin\PluginCommandProxy.cpp" />
