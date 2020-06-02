@@ -10,48 +10,25 @@ namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
-// fwd ref
-Vst2Plugin* VSTPluginMainInternal (Jacobi::Vst::Plugin::Interop::Configuration^, Vst2HostCommand);
+	// fwd ref
+	Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 
 // main exported method called by host to create the plugin
 Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 {
+	// create the host command stub (sends commands to host)
+	Jacobi::Vst::Plugin::Interop::HostCommandStub^ hostStub =
+		gcnew Jacobi::Vst::Plugin::Interop::HostCommandStub(hostCommandHandler);
+
 	try
 	{
 		// retrieve the current plugin file name (interop)
 		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
 		System::String^ pluginPath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
-		// try to locate the plugin specific config file
-		Jacobi::Vst::Plugin::Interop::Configuration^ config = 
-			gcnew Jacobi::Vst::Plugin::Interop::Configuration(pluginPath);
-
-		return VSTPluginMainInternal(config, hostCommandHandler);
-	}
-	catch(System::Exception^ exc)
-	{
-		Utils::ShowError(exc);
-	}
-
-	return NULL;
-}
-
-// fwd ref
-Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
-
-Vst2Plugin* VSTPluginMainInternal (Jacobi::Vst::Plugin::Interop::Configuration^ config, Vst2HostCommand hostCommandHandler)
-{
-	// retrieve the current plugin file name (interop)
-	System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
-
-	// create the host command stub (sends commands to host)
-	Jacobi::Vst::Plugin::Interop::HostCommandStub^ hostStub = 
-		gcnew Jacobi::Vst::Plugin::Interop::HostCommandStub(hostCommandHandler);
-
-	try
-	{
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName, config);
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName, 
+			Jacobi::Vst::Plugin::Interop::Configuration::OpenConfig(pluginPath));
 		
 		if(commandStub != nullptr)
 		{

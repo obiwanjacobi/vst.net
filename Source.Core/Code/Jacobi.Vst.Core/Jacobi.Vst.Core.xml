@@ -2223,57 +2223,6 @@
             <param name="extension">The extensions to check for. Must not be null or empty.</param>
             <returns>Returns null if no suitable assembly file was found.</returns>
         </member>
-        <member name="T:Jacobi.Vst.Core.Plugin.Configuration">
-            <summary>
-            VST.NET specific plugin configuration options
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.Configuration.#ctor(System.String)">
-            <summary>
-            Open configuration based on the plugin folder.
-            </summary>
-            <param name="basePath">Must not be null.</param>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.Configuration.PluginConfig">
-            <summary>
-            Access the plugin config. Returns null if no config is found.
-            </summary>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Plugin.FileFinder">
-            <summary>
-            The FileFinder class locates a file on the file system based on several paths and file extensions.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.FileFinder.#ctor">
-            <summary>
-            A default constructor.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.FileFinder.#ctor(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Initializing constructor.
-            </summary>
-            <param name="extensions">An enumerator for a list of file extensions.</param>
-            <param name="paths">An enumerator for a list of probe paths.</param>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.FileFinder.Extensions">
-            <summary>
-            Gets the list of file extensions to try.
-            </summary>
-            <remarks>Include the '.' in each extension.</remarks>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.FileFinder.Paths">
-            <summary>
-            Gets a list of file paths to try.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.FileFinder.Find(System.String)">
-            <summary>
-            Finds a file that exists on the file system using the <see cref="P:Jacobi.Vst.Core.Plugin.FileFinder.Paths"/> and <see cref="P:Jacobi.Vst.Core.Plugin.FileFinder.Extensions"/>.
-            </summary>
-            <param name="fileNameWithoutExtension">The name of the file to find (without file extension).</param>
-            <returns>Returns null if no file was found. Otherwise the full file path is returned.</returns>
-        </member>
         <member name="T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub">
             <summary>
             The Vst Host Stub called by the Plugin (Framework).
