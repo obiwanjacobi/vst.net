@@ -29,7 +29,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         {
             VstAudioBufferManager bufferMgr = CreateNew();
 
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 for (int i = 0; i < buffer.SampleCount; i++)
                 {
@@ -42,7 +42,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
         private void AssertAllBuffersHasValue(VstAudioBufferManager bufferMgr, float value)
         {
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 AssertBufferHasValue(buffer, value);
             }
@@ -83,7 +83,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
             AssertAllBuffersHasValue(bufferMgr, _testValue);
 
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 bufferMgr.ClearBuffer(buffer);
             }
@@ -97,7 +97,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
             VstAudioBufferManager bufferMgr = CreateNew(_testValue);
 
             int counter = 0;
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 counter++;
             }
