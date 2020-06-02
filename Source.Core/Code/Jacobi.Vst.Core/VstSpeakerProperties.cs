@@ -1,4 +1,6 @@
-﻿namespace Jacobi.Vst.Core
+﻿using System;
+
+namespace Jacobi.Vst.Core
 {
     /// <summary>
     /// Used to communicate speaker properties to the host.
@@ -27,7 +29,7 @@
         /// </summary>
         public float Radius { get; set; }
 
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// for new setups, new names should be given (L/R/C... won't do).
         /// </summary>

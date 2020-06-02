@@ -21,7 +21,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstFileSelect_Title()
         {
             VstFileSelect fs = new VstFileSelect();
-            fs.Title.Should().BeNull();
+            fs.Title.Should().BeEmpty();
 
             fs.Title = String.Empty;
             fs.Title.Should().BeEmpty();
@@ -40,7 +40,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstFileType_Name()
         {
             VstFileType ft = new VstFileType();
-            ft.Name.Should().BeNull();
+            ft.Name.Should().BeEmpty();
 
             ft.Name = String.Empty;
             ft.Name.Should().BeEmpty();
@@ -59,7 +59,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstFileType_Extension()
         {
             VstFileType ft = new VstFileType();
-            ft.Extension.Should().BeNull();
+            ft.Extension.Should().BeEmpty();
 
             ft.Extension = String.Empty;
             ft.Extension.Should().BeEmpty();
@@ -78,7 +78,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstVstMidiKeyName_Name()
         {
             VstMidiKeyName mkn = new VstMidiKeyName();
-            mkn.Name.Should().BeNull();
+            mkn.Name.Should().BeEmpty();
 
             mkn.Name = String.Empty;
             mkn.Name.Should().BeEmpty();
@@ -97,7 +97,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstMidiProgramCategory_Name()
         {
             VstMidiProgramCategory mpc = new VstMidiProgramCategory();
-            mpc.Name.Should().BeNull();
+            mpc.Name.Should().BeEmpty();
 
             mpc.Name = String.Empty;
             mpc.Name.Should().BeEmpty();
@@ -116,7 +116,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstMidiProgramName_Name()
         {
             VstMidiProgramName mpn = new VstMidiProgramName();
-            mpn.Name.Should().BeNull();
+            mpn.Name.Should().BeEmpty();
 
             mpn.Name = String.Empty;
             mpn.Name.Should().BeEmpty();
@@ -135,7 +135,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstParameterProperties_Label()
         {
             VstParameterProperties mpn = new VstParameterProperties();
-            mpn.Label.Should().BeNull();
+            mpn.Label.Should().BeEmpty();
 
             mpn.Label = String.Empty;
             mpn.Label.Should().BeEmpty();
@@ -154,7 +154,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstParameterProperties_ShortLabel()
         {
             VstParameterProperties mpn = new VstParameterProperties();
-            mpn.ShortLabel.Should().BeNull();
+            mpn.ShortLabel.Should().BeEmpty();
 
             mpn.ShortLabel = String.Empty;
             mpn.ShortLabel.Should().BeEmpty();
@@ -173,7 +173,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstParameterProperties_CategoryLabel()
         {
             VstParameterProperties mpn = new VstParameterProperties();
-            mpn.CategoryLabel.Should().BeNull();
+            mpn.CategoryLabel.Should().BeEmpty();
 
             mpn.CategoryLabel = String.Empty;
             mpn.CategoryLabel.Should().BeEmpty();
@@ -192,7 +192,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstPinProperties_Label()
         {
             VstPinProperties pp = new VstPinProperties();
-            pp.Label.Should().BeNull();
+            pp.Label.Should().BeEmpty();
 
             pp.Label = String.Empty;
             pp.Label.Should().BeEmpty();
@@ -211,7 +211,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstPinProperties_ShortLabel()
         {
             VstPinProperties mpn = new VstPinProperties();
-            mpn.ShortLabel.Should().BeNull();
+            mpn.ShortLabel.Should().BeEmpty();
 
             mpn.ShortLabel = String.Empty;
             mpn.ShortLabel.Should().BeEmpty();
@@ -230,7 +230,7 @@ namespace Jacobi.Vst.UnitTest.Core
         public void Test_MaxLength_VstSpeakerProperties_Name()
         {
             VstSpeakerProperties mpn = new VstSpeakerProperties();
-            mpn.Name.Should().BeNull();
+            mpn.Name.Should().BeEmpty();
 
             mpn.Name = String.Empty;
             mpn.Name.Should().BeEmpty();

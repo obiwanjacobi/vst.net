@@ -11,7 +11,7 @@
     /// </remarks>
     public class VstHostCommandDeprecatedAdapter : VstHostCommandAdapter, Deprecated.IVstHostCommandsDeprecated20
     {
-        private IVstHostCommandsDeprecated20 _deprecatedStub;
+        private IVstHostCommandsDeprecated20? _deprecatedStub;
 
         /// <summary>
         /// Constructs a new adapter instance on the passed <paramref name="hostCmdStub"/>.
@@ -20,7 +20,8 @@
         public VstHostCommandDeprecatedAdapter(IVstHostCommandStub hostCmdStub)
             : base(hostCmdStub)
         {
-            _deprecatedStub = (IVstHostCommandsDeprecated20)hostCmdStub;
+            _deprecatedStub = (IVstHostCommandsDeprecated20)hostCmdStub
+                ?? throw new ArgumentNullException(nameof(hostCmdStub));
         }
 
         #region IVstHostCommandsDeprecated20 Members
@@ -31,7 +32,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool WantMidi()
         {
-            return _deprecatedStub.WantMidi();
+            ThrowIfDisposed();
+            return _deprecatedStub!.WantMidi();
         }
 
         /// <summary>
@@ -42,7 +44,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SetTime(VstTimeInfo timeInfo, VstTimeInfoFlags filterFlags)
         {
-            return _deprecatedStub.SetTime(timeInfo, filterFlags);
+            ThrowIfDisposed();
+            return _deprecatedStub!.SetTime(timeInfo, filterFlags);
         }
 
         /// <summary>
@@ -52,7 +55,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetTempoAt(int sampleIndex)
         {
-            return _deprecatedStub.GetTempoAt(sampleIndex);
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetTempoAt(sampleIndex);
         }
 
         /// <summary>
@@ -61,7 +65,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetAutomatableParameterCount()
         {
-            return _deprecatedStub.GetAutomatableParameterCount();
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetAutomatableParameterCount();
         }
 
         /// <summary>
@@ -71,7 +76,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetParameterQuantization(int parameterIndex)
         {
-            return _deprecatedStub.GetParameterQuantization(parameterIndex);
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetParameterQuantization(parameterIndex);
         }
 
         /// <summary>
@@ -80,7 +86,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool NeedIdle()
         {
-            return _deprecatedStub.NeedIdle();
+            ThrowIfDisposed();
+            return _deprecatedStub!.NeedIdle();
         }
 
         /// <summary>
@@ -90,7 +97,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public IntPtr GetPreviousPlugin(int pinIndex)
         {
-            return _deprecatedStub.GetPreviousPlugin(pinIndex);
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetPreviousPlugin(pinIndex);
         }
 
         /// <summary>
@@ -100,7 +108,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public IntPtr GetNextPlugin(int pinIndex)
         {
-            return _deprecatedStub.GetNextPlugin(pinIndex);
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetNextPlugin(pinIndex);
         }
 
         /// <summary>
@@ -109,7 +118,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int WillReplaceOrAccumulate()
         {
-            return _deprecatedStub.WillReplaceOrAccumulate();
+            ThrowIfDisposed();
+            return _deprecatedStub!.WillReplaceOrAccumulate();
         }
 
         /// <summary>
@@ -119,7 +129,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SetOutputSampleRate(float sampleRate)
         {
-            return _deprecatedStub.SetOutputSampleRate(sampleRate);
+            ThrowIfDisposed();
+            return _deprecatedStub!.SetOutputSampleRate(sampleRate);
         }
 
         /// <summary>
@@ -128,7 +139,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstSpeakerArrangement GetOutputSpeakerArrangement()
         {
-            return _deprecatedStub.GetOutputSpeakerArrangement();
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetOutputSpeakerArrangement();
         }
 
         /// <summary>
@@ -138,7 +150,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SetIcon(IntPtr icon)
         {
-            return _deprecatedStub.SetIcon(icon);
+            ThrowIfDisposed();
+            return _deprecatedStub!.SetIcon(icon);
         }
 
         /// <summary>
@@ -147,7 +160,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public IntPtr OpenWindow()
         {
-            return _deprecatedStub.OpenWindow();
+            ThrowIfDisposed();
+            return _deprecatedStub!.OpenWindow();
         }
 
         /// <summary>
@@ -157,7 +171,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool CloseWindow(IntPtr wnd)
         {
-            return _deprecatedStub.CloseWindow(wnd);
+            ThrowIfDisposed();
+            return _deprecatedStub!.CloseWindow(wnd);
         }
 
         /// <summary>
@@ -167,7 +182,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool EditFile(string xml)
         {
-            return _deprecatedStub.EditFile(xml);
+            ThrowIfDisposed();
+            return _deprecatedStub!.EditFile(xml);
         }
 
         /// <summary>
@@ -176,7 +192,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetChunkFile()
         {
-            return _deprecatedStub.GetChunkFile();
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetChunkFile();
         }
 
         /// <summary>
@@ -185,7 +202,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstSpeakerArrangement GetInputSpeakerArrangement()
         {
-            return _deprecatedStub.GetInputSpeakerArrangement();
+            ThrowIfDisposed();
+            return _deprecatedStub!.GetInputSpeakerArrangement();
         }
 
         #endregion
@@ -200,7 +218,8 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool PinConnected(int connectionIndex, bool output)
         {
-            return _deprecatedStub.PinConnected(connectionIndex, output);
+            ThrowIfDisposed();
+            return _deprecatedStub!.PinConnected(connectionIndex, output);
         }
 
         #endregion
@@ -217,6 +236,14 @@
             }
 
             base.Dispose(disposing);
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (_deprecatedStub == null)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
         }
     }
 }

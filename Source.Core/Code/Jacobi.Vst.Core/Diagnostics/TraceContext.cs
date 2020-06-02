@@ -13,8 +13,8 @@
     public partial class TraceContext
     {
         private TraceSource _traceSource;
-        private string _contextDescription;
-        private Type _commandInterface;
+        private string? _contextDescription;
+        private Type? _commandInterface;
 
         /// <summary>
         /// Consrtucts a new instance using the <paramref name="contextName"/> and specified <paramref name="commandInterface"/>.
@@ -59,7 +59,7 @@
             if (_traceSource.Switch.ShouldTrace(TraceEventType.Verbose))
             {
                 string message = "Dispatch (Begin) ";
-                OpcodeInfo opcodeInfo = LookupOpcodeInfo(opcode);
+                OpcodeInfo? opcodeInfo = LookupOpcodeInfo(opcode);
 
                 if (opcodeInfo != null)
                 {
@@ -211,9 +211,9 @@
         }
 
         // refer to TraceContext.OpcodeInfo.cs
-        private OpcodeInfo LookupOpcodeInfo(int opcode)
+        private OpcodeInfo? LookupOpcodeInfo(int opcode)
         {
-            OpcodeInfo[] lookupTable = null;
+            OpcodeInfo[]? lookupTable = null;
 
             if (typeof(IVstHostCommands20).IsAssignableFrom(_commandInterface))
             {

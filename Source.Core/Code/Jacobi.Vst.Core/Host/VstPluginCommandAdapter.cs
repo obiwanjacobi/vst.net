@@ -16,7 +16,9 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="pluginCmdStub">Will be used to forward calls to. Must not be null.</param>
         [CLSCompliant(false)]
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public VstPluginCommandAdapter(Plugin.IVstPluginCommandStub pluginCmdStub)
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         {
             Throw.IfArgumentIsNull(pluginCmdStub, nameof(pluginCmdStub));
 

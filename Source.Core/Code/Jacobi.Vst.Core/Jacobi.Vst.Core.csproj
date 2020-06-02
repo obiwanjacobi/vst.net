@@ -9,6 +9,7 @@
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
     <Platforms>x64;x86</Platforms>
+    <Nullable>enable</Nullable>
     
   </PropertyGroup>
 
