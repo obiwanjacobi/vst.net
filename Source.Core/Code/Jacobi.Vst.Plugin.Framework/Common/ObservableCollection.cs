@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -62,7 +61,7 @@ namespace Jacobi.Vst.Framework.Common
         /// <param name="oldItem">Can be null.</param>
         protected void OnCollectionChanged(NotifyCollectionChangedAction action, object newItem, object oldItem)
         {
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
+            CollectionChanged?.Invoke(this, NotifyCollectionChangedBase.CreateNotifyCollectionChangedEventArgs(action, newItem, oldItem));
         }
 
         /// <summary>
@@ -73,7 +72,7 @@ namespace Jacobi.Vst.Framework.Common
         /// <param name="oldItems">Can be null.</param>
         protected void OnCollectionChanged(NotifyCollectionChangedAction action, IList newItems, IList oldItems)
         {
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(action, newItems, oldItems));
+            CollectionChanged?.Invoke(this, NotifyCollectionChangedBase.CreateNotifyCollectionChangedEventArgs(action, newItems, oldItems));
         }
 
         #endregion
