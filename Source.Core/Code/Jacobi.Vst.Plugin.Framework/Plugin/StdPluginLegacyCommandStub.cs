@@ -1,7 +1,7 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Core.Deprecated;
+    using Jacobi.Vst.Core.Legacy;
     using System;
     using System.Drawing;
 
@@ -10,9 +10,9 @@
     /// </summary>
     /// <remarks>Derive your public plugin command stub class from this class if you need to support older VST versions.
     /// Most methods are not implemented. You should override and implement the specific methods you need to support.</remarks>
-    public abstract class StdPluginDeprecatedCommandStub : StdPluginCommandStub, IVstPluginCommandsDeprecated20
+    public abstract class StdPluginLegacyCommandStub : StdPluginCommandStub, IVstPluginCommandsLegacy20
     {
-        #region IVstPluginCommandsDeprecated20 Members
+        #region IVstPluginCommandsLegacy20 Members
 
         /// <summary>
         /// Not implemented.
@@ -161,7 +161,7 @@
 
         #endregion
 
-        #region IVstPluginCommandsDeprecated10 Members
+        #region IVstPluginCommandsLegacy10 Members
 
         /// <summary>
         /// Not implemented.
@@ -211,7 +211,7 @@
 
         #endregion
 
-        #region IVstPluginCommandsDeprecatedBase Members
+        #region IVstPluginCommandsLegacyBase Members
 
         /// <summary>
         /// Not implemented.

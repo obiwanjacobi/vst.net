@@ -307,17 +307,17 @@ System::Boolean HostCommandStub::CloseFileSelector(Jacobi::Vst::Core::VstFileSel
 }
 
 //
-// Deprecated VST 2.4 methods
+// Legacy VST 2.4 methods
 //
 
-// IVstPluginCommandsDeprecated10
+// IVstPluginCommandsLegacy10
 System::Boolean HostCommandStub::PinConnected(System::Int32 connectionIndex, System::Boolean output)
 {
 	// Note: retval 0 = true
 	return (CallHost(Vst2HostCommands::PinConnected, connectionIndex, safe_cast<Vst2IntPtr>(output), 0, 0) == 0);
 }
 
-// IVstPluginCommandsDeprecated20
+// IVstPluginCommandsLegacy20
 System::Boolean HostCommandStub::WantMidi()
 {
 	return (CallHost(Vst2HostCommands::WantMidi, 0, 0, 0, 0) != 0);

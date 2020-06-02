@@ -51,604 +51,6 @@
         <member name="F:Jacobi.Vst.Core.Constants.MaxCanDoLength">
             <summary>used in both host and plugin cando's.</summary>
         </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated10">
-            <summary>
-            Contains all the operations from VST 1.0 that were deprecated in VST 2.4.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated10.PinConnected(System.Int32,System.Boolean)">
-            <summary>
-            Reports whether the spefied pin at the <paramref name="connectionIndex"/> is connected.
-            </summary>
-            <param name="connectionIndex">A zero-based index of the connection pin.</param>
-            <param name="output">Report in output pins when True, otherwise (False) report on input pins.</param>
-            <returns>Returns True when the pin is connected, otherwise False is returned.</returns>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20">
-            <summary>
-            Contains all the operations from VST 2.0 that were deprecated in VST 2.4.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.WantMidi">
-            <summary>
-            Indicates to the Host that the Plugin wants to process Midi events.
-            </summary>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.SetTime(Jacobi.Vst.Core.VstTimeInfo,Jacobi.Vst.Core.VstTimeInfoFlags)">
-            <summary>
-            Sets a new time for the Host.
-            </summary>
-            <param name="timeInfo">Must not be null.</param>
-            <param name="filterFlags">Unclear what the purpose is for these flags.</param>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetTempoAt(System.Int32)">
-            <summary>
-            Retrieves the tempo at specified <paramref name="sampleIndex"/> location.
-            </summary>
-            <param name="sampleIndex">A zero-based sample index.</param>
-            <returns>Returns the tempo in bmp * 10000.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetAutomatableParameterCount">
-            <summary>
-            Returns the number of parameters that support automation.
-            </summary>
-            <returns>Returns the number of parameters that support automation.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetParameterQuantization(System.Int32)">
-            <summary>
-            Returns the integer value for +1.0 representation,
-            or 1 if full single float precision is maintained in automation.
-            </summary>
-            <param name="parameterIndex">A zero-based index into the parmeter collection or -1 for all/any.</param>
-            <returns>Returns the integer value for +1.0 representation, or 1 if full single float precision is maintained in automation.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.NeedIdle">
-            <summary>
-            Indicates to the host that the Plugin needs idle calls (outside its editor window).
-            </summary>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetPreviousPlugin(System.Int32)">
-            <summary>
-            Retrieves the previous Plugin based on the specified <paramref name="pinIndex"/>.
-            </summary>
-            <param name="pinIndex">A zero-based pin index. Specify -1 for next.</param>
-            <returns>Return System.IntPtr.Zero when unsuccessful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetNextPlugin(System.Int32)">
-            <summary>
-            Retrieves the next Plugin based on the specified <paramref name="pinIndex"/>.
-            </summary>
-            <param name="pinIndex">A zero-based pin index. Specify -1 for next.</param>
-            <returns>Return System.IntPtr.Zero when unsuccessful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.WillReplaceOrAccumulate">
-            <summary>
-            Returns an indication how the Host processes audio.
-            </summary>
-            <returns>Returns 0=Not Supported, 1=Replace, 2=Accumulate.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.SetOutputSampleRate(System.Single)">
-            <summary>
-            For variable IO. Sets the output sample rate.
-            </summary>
-            <param name="sampleRate">The sample rate.</param>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetOutputSpeakerArrangement">
-            <summary>
-            Gets the output speaker arrangement.
-            </summary>
-            <returns>Returns the speaker arrangement.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.SetIcon(System.IntPtr)">
-            <summary>
-            Provides the host with an icon representation of the plugin.
-            </summary>
-            <param name="icon">Passes the icon Handle to the Host. Must not be null.</param>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.OpenWindow">
-            <summary>
-            Opens a new host window.
-            </summary>
-            <returns>Returns the Win32 HWND window handle.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.CloseWindow(System.IntPtr)">
-            <summary>
-            Closes a window previously opened by <see cref="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.OpenWindow"/>.
-            </summary>
-            <param name="wnd">The window handle.</param>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.EditFile(System.String)">
-            <summary>
-            Opens an audio editor window; defined by <paramref name="xml"/>.
-            </summary>
-            <param name="xml">Must not be null or empty.</param>
-            <returns>Returns True when the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetChunkFile">
-            <summary>
-            Gets the native path of currently loading bank or project.
-            </summary>
-            <returns>Return the file path to the chunk file.</returns>
-            <remarks>Call from within GetChunk.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20.GetInputSpeakerArrangement">
-            <summary>
-            Gets the input speaker arrangement.
-            </summary>
-            <returns>Returns the speaker arrangement.</returns>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecatedBase">
-            <summary>
-            Contains all the operations from VST 1.0 that were deprecated in VST 2.4.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecatedBase.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
-            <summary>
-            Processes audio in an accumulating fashion.
-            </summary>
-            <param name="inputs">Audio input buffers. Must not be null.</param>
-            <param name="outputs">Audio output buffers. Must not be null.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10">
-            <summary>
-            Contains all the operations from VST 1.0 that were deprecated in VST 2.4.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10.GetVu">
-            <summary>
-            Called if the VstPluginDeprecatedInfo.DeprecatedFlags has the "HasClip" or "HasVu" flags set.
-            </summary>
-            <returns>Returns the current Vu value.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10.EditorKey(System.Int32)">
-            <summary>
-            Called when a key stroke occurs in the editor.
-            </summary>
-            <param name="keycode">The key code value.</param>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10.EditorTop">
-            <summary>
-            The window that hosts the plugin editor is put on top of other windows.
-            </summary>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10.EditorSleep">
-            <summary>
-            The window that hosts the plugin editor is put in the background.
-            </summary>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated10.Identify">
-            <summary>
-            Returns an identifaction code.
-            </summary>
-            <returns>Returns 'NvEf' as an integer.</returns>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20">
-            <summary>
-            Contains all the operations from VST 2.0 that were deprecated in VST 2.4.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.GetProgramCategoriesCount">
-            <summary>
-            Retrieves the number of program categories.
-            </summary>
-            <returns>Returns the number of program categories.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.CopyCurrentProgramTo(System.Int32)">
-            <summary>
-            Copy the current program to the program at <paramref name="programIndex"/>.
-            </summary>
-            <param name="programIndex">A zero-based index into the program collection.</param>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.ConnectInput(System.Int32,System.Boolean)">
-            <summary>
-            Notifies the plugin of the fact that an input pin was dis/connected.
-            </summary>
-            <param name="inputIndex">A zero-based index into the input connection collection.</param>
-            <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.ConnectOutput(System.Int32,System.Boolean)">
-            <summary>
-            Notifies the plugin of the fact that an output pin was dis/connected.
-            </summary>
-            <param name="outputIndex">A zero-based index into the output connection collection.</param>
-            <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.GetCurrentPosition">
-            <summary>
-            For external DSP.
-            </summary>
-            <returns>Returns the current position.</returns>
-            <remarks>The <see cref="T:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags"/>.ExtIsAsync 
-            must be set in order for this method to be called.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.GetDestinationBuffer">
-            <summary>
-            For external DSP.
-            </summary>
-            <returns>Returns the destination audio buffer.</returns>
-            <remarks>The <see cref="T:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags"/>.ExtHasBuffer 
-            must be set in order for this method to be called.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
-            <summary>
-            Assigns a new block size and sample rate value to the plugin.
-            </summary>
-            <param name="blockSize">The number of samples per frame (cycle).</param>
-            <param name="sampleRate">The new sample rate.</param>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.GetErrorText">
-            <summary>
-            Retrieves an error text from the plugin.
-            </summary>
-            <returns>Returns the error text.</returns>
-            <remarks>The length of the text must not exceed 256 characters.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.Idle">
-            <summary>
-            Called by the host to allow some light idle processing by the plugin.
-            </summary>
-            <returns>Returns True when subsequent Idle calls should follow. 
-            False is returned when no further Idle processing is required.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.GetIcon">
-            <summary>
-            Retrieves an iconic representation of the plugin.
-            </summary>
-            <returns>Returns null when not supported.</returns>
-            <remarks>The VST specs are not final for this method. Not supported.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.SetViewPosition(System.Drawing.Point@)">
-            <summary>
-            Moves the view to a new position inside the window.
-            </summary>
-            <param name="position">The x and y coordinates.</param>
-            <returns>Returns true if the call was successful.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20.KeysRequired">
-            <summary>
-            Indicates if keys are required by the plugin.
-            </summary>
-            <returns>Returns true if keys are required.</returns>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.VstGenericEvent">
-            <summary>
-            The VstGenericEvent represents an event of one of the deprecated event types.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstGenericEvent.#ctor(Jacobi.Vst.Core.VstEventTypes,System.Int32,System.Byte[])">
-            <summary>
-            Constructs a new immutable instance.
-            </summary>
-            <param name="eventType">The type of event. Cannot be <see cref="F:Jacobi.Vst.Core.VstEventTypes.MidiEvent"/> or <see cref="F:Jacobi.Vst.Core.VstEventTypes.MidiSysExEvent"/>.</param>
-            <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
-            <param name="data">The associated data for this event.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter">
-            <summary>
-            This class implements an extension to the <see cref="T:Jacobi.Vst.Core.Host.VstHostCommandAdapter"/> to include all depricated Host members.
-            </summary>
-            <remarks>
-            Only instantiate this class when you have a reference to an implementation of the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> interface.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.#ctor(Jacobi.Vst.Core.Host.IVstHostCommandStub)">
-            <summary>
-            Constructs a new adapter instance on the passed <paramref name="hostCmdStub"/>.
-            </summary>
-            <param name="hostCmdStub">An implementation of the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> interface. Must not be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.WantMidi">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.SetTime(Jacobi.Vst.Core.VstTimeInfo,Jacobi.Vst.Core.VstTimeInfoFlags)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="filterFlags">Passed with the forwarded call.</param>
-            <param name="timeInfo">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetTempoAt(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="sampleIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetAutomatableParameterCount">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetParameterQuantization(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="parameterIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.NeedIdle">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetPreviousPlugin(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="pinIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetNextPlugin(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="pinIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.WillReplaceOrAccumulate">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.SetOutputSampleRate(System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="sampleRate">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetOutputSpeakerArrangement">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.SetIcon(System.IntPtr)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="icon">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.OpenWindow">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.CloseWindow(System.IntPtr)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="wnd">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.EditFile(System.String)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="xml">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetChunkFile">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.GetInputSpeakerArrangement">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.PinConnected(System.Int32,System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="connectionIndex">Passed with the forwarded call.</param>
-            <param name="output">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter.Dispose(System.Boolean)">
-            <summary>
-            Called to dispose of this instance.
-            </summary>
-            <param name="disposing">When true also dispose of managed resources. Otherwise only dispose of unmanaged resources.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter">
-            <summary>
-            This class implements an extension to the <see cref="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter"/> to include all depricated Host members.
-            </summary>
-            <remarks>
-            Only instantiate this class when you have a reference to an implementation of the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> interface.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.#ctor(Jacobi.Vst.Core.Plugin.IVstPluginCommandStub)">
-            <summary>
-            Constructs a new instance on the passed <paramref name="pluginCmdStub"/>.
-            </summary>
-            <param name="pluginCmdStub">An implementation of the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> interface. Must not be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.GetProgramCategoriesCount">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.CopyCurrentProgramTo(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.ConnectInput(System.Int32,System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.ConnectOutput(System.Int32,System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.GetCurrentPosition">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.GetDestinationBuffer">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.GetErrorText">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.Idle">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.GetIcon">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.SetViewPosition(System.Drawing.Point@)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.KeysRequired">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.GetVu">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.EditorKey(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.EditorTop">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.EditorSleep">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.Identify">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Deprecated.IVstPluginCommandsDeprecated20"/> implementation.
-            </summary>
-            <param name="inputs">Passed with the forwarded call.</param>
-            <param name="outputs">Passed with the forwarded call.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedInfo">
-            <summary>
-            Plugin deprecated information passed to the Host.
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedInfo.DeprecatedFlags">
-            <summary>
-            Plugin flags.
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedInfo.RealQualities">
-            <summary>
-            Number of realtime qualities (0: realtime).
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedInfo.OfflineQualities">
-            <summary>
-            Number of offline qualities (0: realtime only).
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedInfo.IoRatio">
-            <summary>
-            Input samplerate to output samplerate ratio, not used yet.
-            </summary>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags">
-            <summary>
-            Deprecated capability flags for the plugin.
-            </summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags.None">
-            <summary>Null value.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags.HasClip">
-            <summary>Return > 1. in getVu() if clipped.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags.HasVu">
-            <summary>Return vu value in getVu(); > 1. means clipped.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags.CanMono">
-            <summary>If numInputs == 2, makes sense to be used for mono in.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags.ExtIsAsync">
-            <summary>For external dsp; plug returns immedeately from process()
-            host polls plug position (current block) via effGetCurrentPosition.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Core.Deprecated.VstPluginDeprecatedFlags.ExtHasBuffer">
-            <summary>external dsp, may have their own output buffe (32 bit float)
-            host then requests this via effGetDestinationBuffer.</summary>
-        </member>
         <member name="T:Jacobi.Vst.Core.Diagnostics.ErrorHelper">
             <summary>
             Helper class for formatting errors.
@@ -802,7 +204,7 @@
             Gets the opcode description.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo.Deprecated">
+        <member name="P:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo.Legacy">
             <summary>
             Gets an indication if the opcode is deprecated.
             </summary>
@@ -1141,7 +543,7 @@
             A factory method to create the correct <see cref="T:Jacobi.Vst.Core.Host.VstHostCommandAdapter"/> class type.
             </summary>
             <param name="hostCmdStub">A reference to the host command stub. Must not be null.</param>
-            <returns>Returns an instance of <see cref="T:Jacobi.Vst.Core.Deprecated.VstHostCommandDeprecatedAdapter"/> when the <paramref name="hostCmdStub"/> supports deprecated methods.</returns>
+            <returns>Returns an instance of <see cref="T:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter"/> when the <paramref name="hostCmdStub"/> supports deprecated methods.</returns>
         </member>
         <member name="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter">
             <summary>
@@ -1561,7 +963,7 @@
             A factory method to create the correct <see cref="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter"/> class type.
             </summary>
             <param name="pluginCmdStub">A reference to the plugin command stub. Must not be null.</param>
-            <returns>Returns an instance of <see cref="T:Jacobi.Vst.Core.Deprecated.VstPluginCommandDeprecatedAdapter"/> when the <paramref name="pluginCmdStub"/> supports deprecated methods.</returns>
+            <returns>Returns an instance of <see cref="T:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter"/> when the <paramref name="pluginCmdStub"/> supports deprecated methods.</returns>
         </member>
         <member name="T:Jacobi.Vst.Core.IDirectBufferAccess32">
             <summary>
@@ -2200,6 +1602,604 @@
             </summary>
             <returns>Returns the number of Midi Out channels, or 0 (zero) if not supported.</returns>
         </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy10">
+            <summary>
+            Contains all the operations from VST 1.0 that were deprecated in VST 2.4.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy10.PinConnected(System.Int32,System.Boolean)">
+            <summary>
+            Reports whether the spefied pin at the <paramref name="connectionIndex"/> is connected.
+            </summary>
+            <param name="connectionIndex">A zero-based index of the connection pin.</param>
+            <param name="output">Report in output pins when True, otherwise (False) report on input pins.</param>
+            <returns>Returns True when the pin is connected, otherwise False is returned.</returns>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20">
+            <summary>
+            Contains all the operations from VST 2.0 that were deprecated in VST 2.4.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.WantMidi">
+            <summary>
+            Indicates to the Host that the Plugin wants to process Midi events.
+            </summary>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.SetTime(Jacobi.Vst.Core.VstTimeInfo,Jacobi.Vst.Core.VstTimeInfoFlags)">
+            <summary>
+            Sets a new time for the Host.
+            </summary>
+            <param name="timeInfo">Must not be null.</param>
+            <param name="filterFlags">Unclear what the purpose is for these flags.</param>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetTempoAt(System.Int32)">
+            <summary>
+            Retrieves the tempo at specified <paramref name="sampleIndex"/> location.
+            </summary>
+            <param name="sampleIndex">A zero-based sample index.</param>
+            <returns>Returns the tempo in bmp * 10000.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetAutomatableParameterCount">
+            <summary>
+            Returns the number of parameters that support automation.
+            </summary>
+            <returns>Returns the number of parameters that support automation.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetParameterQuantization(System.Int32)">
+            <summary>
+            Returns the integer value for +1.0 representation,
+            or 1 if full single float precision is maintained in automation.
+            </summary>
+            <param name="parameterIndex">A zero-based index into the parmeter collection or -1 for all/any.</param>
+            <returns>Returns the integer value for +1.0 representation, or 1 if full single float precision is maintained in automation.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.NeedIdle">
+            <summary>
+            Indicates to the host that the Plugin needs idle calls (outside its editor window).
+            </summary>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetPreviousPlugin(System.Int32)">
+            <summary>
+            Retrieves the previous Plugin based on the specified <paramref name="pinIndex"/>.
+            </summary>
+            <param name="pinIndex">A zero-based pin index. Specify -1 for next.</param>
+            <returns>Return System.IntPtr.Zero when unsuccessful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetNextPlugin(System.Int32)">
+            <summary>
+            Retrieves the next Plugin based on the specified <paramref name="pinIndex"/>.
+            </summary>
+            <param name="pinIndex">A zero-based pin index. Specify -1 for next.</param>
+            <returns>Return System.IntPtr.Zero when unsuccessful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.WillReplaceOrAccumulate">
+            <summary>
+            Returns an indication how the Host processes audio.
+            </summary>
+            <returns>Returns 0=Not Supported, 1=Replace, 2=Accumulate.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.SetOutputSampleRate(System.Single)">
+            <summary>
+            For variable IO. Sets the output sample rate.
+            </summary>
+            <param name="sampleRate">The sample rate.</param>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetOutputSpeakerArrangement">
+            <summary>
+            Gets the output speaker arrangement.
+            </summary>
+            <returns>Returns the speaker arrangement.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.SetIcon(System.IntPtr)">
+            <summary>
+            Provides the host with an icon representation of the plugin.
+            </summary>
+            <param name="icon">Passes the icon Handle to the Host. Must not be null.</param>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.OpenWindow">
+            <summary>
+            Opens a new host window.
+            </summary>
+            <returns>Returns the Win32 HWND window handle.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.CloseWindow(System.IntPtr)">
+            <summary>
+            Closes a window previously opened by <see cref="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.OpenWindow"/>.
+            </summary>
+            <param name="wnd">The window handle.</param>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.EditFile(System.String)">
+            <summary>
+            Opens an audio editor window; defined by <paramref name="xml"/>.
+            </summary>
+            <param name="xml">Must not be null or empty.</param>
+            <returns>Returns True when the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetChunkFile">
+            <summary>
+            Gets the native path of currently loading bank or project.
+            </summary>
+            <returns>Return the file path to the chunk file.</returns>
+            <remarks>Call from within GetChunk.</remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20.GetInputSpeakerArrangement">
+            <summary>
+            Gets the input speaker arrangement.
+            </summary>
+            <returns>Returns the speaker arrangement.</returns>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacyBase">
+            <summary>
+            Contains all the operations from VST 1.0 that were deprecated in VST 2.4.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacyBase.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+            <summary>
+            Processes audio in an accumulating fashion.
+            </summary>
+            <param name="inputs">Audio input buffers. Must not be null.</param>
+            <param name="outputs">Audio output buffers. Must not be null.</param>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy10">
+            <summary>
+            Contains all the operations from VST 1.0 that were deprecated in VST 2.4.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy10.GetVu">
+            <summary>
+            Called if the VstPluginLegacyInfo.LegacyFlags has the "HasClip" or "HasVu" flags set.
+            </summary>
+            <returns>Returns the current Vu value.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy10.EditorKey(System.Int32)">
+            <summary>
+            Called when a key stroke occurs in the editor.
+            </summary>
+            <param name="keycode">The key code value.</param>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy10.EditorTop">
+            <summary>
+            The window that hosts the plugin editor is put on top of other windows.
+            </summary>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy10.EditorSleep">
+            <summary>
+            The window that hosts the plugin editor is put in the background.
+            </summary>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy10.Identify">
+            <summary>
+            Returns an identifaction code.
+            </summary>
+            <returns>Returns 'NvEf' as an integer.</returns>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20">
+            <summary>
+            Contains all the operations from VST 2.0 that were deprecated in VST 2.4.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.GetProgramCategoriesCount">
+            <summary>
+            Retrieves the number of program categories.
+            </summary>
+            <returns>Returns the number of program categories.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.CopyCurrentProgramTo(System.Int32)">
+            <summary>
+            Copy the current program to the program at <paramref name="programIndex"/>.
+            </summary>
+            <param name="programIndex">A zero-based index into the program collection.</param>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.ConnectInput(System.Int32,System.Boolean)">
+            <summary>
+            Notifies the plugin of the fact that an input pin was dis/connected.
+            </summary>
+            <param name="inputIndex">A zero-based index into the input connection collection.</param>
+            <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.ConnectOutput(System.Int32,System.Boolean)">
+            <summary>
+            Notifies the plugin of the fact that an output pin was dis/connected.
+            </summary>
+            <param name="outputIndex">A zero-based index into the output connection collection.</param>
+            <param name="connected">Indicates if the pin was connected (True) or disconnected (False).</param>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.GetCurrentPosition">
+            <summary>
+            For external DSP.
+            </summary>
+            <returns>Returns the current position.</returns>
+            <remarks>The <see cref="T:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags"/>.ExtIsAsync 
+            must be set in order for this method to be called.</remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.GetDestinationBuffer">
+            <summary>
+            For external DSP.
+            </summary>
+            <returns>Returns the destination audio buffer.</returns>
+            <remarks>The <see cref="T:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags"/>.ExtHasBuffer 
+            must be set in order for this method to be called.</remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
+            <summary>
+            Assigns a new block size and sample rate value to the plugin.
+            </summary>
+            <param name="blockSize">The number of samples per frame (cycle).</param>
+            <param name="sampleRate">The new sample rate.</param>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.GetErrorText">
+            <summary>
+            Retrieves an error text from the plugin.
+            </summary>
+            <returns>Returns the error text.</returns>
+            <remarks>The length of the text must not exceed 256 characters.</remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.Idle">
+            <summary>
+            Called by the host to allow some light idle processing by the plugin.
+            </summary>
+            <returns>Returns True when subsequent Idle calls should follow. 
+            False is returned when no further Idle processing is required.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.GetIcon">
+            <summary>
+            Retrieves an iconic representation of the plugin.
+            </summary>
+            <returns>Returns null when not supported.</returns>
+            <remarks>The VST specs are not final for this method. Not supported.</remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.SetViewPosition(System.Drawing.Point@)">
+            <summary>
+            Moves the view to a new position inside the window.
+            </summary>
+            <param name="position">The x and y coordinates.</param>
+            <returns>Returns true if the call was successful.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20.KeysRequired">
+            <summary>
+            Indicates if keys are required by the plugin.
+            </summary>
+            <returns>Returns true if keys are required.</returns>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.VstGenericEvent">
+            <summary>
+            The VstGenericEvent represents an event of one of the deprecated event types.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstGenericEvent.#ctor(Jacobi.Vst.Core.VstEventTypes,System.Int32,System.Byte[])">
+            <summary>
+            Constructs a new immutable instance.
+            </summary>
+            <param name="eventType">The type of event. Cannot be <see cref="F:Jacobi.Vst.Core.VstEventTypes.MidiEvent"/> or <see cref="F:Jacobi.Vst.Core.VstEventTypes.MidiSysExEvent"/>.</param>
+            <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
+            <param name="data">The associated data for this event.</param>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter">
+            <summary>
+            This class implements an extension to the <see cref="T:Jacobi.Vst.Core.Host.VstHostCommandAdapter"/> to include all depricated Host members.
+            </summary>
+            <remarks>
+            Only instantiate this class when you have a reference to an implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> interface.
+            </remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.#ctor(Jacobi.Vst.Core.Host.IVstHostCommandStub)">
+            <summary>
+            Constructs a new adapter instance on the passed <paramref name="hostCmdStub"/>.
+            </summary>
+            <param name="hostCmdStub">An implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> interface. Must not be null.</param>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.WantMidi">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.SetTime(Jacobi.Vst.Core.VstTimeInfo,Jacobi.Vst.Core.VstTimeInfoFlags)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="filterFlags">Passed with the forwarded call.</param>
+            <param name="timeInfo">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetTempoAt(System.Int32)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="sampleIndex">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetAutomatableParameterCount">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetParameterQuantization(System.Int32)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="parameterIndex">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.NeedIdle">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetPreviousPlugin(System.Int32)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="pinIndex">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetNextPlugin(System.Int32)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="pinIndex">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.WillReplaceOrAccumulate">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.SetOutputSampleRate(System.Single)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="sampleRate">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetOutputSpeakerArrangement">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.SetIcon(System.IntPtr)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="icon">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.OpenWindow">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.CloseWindow(System.IntPtr)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="wnd">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.EditFile(System.String)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="xml">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetChunkFile">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetInputSpeakerArrangement">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.PinConnected(System.Int32,System.Boolean)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="connectionIndex">Passed with the forwarded call.</param>
+            <param name="output">Passed with the forwarded call.</param>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.Dispose(System.Boolean)">
+            <summary>
+            Called to dispose of this instance.
+            </summary>
+            <param name="disposing">When true also dispose of managed resources. Otherwise only dispose of unmanaged resources.</param>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter">
+            <summary>
+            This class implements an extension to the <see cref="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter"/> to include all depricated Host members.
+            </summary>
+            <remarks>
+            Only instantiate this class when you have a reference to an implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> interface.
+            </remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.#ctor(Jacobi.Vst.Core.Plugin.IVstPluginCommandStub)">
+            <summary>
+            Constructs a new instance on the passed <paramref name="pluginCmdStub"/>.
+            </summary>
+            <param name="pluginCmdStub">An implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> interface. Must not be null.</param>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetProgramCategoriesCount">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.CopyCurrentProgramTo(System.Int32)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.ConnectInput(System.Int32,System.Boolean)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.ConnectOutput(System.Int32,System.Boolean)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetCurrentPosition">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetDestinationBuffer">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetErrorText">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.Idle">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetIcon">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.SetViewPosition(System.Drawing.Point@)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.KeysRequired">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetVu">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.EditorKey(System.Int32)">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.EditorTop">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.EditorSleep">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.Identify">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <returns>Returns the value returned from the forwarded call.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+            <summary>
+            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
+            </summary>
+            <param name="inputs">Passed with the forwarded call.</param>
+            <param name="outputs">Passed with the forwarded call.</param>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo">
+            <summary>
+            Plugin deprecated information passed to the Host.
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.LegacyFlags">
+            <summary>
+            Plugin flags.
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.RealQualities">
+            <summary>
+            Number of realtime qualities (0: realtime).
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.OfflineQualities">
+            <summary>
+            Number of offline qualities (0: realtime only).
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.IoRatio">
+            <summary>
+            Input samplerate to output samplerate ratio, not used yet.
+            </summary>
+        </member>
+        <member name="T:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags">
+            <summary>
+            Legacy capability flags for the plugin.
+            </summary>
+        </member>
+        <member name="F:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags.None">
+            <summary>Null value.</summary>
+        </member>
+        <member name="F:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags.HasClip">
+            <summary>Return > 1. in getVu() if clipped.</summary>
+        </member>
+        <member name="F:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags.HasVu">
+            <summary>Return vu value in getVu(); > 1. means clipped.</summary>
+        </member>
+        <member name="F:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags.CanMono">
+            <summary>If numInputs == 2, makes sense to be used for mono in.</summary>
+        </member>
+        <member name="F:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags.ExtIsAsync">
+            <summary>For external dsp; plug returns immedeately from process()
+            host polls plug position (current block) via effGetCurrentPosition.</summary>
+        </member>
+        <member name="F:Jacobi.Vst.Core.Legacy.VstPluginLegacyFlags.ExtHasBuffer">
+            <summary>external dsp, may have their own output buffe (32 bit float)
+            host then requests this via effGetDestinationBuffer.</summary>
+        </member>
         <member name="T:Jacobi.Vst.Core.Plugin.AssemblyLoader">
             <summary>
             The AssemblyLoader class manages loading assemblies from non-standard probe paths.
@@ -2825,16 +2825,16 @@
         <member name="F:Jacobi.Vst.Core.VstEventTypes.MidiEvent">
             <summary>Midi event.</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstEventTypes.DeprecatedAudioEvent">
+        <member name="F:Jacobi.Vst.Core.VstEventTypes.LegacyAudioEvent">
             <summary>Audio event (deprecated).</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstEventTypes.DeprecatedVideoEvent">
+        <member name="F:Jacobi.Vst.Core.VstEventTypes.LegacyVideoEvent">
             <summary>Video event (deprecated).</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstEventTypes.DeprecatedParameterEvent">
+        <member name="F:Jacobi.Vst.Core.VstEventTypes.LegacyParameterEvent">
             <summary>Parameter event (deprecated).</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstEventTypes.DeprecatedTriggerEvent">
+        <member name="F:Jacobi.Vst.Core.VstEventTypes.LegacyTriggerEvent">
             <summary>Trigger event (deprecated).</summary>
         </member>
         <member name="F:Jacobi.Vst.Core.VstEventTypes.MidiSysExEvent">

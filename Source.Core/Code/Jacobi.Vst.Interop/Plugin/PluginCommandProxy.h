@@ -52,10 +52,10 @@ namespace Interop {
 		/// <summary>
 		/// Dispatches the opcode to one of the Plugin deprecated methods.
 		/// </summary>
-		Vst2IntPtr DispatchDeprecated(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
+		Vst2IntPtr DispatchLegacy(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
-		Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20^ _deprecatedCmdStub;
+		Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^ _deprecatedCmdStub;
 
 		Jacobi::Vst::Interop::MemoryTracker^ _memTracker;
 		Vst2Rectangle* _pEditorRect;

@@ -13,7 +13,7 @@ VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostComman
 	Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
 
 	_hostCmdStub = hostCmdStub;
-	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^>(hostCmdStub);
+	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^>(hostCmdStub);
 
 	// unmanaged structures
 	_pTimeInfo = new ::Vst2TimeInfo();
@@ -163,7 +163,7 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 				Jacobi::Vst::Interop::TypeConverter::DeleteUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr);
 			}	break;
 			default:
-				result = DispatchDeprecated(command, index, value, ptr, opt);
+				result = DispatchLegacy(command, index, value, ptr, opt);
 				break;
 			}
 		}
@@ -184,7 +184,7 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 	return result;
 }
 
-Vst2IntPtr VstHostCommandProxy::DispatchDeprecated(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
+Vst2IntPtr VstHostCommandProxy::DispatchLegacy(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
 {
 	Vst2IntPtr result = 0;
 

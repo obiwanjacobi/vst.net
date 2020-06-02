@@ -15,11 +15,11 @@ namespace Interop {
 /// interface that is called by the host to access the Plugin.
 /// </summary>
 /// <remarks>
-/// The class also implements the <see cref="Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20"/> 
+/// The class also implements the <see cref="Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20"/> 
 /// interface for deprecated method support.
 /// </remarks>
 ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub, 
-    Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20, System::IDisposable
+    Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20, System::IDisposable
 {
 public:
     ~VstPluginCommandStub()
@@ -409,10 +409,10 @@ public:
     virtual property Jacobi::Vst::Core::Host::IVstPluginContext^ PluginContext;
 
     //
-    // Deprecated support
+    // Legacy support
     //
 
-    // IVstPluginCommandsDeprecatedBase
+    // IVstPluginCommandsLegacyBase
     /// <summary>
     /// Processes audio in an accumulating fashion.
     /// </summary>
@@ -420,9 +420,9 @@ public:
     /// <param name="outputs">Audio output buffers. Must not be null.</param>
     virtual void ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs);
 
-    // IVstPluginCommandsDeprecated10
+    // IVstPluginCommandsLegacy10
     /// <summary>
-    /// Called if the VstPluginDeprecatedInfo.DeprecatedFlags has the "HasClip" or "HasVu" flags set.
+    /// Called if the VstPluginLegacyInfo.LegacyFlags has the "HasClip" or "HasVu" flags set.
     /// </summary>
     /// <returns>Returns the current Vu value.</returns>
     virtual System::Single GetVu();
@@ -448,7 +448,7 @@ public:
     /// <returns>Returns 'NvEf' as an integer.</returns>
     virtual System::Int32 Identify();
 
-    // IVstPluginCommandsDeprecated20
+    // IVstPluginCommandsLegacy20
     /// <summary>
     /// Retrieves the number of program categories.
     /// </summary>
@@ -478,14 +478,14 @@ public:
     /// For external DSP.
     /// </summary>
     /// <returns>Returns the current position.</returns>
-    /// <remarks>The <see cref="Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedFlags"/>.ExtIsAsync 
+    /// <remarks>The <see cref="Jacobi::Vst::Core::Legacy::VstPluginLegacyFlags"/>.ExtIsAsync 
     /// must be set in order for this method to be called.</remarks>
     virtual System::Int32 GetCurrentPosition();
     /// <summary>
     /// For external DSP.
     /// </summary>
     /// <returns>Returns the destination audio buffer.</returns>
-    /// <remarks>The <see cref="Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedFlags"/>.ExtHasBuffer 
+    /// <remarks>The <see cref="Jacobi::Vst::Core::Legacy::VstPluginLegacyFlags"/>.ExtHasBuffer 
     /// must be set in order for this method to be called.</remarks>
     virtual Jacobi::Vst::Core::VstAudioBuffer^ GetDestinationBuffer();
     /// <summary>

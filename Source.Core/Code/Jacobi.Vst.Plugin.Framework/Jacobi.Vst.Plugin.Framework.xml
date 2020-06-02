@@ -1488,20 +1488,20 @@
             <returns>Never returns null.</returns>
             <remarks>Override to add or change behavior.</remarks>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub">
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub">
             <summary>
             Implements the Plugin command stub containing the deprecated methods.
             </summary>
             <remarks>Derive your public plugin command stub class from this class if you need to support older VST versions.
             Most methods are not implemented. You should override and implement the specific methods you need to support.</remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.GetProgramCategoriesCount">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.GetProgramCategoriesCount">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns zero.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.CopyCurrentProgramTo(System.Int32)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.CopyCurrentProgramTo(System.Int32)">
             <summary>
             Copies the parameter values of the current <see cref="T:Jacobi.Vst.Plugin.Framework.VstProgram"/> to the program indicated by <paramref name="programIndex"/>.
             </summary>
@@ -1509,7 +1509,7 @@
             <returns>Returns true when the program parameter values were successfully copied.</returns>
             <remarks>The name of the program itself is also copied.</remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.ConnectInput(System.Int32,System.Boolean)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.ConnectInput(System.Int32,System.Boolean)">
             <summary>
             Not implemented.
             </summary>
@@ -1517,7 +1517,7 @@
             <param name="connected">Not used.</param>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.ConnectOutput(System.Int32,System.Boolean)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.ConnectOutput(System.Int32,System.Boolean)">
             <summary>
             Not implemented.
             </summary>
@@ -1525,19 +1525,19 @@
             <param name="connected">Not used.</param>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.GetCurrentPosition">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.GetCurrentPosition">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns zero.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.GetDestinationBuffer">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.GetDestinationBuffer">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns null.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
             <summary>
             Assigns the <paramref name="blockSize"/> and <paramref name="sampleRate"/> to the audio processor.
             </summary>
@@ -1546,69 +1546,69 @@
             <returns>Returns true when the information was assigned to the audio processor. 
             When the plugin does not implement the audio processor, false is returned.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.GetErrorText">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.GetErrorText">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns null.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.Idle">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.Idle">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.GetIcon">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.GetIcon">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns null.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.SetViewPosition(System.Drawing.Point@)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.SetViewPosition(System.Drawing.Point@)">
             <summary>
             Not implemented.
             </summary>
             <param name="position">Not used.</param>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.KeysRequired">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.KeysRequired">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.GetVu">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.GetVu">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns 0.0.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.EditorKey(System.Int32)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.EditorKey(System.Int32)">
             <summary>
             Not implemented.
             </summary>
             <param name="keycode">Not used.</param>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.EditorTop">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.EditorTop">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.EditorSleep">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.EditorSleep">
             <summary>
             Not implemented.
             </summary>
             <returns>Always returns false.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.Identify">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.Identify">
             <summary>
             Identifies with 'NvEf'.
             </summary>
             <returns>Always returns the integer value for 'NvEf'.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginDeprecatedCommandStub.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginLegacyCommandStub.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
             <summary>
             Not implemented.
             </summary>

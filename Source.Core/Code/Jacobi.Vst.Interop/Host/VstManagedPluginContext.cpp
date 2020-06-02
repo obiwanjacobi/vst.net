@@ -51,12 +51,12 @@ namespace Interop {
 			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
 
 		_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedPluginInfo = 
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedPluginInfo = 
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
 
 		if(deprecatedPluginInfo != nullptr)
 		{
-			PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
+			PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
 		}
 		else
 		{
@@ -73,11 +73,11 @@ namespace Interop {
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(PluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInfo =
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
 
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInternalInfo =
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInternalInfo =
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
 
 		System::Collections::Generic::List<System::String^>^ changedPropNames = 
 			gcnew System::Collections::Generic::List<System::String^>();
@@ -126,9 +126,9 @@ namespace Interop {
 
 			if(deprecatedInfo != nullptr)
 			{
-				if(deprecatedInfo->DeprecatedFlags != deprecatedInternalInfo->DeprecatedFlags)
+				if(deprecatedInfo->LegacyFlags != deprecatedInternalInfo->LegacyFlags)
 				{
-					changedPropNames->Add("PluginInfo.DeprecatedFlags");
+					changedPropNames->Add("PluginInfo.LegacyFlags");
 				}
 
 				if(deprecatedInfo->RealQualities != deprecatedInternalInfo->RealQualities)
@@ -161,7 +161,7 @@ namespace Interop {
 		// deprecated fields
 		if(deprecatedInfo != nullptr)
 		{
-			deprecatedInfo->DeprecatedFlags = deprecatedInternalInfo->DeprecatedFlags;
+			deprecatedInfo->LegacyFlags = deprecatedInternalInfo->LegacyFlags;
 			deprecatedInfo->RealQualities = deprecatedInternalInfo->RealQualities;
 			deprecatedInfo->OfflineQualities = deprecatedInternalInfo->OfflineQualities;
 			deprecatedInfo->IoRatio = deprecatedInternalInfo->IoRatio;

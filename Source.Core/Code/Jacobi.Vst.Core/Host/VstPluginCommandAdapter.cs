@@ -634,13 +634,13 @@ namespace Jacobi.Vst.Core.Host
         /// A factory method to create the correct <see cref="VstPluginCommandAdapter"/> class type.
         /// </summary>
         /// <param name="pluginCmdStub">A reference to the plugin command stub. Must not be null.</param>
-        /// <returns>Returns an instance of <see cref="Deprecated.VstPluginCommandDeprecatedAdapter"/> when the <paramref name="pluginCmdStub"/> supports deprecated methods.</returns>
+        /// <returns>Returns an instance of <see cref="Legacy.VstPluginCommandLegacyAdapter"/> when the <paramref name="pluginCmdStub"/> supports deprecated methods.</returns>
         [CLSCompliant(false)]
         public static VstPluginCommandAdapter Create(Plugin.IVstPluginCommandStub pluginCmdStub)
         {
-            if (pluginCmdStub is Deprecated.IVstPluginCommandsDeprecated20)
+            if (pluginCmdStub is Legacy.IVstPluginCommandsLegacy20)
             {
-                return new Deprecated.VstPluginCommandDeprecatedAdapter(pluginCmdStub);
+                return new Legacy.VstPluginCommandLegacyAdapter(pluginCmdStub);
             }
 
             return new VstPluginCommandAdapter(pluginCmdStub);

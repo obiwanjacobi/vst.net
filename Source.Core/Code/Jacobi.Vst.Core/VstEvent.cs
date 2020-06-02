@@ -51,13 +51,13 @@ namespace Jacobi.Vst.Core
         /// <summary>Midi event.</summary>
         MidiEvent = 1,
         /// <summary>Audio event (deprecated).</summary>
-        DeprecatedAudioEvent,
+        LegacyAudioEvent,
         /// <summary>Video event (deprecated).</summary>
-        DeprecatedVideoEvent,
+        LegacyVideoEvent,
         /// <summary>Parameter event (deprecated).</summary>
-        DeprecatedParameterEvent,
+        LegacyParameterEvent,
         /// <summary>Trigger event (deprecated).</summary>
-        DeprecatedTriggerEvent,
+        LegacyTriggerEvent,
         /// <summary>Midi System Exclusive event.</summary>
         MidiSysExEvent
     }

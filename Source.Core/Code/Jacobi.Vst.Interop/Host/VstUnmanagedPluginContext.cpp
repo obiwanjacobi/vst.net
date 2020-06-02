@@ -135,7 +135,7 @@ namespace Interop {
 			if(PluginCommandStub->GetVstVersion() < 2400)
 			{
 				// use structure with extra deprecated fields for older versions
-				PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
+				PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
 			}
 			else
 			{
@@ -169,8 +169,8 @@ namespace Interop {
 
 	void VstUnmanagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(PluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInfo =
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
 
 		System::Collections::Generic::List<System::String^>^ changedPropNames = 
 			gcnew System::Collections::Generic::List<System::String^>();

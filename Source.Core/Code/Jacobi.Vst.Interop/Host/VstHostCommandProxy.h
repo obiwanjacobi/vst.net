@@ -33,13 +33,13 @@ public:
 
 private:
 	Jacobi::Vst::Core::Host::IVstHostCommandStub^ _hostCmdStub;
-	Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^ _deprecatedCmdStub;
+	Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^ _deprecatedCmdStub;
 
 	::Vst2TimeInfo* _pTimeInfo;
 	char* _directory;
 	::Vst2SpeakerArrangement* _pArrangement;
 
-	Vst2IntPtr DispatchDeprecated(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
+	Vst2IntPtr DispatchLegacy(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 	Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
