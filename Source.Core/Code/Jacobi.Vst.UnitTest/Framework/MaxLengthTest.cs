@@ -22,7 +22,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstConnectionInfo_Label()
         {
             VstConnectionInfo ci = new VstConnectionInfo();
-            ci.Label.Should().BeNull();
+            ci.Label.Should().BeEmpty();
 
             ci.Label = String.Empty;
             ci.Label.Should().BeEmpty();
@@ -41,7 +41,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstConnectionInfo_ShortLabel()
         {
             VstConnectionInfo ci = new VstConnectionInfo();
-            ci.ShortLabel.Should().BeNull();
+            ci.ShortLabel.Should().BeEmpty();
 
             ci.ShortLabel = String.Empty;
             ci.ShortLabel.Should().BeEmpty();
@@ -60,7 +60,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstMidiCategory_Name()
         {
             VstMidiCategory mc = new VstMidiCategory();
-            mc.Name.Should().BeNull();
+            mc.Name.Should().BeEmpty();
 
             mc.Name = String.Empty;
             mc.Name.Should().BeEmpty();
@@ -79,7 +79,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstMidiProgram_Name()
         {
             VstMidiProgram mp = new VstMidiProgram();
-            mp.Name.Should().BeNull();
+            mp.Name.Should().BeEmpty();
 
             mp.Name = String.Empty;
             mp.Name.Should().BeEmpty();
@@ -98,7 +98,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstParameterCategory_Name()
         {
             VstParameterCategory pc = new VstParameterCategory();
-            pc.Name.Should().BeNull();
+            pc.Name.Should().BeEmpty();
 
             pc.Name = String.Empty;
             pc.Name.Should().BeEmpty();
@@ -117,7 +117,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstParameterInfo_Name()
         {
             VstParameterInfo pi = new VstParameterInfo();
-            pi.Name.Should().BeNull();
+            pi.Name.Should().BeEmpty();
 
             pi.Name = String.Empty;
             pi.Name.Should().BeEmpty();
@@ -136,7 +136,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstParameterInfo_Label()
         {
             VstParameterInfo pi = new VstParameterInfo();
-            pi.Label.Should().BeNull();
+            pi.Label.Should().BeEmpty();
 
             pi.Label = String.Empty;
             pi.Label.Should().BeEmpty();
@@ -155,7 +155,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstParameterInfo_ShortLabel()
         {
             VstParameterInfo pi = new VstParameterInfo();
-            pi.ShortLabel.Should().BeNull();
+            pi.ShortLabel.Should().BeEmpty();
 
             pi.ShortLabel = String.Empty;
             pi.ShortLabel.Should().BeEmpty();
@@ -174,7 +174,7 @@ namespace Jacobi.Vst.UnitTest.Framework
         public void Test_MaxLength_VstProgram_Name()
         {
             VstProgram p = new VstProgram();
-            p.Name.Should().BeNull();
+            p.Name.Should().BeEmpty();
 
             p.Name = String.Empty;
             p.Name.Should().BeEmpty();

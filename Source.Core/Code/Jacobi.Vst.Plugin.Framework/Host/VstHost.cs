@@ -171,8 +171,14 @@
             if (typeof(IVstMidiProcessor).Equals(type))
             {
                 CheckMidiSource();
-                return (T)_midiProcessor;
+
+                // does host support MIDI?
+                if (HostCommandStub.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) != VstCanDoResult.No)
+                {
+                    return (T)_midiProcessor;
+                }
             }
+
             return null;
         }
 
