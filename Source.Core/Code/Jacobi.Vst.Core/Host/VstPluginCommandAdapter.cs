@@ -72,7 +72,7 @@ namespace Jacobi.Vst.Core.Host
         /// <param name="input">Passed with the forwarded call and back.</param>
         /// <param name="output">Passed with the forwarded call and back.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
+        public bool GetSpeakerArrangement(out VstSpeakerArrangement? input, out VstSpeakerArrangement? output)
         {
             return _pluginCmdStub.GetSpeakerArrangement(out input, out output);
         }
@@ -176,23 +176,23 @@ namespace Jacobi.Vst.Core.Host
         /// <summary>
         /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
         /// </summary>
-        /// <param name="midiProgram">Passed with the forwarded call.</param>
+        /// <param name="midiProgramName">Passed with the forwarded call.</param>
         /// <param name="channel">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public int GetMidiProgramName(VstMidiProgramName midiProgram, int channel)
+        public int GetMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
-            return _pluginCmdStub.GetMidiProgramName(midiProgram, channel);
+            return _pluginCmdStub.GetMidiProgramName(midiProgramName, channel);
         }
 
         /// <summary>
         /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
         /// </summary>
-        /// <param name="midiProgram">Passed with the forwarded call.</param>
+        /// <param name="midiProgramName">Passed with the forwarded call.</param>
         /// <param name="channel">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel)
+        public int GetCurrentMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
-            return _pluginCmdStub.GetCurrentMidiProgramName(midiProgram, channel);
+            return _pluginCmdStub.GetCurrentMidiProgramName(midiProgramName, channel);
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="index">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstPinProperties GetInputProperties(int index)
+        public VstPinProperties? GetInputProperties(int index)
         {
             return _pluginCmdStub.GetInputProperties(index);
         }
@@ -305,7 +305,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="index">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstPinProperties GetOutputProperties(int index)
+        public VstPinProperties? GetOutputProperties(int index)
         {
             return _pluginCmdStub.GetOutputProperties(index);
         }
@@ -400,7 +400,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="index">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstParameterProperties GetParameterProperties(int index)
+        public VstParameterProperties? GetParameterProperties(int index)
         {
             return _pluginCmdStub.GetParameterProperties(index);
         }

@@ -10,11 +10,11 @@
     internal sealed class VstPluginContext : IDisposable
     {
         /// <summary>Reference to the plugin information.</summary>
-        public VstPluginInfo PluginInfo;
+        public VstPluginInfo? PluginInfo;
         /// <summary>Reference to the plugin root object.</summary>
-        public IVstPlugin Plugin;
+        public IVstPlugin? Plugin;
         /// <summary>Reference to Host Proxy.</summary>
-        public VstHost Host;
+        public VstHost? Host;
 
         #region IDisposable Members
 

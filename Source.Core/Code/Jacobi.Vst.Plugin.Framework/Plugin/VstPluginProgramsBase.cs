@@ -12,7 +12,7 @@
     {
         #region IVstPluginPrograms Members
 
-        private VstProgramCollection _programs;
+        private VstProgramCollection? _programs;
         /// <inheritdoc />
         public VstProgramCollection Programs
         {
@@ -27,9 +27,9 @@
             }
         }
 
-        private VstProgram _activeProgram;
+        private VstProgram? _activeProgram;
         /// <inheritdoc />
-        public virtual VstProgram ActiveProgram
+        public virtual VstProgram? ActiveProgram
         {
             get
             {

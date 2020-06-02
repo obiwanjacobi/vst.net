@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
 namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
@@ -91,7 +90,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
         /// <param name="programs">Must not be null.</param>
         protected virtual void WriteProgramHeader(VstProgramCollection programs)
         {
-            Writer.Write(typeof(VstProgram).FullName);
+            var type = typeof(VstProgram);
+            Writer.Write(type.FullName ?? type.Name);
             Writer.Write(programs.Count);
         }
 
@@ -101,7 +101,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
         /// <param name="parameters">Must not be null.</param>
         protected virtual void WriteParameterHeader(VstParameterCollection parameters)
         {
-            Writer.Write(typeof(VstParameter).FullName);
+            var type = typeof(VstParameter);
+            Writer.Write(type.FullName ?? type.Name);
             Writer.Write(parameters.Count);
         }
     }

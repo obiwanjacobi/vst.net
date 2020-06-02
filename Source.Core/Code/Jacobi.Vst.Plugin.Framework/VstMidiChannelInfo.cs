@@ -14,10 +14,10 @@
     /// of one VstMidiChannelInfo instance for multiple channels.</remarks>
     public class VstMidiChannelInfo : ObservableObject
     {
-        private CollectionChangeManager<INotifyPropertyChanged> _categoriesMgr;
-        private CollectionChangeManager<INotifyPropertyChanged> _programsMgr;
+        private CollectionChangeManager<INotifyPropertyChanged>? _categoriesMgr;
+        private CollectionChangeManager<INotifyPropertyChanged>? _programsMgr;
 
-        private VstMidiCategoryCollection _categories;
+        private VstMidiCategoryCollection? _categories;
         /// <summary>
         /// Gets the collection of <see cref="VstMidiCategory"/>s.
         /// </summary>
@@ -36,7 +36,7 @@
             }
         }
 
-        private VstMidiProgramCollection _programs;
+        private VstMidiProgramCollection? _programs;
         /// <summary>
         /// Gets a collection of <see cref="VstMidiProgram"/>s.
         /// </summary>
@@ -55,11 +55,11 @@
             }
         }
 
-        private VstMidiProgram _activeProgram;
+        private VstMidiProgram? _activeProgram;
         /// <summary>
         /// Gets or sets the active/current Midi Program for this channel.
         /// </summary>
-        public VstMidiProgram ActiveProgram
+        public VstMidiProgram? ActiveProgram
         {
             get
             {
@@ -144,9 +144,8 @@
             private List<ItemT> InitializeItems()
             {
                 var items = new List<ItemT>();
-                var enumerator = _collection as IEnumerable<ItemT>;
 
-                if (enumerator != null)
+                if (_collection is IEnumerable<ItemT> enumerator)
                 {
                     items.AddRange(enumerator);
                 }
@@ -160,6 +159,7 @@
                 {
                     foreach (ItemT item in e.NewItems)
                     {
+                        if (item == null) continue;
                         _addItemHandler(item);
                     }
                 }
@@ -168,6 +168,7 @@
                 {
                     foreach (ItemT item in e.OldItems)
                     {
+                        if (item == null) continue;
                         _removeItemHandler(item);
                     }
                 }

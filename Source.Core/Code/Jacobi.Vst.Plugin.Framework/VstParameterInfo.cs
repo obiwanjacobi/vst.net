@@ -18,12 +18,12 @@
             MaxInteger = 1;
         }
 
-        private VstParameterNormalizationInfo _normalizationInfo;
+        private VstParameterNormalizationInfo? _normalizationInfo;
         /// <summary>
         /// When set to an instance of an object it contains 
         /// the normalization factors for this parameter.
         /// </summary>
-        public VstParameterNormalizationInfo NormalizationInfo
+        public VstParameterNormalizationInfo? NormalizationInfo
         {
             get { return _normalizationInfo; }
             set
@@ -32,7 +32,7 @@
             }
         }
 
-        private VstParameterManager _paramMgr;
+        private VstParameterManager? _paramMgr;
         /// <summary>
         /// Gets or sets the <see cref="VstParameterManager"/> for this parameter type.
         /// </summary>
@@ -40,7 +40,7 @@
         /// otherwise an <see cref="ArgumentException"/> is thrown.</remarks>
         /// <exception cref="ArgumentException">Thrown when the <see cref="VstParameterManager"/> instance that is set, 
         /// does not managed <b>this</b> parameter.</exception>
-        public VstParameterManager ParameterManager
+        public VstParameterManager? ParameterManager
         {
             get { return _paramMgr; }
             set
@@ -56,11 +56,11 @@
             }
         }
 
-        private VstParameterCategory _category;
+        private VstParameterCategory? _category;
         /// <summary>
         /// Gets or sets the parameter category.
         /// </summary>
-        public VstParameterCategory Category
+        public VstParameterCategory? Category
         {
             get { return _category; }
             set
@@ -134,7 +134,7 @@
             }
         }
 
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Gets or sets the name of the parameter.
         /// </summary>
@@ -151,7 +151,7 @@
             }
         }
 
-        private string _label;
+        private string _label = String.Empty;
         /// <summary>
         /// Gets or sets the label of the parameter.
         /// </summary>
@@ -168,7 +168,7 @@
             }
         }
 
-        private string _shortLabel;
+        private string _shortLabel = String.Empty;
         /// <summary>
         /// Gets or sets the short label of the parameter.
         /// </summary>

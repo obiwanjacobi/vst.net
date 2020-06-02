@@ -17,6 +17,6 @@
         /// </summary>
         /// <typeparam name="T">The interface type.</typeparam>
         /// <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
-        T GetInstance<T>() where T : class;
+        T? GetInstance<T>() where T : class;
     }
 }

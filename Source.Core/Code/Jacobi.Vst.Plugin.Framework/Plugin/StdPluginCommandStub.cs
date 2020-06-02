@@ -15,14 +15,14 @@
     /// to create their plugin root object.</remarks>
     public abstract class StdPluginCommandStub : IVstPluginCommandStub
     {
-        private VstPluginContext _pluginCtx;
+        private VstPluginContext? _pluginCtx;
 
         /// <summary>
         /// Provides derived classes accces to the root object of the Plugin.
         /// </summary>
-        protected IVstPlugin Plugin
+        protected IVstPlugin? Plugin
         {
-            get { return _pluginCtx.Plugin; }
+            get { return _pluginCtx?.Plugin; }
         }
 
         #region IVstPluginCommandStub Members
@@ -32,7 +32,7 @@
         /// <param name="hostCmdStub">Must not be null.</param>
         /// <returns>Returns a fully populated <see cref="VstPluginInfo"/> instance. Never returns null.</returns>
         /// <remarks>Override <see cref="CreatePluginInfo"/> to change the default behavior of how the plugin info is built.</remarks>
-        public VstPluginInfo GetPluginInfo(IVstHostCommandStub hostCmdStub)
+        public VstPluginInfo? GetPluginInfo(IVstHostCommandStub hostCmdStub)
         {
             IVstPlugin plugin = CreatePluginInstance();
 
@@ -45,7 +45,7 @@
                     PluginInfo = CreatePluginInfo(plugin)
                 };
 
-                return _pluginCtx.PluginInfo;
+                return _pluginCtx?.PluginInfo;
             }
 
             return null;
@@ -56,7 +56,7 @@
         /// </summary>
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
         [CLSCompliant(false)]
-        public IConfiguration PluginConfiguration { get; set; }
+        public IConfiguration? PluginConfiguration { get; set; }
 
         #endregion
 
@@ -75,10 +75,10 @@
             switch (precision)
             {
                 case VstProcessPrecision.Process32:
-                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioProcessor>();
+                    canDo = _pluginCtx?.Plugin?.Supports<IVstPluginAudioProcessor>() ?? false;
                     break;
                 case VstProcessPrecision.Process64:
-                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioPrecisionProcessor>();
+                    canDo = _pluginCtx?.Plugin?.Supports<IVstPluginAudioPrecisionProcessor>() ?? false;
                     break;
             }
 
@@ -93,7 +93,7 @@
         /// Override to change this behavior.</remarks>
         public virtual int GetNumberOfMidiInputChannels()
         {
-            IVstMidiProcessor midiProcessor = _pluginCtx.Plugin.GetInstance<IVstMidiProcessor>();
+            var midiProcessor = _pluginCtx?.Plugin?.GetInstance<IVstMidiProcessor>();
 
             if (midiProcessor != null)
             {
@@ -111,7 +111,7 @@
         /// Override to change this behavior.</remarks>
         public virtual int GetNumberOfMidiOutputChannels()
         {
-            IVstPluginMidiSource midiSource = _pluginCtx.Plugin.GetInstance<IVstPluginMidiSource>();
+            var midiSource = _pluginCtx?.Plugin?.GetInstance<IVstPluginMidiSource>();
 
             if (midiSource != null)
             {
@@ -131,9 +131,9 @@
         /// <param name="input">Filled with the speaker arrangement for the plugin inputs.</param>
         /// <param name="output">Filled with the speaker arrangement for the plugin outputs.</param>
         /// <returns>Returns true when the plugin implements the <see cref="IVstPluginConnections"/> interfcace.</returns>
-        public virtual bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
+        public virtual bool GetSpeakerArrangement(out VstSpeakerArrangement? input, out VstSpeakerArrangement? output)
         {
-            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _pluginCtx?.Plugin?.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -156,7 +156,7 @@
         public virtual int GetNextPlugin(out string name)
         {
             // not implemented for managed plugins!
-            name = null;
+            name = String.Empty;
             return 0;
         }
 
@@ -166,7 +166,7 @@
         /// <returns>Returns 0 (zero) when not supported. It is unclear what this return value represents.</returns>
         public virtual int StartProcess()
         {
-            IVstPluginProcess pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
+            var pluginProcess = _pluginCtx?.Plugin?.GetInstance<IVstPluginProcess>();
 
             if (pluginProcess != null)
             {
@@ -183,7 +183,7 @@
         /// <returns>Returns 0 (zero) when not supported. It is unclear what this return value represents.</returns>
         public virtual int StopProcess()
         {
-            IVstPluginProcess pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
+            var pluginProcess = _pluginCtx?.Plugin?.GetInstance<IVstPluginProcess>();
 
             if (pluginProcess != null)
             {
@@ -202,7 +202,7 @@
         /// <returns>Returns false when not implemented.</returns>
         public virtual bool SetPanLaw(VstPanLaw type, float gain)
         {
-            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _pluginCtx?.Plugin?.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -221,7 +221,7 @@
         /// Override to change this behavior.</remarks>
         public virtual VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
         {
-            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+            var pluginPersistence = _pluginCtx?.Plugin?.GetInstance<IVstPluginPersistence>();
 
             if (pluginPersistence != null)
             {
@@ -240,7 +240,7 @@
         /// Override to change this behavior.</remarks>
         public virtual VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo)
         {
-            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+            var pluginPersistence = _pluginCtx?.Plugin?.GetInstance<IVstPluginPersistence>();
 
             if (pluginPersistence != null)
             {
@@ -264,7 +264,7 @@
         /// Override to change this behavior.</remarks>
         public virtual bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -285,7 +285,7 @@
         /// Override to change this behavior.</remarks>
         public virtual bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -302,7 +302,7 @@
         /// <returns>Returns true when the mode was set on the plugin editor.</returns>
         public virtual bool SetEditorKnobMode(VstKnobMode mode)
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -321,7 +321,9 @@
         /// <returns>Returns the number of implemented Midi programs.</returns>
         public virtual int GetMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
-            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            Throw.IfArgumentIsNull(midiProgramName, nameof(midiProgramName));
+
+            var midiPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -355,7 +357,9 @@
         /// <returns>Returns the number of implemented Midi programs.</returns>
         public virtual int GetCurrentMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
-            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            Throw.IfArgumentIsNull(midiProgramName, nameof(midiProgramName));
+
+            var midiPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -402,7 +406,7 @@
         /// <returns>Returns the total number of Midi program categories.</returns>
         public virtual int GetMidiProgramCategory(VstMidiProgramCategory midiCat, int channel)
         {
-            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -432,7 +436,7 @@
         /// <returns>Returns true if the Midi Program has changed, otherwise false is returned.</returns>
         public virtual bool HasMidiProgramsChanged(int channel)
         {
-            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -457,7 +461,7 @@
         /// <returns>Returns true when the <paramref name="midiKeyName"/>.Name was filled.</returns>
         public virtual bool GetMidiKeyName(VstMidiKeyName midiKeyName, int channel)
         {
-            IVstPluginMidiPrograms midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -477,7 +481,7 @@
         /// <returns>Returns true when the call was forwarded to the plugin's <see cref="IVstPluginPrograms"/> implementation.</returns>
         public virtual bool BeginSetProgram()
         {
-            IVstPluginPrograms pluginProgram = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginProgram = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginProgram != null)
             {
@@ -494,7 +498,7 @@
         /// <returns>Returns true when the call was forwarded to the plugin's <see cref="IVstPluginPrograms"/> implementation.</returns>
         public virtual bool EndSetProgram()
         {
-            IVstPluginPrograms pluginProgram = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginProgram = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginProgram != null)
             {
@@ -516,7 +520,7 @@
         /// <returns>Returns true when the call was forwarded to the plugin.</returns>
         public virtual bool ProcessEvents(VstEvent[] events)
         {
-            IVstMidiProcessor midiProcessor = _pluginCtx.Plugin.GetInstance<IVstMidiProcessor>();
+            var midiProcessor = _pluginCtx?.Plugin?.GetInstance<IVstMidiProcessor>();
 
             if (midiProcessor != null)
             {
@@ -535,7 +539,7 @@
         /// or false if the plugin does not support parameters.</returns>
         public virtual bool CanParameterBeAutomated(int index)
         {
-            IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -555,7 +559,7 @@
         /// Returns false when the plugin does not implement parameters.</returns>
         public virtual bool String2Parameter(int index, string str)
         {
-            IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -573,7 +577,7 @@
         /// <returns>Returns null when the plugin does not implement Programs.</returns>
         public virtual string GetProgramNameIndexed(int index)
         {
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null)
             {
@@ -581,7 +585,7 @@
                 return program.Name;
             }
 
-            return null;
+            return String.Empty;
         }
 
         /// <summary>
@@ -589,9 +593,9 @@
         /// </summary>
         /// <param name="index">A zero-based index into the plugin inputs.</param>
         /// <returns>Returns null when the plugin does not implement <see cref="IVstPluginConnections"/>.</returns>
-        public virtual VstPinProperties GetInputProperties(int index)
+        public virtual VstPinProperties? GetInputProperties(int index)
         {
-            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _pluginCtx?.Plugin?.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -616,9 +620,9 @@
         /// </summary>
         /// <param name="index">A zero-based index into the plugin outputs.</param>
         /// <returns>Returns null when the plugin does not implement <see cref="IVstPluginConnections"/>.</returns>
-        public virtual VstPinProperties GetOutputProperties(int index)
+        public virtual VstPinProperties? GetOutputProperties(int index)
         {
-            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _pluginCtx?.Plugin?.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -644,7 +648,7 @@
         /// <returns>Returns the <see cref="IVstPlugin.Category"/> value.</returns>
         public virtual VstPluginCategory GetCategory()
         {
-            return _pluginCtx.Plugin.Category;
+            return _pluginCtx?.Plugin?.Category ?? VstPluginCategory.Unknown;
         }
 
         /// <summary>
@@ -655,7 +659,7 @@
         /// <returns>Returns false if the plugin does not implement <see cref="IVstPluginConnections"/>.</returns>
         public virtual bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput)
         {
-            IVstPluginConnections pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _pluginCtx?.Plugin?.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -672,7 +676,7 @@
         /// <returns>Returns false when the plugin does not implement the <see cref="IVstPluginBypass"/> interface.</returns>
         public virtual bool SetBypass(bool bypass)
         {
-            IVstPluginBypass pluginBypass = _pluginCtx.Plugin.GetInstance<IVstPluginBypass>();
+            var pluginBypass = _pluginCtx?.Plugin?.GetInstance<IVstPluginBypass>();
 
             if (pluginBypass != null)
             {
@@ -691,7 +695,7 @@
         /// <exception cref="InvalidOperationException">Thrown when the name exceeds 31 characters.</exception>
         public virtual string GetEffectName()
         {
-            string name = _pluginCtx.Plugin.Name;
+            var name = _pluginCtx?.Plugin?.Name;
 
             if (name != null && name.Length > Core.Constants.MaxEffectNameLength)
             {
@@ -700,7 +704,7 @@
                         "Plugin.Name", name, Core.Constants.MaxEffectNameLength));
             }
 
-            return name;
+            return name ?? String.Empty;
         }
 
         /// <summary>
@@ -709,7 +713,7 @@
         /// <returns>Returns <see cref="IVstPlugin.ProductInfo"/>.Vendor.</returns>
         public virtual string GetVendorString()
         {
-            return _pluginCtx.Plugin.ProductInfo.Vendor;
+            return _pluginCtx?.Plugin?.ProductInfo.Vendor ?? String.Empty;
         }
 
         /// <summary>
@@ -718,7 +722,7 @@
         /// <returns>Returns <see cref="IVstPlugin.ProductInfo"/>.Product.</returns>
         public virtual string GetProductString()
         {
-            return _pluginCtx.Plugin.ProductInfo.Product;
+            return _pluginCtx?.Plugin?.ProductInfo.Product ?? String.Empty;
         }
 
         /// <summary>
@@ -727,7 +731,7 @@
         /// <returns>Returns <see cref="IVstPlugin.ProductInfo"/>.Version.</returns>
         public virtual int GetVendorVersion()
         {
-            return _pluginCtx.Plugin.ProductInfo.Version;
+            return _pluginCtx?.Plugin?.ProductInfo.Version ?? 0;
         }
 
         /// <summary>
@@ -744,27 +748,33 @@
 
             VstPluginCanDo candoEnum = VstCanDoHelper.ParsePluginCanDo(cando);
 
+            VstCanDoResult Supports<T>() where T : class
+            {
+                var yes = _pluginCtx?.Plugin?.Supports<T>() ?? false;
+                return yes ? VstCanDoResult.Yes : VstCanDoResult.No;
+            }
+
             switch (candoEnum)
             {
                 case VstPluginCanDo.Bypass:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginBypass>() ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    result = Supports<IVstPluginBypass>();
                     break;
                 case VstPluginCanDo.MidiProgramNames:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiPrograms>() ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    result = Supports<IVstPluginMidiPrograms>();
                     break;
                 case VstPluginCanDo.Offline:
                     result = VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.ReceiveVstEvents:
                 case VstPluginCanDo.ReceiveVstMidiEvent:
-                    result = _pluginCtx.Plugin.Supports<IVstMidiProcessor>() ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    result = Supports<IVstMidiProcessor>();
                     break;
                 case VstPluginCanDo.ReceiveVstTimeInfo:
-                    result = ((_pluginCtx.Plugin.Capabilities & VstPluginCapabilities.ReceiveTimeInfo) > 0) ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    result = ((_pluginCtx?.Plugin?.Capabilities & VstPluginCapabilities.ReceiveTimeInfo) > 0) ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.SendVstEvents:
                 case VstPluginCanDo.SendVstMidiEvent:
-                    result = _pluginCtx.Plugin.Supports<IVstPluginMidiSource>() ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    result = Supports<IVstPluginMidiSource>();
                     break;
             }
 
@@ -777,7 +787,7 @@
         /// <returns>Returns <see cref="IVstPluginAudioProcessor.TailSize"/> or zero if not implemented by the plugin.</returns>
         public virtual int GetTailSize()
         {
-            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _pluginCtx?.Plugin?.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -795,9 +805,9 @@
         /// <remarks>The implementation uses the <see cref="IVstPluginParameters"/> interface, the <see cref="VstParameter"/> 
         /// at <paramref name="index"/> and the <see cref="VstParameterInfo"/> attached to the parameter 
         /// to fill the <see cref="VstParameterProperties"/> instance.</remarks>
-        public virtual VstParameterProperties GetParameterProperties(int index)
+        public virtual VstParameterProperties? GetParameterProperties(int index)
         {
-            IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -813,7 +823,7 @@
                     ShortLabel = parameter.Info.ShortLabel
                 };
 
-                VstParameterCategory category = parameter.Info.Category;
+                VstParameterCategory? category = parameter.Info.Category;
                 if (category != null)
                 {
                     // find parameters in current category
@@ -887,12 +897,12 @@
         /// <exception cref="InvalidOperationException">Thrown when the HostCommandStub has not been initialized.</exception>
         public virtual void Open()
         {
-            if (!_pluginCtx.Host.HostCommandStub.IsInitialized())
+            if (!_pluginCtx?.Host?.HostCommandStub.IsInitialized() ?? false)
             {
                 throw new InvalidOperationException(Properties.Resources.StdPluginCommandStub_HostNotInitialized);
             }
 
-            _pluginCtx.Plugin.Open(_pluginCtx.Host);
+            _pluginCtx?.Plugin?.Open(_pluginCtx!.Host!);
         }
 
         /// <summary>
@@ -914,7 +924,7 @@
         /// <param name="programNumber">A zero-based program number (index).</param>
         public virtual void SetProgram(int programNumber)
         {
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null)
             {
@@ -930,7 +940,7 @@
         /// or no active program was set; <see cref="IVstPluginPrograms.ActiveProgram"/> returns null.</returns>
         public virtual int GetProgram()
         {
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null &&
                 pluginPrograms.ActiveProgram != null)
@@ -951,10 +961,9 @@
         /// </remarks>
         public virtual void SetProgramName(string name)
         {
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
-            if (pluginPrograms != null &&
-                pluginPrograms.ActiveProgram != null &&
+            if (pluginPrograms?.ActiveProgram != null &&
                 !pluginPrograms.ActiveProgram.IsReadOnly)
             {
                 pluginPrograms.ActiveProgram.Name = name;
@@ -969,15 +978,14 @@
         /// <remarks>The implementation uses the <see cref="IVstPluginPrograms.ActiveProgram"/> to get the name.</remarks>
         public virtual string GetProgramName()
         {
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
-            if (pluginPrograms != null &&
-                pluginPrograms.ActiveProgram != null)
+            if (pluginPrograms?.ActiveProgram != null)
             {
                 return pluginPrograms.ActiveProgram.Name;
             }
 
-            return null;
+            return String.Empty;
         }
 
         /// <summary>
@@ -988,7 +996,7 @@
         /// or when <see cref="VstParameterInfo.ShortLabel"/> was not set.</returns>
         public virtual string GetParameterLabel(int index)
         {
-            IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -996,7 +1004,7 @@
                 return parameter.Info.ShortLabel;
             }
 
-            return null;
+            return String.Empty;
         }
 
         /// <summary>
@@ -1007,7 +1015,7 @@
         /// or when <see cref="VstParameter.DisplayValue"/> was not set.</returns>
         public virtual string GetParameterDisplay(int index)
         {
-            IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -1015,7 +1023,7 @@
                 return parameter.DisplayValue;
             }
 
-            return null;
+            return String.Empty;
         }
 
         /// <summary>
@@ -1026,7 +1034,7 @@
         /// or when <see cref="VstParameterInfo.Name"/> was not set.</returns>
         public virtual string GetParameterName(int index)
         {
-            IVstPluginParameters pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -1034,7 +1042,7 @@
                 return parameter.Info.Name;
             }
 
-            return null;
+            return String.Empty;
         }
 
         /// <summary>
@@ -1044,7 +1052,7 @@
         /// <remarks>The implementation uses the <see cref="IVstPluginAudioProcessor"/> interface. Override to change behavior.</remarks>
         public virtual void SetSampleRate(float sampleRate)
         {
-            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _pluginCtx?.Plugin?.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1059,7 +1067,7 @@
         /// <remarks>The implementation uses the <see cref="IVstPluginAudioProcessor"/> interface. Override to change behavior.</remarks>
         public virtual void SetBlockSize(int blockSize)
         {
-            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _pluginCtx?.Plugin?.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1073,15 +1081,17 @@
         /// <param name="onoff">True when on, False when off.</param>
         public virtual void MainsChanged(bool onoff)
         {
-            IVstPlugin plugin = _pluginCtx.Plugin;
-
-            if (onoff)
+            var plugin = _pluginCtx?.Plugin;
+            if (plugin != null)
             {
-                plugin.Resume();
-            }
-            else
-            {
-                plugin.Suspend();
+                if (onoff)
+                {
+                    plugin.Resume();
+                }
+                else
+                {
+                    plugin.Suspend();
+                }
             }
         }
 
@@ -1093,7 +1103,7 @@
         /// Returns false when the plugin does not implement the <see cref="IVstPluginEditor"/> interface.</returns>
         public virtual bool EditorGetRect(out System.Drawing.Rectangle rect)
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1112,7 +1122,7 @@
         /// <returns>Returns false when the plugin does not implement the <see cref="IVstPluginEditor"/> interface.</returns>
         public virtual bool EditorOpen(IntPtr hWnd)
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1130,7 +1140,7 @@
         /// Override to change this behavior.</remarks>
         public virtual void EditorClose()
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1144,7 +1154,7 @@
         /// <remarks>Keep your processing short.</remarks>
         public virtual void EditorIdle()
         {
-            IVstPluginEditor pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _pluginCtx?.Plugin?.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1161,13 +1171,13 @@
         /// and/or <see cref="IVstPluginPrograms"/> interfaces.</returns>
         public virtual byte[] GetChunk(bool isPreset)
         {
-            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPersistence = _pluginCtx?.Plugin?.GetInstance<IVstPluginPersistence>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginPersistence != null)
             {
                 using MemoryStream stream = new MemoryStream();
-                VstProgramCollection programs = null;
+                VstProgramCollection? programs = null;
 
                 if (pluginPrograms != null)
                 {
@@ -1200,7 +1210,7 @@
                 return stream.GetBuffer();
             }
 
-            return null;
+            return Array.Empty<byte>();
         }
 
         /// <summary>
@@ -1214,8 +1224,8 @@
         /// and/or <see cref="IVstPluginPrograms"/> interfaces.</returns>
         public virtual int SetChunk(byte[] data, bool isPreset)
         {
-            IVstPluginPersistence pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
-            IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPersistence = _pluginCtx?.Plugin?.GetInstance<IVstPluginPersistence>();
+            var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
             if (pluginPersistence != null)
             {
@@ -1230,7 +1240,7 @@
                 {
                     if (isPreset)
                     {
-                        VstProgram prog = null;
+                        VstProgram? prog = null;
 
                         if (programs.Count > 0)
                         {
@@ -1239,7 +1249,7 @@
 
                         if (prog != null)
                         {
-                            VstProgram formerActiveProg = pluginPrograms.ActiveProgram;
+                            VstProgram? formerActiveProg = pluginPrograms.ActiveProgram;
 
                             if (formerActiveProg != null)
                             {
@@ -1299,7 +1309,7 @@
         /// <remarks>The implementation calls the <see cref="IVstPluginAudioProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
         {
-            IVstPluginAudioProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _pluginCtx?.Plugin?.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1315,7 +1325,7 @@
         /// <remarks>The implementation calls the <see cref="IVstPluginAudioPrecisionProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
-            IVstPluginAudioPrecisionProcessor audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioPrecisionProcessor>();
+            var audioProcessor = _pluginCtx?.Plugin?.GetInstance<IVstPluginAudioPrecisionProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1333,11 +1343,11 @@
         /// </remarks>
         public virtual void SetParameter(int index, float value)
         {
-            IVstPluginParameters pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParams = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParams != null)
             {
-                IVstPluginPrograms pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+                var pluginPrograms = _pluginCtx?.Plugin?.GetInstance<IVstPluginPrograms>();
 
                 if (pluginPrograms != null &&
                     pluginPrograms.ActiveProgram != null &&
@@ -1360,7 +1370,7 @@
         /// <returns>Returns 0.0 when the plugin does not implement the <see cref="IVstPluginParameters"/> interface.</returns>
         public virtual float GetParameter(int index)
         {
-            IVstPluginParameters pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParams = _pluginCtx?.Plugin?.GetInstance<IVstPluginParameters>();
 
             if (pluginParams != null)
             {
@@ -1390,7 +1400,7 @@
         {
             VstPluginInfo pluginInfo = new VstPluginInfo();
 
-            IVstPluginAudioProcessor audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>();
 
             // determine flags
             if (plugin.Supports<IVstPluginEditor>())
@@ -1419,14 +1429,14 @@
             }
 
             // parameter info
-            IVstPluginParameters pluginParameters = plugin.GetInstance<IVstPluginParameters>();
+            IVstPluginParameters? pluginParameters = plugin.GetInstance<IVstPluginParameters>();
             if (pluginParameters != null)
             {
                 pluginInfo.ParameterCount = pluginParameters.Parameters.Count;
             }
 
             // program info
-            IVstPluginPrograms pluginPrograms = plugin.GetInstance<IVstPluginPrograms>();
+            IVstPluginPrograms? pluginPrograms = plugin.GetInstance<IVstPluginPrograms>();
             if (pluginPrograms != null)
             {
                 pluginInfo.ProgramCount = pluginPrograms.Programs.Count;

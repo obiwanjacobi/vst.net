@@ -1,4 +1,5 @@
-﻿using Jacobi.Vst.Plugin.Framework.Common;
+﻿using Jacobi.Vst.Core;
+using Jacobi.Vst.Plugin.Framework.Common;
 
 namespace Jacobi.Vst.Plugin.Framework
 {
@@ -14,7 +15,7 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <returns>Returns the <see cref="VstMidiCategory.Name"/> property.</returns>
         protected override string GetKeyForItem(VstMidiCategory item)
         {
-            if (item == null) return null;
+            Throw.IfArgumentIsNull(item, nameof(item));
 
             return item.Name;
         }

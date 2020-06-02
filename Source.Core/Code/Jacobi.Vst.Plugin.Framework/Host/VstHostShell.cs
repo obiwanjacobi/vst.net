@@ -35,7 +35,7 @@
             return _host.HostCommandStub.SizeWindow(width, height);
         }
 
-        public CultureInfo _culture;
+        public CultureInfo? _culture;
         /// <summary>
         /// Gets the culture of the host.
         /// </summary>
@@ -64,7 +64,7 @@
             }
         }
 
-        private string _baseDir;
+        private string _baseDir = String.Empty;
         public string BaseDirectory
         {
             get
@@ -82,7 +82,7 @@
         /// Under construction!
         /// </summary>
         /// <returns>Returns null when the host does not support opening a file selector.</returns>
-        public IDisposable OpenFileSelector(VstFileSelect fileSelect)
+        public IDisposable? OpenFileSelector(VstFileSelect fileSelect)
         {
             // check capability of the host
             if ((_host.Capabilities & VstHostCapabilities.OpenFileSelector) > 0)
@@ -102,8 +102,8 @@
         /// </summary>
         private sealed class FileSelectorScope : IDisposable
         {
-            private VstHost _host;
-            private readonly VstFileSelect _fileSelect;
+            private VstHost? _host;
+            private VstFileSelect? _fileSelect;
 
             public FileSelectorScope(VstHost host, VstFileSelect fileSelect)
             {
@@ -117,16 +117,18 @@
             }
 
             #region IDisposable Members
+
             /// <summary>
             /// Call by the client when it is done with the file selector.
             /// </summary>
             /// <remarks>We do not check wheter or not the host supports closing the file selector...</remarks>
             public void Dispose()
             {
-                if (_host != null)
+                if (_host != null && _fileSelect != null)
                 {
                     _host.HostCommandStub.CloseFileSelector(_fileSelect);
                     _host = null;
+                    _fileSelect = null;
                 }
             }
 

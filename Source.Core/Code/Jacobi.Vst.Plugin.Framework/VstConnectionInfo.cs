@@ -2,13 +2,14 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework.Common;
+    using System;
 
     /// <summary>
     /// The VstConnectionInfo class represents information about a plugin connection pin.
     /// </summary>
     public class VstConnectionInfo : ObservableObject
     {
-        private string _label;
+        private string _label = String.Empty;
         /// <summary>
         /// Gets or sets the label for this connection pin.
         /// </summary>
@@ -24,7 +25,7 @@
             }
         }
 
-        private string _shortLabel;
+        private string _shortLabel = String.Empty;
         /// <summary>
         /// Gets or sets the short label for the connection pin.
         /// </summary>

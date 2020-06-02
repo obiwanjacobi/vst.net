@@ -199,14 +199,14 @@
         /// </summary>
         /// <param name="index">A zero-based index into the plugin inputs.</param>
         /// <returns>Returns null if not implemented.</returns>
-        VstPinProperties GetInputProperties(int index);
+        VstPinProperties? GetInputProperties(int index);
 
         /// <summary>
         /// Retrieves the pin properties for the output at <paramref name="index"/>.
         /// </summary>
         /// <param name="index">A zero-based index into the plugin outputs.</param>
         /// <returns>Returns null if not implemented.</returns>
-        VstPinProperties GetOutputProperties(int index);
+        VstPinProperties? GetOutputProperties(int index);
 
         /// <summary>
         /// Retrieves a categorization value for the plugin.
@@ -272,7 +272,7 @@
         /// </summary>
         /// <param name="index">A zero-based index into the plugin parameters.</param>
         /// <returns>Returns null if not implemented.</returns>
-        VstParameterProperties GetParameterProperties(int index);
+        VstParameterProperties? GetParameterProperties(int index);
 
         /// <summary>
         /// Called by the host to query the plugin what VST version it supports.
@@ -314,18 +314,18 @@
         /// <summary>
         /// Retrieves information about a midi program for a specific Midi <paramref name="channel"/>.
         /// </summary>
-        /// <param name="midiProgram">Must not be null.</param>
+        /// <param name="midiProgramName">Must not be null.</param>
         /// <param name="channel">The zero-based Midi channel.</param>
         /// <returns>Returns the number of implemented Midi programs or 0 if not implemented.</returns>
-        int GetMidiProgramName(VstMidiProgramName midiProgram, int channel);
+        int GetMidiProgramName(VstMidiProgramName midiProgramName, int channel);
 
         /// <summary>
         /// Retrieves information about the current midi program for a specific Midi <paramref name="channel"/>.
         /// </summary>
-        /// <param name="midiProgram">Must not be null.</param>
+        /// <param name="midiProgramName">Must not be null.</param>
         /// <param name="channel">The zero-based Midi channel.</param>
         /// <returns>Returns the number of implemented Midi programs or 0 if not implemented.</returns>
-        int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel);
+        int GetCurrentMidiProgramName(VstMidiProgramName midiProgramName, int channel);
 
         /// <summary>
         /// Retrieves information about a Midi Program Category.
@@ -374,7 +374,7 @@
         /// <param name="input">Filled with the speaker arrangement for the plugin inputs.</param>
         /// <param name="output">Filled with the speaker arrangement for the plugin outputs.</param>
         /// <returns>Returns false when not implemented.</returns>
-        bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output);
+        bool GetSpeakerArrangement(out VstSpeakerArrangement? input, out VstSpeakerArrangement? output);
 
         /// <summary>
         /// Retrieves the unique plugin Id and the name of the next (sub) plugin.

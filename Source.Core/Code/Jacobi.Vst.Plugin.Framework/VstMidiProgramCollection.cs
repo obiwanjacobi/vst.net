@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework
 {
+    using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework.Common;
     using System;
     using System.ComponentModel;
@@ -16,7 +17,7 @@
         /// <returns>Returns the <see cref="VstMidiProgram.Name"/> property.</returns>
         protected override string GetKeyForItem(VstMidiProgram item)
         {
-            if (item == null) return null;
+            Throw.IfArgumentIsNull(item, nameof(item));
 
             return item.Name;
         }
@@ -81,7 +82,7 @@
         /// <summary>
         /// Event is raised when a <see cref="ObservableObject.PropertyChanged"/> event is raised.
         /// </summary>
-        public event EventHandler<EventArgs> MidiProgramNameChanged;
+        public event EventHandler<EventArgs>? MidiProgramNameChanged;
 
         /// <summary>
         /// Raises the <see cref="MidiProgramNameChanged"/> event when a
@@ -90,12 +91,7 @@
         /// <param name="sender">The original <see cref="VstMidiProgram"/> that fired the event.</param>
         protected virtual void OnMidiProgramNameChanged(object sender)
         {
-            EventHandler<EventArgs> handler = MidiProgramNameChanged;
-
-            if (handler != null)
-            {
-                handler(sender, EventArgs.Empty);
-            }
+            MidiProgramNameChanged?.Invoke(sender, EventArgs.Empty);
         }
 
         //// event handler that receives Changed events from the VstMidiProgram instances.

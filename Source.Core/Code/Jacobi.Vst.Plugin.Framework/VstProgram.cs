@@ -44,14 +44,14 @@
         /// </remarks>
         public bool IsReadOnly { get; set; }
 
-        private string _name;
+        private string? _name;
         /// <summary>
         /// Gets or sets the name of the plugin program.
         /// </summary>
         /// <remarks>The Name must not exceed 24 characters.</remarks>
         public string Name
         {
-            get { return _name; }
+            get { return _name ?? String.Empty; }
             set
             {
                 Throw.IfArgumentTooLong(value, Core.Constants.MaxProgramNameLength, nameof(Name));
@@ -67,7 +67,7 @@
         /// </summary>
         public VstParameterCategoryCollection Categories { get; private set; }
 
-        private VstParameterCollection _parameters;
+        private VstParameterCollection? _parameters;
         /// <summary>
         /// Gets a collection of parameter instances that defines the program.
         /// </summary>
@@ -107,7 +107,6 @@
         protected virtual void Dispose(bool disposing)
         {
             _name = null;
-            Categories = null;
 
             if (_parameters != null)
             {
@@ -120,6 +119,8 @@
 
         private void Parameters_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (Categories == null) return;
+
             IEnumerable parameters;
 
             if (e.NewItems != null)
@@ -134,10 +135,10 @@
                 Categories.Clear();
             }
 
-            foreach (VstParameter parameter in parameters)
+            foreach (VstParameter? parameter in parameters)
             {
                 // add category to collection if not present yet
-                if (parameter.Info.Category != null &&
+                if (parameter?.Info.Category != null &&
                     !Categories.Contains(parameter.Info.Category.Name))
                 {
                     Categories.Add(parameter.Info.Category);

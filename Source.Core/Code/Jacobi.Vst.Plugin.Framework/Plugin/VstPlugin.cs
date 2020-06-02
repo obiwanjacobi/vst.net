@@ -74,13 +74,13 @@
         /// Gets the reference to the Host root object.
         /// </summary>
         /// <remarks>This member can be null. It is set after a call to <see cref="Open"/>.</remarks>
-        public IVstHost Host { get; private set; }
+        public IVstHost? Host { get; private set; }
 
         /// <summary>
         /// Triggered when the <see cref="M:Open"/> method is called.
         /// </summary>
         /// <remarks>At this point the <see cref="P:Host"/> property is available.</remarks>
-        public event EventHandler Opened;
+        public event EventHandler? Opened;
 
         /// <summary>
         /// The host will call this method when the plugin is loaded and should open its resources.
@@ -112,7 +112,7 @@
         {
             if (Supports<IVstMidiProcessor>())
             {
-                IVstHostCommandsLegacy20 deprecated = Host.GetInstance<IVstHostCommandsLegacy20>();
+                var deprecated = Host?.GetInstance<IVstHostCommandsLegacy20>();
 
                 if (deprecated != null)
                 {
@@ -142,7 +142,7 @@
         /// <typeparam name="T">The interface type.</typeparam>
         /// <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
         /// <remarks>The implementation check <b>this</b> instance for the specified Type.</remarks>
-        public virtual T GetInstance<T>() where T : class
+        public virtual T? GetInstance<T>() where T : class
         {
             return this as T;
         }

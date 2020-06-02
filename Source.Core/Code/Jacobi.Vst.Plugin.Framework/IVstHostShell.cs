@@ -1,8 +1,8 @@
 namespace Jacobi.Vst.Plugin.Framework
 {
+    using Jacobi.Vst.Core;
     using System;
     using System.Globalization;
-    using Jacobi.Vst.Core;
 
     /// <summary>
     /// Provides access to the windowing shell of the host.
@@ -28,13 +28,13 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <summary>
         /// Gets the plugin base directory of the host.
         /// </summary>
-        string BaseDirectory { get;}
+        string BaseDirectory { get; }
         /// <summary>
         /// Opens the File Selector.
         /// </summary>
         /// <param name="fileSelect">Information on how the file selector should behave and selected paths.</param>
         /// <returns>Returns null if the host does not support the Open File Selector.</returns>
         /// <remarks>Call <see cref="IDisposable.Dispose"/> on the return value to close the File Selector.</remarks>
-        IDisposable OpenFileSelector(VstFileSelect fileSelect);
+        IDisposable? OpenFileSelector(VstFileSelect fileSelect);
     }
 }

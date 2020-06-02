@@ -29,7 +29,7 @@
             get { return _host.HostCommandStub.GetAutomationState(); }
         }
 
-        public IDisposable BeginEditParameter(VstParameter parameter)
+        public IDisposable? BeginEditParameter(VstParameter parameter)
         {
             Throw.IfArgumentIsNull(parameter, nameof(parameter));
 
@@ -57,7 +57,7 @@
         /// </summary>
         private sealed class EditParameterScope : IDisposable
         {
-            private VstHost _host;
+            private VstHost? _host;
             private readonly int _index;
 
             public EditParameterScope(VstHost host, int index)

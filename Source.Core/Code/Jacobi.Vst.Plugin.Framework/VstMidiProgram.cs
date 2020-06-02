@@ -2,6 +2,7 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework.Common;
+    using System;
 
     /// <summary>
     /// Contains information about a Midi Program.
@@ -10,7 +11,7 @@
     {
         private static readonly string[] KeyNames = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Gets or sets the name of the Midi program.
         /// </summary>
@@ -65,12 +66,12 @@
             }
         }
 
-        private VstMidiCategory _category;
+        private VstMidiCategory? _category;
         /// <summary>
         /// Gets or sets the <see cref="VstMidiCategory"/> instance this Midi program is part of.
         /// </summary>
         /// <remarks>Can be null.</remarks>
-        public VstMidiCategory Category
+        public VstMidiCategory? Category
         {
             get { return _category; }
             set

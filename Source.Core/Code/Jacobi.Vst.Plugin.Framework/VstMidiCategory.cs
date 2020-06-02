@@ -2,13 +2,14 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework.Common;
+    using System;
 
     /// <summary>
     /// The VstMidiCategory is used by a plugin to define Midi Program Category hierarchies.
     /// </summary>
     public class VstMidiCategory : ObservableObject
     {
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Gets or sets the category name.
         /// </summary>
@@ -24,12 +25,12 @@
             }
         }
 
-        private VstMidiCategory _parentCategory;
+        private VstMidiCategory? _parentCategory;
         /// <summary>
         /// Gets or sets the parent category.
         /// </summary>
         /// <remarks>When this Property is null, the instance represents a root category.</remarks>
-        public VstMidiCategory ParentCategory
+        public VstMidiCategory? ParentCategory
         {
             get { return _parentCategory; }
             set

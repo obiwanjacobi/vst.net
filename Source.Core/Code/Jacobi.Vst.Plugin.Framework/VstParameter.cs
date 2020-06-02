@@ -36,7 +36,7 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <summary>
         /// Gets or set a reference to the (first) collection this parameter is in.
         /// </summary>
-        internal protected VstParameterCollection Parent { get; set; }
+        internal protected VstParameterCollection? Parent { get; set; }
 
         /// <summary>
         /// Gets the zero-based index this parameter has in the parameter collection.
@@ -91,7 +91,7 @@ namespace Jacobi.Vst.Plugin.Framework
             }
         }
 
-        private string _displayValue;
+        private string? _displayValue;
         /// <summary>
         /// Gets the value of the parameter formatted for displaying.
         /// </summary>
@@ -170,8 +170,7 @@ namespace Jacobi.Vst.Plugin.Framework
             if (disposing)
             {
                 // clear all references
-                DisplayValue = null;
-                Info = null;
+                _displayValue = null;
                 Parent = null;
             }
         }

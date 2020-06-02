@@ -20,11 +20,11 @@
             }
         }
 
-        private T _instance;
+        private T? _instance;
         /// <summary>
         /// Gets the instance of <typeparamref name="T"/>. Can be null.
         /// </summary>
-        public T Instance { get { return _instance; } }
+        public T? Instance { get { return _instance; } }
 
         /// <summary>
         /// Gets the instance of <typeparamref name="T"/>. Never null.
@@ -35,7 +35,7 @@
             {
                 EnsureInstance();
 
-                return _instance;
+                return _instance!;
             }
         }
 
@@ -48,7 +48,7 @@
         {
             EnsureInstance();
 
-            NativeMethods.SetParent(_instance.Handle, hWnd);
+            NativeMethods.SetParent(_instance!.Handle, hWnd);
 
             _instance.Show();
         }
@@ -62,7 +62,7 @@
             {
                 EnsureInstance();
 
-                return _instance.Bounds;
+                return _instance!.Bounds;
             }
         }
 
