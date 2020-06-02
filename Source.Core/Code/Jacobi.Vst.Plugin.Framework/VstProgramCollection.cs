@@ -1,8 +1,8 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Plugin.Framework.Common;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     /// <summary>
     /// Manages a collection of <see cref="VstProgram"/> instances.

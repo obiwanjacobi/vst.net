@@ -9,67 +9,6 @@
             P/Invoke native methods.
             </summary>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Common.NotifyCollectionChangedBase">
-            <summary>
-            A base class that helps a collection implement the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> interface.
-            </summary>
-        </member>
-        <member name="E:Jacobi.Vst.Plugin.Framework.Common.NotifyCollectionChangedBase.CollectionChanged">
-            <inheritdoc/>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.NotifyCollectionChangedBase.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Object,System.Object)">
-            <summary>
-            Fires the <see cref="E:Jacobi.Vst.Plugin.Framework.Common.NotifyCollectionChangedBase.CollectionChanged"/> event using single instances.
-            </summary>
-            <param name="action">The type of action that caused the collection to change.</param>
-            <param name="newItem">Can be null.</param>
-            <param name="oldItem">Can be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.NotifyCollectionChangedBase.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
-            <summary>
-            Fires the <see cref="E:Jacobi.Vst.Plugin.Framework.Common.NotifyCollectionChangedBase.CollectionChanged"/> event using lists of items.
-            </summary>
-            <param name="action">The type of action that caused the collection to change.</param>
-            <param name="newItems">Can be null.</param>
-            <param name="oldItems">Can be null.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1">
-            <summary>
-            A collection class that implements the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> interface.
-            </summary>
-            <typeparam name="T">The type of collection items.</typeparam>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.InsertItem(System.Int32,`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.RemoveItem(System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.SetItem(System.Int32,`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.ClearItems">
-            <inheritdoc/>
-        </member>
-        <member name="E:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.CollectionChanged">
-            <inheritdoc/>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Object,System.Object)">
-            <summary>
-            Fires the <see cref="E:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.CollectionChanged"/> event using single instances.
-            </summary>
-            <param name="action">The type of action that caused the collection to change.</param>
-            <param name="newItem">Can be null.</param>
-            <param name="oldItem">Can be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedAction,System.Collections.IList,System.Collections.IList)">
-            <summary>
-            Fires the <see cref="E:Jacobi.Vst.Plugin.Framework.Common.ObservableCollection`1.CollectionChanged"/> event using lists of items.
-            </summary>
-            <param name="action">The type of action that caused the collection to change.</param>
-            <param name="newItems">Can be null.</param>
-            <param name="oldItems">Can be null.</param>
-        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Common.ObservableKeyedCollection`2">
             <summary>
             A KeyedCollection base class that implements the <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> interface.
@@ -2067,73 +2006,11 @@
             <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="events"/> 
             is not set to an instance of an object.</exception>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.ToArray">
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
             <summary>
-            Returns the collection of <see cref="T:Jacobi.Vst.Core.VstEvent"/> instances as an array.
+            Overriden to check for IsReadOnly
             </summary>
-            <returns>Returns a copy of the <see cref="T:Jacobi.Vst.Core.VstEvent"/> instances.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.IndexOf(Jacobi.Vst.Core.VstEvent)">
-            <summary>
-            Returns the index of the specified <paramref name="item"/>.
-            </summary>
-            <param name="item">The item to retrieve the index for.</param>
-            <returns>Returns -1 when the <paramref name="item"/> was not found.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.Insert(System.Int32,Jacobi.Vst.Core.VstEvent)">
-            <summary>
-            Inserts a new <paramref name="item"/> at the specified <paramref name="index"/> into the collection.
-            </summary>
-            <param name="index">The index to insert the <paramref name="item"/> at.</param>
-            <param name="item">The <see cref="T:Jacobi.Vst.Core.VstEvent"/> instance to insert.</param>
-            <exception cref="T:System.InvalidOperationException">Thrown when the collection is read-only.</exception>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.RemoveAt(System.Int32)">
-            <summary>
-            Removes an item from the specified <paramref name="index"/>.
-            </summary>
-            <param name="index">A zero-based index of the item to remove.</param>
-            <exception cref="T:System.InvalidOperationException">Thrown when the collection is read-only.</exception>
-        </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.VstEventCollection.Item(System.Int32)">
-            <summary>
-            Gets or sets an instance at a specific <paramref name="index"/>.
-            </summary>
-            <param name="index">The zero-based index of the item.</param>
-            <returns>Returns the item at <paramref name="index"/>.</returns>
-            <exception cref="T:System.InvalidOperationException">Thrown when the collection is read-only and the setter is called.</exception>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.Add(Jacobi.Vst.Core.VstEvent)">
-            <summary>
-            Adds a new instance to the collection.
-            </summary>
-            <param name="item">A new item to add.</param>
-            <exception cref="T:System.InvalidOperationException">Thrown when the collection is read-only.</exception>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.Clear">
-            <summary>
-            Removes all items from the collection.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">Thrown when the collection is read-only.</exception>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.Contains(Jacobi.Vst.Core.VstEvent)">
-            <summary>
-            Checks if the <paramref name="item"/> is part of the collection.
-            </summary>
-            <param name="item">The instance to check.</param>
-            <returns>Returns true when the <paramref name="item"/> is part of the collection.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.CopyTo(Jacobi.Vst.Core.VstEvent[],System.Int32)">
-            <summary>
-            Copies the contents of the collection to the specified <paramref name="array"/> starting at the <paramref name="arrayIndex"/>.
-            </summary>
-            <param name="array">Must not be null.</param>
-            <param name="arrayIndex">The zero-based index into <paramref name="array"/> to start filling items.</param>
-        </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.VstEventCollection.Count">
-            <summary>
-            Gets the number of items in the collection.
-            </summary>
+            <param name="e"></param>
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.VstEventCollection.IsReadOnly">
             <summary>
@@ -2141,27 +2018,6 @@
             </summary>
             <remarks>All methods that modify the collection will throw an 
             <see cref="T:System.InvalidOperationException"/> when the collection is read-only.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.Remove(Jacobi.Vst.Core.VstEvent)">
-            <summary>
-            Removes the specified <paramref name="item"/> from the collection.
-            </summary>
-            <param name="item">The item to remove.</param>
-            <returns>Returns true when the <paramref name="item"/> was successful removed. 
-            False is returned when the <paramref name="item"/> was not found in the collection.</returns>
-            <exception cref="T:System.InvalidOperationException">Thrown when the collection is read-only.</exception>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.GetEnumerator">
-            <summary>
-            Returns an enumeration object.
-            </summary>
-            <returns>Never returns null.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Retrieves a new enumeration object.
-            </summary>
-            <returns>Never returns null.</returns>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.ThrowIfReadOnly">
             <summary>
