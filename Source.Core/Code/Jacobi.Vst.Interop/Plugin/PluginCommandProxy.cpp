@@ -18,7 +18,7 @@ PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginComm
 	}
 
 	_commandStub = cmdStub;
-	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20^>(cmdStub);
+	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^>(cmdStub);
 
 	_memTracker = gcnew Jacobi::Vst::Interop::MemoryTracker();
 	_pEditorRect = new Vst2Rectangle();
@@ -344,7 +344,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				result = _commandStub->GetNumberOfMidiOutputChannels();
 				break;
 			default:
-				result = DispatchDeprecated(command, index, value, ptr, opt);
+				result = DispatchLegacy(command, index, value, ptr, opt);
 				break;
 			}
 		}
@@ -368,7 +368,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 // continuation of Dispatch()
 // Dispatches an opcode to the plugin deprecated command stub.
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
-Vst2IntPtr PluginCommandProxy::DispatchDeprecated(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
+Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
 {
 	Vst2IntPtr result = 0;
 

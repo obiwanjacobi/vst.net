@@ -9,7 +9,7 @@ namespace Interop {
     /// The HostCommandStub calls the host callback function.
     /// </summary>
     ref class HostCommandStub : Jacobi::Vst::Core::Plugin::IVstHostCommandStub, 
-        Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20
+        Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20
     {
     public:
         /// <summary>
@@ -176,10 +176,10 @@ namespace Interop {
         virtual System::Boolean CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect);
 
         //
-        // Deprecated method support (VST 2.4)
+        // Legacy method support (VST 2.4)
         //
 
-        // IVstHostCommandsDeprecated10
+        // IVstHostCommandsLegacy10
         /// <summary>
         /// Reports whether the spefied pin at the <paramref name="connectionIndex"/> is connected.
         /// </summary>
@@ -188,7 +188,7 @@ namespace Interop {
         /// <returns>Returns True when the pin is connected, otherwise False is returned.</returns>
         virtual System::Boolean PinConnected(System::Int32 connectionIndex, System::Boolean output);
 
-        // IVstHostCommandsDeprecated20
+        // IVstHostCommandsLegacy20
         /// <summary>
         /// Indicates to the Host that the Plugin wants to process Midi events.
         /// </summary>

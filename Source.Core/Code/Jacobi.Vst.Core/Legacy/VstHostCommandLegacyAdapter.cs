@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Core.Deprecated
+﻿namespace Jacobi.Vst.Core.Legacy
 {
     using Jacobi.Vst.Core.Host;
     using System;
@@ -7,27 +7,27 @@
     /// This class implements an extension to the <see cref="VstHostCommandAdapter"/> to include all depricated Host members.
     /// </summary>
     /// <remarks>
-    /// Only instantiate this class when you have a reference to an implementation of the <see cref="IVstHostCommandsDeprecated20"/> interface.
+    /// Only instantiate this class when you have a reference to an implementation of the <see cref="IVstHostCommandsLegacy20"/> interface.
     /// </remarks>
-    public class VstHostCommandDeprecatedAdapter : VstHostCommandAdapter, Deprecated.IVstHostCommandsDeprecated20
+    public class VstHostCommandLegacyAdapter : VstHostCommandAdapter, Legacy.IVstHostCommandsLegacy20
     {
-        private IVstHostCommandsDeprecated20? _deprecatedStub;
+        private IVstHostCommandsLegacy20? _deprecatedStub;
 
         /// <summary>
         /// Constructs a new adapter instance on the passed <paramref name="hostCmdStub"/>.
         /// </summary>
-        /// <param name="hostCmdStub">An implementation of the <see cref="IVstHostCommandsDeprecated20"/> interface. Must not be null.</param>
-        public VstHostCommandDeprecatedAdapter(IVstHostCommandStub hostCmdStub)
+        /// <param name="hostCmdStub">An implementation of the <see cref="IVstHostCommandsLegacy20"/> interface. Must not be null.</param>
+        public VstHostCommandLegacyAdapter(IVstHostCommandStub hostCmdStub)
             : base(hostCmdStub)
         {
-            _deprecatedStub = (IVstHostCommandsDeprecated20)hostCmdStub
+            _deprecatedStub = (IVstHostCommandsLegacy20)hostCmdStub
                 ?? throw new ArgumentNullException(nameof(hostCmdStub));
         }
 
-        #region IVstHostCommandsDeprecated20 Members
+        #region IVstHostCommandsLegacy20 Members
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool WantMidi()
@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="filterFlags">Passed with the forwarded call.</param>
         /// <param name="timeInfo">Passed with the forwarded call.</param>
@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="sampleIndex">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -60,7 +60,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetAutomatableParameterCount()
@@ -70,7 +70,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="parameterIndex">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -81,7 +81,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool NeedIdle()
@@ -91,7 +91,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="pinIndex">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -102,7 +102,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="pinIndex">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -113,7 +113,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int WillReplaceOrAccumulate()
@@ -123,7 +123,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="sampleRate">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -134,7 +134,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstSpeakerArrangement GetOutputSpeakerArrangement()
@@ -144,7 +144,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="icon">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -155,7 +155,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public IntPtr OpenWindow()
@@ -165,7 +165,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="wnd">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -176,7 +176,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="xml">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
@@ -187,7 +187,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetChunkFile()
@@ -197,7 +197,7 @@
         }
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstSpeakerArrangement GetInputSpeakerArrangement()
@@ -208,10 +208,10 @@
 
         #endregion
 
-        #region IVstHostCommandsDeprecated10 Members
+        #region IVstHostCommandsLegacy10 Members
 
         /// <summary>
-        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Deprecated.IVstHostCommandsDeprecated20"/> implementation.
+        /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
         /// </summary>
         /// <param name="connectionIndex">Passed with the forwarded call.</param>
         /// <param name="output">Passed with the forwarded call.</param>

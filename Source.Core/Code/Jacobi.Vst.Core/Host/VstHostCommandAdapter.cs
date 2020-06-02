@@ -350,12 +350,12 @@ namespace Jacobi.Vst.Core.Host
         /// A factory method to create the correct <see cref="VstHostCommandAdapter"/> class type.
         /// </summary>
         /// <param name="hostCmdStub">A reference to the host command stub. Must not be null.</param>
-        /// <returns>Returns an instance of <see cref="Deprecated.VstHostCommandDeprecatedAdapter"/> when the <paramref name="hostCmdStub"/> supports deprecated methods.</returns>
+        /// <returns>Returns an instance of <see cref="Legacy.VstHostCommandLegacyAdapter"/> when the <paramref name="hostCmdStub"/> supports deprecated methods.</returns>
         public static VstHostCommandAdapter Create(IVstHostCommandStub hostCmdStub)
         {
-            if (hostCmdStub is Deprecated.IVstHostCommandsDeprecated20)
+            if (hostCmdStub is Legacy.IVstHostCommandsLegacy20)
             {
-                return new Deprecated.VstHostCommandDeprecatedAdapter(hostCmdStub);
+                return new Legacy.VstHostCommandLegacyAdapter(hostCmdStub);
             }
 
             return new VstHostCommandAdapter(hostCmdStub);

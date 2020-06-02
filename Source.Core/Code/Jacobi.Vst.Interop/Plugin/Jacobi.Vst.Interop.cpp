@@ -185,8 +185,8 @@ Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ plug
 	pEffect->version = pluginInfo->PluginVersion;
 
 	// check for deprecated members
-	Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
-		dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(pluginInfo);
+	Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInfo =
+		dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(pluginInfo);
 
 	if(deprecatedInfo != nullptr)
 	{

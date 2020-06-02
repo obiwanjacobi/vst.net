@@ -1,7 +1,7 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Core.Deprecated;
+    using Jacobi.Vst.Core.Legacy;
     using System;
 
     /// <summary>
@@ -112,7 +112,7 @@
         {
             if (Supports<IVstMidiProcessor>())
             {
-                IVstHostCommandsDeprecated20 deprecated = Host.GetInstance<IVstHostCommandsDeprecated20>();
+                IVstHostCommandsLegacy20 deprecated = Host.GetInstance<IVstHostCommandsLegacy20>();
 
                 if (deprecated != null)
                 {

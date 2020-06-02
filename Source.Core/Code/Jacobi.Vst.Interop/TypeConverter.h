@@ -149,8 +149,8 @@ public:
 					data[i] = pEvent->data[i];
 				}
 
-				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent =
-					gcnew Jacobi::Vst::Core::Deprecated::VstGenericEvent(
+				Jacobi::Vst::Core::Legacy::VstGenericEvent^ genericEvent =
+					gcnew Jacobi::Vst::Core::Legacy::VstGenericEvent(
 						safe_cast<Jacobi::Vst::Core::VstEventTypes>(pEvent->kind), pEvent->deltaFrames, data);
 
 				eventArray[n] = genericEvent;
@@ -226,7 +226,7 @@ public:
 			default:
 			{
 				// deprecated event types support
-				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Deprecated::VstGenericEvent^)evnt;
+				Jacobi::Vst::Core::Legacy::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Legacy::VstGenericEvent^)evnt;
 				// incl. deltaFrames and flags
 				int dataLength = genericEvent->Data->Length + (2 * sizeof(int32_t));
 				// incl.  type and byteSize

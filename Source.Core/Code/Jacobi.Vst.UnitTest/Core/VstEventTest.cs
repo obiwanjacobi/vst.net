@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Jacobi.Vst.Core;
-using Jacobi.Vst.Core.Deprecated;
+using Jacobi.Vst.Core.Legacy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -56,7 +56,7 @@ namespace Jacobi.Vst.UnitTest.Core
         [TestMethod()]
         public void Test_VstGenericEvent_Constructor()
         {
-            var eventType = VstEventTypes.DeprecatedAudioEvent;
+            var eventType = VstEventTypes.LegacyAudioEvent;
             int deltaFrames = 12;
             byte[] data = new byte[] { 0x9C, 0x7F, 0x40 };
 

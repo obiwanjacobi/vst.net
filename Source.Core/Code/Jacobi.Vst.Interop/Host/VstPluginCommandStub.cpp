@@ -560,10 +560,10 @@ System::Int32 VstPluginCommandStub::GetNumberOfMidiOutputChannels()
 }
 
 //
-// Deprecated support
+// Legacy support
 //
 
-// IVstPluginCommandsDeprecatedBase
+// IVstPluginCommandsLegacyBase
 void VstPluginCommandStub::ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputs, array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputs)
 {
 	float** ppInputs = inputs->Length == 0 ? _emptyAudio32 : _audioInputs.GetArray(inputs->Length);
@@ -575,7 +575,7 @@ void VstPluginCommandStub::ProcessAcc(array<Jacobi::Vst::Core::VstAudioBuffer^>^
 	CallProcess32Acc(ppInputs, ppOutputs, inputSampleCount);
 }
 
-// IVstPluginCommandsDeprecated10
+// IVstPluginCommandsLegacy10
 System::Single VstPluginCommandStub::GetVu()
 {
 	return safe_cast<System::Single>(CallDispatch(Vst2PluginCommands::VuGet, 0, 0, 0, 0));
@@ -601,7 +601,7 @@ System::Int32 VstPluginCommandStub::Identify()
 	return safe_cast<System::Int32>(CallDispatch(Vst2PluginCommands::Identify, 0, 0, 0, 0));
 }
 
-// IVstPluginCommandsDeprecated20
+// IVstPluginCommandsLegacy20
 System::Int32 VstPluginCommandStub::GetProgramCategoriesCount()
 {
 	return safe_cast<System::Int32>(CallDispatch(Vst2PluginCommands::ProgramGetCategoriesCount, 0, 0, 0, 0));

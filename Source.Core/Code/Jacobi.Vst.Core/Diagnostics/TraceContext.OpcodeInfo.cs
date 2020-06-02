@@ -17,7 +17,7 @@
             public OpcodeInfo(string description, bool deprecated)
             {
                 Description = description;
-                Deprecated = deprecated;
+                Legacy = deprecated;
             }
 
             /// <summary>
@@ -28,7 +28,7 @@
             /// <summary>
             /// Gets an indication if the opcode is deprecated.
             /// </summary>
-            public bool Deprecated { get; private set; }
+            public bool Legacy { get; private set; }
 
             /// <summary>
             /// Formats the dispatcher method parameters into a text string.
@@ -42,7 +42,7 @@
             {
                 string result = Description;
 
-                if (Deprecated)
+                if (Legacy)
                 {
                     result += " (deprecated)";
                 }

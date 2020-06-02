@@ -31,8 +31,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 * [All] rename all Deprecated to Legacy (less confusing)
 * [All] remove all [Obsolete] API.
-* [Framework] remove thread management from interface manager (simplifies the class)
-* [Framework] .NET Core DI instead of interface manager?
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
@@ -42,10 +40,9 @@ https://github.com/maxtoroq/sandcastle-md
 * [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
 * Turn on nullable reference types.
 * Update code to modern constructs (linter suggestions)
-* [UnitTest] Use FluentAssertions, remove TestContext prop.
+* [UnitTest] Use FluentAssertions.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds.
-* ObservableCollection is in System.Collections.DataModel
 
 ## Decisions
 
