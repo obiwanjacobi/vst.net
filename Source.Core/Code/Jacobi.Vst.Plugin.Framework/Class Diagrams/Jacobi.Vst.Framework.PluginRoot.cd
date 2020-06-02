@@ -49,7 +49,6 @@
     <ShowAsAssociation>
       <Property Name="ProductInfo" />
       <Property Name="Capabilities" />
-      <Property Name="Category" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
