@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "VstManagedPluginContext.h"
-#include "..\Plugin\Configuration.h"
 #include "..\Properties\Resources.h"
 #include "..\Bootstrapper.h"
 #include "..\Utils.h"
@@ -37,7 +36,7 @@ namespace Interop {
 		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-			Jacobi::Vst::Interop::Bootstrapper::LoadManagedPlugin(pluginPath, Jacobi::Vst::Plugin::Interop::Configuration::OpenConfig(basePath));
+			Jacobi::Vst::Interop::Bootstrapper::LoadManagedPlugin(pluginPath);
 
 		if(pluginCmdStub == nullptr)
 		{

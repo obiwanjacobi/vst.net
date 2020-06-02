@@ -24,11 +24,9 @@ Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
 	{
 		// retrieve the current plugin file name (interop)
 		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
-		System::String^ pluginPath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
 
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName, 
-			Jacobi::Vst::Plugin::Interop::Configuration::OpenConfig(pluginPath));
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName);
 		
 		if(commandStub != nullptr)
 		{

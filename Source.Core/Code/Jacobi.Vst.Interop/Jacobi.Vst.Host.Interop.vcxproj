@@ -232,7 +232,6 @@
     <ClInclude Include="Host\VstPluginContext.h" />
     <ClInclude Include="Host\VstUnmanagedPluginContext.h" />
     <ClInclude Include="MemoryTracker.h" />
-    <ClInclude Include="Plugin\Configuration.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Properties\Resources.h" />
     <ClInclude Include="Properties\targetver.h" />
@@ -253,7 +252,6 @@
     <ClCompile Include="Host\VstPluginContext.cpp" />
     <ClCompile Include="Host\VstUnmanagedPluginContext.cpp" />
     <ClCompile Include="MemoryTracker.cpp" />
-    <ClCompile Include="Plugin\Configuration.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -13,7 +13,6 @@
     <ClInclude Include="UnmanagedString.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vst2400.h" />
-    <ClInclude Include="Plugin\Configuration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -23,7 +22,6 @@
     <ClCompile Include="Bootstrapper.cpp" />
     <ClCompile Include="MemoryTracker.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="Plugin\Configuration.cpp" />
     <ClCompile Include="Plugin\Jacobi.Vst.Interop.cpp" />
   </ItemGroup>
   <ItemGroup>

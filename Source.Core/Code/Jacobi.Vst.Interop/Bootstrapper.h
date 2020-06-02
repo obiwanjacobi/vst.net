@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Plugin/Configuration.h"
-
 namespace Jacobi {
 namespace Vst {
 namespace Interop {
@@ -13,8 +11,7 @@ ref class Bootstrapper
 {
 public:
 	// helper
-	static Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ LoadManagedPlugin(System::String^ pluginPath, 
-		Microsoft::Extensions::Configuration::IConfiguration^ config);
+	static Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ LoadManagedPlugin(System::String^ pluginPath);
 };
 
 }}} // Jacobi::Vst::Interop

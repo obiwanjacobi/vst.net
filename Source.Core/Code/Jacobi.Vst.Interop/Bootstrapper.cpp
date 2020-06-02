@@ -1,15 +1,18 @@
 #include "pch.h"
 #include "Utils.h"
 #include "Bootstrapper.h"
+
 #using <Microsoft.Extensions.Configuration.dll>
 #using <Microsoft.Extensions.Configuration.Abstractions.dll>
+#using <Microsoft.Extensions.Configuration.FileExtensions.dll>
+#using <Microsoft.Extensions.Configuration.Json.dll>
 
 namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
 // static helper method
-Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath, Microsoft::Extensions::Configuration::IConfiguration^ config)
+Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath)
 {
 	System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
@@ -28,8 +31,11 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 	
 	if(commandStub != nullptr)
 	{
-		// assign config to commandStub (can be null)
-		commandStub->PluginConfiguration = config;
+		auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
+		Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, basePath);
+		Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json", true);
+		// assign config to commandStub
+		commandStub->PluginConfiguration = builder->Build();
 	}
 
 	return commandStub;
