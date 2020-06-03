@@ -10,8 +10,8 @@ namespace Jacobi {
 namespace Vst {
 namespace Interop {
 
-	// fwd ref
-	Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
+// fwd ref
+Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 
 // main exported method called by host to create the plugin
 Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)

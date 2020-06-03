@@ -36,7 +36,7 @@ namespace Interop {
 		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
 
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-			Jacobi::Vst::Interop::Bootstrapper::LoadManagedPlugin(pluginPath);
+			Bootstrapper::LoadManagedPlugin(pluginPath);
 
 		if(pluginCmdStub == nullptr)
 		{

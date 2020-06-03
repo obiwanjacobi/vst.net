@@ -71,7 +71,7 @@ namespace Interop {
 
 		try
 		{
-			pPluginPath = Jacobi::Vst::Interop::TypeConverter::AllocateString(pluginPath);
+			pPluginPath = TypeConverter::AllocateString(pluginPath);
 
 			// Load plugin dll
 			_hLib = ::LoadLibraryA(pPluginPath);
@@ -160,7 +160,7 @@ namespace Interop {
 		{
 			if(pPluginPath != NULL)
 			{
-				Jacobi::Vst::Interop::TypeConverter::DeallocateString(pPluginPath);
+				TypeConverter::DeallocateString(pPluginPath);
 			}
 
 			LoadingPlugin = nullptr;
