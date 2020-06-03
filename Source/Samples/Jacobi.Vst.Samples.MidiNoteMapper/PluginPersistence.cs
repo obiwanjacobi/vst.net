@@ -1,16 +1,14 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
-    using System;
+    using Jacobi.Vst.Core;
+    using Jacobi.Vst.Plugin.Framework;
     using System.IO;
     using System.Text;
 
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-
-    class PluginPersistence : IVstPluginPersistence
+    internal sealed class PluginPersistence : IVstPluginPersistence
     {
-        private Plugin _plugin;
-        private Encoding _encoding = Encoding.ASCII;
+        private readonly Plugin _plugin;
+        private readonly Encoding _encoding = Encoding.ASCII;
 
         public PluginPersistence(Plugin plugin)
         {
@@ -33,10 +31,12 @@
 
             for (int n = 0; n < count; n++)
             {
-                MapNoteItem item = new MapNoteItem();
-                item.KeyName = reader.ReadString();
-                item.TriggerNoteNumber = reader.ReadByte();
-                item.OutputNoteNumber = reader.ReadByte();
+                MapNoteItem item = new MapNoteItem
+                {
+                    KeyName = reader.ReadString(),
+                    TriggerNoteNumber = reader.ReadByte(),
+                    OutputNoteNumber = reader.ReadByte()
+                };
 
                 _plugin.NoteMap.Add(item);
             }

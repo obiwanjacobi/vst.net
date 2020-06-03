@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProgram">
+    <Position X="3.5" Y="0.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAACAEAAAYEAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
+      <FileName>VstProgram.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Categories" />
+      <Property Name="Parameters" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProgramCollection">
+    <Position X="0.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
+      <FileName>VstProgramCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCollection">
+    <Position X="7" Y="0.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAARACAEIAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
+      <FileName>VstParameterCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameter">
+    <Position X="0.5" Y="5.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAACAAAAAAEIAAQAgAAAABAAAAAAEggEAACAA=</HashCode>
+      <FileName>VstParameter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Info" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterInfo">
+    <Position X="3.25" Y="5.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAIYMAIAMAAADAAAIBJBAAwKACBAAMJAAAIgEABgmAA=</HashCode>
+      <FileName>VstParameterInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ParameterManager" />
+      <Property Name="Category" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterManager">
+    <Position X="6.5" Y="5.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="ActiveParameter" Type="Jacobi.Vst.Plugin.Framework.VstParameter" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.938" Y="5.5" />
+        <Point X="6.938" Y="5.125" />
+        <Point X="1.688" Y="5.125" />
+        <Point X="1.688" Y="5.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.234" Y="0.07" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QEACAAQgAAAAABAAAAABCCAAQEIAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>VstParameterManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ParameterInfo" />
+      <Property Name="ActiveParameter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCategory">
+    <Position X="6.5" Y="8.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstParameterCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCategoryCollection">
+    <Position X="3.5" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>VstParameterCategoryCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginPrograms">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAACAAAAAAA=</HashCode>
+      <FileName>IVstPluginPrograms.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Programs" />
+      <Property Name="ActiveProgram" />
+    </ShowAsAssociation>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

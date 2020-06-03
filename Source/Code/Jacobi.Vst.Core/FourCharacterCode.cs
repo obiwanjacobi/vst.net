@@ -29,7 +29,7 @@
         /// <param name="value">A string of exactly four characters.</param>
         public FourCharacterCode(string value)
         {
-            ThrowIfInvalidString(value, "value");
+            ThrowIfInvalidString(value, nameof(value));
 
             _value = value;
         }
@@ -43,7 +43,7 @@
             get { return _value; }
             set
             {
-                ThrowIfInvalidString(value, "value");
+                ThrowIfInvalidString(value, nameof(value));
 
                 _value = value;
             }

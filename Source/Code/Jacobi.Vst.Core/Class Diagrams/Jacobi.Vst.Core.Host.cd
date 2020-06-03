@@ -17,7 +17,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>yBRYQIQEAABAoMQICAwhAgKEAQFBgGABQAAbAgqRQUA=</HashCode>
+      <HashCode>yBRYQIQEAABAoMQICAwhAgKEAQFBgGAhQAAbAgqRQUA=</HashCode>
       <FileName>Host\VstPluginCommandAdapter.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -36,7 +36,7 @@
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Jacobi.Vst.Core.Host.IVstPluginCommandStub" Collapsed="true">
-    <Position X="0.5" Y="11.5" Width="2" />
+    <Position X="0.5" Y="11.75" Width="2" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Host\IVstPluginCommandStub.cs</FileName>
@@ -60,7 +60,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Jacobi.Vst.Core.IVstPluginCommands24">
-    <Position X="0.5" Y="9.75" Width="2" />
+    <Position X="0.5" Y="10" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>IVstPluginCommands.cs</FileName>
@@ -76,7 +76,7 @@
   <Interface Name="Jacobi.Vst.Core.IVstPluginCommands23">
     <Position X="0.5" Y="7.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAAAAAQAAAAAAAAAAAAAgAAAAAABAAAAQEA=</HashCode>
+      <HashCode>QAAAAAAAAAAAAAQAAAAAAAAAAAAAgAAgAAABAAAAQEA=</HashCode>
       <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
   </Interface>

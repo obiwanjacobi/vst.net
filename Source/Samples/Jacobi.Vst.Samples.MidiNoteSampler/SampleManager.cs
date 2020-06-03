@@ -1,37 +1,29 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteSampler
 {
+    using Jacobi.Vst.Core;
     using System;
     using System.Collections.Generic;
-    
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
 
     /// <summary>
     /// Manages playback, recording and storing audio samples.
     /// </summary>
-    internal class SampleManager
+    internal sealed class SampleManager
     {
-        private Dictionary<byte, StereoBuffer> _noteMap = new Dictionary<byte, StereoBuffer>();
-    
+        private readonly Dictionary<byte, StereoBuffer> _noteMap = new Dictionary<byte, StereoBuffer>();
+
         /// <summary>
         /// Starts recording the current audio or playing back the sample buffer.
         /// </summary>
         /// <param name="noteNo">The midi note number.</param>
         public void ProcessNoteOnEvent(byte noteNo)
         {
-            //System.Diagnostics.Debug.WriteLine("Note On event for note:" + noteNo, "VST.NET");
-
             if (_noteMap.ContainsKey(noteNo))
             {
                 _player = new SamplePlayer(_noteMap[noteNo]);
-
-                //System.Diagnostics.Debug.WriteLine("Playing Sample for note:" + noteNo, "VST.NET");
             }
-            else if(_recorder == null)
+            else if (_recorder == null)
             {
                 _recorder = new SampleRecorder(noteNo);
-
-                //System.Diagnostics.Debug.WriteLine("Recording Sample for note:" + noteNo, "VST.NET");
             }
         }
 
@@ -47,15 +39,11 @@
             {
                 _noteMap.Add(noteNo, _recorder.Buffer);
                 _recorder = null;
-
-                //System.Diagnostics.Debug.WriteLine("Stop Recording Sample for note:" + noteNo, "VST.NET");
             }
 
             if (_player != null && _player.Buffer.NoteNo == noteNo)
             {
                 _player = null;
-
-                //System.Diagnostics.Debug.WriteLine("Stop Playing Sample for note:" + noteNo, "VST.NET");
             }
         }
 

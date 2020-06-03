@@ -2,8 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Reflection;
-    using System.Configuration;
 
     /// <summary>
     /// This class represents the context that is used during tracing debug messages.
@@ -14,9 +12,9 @@
     /// </remarks>
     public partial class TraceContext
     {
-        private TraceSource _traceSource;
-        private string _contextDescription;
-        private Type _commandInterface;
+        private readonly TraceSource _traceSource;
+        private readonly string? _contextDescription;
+        private readonly Type? _commandInterface;
 
         /// <summary>
         /// Consrtucts a new instance using the <paramref name="contextName"/> and specified <paramref name="commandInterface"/>.
@@ -61,7 +59,7 @@
             if (_traceSource.Switch.ShouldTrace(TraceEventType.Verbose))
             {
                 string message = "Dispatch (Begin) ";
-                OpcodeInfo opcodeInfo = LookupOpcodeInfo(opcode);
+                OpcodeInfo? opcodeInfo = LookupOpcodeInfo(opcode);
 
                 if (opcodeInfo != null)
                 {
@@ -102,7 +100,7 @@
         /// </remarks>
         public void WriteError(Exception exception)
         {
-            Throw.IfArgumentIsNull(exception, "exception");
+            Throw.IfArgumentIsNull(exception, nameof(exception));
 
             if (_traceSource.Switch.ShouldTrace(TraceEventType.Error))
             {
@@ -213,9 +211,9 @@
         }
 
         // refer to TraceContext.OpcodeInfo.cs
-        private OpcodeInfo LookupOpcodeInfo(int opcode)
+        private OpcodeInfo? LookupOpcodeInfo(int opcode)
         {
-            OpcodeInfo[] lookupTable = null;
+            OpcodeInfo[]? lookupTable = null;
 
             if (typeof(IVstHostCommands20).IsAssignableFrom(_commandInterface))
             {
@@ -227,12 +225,10 @@
                 lookupTable = _dispatchPlugin;
             }
 
-            if (lookupTable != null)
+            if (lookupTable != null &&
+                opcode < lookupTable.Length)
             {
-                if (opcode < lookupTable.Length)
-                {
-                    return lookupTable[opcode];
-                }
+                return lookupTable[opcode];
             }
 
             return null;

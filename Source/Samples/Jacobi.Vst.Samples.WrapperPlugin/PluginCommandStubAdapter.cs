@@ -1,10 +1,9 @@
-﻿using System;
-using System.Configuration;
-using System.Drawing;
-
-using Jacobi.Vst.Core;
+﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Core.Plugin;
-using Jacobi.Vst.Interop.Host;
+using Jacobi.Vst.Host.Interop;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Drawing;
 
 namespace Jacobi.Vst.Samples.WrapperPlugin
 {
@@ -22,24 +21,18 @@ namespace Jacobi.Vst.Samples.WrapperPlugin
 
             if (PluginConfiguration == null)
             {
-                throw new ApplicationException("No plugin configuration found.");
+                throw new InvalidOperationException("No plugin configuration found.");
             }
 
-            KeyValueConfigurationElement configElem = PluginConfiguration.AppSettings.Settings["PluginPath"];
-
-            if(configElem == null)
-            {
-                throw new ApplicationException("The 'PluginPath' configuration (app) setting was not found.");
-            }
+            var pluginPath = PluginConfiguration["PluginPath"];
 
             Host.HostCommandStubAdapter hostCmdAdapter = new Host.HostCommandStubAdapter(hostCmdStub);
-            _pluginCtx = VstPluginContext.Create(configElem.Value, hostCmdAdapter);
+            _pluginCtx = VstPluginContext.Create(pluginPath, hostCmdAdapter);
 
             return _pluginCtx.PluginInfo;
         }
 
-        public Configuration PluginConfiguration 
-        { get; set; }
+        public IConfiguration PluginConfiguration { get; set; }
 
         #endregion
 

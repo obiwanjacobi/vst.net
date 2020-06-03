@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Jacobi.Vst.Core;
-
 namespace Jacobi.Vst.Core.Host
 {
     /// <summary>
@@ -11,7 +9,7 @@ namespace Jacobi.Vst.Core.Host
     /// </summary>
     public class VstHostCommandAdapter : Plugin.IVstHostCommandStub
     {
-        private IVstHostCommandStub _hostCmdStub;
+        private IVstHostCommandStub? _hostCmdStub;
 
         /// <summary>
         /// Constructs a new instance based on the <paramref name="hostCmdStub"/>
@@ -19,7 +17,7 @@ namespace Jacobi.Vst.Core.Host
         /// <param name="hostCmdStub">Will be used to forward calls to. Must not be null.</param>
         public VstHostCommandAdapter(IVstHostCommandStub hostCmdStub)
         {
-            Throw.IfArgumentIsNull(hostCmdStub, "hostCmdStub");
+            Throw.IfArgumentIsNull(hostCmdStub, nameof(hostCmdStub));
 
             _hostCmdStub = hostCmdStub;
         }
@@ -42,7 +40,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool UpdatePluginInfo(Plugin.VstPluginInfo pluginInfo)
         {
-            _hostCmdStub.PluginContext.PluginInfo = pluginInfo;
+            ThrowIfDisposed();
+            _hostCmdStub!.PluginContext.PluginInfo = pluginInfo;
 
             return true;
         }
@@ -58,7 +57,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstTimeInfo GetTimeInfo(VstTimeInfoFlags filterFlags)
         {
-            return _hostCmdStub.GetTimeInfo(filterFlags);
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetTimeInfo(filterFlags);
         }
 
         /// <summary>
@@ -68,7 +68,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool ProcessEvents(VstEvent[] events)
         {
-            return _hostCmdStub.ProcessEvents(events);
+            ThrowIfDisposed();
+            return _hostCmdStub!.ProcessEvents(events);
         }
 
         /// <summary>
@@ -77,7 +78,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool IoChanged()
         {
-            return _hostCmdStub.IoChanged();
+            ThrowIfDisposed();
+            return _hostCmdStub!.IoChanged();
         }
 
         /// <summary>
@@ -88,7 +90,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SizeWindow(int width, int height)
         {
-            return _hostCmdStub.SizeWindow(width, height);
+            ThrowIfDisposed();
+            return _hostCmdStub!.SizeWindow(width, height);
         }
 
         /// <summary>
@@ -97,7 +100,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public float GetSampleRate()
         {
-            return _hostCmdStub.GetSampleRate();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetSampleRate();
         }
 
         /// <summary>
@@ -106,7 +110,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetBlockSize()
         {
-            return _hostCmdStub.GetBlockSize();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetBlockSize();
         }
 
         /// <summary>
@@ -115,7 +120,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetInputLatency()
         {
-            return _hostCmdStub.GetInputLatency();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetInputLatency();
         }
 
         /// <summary>
@@ -124,7 +130,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetOutputLatency()
         {
-            return _hostCmdStub.GetOutputLatency();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetOutputLatency();
         }
 
         /// <summary>
@@ -133,7 +140,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstProcessLevels GetProcessLevel()
         {
-            return _hostCmdStub.GetProcessLevel();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetProcessLevel();
         }
 
         /// <summary>
@@ -142,7 +150,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstAutomationStates GetAutomationState()
         {
-            return _hostCmdStub.GetAutomationState();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetAutomationState();
         }
 
         /// <summary>
@@ -151,7 +160,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetVendorString()
         {
-            return _hostCmdStub.GetVendorString();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetVendorString();
         }
 
         /// <summary>
@@ -160,7 +170,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetProductString()
         {
-            return _hostCmdStub.GetProductString();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetProductString();
         }
 
         /// <summary>
@@ -169,7 +180,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetVendorVersion()
         {
-            return _hostCmdStub.GetVendorVersion();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetVendorVersion();
         }
 
         /// <summary>
@@ -179,7 +191,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstCanDoResult CanDo(string cando)
         {
-            return _hostCmdStub.CanDo(cando);
+            ThrowIfDisposed();
+            return _hostCmdStub!.CanDo(cando);
         }
 
         /// <summary>
@@ -188,7 +201,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstHostLanguage GetLanguage()
         {
-            return _hostCmdStub.GetLanguage();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetLanguage();
         }
 
         /// <summary>
@@ -197,7 +211,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetDirectory()
         {
-            return _hostCmdStub.GetDirectory();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetDirectory();
         }
 
         /// <summary>
@@ -206,7 +221,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool UpdateDisplay()
         {
-            return _hostCmdStub.UpdateDisplay();
+            ThrowIfDisposed();
+            return _hostCmdStub!.UpdateDisplay();
         }
 
         /// <summary>
@@ -216,7 +232,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool BeginEdit(int index)
         {
-            return _hostCmdStub.BeginEdit(index);
+            ThrowIfDisposed();
+            return _hostCmdStub!.BeginEdit(index);
         }
 
         /// <summary>
@@ -226,7 +243,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool EndEdit(int index)
         {
-            return _hostCmdStub.EndEdit(index);
+            ThrowIfDisposed();
+            return _hostCmdStub!.EndEdit(index);
         }
 
         /// <summary>
@@ -236,7 +254,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool OpenFileSelector(VstFileSelect fileSelect)
         {
-            return _hostCmdStub.OpenFileSelector(fileSelect);
+            ThrowIfDisposed();
+            return _hostCmdStub!.OpenFileSelector(fileSelect);
         }
 
         /// <summary>
@@ -245,7 +264,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool CloseFileSelector(VstFileSelect fileSelect)
         {
-            return _hostCmdStub.CloseFileSelector(fileSelect);
+            ThrowIfDisposed();
+            return _hostCmdStub!.CloseFileSelector(fileSelect);
         }
 
         #endregion
@@ -259,7 +279,8 @@ namespace Jacobi.Vst.Core.Host
         /// <param name="value">Passed with the forwarded call.</param>
         public void SetParameterAutomated(int index, float value)
         {
-            _hostCmdStub.SetParameterAutomated(index, value);
+            ThrowIfDisposed();
+            _hostCmdStub!.SetParameterAutomated(index, value);
         }
 
         /// <summary>
@@ -268,7 +289,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetVersion()
         {
-            return _hostCmdStub.GetVersion();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetVersion();
         }
 
         /// <summary>
@@ -277,7 +299,8 @@ namespace Jacobi.Vst.Core.Host
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetCurrentPluginID()
         {
-            return _hostCmdStub.GetCurrentPluginID();
+            ThrowIfDisposed();
+            return _hostCmdStub!.GetCurrentPluginID();
         }
 
         /// <summary>
@@ -285,7 +308,8 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         public void ProcessIdle()
         {
-            _hostCmdStub.ProcessIdle();
+            ThrowIfDisposed();
+            _hostCmdStub!.ProcessIdle();
         }
 
         #endregion
@@ -298,6 +322,7 @@ namespace Jacobi.Vst.Core.Host
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -306,9 +331,17 @@ namespace Jacobi.Vst.Core.Host
         /// <param name="disposing">When true also disposes of managed resources. Otherwise only unmanaged resources are disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
-                _hostCmdStub = null; 
+                _hostCmdStub = null;
+            }
+        }
+
+        private void ThrowIfDisposed()
+        {
+            if (_hostCmdStub == null)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
             }
         }
         #endregion
@@ -317,12 +350,12 @@ namespace Jacobi.Vst.Core.Host
         /// A factory method to create the correct <see cref="VstHostCommandAdapter"/> class type.
         /// </summary>
         /// <param name="hostCmdStub">A reference to the host command stub. Must not be null.</param>
-        /// <returns>Returns an instance of <see cref="Deprecated.VstHostCommandDeprecatedAdapter"/> when the <paramref name="hostCmdStub"/> supports deprecated methods.</returns>
+        /// <returns>Returns an instance of <see cref="Legacy.VstHostCommandLegacyAdapter"/> when the <paramref name="hostCmdStub"/> supports legacy methods.</returns>
         public static VstHostCommandAdapter Create(IVstHostCommandStub hostCmdStub)
         {
-            if(hostCmdStub is Deprecated.IVstHostCommandsDeprecated20)
+            if (hostCmdStub is Legacy.IVstHostCommandsLegacy20)
             {
-                return new Deprecated.VstHostCommandDeprecatedAdapter(hostCmdStub);
+                return new Legacy.VstHostCommandLegacyAdapter(hostCmdStub);
             }
 
             return new VstHostCommandAdapter(hostCmdStub);

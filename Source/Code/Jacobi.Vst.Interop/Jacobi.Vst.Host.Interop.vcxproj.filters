@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Properties\Resources.h" />
+    <ClInclude Include="Properties\targetver.h" />
+    <ClInclude Include="TypeConverter.h" />
+    <ClInclude Include="UnmanagedPointer.h" />
+    <ClInclude Include="UnmanagedString.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vst2400.h" />
+    <ClInclude Include="MemoryTracker.h" />
+    <ClInclude Include="Bootstrapper.h" />
+    <ClInclude Include="Host\UnmanagedArray.h" />
+    <ClInclude Include="Host\VstAudioBufferManager.h" />
+    <ClInclude Include="Host\VstAudioPrecisionBufferManager.h" />
+    <ClInclude Include="Host\VstHostCommandProxy.h" />
+    <ClInclude Include="Host\VstManagedPluginContext.h" />
+    <ClInclude Include="Host\VstPluginCommandStub.h" />
+    <ClInclude Include="Host\VstPluginContext.h" />
+    <ClInclude Include="Host\VstUnmanagedPluginContext.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Properties\AssemblyInfo.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="MemoryTracker.cpp" />
+    <ClCompile Include="Bootstrapper.cpp" />
+    <ClCompile Include="Host\VstAudioBufferManager.cpp" />
+    <ClCompile Include="Host\VstAudioPrecisionBufferManager.cpp" />
+    <ClCompile Include="Host\VstHostCommandProxy.cpp" />
+    <ClCompile Include="Host\VstManagedPluginContext.cpp" />
+    <ClCompile Include="Host\VstPluginCommandStub.cpp" />
+    <ClCompile Include="Host\VstPluginContext.cpp" />
+    <ClCompile Include="Host\VstUnmanagedPluginContext.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" />
+  </ItemGroup>
+</Project>

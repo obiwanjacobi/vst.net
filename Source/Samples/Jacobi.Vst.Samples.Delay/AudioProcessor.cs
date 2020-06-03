@@ -1,24 +1,21 @@
-﻿namespace Jacobi.Vst.Samples.Delay
-{
-    using System;
-    
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    using Jacobi.Vst.Framework.Plugin;
+﻿using Jacobi.Vst.Core;
+using Jacobi.Vst.Plugin.Framework.Plugin;
 
+namespace Jacobi.Vst.Samples.Delay
+{
     /// <summary>
     /// This class manages the plugin audio processing.
     /// </summary>
-    internal class AudioProcessor : VstPluginAudioProcessorBase
+    internal sealed class AudioProcessor : VstPluginAudioProcessorBase
     {
-        private FxTestPlugin _plugin;
-        private Delay _delay;
+        private readonly Plugin _plugin;
+        private readonly Delay _delay;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public AudioProcessor(FxTestPlugin plugin)
+        public AudioProcessor(Plugin plugin)
             : base(1, 1, 0)
         {
             _plugin = plugin;

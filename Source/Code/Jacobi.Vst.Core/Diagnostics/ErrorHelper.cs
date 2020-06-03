@@ -1,10 +1,10 @@
 ﻿namespace Jacobi.Vst.Core.Diagnostics
 {
     using System;
-    using System.Text;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.IO;
+    using System.Reflection;
+    using System.Text;
 
     /// <summary>
     /// Helper class for formatting errors.
@@ -16,7 +16,7 @@
         /// </summary>
         /// <param name="e">The exception to format the error text for.</param>
         /// <returns>Returns the error text for the specified <paramref name="e"/>xception and its <see cref="Exception.InnerException"/>s.</returns>
-        public static string FormatException(Exception e)
+        public static string FormatException(Exception? e)
         {
             StringBuilder text = new StringBuilder();
 
@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="text">The <see cref="StringBuilder"/> that receives the text.</param>
         /// <param name="e">Must not be null.</param>
-        private static void BuildExceptionText(StringBuilder text, Exception e)
+        private static void BuildExceptionText(StringBuilder text, Exception? e)
         {
             if (e != null)
             {
@@ -64,7 +64,9 @@
 
                 if (e.Data != null && e.Data.Count > 0)
                 {
+#pragma warning disable CS8605 // Unboxing a possibly null value.
                     foreach (KeyValuePair<string, object> item in e.Data)
+#pragma warning restore CS8605 // Unboxing a possibly null value.
                     {
                         text.AppendFormat("Key={0}, Value={1}", item.Key, item.Value);
                         text.AppendLine();
@@ -84,13 +86,15 @@
         /// </summary>
         /// <param name="text">The <see cref="StringBuilder"/> that receives the text.</param>
         /// <param name="rtle">A reference to the specialized exception. Can be null.</param>
-        private static void BuildReflectionTypeLoadExceptionText(StringBuilder text, ReflectionTypeLoadException rtle)
+        private static void BuildReflectionTypeLoadExceptionText(StringBuilder text, ReflectionTypeLoadException? rtle)
         {
             if (rtle != null)
             {
                 if (rtle.LoaderExceptions != null)
                 {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                     foreach (Exception le in rtle.LoaderExceptions)
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
                     {
                         text.AppendLine("Loader Exception -----------------------");
 
@@ -114,7 +118,7 @@
             }
         }
 
-        private static void BuildFileNotFoundExceptionText(StringBuilder text, FileNotFoundException fnfe)
+        private static void BuildFileNotFoundExceptionText(StringBuilder text, FileNotFoundException? fnfe)
         {
             if (fnfe != null)
             {

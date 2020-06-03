@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProductInfo">
+    <Position X="1.5" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAECAAAAAABAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>VstProductInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstPluginCategory" Collapsed="true">
+    <Position X="1.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices">
+    <Position X="4.25" Y="6" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAQCAAAAAAABAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Plugin\VstPluginWithServices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.Plugin.VstPlugin">
+    <Position X="4.75" Y="1.75" Width="1.75" />
+    <AssociationLine Name="ProductInfo" Type="Jacobi.Vst.Plugin.Framework.VstProductInfo" FixedFromPoint="true">
+      <Path>
+        <Point X="4.75" Y="4.125" />
+        <Point X="3" Y="4.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Capabilities" Type="Jacobi.Vst.Plugin.Framework.VstPluginCapabilities" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="4.75" Y="2.937" />
+        <Point X="4.375" Y="2.937" />
+        <Point X="4.375" Y="1.551" />
+        <Point X="3.25" Y="1.551" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEiAAIgAAAAAAAAQAFAAACCAIAAAAAAgADAA=</HashCode>
+      <FileName>Plugin\VstPlugin.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProductInfo" />
+      <Property Name="Capabilities" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="Jacobi.Vst.Plugin.Framework.VstPluginCapabilities">
+    <Position X="1.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAABAAAAAAAAAEAAAA=</HashCode>
+      <FileName>VstPluginCapabilities.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

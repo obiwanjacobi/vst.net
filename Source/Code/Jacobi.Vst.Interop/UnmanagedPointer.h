@@ -1,9 +1,5 @@
 #pragma once
 
-namespace Jacobi {
-namespace Vst {
-namespace Interop {
-
 template<class T>
 class UnmanagedPointer
 {
@@ -49,5 +45,3 @@ protected:
 	T* _instance;
 	bool _owned;
 };
-
-}}} // Jacobi::Vst::Interop

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHost">
+    <Position X="4" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAECAAAgAAAACGAAAADAQAAAAAAAAAAIAAJAA=</HashCode>
+      <FileName>Host\VstHost.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_productInfo" />
+      <Field Name="_hostCapabilities" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHostMidiProcessor">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Host\VstHostMidiProcessor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_host" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHostSequencer">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFCAAAAA=</HashCode>
+      <FileName>Host\VstHostSequencer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_host" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHostShell">
+    <Position X="9.5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHostShell.FileSelectorScope" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Host\VstHostShell.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAQAAAAAAAAAAAAAAAQAAAIAAIAABBACAAAA=</HashCode>
+      <FileName>Host\VstHostShell.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_host" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProductInfo">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAECAAAAAABAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>VstProductInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHostAutomation">
+    <Position X="0.5" Y="5.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHostAutomation.EditParameterScope" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Host\VstHostAutomation.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="_host" Type="Jacobi.Vst.Plugin.Framework.Host.VstHost" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="6.312" />
+        <Point X="2.875" Y="6.312" />
+        <Point X="2.875" Y="3.259" />
+        <Point X="4" Y="3.259" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAgBAAAAAA=</HashCode>
+      <FileName>Host\VstHostAutomation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_host" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="Jacobi.Vst.Plugin.Framework.VstHostCapabilities">
+    <Position X="7" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAQAAAEAAAAQIAgAAAAFBAAAAAAAIAAAAIEAAAA=</HashCode>
+      <FileName>VstHostCapabilities.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

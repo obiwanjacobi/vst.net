@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Jacobi.Vst.Host.Interop;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
-
-using Jacobi.Vst.Core;
-using Jacobi.Vst.Interop.Host;
 
 namespace Jacobi.Vst.Samples.Host
 {
@@ -15,6 +13,7 @@ namespace Jacobi.Vst.Samples.Host
         public MainForm()
         {
             InitializeComponent();
+            Text = "VST.NET 2 Dummy Host Sample";
         }
 
         private void FillPluginList()
@@ -128,8 +127,10 @@ namespace Jacobi.Vst.Samples.Host
 
         private void ViewPluginBtn_Click(object sender, EventArgs e)
         {
-            PluginForm dlg = new PluginForm();
-            dlg.PluginContext = SelectedPluginContext;
+            PluginForm dlg = new PluginForm
+            {
+                PluginContext = SelectedPluginContext
+            };
 
             dlg.ShowDialog(this);
         }
@@ -138,7 +139,7 @@ namespace Jacobi.Vst.Samples.Host
         {
             VstPluginContext ctx = SelectedPluginContext;
 
-            if(ctx != null)
+            if (ctx != null)
             {
                 ctx.Dispose();
 

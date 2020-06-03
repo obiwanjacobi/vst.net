@@ -2,8 +2,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 /// <summary>
 /// The VstHostCommandProxy class dispatches incoming requests from the plugin to an implementation of
@@ -29,19 +29,19 @@ public:
 	/// <param name="opt">Optional argument.</param>
 	/// <returns>Returns the return value of the method called on the 
 	/// <see cref="Jacobi::Vst::Core::Host::IVstHostCommandStub"/> interface.</returns>
-	VstIntPtr Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
+	Vst2IntPtr Dispatch(int32_t opcode, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 private:
 	Jacobi::Vst::Core::Host::IVstHostCommandStub^ _hostCmdStub;
-	Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^ _deprecatedCmdStub;
+	Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^ _legacyCmdStub;
 
-	::VstTimeInfo* _pTimeInfo;
+	::Vst2TimeInfo* _pTimeInfo;
 	char* _directory;
-	::VstSpeakerArrangement* _pArrangement;
+	::Vst2SpeakerArrangement* _pArrangement;
 
-	VstIntPtr DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
+	Vst2IntPtr DispatchLegacy(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 	Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

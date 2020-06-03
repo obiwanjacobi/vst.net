@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstHost">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAgAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstHost.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstHostSequencer">
+    <Position X="4" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>RQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAA=</HashCode>
+      <FileName>IVstHostSequencer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstHostShell">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAIAABAACAAAA=</HashCode>
+      <FileName>IVstHostShell.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPlugin">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEgAAIgAAAAAAAAQAAAAAACAIAAAAAAgACAA=</HashCode>
+      <FileName>IVstPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginEditor">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAoAAAAggAAAAAgAAAAAAAAAAAAACAAgA=</HashCode>
+      <FileName>IVstPluginEditor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstMidiProcessor">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstMidiProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginPersistence">
+    <Position X="7.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ggAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginPersistence.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginBypass">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginBypass.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginProcess">
+    <Position X="7.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginProcess.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginAudioProcessor">
+    <Position X="2.5" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAhAAAAAACAAAAAAAAAAAACAAQIA=</HashCode>
+      <FileName>IVstPluginAudioProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginAudioPrecisionProcessor">
+    <Position X="2.25" Y="8.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginAudioProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginMidiPrograms">
+    <Position X="5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginMidiPrograms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginConnections">
+    <Position X="5" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAACAAQAAgIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginConnections.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginMidiSource">
+    <Position X="5" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginMidiSource.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginParameters">
+    <Position X="5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAAAA=</HashCode>
+      <FileName>IVstPluginParameters.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginPrograms">
+    <Position X="2.75" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAACAAAAAAA=</HashCode>
+      <FileName>IVstPluginPrograms.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstHostAutomation">
+    <Position X="6" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>IVstHostAutomation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

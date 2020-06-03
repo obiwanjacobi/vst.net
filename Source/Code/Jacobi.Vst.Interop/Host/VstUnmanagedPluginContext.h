@@ -1,24 +1,24 @@
 #pragma once
 
 #include "VstPluginContext.h"
-#include "VstHostCommandProxy.h"
 #include "VstPluginCommandStub.h"
+#include "VstHostCommandProxy.h"
 
 // typedef for the main exported function from a plugin dll
-typedef ::AEffect* (*VSTPluginMain)(::audioMasterCallback);
+typedef ::Vst2Plugin* (*Vst2PluginMain)(::Vst2HostCallback);
 
 // static callback function
-static VstIntPtr DispatchCallback(AEffect* pEff, VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
+static Vst2IntPtr Vst2Handler HostCommandHandler(Vst2Plugin* pPlugin, int32_t opcode, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 	/// <summary>
 	/// Implements a PluginContext for an unmanaged Plugin, marshalling the calls between the Context and the Plugin.
 	/// </summary>
-	ref class VstUnmanagedPluginContext : public VstPluginContext
+	private ref class VstUnmanagedPluginContext : public VstPluginContext
 	{
 	public:
 		/// <summary>
@@ -32,7 +32,7 @@ namespace Host {
 		!VstUnmanagedPluginContext();
 
 		/// <summary>
-		/// Copies the new values from the unmanaged AEffect structure to the <see cref="PluginInfo"/> property.
+		/// Copies the new values from the unmanaged Vst2Plugin structure to the <see cref="PluginInfo"/> property.
 		/// </summary>
 		/// <param name="raiseEvents">When true the <see cref="PropertyChanged"/> event will be raised for each property that has changed.</param>
 		/// <remarks>All property names will be prefixed with 'PluginInfo.' to indicate the path to the property.</remarks>
@@ -82,8 +82,8 @@ namespace Host {
 
 	private:
 		HMODULE _hLib;
-		::AEffect* _pEffect;
-		VSTPluginMain _pluginMain;
+		::Vst2Plugin* _pEffect;
+		Vst2PluginMain _pluginMain;
 
 		VstHostCommandProxy^ _hostCmdProxy;
 
@@ -91,5 +91,5 @@ namespace Host {
 		{ if(_hLib != NULL) { ::FreeLibrary(_hLib); _hLib = NULL; } }
 	};
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
 

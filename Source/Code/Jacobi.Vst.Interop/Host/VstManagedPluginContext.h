@@ -4,13 +4,13 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 	/// <summary>
 	/// Implements a PluginContext for a Managed Plugin, bypassing the double interop that would occur.
 	/// </summary>
-	ref class VstManagedPluginContext : public VstPluginContext
+	private ref class VstManagedPluginContext : public VstPluginContext
 	{
 	public:
 		/// <summary>
@@ -47,4 +47,4 @@ namespace Host {
 		Jacobi::Vst::Core::Plugin::VstPluginInfo^ _internalPluginInfo;
 	};
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

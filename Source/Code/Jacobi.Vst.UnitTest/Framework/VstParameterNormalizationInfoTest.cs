@@ -1,4 +1,4 @@
-﻿using Jacobi.Vst.Framework;
+﻿using Jacobi.Vst.Plugin.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Framework
@@ -9,42 +9,6 @@ namespace Jacobi.Vst.UnitTest.Framework
     [TestClass]
     public class VstParameterNormalizationInfoTest
     {
-        private TestContext testContextInstance;
-
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
         private void AssertNormalizationInfo(VstParameterInfo paramInfo)
         {
             VstParameterNormalizationInfo.AttachTo(paramInfo);
@@ -62,9 +26,6 @@ namespace Jacobi.Vst.UnitTest.Framework
             Assert.AreEqual(1, actual, "Normalized Max value mismatch.");
         }
 
-        /// <summary>
-        /// Tests normalization for a zero min value and a positive max value.
-        /// </summary>
         [TestMethod]
         public void Test_VstParameterNormalizationInfo_ZeroMinInteger()
         {
@@ -75,9 +36,6 @@ namespace Jacobi.Vst.UnitTest.Framework
             AssertNormalizationInfo(paramInfo);
         }
 
-        /// <summary>
-        /// Tests normalization for a positive min value and a positive max value.
-        /// </summary>
         [TestMethod]
         public void Test_VstParameterNormalizationInfo_PositiveRange()
         {
@@ -88,9 +46,6 @@ namespace Jacobi.Vst.UnitTest.Framework
             AssertNormalizationInfo(paramInfo);
         }
 
-        /// <summary>
-        /// Tests normalization for a negative min value and a positive max value.
-        /// </summary>
         [TestMethod]
         public void Test_VstParameterNormalizationInfo_NegativeMinInteger()
         {
@@ -101,9 +56,6 @@ namespace Jacobi.Vst.UnitTest.Framework
             AssertNormalizationInfo(paramInfo);
         }
 
-        /// <summary>
-        /// Tests normalization for a negative min value and a negative max value.
-        /// </summary>
         [TestMethod]
         public void Test_VstParameterNormalizationInfo_NegativeRange()
         {

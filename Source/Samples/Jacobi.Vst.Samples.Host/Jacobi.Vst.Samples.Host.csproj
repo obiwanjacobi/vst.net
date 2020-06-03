@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>2.0.0</Version>
+    <Authors>Marc Jacobi</Authors>
+    <Company>Jacobi Software</Company>
+    <Product>VST.NET Samples</Product>
+    <Platforms>x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="VST.NET2-Host" Version="2.0.0-alpha" />
+  </ItemGroup>
+
+</Project>

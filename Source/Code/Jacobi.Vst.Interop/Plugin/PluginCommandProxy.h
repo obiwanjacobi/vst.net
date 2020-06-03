@@ -4,8 +4,8 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Plugin {
+namespace Interop {
 
 	/// <summary>
 	/// The PluginCommandProxy dispatches calls to the Plugin.
@@ -23,44 +23,44 @@ namespace Plugin {
 		/// <summary>
 		/// Dispatches the opcode to one of the Plugin methods.
 		/// </summary>
-		VstIntPtr Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
+		Vst2IntPtr Dispatch(int32_t opcode, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 		/// <summary>
 		/// Calls the plugin for 32 bit audio processing.
 		/// </summary>
-		void Process(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs);
+		void Process(float** inputs, float** outputs, int32_t sampleFrames, int32_t numInputs, int32_t numOutputs);
 		/// <summary>
 		/// Calls the plugin for 64 bit audio processing.
 		/// </summary>
-		void Process(double** inputs, double** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs);
+		void Process(double** inputs, double** outputs, int32_t sampleFrames, int32_t numInputs, int32_t numOutputs);
 		/// <summary>
 		/// Calls the plugin to assign a new value to a parameter.
 		/// </summary>
-		void SetParameter(VstInt32 index, float value);
+		void SetParameter(int32_t index, float value);
 		/// <summary>
 		/// Calls the plugin to retrieve a parameter value.
 		/// </summary>
-		float GetParameter(VstInt32 index);
+		float GetParameter(int32_t index);
 
 		/// <summary>
-		/// Calls the plugin for 32 bit accumulating audio processing (deprecated).
+		/// Calls the plugin for 32 bit accumulating audio processing (legacy).
 		/// </summary>
-		void ProcessAcc(float** inputs, float** outputs, VstInt32 sampleFrames, VstInt32 numInputs, VstInt32 numOutputs);
+		void ProcessAcc(float** inputs, float** outputs, int32_t sampleFrames, int32_t numInputs, int32_t numOutputs);
 
 	private:
 		void Cleanup();
 
 		/// <summary>
-		/// Dispatches the opcode to one of the Plugin deprecated methods.
+		/// Dispatches the opcode to one of the Plugin legacy methods.
 		/// </summary>
-		VstIntPtr DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt);
+		Vst2IntPtr DispatchLegacy(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
-		Jacobi::Vst::Core::Deprecated::IVstPluginCommandsDeprecated20^ _deprecatedCmdStub;
+		Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^ _legacyCmdStub;
 
-		MemoryTracker^ _memTracker;
-		ERect* _pEditorRect;
+		Jacobi::Vst::Interop::MemoryTracker^ _memTracker;
+		Vst2Rectangle* _pEditorRect;
 
 		Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 	};
 
-}}}} // Jacobi::Vst::Interop::Plugin
+}}}} // Jacobi::Vst::Plugin::Interop

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Jacobi.Vst3.Interop;
+﻿using Jacobi.Vst3.Core;
 using Jacobi.Vst3.Plugin;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.TestPlugin
 {
@@ -10,8 +10,8 @@ namespace Jacobi.Vst3.TestPlugin
     [ClassInterface(ClassInterfaceType.None)]
     class PluginComponent : AudioEffect
     {
-        private BusCollection _audioInputs = new BusCollection(MediaTypes.Audio, BusDirections.Input);
-        private BusCollection _audioOutputs = new BusCollection(MediaTypes.Audio, BusDirections.Output);
+        private readonly BusCollection _audioInputs = new BusCollection(MediaTypes.Audio, BusDirections.Input);
+        private readonly BusCollection _audioOutputs = new BusCollection(MediaTypes.Audio, BusDirections.Output);
 
         public PluginComponent()
         {
@@ -47,7 +47,6 @@ namespace Jacobi.Vst3.TestPlugin
             // TODO: Parameter handling
 
             var paramCount = data.GetInputParameterChanges().GetParameterCount();
-            //var paramCount = data.OutputParameterChanges.GetParameterCount();
             //var paramCount = data.InputEvents.GetEventCount();
             //var paramCount = data.OutputEvents.GetEventCount();
 
