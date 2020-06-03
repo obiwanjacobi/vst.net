@@ -1,14 +1,14 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteSampler
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
+    using Jacobi.Vst.Plugin.Framework;
 
     /// <summary>
     /// Manages incoming midi events and sents them to the <see cref="SampleManager"/>.
     /// </summary>
-    internal class MidiProcessor : IVstMidiProcessor
+    internal sealed class MidiProcessor : IVstMidiProcessor
     {
-        private Plugin _plugin;
+        private readonly Plugin _plugin;
 
         /// <summary>
         /// Constructs a new instance.
@@ -41,10 +41,7 @@
                 {
                     VstMidiEvent midiEvent = (VstMidiEvent)evnt;
 
-                    //System.Diagnostics.Debug.WriteLine("Receiving Midi Event:" + midiEvent.MidiData[0], "VST.NET");
-
                     // pass note on and note off to the sample manager
-
                     if ((midiEvent.Data[0] & 0xF0) == 0x80)
                     {
                         _plugin.SampleManager.ProcessNoteOffEvent(midiEvent.Data[1]);

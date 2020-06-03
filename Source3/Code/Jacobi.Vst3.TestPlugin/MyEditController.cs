@@ -1,7 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Jacobi.Vst3.Interop;
+﻿using Jacobi.Vst3.Core;
 using Jacobi.Vst3.Plugin;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.TestPlugin
 {

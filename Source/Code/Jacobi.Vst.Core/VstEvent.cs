@@ -18,7 +18,7 @@ namespace Jacobi.Vst.Core
         {
             if (eventType == VstEventTypes.Unknown)
             {
-                throw new ArgumentException(Properties.Resources.VstEvent_InvalidEventType, "eventType");
+                throw new ArgumentException(Properties.Resources.VstEvent_InvalidEventType, nameof(eventType));
             }
 
             EventType = eventType;
@@ -50,14 +50,14 @@ namespace Jacobi.Vst.Core
         Unknown = 0,
         /// <summary>Midi event.</summary>
         MidiEvent = 1,
-        /// <summary>Audio event (deprecated).</summary>
-        DeprecatedAudioEvent,
-        /// <summary>Video event (deprecated).</summary>
-        DeprecatedVideoEvent,
-        /// <summary>Parameter event (deprecated).</summary>
-        DeprecatedParameterEvent,
-        /// <summary>Trigger event (deprecated).</summary>
-        DeprecatedTriggerEvent,
+        /// <summary>Audio event (legacy).</summary>
+        LegacyAudioEvent,
+        /// <summary>Video event (legacy).</summary>
+        LegacyVideoEvent,
+        /// <summary>Parameter event (legacy).</summary>
+        LegacyParameterEvent,
+        /// <summary>Trigger event (legacy).</summary>
+        LegacyTriggerEvent,
         /// <summary>Midi System Exclusive event.</summary>
         MidiSysExEvent
     }

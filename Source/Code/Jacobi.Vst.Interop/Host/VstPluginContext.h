@@ -2,15 +2,15 @@
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 	/// <summary>
 	/// The VstPluginContext class represents a VST Plugin for the host.
 	/// </summary>
 	/// <remarks>
 	/// The VstPluginContext can only be created using the static 
-	/// <see cref="Jacobi::Vst::Interop::Host::VstPluginContext::Create"/> 
+	/// <see cref="Jacobi::Vst::Host::Interop::VstPluginContext::Create"/> 
 	/// factory method. The method accepts the path to the plugin and an
 	/// implementation of the <see cref="Jacobi::Vst::Core::Host::IVstHostCommandStub"/>
 	/// interface.
@@ -81,7 +81,7 @@ namespace Host {
 		/// Removes the <paramref name="keyName"/> property from the plugin context.
 		/// </summary>
 		/// <param name="keyName">The name of the key used to identify the property.</param>
-		/// <remarks><see cref="System::IDisposable::Dispose"/> is <b>NOT</b> called on the property.</remarks>
+		/// <remarks><see cref="System::IDisposable"/> is <b>NOT</b> called on the property.</remarks>
 		virtual void Remove(System::String^ keyName)
 		{ _props->Remove(keyName); }
 
@@ -89,7 +89,7 @@ namespace Host {
 		/// Deletes the <paramref name="keyName"/> property and removes it from the plugin context.
 		/// </summary>
 		/// <param name="keyName">The name of the key used to identify the property.</param>
-		/// <remarks><see cref="System::IDisposable::Dispose"/> <i>is</i> called on the property (when implemented).</remarks>
+		/// <remarks><see cref="System::IDisposable"/> <i>is</i> called on the property (when implemented).</remarks>
 		virtual void Delete(System::String^ keyName);
 		
 		/// <summary>
@@ -167,5 +167,5 @@ namespace Host {
 		System::Collections::Generic::Dictionary<System::String^, System::Object^>^ _props;
 	};
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
 

@@ -8,7 +8,7 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
     /// <summary>
     /// The plugin custom editor UI.
     /// </summary>
-    partial class MidiNoteMapperUI : UserControl
+    internal sealed partial class MidiNoteMapperUI : UserControl
     {
         /// <summary>
         /// Constructs a new instance.
@@ -97,12 +97,14 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            MapNoteDetails dlg = new MapNoteDetails();
-            dlg.MapNoteItem = new MapNoteItem()
+            MapNoteDetails dlg = new MapNoteDetails
             {
-                KeyName = "New Note Map",
-                TriggerNoteNumber = 64,
-                OutputNoteNumber = 64
+                MapNoteItem = new MapNoteItem()
+                {
+                    KeyName = "New Note Map",
+                    TriggerNoteNumber = 64,
+                    OutputNoteNumber = 64
+                }
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
@@ -121,8 +123,10 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
         {
             if (MapListVw.SelectedItems.Count > 0)
             {
-                MapNoteDetails dlg = new MapNoteDetails();
-                dlg.MapNoteItem = (MapNoteItem)MapListVw.SelectedItems[0].Tag;
+                MapNoteDetails dlg = new MapNoteDetails
+                {
+                    MapNoteItem = (MapNoteItem)MapListVw.SelectedItems[0].Tag
+                };
 
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
@@ -137,9 +141,9 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
             {
                 MapNoteItem item = (MapNoteItem)MapListVw.SelectedItems[0].Tag;
 
-                if (MessageBox.Show(this, 
-                    String.Format("Are you sure you want to delete {0}.", item.KeyName), 
-                    "Delete a Note Map Item.", 
+                if (MessageBox.Show(this,
+                    String.Format("Are you sure you want to delete {0}.", item.KeyName),
+                    "Delete a Note Map Item.",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     NoteMap.Remove(item);
@@ -156,8 +160,10 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
             {
                 hitInfo.Item.Selected = true;
 
-                MapNoteDetails dlg = new MapNoteDetails();
-                dlg.MapNoteItem = (MapNoteItem)hitInfo.Item.Tag;
+                MapNoteDetails dlg = new MapNoteDetails
+                {
+                    MapNoteItem = (MapNoteItem)hitInfo.Item.Tag
+                };
 
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                 {

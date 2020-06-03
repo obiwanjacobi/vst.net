@@ -1,24 +1,24 @@
-#include "StdAfx.h"
+#include "pch.h"
 #include "VstHostCommandProxy.h"
 #include "..\TypeConverter.h"
 #include "..\Utils.h"
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
 
 VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 {
 	Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
 
 	_hostCmdStub = hostCmdStub;
-	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Deprecated::IVstHostCommandsDeprecated20^>(hostCmdStub);
+	_legacyCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^>(hostCmdStub);
 
 	// unmanaged structures
-	_pTimeInfo = new VstTimeInfo();
+	_pTimeInfo = new ::Vst2TimeInfo();
 	_directory = NULL;
-	_pArrangement = new ::VstSpeakerArrangement();
+	_pArrangement = new ::Vst2SpeakerArrangement();
 
 	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.HostCommandProxy", Jacobi::Vst::Core::Host::IVstHostCommandStub::typeid);
 }
@@ -49,9 +49,9 @@ VstHostCommandProxy::!VstHostCommandProxy()
 	}
 }
 
-VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
+Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPtr value, void* ptr, float opt)
 {
-	VstIntPtr result = 0;
+	Vst2IntPtr result = 0;
 
 	_traceCtx->WriteDispatchBegin(opcode, index, System::IntPtr(value), System::IntPtr(ptr), opt);
 
@@ -59,153 +59,111 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 	{
 		try
 		{
-			switch(opcode)
+			Vst2HostCommands command = safe_cast<Vst2HostCommands>(opcode);
+			switch(command)
 			{
 			// version 1.0 commands
-			case audioMasterAutomate:
-				// [index]: parameter index [opt]: parameter value  @see AudioEffect::setParameterAutomated
+			case Vst2HostCommands::Automate:
 				_hostCmdStub->SetParameterAutomated(index, opt);
 				result = 1;
 				break;
-			case audioMasterVersion:
-				// [return value]: Host VST version (for example 2400 for VST 2.4) @see AudioEffect::getMasterVersion
+			case Vst2HostCommands::Version:
 				result = _hostCmdStub->GetVersion();
 				break;
-			case audioMasterCurrentId:
-				// [return value]: current unique identifier on shell plug-in  @see AudioEffect::getCurrentUniqueId
+			case Vst2HostCommands::CurrentId:
 				result = _hostCmdStub->GetCurrentPluginID();
 				break;
-			case audioMasterIdle:
-				// no arguments  @see AudioEffect::masterIdle
+			case Vst2HostCommands::Idle:
 				_hostCmdStub->ProcessIdle();
 				result = 1;
 				break;
 
 			// version 2.0 commands
-			case audioMasterGetTime:
+			case Vst2HostCommands::GetTime:
 			{
-				// [return value]: #VstTimeInfo* or null if not supported [value]: request mask  @see VstTimeInfoFlags @see AudioEffectX::getTimeInfo
 				Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
 				if(timeInfo != nullptr)
 				{
 					TypeConverter::ToUnmanagedTimeInfo(_pTimeInfo, timeInfo);
-					result = (VstIntPtr)_pTimeInfo;
+					result = (Vst2IntPtr)_pTimeInfo;
 				}
 			}	break;
-			case audioMasterProcessEvents:
-				// [ptr]: pointer to #VstEvents  @see VstEvents @see AudioEffectX::sendVstEventsToHost
-				_hostCmdStub->ProcessEvents(TypeConverter::ToManagedEventArray((::VstEvents*)ptr));
+			case Vst2HostCommands::ProcessEvents:
+				_hostCmdStub->ProcessEvents(TypeConverter::ToManagedEventArray((::Vst2Events*)ptr));
 				result = 1;
 				break;
-			case audioMasterIOChanged:
-				// [return value]: 1 if supported  @see AudioEffectX::ioChanged
+			case Vst2HostCommands::IoChanged:
 				result = _hostCmdStub->IoChanged() ? 1 : 0;
 				break;
-			case audioMasterSizeWindow:
-				// [index]: new width [value]: new height [return value]: 1 if supported  @see AudioEffectX::sizeWindow
-				result = _hostCmdStub->SizeWindow(index, (::VstInt32)value) ? 1 : 0;
+			case Vst2HostCommands::SizeWindow:
+				result = _hostCmdStub->SizeWindow(index, (::int32_t)value) ? 1 : 0;
 				break;
-			case audioMasterGetSampleRate:
-				// [return value]: current sample rate  @see AudioEffectX::updateSampleRate
-				result = safe_cast<VstIntPtr>(_hostCmdStub->GetSampleRate());
+			case Vst2HostCommands::GetSampleRate:
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetSampleRate());
 				break;
-			case audioMasterGetBlockSize:
-				// [return value]: current block size  @see AudioEffectX::updateBlockSize
+			case Vst2HostCommands::GetBlockSize:
 				result = _hostCmdStub->GetBlockSize();
 				break;
-			case audioMasterGetInputLatency:
-				// [return value]: input latency in audio samples  @see AudioEffectX::getInputLatency
+			case Vst2HostCommands::GetInputLatency:
 				result = _hostCmdStub->GetInputLatency();
 				break;
-			case audioMasterGetOutputLatency:
-				// [return value]: output latency in audio samples  @see AudioEffectX::getOutputLatency
+			case Vst2HostCommands::GetOutputLatency:
 				result = _hostCmdStub->GetOutputLatency();
 				break;
-			case audioMasterGetCurrentProcessLevel:
-				// [return value]: current process level  @see VstProcessLevels
-				result = safe_cast<VstIntPtr>(_hostCmdStub->GetProcessLevel());
+			case Vst2HostCommands::GetCurrentProcessLevel:
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetProcessLevel());
 				break;
-			case audioMasterGetAutomationState:
-				// [return value]: current automation state  @see VstAutomationStates
-				result = safe_cast<VstIntPtr>(_hostCmdStub->GetAutomationState());
+			case Vst2HostCommands::GetAutomationState:
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetAutomationState());
 				break;
-			//case audioMasterOfflineStart:
-			//	// [index]: numNewAudioFiles [value]: numAudioFiles [ptr]: #VstAudioFile*  @see AudioEffectX::offlineStart
-			//	break;
-			//case audioMasterOfflineRead:
-			//	// [index]: bool readSource [value]: #VstOfflineOption* @see VstOfflineOption [ptr]: #VstOfflineTask*  @see VstOfflineTask @see AudioEffectX::offlineRead
-			//	break;
-			//case audioMasterOfflineWrite:
-			//	// @see audioMasterOfflineRead @see AudioEffectX::offlineRead
-			//	break;
-			//case audioMasterOfflineGetCurrentPass:
-			//	// @see AudioEffectX::offlineGetCurrentPass
-			//	break;
-			//case audioMasterOfflineGetCurrentMetaPass:
-			//	// @see AudioEffectX::offlineGetCurrentMetaPass
-			//	break;
-			case audioMasterGetVendorString:
-				// [ptr]: char buffer for vendor string, limited to #kVstMaxVendorStrLen  @see AudioEffectX::getHostVendorString
-				TypeConverter::StringToChar(_hostCmdStub->GetVendorString(), (char*)ptr, kVstMaxVendorStrLen);
+			case Vst2HostCommands::VendorGetString:
+				TypeConverter::StringToChar(_hostCmdStub->GetVendorString(), (char*)ptr, Vst2MaxVendorStrLen);
 				break;
-			case audioMasterGetProductString:
-				// [ptr]: char buffer for vendor string, limited to #kVstMaxProductStrLen  @see AudioEffectX::getHostProductString
-				TypeConverter::StringToChar(_hostCmdStub->GetProductString(), (char*)ptr, kVstMaxProductStrLen);
+			case Vst2HostCommands::ProductGetString:
+				TypeConverter::StringToChar(_hostCmdStub->GetProductString(), (char*)ptr, Vst2MaxProductStrLen);
 				break;
-			case audioMasterGetVendorVersion:
-				// [return value]: vendor-specific version  @see AudioEffectX::getHostVendorVersion
+			case Vst2HostCommands::VendorGetVersion:
 				result = _hostCmdStub->GetVendorVersion();
 				break;
-			//case audioMasterVendorSpecific:
-			//	// no definition, vendor specific handling  @see AudioEffectX::hostVendorSpecific
-			//	break;
-			case audioMasterCanDo:
+			case Vst2HostCommands::CanDo:
 			{
-				// [ptr]: "can do" string [return value]: 1 for supported
 				System::String^ cando = TypeConverter::CharToString((char*)ptr);
-				result = safe_cast<VstIntPtr>(_hostCmdStub->CanDo(cando));
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->CanDo(cando));
 			}	break;
-			case audioMasterGetLanguage:
-				// [return value]: language code  @see VstHostLanguage
-				result = safe_cast<VstIntPtr>(_hostCmdStub->GetLanguage());
+			case Vst2HostCommands::GetLanguage:
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetLanguage());
 				break;
-			case audioMasterGetDirectory:
-				// [return value]: FSSpec on MAC, else char*  @see AudioEffectX::getDirectory
+			case Vst2HostCommands::GetDirectory:
 				if(_directory == NULL)
 				{
 					_directory = TypeConverter::AllocateString(_hostCmdStub->GetDirectory());
 				}
 				// return cached value
-				result = (VstIntPtr)_directory;
+				result = (Vst2IntPtr)_directory;
 				break;
-			case audioMasterUpdateDisplay:
-				// no arguments	
+			case Vst2HostCommands::UpdateDisplay:
 				result = _hostCmdStub->UpdateDisplay() ? 1 : 0;
 				break;
-			case audioMasterBeginEdit:
-				// [index]: parameter index  @see AudioEffectX::beginEdit
+			case Vst2HostCommands::EditBegin:
 				result = _hostCmdStub->BeginEdit(index) ? 1 : 0;
 				break;
-			case audioMasterEndEdit:
-				// [index]: parameter index  @see AudioEffectX::endEdit
+			case Vst2HostCommands::EditEnd:
 				result = _hostCmdStub->EndEdit(index) ? 1 : 0;
 				break;
-			case audioMasterOpenFileSelector:
+			case Vst2HostCommands::FileSelectorOpen:
 			{
-				// [ptr]: VstFileSelect* [return value]: 1 if supported  @see AudioEffectX::openFileSelector
-				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::ToManagedFileSelect((::VstFileSelect*)ptr);
+				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::ToManagedFileSelect((::Vst2FileSelect*)ptr);
 				result = _hostCmdStub->OpenFileSelector(fileSelect) ? 1 : 0;
-				TypeConverter::AllocUpdateUnmanagedFileSelect((::VstFileSelect*)ptr, fileSelect);
+				TypeConverter::AllocUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr, fileSelect);
 			}	break;
-			case audioMasterCloseFileSelector:
+			case Vst2HostCommands::FileSelectorClose:
 			{
-				// [ptr]: VstFileSelect*  @see AudioEffectX::closeFileSelector
-				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::GetManagedFileSelect((::VstFileSelect*)ptr);
+				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::GetManagedFileSelect((::Vst2FileSelect*)ptr);
 				result = _hostCmdStub->CloseFileSelector(fileSelect) ? 1 : 0;
-				TypeConverter::DeleteUpdateUnmanagedFileSelect((::VstFileSelect*)ptr);
+				TypeConverter::DeleteUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr);
 			}	break;
 			default:
-				result = DispatchDeprecated(opcode, index, value, ptr, opt);
+				result = DispatchLegacy(command, index, value, ptr, opt);
 				break;
 			}
 		}
@@ -226,95 +184,96 @@ VstIntPtr VstHostCommandProxy::Dispatch(VstInt32 opcode, VstInt32 index, VstIntP
 	return result;
 }
 
-VstIntPtr VstHostCommandProxy::DispatchDeprecated(VstInt32 opcode, VstInt32 index, VstIntPtr value, void* ptr, float opt)
+Vst2IntPtr VstHostCommandProxy::DispatchLegacy(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
 {
-	VstIntPtr result = 0;
+	Vst2IntPtr result = 0;
 
-	if(_deprecatedCmdStub != nullptr)
+	if(_legacyCmdStub != nullptr)
 	{
-		switch(opcode)
+		switch(command)
 		{
 		// VST 1.0
-		case DECLARE_VST_DEPRECATED (audioMasterPinConnected):
-			result = _deprecatedCmdStub->PinConnected(index, value != 0) ? 1 : 0;
+		case Vst2HostCommands::PinConnected:
+			result = _legacyCmdStub->PinConnected(index, value != 0) ? 1 : 0;
 			break;
 
 		// VST 2.0
-		case DECLARE_VST_DEPRECATED (audioMasterSetTime):
+		case Vst2HostCommands::SetTime:
 		{
 			Jacobi::Vst::Core::VstTimeInfo^ timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
-			TypeConverter::ToManagedTimeInfo(timeInfo, (::VstTimeInfo*)ptr);
+			TypeConverter::ToManagedTimeInfo(timeInfo, (::Vst2TimeInfo*)ptr);
 			Jacobi::Vst::Core::VstTimeInfoFlags filterFlags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value);
 
-			result = _deprecatedCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;
+			result = _legacyCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;
 		}	break;
-		case DECLARE_VST_DEPRECATED (audioMasterTempoAt):
-			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetTempoAt(safe_cast<System::Int32>(value)));
+		case Vst2HostCommands::TempoAt:
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetTempoAt(safe_cast<System::Int32>(value)));
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetNumAutomatableParameters):
-			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetAutomatableParameterCount());
+		case Vst2HostCommands::GetAutomatableParameterCount:
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetAutomatableParameterCount());
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetParameterQuantization):
-			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->GetParameterQuantization(safe_cast<System::Int32>(value)));
+		case Vst2HostCommands::GetParameterQuantization:
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetParameterQuantization(safe_cast<System::Int32>(value)));
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterNeedIdle):
-			result = _deprecatedCmdStub->NeedIdle() ? 1 : 0;
+		case Vst2HostCommands::NeedIdle:
+			result = _legacyCmdStub->NeedIdle() ? 1 : 0;
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetPreviousPlug):
-			result = (VstIntPtr)_deprecatedCmdStub->GetPreviousPlugin(safe_cast<System::Int32>(value)).ToPointer();
+		case Vst2HostCommands::PluginGetPrevious:
+			result = (Vst2IntPtr)_legacyCmdStub->GetPreviousPlugin(safe_cast<System::Int32>(value)).ToPointer();
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetNextPlug):
-			result = (VstIntPtr)_deprecatedCmdStub->GetNextPlugin(safe_cast<System::Int32>(value)).ToPointer();
+		case Vst2HostCommands::PluginGetNext:
+			result = (Vst2IntPtr)_legacyCmdStub->GetNextPlugin(safe_cast<System::Int32>(value)).ToPointer();
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterWillReplaceOrAccumulate):
-			result = safe_cast<VstIntPtr>(_deprecatedCmdStub->WillReplaceOrAccumulate());
+		case Vst2HostCommands::WillReplace:
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->WillReplaceOrAccumulate());
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterSetOutputSampleRate):
-			result = _deprecatedCmdStub->SetOutputSampleRate(opt) ? 1 : 0;
+		case Vst2HostCommands::SetOutputSampleRate:
+			result = _legacyCmdStub->SetOutputSampleRate(opt) ? 1 : 0;
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetOutputSpeakerArrangement):
-		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetOutputSpeakerArrangement();
-			TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
-			result = (VstIntPtr)_pArrangement;
+		case Vst2HostCommands::GetOutputSpeakerArrangement:
+		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _legacyCmdStub->GetOutputSpeakerArrangement();
+		TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
+			result = (Vst2IntPtr)_pArrangement;
 		}	break;
-		case DECLARE_VST_DEPRECATED (audioMasterSetIcon):
+		case Vst2HostCommands::SetIcon:
 		{
 			System::IntPtr hIcon(ptr);
-			System::Drawing::Icon^ icon = System::Drawing::Icon::FromHandle(hIcon);
-			result = _deprecatedCmdStub->SetIcon(icon) ? 1 : 0;
+			result = _legacyCmdStub->SetIcon(hIcon) ? 1 : 0;
 		}	break;
-		case DECLARE_VST_DEPRECATED (audioMasterOpenWindow):
-			result = (VstIntPtr)_deprecatedCmdStub->OpenWindow().ToPointer();
+		case Vst2HostCommands::WindowOpen:
+			result = (Vst2IntPtr)_legacyCmdStub->OpenWindow().ToPointer();
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterCloseWindow):
-			result = _deprecatedCmdStub->CloseWindow(System::IntPtr(ptr)) ? 1 : 0;
+		case Vst2HostCommands::WindowClose:
+			result = _legacyCmdStub->CloseWindow(System::IntPtr(ptr)) ? 1 : 0;
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterEditFile):
-			result = _deprecatedCmdStub->EditFile(TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
+		case Vst2HostCommands::EditFile:
+			result = _legacyCmdStub->EditFile(TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
 			break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetChunkFile):
-		{	System::String^ path = _deprecatedCmdStub->GetChunkFile();
-			TypeConverter::StringToChar(path, (char*)ptr, 2047);
+		case Vst2HostCommands::GetChunkFile:
+		{	System::String^ path = _legacyCmdStub->GetChunkFile();
+		TypeConverter::StringToChar(path, (char*)ptr, 2047);
 			result = System::String::IsNullOrEmpty(path) ? 1 : 0;
 		}	break;
-		case DECLARE_VST_DEPRECATED (audioMasterGetInputSpeakerArrangement):
-		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetInputSpeakerArrangement();
-			TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
-			result = (VstIntPtr)_pArrangement;
+		case Vst2HostCommands::GetInputSpeakerArrangement:
+		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _legacyCmdStub->GetInputSpeakerArrangement();
+		TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
+			result = (Vst2IntPtr)_pArrangement;
 		}	break;
 		default:
 			// unknown command
-			_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, "Unhandled dispatcher opcode:" + opcode);
+			_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, 
+				System::String::Format("Unhandled dispatcher opcode: {0}.", safe_cast<System::Int32>(command)));
 			break;
 		}
 	}
 	else
 	{
 		// unhandled command
-		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, "Unhandled dispatcher opcode:" + opcode);
+		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, 
+			System::String::Format("Unhandled dispatcher opcode: {0}.", safe_cast<System::Int32>(command)));
 	}
 
 	return result;
 }
 
-}}}} // Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

@@ -1,4 +1,6 @@
-﻿namespace Jacobi.Vst.Core
+﻿using System;
+
+namespace Jacobi.Vst.Core
 {
     /// <summary>
     /// The VstMidiKeyName contains field that are used to 
@@ -18,7 +20,7 @@
         /// </summary>
         public int CurrentKeyNumber { get; set; }
 
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Always filled by the plugin with the note name of the 
         /// <see cref="CurrentKeyNumber"/> in the <see cref="CurrentProgramIndex"/>.
@@ -30,7 +32,7 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, "Name");
+                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, nameof(Name));
 
                 _name = value;
             }

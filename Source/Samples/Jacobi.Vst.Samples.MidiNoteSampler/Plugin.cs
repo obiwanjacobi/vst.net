@@ -1,55 +1,38 @@
-﻿namespace Jacobi.Vst.Samples.MidiNoteSampler
-{
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    using Jacobi.Vst.Framework.Plugin;
+﻿using Jacobi.Vst.Core;
+using Jacobi.Vst.Plugin.Framework;
+using Jacobi.Vst.Plugin.Framework.Plugin;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace Jacobi.Vst.Samples.MidiNoteSampler
+{
     /// <summary>
     /// The Plugin root class that derives from the framework provided base class that also include the interface manager.
     /// </summary>
-    internal class Plugin : VstPluginWithInterfaceManagerBase
+    internal sealed class Plugin : VstPluginWithServices
     {
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
-            : base("VST.NET Midi Note Sampler", 
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software (c) 2011", 1000),
-                VstPluginCategory.Synth, 
-                VstPluginCapabilities.NoSoundInStop, 
-                0, 
-                36373435)
+                : base("VST.NET Midi Note Sampler",
+                    new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
+                    VstPluginCategory.Synth,
+                    VstPluginCapabilities.NoSoundInStop,
+                    0,
+                    36373435)
         {
             SampleManager = new SampleManager();
+        }
+
+        protected override void RegisterServices(IServiceCollection services)
+        {
+            services.AddPluginComponent(new AudioProcessor(this));
+            services.AddPluginComponent(new MidiProcessor(this));
         }
 
         /// <summary>
         /// Gets the sample manager.
         /// </summary>
         public SampleManager SampleManager { get; private set; }
-
-        /// <summary>
-        /// Creates a default instance and reuses that for all threads.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance.</returns>
-        protected override IVstPluginAudioProcessor CreateAudioProcessor(IVstPluginAudioProcessor instance)
-        {
-            if (instance == null) return new AudioProcessor(this);
-
-            return base.CreateAudioProcessor(instance);
-        }
-
-        /// <summary>
-        /// Creates a default instance and reuses that for all threads.
-        /// </summary>
-        /// <param name="instance">A reference to the default instance or null.</param>
-        /// <returns>Returns the default instance.</returns>
-        protected override IVstMidiProcessor CreateMidiProcessor(IVstMidiProcessor instance)
-        {
-            if (instance == null) return new MidiProcessor(this);
-
-            return base.CreateMidiProcessor(instance);
-        }
     }
 }

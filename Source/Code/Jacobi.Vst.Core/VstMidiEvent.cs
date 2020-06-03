@@ -35,7 +35,7 @@ namespace Jacobi.Vst.Core
             int noteLength, int noteOffset, byte[] midiData, short detune, byte noteOffVelocity, bool isRealtime)
             : base(VstEventTypes.MidiEvent, deltaFrames, midiData)
         {
-            Throw.IfArgumentIsNull(midiData, "midiData");
+            Throw.IfArgumentIsNull(midiData, nameof(midiData));
             //Throw.IfArgumentNotInRange<short>(detune, -64, 63, "detune"); // caused problems in Sonar X2. Issue: 10054
 
             NoteLength = noteLength;

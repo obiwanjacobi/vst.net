@@ -1,9 +1,7 @@
-﻿using System;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+﻿
 using Jacobi.Vst.Core;
-using Jacobi.Vst.Interop.Host;
+using Jacobi.Vst.Host.Interop;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Interop.Host
 {
@@ -13,47 +11,6 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
     [TestClass]
     public class VstAudioBufferManagerTest
     {
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
         private const int _bufferCount = 24;
         private const int _bufferSize = 1024;
         private const float _testValue = 0xFF;
@@ -72,7 +29,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         {
             VstAudioBufferManager bufferMgr = CreateNew();
 
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 for (int i = 0; i < buffer.SampleCount; i++)
                 {
@@ -85,7 +42,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
         private void AssertAllBuffersHasValue(VstAudioBufferManager bufferMgr, float value)
         {
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 AssertBufferHasValue(buffer, value);
             }
@@ -126,7 +83,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
             AssertAllBuffersHasValue(bufferMgr, _testValue);
 
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 bufferMgr.ClearBuffer(buffer);
             }
@@ -140,7 +97,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
             VstAudioBufferManager bufferMgr = CreateNew(_testValue);
 
             int counter = 0;
-            foreach (VstAudioBuffer buffer in bufferMgr)
+            foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
                 counter++;
             }

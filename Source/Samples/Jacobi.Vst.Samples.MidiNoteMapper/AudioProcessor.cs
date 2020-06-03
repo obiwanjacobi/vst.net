@@ -1,16 +1,16 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    using Jacobi.Vst.Framework.Plugin;
+    using Jacobi.Vst.Plugin.Framework;
+    using Jacobi.Vst.Plugin.Framework.Plugin;
 
     /// <summary>
     /// A dummy audio processor only used for the timing of midi processing.
     /// </summary>
-    class AudioProcessor : VstPluginAudioProcessorBase
+    internal sealed class AudioProcessor : VstPluginAudioProcessorBase
     {
-        private Plugin _plugin;
-        private MidiProcessor _midiProcessor;
+        private readonly Plugin _plugin;
+        private readonly MidiProcessor _midiProcessor;
         private IVstMidiProcessor _hostProcessor;
 
         /// <summary>
@@ -21,7 +21,7 @@
             : base(0, 0, 0)
         {
             _plugin = plugin;
-            
+
             _midiProcessor = plugin.GetInstance<MidiProcessor>();
         }
 

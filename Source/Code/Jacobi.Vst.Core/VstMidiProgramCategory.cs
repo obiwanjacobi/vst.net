@@ -1,4 +1,6 @@
-﻿namespace Jacobi.Vst.Core
+﻿using System;
+
+namespace Jacobi.Vst.Core
 {
     /// <summary>
     /// Used to communicate the Midi category name back to the host.
@@ -10,7 +12,7 @@
         /// </summary>
         public int CurrentCategoryIndex { get; set; }
 
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// Filled by the plugin with the name of the <see cref="CurrentCategoryIndex"/>.
         /// </summary>
@@ -21,7 +23,7 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, "Name");
+                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, nameof(Name));
 
                 _name = value;
             }
@@ -31,6 +33,6 @@
         /// The index of the category that is parent of the <see cref="CurrentCategoryIndex"/>.
         /// </summary>
         /// <remarks>Can be null.</remarks>
-        public int ParentCategoryIndex;
+        public int ParentCategoryIndex { get; set; }
     }
 }

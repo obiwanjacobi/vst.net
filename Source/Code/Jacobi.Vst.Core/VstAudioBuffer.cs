@@ -49,7 +49,7 @@
         {
             get
             {
-                Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, "index");
+                Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, nameof(index));
 
                 unsafe
                 {
@@ -59,7 +59,7 @@
             set
             {
                 if (!CanWrite) throw new InvalidOperationException(Properties.Resources.VstAudioBuffer_BufferNotWritable);
-                Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, "index");
+                Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, nameof(index));
 
                 unsafe
                 {
@@ -87,11 +87,11 @@
         {
             if (this.SampleCount > destination.SampleCount)
             {
-                throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferTooSmall, "destination");
+                throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferTooSmall, nameof(destination));
             }
             if (!destination.CanWrite)
             {
-                throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferNotWritable, "destination");
+                throw new ArgumentException(Properties.Resources.VstAudioBuffer_BufferNotWritable, nameof(destination));
             }
 
             unsafe

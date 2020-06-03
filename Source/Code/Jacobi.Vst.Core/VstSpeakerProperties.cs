@@ -1,14 +1,16 @@
-﻿namespace Jacobi.Vst.Core
+﻿using System;
+
+namespace Jacobi.Vst.Core
 {
     /// <summary>
     /// Used to communicate speaker properties to the host.
     /// </summary>
     /// <remarks>The origin for azimuth is right (as by math conventions dealing with radians).
-	/// The elevation origin is also right, visualizing a rotation of a circle across the
-	/// -pi/pi axis of the horizontal circle. Thus, an elevation of -pi/2 corresponds
-	/// to bottom, and a speaker standing on the left, and 'beaming' upwards would have
-	/// an azimuth of -pi, and an elevation of pi/2.
-	/// For user interface representation, grads are more likely to be used, and the
+    /// The elevation origin is also right, visualizing a rotation of a circle across the
+    /// -pi/pi axis of the horizontal circle. Thus, an elevation of -pi/2 corresponds
+    /// to bottom, and a speaker standing on the left, and 'beaming' upwards would have
+    /// an azimuth of -pi, and an elevation of pi/2.
+    /// For user interface representation, grads are more likely to be used, and the
     /// origins will obviously 'shift' accordingly.</remarks>
     public class VstSpeakerProperties
     {
@@ -27,7 +29,7 @@
         /// </summary>
         public float Radius { get; set; }
 
-        private string _name;
+        private string _name = String.Empty;
         /// <summary>
         /// for new setups, new names should be given (L/R/C... won't do).
         /// </summary>
@@ -38,7 +40,7 @@
             get { return _name; }
             set
             {
-                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, "Name");
+                Throw.IfArgumentTooLong(value, Constants.MaxMidiNameLength, nameof(Name));
 
                 _name = value;
             }

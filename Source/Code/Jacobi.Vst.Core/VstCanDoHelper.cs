@@ -18,7 +18,7 @@ namespace Jacobi.Vst.Core
         /// <exception cref="ArgumentException">Thrown when <paramref name="cando"/> is an empty string.</exception>
         public static VstPluginCanDo ParsePluginCanDo(string cando)
         {
-            Throw.IfArgumentIsNullOrEmpty(cando, "cando");
+            Throw.IfArgumentIsNullOrEmpty(cando, nameof(cando));
 
             VstPluginCanDo result = VstPluginCanDo.Unknown;
             Type enumType = typeof(VstPluginCanDo);
@@ -49,7 +49,7 @@ namespace Jacobi.Vst.Core
         /// <exception cref="ArgumentException">Thrown when <paramref name="cando"/> is an empty string.</exception>
         public static VstHostCanDo ParseHostCanDo(string cando)
         {
-            Throw.IfArgumentIsNullOrEmpty(cando, "cando");
+            Throw.IfArgumentIsNullOrEmpty(cando, nameof(cando));
 
             VstHostCanDo result = VstHostCanDo.None;
             Type enumType = typeof(VstHostCanDo);
