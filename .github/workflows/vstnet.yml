@@ -1,10 +1,10 @@
-name: VST.NET Core3
+name: VST.NET 2 - CI
 
 on:
   push:
-    branches: [ core3 ]
+    branches: [ master ]
   pull_request:
-    branches: [ core3 ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -25,3 +25,5 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.0
+    - name: Build
+      run: msbuild Source/Code/Jacobi.Vst.sln /t:Build /p:Configuration=Release
