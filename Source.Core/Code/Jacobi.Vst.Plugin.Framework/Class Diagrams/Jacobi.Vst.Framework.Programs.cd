@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Jacobi.Vst.Framework.VstProgram">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProgram">
     <Position X="3.5" Y="0.75" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAIAAAACAEAAAYEAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAACAEAAAYEAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
       <FileName>VstProgram.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -15,14 +15,14 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstProgramCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProgramCollection">
     <Position X="0.5" Y="2.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
       <FileName>VstProgramCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCollection">
     <Position X="7" Y="0.75" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -33,13 +33,13 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameter">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameter">
     <Position X="0.5" Y="5.5" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ABECAAAAACAAAAIAEIAAQAgAAAABAAAAAAEggEAACAA=</HashCode>
+      <HashCode>ABAAAAAAACAAAAAAEIAAQAgAAAABAAAAAAEggEAACAA=</HashCode>
       <FileName>VstParameter.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -47,13 +47,13 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterInfo">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterInfo">
     <Position X="3.25" Y="5.5" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>CCIZMCKEMQEATAAAIBJBAAwLACBEQMJAAQIgGABhmAg=</HashCode>
+      <HashCode>CAIYMAIAMAAADAAAIBJBAAwKACBAAMJAAAIgEABgmAA=</HashCode>
       <FileName>VstParameterInfo.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -61,12 +61,12 @@
       <Property Name="Category" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterManager">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterManager">
     <Position X="6.5" Y="5.5" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
-    <AssociationLine Name="ActiveParameter" Type="Jacobi.Vst.Framework.VstParameter" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="ActiveParameter" Type="Jacobi.Vst.Plugin.Framework.VstParameter" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6.938" Y="5.5" />
         <Point X="6.938" Y="5.125" />
@@ -78,7 +78,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>QEACAAQgAAAAABAAAAABCCAAQEIAAACAAACAQAABAAA=</HashCode>
+      <HashCode>QEACAAQgAAAAABAAAAABCCAAQEIAAAAAAACAAAAAAAA=</HashCode>
       <FileName>VstParameterManager.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -86,24 +86,24 @@
       <Property Name="ActiveParameter" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterCategory">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCategory">
     <Position X="6.5" Y="8.5" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>VstParameterCategory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterCategoryCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCategoryCollection">
     <Position X="3.5" Y="3.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>VstParameterCategoryCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Jacobi.Vst.Framework.IVstPluginPrograms">
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPluginPrograms">
     <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAgAACAAAAAAA=</HashCode>

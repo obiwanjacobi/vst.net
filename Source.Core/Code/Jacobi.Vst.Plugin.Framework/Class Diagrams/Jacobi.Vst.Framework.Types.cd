@@ -1,47 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="Jacobi.Vst.Framework.VstProgramCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProgramCollection">
     <Position X="0.5" Y="0.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
       <FileName>VstProgramCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstEventCollection" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="13" Width="4" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AGIAAEAAAAAAAhAQCAAABAQAAAAAAAAAaAAAAABUIAA=</HashCode>
-      <FileName>VstEventCollection.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Jacobi.Vst.Framework.VstMidiCategory">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiCategory">
     <Position X="9.5" Y="10" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAIAAAAAAAAAAAAAAAAAQEAAgAAAAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>VstMidiCategory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstMidiCategoryCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiCategoryCollection">
     <Position X="9.5" Y="8.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>VstMidiCategoryCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstMidiChannelInfo">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiChannelInfo">
     <Position X="2.75" Y="9.5" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <NestedTypes>
-      <Class Name="Jacobi.Vst.Framework.VstMidiChannelInfo.CollectionChangeManager&lt;ItemT&gt;" Collapsed="true">
+      <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiChannelInfo.CollectionChangeManager&lt;ItemT&gt;" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>VstMidiChannelInfo.cs</NewMemberFileName>
         </TypeIdentifier>
@@ -49,47 +38,40 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAQAgAIIAAAQAAAYAAEAIFgAQAAAAAACA=</HashCode>
+      <HashCode>ACAAAAAAAAAAQAgAIIAAAAAAAYAAEAIBgAQAAAAAACA=</HashCode>
       <FileName>VstMidiChannelInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstMidiChannelInfoCollection" Collapsed="true">
-    <Position X="2.75" Y="8.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>VstMidiChannelInfoCollection.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Jacobi.Vst.Framework.VstMidiProgram">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiProgram">
     <Position X="5.75" Y="11.5" Width="3" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAIAAAAEAAxAIAEMAAQAQAAgAAAACAAAIQIAAASAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAhAAAEIAAQAQAAgAAAACAAAAQIAAASAA=</HashCode>
       <FileName>VstMidiProgram.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstMidiProgramCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiProgramCollection">
     <Position X="5.75" Y="8.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAABACAAAAAAAAASAgAAAAEAAgAAAAAAAA=</HashCode>
       <FileName>VstMidiProgramCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameter">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameter">
     <Position X="3.75" Y="4.25" Width="3.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ABECAAAAACAAAAIAEIAAQAgAAAABAAAAAAEggEAACAA=</HashCode>
+      <HashCode>ABAAAAAAACAAAAAAEIAAQAgAAAABAAAAAAEggEAACAA=</HashCode>
       <FileName>VstParameter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCollection">
     <Position X="0.5" Y="4.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAARACAEIAAAAAAQAAAAAAEAAAAAAAEAAA=</HashCode>
@@ -97,76 +79,69 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstProgram" BaseTypeListCollapsed="true">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProgram" BaseTypeListCollapsed="true">
     <Position X="3.75" Y="0.75" Width="3" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAIAAAACAEAAAYEAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAACAEAAAYEAAAAAQAAAAAEAAAAIAAAAAAAAA=</HashCode>
       <FileName>VstProgram.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterCategoryCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCategoryCollection">
     <Position X="10.5" Y="0.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>VstParameterCategoryCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterCategory">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterCategory">
     <Position X="10.5" Y="2.25" Width="1.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>ACAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>VstParameterCategory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterManager">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterManager">
     <Position X="10.5" Y="3.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>QEACAAQgAAAAABAAAAABCCAAQEIAAACAAACAQAABAAA=</HashCode>
+      <HashCode>QEACAAQgAAAAABAAAAABCCAAQEIAAAAAAACAAAAAAAA=</HashCode>
       <FileName>VstParameterManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterInfoCollection">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterInfoCollection">
     <Position X="7.5" Y="0.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>VstParameterInfoCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstParameterInfo">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstParameterInfo">
     <Position X="7.5" Y="2.25" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>CCIZMCKEMQEATAAAIBJBAAwLACBEQMJAAQIgGABhmAg=</HashCode>
+      <HashCode>CAIYMAIAMAAADAAAIBJBAAwKACBAAMJAAAIgEABgmAA=</HashCode>
       <FileName>VstParameterInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstConnectionInfo">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstConnectionInfo">
     <Position X="5.25" Y="14.5" Width="3.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIAAAgAEAAAAAAAABABAAAAAAAAgAAAAAAACAEAAAg=</HashCode>
+      <HashCode>AAIAAAgAEAAAAAAAABABAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>VstConnectionInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Framework.VstConnectionInfoCollection" Collapsed="true">
-    <Position X="9" Y="14.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>VstConnectionInfoCollection.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Jacobi.Vst.Framework.VstProductInfo">
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstProductInfo">
     <Position X="0.5" Y="8.5" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -174,6 +149,30 @@
     <TypeIdentifier>
       <HashCode>IAECAAAAAABAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
       <FileName>VstProductInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstMidiChannelInfoCollection" Collapsed="true">
+    <Position X="2.75" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstMidiChannelInfoCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstEventCollection" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="13" Width="4" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAQAAAAAAAAAAAAABAAIAAAAAAEAAA=</HashCode>
+      <FileName>VstEventCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Jacobi.Vst.Plugin.Framework.VstConnectionInfoCollection" Collapsed="true">
+    <Position X="9" Y="14.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VstConnectionInfoCollection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Tahoma" Size="8.25" />

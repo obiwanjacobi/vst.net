@@ -10,6 +10,6 @@ namespace Jacobi.Vst.Plugin.Framework
         /// Gets or sets the bypass status.
         /// </summary>
         /// <remarks>The host's call to bypass the plugin ends up here when the interface is implemented by the plugin.</remarks>
-        bool Bypass { get;set;}
+        bool Bypass { get; set; }
     }
 }
