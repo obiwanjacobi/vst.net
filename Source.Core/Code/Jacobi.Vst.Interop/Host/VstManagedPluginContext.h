@@ -10,7 +10,7 @@ namespace Interop {
 	/// <summary>
 	/// Implements a PluginContext for a Managed Plugin, bypassing the double interop that would occur.
 	/// </summary>
-	ref class VstManagedPluginContext : public VstPluginContext
+	private ref class VstManagedPluginContext : public VstPluginContext
 	{
 	public:
 		/// <summary>

@@ -43,6 +43,7 @@ Requires a redesign.
 * [Interop] Start vstsettings.json with the plugin (host?) name.
 * [Framework] Add configuration to VstPluginWithServices and expose service provider.
 * [Interop/Core] Hookup tracing again.
+* [CLI/Interop] Add CRT to output bins and let CLI publish them
 
 ---
 

@@ -1,10 +1,5 @@
 #pragma once
 
-namespace Jacobi {
-namespace Vst {
-namespace Host {
-namespace Interop {
-
 /// <summary>
 /// caches an array of T and grows on demand
 /// </summary>
@@ -83,5 +78,3 @@ private:
 		}
 	}
 };
-
-}}}} // Jacobi::Vst::Host::Interop
