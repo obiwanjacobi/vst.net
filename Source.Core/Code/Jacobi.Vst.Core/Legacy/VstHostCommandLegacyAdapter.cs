@@ -4,7 +4,7 @@
     using System;
 
     /// <summary>
-    /// This class implements an extension to the <see cref="VstHostCommandAdapter"/> to include all depricated Host members.
+    /// This class implements an extension to the <see cref="VstHostCommandAdapter"/> to include all legacy Host members.
     /// </summary>
     /// <remarks>
     /// Only instantiate this class when you have a reference to an implementation of the <see cref="IVstHostCommandsLegacy20"/> interface.

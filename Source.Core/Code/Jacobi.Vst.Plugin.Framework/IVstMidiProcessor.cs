@@ -1,7 +1,7 @@
 namespace Jacobi.Vst.Plugin.Framework
 {
     // Note: this interface is NOT called IVstPluginMidiProcessor because the Host implements it too.
-    
+
     /// <summary>
     /// This interface is used to pass on incoming Midi data.
     /// </summary>

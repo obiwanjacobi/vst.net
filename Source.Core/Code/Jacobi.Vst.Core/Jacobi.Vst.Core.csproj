@@ -10,7 +10,6 @@
     <Product>VST.NET</Product>
     <Platforms>x64;x86</Platforms>
     <Nullable>enable</Nullable>
-    
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">
@@ -41,6 +40,39 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
+  </ItemGroup>
+
+  <!-- this does not seem to work -->
+  <!--<ItemGroup>
+    <Compile Update="Resources.resx">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Properties\Resources.Designer.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>-->
+  
+  <!-- Still complains about being specified multiple times (warning CS2002) -->
+  <ItemGroup>
+    <None Remove="Properties\Resources.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <StronglyTypedFileName>Properties\Resources.Designer.cs</StronglyTypedFileName>
+      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+      <StronglyTypedNamespace>Jacobi.Vst.Core.Properties</StronglyTypedNamespace>
+      <StronglyTypedClassName>Resources</StronglyTypedClassName>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

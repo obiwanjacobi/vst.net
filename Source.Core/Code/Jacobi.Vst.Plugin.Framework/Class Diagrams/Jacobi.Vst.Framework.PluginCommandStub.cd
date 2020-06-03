@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Jacobi.Vst.Framework.Plugin.StdPluginCommandStub">
+  <Class Name="Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub">
     <Position X="0.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>wBRYQIQEBABAoMYICAwhQgKEQAFBgCABQAAbAgqRQUA=</HashCode>
+      <HashCode>wBRYQIQEBABAoMQICAwlQgKEQAFBgCAhQAAbAgqRwUA=</HashCode>
       <FileName>Plugin\StdPluginCommandStub.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -11,7 +11,7 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.Plugin.VstPluginContext">
+  <Class Name="Jacobi.Vst.Plugin.Framework.Plugin.VstPluginContext">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAQAAEAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
@@ -28,18 +28,18 @@
     <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Jacobi.Vst.Framework.Host.VstHost">
+  <Class Name="Jacobi.Vst.Plugin.Framework.Host.VstHost">
     <Position X="7" Y="3.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAgAAAECAAAgAAAACEAAAABAQAAAAAAAAAAIAABAA=</HashCode>
+      <HashCode>AgAAAAAAECAAAgAAAACGAAAADAQAAAAAAAAAAIAAJAA=</HashCode>
       <FileName>Host\VstHost.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="Jacobi.Vst.Framework.IVstPlugin">
+  <Interface Name="Jacobi.Vst.Plugin.Framework.IVstPlugin">
     <Position X="4.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEgAAIgAAAAAAAAQAAAAAACAIAAAAAAgACAA=</HashCode>

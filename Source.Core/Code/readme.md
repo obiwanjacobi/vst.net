@@ -29,7 +29,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 ## Refactor wishes
 
-* [All] remove all [Obsolete] API.
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github
     => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
@@ -37,10 +36,15 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 https://github.com/EWSoftware/SHFB
 https://github.com/maxtoroq/sandcastle-md
 * [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
-* Update code to modern constructs (linter suggestions)
 * [UnitTest] Use FluentAssertions.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
-* [Release] have conditionals to ommit debugging/trace and checks from release builds.
+Requires a redesign.
+* [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
+* [Interop] Start vstsettings.json with the plugin (host?) name.
+* [Framework] Add configuration to VstPluginWithServices and expose service provider.
+* [Interop/Core] Hookup tracing again.
+
+---
 
 ## Decisions
 
@@ -64,7 +68,7 @@ It should produce t.txt in the current directory with lot of info about the nati
 COM (VST3?)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
 
-- `ISSUE`: ijwhost/clr loading does not work on a mixed assembly! 
+- `ISSUE`: ijwhost/clr loading does not work on a mixed assembly!?
 That means the plugin wont load in the unmanage host.
 
 
@@ -82,7 +86,7 @@ Install VST.NET dotnet core nuget package into your plugin project.
 
 You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
 
-> You can run `vstnet publish <targetpath> -o <out folder>` to get all the dependencies into one folder.
+> You can run `vstnet publish <targetpath.dll> -o <out folder>` to get all the dependencies into one folder.
 
 You should now be able to load your plugin in the host.
 
@@ -98,5 +102,4 @@ Install VST.NET dotnet core nuget package into your host project.
 
 You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
 
-* `ijwhost.dll` needs to be present in the same folder your managed host exe is installed to.
-There is a x86 and a x64 version - match it with your host.
+> You can run `vstnet publish <targetpath.exe> -o <out folder>` to get all the dependencies into one folder.

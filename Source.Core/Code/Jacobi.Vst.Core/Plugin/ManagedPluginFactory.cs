@@ -63,20 +63,17 @@
         {
             if (_assembly == null)
             {
-                // TODO: Properties.Resources.ManagedPluginFactory_NoAssemblyLoaded, pluginType
-                throw new InvalidOperationException();
+                throw new InvalidOperationException(Properties.Resources.ManagedPluginFactory_NoAssemblyLoaded);
             }
 
-            Type? pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub))
+            Type pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub))
                 ?? throw new InvalidOperationException(
                     String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
 
-            var cmdStub = (IVstPluginCommandStub?)Activator.CreateInstance(pluginType);
-            if (cmdStub == null)
-            {
-                // TODO: Properties.Resources.ManagedPluginFactory_CreationFailed, pluginType
-                throw new InvalidOperationException();
-            }
+            var cmdStub = (IVstPluginCommandStub?)Activator.CreateInstance(pluginType)
+                ?? throw new InvalidOperationException(
+                    String.Format(Properties.Resources.ManagedPluginFactory_CreationFailed, pluginType));
+
             return cmdStub;
         }
 

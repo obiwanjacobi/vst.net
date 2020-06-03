@@ -29,14 +29,14 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <remarks>The host will call into the plugin to set the sample rate (that call ends up here).
         /// When the sample rate changes, the plugin should prepare its inner structures (pre-allocated 
         /// memory buffer etc.) to accomodate the new sample rate.</remarks>
-        float SampleRate { get;set; }
+        float SampleRate { get; set; }
         /// <summary>
         /// Gets or sets the number of samples (per channel) that will be passed to the <see cref="Process"/> method.
         /// </summary>
         /// <remarks>The host will call into the plugin to set the block size (that call ends up here).
         /// When the block size changes, the plugin should prepare its inner structures (pre-allocated 
         /// memory buffer etc.) to accomodate the new block size.</remarks>
-        int BlockSize { get;set; }
+        int BlockSize { get; set; }
         /// <summary>
         /// Called by the host repeatedly to allow the plugin to process the incoming audio and/or output altered audio.
         /// </summary>

@@ -10,20 +10,20 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <summary>
         /// Gets the current sample rate.
         /// </summary>
-        double SampleRate { get;}
+        double SampleRate { get; }
         /// <summary>
         /// Gets the current block size in bytes.
         /// </summary>
-        int BlockSize { get;}
+        int BlockSize { get; }
         /// <summary>
         /// Gets the input latency.
         /// </summary>
-        int InputLatency { get;}
+        int InputLatency { get; }
         /// <summary>
         /// Gets the output latency.
         /// </summary>
-        int OutputLatency { get;}
-        
+        int OutputLatency { get; }
+
         /// <summary>
         /// Retrieves the current time information.
         /// </summary>

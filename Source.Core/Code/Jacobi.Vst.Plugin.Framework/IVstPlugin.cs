@@ -1,7 +1,7 @@
 namespace Jacobi.Vst.Plugin.Framework
 {
-    using System;
     using Jacobi.Vst.Core;
+    using System;
 
     /// <summary>
     /// This interface is implemented by the Plugin root object.
@@ -15,7 +15,7 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <summary>
         /// Gets the name of the plugin.
         /// </summary>
-        string Name { get;}
+        string Name { get; }
         /// <summary>
         /// Gets the category of the plugin.
         /// </summary>

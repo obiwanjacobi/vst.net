@@ -13,11 +13,11 @@
             /// Constructs a new instance.
             /// </summary>
             /// <param name="description">The human readable description of the opcode.</param>
-            /// <param name="deprecated">An indication if the opcode was deprecated.</param>
-            public OpcodeInfo(string description, bool deprecated)
+            /// <param name="legacy">An indication if the opcode is legacy.</param>
+            public OpcodeInfo(string description, bool legacy)
             {
                 Description = description;
-                Legacy = deprecated;
+                Legacy = legacy;
             }
 
             /// <summary>
@@ -44,7 +44,7 @@
 
                 if (Legacy)
                 {
-                    result += " (deprecated)";
+                    result += " (legacy)";
                 }
 
                 result += String.Format(", Index={0}, Value={1} Ptr={2} Opt={3}.", index, value, ptr, opt);

@@ -12,9 +12,9 @@
     /// </remarks>
     public partial class TraceContext
     {
-        private TraceSource _traceSource;
-        private string? _contextDescription;
-        private Type? _commandInterface;
+        private readonly TraceSource _traceSource;
+        private readonly string? _contextDescription;
+        private readonly Type? _commandInterface;
 
         /// <summary>
         /// Consrtucts a new instance using the <paramref name="contextName"/> and specified <paramref name="commandInterface"/>.

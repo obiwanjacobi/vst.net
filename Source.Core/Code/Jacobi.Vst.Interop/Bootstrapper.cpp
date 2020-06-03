@@ -14,11 +14,6 @@ namespace Interop {
 // static helper method
 Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath)
 {
-	System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
-
-	// set the base path to the assembly loader
-	Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->BasePath = basePath;
-
 	// create the plugin (command stub) factory
 	Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
 		gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
@@ -31,6 +26,8 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 	
 	if(commandStub != nullptr)
 	{
+		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+
 		auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
 		Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, basePath);
 		Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json", true);
