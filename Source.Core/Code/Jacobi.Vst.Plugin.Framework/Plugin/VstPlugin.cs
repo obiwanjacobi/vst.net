@@ -112,11 +112,11 @@
         {
             if (Supports<IVstMidiProcessor>())
             {
-                var deprecated = Host?.GetInstance<IVstHostCommandsLegacy20>();
+                var legacy = Host?.GetInstance<IVstHostCommandsLegacy20>();
 
-                if (deprecated != null)
+                if (legacy != null)
                 {
-                    deprecated.WantMidi();
+                    legacy.WantMidi();
                 }
             }
         }

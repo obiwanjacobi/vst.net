@@ -16,7 +16,7 @@ namespace Interop {
 /// </summary>
 /// <remarks>
 /// The class also implements the <see cref="Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20"/> 
-/// interface for deprecated method support.
+/// interface for legacy method support.
 /// </remarks>
 ref class VstPluginCommandStub : Jacobi::Vst::Core::Host::IVstPluginCommandStub, 
     Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20, System::IDisposable
@@ -649,7 +649,7 @@ private:
         return 0.0f;
     }
 
-    // deprecated support
+    // legacy support
     void CallProcess32Acc(float** inputs, float** outputs, ::int32_t sampleFrames)
     {
         if (_pPlugin && _pPlugin->process)

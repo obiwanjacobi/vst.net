@@ -18,7 +18,7 @@ PluginCommandProxy::PluginCommandProxy(Jacobi::Vst::Core::Plugin::IVstPluginComm
 	}
 
 	_commandStub = cmdStub;
-	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^>(cmdStub);
+	_legacyCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^>(cmdStub);
 
 	_memTracker = gcnew Jacobi::Vst::Interop::MemoryTracker();
 	_pEditorRect = new Vst2Rectangle();
@@ -366,68 +366,68 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 }
 
 // continuation of Dispatch()
-// Dispatches an opcode to the plugin deprecated command stub.
+// Dispatches an opcode to the plugin legacy command stub.
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
 {
 	Vst2IntPtr result = 0;
 
-	if(_deprecatedCmdStub != nullptr)
+	if(_legacyCmdStub != nullptr)
 	{
 		switch(command)
 		{
-		// VST 1.0 deprecated
+		// VST 1.0 legacy
 		case Vst2PluginCommands::VuGet:
-			result = safe_cast<Vst2IntPtr>(_deprecatedCmdStub->GetVu());
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetVu());
 			break;
 		//case Vst2PluginCommands::EditDraw:
 		//	break;
 		//case Vst2PluginCommands::EditMouse:
 		//	break;
 		case Vst2PluginCommands::EditorKey:
-			result = _deprecatedCmdStub->EditorKey(safe_cast<System::Int32>(value)) ? 1 : 0;
+			result = _legacyCmdStub->EditorKey(safe_cast<System::Int32>(value)) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::EditorTop:
-			result = _deprecatedCmdStub->EditorTop() ? 1 : 0;
+			result = _legacyCmdStub->EditorTop() ? 1 : 0;
 			break;
 		case Vst2PluginCommands::EditorSleep:
-			result = _deprecatedCmdStub->EditorSleep() ? 1 : 0;
+			result = _legacyCmdStub->EditorSleep() ? 1 : 0;
 			break;
 		case Vst2PluginCommands::Identify:
-			result = _deprecatedCmdStub->Identify();
+			result = _legacyCmdStub->Identify();
 			break;
 
-		// VST 2.0 deprecated
+		// VST 2.0 legacy
 		case Vst2PluginCommands::ProgramGetCategoriesCount:
-			result = _deprecatedCmdStub->GetProgramCategoriesCount();
+			result = _legacyCmdStub->GetProgramCategoriesCount();
 			break;
 		case Vst2PluginCommands::ProgramCopy:
-			result = _deprecatedCmdStub->CopyCurrentProgramTo(index);
+			result = _legacyCmdStub->CopyCurrentProgramTo(index);
 			break;
 		case Vst2PluginCommands::ConnectInput:
-			result = _deprecatedCmdStub->ConnectInput(index, value != 0) ? 1 : 0;
+			result = _legacyCmdStub->ConnectInput(index, value != 0) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::ConnectOutput:
-			result = _deprecatedCmdStub->ConnectOutput(index, value != 0) ? 1 : 0;
+			result = _legacyCmdStub->ConnectOutput(index, value != 0) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::GetCurrentPosition:
-			result = _deprecatedCmdStub->GetCurrentPosition();
+			result = _legacyCmdStub->GetCurrentPosition();
 			break;
 		case Vst2PluginCommands::GetDestinationBuffer:
 		{
 			Jacobi::Vst::Core::IDirectBufferAccess32^ audioBuffer = 
-				dynamic_cast<Jacobi::Vst::Core::IDirectBufferAccess32^>(_deprecatedCmdStub->GetDestinationBuffer());
+				dynamic_cast<Jacobi::Vst::Core::IDirectBufferAccess32^>(_legacyCmdStub->GetDestinationBuffer());
 			if(audioBuffer != nullptr)
 			{
 				result = (Vst2IntPtr)audioBuffer->Buffer;
 			}
 		}	break;
 		case Vst2PluginCommands::SetBlockSizeAndSampleRate:
-			result = _deprecatedCmdStub->SetBlockSizeAndSampleRate(safe_cast<System::Int32>(value), opt) ? 1 : 0;
+			result = _legacyCmdStub->SetBlockSizeAndSampleRate(safe_cast<System::Int32>(value), opt) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::GetErrorText:
 		{
-			System::String^ txt = _deprecatedCmdStub->GetErrorText();
+			System::String^ txt = _legacyCmdStub->GetErrorText();
 			if(txt != nullptr)
 			{
 				Jacobi::Vst::Interop::TypeConverter::StringToChar(txt, (char*)ptr, 256);
@@ -435,11 +435,11 @@ Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_
 			}
 		}	break;
 		case Vst2PluginCommands::Idle:
-			result = _deprecatedCmdStub->Idle() ? 1 : 0;
+			result = _legacyCmdStub->Idle() ? 1 : 0;
 			break;
 		case Vst2PluginCommands::GetIcon:
 		{
-			System::IntPtr^ icon = _deprecatedCmdStub->GetIcon();
+			System::IntPtr^ icon = _legacyCmdStub->GetIcon();
 			if(icon != nullptr)
 			{
 				// TODO:
@@ -448,11 +448,11 @@ Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_
 			}
 		}	break;
 		case Vst2PluginCommands::SetViewPosition:
-			result = _deprecatedCmdStub->SetViewPosition(System::Drawing::Point(index, safe_cast<System::Int32>(value))) ? 1 : 0;
+			result = _legacyCmdStub->SetViewPosition(System::Drawing::Point(index, safe_cast<System::Int32>(value))) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::KeysRequired:
 			// NOTE: 0=Required, 1=dont need.
-			result = _deprecatedCmdStub->KeysRequired() ? 0 : 1;
+			result = _legacyCmdStub->KeysRequired() ? 0 : 1;
 			break;
 		default:
 			// unknown command
@@ -555,11 +555,11 @@ float PluginCommandProxy::GetParameter(int32_t index)
 	return 0.0f;
 }
 
-// Calls the plugin command stub to process audio (deprecated).
+// Calls the plugin command stub to process audio (legacy).
 // Takes care of marshaling from C++ to Managed .NET and visa versa.
 void PluginCommandProxy::ProcessAcc(float** inputs, float** outputs, int32_t sampleFrames, int32_t numInputs, int32_t numOutputs)
 {
-	if(_deprecatedCmdStub == nullptr) return;
+	if(_legacyCmdStub == nullptr) return;
 
 	_traceCtx->WriteProcess(numInputs, numOutputs, sampleFrames, sampleFrames);
 
@@ -568,7 +568,7 @@ void PluginCommandProxy::ProcessAcc(float** inputs, float** outputs, int32_t sam
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = Jacobi::Vst::Interop::TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = Jacobi::Vst::Interop::TypeConverter::ToManagedAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
-		_deprecatedCmdStub->ProcessAcc(inputBuffers, outputBuffers);
+		_legacyCmdStub->ProcessAcc(inputBuffers, outputBuffers);
 	}
 	catch(System::Exception^ e)
 	{

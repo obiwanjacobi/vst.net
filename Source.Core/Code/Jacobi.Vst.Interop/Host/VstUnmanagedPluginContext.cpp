@@ -134,7 +134,7 @@ namespace Interop {
 			// setup the plugin info
 			if(PluginCommandStub->GetVstVersion() < 2400)
 			{
-				// use structure with extra deprecated fields for older versions
+				// use structure with extra legacy fields for older versions
 				PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
 			}
 			else
@@ -169,7 +169,7 @@ namespace Interop {
 
 	void VstUnmanagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInfo =
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
 			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
 
 		System::Collections::Generic::List<System::String^>^ changedPropNames = 
@@ -217,19 +217,19 @@ namespace Interop {
 				changedPropNames->Add("PluginInfo.PluginVersion");
 			}
 
-			if(deprecatedInfo != nullptr)
+			if(legacyInfo != nullptr)
 			{
-				if(deprecatedInfo->RealQualities != _pEffect->realQualities)
+				if(legacyInfo->RealQualities != _pEffect->realQualities)
 				{
 					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
-				if(deprecatedInfo->OfflineQualities != _pEffect->offQualities)
+				if(legacyInfo->OfflineQualities != _pEffect->offQualities)
 				{
 					changedPropNames->Add("PluginInfo.OfflineQualities");
 				}
 
-				if(deprecatedInfo->IoRatio != _pEffect->ioRatio)
+				if(legacyInfo->IoRatio != _pEffect->ioRatio)
 				{
 					changedPropNames->Add("PluginInfo.IoRatio");
 				}
@@ -246,12 +246,12 @@ namespace Interop {
 		PluginInfo->PluginID = _pEffect->id;
 		PluginInfo->PluginVersion = _pEffect->version;
 
-		// deprecated fields
-		if(deprecatedInfo != nullptr)
+		// legacy fields
+		if(legacyInfo != nullptr)
 		{
-			deprecatedInfo->RealQualities = _pEffect->realQualities;
-			deprecatedInfo->OfflineQualities = _pEffect->offQualities;
-			deprecatedInfo->IoRatio = _pEffect->ioRatio;
+			legacyInfo->RealQualities = _pEffect->realQualities;
+			legacyInfo->OfflineQualities = _pEffect->offQualities;
+			legacyInfo->IoRatio = _pEffect->ioRatio;
 		}
 
 		// raise all the changed property events

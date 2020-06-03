@@ -4,7 +4,7 @@
     using System;
 
     /// <summary>
-    /// Plugin deprecated information passed to the Host.
+    /// Plugin legacy information passed to the Host.
     /// </summary>
     public class VstPluginLegacyInfo : VstPluginInfo
     {
