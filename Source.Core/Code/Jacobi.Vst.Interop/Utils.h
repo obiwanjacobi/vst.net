@@ -1,9 +1,5 @@
 #pragma once
 
-namespace Jacobi {
-namespace Vst {
-namespace Interop {
-
 class Utils
 {
 public:
@@ -16,5 +12,3 @@ public:
 	static System::String^ GetPluginName()
 	{ return System::IO::Path::GetFileNameWithoutExtension(GetCurrentFileName()); }
 };
-
-}}} // Jacobi::Vst::Interop

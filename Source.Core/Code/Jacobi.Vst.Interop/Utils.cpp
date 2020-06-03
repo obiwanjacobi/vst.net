@@ -1,10 +1,6 @@
 #include "pch.h"
 #include "Utils.h"
 
-namespace Jacobi {
-namespace Vst {
-namespace Interop {
-
 // Shows a MessageBox with the exception information.
 void Utils::ShowError(System::Exception^ e)
 {
@@ -20,5 +16,3 @@ void Utils::ShowWarning(System::String^ message)
 	System::Windows::Forms::MessageBox::Show(nullptr, message, "VST.NET Warning", 
 		System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Exclamation);
 }
-
-}}} // Jacobi::Vst::Interop

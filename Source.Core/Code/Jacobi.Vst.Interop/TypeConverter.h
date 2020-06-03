@@ -1,9 +1,5 @@
 #pragma once
 
-namespace Jacobi {
-namespace Vst {
-namespace Interop {
-
 class TypeConverter
 {
 public:
@@ -707,4 +703,3 @@ public:
 private:
 	TypeConverter(){}
 };
-}}} // Jacobi::Vst::Interop

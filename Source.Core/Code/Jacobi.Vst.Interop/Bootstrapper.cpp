@@ -7,10 +7,6 @@
 #using <Microsoft.Extensions.Configuration.FileExtensions.dll>
 #using <Microsoft.Extensions.Configuration.Json.dll>
 
-namespace Jacobi {
-namespace Vst {
-namespace Interop {
-
 // static helper method
 Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath)
 {
@@ -37,5 +33,3 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 
 	return commandStub;
 }
-
-}}} // Jacobi::Vst::Interop
