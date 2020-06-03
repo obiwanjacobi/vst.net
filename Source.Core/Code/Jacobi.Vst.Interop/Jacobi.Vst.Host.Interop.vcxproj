@@ -236,7 +236,6 @@
     <ClInclude Include="Properties\Resources.h" />
     <ClInclude Include="Properties\targetver.h" />
     <ClInclude Include="Vst2400.h" />
-    <ClInclude Include="TimeCriticalScope.h" />
     <ClInclude Include="TypeConverter.h" />
     <ClInclude Include="UnmanagedPointer.h" />
     <ClInclude Include="UnmanagedString.h" />

@@ -18,7 +18,7 @@ namespace Interop {
 	/// <summary>
 	/// Implements a PluginContext for an unmanaged Plugin, marshalling the calls between the Context and the Plugin.
 	/// </summary>
-	ref class VstUnmanagedPluginContext : public VstPluginContext
+	private ref class VstUnmanagedPluginContext : public VstPluginContext
 	{
 	public:
 		/// <summary>
