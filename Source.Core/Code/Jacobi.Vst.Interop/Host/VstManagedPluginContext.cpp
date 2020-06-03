@@ -50,10 +50,10 @@ namespace Interop {
 			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
 
 		_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedPluginInfo = 
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyPluginInfo = 
 			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
 
-		if(deprecatedPluginInfo != nullptr)
+		if(legacyPluginInfo != nullptr)
 		{
 			PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
 		}
@@ -72,10 +72,10 @@ namespace Interop {
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInfo =
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
 			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
 
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInternalInfo =
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInternalInfo =
 			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
 
 		System::Collections::Generic::List<System::String^>^ changedPropNames = 
@@ -123,24 +123,24 @@ namespace Interop {
 				changedPropNames->Add("PluginInfo.PluginVersion");
 			}
 
-			if(deprecatedInfo != nullptr)
+			if(legacyInfo != nullptr)
 			{
-				if(deprecatedInfo->LegacyFlags != deprecatedInternalInfo->LegacyFlags)
+				if(legacyInfo->LegacyFlags != legacyInternalInfo->LegacyFlags)
 				{
 					changedPropNames->Add("PluginInfo.LegacyFlags");
 				}
 
-				if(deprecatedInfo->RealQualities != deprecatedInternalInfo->RealQualities)
+				if(legacyInfo->RealQualities != legacyInternalInfo->RealQualities)
 				{
 					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
-				if(deprecatedInfo->OfflineQualities != deprecatedInternalInfo->OfflineQualities)
+				if(legacyInfo->OfflineQualities != legacyInternalInfo->OfflineQualities)
 				{
 					changedPropNames->Add("PluginInfo.OfflineQualities");
 				}
 
-				if(deprecatedInfo->IoRatio != deprecatedInternalInfo->IoRatio)
+				if(legacyInfo->IoRatio != legacyInternalInfo->IoRatio)
 				{
 					changedPropNames->Add("PluginInfo.IoRatio");
 				}
@@ -157,13 +157,13 @@ namespace Interop {
 		PluginInfo->PluginID = _internalPluginInfo->PluginID;
 		PluginInfo->PluginVersion = _internalPluginInfo->PluginVersion;
 
-		// deprecated fields
-		if(deprecatedInfo != nullptr)
+		// legacy fields
+		if(legacyInfo != nullptr)
 		{
-			deprecatedInfo->LegacyFlags = deprecatedInternalInfo->LegacyFlags;
-			deprecatedInfo->RealQualities = deprecatedInternalInfo->RealQualities;
-			deprecatedInfo->OfflineQualities = deprecatedInternalInfo->OfflineQualities;
-			deprecatedInfo->IoRatio = deprecatedInternalInfo->IoRatio;
+			legacyInfo->LegacyFlags = legacyInternalInfo->LegacyFlags;
+			legacyInfo->RealQualities = legacyInternalInfo->RealQualities;
+			legacyInfo->OfflineQualities = legacyInternalInfo->OfflineQualities;
+			legacyInfo->IoRatio = legacyInternalInfo->IoRatio;
 		}
 
 		// raise all the changed property events

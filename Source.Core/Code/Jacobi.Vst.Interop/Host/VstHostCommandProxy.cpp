@@ -13,7 +13,7 @@ VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostComman
 	Jacobi::Vst::Core::Throw::IfArgumentIsNull(hostCmdStub, "hostCmdStub");
 
 	_hostCmdStub = hostCmdStub;
-	_deprecatedCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^>(hostCmdStub);
+	_legacyCmdStub = dynamic_cast<Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^>(hostCmdStub);
 
 	// unmanaged structures
 	_pTimeInfo = new ::Vst2TimeInfo();
@@ -188,13 +188,13 @@ Vst2IntPtr VstHostCommandProxy::DispatchLegacy(Vst2HostCommands command, int32_t
 {
 	Vst2IntPtr result = 0;
 
-	if(_deprecatedCmdStub != nullptr)
+	if(_legacyCmdStub != nullptr)
 	{
 		switch(command)
 		{
 		// VST 1.0
 		case Vst2HostCommands::PinConnected:
-			result = _deprecatedCmdStub->PinConnected(index, value != 0) ? 1 : 0;
+			result = _legacyCmdStub->PinConnected(index, value != 0) ? 1 : 0;
 			break;
 
 		// VST 2.0
@@ -204,58 +204,58 @@ Vst2IntPtr VstHostCommandProxy::DispatchLegacy(Vst2HostCommands command, int32_t
 			Jacobi::Vst::Interop::TypeConverter::ToManagedTimeInfo(timeInfo, (::Vst2TimeInfo*)ptr);
 			Jacobi::Vst::Core::VstTimeInfoFlags filterFlags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value);
 
-			result = _deprecatedCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;
+			result = _legacyCmdStub->SetTime(timeInfo, filterFlags) ? 1 : 0;
 		}	break;
 		case Vst2HostCommands::TempoAt:
-			result = safe_cast<Vst2IntPtr>(_deprecatedCmdStub->GetTempoAt(safe_cast<System::Int32>(value)));
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetTempoAt(safe_cast<System::Int32>(value)));
 			break;
 		case Vst2HostCommands::GetAutomatableParameterCount:
-			result = safe_cast<Vst2IntPtr>(_deprecatedCmdStub->GetAutomatableParameterCount());
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetAutomatableParameterCount());
 			break;
 		case Vst2HostCommands::GetParameterQuantization:
-			result = safe_cast<Vst2IntPtr>(_deprecatedCmdStub->GetParameterQuantization(safe_cast<System::Int32>(value)));
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->GetParameterQuantization(safe_cast<System::Int32>(value)));
 			break;
 		case Vst2HostCommands::NeedIdle:
-			result = _deprecatedCmdStub->NeedIdle() ? 1 : 0;
+			result = _legacyCmdStub->NeedIdle() ? 1 : 0;
 			break;
 		case Vst2HostCommands::PluginGetPrevious:
-			result = (Vst2IntPtr)_deprecatedCmdStub->GetPreviousPlugin(safe_cast<System::Int32>(value)).ToPointer();
+			result = (Vst2IntPtr)_legacyCmdStub->GetPreviousPlugin(safe_cast<System::Int32>(value)).ToPointer();
 			break;
 		case Vst2HostCommands::PluginGetNext:
-			result = (Vst2IntPtr)_deprecatedCmdStub->GetNextPlugin(safe_cast<System::Int32>(value)).ToPointer();
+			result = (Vst2IntPtr)_legacyCmdStub->GetNextPlugin(safe_cast<System::Int32>(value)).ToPointer();
 			break;
 		case Vst2HostCommands::WillReplace:
-			result = safe_cast<Vst2IntPtr>(_deprecatedCmdStub->WillReplaceOrAccumulate());
+			result = safe_cast<Vst2IntPtr>(_legacyCmdStub->WillReplaceOrAccumulate());
 			break;
 		case Vst2HostCommands::SetOutputSampleRate:
-			result = _deprecatedCmdStub->SetOutputSampleRate(opt) ? 1 : 0;
+			result = _legacyCmdStub->SetOutputSampleRate(opt) ? 1 : 0;
 			break;
 		case Vst2HostCommands::GetOutputSpeakerArrangement:
-		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetOutputSpeakerArrangement();
+		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _legacyCmdStub->GetOutputSpeakerArrangement();
 		Jacobi::Vst::Interop::TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
 			result = (Vst2IntPtr)_pArrangement;
 		}	break;
 		case Vst2HostCommands::SetIcon:
 		{
 			System::IntPtr hIcon(ptr);
-			result = _deprecatedCmdStub->SetIcon(hIcon) ? 1 : 0;
+			result = _legacyCmdStub->SetIcon(hIcon) ? 1 : 0;
 		}	break;
 		case Vst2HostCommands::WindowOpen:
-			result = (Vst2IntPtr)_deprecatedCmdStub->OpenWindow().ToPointer();
+			result = (Vst2IntPtr)_legacyCmdStub->OpenWindow().ToPointer();
 			break;
 		case Vst2HostCommands::WindowClose:
-			result = _deprecatedCmdStub->CloseWindow(System::IntPtr(ptr)) ? 1 : 0;
+			result = _legacyCmdStub->CloseWindow(System::IntPtr(ptr)) ? 1 : 0;
 			break;
 		case Vst2HostCommands::EditFile:
-			result = _deprecatedCmdStub->EditFile(Jacobi::Vst::Interop::TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
+			result = _legacyCmdStub->EditFile(Jacobi::Vst::Interop::TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
 			break;
 		case Vst2HostCommands::GetChunkFile:
-		{	System::String^ path = _deprecatedCmdStub->GetChunkFile();
+		{	System::String^ path = _legacyCmdStub->GetChunkFile();
 		Jacobi::Vst::Interop::TypeConverter::StringToChar(path, (char*)ptr, 2047);
 			result = System::String::IsNullOrEmpty(path) ? 1 : 0;
 		}	break;
 		case Vst2HostCommands::GetInputSpeakerArrangement:
-		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _deprecatedCmdStub->GetInputSpeakerArrangement();
+		{	Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement = _legacyCmdStub->GetInputSpeakerArrangement();
 		Jacobi::Vst::Interop::TypeConverter::ToUnmanagedSpeakerArrangement(_pArrangement, arrangement);
 			result = (Vst2IntPtr)_pArrangement;
 		}	break;

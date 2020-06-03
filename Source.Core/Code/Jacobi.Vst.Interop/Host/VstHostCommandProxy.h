@@ -33,7 +33,7 @@ public:
 
 private:
 	Jacobi::Vst::Core::Host::IVstHostCommandStub^ _hostCmdStub;
-	Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^ _deprecatedCmdStub;
+	Jacobi::Vst::Core::Legacy::IVstHostCommandsLegacy20^ _legacyCmdStub;
 
 	::Vst2TimeInfo* _pTimeInfo;
 	char* _directory;

@@ -11,7 +11,7 @@
     /// </remarks>
     public class VstHostCommandLegacyAdapter : VstHostCommandAdapter, Legacy.IVstHostCommandsLegacy20
     {
-        private IVstHostCommandsLegacy20? _deprecatedStub;
+        private IVstHostCommandsLegacy20? _legacyStub;
 
         /// <summary>
         /// Constructs a new adapter instance on the passed <paramref name="hostCmdStub"/>.
@@ -20,7 +20,7 @@
         public VstHostCommandLegacyAdapter(IVstHostCommandStub hostCmdStub)
             : base(hostCmdStub)
         {
-            _deprecatedStub = (IVstHostCommandsLegacy20)hostCmdStub
+            _legacyStub = (IVstHostCommandsLegacy20)hostCmdStub
                 ?? throw new ArgumentNullException(nameof(hostCmdStub));
         }
 
@@ -33,7 +33,7 @@
         public bool WantMidi()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.WantMidi();
+            return _legacyStub!.WantMidi();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@
         public bool SetTime(VstTimeInfo timeInfo, VstTimeInfoFlags filterFlags)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.SetTime(timeInfo, filterFlags);
+            return _legacyStub!.SetTime(timeInfo, filterFlags);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@
         public int GetTempoAt(int sampleIndex)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetTempoAt(sampleIndex);
+            return _legacyStub!.GetTempoAt(sampleIndex);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@
         public int GetAutomatableParameterCount()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetAutomatableParameterCount();
+            return _legacyStub!.GetAutomatableParameterCount();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@
         public int GetParameterQuantization(int parameterIndex)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetParameterQuantization(parameterIndex);
+            return _legacyStub!.GetParameterQuantization(parameterIndex);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@
         public bool NeedIdle()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.NeedIdle();
+            return _legacyStub!.NeedIdle();
         }
 
         /// <summary>
@@ -98,7 +98,7 @@
         public IntPtr GetPreviousPlugin(int pinIndex)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetPreviousPlugin(pinIndex);
+            return _legacyStub!.GetPreviousPlugin(pinIndex);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@
         public IntPtr GetNextPlugin(int pinIndex)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetNextPlugin(pinIndex);
+            return _legacyStub!.GetNextPlugin(pinIndex);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@
         public int WillReplaceOrAccumulate()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.WillReplaceOrAccumulate();
+            return _legacyStub!.WillReplaceOrAccumulate();
         }
 
         /// <summary>
@@ -130,7 +130,7 @@
         public bool SetOutputSampleRate(float sampleRate)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.SetOutputSampleRate(sampleRate);
+            return _legacyStub!.SetOutputSampleRate(sampleRate);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@
         public VstSpeakerArrangement GetOutputSpeakerArrangement()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetOutputSpeakerArrangement();
+            return _legacyStub!.GetOutputSpeakerArrangement();
         }
 
         /// <summary>
@@ -151,7 +151,7 @@
         public bool SetIcon(IntPtr icon)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.SetIcon(icon);
+            return _legacyStub!.SetIcon(icon);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@
         public IntPtr OpenWindow()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.OpenWindow();
+            return _legacyStub!.OpenWindow();
         }
 
         /// <summary>
@@ -172,7 +172,7 @@
         public bool CloseWindow(IntPtr wnd)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.CloseWindow(wnd);
+            return _legacyStub!.CloseWindow(wnd);
         }
 
         /// <summary>
@@ -183,7 +183,7 @@
         public bool EditFile(string xml)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.EditFile(xml);
+            return _legacyStub!.EditFile(xml);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@
         public string GetChunkFile()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetChunkFile();
+            return _legacyStub!.GetChunkFile();
         }
 
         /// <summary>
@@ -203,7 +203,7 @@
         public VstSpeakerArrangement GetInputSpeakerArrangement()
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.GetInputSpeakerArrangement();
+            return _legacyStub!.GetInputSpeakerArrangement();
         }
 
         #endregion
@@ -219,7 +219,7 @@
         public bool PinConnected(int connectionIndex, bool output)
         {
             ThrowIfDisposed();
-            return _deprecatedStub!.PinConnected(connectionIndex, output);
+            return _legacyStub!.PinConnected(connectionIndex, output);
         }
 
         #endregion
@@ -232,7 +232,7 @@
         {
             if (disposing)
             {
-                _deprecatedStub = null;
+                _legacyStub = null;
             }
 
             base.Dispose(disposing);
@@ -240,7 +240,7 @@
 
         private void ThrowIfDisposed()
         {
-            if (_deprecatedStub == null)
+            if (_legacyStub == null)
             {
                 throw new ObjectDisposedException(GetType().FullName);
             }

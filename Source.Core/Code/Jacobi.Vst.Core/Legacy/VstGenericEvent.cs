@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// The VstGenericEvent represents an event of one of the deprecated event types.
+    /// The VstGenericEvent represents an event of one of the legacy event types.
     /// </summary>
     public class VstGenericEvent : VstEvent
     {

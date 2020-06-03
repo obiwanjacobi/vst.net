@@ -182,17 +182,17 @@ Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ plug
 	pEffect->id = pluginInfo->PluginID;
 	pEffect->version = pluginInfo->PluginVersion;
 
-	// check for deprecated members
-	Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ deprecatedInfo =
+	// check for legacy members
+	Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
 		dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(pluginInfo);
 
-	if(deprecatedInfo != nullptr)
+	if(legacyInfo != nullptr)
 	{
-		// hook up the old accumulating process proc when deprecated PluginInfo is passed in
+		// hook up the old accumulating process proc when legacy PluginInfo is passed in
 		pEffect->process = Jacobi::Vst::Interop::Process32AccProc;
-		pEffect->realQualities = deprecatedInfo->RealQualities;
-		pEffect->offQualities = deprecatedInfo->OfflineQualities;
-		pEffect->ioRatio = deprecatedInfo->IoRatio;
+		pEffect->realQualities = legacyInfo->RealQualities;
+		pEffect->offQualities = legacyInfo->OfflineQualities;
+		pEffect->ioRatio = legacyInfo->IoRatio;
 	}
 
 	return pEffect;

@@ -26,7 +26,7 @@
             public string Description { get; private set; }
 
             /// <summary>
-            /// Gets an indication if the opcode is deprecated.
+            /// Gets an indication if the opcode is legacy.
             /// </summary>
             public bool Legacy { get; private set; }
 

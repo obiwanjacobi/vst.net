@@ -139,7 +139,7 @@ public:
 			}	break;
 			default:
 			{
-				// deprecated event types support
+				// legacy event types support
 				// subtract deltaFrames and flags fields from byteSize
 				int length = pEvent->sizeInBytes - (2 * sizeof(int32_t));
 
@@ -225,7 +225,7 @@ public:
 			}	break;
 			default:
 			{
-				// deprecated event types support
+				// legacy event types support
 				Jacobi::Vst::Core::Legacy::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Legacy::VstGenericEvent^)evnt;
 				// incl. deltaFrames and flags
 				int dataLength = genericEvent->Data->Length + (2 * sizeof(int32_t));
@@ -273,7 +273,7 @@ public:
 				// delete the midi event
 				delete pEvents->events[n];
 			}
-			else // deprecated generic events
+			else // legacy generic events
 			{
 				delete[] pEvents->events[n];
 			}

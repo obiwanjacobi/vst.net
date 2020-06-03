@@ -12,7 +12,7 @@
     /// </remarks>
     public class VstPluginCommandLegacyAdapter : VstPluginCommandAdapter, IVstPluginCommandsLegacy20
     {
-        private readonly IVstPluginCommandsLegacy20 _deprecatedStub;
+        private readonly IVstPluginCommandsLegacy20 _legacyStub;
 
         /// <summary>
         /// Constructs a new instance on the passed <paramref name="pluginCmdStub"/>.
@@ -22,7 +22,7 @@
         public VstPluginCommandLegacyAdapter(Plugin.IVstPluginCommandStub pluginCmdStub)
             : base(pluginCmdStub)
         {
-            _deprecatedStub = (IVstPluginCommandsLegacy20)pluginCmdStub;
+            _legacyStub = (IVstPluginCommandsLegacy20)pluginCmdStub;
         }
 
         #region IVstPluginCommandsLegacy20 Members
@@ -33,7 +33,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetProgramCategoriesCount()
         {
-            return _deprecatedStub.GetProgramCategoriesCount();
+            return _legacyStub.GetProgramCategoriesCount();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool CopyCurrentProgramTo(int programIndex)
         {
-            return _deprecatedStub.CopyCurrentProgramTo(programIndex);
+            return _legacyStub.CopyCurrentProgramTo(programIndex);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool ConnectInput(int inputIndex, bool connected)
         {
-            return _deprecatedStub.ConnectInput(inputIndex, connected);
+            return _legacyStub.ConnectInput(inputIndex, connected);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool ConnectOutput(int outputIndex, bool connected)
         {
-            return _deprecatedStub.ConnectOutput(outputIndex, connected);
+            return _legacyStub.ConnectOutput(outputIndex, connected);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int GetCurrentPosition()
         {
-            return _deprecatedStub.GetCurrentPosition();
+            return _legacyStub.GetCurrentPosition();
         }
 
         /// <summary>
@@ -78,7 +78,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public VstAudioBuffer? GetDestinationBuffer()
         {
-            return _deprecatedStub.GetDestinationBuffer();
+            return _legacyStub.GetDestinationBuffer();
         }
 
         /// <summary>
@@ -87,7 +87,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SetBlockSizeAndSampleRate(int blockSize, float sampleRate)
         {
-            return _deprecatedStub.SetBlockSizeAndSampleRate(blockSize, sampleRate);
+            return _legacyStub.SetBlockSizeAndSampleRate(blockSize, sampleRate);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public string GetErrorText()
         {
-            return _deprecatedStub.GetErrorText();
+            return _legacyStub.GetErrorText();
         }
 
         /// <summary>
@@ -105,7 +105,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool Idle()
         {
-            return _deprecatedStub.Idle();
+            return _legacyStub.Idle();
         }
 
         /// <summary>
@@ -114,7 +114,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public IntPtr GetIcon()
         {
-            return _deprecatedStub.GetIcon();
+            return _legacyStub.GetIcon();
         }
 
         /// <summary>
@@ -123,7 +123,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool SetViewPosition(ref Point position)
         {
-            return _deprecatedStub.SetViewPosition(ref position);
+            return _legacyStub.SetViewPosition(ref position);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool KeysRequired()
         {
-            return _deprecatedStub.KeysRequired();
+            return _legacyStub.KeysRequired();
         }
 
         #endregion
@@ -145,7 +145,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public float GetVu()
         {
-            return _deprecatedStub.GetVu();
+            return _legacyStub.GetVu();
         }
 
         /// <summary>
@@ -154,7 +154,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool EditorKey(int keycode)
         {
-            return _deprecatedStub.EditorKey(keycode);
+            return _legacyStub.EditorKey(keycode);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool EditorTop()
         {
-            return _deprecatedStub.EditorTop();
+            return _legacyStub.EditorTop();
         }
 
         /// <summary>
@@ -172,7 +172,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public bool EditorSleep()
         {
-            return _deprecatedStub.EditorSleep();
+            return _legacyStub.EditorSleep();
         }
 
         /// <summary>
@@ -181,7 +181,7 @@
         /// <returns>Returns the value returned from the forwarded call.</returns>
         public int Identify()
         {
-            return _deprecatedStub.Identify();
+            return _legacyStub.Identify();
         }
 
         #endregion
@@ -195,7 +195,7 @@
         /// <param name="outputs">Passed with the forwarded call.</param>
         public void ProcessAcc(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
         {
-            _deprecatedStub.ProcessAcc(inputs, outputs);
+            _legacyStub.ProcessAcc(inputs, outputs);
         }
 
         #endregion
