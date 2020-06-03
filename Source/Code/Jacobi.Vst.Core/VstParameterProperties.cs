@@ -47,7 +47,7 @@
         /// </summary>
         public int LargeStepInteger { get; set; }
 
-        private string _label;
+        private string _label = String.Empty;
         /// <summary>
         /// The label for the parameter.
         /// </summary>
@@ -58,13 +58,13 @@
             get { return _label; }
             set
             {
-                Throw.IfArgumentTooLong(value, Constants.MaxLabelLength, "Label");
+                Throw.IfArgumentTooLong(value, Constants.MaxLabelLength, nameof(Label));
 
                 _label = value;
             }
         }
 
-        private string _shortLabel;
+        private string _shortLabel = String.Empty;
         /// <summary>
         /// A short label for the parameter.
         /// </summary>
@@ -75,7 +75,7 @@
             get { return _shortLabel; }
             set
             {
-                Throw.IfArgumentTooLong(value, Constants.MaxShortLabelLength, "ShortLabel");
+                Throw.IfArgumentTooLong(value, Constants.MaxShortLabelLength, nameof(ShortLabel));
 
                 _shortLabel = value;
             }
@@ -100,7 +100,7 @@
         /// </summary>
         public short ParameterCountInCategory { get; set; }
 
-        private string _catLabel;
+        private string _catLabel = String.Empty;
         /// <summary>
         /// The label for the category.
         /// </summary>
@@ -111,7 +111,7 @@
             get { return _catLabel; }
             set
             {
-                Throw.IfArgumentTooLong(value, Constants.MaxLabelLength, "CategoryLabel");
+                Throw.IfArgumentTooLong(value, Constants.MaxLabelLength, nameof(CategoryLabel));
 
                 _catLabel = value;
             }
@@ -122,7 +122,9 @@
     /// Flags for the parameter properties.
     /// </summary>
     [Flags]
+#pragma warning disable S2344 // Enumeration type names should not have "Flags" or "Enum" suffixes
     public enum VstParameterPropertiesFlags
+#pragma warning restore S2344 // Enumeration type names should not have "Flags" or "Enum" suffixes
     {
         /// <summary>Parameter is a switch (on/off).</summary>
         ParameterIsSwitch = 1 << 0,

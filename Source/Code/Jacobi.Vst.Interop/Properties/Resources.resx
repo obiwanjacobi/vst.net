@@ -166,11 +166,11 @@
     <comment>Exception text.</comment>
   </data>
   <data name="VstUnmanagedPluginContext_MagicNumberMismatch" xml:space="preserve">
-    <value>'{0}' did not return an AEffect structure with the correct 'Magic' number.</value>
+    <value>'{0}' did not return an Vst2Plugin structure with the correct 'Magic' number.</value>
     <comment>Exception text.</comment>
   </data>
   <data name="VstUnmanagedPluginContext_PluginReturnedNull" xml:space="preserve">
-    <value>'{0}' did not return an AEffect structure (but null).</value>
+    <value>'{0}' did not return an Vst2Plugin structure (but null).</value>
     <comment>Exception text.</comment>
   </data>
   <data name="VstUnmanagedPluginContext_VstVersionMismatch" xml:space="preserve">

@@ -15,12 +15,10 @@
     /// </remarks>
     public class ManagedPluginFactory
     {
-        private Assembly _assembly;
+        private Assembly? _assembly;
 
-        /// <summary>.net.dll</summary>
-        public const string DefaultManagedExtension = ".net.dll";
-        /// <summary>.net.vstdll</summary>
-        public const string AlternateManagedExtension = ".net.vstdll";
+        /// <summary>.net.vst2</summary>
+        public const string DefaultManagedExtension = ".net.vst2";
 
         /// <summary>
         /// Loads the managed plugin assembly with the same name as the specified <paramref name="interopAssemblyPath"/>.
@@ -33,15 +31,10 @@
         /// but with a <b>.net.dll</b> or a <b>.net.vstdll</b> extension.</remarks>
         public void LoadAssemblyByDefaultName(string interopAssemblyPath)
         {
-            Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, "interopAssemblyPath");
+            Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, nameof(interopAssemblyPath));
 
-            string dir = Path.GetDirectoryName(interopAssemblyPath);
             string fileName = Path.GetFileNameWithoutExtension(interopAssemblyPath);
-
-            if (!AssemblyLoader.Current.PrivateProbePaths.Contains(dir))
-            {
-                AssemblyLoader.Current.PrivateProbePaths.Add(dir);
-            }
+            AssemblyLoader.Current.BasePath = Path.GetDirectoryName(interopAssemblyPath) ?? String.Empty;
 
             LoadAssembly(fileName);
         }
@@ -53,15 +46,10 @@
         /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
         public void LoadAssembly(string assemblyName)
         {
-            Throw.IfArgumentIsNullOrEmpty(assemblyName, "assemblyName");
+            Throw.IfArgumentIsNullOrEmpty(assemblyName, nameof(assemblyName));
 
-            // include an empty string as extension to allow to look for the raw assemblyName
-            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, new string[] { DefaultManagedExtension, AlternateManagedExtension, String.Empty });
-
-            if (_assembly == null)
-            {
-                throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, assemblyName);
-            }
+            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, DefaultManagedExtension)
+                ?? throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, assemblyName);
         }
 
         /// <summary>
@@ -70,29 +58,35 @@
         /// <returns>Returns an instance of the PluginCommandStub.</returns>
         /// <exception cref="InvalidOperationException">Thrown when no public class could be found 
         /// that implemented the <see cref="IVstPluginCommandStub"/> interface.</exception>
+        [CLSCompliant(false)]
         public IVstPluginCommandStub CreatePluginCommandStub()
         {
-            Type pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub));
-
-            if (pluginType == null)
+            if (_assembly == null)
             {
-                throw new InvalidOperationException(
-                    String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
+                throw new InvalidOperationException(Properties.Resources.ManagedPluginFactory_NoAssemblyLoaded);
             }
 
-            return (IVstPluginCommandStub)Activator.CreateInstance(pluginType);
+            Type pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub))
+                ?? throw new InvalidOperationException(
+                    String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
+
+            var cmdStub = (IVstPluginCommandStub?)Activator.CreateInstance(pluginType)
+                ?? throw new InvalidOperationException(
+                    String.Format(Properties.Resources.ManagedPluginFactory_CreationFailed, pluginType));
+
+            return cmdStub;
         }
 
-        private Type LocateTypeByInterface(Type typeOfInterface)
+        private Type? LocateTypeByInterface(Type typeOfInterface)
         {
-            foreach (Type type in _assembly.GetTypes())
+            foreach (Type type in _assembly!.GetTypes())
             {
                 if (type.IsPublic)
                 {
                     foreach (Type intfType in type.GetInterfaces())
                     {
                         // Generic types can have no FullName.
-                        if (!string.IsNullOrEmpty(intfType.FullName) &&
+                        if (!String.IsNullOrEmpty(intfType.FullName) &&
                             intfType.FullName.Equals(typeOfInterface.FullName))
                         {
                             return type;

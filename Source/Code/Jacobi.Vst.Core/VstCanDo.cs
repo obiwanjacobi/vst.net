@@ -69,35 +69,35 @@
         /// <summary></summary>
         PlugAsChannelInsert,
         /// <summary></summary>
-	    PlugAsSend,
+        PlugAsSend,
         /// <summary></summary>
-	    MixDryWet,
+        MixDryWet,
         /// <summary></summary>
-	    NoRealTime,
+        NoRealTime,
         /// <summary></summary>
-	    Multipass,
+        Multipass,
         /// <summary></summary>
-	    Metapass,
+        Metapass,
         /// <summary>Strip of x.</summary>
-	    x1in1out,
+        x1in1out,
         /// <summary>Strip of x.</summary>
-	    x1in2out,
+        x1in2out,
         /// <summary>Strip of x.</summary>
-	    x2in1out,
+        x2in1out,
         /// <summary>Strip of x.</summary>
-	    x2in2out,
+        x2in2out,
         /// <summary>Strip of x.</summary>
-	    x2in4out,
+        x2in4out,
         /// <summary>Strip of x.</summary>
-	    x4in2out,
+        x4in2out,
         /// <summary>Strip of x.</summary>
-	    x4in4out,
+        x4in4out,
         /// <summary>Strip of x.</summary>
-	    x4in8out,	// 4:2 matrix to surround bus
+        x4in8out,	// 4:2 matrix to surround bus
         /// <summary>Strip of x.</summary>
-	    x8in4out,	// surround bus to 4:2 matrix
+        x8in4out,	// surround bus to 4:2 matrix
         /// <summary>Strip of x.</summary>
-	    x8in8out,
+        x8in8out,
         /// <summary>plug-in supports function #getMidiProgramName().</summary>
         MidiProgramNames,
         /// <summary>

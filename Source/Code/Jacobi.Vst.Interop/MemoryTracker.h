@@ -7,7 +7,8 @@ namespace Interop {
 /// <summary>
 /// The MemoryTracker class maintains a list of native allocated objects that can be deleted (freed) at another time.
 /// </summary>
-ref class MemoryTracker
+///<remarks>Is a managed class because it is used as a member of a managed class.</remarks>
+private ref class MemoryTracker
 {
 public:
 	/// <summary>

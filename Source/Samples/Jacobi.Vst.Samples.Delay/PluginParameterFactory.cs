@@ -1,12 +1,11 @@
 ﻿namespace Jacobi.Vst.Samples.Delay
 {
-    using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    
+    using Jacobi.Vst.Plugin.Framework;
+
     /// <summary>
     /// This class manages all parameters used by the plugin.
     /// </summary>
-    internal class PluginParameterFactory
+    internal sealed class PluginParameterFactory
     {
         // we bypass thread safety concerns for now...
 
@@ -24,8 +23,10 @@
         /// </summary>
         public PluginParameterFactory()
         {
-            VstParameterCategory paramCat = new VstParameterCategory();
-            paramCat.Name = "Delay";
+            VstParameterCategory paramCat = new VstParameterCategory
+            {
+                Name = "Delay"
+            };
 
             Categories.Add(paramCat);
         }

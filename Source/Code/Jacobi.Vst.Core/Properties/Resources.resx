@@ -112,17 +112,25 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FourCharacterCode_InvalidValue" xml:space="preserve">
     <value>The value is not a valid four character code.</value>
     <comment>Exception text.</comment>
   </data>
+  <data name="ManagedPluginFactory_CreationFailed" xml:space="preserve">
+    <value>Failed to create the PluginCommandStub '{0}'.</value>
+    <comment>Exception text.</comment>
+  </data>
   <data name="ManagedPluginFactory_FileNotFound" xml:space="preserve">
     <value>Could not find the managed VST plugin assembly with either the .net.dll or .net.vstdll extension.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="ManagedPluginFactory_NoAssemblyLoaded" xml:space="preserve">
+    <value>No Plugin Assembly was loaded. Call LoadAssembly(WithDefaultName) first.</value>
     <comment>Exception text.</comment>
   </data>
   <data name="ManagedPluginFactory_NoPublicStub" xml:space="preserve">

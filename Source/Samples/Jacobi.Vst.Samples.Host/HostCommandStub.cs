@@ -1,14 +1,12 @@
-﻿using System;
-
-using Jacobi.Vst.Core.Host;
-using Jacobi.Vst.Interop.Host;
+﻿using Jacobi.Vst.Core.Host;
+using System;
 
 namespace Jacobi.Vst.Samples.Host
 {
     /// <summary>
     /// The HostCommandStub class represents the part of the host that a plugin can call.
     /// </summary>
-    class HostCommandStub : IVstHostCommandStub 
+    class HostCommandStub : IVstHostCommandStub
     {
         /// <summary>
         /// Raised when one of the methods is called.
@@ -17,19 +15,14 @@ namespace Jacobi.Vst.Samples.Host
 
         private void RaisePluginCalled(string message)
         {
-            EventHandler<PluginCalledEventArgs> handler = PluginCalled;
-
-            if(handler != null)
-            {
-                handler(this, new PluginCalledEventArgs(message));
-            }
+            PluginCalled?.Invoke(this, new PluginCalledEventArgs(message));
         }
 
         #region IVstHostCommandsStub Members
 
         /// <inheritdoc />
         public IVstPluginContext PluginContext { get; set; }
-        
+
         #endregion
 
         #region IVstHostCommands20 Members

@@ -1,17 +1,18 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
-    using System;
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Framework;
-    using Jacobi.Vst.Framework.Common;
+    using Jacobi.Vst.Plugin.Framework;
+    using Jacobi.Vst.Plugin.Framework.Common;
+    using System;
 
     /// <summary>
     /// Implements the custom UI editor for the plugin.
     /// </summary>
-    class PluginEditor : IVstPluginEditor
+    internal sealed class PluginEditor : IVstPluginEditor
     {
-        private Plugin _plugin;
-        private WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper = new WinFormsControlWrapper<MidiNoteMapperUI>();
+        private readonly Plugin _plugin;
+
+        private readonly WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper = new WinFormsControlWrapper<MidiNoteMapperUI>();
 
         /// <summary>
         /// Constructs a new instance.

@@ -13,7 +13,7 @@ namespace Jacobi.Vst.Core
         public VstMidiSysExEvent(int deltaFrames, byte[] sysexData)
             : base(VstEventTypes.MidiSysExEvent, deltaFrames, sysexData)
         {
-            Throw.IfArgumentIsNull(sysexData, "sysexData");
+            Throw.IfArgumentIsNull(sysexData, nameof(sysexData));
         }
     }
 }

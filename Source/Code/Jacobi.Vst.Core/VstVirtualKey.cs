@@ -140,5 +140,4 @@
         /// <summary>Ctrl on PC, Apple on Mac</summary>
         MODIFIER_CONTROL = 1 << 3
     }
-
 }

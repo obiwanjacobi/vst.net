@@ -1,2 +1,0 @@
-xcopy "..\..\Source\BuildResults\CLR4\x86\Release" "VST.NET %1\x86\lib\net40\" /F /Y /EXCLUDE:Copy_Excludes.txt
-xcopy "..\..\Source\BuildResults\CLR4\x64\Release" "VST.NET %1\x64\lib\net40\" /F /Y /EXCLUDE:Copy_Excludes.txt

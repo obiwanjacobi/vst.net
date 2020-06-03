@@ -1,12 +1,13 @@
-#include "StdAfx.h"
+#include "pch.h"
 #include "VstUnmanagedPluginContext.h"
 #include "..\TypeConverter.h"
 #include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
+
 
 	VstUnmanagedPluginContext::VstUnmanagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 		: VstPluginContext(hostCmdStub)
@@ -84,12 +85,12 @@ namespace Host {
 			}
 				
 			// check entry point
-			_pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "VSTPluginMain");
+			_pluginMain = (Vst2PluginMain)::GetProcAddress(_hLib, "VSTPluginMain");
 
 			if(_pluginMain == NULL)
 			{
 				// check old entry point
-				_pluginMain = (VSTPluginMain)::GetProcAddress(_hLib, "main");
+				_pluginMain = (Vst2PluginMain)::GetProcAddress(_hLib, "main");
 			}
 
 			if(_pluginMain == NULL)
@@ -102,8 +103,8 @@ namespace Host {
 			
 			LoadingPlugin = this;
 
-			// call main and retrieve AEffect*
-			_pEffect = _pluginMain(&DispatchCallback);
+			// call main and retrieve Vst2Plugin*
+			_pEffect = _pluginMain(&HostCommandHandler);
 
 			if(_pEffect == NULL)
 			{
@@ -113,7 +114,7 @@ namespace Host {
 						pluginPath));
 			}
 
-			if(_pEffect->magic != kEffectMagic)
+			if(_pEffect->VstP != Vst2FourCharacterCode)
 			{
 				throw gcnew System::OperationCanceledException(
 					System::String::Format(
@@ -125,25 +126,16 @@ namespace Host {
 					System::Runtime::InteropServices::GCHandle::Alloc(this);
 
 			// maintain the context reference as part of the effect struct
-			_pEffect->resvd1 = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();
+			_pEffect->reserved1 = (Vst2IntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();
 
 			PluginCommandStub = gcnew VstPluginCommandStub(_pEffect);
 			PluginCommandStub->PluginContext = this;
 
-			/*// check if the plugin supports our VST version
-			if(PluginCommandStub->GetVstVersion() < 2400)
-			{
-				throw gcnew System::NotSupportedException(
-					System::String::Format(
-						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_VstVersionMismatch,
-						pluginPath));
-			}*/
-
 			// setup the plugin info
 			if(PluginCommandStub->GetVstVersion() < 2400)
 			{
-				// use structure with extra deprecated fields for older versions
-				PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
+				// use structure with extra legacy fields for older versions
+				PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
 			}
 			else
 			{
@@ -177,89 +169,89 @@ namespace Host {
 
 	void VstUnmanagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(PluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
 
-		System::Collections::Generic::List<System::String^> changedPropNames = 
+		System::Collections::Generic::List<System::String^>^ changedPropNames = 
 			gcnew System::Collections::Generic::List<System::String^>();
 
 		if(raiseEvents)
 		{
 			if(PluginInfo->Flags != safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags))
 			{
-				changedPropNames.Add("PluginInfo.Flags");
+				changedPropNames->Add("PluginInfo.Flags");
 			}
 
-			if(PluginInfo->ProgramCount != _pEffect->numPrograms)
+			if(PluginInfo->ProgramCount != _pEffect->programCount)
 			{
-				changedPropNames.Add("PluginInfo.ProgramCount");
+				changedPropNames->Add("PluginInfo.ProgramCount");
 			}
 
-			if(PluginInfo->ParameterCount != _pEffect->numParams)
+			if(PluginInfo->ParameterCount != _pEffect->parameterCount)
 			{
-				changedPropNames.Add("PluginInfo.ParameterCount");
+				changedPropNames->Add("PluginInfo.ParameterCount");
 			}
 
-			if(PluginInfo->AudioInputCount != _pEffect->numInputs)
+			if(PluginInfo->AudioInputCount != _pEffect->inputCount)
 			{
-				changedPropNames.Add("PluginInfo.AudioInputCount");
+				changedPropNames->Add("PluginInfo.AudioInputCount");
 			}
 
-			if(PluginInfo->AudioOutputCount != _pEffect->numOutputs)
+			if(PluginInfo->AudioOutputCount != _pEffect->outputCount)
 			{
-				changedPropNames.Add("PluginInfo.AudioOutputCount");
+				changedPropNames->Add("PluginInfo.AudioOutputCount");
 			}
 
-			if(PluginInfo->InitialDelay != _pEffect->initialDelay)
+			if(PluginInfo->InitialDelay != _pEffect->startupDelay)
 			{
-				changedPropNames.Add("PluginInfo.InitialDelay");
+				changedPropNames->Add("PluginInfo.InitialDelay");
 			}
 			
-			if(PluginInfo->PluginID != _pEffect->uniqueID)
+			if(PluginInfo->PluginID != _pEffect->id)
 			{
-				changedPropNames.Add("PluginInfo.PluginID");
+				changedPropNames->Add("PluginInfo.PluginID");
 			}
 
 			if(PluginInfo->PluginVersion != _pEffect->version)
 			{
-				changedPropNames.Add("PluginInfo.PluginVersion");
+				changedPropNames->Add("PluginInfo.PluginVersion");
 			}
 
-			if(deprecatedInfo != nullptr)
+			if(legacyInfo != nullptr)
 			{
-				if(deprecatedInfo->RealQualities != _pEffect->DECLARE_VST_DEPRECATED (realQualities))
+				if(legacyInfo->RealQualities != _pEffect->realQualities)
 				{
-					changedPropNames.Add("PluginInfo.RealQualities");
+					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
-				if(deprecatedInfo->OfflineQualities != _pEffect->DECLARE_VST_DEPRECATED (offQualities))
+				if(legacyInfo->OfflineQualities != _pEffect->offQualities)
 				{
-					changedPropNames.Add("PluginInfo.OfflineQualities");
+					changedPropNames->Add("PluginInfo.OfflineQualities");
 				}
 
-				if(deprecatedInfo->IoRatio != _pEffect->DECLARE_VST_DEPRECATED (ioRatio))
+				if(legacyInfo->IoRatio != _pEffect->ioRatio)
 				{
-					changedPropNames.Add("PluginInfo.IoRatio");
+					changedPropNames->Add("PluginInfo.IoRatio");
 				}
 			}
 		}
 
 		// assign new values
 		PluginInfo->Flags = safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_pEffect->flags);
-		PluginInfo->ProgramCount = _pEffect->numPrograms;
-		PluginInfo->ParameterCount = _pEffect->numParams;
-		PluginInfo->AudioInputCount = _pEffect->numInputs;
-		PluginInfo->AudioOutputCount = _pEffect->numOutputs;
-		PluginInfo->InitialDelay = _pEffect->initialDelay;
-		PluginInfo->PluginID = _pEffect->uniqueID;
+		PluginInfo->ProgramCount = _pEffect->programCount;
+		PluginInfo->ParameterCount = _pEffect->parameterCount;
+		PluginInfo->AudioInputCount = _pEffect->inputCount;
+		PluginInfo->AudioOutputCount = _pEffect->outputCount;
+		PluginInfo->InitialDelay = _pEffect->startupDelay;
+		PluginInfo->PluginID = _pEffect->id;
 		PluginInfo->PluginVersion = _pEffect->version;
 
-		// deprecated fields
-		if(deprecatedInfo != nullptr)
+		// legacy fields
+		if(legacyInfo != nullptr)
 		{
-			deprecatedInfo->RealQualities = _pEffect->DECLARE_VST_DEPRECATED (realQualities);
-			deprecatedInfo->OfflineQualities = _pEffect->DECLARE_VST_DEPRECATED (offQualities);
-			deprecatedInfo->IoRatio = _pEffect->DECLARE_VST_DEPRECATED (ioRatio);
+			legacyInfo->RealQualities = _pEffect->realQualities;
+			legacyInfo->OfflineQualities = _pEffect->offQualities;
+			legacyInfo->IoRatio = _pEffect->ioRatio;
 		}
 
 		// raise all the changed property events
@@ -270,24 +262,24 @@ namespace Host {
 	}
 
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop
 
 
-VstIntPtr DispatchCallback(::AEffect* pEffect, ::VstInt32 opcode, ::VstInt32 index, ::VstIntPtr value, void* ptr, float opt)
+Vst2IntPtr HostCommandHandler(::Vst2Plugin* pPlugin, ::int32_t opcode, ::int32_t index, ::Vst2IntPtr value, void* ptr, float opt)
 {
-	Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^ context = nullptr;
+	Jacobi::Vst::Host::Interop::VstUnmanagedPluginContext^ context = nullptr;
 
-	if(pEffect != NULL && pEffect->resvd1 != 0)
+	if(pPlugin != NULL && pPlugin->reserved1 != 0)
 	{
 		// extract the reference to the VstPluginContext from the effect struct.
-		context = safe_cast<Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext^>(
-			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr((void*)pEffect->resvd1)).Target);
+		context = safe_cast<Jacobi::Vst::Host::Interop::VstUnmanagedPluginContext^>(
+			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr((void*)pPlugin->reserved1)).Target);
 	}
 
 	// fallback to the current loading plugin.
 	if(context == nullptr)
 	{
-		context = Jacobi::Vst::Interop::Host::VstUnmanagedPluginContext::LoadingPlugin;
+		context = Jacobi::Vst::Host::Interop::VstUnmanagedPluginContext::LoadingPlugin;
 	}
 
 	// dispatch call to plugin context and its Host Proxy.
@@ -297,6 +289,7 @@ VstIntPtr DispatchCallback(::AEffect* pEffect, ::VstInt32 opcode, ::VstInt32 ind
 	}
 
 	// no-one there to answer...
-	System::Diagnostics::Debug::WriteLine("Warning: No VstUnmanagedPluginContext instance was found to dispatch opcode:" + opcode);
+	System::Diagnostics::Debug::WriteLine(
+		"Warning: No VstUnmanagedPluginContext instance was found to dispatch opcode: {0}.", opcode);
 	return 0;
 }

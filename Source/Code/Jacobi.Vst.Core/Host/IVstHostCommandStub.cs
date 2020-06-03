@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Jacobi.Vst.Core.Host
+﻿namespace Jacobi.Vst.Core.Host
 {
     /// <summary>
     /// The IVstHostCommandStub interface is implemented by the command stub for handling 

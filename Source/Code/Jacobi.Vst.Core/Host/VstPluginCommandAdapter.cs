@@ -9,15 +9,18 @@ namespace Jacobi.Vst.Core.Host
     /// </summary>
     public class VstPluginCommandAdapter : IVstPluginCommandStub
     {
-        private Plugin.IVstPluginCommandStub _pluginCmdStub;
+        private readonly Plugin.IVstPluginCommandStub _pluginCmdStub;
 
         /// <summary>
         /// Constructs a new instance based on the <paramref name="pluginCmdStub"/>
         /// </summary>
         /// <param name="pluginCmdStub">Will be used to forward calls to. Must not be null.</param>
+        [CLSCompliant(false)]
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public VstPluginCommandAdapter(Plugin.IVstPluginCommandStub pluginCmdStub)
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         {
-            Throw.IfArgumentIsNull(pluginCmdStub, "pluginCmdStub");
+            Throw.IfArgumentIsNull(pluginCmdStub, nameof(pluginCmdStub));
 
             _pluginCmdStub = pluginCmdStub;
         }
@@ -69,7 +72,7 @@ namespace Jacobi.Vst.Core.Host
         /// <param name="input">Passed with the forwarded call and back.</param>
         /// <param name="output">Passed with the forwarded call and back.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public bool GetSpeakerArrangement(out VstSpeakerArrangement input, out VstSpeakerArrangement output)
+        public bool GetSpeakerArrangement(out VstSpeakerArrangement? input, out VstSpeakerArrangement? output)
         {
             return _pluginCmdStub.GetSpeakerArrangement(out input, out output);
         }
@@ -173,23 +176,23 @@ namespace Jacobi.Vst.Core.Host
         /// <summary>
         /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
         /// </summary>
-        /// <param name="midiProgram">Passed with the forwarded call.</param>
+        /// <param name="midiProgramName">Passed with the forwarded call.</param>
         /// <param name="channel">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public int GetMidiProgramName(VstMidiProgramName midiProgram, int channel)
+        public int GetMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
-            return _pluginCmdStub.GetMidiProgramName(midiProgram, channel);
+            return _pluginCmdStub.GetMidiProgramName(midiProgramName, channel);
         }
 
         /// <summary>
         /// This call is forwarded to the <see cref="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
         /// </summary>
-        /// <param name="midiProgram">Passed with the forwarded call.</param>
+        /// <param name="midiProgramName">Passed with the forwarded call.</param>
         /// <param name="channel">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public int GetCurrentMidiProgramName(VstMidiProgramName midiProgram, int channel)
+        public int GetCurrentMidiProgramName(VstMidiProgramName midiProgramName, int channel)
         {
-            return _pluginCmdStub.GetCurrentMidiProgramName(midiProgram, channel);
+            return _pluginCmdStub.GetCurrentMidiProgramName(midiProgramName, channel);
         }
 
         /// <summary>
@@ -292,7 +295,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="index">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstPinProperties GetInputProperties(int index)
+        public VstPinProperties? GetInputProperties(int index)
         {
             return _pluginCmdStub.GetInputProperties(index);
         }
@@ -302,7 +305,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="index">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstPinProperties GetOutputProperties(int index)
+        public VstPinProperties? GetOutputProperties(int index)
         {
             return _pluginCmdStub.GetOutputProperties(index);
         }
@@ -397,7 +400,7 @@ namespace Jacobi.Vst.Core.Host
         /// </summary>
         /// <param name="index">Passed with the forwarded call.</param>
         /// <returns>Returns the value returned from the forwarded call.</returns>
-        public VstParameterProperties GetParameterProperties(int index)
+        public VstParameterProperties? GetParameterProperties(int index)
         {
             return _pluginCmdStub.GetParameterProperties(index);
         }
@@ -631,12 +634,13 @@ namespace Jacobi.Vst.Core.Host
         /// A factory method to create the correct <see cref="VstPluginCommandAdapter"/> class type.
         /// </summary>
         /// <param name="pluginCmdStub">A reference to the plugin command stub. Must not be null.</param>
-        /// <returns>Returns an instance of <see cref="Deprecated.VstPluginCommandDeprecatedAdapter"/> when the <paramref name="pluginCmdStub"/> supports deprecated methods.</returns>
+        /// <returns>Returns an instance of <see cref="Legacy.VstPluginCommandLegacyAdapter"/> when the <paramref name="pluginCmdStub"/> supports legacy methods.</returns>
+        [CLSCompliant(false)]
         public static VstPluginCommandAdapter Create(Plugin.IVstPluginCommandStub pluginCmdStub)
         {
-            if (pluginCmdStub is Deprecated.IVstPluginCommandsDeprecated20)
+            if (pluginCmdStub is Legacy.IVstPluginCommandsLegacy20)
             {
-                return new Deprecated.VstPluginCommandDeprecatedAdapter(pluginCmdStub);
+                return new Legacy.VstPluginCommandLegacyAdapter(pluginCmdStub);
             }
 
             return new VstPluginCommandAdapter(pluginCmdStub);

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "pch.h"
 #include "MemoryTracker.h"
 
 namespace Jacobi {

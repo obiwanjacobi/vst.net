@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 using Jacobi.Vst.Core;
 using Jacobi.Vst.Core.Plugin;
 
@@ -7,7 +6,7 @@ namespace Jacobi.Vst.Samples.WrapperPlugin.Host
 {
     public class HostCommandStubAdapter : Jacobi.Vst.Core.Host.IVstHostCommandStub
     {
-        IVstHostCommandStub _hostCmdStub;
+        readonly IVstHostCommandStub _hostCmdStub;
 
         public HostCommandStubAdapter(IVstHostCommandStub hostCmdStub)
         {
@@ -144,12 +143,12 @@ namespace Jacobi.Vst.Samples.WrapperPlugin.Host
 
         public void ProcessIdle()
         {
-             _hostCmdStub.ProcessIdle();
+            _hostCmdStub.ProcessIdle();
         }
 
         public void SetParameterAutomated(int index, float value)
         {
-             _hostCmdStub.SetParameterAutomated(index, value);
+            _hostCmdStub.SetParameterAutomated(index, value);
         }
 
         #endregion

@@ -1,14 +1,14 @@
-#include "StdAfx.h"
+#include "pch.h"
 #include "VstManagedPluginContext.h"
-#include "..\Plugin\Configuration.h"
 #include "..\Properties\Resources.h"
 #include "..\Bootstrapper.h"
 #include "..\Utils.h"
 
 namespace Jacobi {
 namespace Vst {
-namespace Interop {
 namespace Host {
+namespace Interop {
+
 
 	VstManagedPluginContext::VstManagedPluginContext(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 		: VstPluginContext(hostCmdStub)
@@ -19,14 +19,11 @@ namespace Host {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		Jacobi::Vst::Core::Plugin::FileFinder^ fileFinder = Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->CreateFileFinder();
-		fileFinder->Paths->Insert(0, System::IO::Path::GetDirectoryName(pluginPath));
-		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension);
-		fileFinder->Extensions->Add(Jacobi::Vst::Core::Plugin::ManagedPluginFactory::AlternateManagedExtension);
-
-		if(!System::String::IsNullOrEmpty(fileFinder->Find(System::IO::Path::GetFileNameWithoutExtension(pluginPath))))
+		if(System::IO::File::Exists(System::IO::Path::Combine(
+			System::IO::Path::GetDirectoryName(pluginPath), 
+			System::IO::Path::GetFileNameWithoutExtension(pluginPath) + Jacobi::Vst::Core::Plugin::ManagedPluginFactory::DefaultManagedExtension)))
 		{
-			return gcnew Jacobi::Vst::Interop::Host::VstManagedPluginContext(hostCmdStub);
+			return gcnew Jacobi::Vst::Host::Interop::VstManagedPluginContext(hostCmdStub);
 		}
 
 		return nullptr;
@@ -36,122 +33,116 @@ namespace Host {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		try
+		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+
+		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
+			Bootstrapper::LoadManagedPlugin(pluginPath);
+
+		if(pluginCmdStub == nullptr)
 		{
-			Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-				Bootstrapper::LoadManagedPlugin(pluginPath, gcnew Jacobi::Vst::Interop::Plugin::Configuration(pluginPath));
-
-			if(pluginCmdStub == nullptr)
-			{
-				throw gcnew System::EntryPointNotFoundException(
-					System::String::Format(
-						Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
-						pluginPath));
-			}
-
-			Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
-				Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
-
-			_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
-			Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedPluginInfo = 
-				dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
-
-			if(deprecatedPluginInfo != nullptr)
-			{
-				PluginInfo = gcnew Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo();
-			}
-			else
-			{
-				PluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
-			}
-
-			AcceptPluginInfoData(false);
-
-			PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
-			PluginCommandStub->PluginContext = this;
-
-			Set(VstPluginContext::PluginPathContextVar, pluginPath);
+			throw gcnew System::EntryPointNotFoundException(
+				System::String::Format(
+					Jacobi::Vst::Interop::Properties::Resources::VstManagedPluginContext_PluginCommandStubNotFound,
+					pluginPath));
 		}
-		finally
+
+		Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
+			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
+
+		_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyPluginInfo = 
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
+
+		if(legacyPluginInfo != nullptr)
 		{
-			// make sure the private paths are cleared once the plugin is fully loaded.
-			Jacobi::Vst::Core::Plugin::AssemblyLoader::Current->PrivateProbePaths->Clear();
+			PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
 		}
+		else
+		{
+			PluginInfo = gcnew Jacobi::Vst::Core::Plugin::VstPluginInfo();
+		}
+
+		AcceptPluginInfoData(false);
+
+		PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
+		PluginCommandStub->PluginContext = this;
+
+		Set(VstPluginContext::PluginPathContextVar, pluginPath);
 	}
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInfo =
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(PluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
 
-		Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^ deprecatedInternalInfo =
-			dynamic_cast<Jacobi::Vst::Core::Deprecated::VstPluginDeprecatedInfo^>(_internalPluginInfo);
+		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInternalInfo =
+			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
 
-		System::Collections::Generic::List<System::String^> changedPropNames = 
+		System::Collections::Generic::List<System::String^>^ changedPropNames = 
 			gcnew System::Collections::Generic::List<System::String^>();
 
 		if(raiseEvents)
 		{
 			if(PluginInfo->Flags != safe_cast<Jacobi::Vst::Core::VstPluginFlags>(_internalPluginInfo->Flags))
 			{
-				changedPropNames.Add("PluginInfo.Flags");
+				changedPropNames->Add("PluginInfo.Flags");
 			}
 
 			if(PluginInfo->ProgramCount != _internalPluginInfo->ProgramCount)
 			{
-				changedPropNames.Add("PluginInfo.ProgramCount");
+				changedPropNames->Add("PluginInfo.ProgramCount");
 			}
 
 			if(PluginInfo->ParameterCount != _internalPluginInfo->ParameterCount)
 			{
-				changedPropNames.Add("PluginInfo.ParameterCount");
+				changedPropNames->Add("PluginInfo.ParameterCount");
 			}
 
 			if(PluginInfo->AudioInputCount != _internalPluginInfo->AudioInputCount)
 			{
-				changedPropNames.Add("PluginInfo.AudioInputCount");
+				changedPropNames->Add("PluginInfo.AudioInputCount");
 			}
 
 			if(PluginInfo->AudioOutputCount != _internalPluginInfo->AudioOutputCount)
 			{
-				changedPropNames.Add("PluginInfo.AudioOutputCount");
+				changedPropNames->Add("PluginInfo.AudioOutputCount");
 			}
 
 			if(PluginInfo->InitialDelay != _internalPluginInfo->InitialDelay)
 			{
-				changedPropNames.Add("PluginInfo.InitialDelay");
+				changedPropNames->Add("PluginInfo.InitialDelay");
 			}
 			
 			if(PluginInfo->PluginID != _internalPluginInfo->PluginID)
 			{
-				changedPropNames.Add("PluginInfo.PluginID");
+				changedPropNames->Add("PluginInfo.PluginID");
 			}
 
 			if(PluginInfo->PluginVersion != _internalPluginInfo->PluginVersion)
 			{
-				changedPropNames.Add("PluginInfo.PluginVersion");
+				changedPropNames->Add("PluginInfo.PluginVersion");
 			}
 
-			if(deprecatedInfo != nullptr)
+			if(legacyInfo != nullptr)
 			{
-				if(deprecatedInfo->DeprecatedFlags != deprecatedInternalInfo->DeprecatedFlags)
+				if(legacyInfo->LegacyFlags != legacyInternalInfo->LegacyFlags)
 				{
-					changedPropNames.Add("PluginInfo.DeprecatedFlags");
+					changedPropNames->Add("PluginInfo.LegacyFlags");
 				}
 
-				if(deprecatedInfo->RealQualities != deprecatedInternalInfo->RealQualities)
+				if(legacyInfo->RealQualities != legacyInternalInfo->RealQualities)
 				{
-					changedPropNames.Add("PluginInfo.RealQualities");
+					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
-				if(deprecatedInfo->OfflineQualities != deprecatedInternalInfo->OfflineQualities)
+				if(legacyInfo->OfflineQualities != legacyInternalInfo->OfflineQualities)
 				{
-					changedPropNames.Add("PluginInfo.OfflineQualities");
+					changedPropNames->Add("PluginInfo.OfflineQualities");
 				}
 
-				if(deprecatedInfo->IoRatio != deprecatedInternalInfo->IoRatio)
+				if(legacyInfo->IoRatio != legacyInternalInfo->IoRatio)
 				{
-					changedPropNames.Add("PluginInfo.IoRatio");
+					changedPropNames->Add("PluginInfo.IoRatio");
 				}
 			}
 		}
@@ -166,13 +157,13 @@ namespace Host {
 		PluginInfo->PluginID = _internalPluginInfo->PluginID;
 		PluginInfo->PluginVersion = _internalPluginInfo->PluginVersion;
 
-		// deprecated fields
-		if(deprecatedInfo != nullptr)
+		// legacy fields
+		if(legacyInfo != nullptr)
 		{
-			deprecatedInfo->DeprecatedFlags = deprecatedInternalInfo->DeprecatedFlags;
-			deprecatedInfo->RealQualities = deprecatedInternalInfo->RealQualities;
-			deprecatedInfo->OfflineQualities = deprecatedInternalInfo->OfflineQualities;
-			deprecatedInfo->IoRatio = deprecatedInternalInfo->IoRatio;
+			legacyInfo->LegacyFlags = legacyInternalInfo->LegacyFlags;
+			legacyInfo->RealQualities = legacyInternalInfo->RealQualities;
+			legacyInfo->OfflineQualities = legacyInternalInfo->OfflineQualities;
+			legacyInfo->IoRatio = legacyInternalInfo->IoRatio;
 		}
 
 		// raise all the changed property events
@@ -182,4 +173,4 @@ namespace Host {
 		}
 	}
 
-}}}} // namespace Jacobi::Vst::Interop::Host
+}}}} // Jacobi::Vst::Host::Interop

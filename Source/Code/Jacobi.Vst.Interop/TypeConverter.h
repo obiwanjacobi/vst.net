@@ -1,8 +1,5 @@
 #pragma once
 
-namespace Jacobi {
-namespace Vst {
-namespace Interop {
 class TypeConverter
 {
 public:
@@ -47,8 +44,8 @@ public:
 		}
 	}
 
-	// Converts a managed rect to an unmanaged ERect*
-	static void ToUnmanagedRectangle(ERect* pRect, System::Drawing::Rectangle rect)
+	// Converts a managed rect to an unmanaged Vst2Rectangle*
+	static void ToUnmanagedRectangle(Vst2Rectangle* pRect, System::Drawing::Rectangle rect)
 	{
 		pRect->top = rect.Top;
 		pRect->left = rect.Left;
@@ -56,8 +53,8 @@ public:
 		pRect->right = rect.Right;
 	}
 
-	// converts an unmanaged ERect* to a Rectangle.
-	static System::Drawing::Rectangle ToManagedRectangle(ERect* pRect)
+	// converts an unmanaged Vst2Rectangle* to a Rectangle.
+	static System::Drawing::Rectangle ToManagedRectangle(Vst2Rectangle* pRect)
 	{
 		System::Drawing::Rectangle rect(pRect->top, pRect->left, pRect->right, pRect->bottom);
 
@@ -94,19 +91,19 @@ public:
 
 	// Converts an unmanaged events to a managed VstEvent array.
 	// Only handles MidiEvent and MidiSysExEvent types.
-	static array<Jacobi::Vst::Core::VstEvent^>^ ToManagedEventArray(VstEvents* pEvents)
+	static array<Jacobi::Vst::Core::VstEvent^>^ ToManagedEventArray(Vst2Events* pEvents)
 	{
-		array<Jacobi::Vst::Core::VstEvent^>^ eventArray = gcnew array<Jacobi::Vst::Core::VstEvent^>(pEvents->numEvents);
+		array<Jacobi::Vst::Core::VstEvent^>^ eventArray = gcnew array<Jacobi::Vst::Core::VstEvent^>(pEvents->eventCount);
 
-		for(int n = 0; n < pEvents->numEvents; n++)
+		for(int n = 0; n < pEvents->eventCount; n++)
 		{
-			::VstEvent* pEvent = pEvents->events[n];
+			::Vst2Event* pEvent = pEvents->events[n];
 
-			switch(pEvent->type)
+			switch(pEvent->kind)
 			{
-			case kVstMidiType:
+			case Vst2EventKind::Midi:
 			{
-				::VstMidiEvent* pMidiEvent = (::VstMidiEvent*)pEvent;
+				::Vst2MidiEvent* pMidiEvent = (::Vst2MidiEvent*)pEvent;
 
 				array<System::Byte>^ midiData = gcnew array<System::Byte>(4);
 				midiData[0] = pMidiEvent->midiData[0];
@@ -116,19 +113,19 @@ public:
 				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = gcnew Jacobi::Vst::Core::VstMidiEvent(
 					pMidiEvent->deltaFrames,
 					pMidiEvent->noteLength, pMidiEvent->noteOffset, midiData, pMidiEvent->detune, pMidiEvent->noteOffVelocity,
-					pMidiEvent->flags == kVstMidiEventIsRealtime);
+					pMidiEvent->flags == Vst2MidiEventFlags::IsRealTime);
 
 				eventArray[n] = midiEvent;
 			}	break;
-			case kVstSysExType:
+			case Vst2EventKind::SystemExclusive:
 			{
-				::VstMidiSysexEvent* pMidiEvent = (::VstMidiSysexEvent*)pEvent;
+				::Vst2MidiSysExEvent* pMidiEvent = (::Vst2MidiSysExEvent*)pEvent;
 
 				// copy sysex data into managed buffer
-				array<System::Byte>^ midiData = gcnew array<System::Byte>(pMidiEvent->dumpBytes);
-				for(int i = 0; i < pMidiEvent->dumpBytes; i++)
+				array<System::Byte>^ midiData = gcnew array<System::Byte>(pMidiEvent->dumpInBytes);
+				for(int i = 0; i < pMidiEvent->dumpInBytes; i++)
 				{
-					midiData[i] = pMidiEvent->sysexDump[i];
+					midiData[i] = pMidiEvent->dump[i];
 				}
 
 				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent =
@@ -138,9 +135,9 @@ public:
 			}	break;
 			default:
 			{
-				// deprecated event types support
+				// legacy event types support
 				// subtract deltaFrames and flags fields from byteSize
-				int length = pEvent->byteSize - (2 * sizeof(VstInt32));
+				int length = pEvent->sizeInBytes - (2 * sizeof(int32_t));
 
 				array<System::Byte>^ data = gcnew array<System::Byte>(length);
 				for(int i = 0; i < length; i++)
@@ -148,9 +145,9 @@ public:
 					data[i] = pEvent->data[i];
 				}
 
-				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent =
-					gcnew Jacobi::Vst::Core::Deprecated::VstGenericEvent(
-						safe_cast<Jacobi::Vst::Core::VstEventTypes>(pEvent->type), pEvent->deltaFrames, data);
+				Jacobi::Vst::Core::Legacy::VstGenericEvent^ genericEvent =
+					gcnew Jacobi::Vst::Core::Legacy::VstGenericEvent(
+						safe_cast<Jacobi::Vst::Core::VstEventTypes>(pEvent->kind), pEvent->deltaFrames, data);
 
 				eventArray[n] = genericEvent;
 			}	break;
@@ -162,17 +159,17 @@ public:
 
 	// Converts a managed VstEvent array to an unmanaged VstEvent array.
 	// Call DeleteVstEvents on retval.
-	static ::VstEvents* AllocUnmanagedEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)
+	static ::Vst2Events* AllocUnmanagedEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)
 	{
 		int length = events->Length;
 		if(length > 2) length -= 2;
 
-		int totalLength = sizeof(VstEvents) + (length * sizeof(VstEvent*));
+		int totalLength = sizeof(Vst2Events) + (length * sizeof(Vst2Event*));
 
-		::VstEvents* pEvents = (::VstEvents*)new char[totalLength];
+		::Vst2Events* pEvents = (::Vst2Events*)new char[totalLength];
 		ZeroMemory(pEvents, totalLength);
 
-		pEvents->numEvents = events->Length;
+		pEvents->eventCount = events->Length;
 
 		int index = 0;
 		for each(Jacobi::Vst::Core::VstEvent^ evnt in events)
@@ -182,12 +179,12 @@ public:
 			case Jacobi::Vst::Core::VstEventTypes::MidiEvent:
 			{
 				Jacobi::Vst::Core::VstMidiEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiEvent^)evnt;
-				::VstMidiEvent* pMidiEvent = new ::VstMidiEvent();
+				::Vst2MidiEvent* pMidiEvent = new ::Vst2MidiEvent();
 
-				pMidiEvent->byteSize = sizeof(::VstMidiEvent);
-				pMidiEvent->flags = 0;
+				pMidiEvent->sizeInBytes = sizeof(::Vst2MidiEvent);
+				pMidiEvent->flags = Vst2MidiEventFlags::None;
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
-				pMidiEvent->type = (VstInt32)midiEvent->EventType;
+				pMidiEvent->kind = (Vst2EventKind)midiEvent->EventType;
 
 				for(int i = 0; i < midiEvent->Data->Length && i < 4; i++)
 				{
@@ -198,43 +195,43 @@ public:
 				pMidiEvent->noteLength = midiEvent->NoteLength;
 				pMidiEvent->noteOffset = midiEvent->NoteOffset;
 				pMidiEvent->noteOffVelocity = midiEvent->NoteOffVelocity;
-				pMidiEvent->flags = midiEvent->IsRealtime ? kVstMidiEventIsRealtime : 0;
+				pMidiEvent->flags = midiEvent->IsRealtime ? Vst2MidiEventFlags::IsRealTime : Vst2MidiEventFlags::None;
 
-				pEvents->events[index] = (::VstEvent*)pMidiEvent;
+				pEvents->events[index] = (::Vst2Event*)pMidiEvent;
 			}	break;
 			case Jacobi::Vst::Core::VstEventTypes::MidiSysExEvent:
 			{
 				Jacobi::Vst::Core::VstMidiSysExEvent^ midiEvent = (Jacobi::Vst::Core::VstMidiSysExEvent^)evnt;
-				::VstMidiSysexEvent* pMidiEvent = new ::VstMidiSysexEvent();
+				::Vst2MidiSysExEvent* pMidiEvent = new ::Vst2MidiSysExEvent();
 
-				pMidiEvent->byteSize = sizeof(::VstMidiSysexEvent);
+				pMidiEvent->sizeInBytes = sizeof(::Vst2MidiSysExEvent);
 				pMidiEvent->flags = 0;
 				pMidiEvent->deltaFrames = midiEvent->DeltaFrames;
-				pMidiEvent->type = (VstInt32)midiEvent->EventType;
+				pMidiEvent->kind = (Vst2EventKind)midiEvent->EventType;
 
-				pMidiEvent->dumpBytes = midiEvent->Data->Length;
-				pMidiEvent->sysexDump = new char[midiEvent->Data->Length];
+				pMidiEvent->dumpInBytes = midiEvent->Data->Length;
+				pMidiEvent->dump = new char[midiEvent->Data->Length];
 
 				for(int i = 0; i < midiEvent->Data->Length; i++)
 				{
-					pMidiEvent->sysexDump[i] = (char)midiEvent->Data[i];
+					pMidiEvent->dump[i] = (char)midiEvent->Data[i];
 				}
 
-				pEvents->events[index] = (::VstEvent*)pMidiEvent;
+				pEvents->events[index] = (::Vst2Event*)pMidiEvent;
 			}	break;
 			default:
 			{
-				// deprecated event types support
-				Jacobi::Vst::Core::Deprecated::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Deprecated::VstGenericEvent^)evnt;
+				// legacy event types support
+				Jacobi::Vst::Core::Legacy::VstGenericEvent^ genericEvent = (Jacobi::Vst::Core::Legacy::VstGenericEvent^)evnt;
 				// incl. deltaFrames and flags
-				int dataLength = genericEvent->Data->Length + (2 * sizeof(VstInt32));
+				int dataLength = genericEvent->Data->Length + (2 * sizeof(int32_t));
 				// incl.  type and byteSize
-				int structLength = dataLength + (2 * sizeof(VstInt32));
+				int structLength = dataLength + (2 * sizeof(int32_t));
 
-				::VstEvent* pEvent = (::VstEvent*)new char[structLength];
+				::Vst2Event* pEvent = (::Vst2Event*)new char[structLength];
 
-				pEvent->type = safe_cast<VstInt32>(genericEvent->EventType);
-				pEvent->byteSize = dataLength;
+				pEvent->kind = safe_cast<Vst2EventKind>(genericEvent->EventType);
+				pEvent->sizeInBytes = dataLength;
 				pEvent->deltaFrames = genericEvent->DeltaFrames;
 				pEvent->flags = 0;
 
@@ -254,25 +251,25 @@ public:
 	}
 
 	// Cleanup method for the return value of 'AllocUnmanagedEvents'
-	static void DeleteUnmanagedEvents(::VstEvents* pEvents)
+	static void DeleteUnmanagedEvents(::Vst2Events* pEvents)
 	{
-		for(int n = 0 ; n < pEvents->numEvents; n++)
+		for(int n = 0 ; n < pEvents->eventCount; n++)
 		{
-			if(pEvents->events[n]->flags == kVstSysExType)
+			if(pEvents->events[n]->kind == Vst2EventKind::SystemExclusive)
 			{
 				// delete the sysex buffer
-				::VstMidiSysexEvent* pMidiEvent = (::VstMidiSysexEvent*)pEvents->events[n];
-				delete[] pMidiEvent->sysexDump;
+				::Vst2MidiSysExEvent* pMidiEvent = (::Vst2MidiSysExEvent*)pEvents->events[n];
+				delete[] pMidiEvent->dump;
 
 				// delete the event
 				delete pEvents->events[n];
 			}
-			else if(pEvents->events[n]->flags == kVstMidiType)
+			else if(pEvents->events[n]->kind == Vst2EventKind::Midi)
 			{
 				// delete the midi event
 				delete pEvents->events[n];
 			}
-			else // deprecated generic events
+			else // legacy generic events
 			{
 				delete[] pEvents->events[n];
 			}
@@ -283,38 +280,38 @@ public:
 	}
 
 	// Assigns the values of the managed pinProps to the unmanaged pProps fields.
-	static void ToUnmanagedPinProperties(::VstPinProperties* pProps, Jacobi::Vst::Core::VstPinProperties^ pinProps)
+	static void ToUnmanagedPinProperties(::Vst2PinProperties* pProps, Jacobi::Vst::Core::VstPinProperties^ pinProps)
 	{
-		pProps->flags = safe_cast<VstInt32>(pinProps->Flags);
-		StringToChar(pinProps->Label, pProps->label, kVstMaxLabelLen);
-		StringToChar(pinProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
-		pProps->arrangementType = safe_cast<VstInt32>(pinProps->ArrangementType);
+		pProps->flags = safe_cast<Vst2PinPropertiesFlags>(pinProps->Flags);
+		StringToChar(pinProps->Label, pProps->label, Vst2MaxLabelLen);
+		StringToChar(pinProps->ShortLabel, pProps->shortLabel, Vst2MaxShortLabelLen);
+		pProps->arrangementKind = safe_cast<Vst2SpeakerArrangementKind>(pinProps->ArrangementType);
 	}
 
 	// Returns the values of the unmanaged pProps as managed VstPinProperties instance.
-	static Jacobi::Vst::Core::VstPinProperties^ ToManagedPinProperties(::VstPinProperties* pProps)
+	static Jacobi::Vst::Core::VstPinProperties^ ToManagedPinProperties(::Vst2PinProperties* pProps)
 	{
 		Jacobi::Vst::Core::VstPinProperties^ pinProps = gcnew Jacobi::Vst::Core::VstPinProperties();
 
 		pinProps->Flags = safe_cast<Jacobi::Vst::Core::VstPinPropertiesFlags>(pProps->flags);
 		pinProps->Label = CharToString(pProps->label);
 		pinProps->ShortLabel = CharToString(pProps->shortLabel);
-		pinProps->ArrangementType = safe_cast<Jacobi::Vst::Core::VstSpeakerArrangementType>(pProps->arrangementType);
+		pinProps->ArrangementType = safe_cast<Jacobi::Vst::Core::VstSpeakerArrangementType>(pProps->arrangementKind);
 
 		return pinProps;
 	}
 
 	// Converts an unmanaged speaker pArrangement to a managed VstSpeakerArrangement.
-	static Jacobi::Vst::Core::VstSpeakerArrangement^ ToManagedSpeakerArrangement(::VstSpeakerArrangement* pArrangement)
+	static Jacobi::Vst::Core::VstSpeakerArrangement^ ToManagedSpeakerArrangement(::Vst2SpeakerArrangement* pArrangement)
 	{
 		Jacobi::Vst::Core::VstSpeakerArrangement^ spkArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
 
-		spkArr->Type = safe_cast<Jacobi::Vst::Core::VstSpeakerArrangementType>(pArrangement->type);
-		spkArr->Speakers = gcnew array<Jacobi::Vst::Core::VstSpeakerProperties^>(pArrangement->numChannels);
+		spkArr->Type = safe_cast<Jacobi::Vst::Core::VstSpeakerArrangementType>(pArrangement->kind);
+		spkArr->Speakers = gcnew array<Jacobi::Vst::Core::VstSpeakerProperties^>(pArrangement->channelCount);
 
-		for(int n = 0; n < pArrangement->numChannels; n++)
+		for(int n = 0; n < pArrangement->channelCount; n++)
 		{
-			::VstSpeakerProperties propSrc = pArrangement->speakers[n];
+			::Vst2SpeakerProperties propSrc = pArrangement->speakers[n];
 
 			Jacobi::Vst::Core::VstSpeakerProperties^ spkProp = gcnew Jacobi::Vst::Core::VstSpeakerProperties();
 			spkProp->Azimath = propSrc.azimuth;
@@ -331,9 +328,9 @@ public:
 
 	// Converts a managed speaker arrangement to an unmanaged VstSpeakerArrangement.
 	// delete retval
-	static ::VstSpeakerArrangement* AllocUnmanagedSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement)
+	static ::Vst2SpeakerArrangement* AllocUnmanagedSpeakerArrangement(Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement)
 	{
-		::VstSpeakerArrangement* pArrangement = new ::VstSpeakerArrangement();
+		::Vst2SpeakerArrangement* pArrangement = new ::Vst2SpeakerArrangement();
 
 		ToUnmanagedSpeakerArrangement(pArrangement, arrangement);
 
@@ -341,28 +338,28 @@ public:
 	}
 
 	// copies the values from the managed arrangenment to the unmanaged pArrangement.
-	static void ToUnmanagedSpeakerArrangement(::VstSpeakerArrangement* pArrangement, Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement)
+	static void ToUnmanagedSpeakerArrangement(::Vst2SpeakerArrangement* pArrangement, Jacobi::Vst::Core::VstSpeakerArrangement^ arrangement)
 	{
-		pArrangement->numChannels = arrangement->Speakers->Length;
-		pArrangement->type = safe_cast<::VstSpeakerArrangementType>(arrangement->Type);
+		pArrangement->channelCount = arrangement->Speakers->Length;
+		pArrangement->kind = safe_cast<::Vst2SpeakerArrangementKind>(arrangement->Type);
 
-		// a maximum of 8 audio channels is supported in the ::VstSpeakerArrangement struct
-		for (int index = 0; index < pArrangement->numChannels && index < 8; index++)
+		// a maximum of 8 audio channels is supported in the ::Vst2SpeakerArrangement struct
+		for (int index = 0; index < pArrangement->channelCount && index < 8; index++)
 		{
 			Jacobi::Vst::Core::VstSpeakerProperties^ speakerProps = arrangement->Speakers[index];
 
 			pArrangement->speakers[index].azimuth = speakerProps->Azimath;
 			pArrangement->speakers[index].elevation = speakerProps->Elevation;
-			StringToChar(speakerProps->Name, pArrangement->speakers[index].name, kVstMaxNameLen);
+			StringToChar(speakerProps->Name, pArrangement->speakers[index].name, Vst2MaxNameLen);
 			pArrangement->speakers[index].radius = speakerProps->Radius;
-			pArrangement->speakers[index].type = safe_cast<VstInt32>(speakerProps->SpeakerType);
+			pArrangement->speakers[index].type = safe_cast<Vst2SpeakerType>(speakerProps->SpeakerType);
 		}
 	}
 
 	// Assigns the values from the managed paramProps to the unmanaged pProps fields.
-	static void ToUnmanagedParameterProperties(::VstParameterProperties* pProps, Jacobi::Vst::Core::VstParameterProperties^ paramProps)
+	static void ToUnmanagedParameterProperties(::Vst2ParameterProperties* pProps, Jacobi::Vst::Core::VstParameterProperties^ paramProps)
 	{
-		pProps->flags = safe_cast<VstInt32>(paramProps->Flags);
+		pProps->flags = safe_cast<Vst2ParameterFlags>(paramProps->Flags);
 		pProps->stepFloat = paramProps->StepFloat;
 		pProps->smallStepFloat = paramProps->SmallStepFloat;
 		pProps->largeStepFloat = paramProps->LargeStepFloat;
@@ -373,16 +370,16 @@ public:
 		pProps->minInteger = paramProps->MinInteger;
 
 		pProps->displayIndex = paramProps->DisplayIndex;
-		StringToChar(paramProps->Label, pProps->label, kVstMaxLabelLen);
-		StringToChar(paramProps->ShortLabel, pProps->shortLabel, kVstMaxShortLabelLen);
+		StringToChar(paramProps->Label, pProps->label, Vst2MaxLabelLen);
+		StringToChar(paramProps->ShortLabel, pProps->shortLabel, Vst2MaxShortLabelLen);
 
 		pProps->category = paramProps->Category;
-		StringToChar(paramProps->CategoryLabel, pProps->categoryLabel, kVstMaxCategLabelLen);
+		StringToChar(paramProps->CategoryLabel, pProps->categoryLabel, Vst2MaxCategLabelLen);
 		pProps->numParametersInCategory = paramProps->ParameterCountInCategory;
 	}
 
 	// converts an unmanaged pProps to a managed VstParameterProperties instance.
-	static Jacobi::Vst::Core::VstParameterProperties^ ToManagedParameterProperties(::VstParameterProperties* pProps)
+	static Jacobi::Vst::Core::VstParameterProperties^ ToManagedParameterProperties(::Vst2ParameterProperties* pProps)
 	{
 		Jacobi::Vst::Core::VstParameterProperties^ paramProps = gcnew Jacobi::Vst::Core::VstParameterProperties();
 
@@ -408,19 +405,19 @@ public:
 	}
 
 	// Assigns the values of the managed midiProgName to the unmanaged pProgName fields.
-	static void ToUnmanagedMidiProgramName(::MidiProgramName* pProgName, Jacobi::Vst::Core::VstMidiProgramName^ midiProgName)
+	static void ToUnmanagedMidiProgramName(::Vst2MidiProgramName* pProgName, Jacobi::Vst::Core::VstMidiProgramName^ midiProgName)
 	{
 		pProgName->thisProgramIndex = midiProgName->CurrentProgramIndex;
-		pProgName->flags = safe_cast<VstInt32>(midiProgName->Flags);
+		pProgName->flags = safe_cast<Vst2MidiProgramNameFlags>(midiProgName->Flags);
 		pProgName->midiBankLsb = safe_cast<char>(midiProgName->MidiBankLSB);
 		pProgName->midiBankMsb = safe_cast<char>(midiProgName->MidiBankMSB);
 		pProgName->midiProgram = safe_cast<char>(midiProgName->MidiProgram);
-		StringToChar(midiProgName->Name, pProgName->name, kVstMaxNameLen);
+		StringToChar(midiProgName->Name, pProgName->name, Vst2MaxNameLen);
 		pProgName->parentCategoryIndex = midiProgName->ParentCategoryIndex;
 	}
 
 	// Assigns the values of the unmanaged pProgName to the managed midiProgName
-	static void ToManagedMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::MidiProgramName* pProgName)
+	static void ToManagedMidiProgramName(Jacobi::Vst::Core::VstMidiProgramName^ midiProgName, ::Vst2MidiProgramName* pProgName)
 	{
 		midiProgName->CurrentProgramIndex = pProgName->thisProgramIndex;
 		midiProgName->Flags = safe_cast<Jacobi::Vst::Core::VstMidiProgramNameFlags>(pProgName->flags);
@@ -432,15 +429,15 @@ public:
 	}
 
 	// Assigns the values of the managed midiProgCat to the unmanaged pProgCat fields.
-	static void ToUnmanagedMidiProgramCategory(::MidiProgramCategory* pProgCat, Jacobi::Vst::Core::VstMidiProgramCategory^ midiProgCat)
+	static void ToUnmanagedMidiProgramCategory(::Vst2MidiProgramCategory* pProgCat, Jacobi::Vst::Core::VstMidiProgramCategory^ midiProgCat)
 	{
 		pProgCat->thisCategoryIndex = midiProgCat->CurrentCategoryIndex;
 		pProgCat->parentCategoryIndex = midiProgCat->ParentCategoryIndex;
-		StringToChar(midiProgCat->Name, pProgCat->name, kVstMaxNameLen);
+		StringToChar(midiProgCat->Name, pProgCat->name, Vst2MaxNameLen);
 	}
 
 	// Assigns the values of the unmanaged pProgCat to the managed midiProgCat fields.
-	static void ToManagedMidiProgramCategory(Jacobi::Vst::Core::VstMidiProgramCategory^ midiProgCat, ::MidiProgramCategory* pProgCat)
+	static void ToManagedMidiProgramCategory(Jacobi::Vst::Core::VstMidiProgramCategory^ midiProgCat, ::Vst2MidiProgramCategory* pProgCat)
 	{
 		midiProgCat->CurrentCategoryIndex = pProgCat->thisCategoryIndex;
 		midiProgCat->ParentCategoryIndex = pProgCat->parentCategoryIndex;
@@ -448,39 +445,39 @@ public:
 	}
 
 	// Converts the unmanaged pChunkInfo to a managed VstPatchChunkInfo.
-	static Jacobi::Vst::Core::VstPatchChunkInfo^ ToManagedPatchChunkInfo(::VstPatchChunkInfo* pChunkInfo)
+	static Jacobi::Vst::Core::VstPatchChunkInfo^ ToManagedPatchChunkInfo(::Vst2PatchChunkInfo* pChunkInfo)
 	{
 		Jacobi::Vst::Core::VstPatchChunkInfo^ patchChunkInfo =
 			gcnew Jacobi::Vst::Core::VstPatchChunkInfo(
 				pChunkInfo->version,
 				pChunkInfo->pluginUniqueID,
 				pChunkInfo->pluginVersion,
-				pChunkInfo->numElements);
+				pChunkInfo->elementCount);
 
 		return patchChunkInfo;
 	}
 
 	// Assigns the field values of the managed chunkInfo to the unmanaged pChunkInfo fields.
-	static void ToUnmanagedPatchChunkInfo(::VstPatchChunkInfo* pChunkInfo, Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo)
+	static void ToUnmanagedPatchChunkInfo(::Vst2PatchChunkInfo* pChunkInfo, Jacobi::Vst::Core::VstPatchChunkInfo^ chunkInfo)
 	{
 		pChunkInfo->version = chunkInfo->Version;
 		pChunkInfo->pluginUniqueID = chunkInfo->PluginID;
 		pChunkInfo->pluginVersion = chunkInfo->PluginVersion;
-		pChunkInfo->numElements = chunkInfo->ElementCount;
+		pChunkInfo->elementCount = chunkInfo->ElementCount;
 	}
 
 	// Assigns the field values of the unmanaged pTimeInfo to the managed VstTimeInfo.
-	static void ToManagedTimeInfo(Jacobi::Vst::Core::VstTimeInfo^ timeInfo, ::VstTimeInfo* pTimeInfo)
+	static void ToManagedTimeInfo(Jacobi::Vst::Core::VstTimeInfo^ timeInfo, ::Vst2TimeInfo* pTimeInfo)
 	{
-		timeInfo->BarStartPosition = pTimeInfo->barStartPos;
-		timeInfo->CycleStartPosition = pTimeInfo->cycleStartPos;
-		timeInfo->CycleEndPosition = pTimeInfo->cycleEndPos;
+		timeInfo->BarStartPosition = pTimeInfo->barStartPosition;
+		timeInfo->CycleStartPosition = pTimeInfo->cycleStartPosition;
+		timeInfo->CycleEndPosition = pTimeInfo->cycleEndPosition;
 		timeInfo->Flags = safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(pTimeInfo->flags);
 		timeInfo->NanoSeconds = pTimeInfo->nanoSeconds;
-		timeInfo->PpqPosition = pTimeInfo->ppqPos;
-		timeInfo->SamplePosition = pTimeInfo->samplePos;
+		timeInfo->PpqPosition = pTimeInfo->ppqPosition;
+		timeInfo->SamplePosition = pTimeInfo->samplePosition;
 		timeInfo->SampleRate = pTimeInfo->sampleRate;
-		timeInfo->SamplesToNearestClock = pTimeInfo->samplesToNextClock;
+		timeInfo->SamplesToNearestClock = pTimeInfo->sampleCountToNextClock;
 		timeInfo->SmpteFrameRate = safe_cast<Jacobi::Vst::Core::VstSmpteFrameRate>(pTimeInfo->smpteFrameRate);
 		timeInfo->SmpteOffset = pTimeInfo->smpteOffset;
 		timeInfo->Tempo = pTimeInfo->tempo;
@@ -489,18 +486,18 @@ public:
 	}
 
 	// assigns the field values of the managed timeInfo to the unmanaged pTimeInfo fields.
-	static void ToUnmanagedTimeInfo(::VstTimeInfo* pTimeInfo, Jacobi::Vst::Core::VstTimeInfo^ timeInfo)
+	static void ToUnmanagedTimeInfo(::Vst2TimeInfo* pTimeInfo, Jacobi::Vst::Core::VstTimeInfo^ timeInfo)
 	{
-		pTimeInfo->barStartPos = timeInfo->BarStartPosition;
-		pTimeInfo->cycleStartPos = timeInfo->CycleStartPosition;
-		pTimeInfo->cycleEndPos = timeInfo->CycleEndPosition;
-		pTimeInfo->flags = safe_cast<VstInt32>(timeInfo->Flags);
+		pTimeInfo->barStartPosition = timeInfo->BarStartPosition;
+		pTimeInfo->cycleStartPosition = timeInfo->CycleStartPosition;
+		pTimeInfo->cycleEndPosition = timeInfo->CycleEndPosition;
+		pTimeInfo->flags = safe_cast<Vst2TimeInfoFlags>(timeInfo->Flags);
 		pTimeInfo->nanoSeconds = timeInfo->NanoSeconds;
-		pTimeInfo->ppqPos = timeInfo->PpqPosition;
-		pTimeInfo->samplePos = timeInfo->SamplePosition;
+		pTimeInfo->ppqPosition = timeInfo->PpqPosition;
+		pTimeInfo->samplePosition = timeInfo->SamplePosition;
 		pTimeInfo->sampleRate = timeInfo->SampleRate;
-		pTimeInfo->samplesToNextClock = timeInfo->SamplesToNearestClock;
-		pTimeInfo->smpteFrameRate = safe_cast<VstInt32>(timeInfo->SmpteFrameRate);
+		pTimeInfo->sampleCountToNextClock = timeInfo->SamplesToNearestClock;
+		pTimeInfo->smpteFrameRate = safe_cast<Vst2SmpteFrameRate>(timeInfo->SmpteFrameRate);
 		pTimeInfo->smpteOffset = timeInfo->SmpteOffset;
 		pTimeInfo->tempo = timeInfo->Tempo;
 		pTimeInfo->timeSigDenominator = timeInfo->TimeSignatureDenominator;
@@ -508,11 +505,11 @@ public:
 	}
 
 	// call delete on retval.
-	static ::VstTimeInfo* AllocUnmanagedTimeInfo(Jacobi::Vst::Core::VstTimeInfo^ timeInfo)
+	static ::Vst2TimeInfo* AllocUnmanagedTimeInfo(Jacobi::Vst::Core::VstTimeInfo^ timeInfo)
 	{
-		::VstTimeInfo* pTimeInfo = new ::VstTimeInfo();
+		::Vst2TimeInfo* pTimeInfo = new ::Vst2TimeInfo();
 
-		ZeroMemory(pTimeInfo, sizeof(::VstTimeInfo));
+		ZeroMemory(pTimeInfo, sizeof(::Vst2TimeInfo));
 
 		ToUnmanagedTimeInfo(pTimeInfo, timeInfo);
 
@@ -546,24 +543,24 @@ public:
 	}
 
 	// Call DeleteFileSelect on retval
-	static ::VstFileSelect* AllocUnmanagedFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
+	static ::Vst2FileSelect* AllocUnmanagedFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
 	{
-		::VstFileSelect* pFileSelect = new ::VstFileSelect();
+		::Vst2FileSelect* pFileSelect = new ::Vst2FileSelect();
 
 		// clear structure
-		ZeroMemory(pFileSelect, sizeof(::VstFileSelect));
+		ZeroMemory(pFileSelect, sizeof(::Vst2FileSelect));
 
 		// keep track of unmanaged memory for call to closeFileSelector
 		fileSelect->Reserved = System::IntPtr(pFileSelect);
 
-		pFileSelect->command = safe_cast<VstInt32>(fileSelect->Command);
+		pFileSelect->command = safe_cast<Vst2FileSelectCommand>(fileSelect->Command);
 		pFileSelect->initialPath = AllocateString(fileSelect->InitialPath);
 
-		pFileSelect->nbFileTypes = fileSelect->FileTypes->Length;
-		pFileSelect->fileTypes = new ::VstFileType[fileSelect->FileTypes->Length];
+		pFileSelect->fileTypesLength = fileSelect->FileTypes->Length;
+		pFileSelect->fileTypes = new ::Vst2FileType[fileSelect->FileTypes->Length];
 
 		// clear allocated file type structures
-		ZeroMemory(pFileSelect->fileTypes, fileSelect->FileTypes->Length * sizeof(::VstFileType));
+		ZeroMemory(pFileSelect->fileTypes, fileSelect->FileTypes->Length * sizeof(::Vst2FileType));
 
 		// copy file type array
 		for(int index = 0; index < fileSelect->FileTypes->Length; index++)
@@ -576,7 +573,7 @@ public:
 	}
 
 	// creates a managed VstFileSelect from the unmanaged pFileSelect
-	static Jacobi::Vst::Core::VstFileSelect^ ToManagedFileSelect(::VstFileSelect* pFileSelect)
+	static Jacobi::Vst::Core::VstFileSelect^ ToManagedFileSelect(::Vst2FileSelect* pFileSelect)
 	{
 		Jacobi::Vst::Core::VstFileSelect^ fileSelect = gcnew Jacobi::Vst::Core::VstFileSelect();
 		// not really needed, but gives the Host a chance to work with MIME info. No harm when overwritten.
@@ -587,14 +584,14 @@ public:
 			System::Runtime::InteropServices::GCHandle::Alloc(fileSelect);
 
 		// couple our managed instance to our unmanaged instance
-		pFileSelect->reserved = (VstIntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(fsHandle).ToPointer();
+		pFileSelect->reserved = (Vst2IntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(fsHandle).ToPointer();
 
 		fileSelect->Command = safe_cast<Jacobi::Vst::Core::VstFileSelectCommand>(pFileSelect->command);
 		fileSelect->InitialPath = CharToString(pFileSelect->initialPath);
-		fileSelect->FileTypes = gcnew array<Jacobi::Vst::Core::VstFileType^>(pFileSelect->nbFileTypes);
+		fileSelect->FileTypes = gcnew array<Jacobi::Vst::Core::VstFileType^>(pFileSelect->fileTypesLength);
 
 		// copy file types
-		for(int index = 0; index < pFileSelect->nbFileTypes; index++)
+		for(int index = 0; index < pFileSelect->fileTypesLength; index++)
 		{
 			fileSelect->FileTypes[index]->Extension = CharToString(pFileSelect->fileTypes[index].dosType);
 			fileSelect->FileTypes[index]->Name = CharToString(pFileSelect->fileTypes[index].name);
@@ -604,7 +601,7 @@ public:
 	}
 
 	// retrieves the managed VstFileSelect instance stored in the reserved field of the unmanaged pFileSelect.
-	static Jacobi::Vst::Core::VstFileSelect^ GetManagedFileSelect(::VstFileSelect* pFileSelect)
+	static Jacobi::Vst::Core::VstFileSelect^ GetManagedFileSelect(::Vst2FileSelect* pFileSelect)
 	{
 		if(pFileSelect != NULL && pFileSelect->reserved != 0)
 		{
@@ -616,13 +613,13 @@ public:
 	}
 
 	// updates the unmanaged pFileSelect with output information set by the managed host (allocates unmanaged resources).
-	static void AllocUpdateUnmanagedFileSelect(::VstFileSelect* pFileSelect, Jacobi::Vst::Core::VstFileSelect^ fileSelect)
+	static void AllocUpdateUnmanagedFileSelect(::Vst2FileSelect* pFileSelect, Jacobi::Vst::Core::VstFileSelect^ fileSelect)
 	{
-		if(pFileSelect->command == ::kVstMultipleFilesLoad)
+		if(pFileSelect->command == Vst2FileSelectCommand::MultipleFilesLoad)
 		{
 			// allocate the pointers slots
 			pFileSelect->returnMultiplePaths = new char*[fileSelect->ReturnPaths->Length];
-			pFileSelect->nbReturnPath = fileSelect->ReturnPaths->Length;
+			pFileSelect->returnPathLength = fileSelect->ReturnPaths->Length;
 
 			for(int index = 0; index < fileSelect->ReturnPaths->Length; index++)
 			{
@@ -632,12 +629,12 @@ public:
 		else if(fileSelect->ReturnPaths != nullptr && fileSelect->ReturnPaths->Length > 0)
 		{
 			pFileSelect->returnPath = AllocateString(fileSelect->ReturnPaths[0]);
-			pFileSelect->sizeReturnPath = (::VstInt32)strlen(pFileSelect->returnPath) + 1;
+			pFileSelect->sizeReturnPath = (::int32_t)strlen(pFileSelect->returnPath) + 1;
 		}
 	}
 
 	// updates the managed VstFileSelect with output information set by the host.
-	static void UpdateManagedFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect, ::VstFileSelect* pFileSelect)
+	static void UpdateManagedFileSelect(Jacobi::Vst::Core::VstFileSelect^ fileSelect, ::Vst2FileSelect* pFileSelect)
 	{
 		if(pFileSelect->returnPath != NULL)
 		{
@@ -646,9 +643,9 @@ public:
 		}
 		else if(pFileSelect->returnMultiplePaths != NULL)
 		{
-			fileSelect->ReturnPaths = gcnew array<System::String^>(pFileSelect->nbReturnPath);
+			fileSelect->ReturnPaths = gcnew array<System::String^>(pFileSelect->returnPathLength);
 
-			for(int index = 0; index < pFileSelect->nbReturnPath; index++)
+			for(int index = 0; index < pFileSelect->returnPathLength; index++)
 			{
 				fileSelect->ReturnPaths[index] = CharToString(pFileSelect->returnMultiplePaths[index]);
 			}
@@ -656,7 +653,7 @@ public:
 	}
 
 	// frees the unmanaged memory allocated by 'AllocUnmanagedFileSelect'
-	static void DeleteUnmanagedFileSelect(::VstFileSelect* pFileSelect)
+	static void DeleteUnmanagedFileSelect(::Vst2FileSelect* pFileSelect)
 	{
 		if(pFileSelect->initialPath != NULL)
 		{
@@ -674,18 +671,18 @@ public:
 	}
 
 	// frees the unmanaged resources allocated by 'AllocUpdateUnmanagedFileSelect'. Also releases the managed instance.
-	static void DeleteUpdateUnmanagedFileSelect(::VstFileSelect* pFileSelect)
+	static void DeleteUpdateUnmanagedFileSelect(::Vst2FileSelect* pFileSelect)
 	{
 		if(pFileSelect->returnMultiplePaths != NULL)
 		{
-			for(int index = 0; index < pFileSelect->nbReturnPath; index++)
+			for(int index = 0; index < pFileSelect->returnPathLength; index++)
 			{
 				DeallocateString(pFileSelect->returnMultiplePaths[index]);
 			}
 
 			delete [] pFileSelect->returnMultiplePaths;
 			pFileSelect->returnMultiplePaths = NULL;
-			pFileSelect->nbReturnPath = 0;
+			pFileSelect->returnPathLength = 0;
 		}
 
 		if(pFileSelect->returnPath != NULL)
@@ -706,4 +703,3 @@ public:
 private:
 	TypeConverter(){}
 };
-}}} // Jacobi::Vst::Interop

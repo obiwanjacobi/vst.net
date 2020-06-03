@@ -1,4 +1,0 @@
-Samples
-.exp
-.pdb
-.lib

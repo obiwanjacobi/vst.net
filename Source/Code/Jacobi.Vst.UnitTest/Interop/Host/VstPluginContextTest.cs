@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Jacobi.Vst.Host.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Jacobi.Vst.Interop.Host;
+using System;
 using System.Reflection;
 
 namespace Jacobi.Vst.UnitTest.Interop.Host
@@ -14,7 +14,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         [WorkItem(8488)]
         [TestMethod]
         [ExpectedException(typeof(EntryPointNotFoundException))]
-        public void Create_InvalidPluginFile_ThrowsExpectedExceptionWithResourceString()
+        public void Create_InvalidPluginFile_ThrowsExpectedException()
         {
             var hostCmdStub = new StubHostCommandStub();
             var notaPluginFile = Assembly.GetExecutingAssembly().Location;

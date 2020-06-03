@@ -1,12 +1,12 @@
-#include "StdAfx.h"
+#include "pch.h"
 #include "VstAudioBufferManager.h"
 #include "..\Properties\Resources.h"
 
 namespace Jacobi {
 namespace Vst {
+namespace Host {
 namespace Interop {
-namespace Host
-{
+
 	VstAudioBufferManager::VstAudioBufferManager(System::Int32 bufferCount, System::Int32 bufferSize)
 	{
 		if(bufferCount < 0)
@@ -43,11 +43,6 @@ namespace Host
 		// destroys the contained UnmanagedArray.
 	}
 
-	array<Jacobi::Vst::Core::VstAudioBuffer^>^ VstAudioBufferManager::ToArray()
-	{
-		return _managedBuffers->ToArray();
-	}
-
 	void VstAudioBufferManager::ClearBuffer(Jacobi::Vst::Core::VstAudioBuffer^ buffer)
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNull(buffer, "buffer");
@@ -80,4 +75,4 @@ namespace Host
 		ClearBuffer(_unmanagedBuffers.GetArray(), _unmanagedBuffers.GetLength());
 	}
 
-}}}} // namespace Jacobi.Vst.Interop.Host
+}}}} // Jacobi::Vst::Host::Interop
