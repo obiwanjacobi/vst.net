@@ -1,6 +1,7 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Host.Interop;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.Host
@@ -165,7 +166,7 @@ namespace Jacobi.Vst.Samples.Host
             using VstAudioBufferManager inputMgr = new VstAudioBufferManager(inputCount, blockSize);
             using VstAudioBufferManager outputMgr = new VstAudioBufferManager(outputCount, blockSize);
 
-            foreach (VstAudioBuffer buffer in inputMgr)
+            foreach (VstAudioBuffer buffer in inputMgr.Buffers)
             {
                 Random rnd = new Random((int)DateTime.Now.Ticks);
 

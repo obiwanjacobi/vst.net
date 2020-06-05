@@ -3,9 +3,12 @@
 ---
 ## New Version: `VST.NET` 2!
 
-`VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET Core 3.1. The new version is still Windows-only and supports the Steinberg VST 2.x API.
+`VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET Core 3.1. 
+The new version is still Windows-only and supports the Steinberg VST 2.x API.
 
-This means that `VST.NET` (1) is phasing out and will not receive any more updates. If you are looking for the old `VST.NET` (1) code, its in the branch called `vstnet1`. Of course you can still ask questions about `VST.NET` (1), but no feature requests or bug fixes will be applied.
+This means that `VST.NET` (1) is phasing out and will not receive any more updates. 
+If you are looking for the old `VST.NET` (1) code, its in the branch called [`vstnet1`](https://github.com/obiwanjacobi/vst.net/tree/vstnet1).
+Of course you can still ask questions about `VST.NET` (1), but no feature requests or bug fixes will be applied.
 
 ## What is `VST.NET`
 
