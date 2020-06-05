@@ -17,6 +17,10 @@ The Framework built on top of the interop layer provides a clear and structured 
 
 `VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Interop.Host) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications.
 
+## Documentations
+
+Still a work in progress, but [here](https://obiwanjacobi.github.io/vst.net/index.html) they are.
+
 ---
 
 ## Community
