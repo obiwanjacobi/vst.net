@@ -23,7 +23,6 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to register the plugin interfaces and the class/types that implement them.
         /// </summary>
         /// <param name="services">Will never be null.</param>
-        [CLSCompliant(false)]
         protected virtual void RegisterServices(IServiceCollection services) { }
 
         private IServiceProvider GetServices()

@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
 
 namespace Jacobi.Vst.Core.Plugin
 {
     /// <summary>
     /// The Plugin Command Stub called by the Interop.
     /// </summary>
-    [CLSCompliant(false)]
     public interface IVstPluginCommandStub : IVstPluginCommands24
     {
         /// <summary>

@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
 
 namespace Jacobi.Vst.Plugin.Framework
 {
     /// <summary>
     /// Plugin Configuration
     /// </summary>
-    [CLSCompliant(false)]
     public interface IConfigurable
     {
         /// <summary>

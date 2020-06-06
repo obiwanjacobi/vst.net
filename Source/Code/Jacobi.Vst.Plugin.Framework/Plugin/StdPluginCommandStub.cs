@@ -60,7 +60,6 @@
         /// Gets or sets the custom plugin specific configuration object.
         /// </summary>
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
-        [CLSCompliant(false)]
         public IConfiguration? PluginConfiguration { get; set; }
 
         #endregion

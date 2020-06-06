@@ -80,7 +80,6 @@
         /// <summary>
         /// The Plugin configuration object.
         /// </summary>
-        [CLSCompliant(false)]
         public IConfiguration? Configuration { get; set; }
 
         /// <summary>

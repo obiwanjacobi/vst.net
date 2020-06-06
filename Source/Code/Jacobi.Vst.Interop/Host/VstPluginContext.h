@@ -17,7 +17,6 @@ namespace Interop {
 	/// Note that <c>Open</c> is not called on the Plugin by the context but it does call 
 	/// Close on the plugin when the context is disposed.
 	/// </remarks>
-	[System::CLSCompliant(true)]
 	public ref class VstPluginContext abstract : public Jacobi::Vst::Core::Host::IVstPluginContext, public System::IDisposable
 	{
 	public:

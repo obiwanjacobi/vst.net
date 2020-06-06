@@ -58,7 +58,6 @@
         /// <returns>Returns an instance of the PluginCommandStub.</returns>
         /// <exception cref="InvalidOperationException">Thrown when no public class could be found 
         /// that implemented the <see cref="IVstPluginCommandStub"/> interface.</exception>
-        [CLSCompliant(false)]
         public IVstPluginCommandStub CreatePluginCommandStub()
         {
             if (_assembly == null)
