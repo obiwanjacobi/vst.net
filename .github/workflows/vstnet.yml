@@ -20,7 +20,8 @@ jobs:
       with:
         nuget-version: latest
     - name: Restore Dependencies
-      run: nuget restore Source/Code/Jacobi.Vst.sln
+#      run: nuget restore Source/Code/Jacobi.Vst.sln
+      run: msbuild Source/Code/Jacobi.Vst.sln /t:restore
     - name: Build VST.NET x64
       run: msbuild Source/Code/Jacobi.Vst.sln /t:Rebuild /p:Configuration=Release /p:Platform=x64
     - name: Build VST.NET x86
