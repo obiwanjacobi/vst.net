@@ -317,6 +317,17 @@
             Gets or sets the current activation state.
             </summary>
         </member>
+        <member name="T:Jacobi.Vst.Plugin.Framework.IConfigurable">
+            <summary>
+            Plugin Configuration
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.IConfigurable.Configuration">
+            <summary>
+            Gets or sets the configuration object.
+            </summary>
+            <remarks>Can be null if there is no config file deployed.</remarks>
+        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.IExtensible">
             <summary>
             Allows a client to query for an interface (typically) that is dynamically implemented by the object.
@@ -1673,6 +1684,11 @@
             </summary>
             <remarks>This member can be null. It is set after a call to <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPlugin.Open(Jacobi.Vst.Plugin.Framework.IVstHost)"/>.</remarks>
         </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPlugin.Configuration">
+            <summary>
+            The Plugin configuration object.
+            </summary>
+        </member>
         <member name="E:Jacobi.Vst.Plugin.Framework.Plugin.VstPlugin.Opened">
             <summary>
             Triggered when the <see cref="M:Open"/> method is called.
@@ -1883,6 +1899,12 @@
             Override to register the plugin interfaces and the class/types that implement them.
             </summary>
             <param name="services">Will never be null.</param>
+        </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.Services">
+            <summary>
+            Provides access to all configured/registered services.
+            </summary>
+            <remarks>Does not create the service provider if it does not exist, so may return null.</remarks>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.Supports``1">
             <summary>

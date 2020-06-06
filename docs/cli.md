@@ -4,7 +4,7 @@ In the spririt of .NET core (`dotnet`) and Command Line Interface (cli) has been
 
 The following commands are available:
 
-- `publish` - This command is similar to the `dotnet` `publish`. It gathers all dependencies of either a plugin (.dll) or a host (.exe) into one folder ready for deployment.
+- `publish` - This command is similar to the `dotnet` `publish` command. It gathers all dependencies of either a plugin (.dll) or a host (.exe) into one folder ready for deployment.
 
 More commands may be added later as the need arises.
 

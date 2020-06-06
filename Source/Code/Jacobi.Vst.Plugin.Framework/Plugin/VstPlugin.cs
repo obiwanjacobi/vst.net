@@ -2,6 +2,7 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Legacy;
+    using Microsoft.Extensions.Configuration;
     using System;
 
     /// <summary>
@@ -9,7 +10,7 @@
     /// </summary>
     /// <remarks>Derive your plugin root class from this base class to gain a 
     /// default implementation of the <see cref="IVstPlugin"/> interface.</remarks>
-    public abstract class VstPlugin : IVstPlugin
+    public abstract class VstPlugin : IVstPlugin, IConfigurable
     {
         /// <summary>
         /// To be called from the default constructor of the derived plugin class
@@ -75,6 +76,12 @@
         /// </summary>
         /// <remarks>This member can be null. It is set after a call to <see cref="Open"/>.</remarks>
         public IVstHost? Host { get; private set; }
+
+        /// <summary>
+        /// The Plugin configuration object.
+        /// </summary>
+        [CLSCompliant(false)]
+        public IConfiguration? Configuration { get; set; }
 
         /// <summary>
         /// Triggered when the <see cref="M:Open"/> method is called.

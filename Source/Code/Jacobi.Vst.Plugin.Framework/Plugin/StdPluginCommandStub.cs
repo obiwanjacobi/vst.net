@@ -38,6 +38,11 @@
 
             if (plugin != null)
             {
+                if (plugin is IConfigurable config)
+                {
+                    config.Configuration = this.PluginConfiguration;
+                }
+
                 _pluginCtx = new VstPluginContext
                 {
                     Host = new Host.VstHost(hostCmdStub, plugin),

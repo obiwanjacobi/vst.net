@@ -41,7 +41,6 @@ https://github.com/maxtoroq/sandcastle-md
 Requires a redesign.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
 * [Interop] Start vstsettings.json with the plugin (host?) name.
-* [Framework] Add configuration to VstPluginWithServices and expose service provider.
 * [Interop/Core] Hookup tracing again.
 * [CLI/Interop] Add CRT to output bins and let CLI publish them
 

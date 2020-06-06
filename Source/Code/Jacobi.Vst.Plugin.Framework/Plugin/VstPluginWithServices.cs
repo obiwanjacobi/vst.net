@@ -1,4 +1,5 @@
 ﻿using Jacobi.Vst.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -30,11 +31,24 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
             if (_services == null)
             {
                 var serviceCollection = new ServiceCollection();
+                if (Configuration != null)
+                {
+                    serviceCollection.AddSingleton<IConfiguration>(Configuration);
+                }
                 RegisterServices(serviceCollection);
                 _services = serviceCollection.BuildServiceProvider();
             }
 
             return _services;
+        }
+
+        /// <summary>
+        /// Provides access to all configured/registered services.
+        /// </summary>
+        /// <remarks>Does not create the service provider if it does not exist, so may return null.</remarks>
+        public IServiceProvider? Services
+        {
+            get { return _services; }
         }
 
         /// <summary>
