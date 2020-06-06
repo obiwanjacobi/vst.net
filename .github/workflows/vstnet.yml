@@ -12,14 +12,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+    - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.0
+    - uses: microsoft/setup-msbuild@v1.0.0
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: latest
     - name: Restore Dependencies
-      run: msbuild Source/Code/Jacobi.Vst.sln /t:restore
+      run: nuget restore Source/Code/Jacobi.Vst.sln
     - name: Build VST.NET x64
       run: msbuild Source/Code/Jacobi.Vst.sln /t:Rebuild /p:Configuration=Release /p:Platform=x64
     - name: Build VST.NET x86
