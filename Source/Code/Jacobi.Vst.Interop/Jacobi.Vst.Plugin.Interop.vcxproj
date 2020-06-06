@@ -263,6 +263,7 @@
   <ItemGroup>
     <!-- Reference all of Windows Forms -->
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
   </ItemGroup>
 </Project>
