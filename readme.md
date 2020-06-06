@@ -1,5 +1,7 @@
 # `VST.NET` 2 (Beta)
 
+![VST.NET2 CI](https://github.com/obiwanjacobi/vst.net/workflows/VST.NET2%20CI/badge.svg)
+
 ---
 ## New Version: `VST.NET` 2!
 
