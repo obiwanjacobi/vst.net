@@ -16,7 +16,8 @@ Jacobi::Vst3::Core::IPluginFactory^ LoadPlugin()
 {
     auto interopPath = System::Reflection::Assembly::GetExecutingAssembly()->Location;
     auto pluginPath = System::IO::Path::GetDirectoryName(interopPath);
-    auto pluginName = System::IO::Path::GetFileNameWithoutExtension(interopPath);
+    //auto pluginName = System::IO::Path::GetFileNameWithoutExtension(interopPath);
+    auto pluginName = gcnew System::String("Jacobi.Vst3.TestPlugin");
 
     auto loader = gcnew Jacobi::Vst3::Core::Common::AssemblyLoader(pluginPath);
     auto pluginAssembly = loader->LoadPlugin(pluginName);

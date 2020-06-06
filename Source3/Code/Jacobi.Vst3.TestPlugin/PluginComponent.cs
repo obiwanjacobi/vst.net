@@ -46,7 +46,10 @@ namespace Jacobi.Vst3.TestPlugin
         {
             // TODO: Parameter handling
 
-            var paramCount = data.GetInputParameterChanges().GetParameterCount();
+            var paramChanges = data.GetInputParameterChanges();
+            if (paramChanges == null) return TResult.E_Pointer;
+
+            var paramCount = paramChanges.GetParameterCount();
             //var paramCount = data.InputEvents.GetEventCount();
             //var paramCount = data.OutputEvents.GetEventCount();
 
@@ -87,10 +90,14 @@ namespace Jacobi.Vst3.TestPlugin
             {
                 // can return null!
                 var inputLeft = inputBus.GetUnsafeBuffer32(0);
-                var inputRight = inputBus.GetUnsafeBuffer32(1);
+                //var inputRight = inputBus.GetUnsafeBuffer32(1);
+                // TODO: check max num channels
+                float* inputRight = null;
 
                 var outputLeft = outputBus.GetUnsafeBuffer32(0);
-                var outputRight = outputBus.GetUnsafeBuffer32(1);
+                //var outputRight = outputBus.GetUnsafeBuffer32(1);
+                // TODO: check max num channels
+                float* outputRight = null;
 
                 // silent inputs result in silent outputs
                 outputBus.SetChannelSilent(0, inputLeft == null);

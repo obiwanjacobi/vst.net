@@ -20,9 +20,7 @@ The dotnet-core version of VST.NET.
 * Add vstnet cli as build tool and add a publish command to the project.
 Then on a successful build a deployment will automatically be generated.
 https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
-
 * CLI does not detect dependencies of dependencies (interop)
-* CLSComplient has no great support in netCore3.1. I think I will remove it too. (revisit RegisterServices)
 
 ## Refactor wishes
 

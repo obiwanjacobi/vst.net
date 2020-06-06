@@ -38,6 +38,7 @@ namespace Jacobi.Vst3.Core
 
         public IParameterChanges GetInputParameterChanges()
         {
+            if (InputParameterChangesPtr == IntPtr.Zero) return null;
             var unknown = Marshal.GetObjectForIUnknown(InputParameterChangesPtr);
 
             //if (unknown is IMarshal)

@@ -14,7 +14,7 @@ Of course you can still ask questions about `VST.NET` (1), but no feature reques
 
 ## What is `VST.NET`
 
-`VST.NET` allows VST Plugin developers to write Plugins in any .NET language. The interop layer makes the transition between the C++ and .NET world smooth and easy.
+`VST.NET` allows VST Plugin developers to write Plugins for the Steinberg VST 2.x API. The interop layer makes the transition between the C++ and C# smooth and easy.
 The Framework built on top of the interop layer provides a clear and structured architecture accelerating development considerably.
 
 `VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Interop.Host) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications.
