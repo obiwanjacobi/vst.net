@@ -25,7 +25,7 @@ namespace Jacobi.Vst3.Core
 
         public enum Masks
         {
-            ChordMask = 0x0FFF,	///< mask for chordMask 
+            ChordMask = 0x0FFF,	    ///< mask for chordMask 
             ReservedMask = 0xF000	///< reserved for future use
         }
     }

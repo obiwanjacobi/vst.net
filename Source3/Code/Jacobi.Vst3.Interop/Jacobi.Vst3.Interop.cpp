@@ -50,13 +50,13 @@ Steinberg::IPluginFactory* GetPluginFactory()
     if (pluginFactory == nullptr) return nullptr;
 
     Steinberg::IPluginFactory* plugin = nullptr;
-    System::IntPtr unknown = System::Runtime::InteropServices::Marshal::GetComInterfaceForObject(
+    System::IntPtr unknownPtr = System::Runtime::InteropServices::Marshal::GetComInterfaceForObject(
         pluginFactory, Jacobi::Vst3::Core::IPluginFactory::typeid);
 
-    if (unknown != System::IntPtr::Zero)
+    if (unknownPtr != System::IntPtr::Zero)
     {
-        Steinberg::FUnknown* unmanagedUnknown = (Steinberg::FUnknown*)unknown.ToPointer();
-        unmanagedUnknown->queryInterface(Steinberg::IPluginFactory_iid, (void**)&plugin);
+        Steinberg::FUnknown* unknown = (Steinberg::FUnknown*)unknownPtr.ToPointer();
+        unknown->queryInterface(Steinberg::IPluginFactory_iid, (void**)&plugin);
     }
     return plugin;
 }
