@@ -23,6 +23,7 @@
     <ClCompile Include="MemoryTracker.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Plugin\Jacobi.Vst.Interop.cpp" />
+    <ClCompile Include="Properties\AssemblyInfo.Plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

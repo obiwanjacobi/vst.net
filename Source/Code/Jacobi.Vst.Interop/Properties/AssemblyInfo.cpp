@@ -4,14 +4,7 @@ using namespace System::Reflection;
 using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::InteropServices;
 
-//
-// General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly:AssemblyTitleAttribute("Jacobi.Vst.Interop")];
-[assembly:AssemblyDescriptionAttribute("C++ <=> .NET Interop layer.")];
-[assembly:AssemblyProductAttribute("VST.NET")];
+[assembly:AssemblyProductAttribute("VST.NET2")];
 [assembly:AssemblyCultureAttribute("")];
 
 // configuration
@@ -26,7 +19,7 @@ using namespace System::Runtime::InteropServices;
 [assembly:AssemblyCopyright("Copyright © 2008-2020 Jacobi Software")] ;
 [assembly:AssemblyTrademark("obiwanjacobi")] ;
 
-[assembly:AssemblyInformationalVersionAttribute("2.0.0-alpha")]
+[assembly:AssemblyInformationalVersionAttribute("2.0.0-beta")]
 [assembly:AssemblyVersionAttribute("2.0.0.0")]
 [assembly:AssemblyFileVersionAttribute("2.0.0.0")]
 

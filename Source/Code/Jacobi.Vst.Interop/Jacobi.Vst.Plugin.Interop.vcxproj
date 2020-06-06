@@ -243,6 +243,7 @@
     <ClCompile Include="Plugin\Jacobi.Vst.Interop.cpp" />
     <ClCompile Include="Plugin\PluginCommandProxy.cpp" />
     <ClCompile Include="Properties\AssemblyInfo.cpp" />
+    <ClCompile Include="Properties\AssemblyInfo.Plugin.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

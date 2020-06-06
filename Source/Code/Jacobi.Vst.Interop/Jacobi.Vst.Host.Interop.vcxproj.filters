@@ -34,6 +34,7 @@
     <ClCompile Include="Host\VstPluginCommandStub.cpp" />
     <ClCompile Include="Host\VstPluginContext.cpp" />
     <ClCompile Include="Host\VstUnmanagedPluginContext.cpp" />
+    <ClCompile Include="Properties\AssemblyInfo.Host.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

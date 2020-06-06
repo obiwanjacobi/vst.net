@@ -2,11 +2,6 @@
 
 The dotnet-core version of VST.NET.
 
-## TODOs
-
-* Merge core branch into master
-
-
 ## Issues
 
 * NuGet Deployment is a mess
@@ -17,8 +12,10 @@ The dotnet-core version of VST.NET.
   Nuget package platform architecture issues:
   https://github.com/NuGet/docs.microsoft.com-nuget/issues/1083#issuecomment-597886840
   https://github.com/dotnet/roslyn/blob/master/docs/features/refout.md
+  
   The VST.NET CLI can perform a publish of a plugin and gather all dependencies into folder.
   NuGet still gives problems with x86/x64 managed assemblies.
+  https://github.com/dotnet/sdk/issues/10875
 
 * Add vstnet cli as build tool and add a publish command to the project.
 Then on a successful build a deployment will automatically be generated.
@@ -31,10 +28,7 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github
-    => https://www.continuousimprover.com/2020/03/reasons-for-adopting-nuke.html
-* Update docs: convert the Sandcastle .aml file to .md. Deploy source code docs (.xml) with nuget. Exit Sandcastle tool.
-https://github.com/EWSoftware/SHFB
-https://github.com/maxtoroq/sandcastle-md
+    => Interop cannot find its package dependencies: https://github.com/dotnet/sdk/issues/11922
 * [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
 * [UnitTest] Use FluentAssertions.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
@@ -42,7 +36,8 @@ Requires a redesign.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
 * [Interop] Start vstsettings.json with the plugin (host?) name.
 * [Interop/Core] Hookup tracing again.
-* [CLI/Interop] Add CRT to output bins and let CLI publish them
+* [CLI/Interop] Add CRT to output bins and let CLI publish them?
+    => adds **a lot** of extra dll's, most of which are not needed...?
 
 ---
 
@@ -65,41 +60,9 @@ It should produce t.txt in the current directory with lot of info about the nati
 
 ## Research
 
-COM (VST3?)
+COM (VST3)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
 
 - `ISSUE`: ijwhost/clr loading does not work on a mixed assembly!?
 That means the plugin wont load in the unmanage host.
-
-
----
-
-## VST.NET Plugin
-
-Creating a VST.NET plugin with the new DotNet Core libraries.
-
-### Development
-
-Install VST.NET dotnet core nuget package into your plugin project.
-
-### Deployment
-
-You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
-
-> You can run `vstnet publish <targetpath.dll> -o <out folder>` to get all the dependencies into one folder.
-
-You should now be able to load your plugin in the host.
-
-## VST.NET Host
-
-Creating a VST.NET host with the new DotNet Core libraries.
-
-### Development
-
-Install VST.NET dotnet core nuget package into your host project.
-
-### Deployment
-
-You either deploy 32-bits (x86) or 64-bits (x64). There is no `AnyCPU`.
-
-> You can run `vstnet publish <targetpath.exe> -o <out folder>` to get all the dependencies into one folder.
+https://github.com/dotnet/runtime/issues/37194
