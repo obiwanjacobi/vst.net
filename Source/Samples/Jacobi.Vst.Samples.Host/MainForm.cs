@@ -22,10 +22,10 @@ namespace Jacobi.Vst.Samples.Host
 
             foreach (VstPluginContext ctx in _plugins)
             {
-                ListViewItem lvItem = new ListViewItem(ctx.PluginCommandStub.GetEffectName());
-                lvItem.SubItems.Add(ctx.PluginCommandStub.GetProductString());
-                lvItem.SubItems.Add(ctx.PluginCommandStub.GetVendorString());
-                lvItem.SubItems.Add(ctx.PluginCommandStub.GetVendorVersion().ToString());
+                ListViewItem lvItem = new ListViewItem(ctx.PluginCommandStub.Commands.GetEffectName());
+                lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetProductString());
+                lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorString());
+                lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorVersion().ToString());
                 lvItem.SubItems.Add(ctx.Find<string>("PluginPath"));
                 lvItem.Tag = ctx;
 
@@ -47,7 +47,7 @@ namespace Jacobi.Vst.Samples.Host
                 ctx.Set("HostCmdStub", hostCmdStub);
 
                 // actually open the plugin itself
-                ctx.PluginCommandStub.Open();
+                ctx.PluginCommandStub.Commands.Open();
 
                 return ctx;
             }

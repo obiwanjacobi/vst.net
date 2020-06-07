@@ -11,6 +11,9 @@
         /// </summary>
         IVstPluginContext PluginContext { get; set; }
 
+        /// <summary>
+        /// All Host Commands.
+        /// </summary>
         IVstHostCommands20 Commands { get; }
     }
 }

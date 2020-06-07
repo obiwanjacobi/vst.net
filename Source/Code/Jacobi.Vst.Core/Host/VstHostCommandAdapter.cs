@@ -37,9 +37,10 @@ namespace Jacobi.Vst.Core.Host
             return true;
         }
 
+        /// <inheritdoc />
         public IVstHostCommands20 Commands
         {
-            get { return _hostCmdStub.Commands; }
+            get { return _hostCmdStub!.Commands; }
         }
 
         #endregion

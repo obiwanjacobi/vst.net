@@ -4,8 +4,12 @@ using System.Drawing;
 
 namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
+    /// <summary>
+    /// Adds legacy commands implementation.
+    /// </summary>
     public class VstPluginCommandsLegacy : VstPluginCommands
     {
+        /// <inheritdoc />
         public VstPluginCommandsLegacy(VstPluginContext pluginCtx)
             : base(pluginCtx)
         { }

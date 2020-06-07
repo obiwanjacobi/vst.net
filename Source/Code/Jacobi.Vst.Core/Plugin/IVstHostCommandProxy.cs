@@ -14,6 +14,9 @@
         /// <returns>Returns true if the update was successful.</returns>
         bool UpdatePluginInfo(VstPluginInfo pluginInfo);
 
+        /// <summary>
+        /// All Host Commands.
+        /// </summary>
         IVstHostCommands20 Commands { get; }
     }
 }

@@ -12,6 +12,9 @@
         /// </summary>
         IVstPluginContext PluginContext { get; set; }
 
+        /// <summary>
+        /// All Plugin Commands.
+        /// </summary>
         public IVstPluginCommands24 Commands { get; }
     }
 }

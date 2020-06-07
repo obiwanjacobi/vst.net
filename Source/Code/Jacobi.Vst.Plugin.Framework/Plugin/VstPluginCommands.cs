@@ -4,15 +4,26 @@ using System.IO;
 
 namespace Jacobi.Vst.Plugin.Framework.Plugin
 {
+    /// <summary>
+    /// Implements the VST 2.4 commands for the Framework.
+    /// </summary>
     public class VstPluginCommands : IVstPluginCommands24
     {
         private readonly VstPluginContext _pluginCtx;
 
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        /// <param name="pluginCtx">Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="pluginCtx"/> is null.</exception>
         public VstPluginCommands(VstPluginContext pluginCtx)
         {
             _pluginCtx = pluginCtx ?? throw new ArgumentNullException(nameof(pluginCtx));
         }
 
+        /// <summary>
+        /// Allows access to Plugin and Host info for derived classes.
+        /// </summary>
         protected VstPluginContext PluginContext { get { return _pluginCtx; } }
 
         #region IVstPluginCommands24 Members

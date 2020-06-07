@@ -9,6 +9,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     /// Most methods are not implemented. You should override and implement the specific methods you need to support.</remarks>
     public abstract class StdPluginLegacyCommandStub : StdPluginCommandStub
     {
+        /// <inheritdoc />
         protected override IVstPluginCommands24 CreatePluginCommands(VstPluginContext pluginCtx)
         {
             return new VstPluginCommandsLegacy(pluginCtx);

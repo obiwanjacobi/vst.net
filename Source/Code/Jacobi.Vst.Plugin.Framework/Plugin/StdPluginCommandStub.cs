@@ -58,6 +58,7 @@
         /// <remarks>Can be null if the plugin has not deployed a config file.</remarks>
         public IConfiguration? PluginConfiguration { get; set; }
 
+        /// <inheritdoc />
         public IVstPluginCommands24? Commands { get; private set; }
 
         #endregion
@@ -68,6 +69,11 @@
         /// <returns>Returning null will abort loading the plugin.</returns>
         protected abstract IVstPlugin CreatePluginInstance();
 
+        /// <summary>
+        /// Override to create a custom Command implementation.
+        /// </summary>
+        /// <param name="pluginCtx">Plugin and Host info. Is never null.</param>
+        /// <returns>Never returns null.</returns>
         protected virtual IVstPluginCommands24 CreatePluginCommands(VstPluginContext pluginCtx)
         {
             return new VstPluginCommands(pluginCtx);

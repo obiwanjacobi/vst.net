@@ -265,11 +265,15 @@
             The IVstHostCommandStub interface is implemented by the command stub for handling 
             incoming Host commands from the Plugin at the interop assembly.
             </summary>
-            <remarks>The interface derives from <see cref="T:Jacobi.Vst.Core.IVstHostCommands20"/>.</remarks>
         </member>
         <member name="P:Jacobi.Vst.Core.Host.IVstHostCommandStub.PluginContext">
             <summary>
             Gets or sets the plugin context this instance is part of.
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Host.IVstHostCommandStub.Commands">
+            <summary>
+            All Host Commands.
             </summary>
         </member>
         <member name="T:Jacobi.Vst.Core.Host.IVstPluginCommandStub">
@@ -282,6 +286,11 @@
         <member name="P:Jacobi.Vst.Core.Host.IVstPluginCommandStub.PluginContext">
             <summary>
             Gets or sets the plugin context this instance is part of.
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Host.IVstPluginCommandStub.Commands">
+            <summary>
+            All Plugin Commands.
             </summary>
         </member>
         <member name="T:Jacobi.Vst.Core.Host.IVstPluginContext">
@@ -345,7 +354,7 @@
         </member>
         <member name="T:Jacobi.Vst.Core.Host.VstHostCommandAdapter">
             <summary>
-            The VstHostCommandAdapter class implements the Plugin <see cref="T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub"/>
+            The VstHostCommandAdapter class implements the Plugin <see cref="T:Jacobi.Vst.Core.Plugin.IVstHostCommandProxy"/>
             interface and forwards those calls to a <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation
             provided when the adapter class is constructed.
             </summary>
@@ -356,12 +365,6 @@
             </summary>
             <param name="hostCmdStub">Will be used to forward calls to. Must not be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.IsInitialized">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
         <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.UpdatePluginInfo(Jacobi.Vst.Core.Plugin.VstPluginInfo)">
             <summary>
             This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
@@ -369,163 +372,8 @@
             <param name="pluginInfo">Passed with the forwarded call.</param>
             <returns>Returns the value returned from the forwarded call.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetTimeInfo(Jacobi.Vst.Core.VstTimeInfoFlags)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="filterFlags">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.ProcessEvents(Jacobi.Vst.Core.VstEvent[])">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="events">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.IoChanged">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.SizeWindow(System.Int32,System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="width">Passed with the forwarded call.</param>
-            <param name="height">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetSampleRate">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetBlockSize">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetInputLatency">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetOutputLatency">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetProcessLevel">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetAutomationState">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetVendorString">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetProductString">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetVendorVersion">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.CanDo(System.String)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="cando">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetLanguage">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetDirectory">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.UpdateDisplay">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.BeginEdit(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.EndEdit(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.OpenFileSelector(Jacobi.Vst.Core.VstFileSelect)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="fileSelect">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.CloseFileSelector(Jacobi.Vst.Core.VstFileSelect)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.SetParameterAutomated(System.Int32,System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <param name="value">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetVersion">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.GetCurrentPluginID">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.ProcessIdle">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Host.IVstHostCommandStub"/> implementation.
-            </summary>
+        <member name="P:Jacobi.Vst.Core.Host.VstHostCommandAdapter.Commands">
+            <inheritdoc />
         </member>
         <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.Dispose">
             <summary>
@@ -537,13 +385,6 @@
             Called to dispose this object instance.
             </summary>
             <param name="disposing">When true also disposes of managed resources. Otherwise only unmanaged resources are disposed.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstHostCommandAdapter.Create(Jacobi.Vst.Core.Host.IVstHostCommandStub)">
-            <summary>
-            A factory method to create the correct <see cref="T:Jacobi.Vst.Core.Host.VstHostCommandAdapter"/> class type.
-            </summary>
-            <param name="hostCmdStub">A reference to the host command stub. Must not be null.</param>
-            <returns>Returns an instance of <see cref="T:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter"/> when the <paramref name="hostCmdStub"/> supports legacy methods.</returns>
         </member>
         <member name="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter">
             <summary>
@@ -561,409 +402,8 @@
         <member name="P:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.PluginContext">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetProcessPrecision(Jacobi.Vst.Core.VstProcessPrecision)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="precision">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetNumberOfMidiInputChannels">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetNumberOfMidiOutputChannels">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetSpeakerArrangement(Jacobi.Vst.Core.VstSpeakerArrangement@,Jacobi.Vst.Core.VstSpeakerArrangement@)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="input">Passed with the forwarded call and back.</param>
-            <param name="output">Passed with the forwarded call and back.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetNextPlugin(System.String@)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.StartProcess">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.StopProcess">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetPanLaw(Jacobi.Vst.Core.VstPanLaw,System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="type">Passed with the forwarded call.</param>
-            <param name="gain">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.BeginLoadBank(Jacobi.Vst.Core.VstPatchChunkInfo)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="chunkInfo">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.BeginLoadProgram(Jacobi.Vst.Core.VstPatchChunkInfo)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="chunkInfo"></param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EditorKeyDown(System.Byte,Jacobi.Vst.Core.VstVirtualKey,Jacobi.Vst.Core.VstModifierKeys)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="ascii">Passed with the forwarded call.</param>
-            <param name="virtualKey">Passed with the forwarded call.</param>
-            <param name="modifers">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EditorKeyUp(System.Byte,Jacobi.Vst.Core.VstVirtualKey,Jacobi.Vst.Core.VstModifierKeys)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="ascii">Passed with the forwarded call.</param>
-            <param name="virtualKey">Passed with the forwarded call.</param>
-            <param name="modifers">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetEditorKnobMode(Jacobi.Vst.Core.VstKnobMode)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="mode">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetMidiProgramName(Jacobi.Vst.Core.VstMidiProgramName,System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="midiProgramName">Passed with the forwarded call.</param>
-            <param name="channel">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetCurrentMidiProgramName(Jacobi.Vst.Core.VstMidiProgramName,System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="midiProgramName">Passed with the forwarded call.</param>
-            <param name="channel">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetMidiProgramCategory(Jacobi.Vst.Core.VstMidiProgramCategory,System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="midiCat">Passed with the forwarded call.</param>
-            <param name="channel">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.HasMidiProgramsChanged(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="channel">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetMidiKeyName(Jacobi.Vst.Core.VstMidiKeyName,System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="midiKeyName">Passed with the forwarded call.</param>
-            <param name="channel">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.BeginSetProgram">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EndSetProgram">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.ProcessEvents(Jacobi.Vst.Core.VstEvent[])">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="events">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.CanParameterBeAutomated(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.String2Parameter(System.Int32,System.String)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <param name="str">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetProgramNameIndexed(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetInputProperties(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetOutputProperties(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetCategory">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetSpeakerArrangement(Jacobi.Vst.Core.VstSpeakerArrangement,Jacobi.Vst.Core.VstSpeakerArrangement)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="saInput">Passed with the forwarded call.</param>
-            <param name="saOutput">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetBypass(System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="bypass">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetEffectName">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetVendorString">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetProductString">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetVendorVersion">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.CanDo(System.String)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="cando">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetTailSize">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetParameterProperties(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetVstVersion">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.Open">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.Close">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetProgram(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="programNumber">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetProgram">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetProgramName(System.String)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="name">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetProgramName">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetParameterLabel(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetParameterDisplay(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetParameterName(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetSampleRate(System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="sampleRate">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetBlockSize(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="blockSize">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.MainsChanged(System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="onoff">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EditorGetRect(System.Drawing.Rectangle@)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="rect">Passed with the forwarded call and back.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EditorOpen(System.IntPtr)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="hWnd">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EditorClose">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.EditorIdle">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetChunk(System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="isPreset">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetChunk(System.Byte[],System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="data">Passed with the forwarded call.</param>
-            <param name="isPreset">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.ProcessReplacing(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="inputs">Passed with the forwarded call.</param>
-            <param name="outputs">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.ProcessReplacing(Jacobi.Vst.Core.VstAudioPrecisionBuffer[],Jacobi.Vst.Core.VstAudioPrecisionBuffer[])">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="inputs">Passed with the forwarded call.</param>
-            <param name="outputs">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.SetParameter(System.Int32,System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <param name="value">Passed with the forwarded call.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.GetParameter(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> implementation.
-            </summary>
-            <param name="index">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.Create(Jacobi.Vst.Core.Plugin.IVstPluginCommandStub)">
-            <summary>
-            A factory method to create the correct <see cref="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter"/> class type.
-            </summary>
-            <param name="pluginCmdStub">A reference to the plugin command stub. Must not be null.</param>
-            <returns>Returns an instance of <see cref="T:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter"/> when the <paramref name="pluginCmdStub"/> supports legacy methods.</returns>
+        <member name="P:Jacobi.Vst.Core.Host.VstPluginCommandAdapter.Commands">
+            <inheritdoc />
         </member>
         <member name="T:Jacobi.Vst.Core.IDirectBufferAccess32">
             <summary>
@@ -1887,269 +1327,6 @@
             <param name="deltaFrames">The start of this event in the number of delta frames from the current cycle.</param>
             <param name="data">The associated data for this event.</param>
         </member>
-        <member name="T:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter">
-            <summary>
-            This class implements an extension to the <see cref="T:Jacobi.Vst.Core.Host.VstHostCommandAdapter"/> to include all legacy Host members.
-            </summary>
-            <remarks>
-            Only instantiate this class when you have a reference to an implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> interface.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.#ctor(Jacobi.Vst.Core.Host.IVstHostCommandStub)">
-            <summary>
-            Constructs a new adapter instance on the passed <paramref name="hostCmdStub"/>.
-            </summary>
-            <param name="hostCmdStub">An implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> interface. Must not be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.WantMidi">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.SetTime(Jacobi.Vst.Core.VstTimeInfo,Jacobi.Vst.Core.VstTimeInfoFlags)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="filterFlags">Passed with the forwarded call.</param>
-            <param name="timeInfo">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetTempoAt(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="sampleIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetAutomatableParameterCount">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetParameterQuantization(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="parameterIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.NeedIdle">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetPreviousPlugin(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="pinIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetNextPlugin(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="pinIndex">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.WillReplaceOrAccumulate">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.SetOutputSampleRate(System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="sampleRate">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetOutputSpeakerArrangement">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.SetIcon(System.IntPtr)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="icon">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.OpenWindow">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.CloseWindow(System.IntPtr)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="wnd">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.EditFile(System.String)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="xml">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetChunkFile">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.GetInputSpeakerArrangement">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.PinConnected(System.Int32,System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstHostCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="connectionIndex">Passed with the forwarded call.</param>
-            <param name="output">Passed with the forwarded call.</param>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstHostCommandLegacyAdapter.Dispose(System.Boolean)">
-            <summary>
-            Called to dispose of this instance.
-            </summary>
-            <param name="disposing">When true also dispose of managed resources. Otherwise only dispose of unmanaged resources.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter">
-            <summary>
-            This class implements an extension to the <see cref="T:Jacobi.Vst.Core.Host.VstPluginCommandAdapter"/> to include all legacy Host members.
-            </summary>
-            <remarks>
-            Only instantiate this class when you have a reference to an implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> interface.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.#ctor(Jacobi.Vst.Core.Plugin.IVstPluginCommandStub)">
-            <summary>
-            Constructs a new instance on the passed <paramref name="pluginCmdStub"/>.
-            </summary>
-            <param name="pluginCmdStub">An implementation of the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> interface. Must not be null.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetProgramCategoriesCount">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.CopyCurrentProgramTo(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.ConnectInput(System.Int32,System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.ConnectOutput(System.Int32,System.Boolean)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetCurrentPosition">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetDestinationBuffer">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetErrorText">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.Idle">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetIcon">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.SetViewPosition(System.Drawing.Point@)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.KeysRequired">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.GetVu">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.EditorKey(System.Int32)">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.EditorTop">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.EditorSleep">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.Identify">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <returns>Returns the value returned from the forwarded call.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Legacy.VstPluginCommandLegacyAdapter.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
-            <summary>
-            This call is forwarded to the <see cref="T:Jacobi.Vst.Core.Legacy.IVstPluginCommandsLegacy20"/> implementation.
-            </summary>
-            <param name="inputs">Passed with the forwarded call.</param>
-            <param name="outputs">Passed with the forwarded call.</param>
-        </member>
         <member name="T:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo">
             <summary>
             Plugin legacy information passed to the Host.
@@ -2223,34 +1400,33 @@
             <param name="extension">The extensions to check for. Must not be null or empty.</param>
             <returns>Returns null if no suitable assembly file was found.</returns>
         </member>
-        <member name="T:Jacobi.Vst.Core.Plugin.IVstHostCommandStub">
+        <member name="T:Jacobi.Vst.Core.Plugin.IVstHostCommandProxy">
             <summary>
             The Vst Host Stub called by the Plugin (Framework).
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.IVstHostCommandStub.IsInitialized">
-            <summary>
-            Indicates if the host stub is fully initialized and is ready to receive commands.
-            </summary>
-            <returns>Returns true when initialized.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.IVstHostCommandStub.UpdatePluginInfo(Jacobi.Vst.Core.Plugin.VstPluginInfo)">
+        <member name="M:Jacobi.Vst.Core.Plugin.IVstHostCommandProxy.UpdatePluginInfo(Jacobi.Vst.Core.Plugin.VstPluginInfo)">
             <summary>
             Updates the new <paramref name="pluginInfo"/> with the host.
             </summary>
             <param name="pluginInfo">Must not be null.</param>
             <returns>Returns true if the update was successful.</returns>
         </member>
+        <member name="P:Jacobi.Vst.Core.Plugin.IVstHostCommandProxy.Commands">
+            <summary>
+            All Host Commands.
+            </summary>
+        </member>
         <member name="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub">
             <summary>
             The Plugin Command Stub called by the Interop.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub.GetPluginInfo(Jacobi.Vst.Core.Plugin.IVstHostCommandStub)">
+        <member name="M:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub.GetPluginInfo(Jacobi.Vst.Core.Plugin.IVstHostCommandProxy)">
             <summary>
             Retrieves the plugin info to pass onto the host.
             </summary>
-            <param name="hostCmdStub">A reference to the host command stub the plugin can use to call the host. Must not be null.</param>
+            <param name="hostCmdProxy">A reference to the host command proxy the plugin can use to call the host. Must not be null.</param>
             <returns>Returns an instance with the plugin info filled in. 
             If null is returned the plugin load sequence is aborted.</returns>
         </member>
@@ -2259,6 +1435,11 @@
             Gets or sets the custom plugin specific configuration object.
             </summary>
             <remarks>Can be null if the plugin has not deployed a config file.</remarks>
+        </member>
+        <member name="P:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub.Commands">
+            <summary>
+            If null, the object is unitialized or disposed.
+            </summary>
         </member>
         <member name="T:Jacobi.Vst.Core.Plugin.ManagedPluginFactory">
             <summary>

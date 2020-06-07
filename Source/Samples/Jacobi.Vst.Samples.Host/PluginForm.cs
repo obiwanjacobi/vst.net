@@ -28,12 +28,12 @@ namespace Jacobi.Vst.Samples.Host
             PluginPropertyListVw.Items.Clear();
 
             // plugin product
-            AddProperty("Plugin Name", PluginContext.PluginCommandStub.GetEffectName());
-            AddProperty("Product", PluginContext.PluginCommandStub.GetProductString());
-            AddProperty("Vendor", PluginContext.PluginCommandStub.GetVendorString());
-            AddProperty("Vendor Version", PluginContext.PluginCommandStub.GetVendorVersion().ToString());
-            AddProperty("Vst Support", PluginContext.PluginCommandStub.GetVstVersion().ToString());
-            AddProperty("Plugin Category", PluginContext.PluginCommandStub.GetCategory().ToString());
+            AddProperty("Plugin Name", PluginContext.PluginCommandStub.Commands.GetEffectName());
+            AddProperty("Product", PluginContext.PluginCommandStub.Commands.GetProductString());
+            AddProperty("Vendor", PluginContext.PluginCommandStub.Commands.GetVendorString());
+            AddProperty("Vendor Version", PluginContext.PluginCommandStub.Commands.GetVendorVersion().ToString());
+            AddProperty("Vst Support", PluginContext.PluginCommandStub.Commands.GetVstVersion().ToString());
+            AddProperty("Plugin Category", PluginContext.PluginCommandStub.Commands.GetCategory().ToString());
 
             // plugin info
             AddProperty("Flags", PluginContext.PluginInfo.Flags.ToString());
@@ -44,36 +44,36 @@ namespace Jacobi.Vst.Samples.Host
             AddProperty("Initial Delay", PluginContext.PluginInfo.InitialDelay.ToString());
             AddProperty("Program Count", PluginContext.PluginInfo.ProgramCount.ToString());
             AddProperty("Parameter Count", PluginContext.PluginInfo.ParameterCount.ToString());
-            AddProperty("Tail Size", PluginContext.PluginCommandStub.GetTailSize().ToString());
+            AddProperty("Tail Size", PluginContext.PluginCommandStub.Commands.GetTailSize().ToString());
 
             // can do
-            AddProperty("CanDo:" + VstPluginCanDo.Bypass, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Bypass)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.MidiProgramNames, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.MidiProgramNames)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.Offline, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Offline)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.ReceiveVstEvents, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstEvents)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.ReceiveVstMidiEvent, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstMidiEvent)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.ReceiveVstTimeInfo, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstTimeInfo)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.SendVstEvents, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.SendVstEvents)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.SendVstMidiEvent, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.SendVstMidiEvent)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.Bypass, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Bypass)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.MidiProgramNames, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.MidiProgramNames)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.Offline, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Offline)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.ReceiveVstEvents, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstEvents)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.ReceiveVstMidiEvent, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstMidiEvent)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.ReceiveVstTimeInfo, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstTimeInfo)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.SendVstEvents, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.SendVstEvents)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.SendVstMidiEvent, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.SendVstMidiEvent)).ToString());
 
-            AddProperty("CanDo:" + VstPluginCanDo.ConformsToWindowRules, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ConformsToWindowRules)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.Metapass, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Metapass)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.MixDryWet, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.MixDryWet)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.Multipass, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Multipass)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.NoRealTime, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.NoRealTime)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.PlugAsChannelInsert, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.PlugAsChannelInsert)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.PlugAsSend, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.PlugAsSend)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.SendVstTimeInfo, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.SendVstTimeInfo)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x1in1out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x1in1out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x1in2out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x1in2out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x2in1out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x2in1out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x2in2out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x2in2out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x2in4out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x2in4out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x4in2out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x4in2out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x4in4out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x4in4out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x4in8out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x4in8out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x8in4out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x8in4out)).ToString());
-            AddProperty("CanDo:" + VstPluginCanDo.x8in8out, PluginContext.PluginCommandStub.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x8in8out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.ConformsToWindowRules, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.ConformsToWindowRules)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.Metapass, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Metapass)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.MixDryWet, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.MixDryWet)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.Multipass, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.Multipass)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.NoRealTime, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.NoRealTime)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.PlugAsChannelInsert, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.PlugAsChannelInsert)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.PlugAsSend, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.PlugAsSend)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.SendVstTimeInfo, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.SendVstTimeInfo)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x1in1out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x1in1out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x1in2out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x1in2out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x2in1out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x2in1out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x2in2out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x2in2out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x2in4out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x2in4out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x4in2out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x4in2out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x4in4out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x4in4out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x4in8out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x4in8out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x8in4out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x8in4out)).ToString());
+            AddProperty("CanDo:" + VstPluginCanDo.x8in8out, PluginContext.PluginCommandStub.Commands.CanDo(VstCanDoHelper.ToString(VstPluginCanDo.x8in8out)).ToString());
         }
 
         private void AddProperty(string propName, string propValue)
@@ -91,14 +91,14 @@ namespace Jacobi.Vst.Samples.Host
             for (int index = 0; index < PluginContext.PluginInfo.ProgramCount; index++)
             {
                 ProgramListCmb.Items.Add(
-                    PluginContext.PluginCommandStub.GetProgramNameIndexed(index));
+                    PluginContext.PluginCommandStub.Commands.GetProgramNameIndexed(index));
             }
         }
 
         private void FillProgram()
         {
-            ProgramIndexNud.Value = PluginContext.PluginCommandStub.GetProgram();
-            ProgramListCmb.Text = PluginContext.PluginCommandStub.GetProgramName();
+            ProgramIndexNud.Value = PluginContext.PluginCommandStub.Commands.GetProgram();
+            ProgramListCmb.Text = PluginContext.PluginCommandStub.Commands.GetProgramName();
         }
 
         private void FillParameterList()
@@ -107,9 +107,9 @@ namespace Jacobi.Vst.Samples.Host
 
             for (int i = 0; i < PluginContext.PluginInfo.ParameterCount; i++)
             {
-                string name = PluginContext.PluginCommandStub.GetParameterName(i);
-                string label = PluginContext.PluginCommandStub.GetParameterLabel(i);
-                string display = PluginContext.PluginCommandStub.GetParameterDisplay(i);
+                string name = PluginContext.PluginCommandStub.Commands.GetParameterName(i);
+                string label = PluginContext.PluginCommandStub.Commands.GetParameterLabel(i);
+                string display = PluginContext.PluginCommandStub.Commands.GetParameterDisplay(i);
 
                 AddParameter(name, display, label, String.Empty);
             }
@@ -142,7 +142,7 @@ namespace Jacobi.Vst.Samples.Host
             if (ProgramIndexNud.Value < PluginContext.PluginInfo.ProgramCount &&
                 ProgramIndexNud.Value >= 0)
             {
-                PluginContext.PluginCommandStub.SetProgram((int)ProgramIndexNud.Value);
+                PluginContext.PluginCommandStub.Commands.SetProgram((int)ProgramIndexNud.Value);
 
                 FillProgram();
                 FillParameterList();
@@ -177,17 +177,17 @@ namespace Jacobi.Vst.Samples.Host
                 }
             }
 
-            PluginContext.PluginCommandStub.SetBlockSize(blockSize);
-            PluginContext.PluginCommandStub.SetSampleRate(44100f);
+            PluginContext.PluginCommandStub.Commands.SetBlockSize(blockSize);
+            PluginContext.PluginCommandStub.Commands.SetSampleRate(44100f);
 
             VstAudioBuffer[] inputBuffers = inputMgr.Buffers.ToArray();
             VstAudioBuffer[] outputBuffers = outputMgr.Buffers.ToArray();
 
-            PluginContext.PluginCommandStub.MainsChanged(true);
-            PluginContext.PluginCommandStub.StartProcess();
-            PluginContext.PluginCommandStub.ProcessReplacing(inputBuffers, outputBuffers);
-            PluginContext.PluginCommandStub.StopProcess();
-            PluginContext.PluginCommandStub.MainsChanged(false);
+            PluginContext.PluginCommandStub.Commands.MainsChanged(true);
+            PluginContext.PluginCommandStub.Commands.StartProcess();
+            PluginContext.PluginCommandStub.Commands.ProcessReplacing(inputBuffers, outputBuffers);
+            PluginContext.PluginCommandStub.Commands.StopProcess();
+            PluginContext.PluginCommandStub.Commands.MainsChanged(false);
 
             for (int i = 0; i < inputBuffers.Length && i < outputBuffers.Length; i++)
             {
@@ -209,12 +209,14 @@ namespace Jacobi.Vst.Samples.Host
 
         private void EditorBtn_Click(object sender, EventArgs e)
         {
-            EditorFrame dlg = new EditorFrame();
-            dlg.PluginCommandStub = PluginContext.PluginCommandStub;
+            EditorFrame dlg = new EditorFrame
+            {
+                PluginCommandStub = PluginContext.PluginCommandStub
+            };
 
-            PluginContext.PluginCommandStub.MainsChanged(true);
+            PluginContext.PluginCommandStub.Commands.MainsChanged(true);
             dlg.ShowDialog(this);
-            PluginContext.PluginCommandStub.MainsChanged(false);
+            PluginContext.PluginCommandStub.Commands.MainsChanged(false);
         }
 
     }

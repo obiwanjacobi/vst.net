@@ -27,9 +27,10 @@
         /// <inheritdoc />
         public IVstPluginContext PluginContext { get; set; }
 
+        /// <inheritdoc />
         public IVstPluginCommands24 Commands
         {
-            get { return _pluginCmdStub.Commands; }
+            get { return _pluginCmdStub!.Commands!; }
         }
 
         #endregion
