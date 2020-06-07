@@ -228,6 +228,7 @@
     <ClInclude Include="Host\VstAudioPrecisionBufferManager.h" />
     <ClInclude Include="Host\VstHostCommandProxy.h" />
     <ClInclude Include="Host\VstManagedPluginContext.h" />
+    <ClInclude Include="Host\VstPluginCommandsImpl.h" />
     <ClInclude Include="Host\VstPluginCommandStub.h" />
     <ClInclude Include="Host\VstPluginContext.h" />
     <ClInclude Include="Host\VstUnmanagedPluginContext.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="Host\VstAudioPrecisionBufferManager.cpp" />
     <ClCompile Include="Host\VstHostCommandProxy.cpp" />
     <ClCompile Include="Host\VstManagedPluginContext.cpp" />
+    <ClCompile Include="Host\VstPluginCommandsImpl.cpp" />
     <ClCompile Include="Host\VstPluginCommandStub.cpp" />
     <ClCompile Include="Host\VstPluginContext.cpp" />
     <ClCompile Include="Host\VstUnmanagedPluginContext.cpp" />

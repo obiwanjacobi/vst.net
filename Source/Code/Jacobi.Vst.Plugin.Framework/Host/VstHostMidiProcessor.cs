@@ -42,7 +42,7 @@
         {
             Throw.IfArgumentIsNull(events, nameof(events));
 
-            _host.HostCommandStub.ProcessEvents(events.ToArray());
+            _host.HostCommandProxy.Commands.ProcessEvents(events.ToArray());
         }
 
         #endregion

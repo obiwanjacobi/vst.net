@@ -55,57 +55,57 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			switch(command)
 			{
 			case Vst2PluginCommands::Open:
-				_commandStub->Open();
+				_commandStub->Commands->Open();
 				break;
 			case Vst2PluginCommands::Close:
-				_commandStub->Close();
+				_commandStub->Commands->Close();
 				// call Dispose() on this instance
 				delete this;
 				break;
 			case Vst2PluginCommands::ProgramSet:
-				_commandStub->SetProgram(safe_cast<System::Int32>(value));
+				_commandStub->Commands->SetProgram(safe_cast<System::Int32>(value));
 				result = 1;
 				break;
 			case Vst2PluginCommands::ProgramGet:
-				result = _commandStub->GetProgram();
+				result = _commandStub->Commands->GetProgram();
 				break;
 			case Vst2PluginCommands::ProgramSetName:
-				_commandStub->SetProgramName(TypeConverter::CharToString((char*)ptr));
+				_commandStub->Commands->SetProgramName(TypeConverter::CharToString((char*)ptr));
 				result = 1;
 				break;
 			case Vst2PluginCommands::ProgramGetName:
-				TypeConverter::StringToChar(_commandStub->GetProgramName(), (char*)ptr, Vst2MaxProgNameLen);
+				TypeConverter::StringToChar(_commandStub->Commands->GetProgramName(), (char*)ptr, Vst2MaxProgNameLen);
 				result = 1;
 				break;
 			case Vst2PluginCommands::ParameterGetLabel:
-				TypeConverter::StringToChar(_commandStub->GetParameterLabel(index), (char*)ptr, Vst2MaxParamStrLen);
+				TypeConverter::StringToChar(_commandStub->Commands->GetParameterLabel(index), (char*)ptr, Vst2MaxParamStrLen);
 				result = 1;
 				break;
 			case Vst2PluginCommands::ParameterGetDisplay:
-				TypeConverter::StringToChar(_commandStub->GetParameterDisplay(index), (char*)ptr, Vst2MaxParamStrLen);
+				TypeConverter::StringToChar(_commandStub->Commands->GetParameterDisplay(index), (char*)ptr, Vst2MaxParamStrLen);
 				result = 1;
 				break;
 			case Vst2PluginCommands::ParameterGetName:
-				TypeConverter::StringToChar(_commandStub->GetParameterName(index), (char*)ptr, Vst2MaxParamStrLen);
+				TypeConverter::StringToChar(_commandStub->Commands->GetParameterName(index), (char*)ptr, Vst2MaxParamStrLen);
 				result = 1;
 				break;
 			case Vst2PluginCommands::SampleRateSet:
-				_commandStub->SetSampleRate(opt);
+				_commandStub->Commands->SetSampleRate(opt);
 				result = 1;
 				break;
 			case Vst2PluginCommands::BlockSizeSet:
-				_commandStub->SetBlockSize(safe_cast<System::Int32>(value));
+				_commandStub->Commands->SetBlockSize(safe_cast<System::Int32>(value));
 				result = 1;
 				break;
 			case Vst2PluginCommands::OnOff:
 				_memTracker->ClearAll(); // safe to delete allocated memory during suspend/resume
-				_commandStub->MainsChanged(value != 0);
+				_commandStub->Commands->MainsChanged(value != 0);
 				result = 1;
 				break;
 			case Vst2PluginCommands::EditorGetRectangle:
 			{
 				System::Drawing::Rectangle rect;
-				if (_commandStub->EditorGetRect(rect))
+				if (_commandStub->Commands->EditorGetRect(rect))
 				{
 					TypeConverter::ToUnmanagedRectangle(_pEditorRect, rect);
 					*((Vst2Rectangle**)ptr) = _pEditorRect;
@@ -113,19 +113,19 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				}
 			}	break;
 			case Vst2PluginCommands::EditorOpen:
-				result = _commandStub->EditorOpen(System::IntPtr(ptr));
+				result = _commandStub->Commands->EditorOpen(System::IntPtr(ptr));
 				break;
 			case Vst2PluginCommands::EditorClose:
-				_commandStub->EditorClose();
+				_commandStub->Commands->EditorClose();
 				result = 1;
 				break;
 			case Vst2PluginCommands::EditorIdle:
-				_commandStub->EditorIdle();
+				_commandStub->Commands->EditorIdle();
 				result = 1;
 				break;
 			case Vst2PluginCommands::ChunkGet:
 			{
-				array<System::Byte>^ buffer = _commandStub->GetChunk(index != 0);
+				array<System::Byte>^ buffer = _commandStub->Commands->GetChunk(index != 0);
 				if(buffer != nullptr)
 				{
 					*(void**)ptr = TypeConverter::ByteArrayToPtr(buffer);
@@ -138,20 +138,20 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			case Vst2PluginCommands::ChunkSet:
 			{
 				array<System::Byte>^ buffer = TypeConverter::PtrToByteArray((char*)ptr, safe_cast<System::Int32>(value));
-				result = _commandStub->SetChunk(buffer, index != 0) ? 1 : 0;
+				result = _commandStub->Commands->SetChunk(buffer, index != 0) ? 1 : 0;
 			}	break;
 			case Vst2PluginCommands::ProcessEvents:
-				result = _commandStub->ProcessEvents(TypeConverter::ToManagedEventArray((Vst2Events*)ptr)) ? 1 : 0;
+				result = _commandStub->Commands->ProcessEvents(TypeConverter::ToManagedEventArray((Vst2Events*)ptr)) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::ParameterCanBeAutomated:
-				result = _commandStub->CanParameterBeAutomated(index) ? 1 : 0;
+				result = _commandStub->Commands->CanParameterBeAutomated(index) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::ParameterFromString:
-				result = _commandStub->String2Parameter(index, TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
+				result = _commandStub->Commands->String2Parameter(index, TypeConverter::CharToString((char*)ptr)) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::ProgramGetNameByIndex:
 			{
-				System::String^ name = _commandStub->GetProgramNameIndexed(index);
+				System::String^ name = _commandStub->Commands->GetProgramNameIndexed(index);
 				if(name != nullptr)
 				{
 					TypeConverter::StringToChar(name, (char*)ptr, Vst2MaxProgNameLen);
@@ -160,7 +160,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			}	break;
 			case Vst2PluginCommands::GetInputProperties:
 			{
-				Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->GetInputProperties(index);
+				Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->Commands->GetInputProperties(index);
 				if(pinProps != nullptr)
 				{
 					TypeConverter::ToUnmanagedPinProperties((::Vst2PinProperties*)ptr, pinProps);
@@ -169,7 +169,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			}	break;
 			case Vst2PluginCommands::GetOutputProperties:
 			{
-				Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->GetOutputProperties(index);
+				Jacobi::Vst::Core::VstPinProperties^ pinProps = _commandStub->Commands->GetOutputProperties(index);
 				if(pinProps != nullptr)
 				{
 					TypeConverter::ToUnmanagedPinProperties((::Vst2PinProperties*)ptr, pinProps);
@@ -177,18 +177,18 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				}
 			}	break;
 			case Vst2PluginCommands::PluginGetCategory:
-				result = safe_cast<int32_t>(_commandStub->GetCategory());
+				result = safe_cast<int32_t>(_commandStub->Commands->GetCategory());
 				break;
 			case Vst2PluginCommands::SetSpeakerArrangement:
-				result = _commandStub->SetSpeakerArrangement(TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)value),
+				result = _commandStub->Commands->SetSpeakerArrangement(TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)value),
 					TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)ptr));
 				break;
 			case Vst2PluginCommands::SetBypass:
-				result = _commandStub->SetBypass(value != 0) ? 1 : 0;
+				result = _commandStub->Commands->SetBypass(value != 0) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::PluginGetName:
 			{
-				System::String^ name = _commandStub->GetEffectName();
+				System::String^ name = _commandStub->Commands->GetEffectName();
 				if(name != nullptr)
 				{
 					TypeConverter::StringToChar(name, (char*)ptr, Vst2MaxEffectNameLen);
@@ -197,7 +197,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			}	break;
 			case Vst2PluginCommands::VendorGetString:
 			{
-				System::String^ str = _commandStub->GetVendorString();
+				System::String^ str = _commandStub->Commands->GetVendorString();
 				if(str != nullptr)
 				{
 					TypeConverter::StringToChar(str, (char*)ptr, Vst2MaxVendorStrLen);
@@ -206,7 +206,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			}	break;
 			case Vst2PluginCommands::ProductGetString:
 			{
-				System::String^ str = _commandStub->GetProductString();
+				System::String^ str = _commandStub->Commands->GetProductString();
 				if(str != nullptr)
 				{
 					TypeConverter::StringToChar(str, (char*)ptr, Vst2MaxProductStrLen);
@@ -214,17 +214,17 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				}
 			}	break;
 			case Vst2PluginCommands::VendorGetVersion:
-				result = _commandStub->GetVendorVersion();
+				result = _commandStub->Commands->GetVendorVersion();
 				break;
 			case Vst2PluginCommands::CanDo:
-				result = safe_cast<int32_t>(_commandStub->CanDo(TypeConverter::CharToString((char*)ptr)));
+				result = safe_cast<int32_t>(_commandStub->Commands->CanDo(TypeConverter::CharToString((char*)ptr)));
 				break;
 			case Vst2PluginCommands::GetTailSizeInSamples:
-				result = _commandStub->GetTailSize();
+				result = _commandStub->Commands->GetTailSize();
 				break;
 			case Vst2PluginCommands::ParameterGetProperties:
 			{
-				Jacobi::Vst::Core::VstParameterProperties^ paramProps = _commandStub->GetParameterProperties(index);
+				Jacobi::Vst::Core::VstParameterProperties^ paramProps = _commandStub->Commands->GetParameterProperties(index);
 				if(paramProps != nullptr)
 				{
 					TypeConverter::ToUnmanagedParameterProperties((::Vst2ParameterProperties*)ptr, paramProps);
@@ -232,34 +232,34 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				}
 			}	break;
 			case Vst2PluginCommands::GetVstVersion:
-				result = _commandStub->GetVstVersion();
+				result = _commandStub->Commands->GetVstVersion();
 				break;
 			case Vst2PluginCommands::EditorKeyDown:
-				result = _commandStub->EditorKeyDown(safe_cast<System::Byte>(index), 
+				result = _commandStub->Commands->EditorKeyDown(safe_cast<System::Byte>(index), 
 					safe_cast<Jacobi::Vst::Core::VstVirtualKey>(value), 
 					safe_cast<Jacobi::Vst::Core::VstModifierKeys>((int32_t)opt)) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::EditorKeyUp:
-				result = _commandStub->EditorKeyUp(safe_cast<System::Byte>(index), 
+				result = _commandStub->Commands->EditorKeyUp(safe_cast<System::Byte>(index), 
 					safe_cast<Jacobi::Vst::Core::VstVirtualKey>(value), 
 					safe_cast<Jacobi::Vst::Core::VstModifierKeys>((int32_t)opt)) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::SetKnobMode:
-				result = _commandStub->SetEditorKnobMode(safe_cast<Jacobi::Vst::Core::VstKnobMode>(value)) ? 1 : 0;
+				result = _commandStub->Commands->SetEditorKnobMode(safe_cast<Jacobi::Vst::Core::VstKnobMode>(value)) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::MidiProgramGetName:
 			{
 				::Vst2MidiProgramName* pProgName = (::Vst2MidiProgramName*)ptr;
 				Jacobi::Vst::Core::VstMidiProgramName^ progName = gcnew Jacobi::Vst::Core::VstMidiProgramName();
 				progName->CurrentProgramIndex = pProgName->thisProgramIndex;
-				result = _commandStub->GetMidiProgramName(progName, index);
+				result = _commandStub->Commands->GetMidiProgramName(progName, index);
 				TypeConverter::ToUnmanagedMidiProgramName(pProgName, progName);
 			}	break;
 			case Vst2PluginCommands::MidiProgramGetCurrent:
 			{
 				::Vst2MidiProgramName* pProgName = (::Vst2MidiProgramName*)ptr;
 				Jacobi::Vst::Core::VstMidiProgramName^ progName = gcnew Jacobi::Vst::Core::VstMidiProgramName();
-				result = _commandStub->GetCurrentMidiProgramName(progName, index);
+				result = _commandStub->Commands->GetCurrentMidiProgramName(progName, index);
 				TypeConverter::ToUnmanagedMidiProgramName(pProgName, progName);
 			}	break;
 			case Vst2PluginCommands::MidiProgramGetCategory:
@@ -267,11 +267,11 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				::Vst2MidiProgramCategory* pProgCat = (::Vst2MidiProgramCategory*)ptr;
 				Jacobi::Vst::Core::VstMidiProgramCategory^ progCat = gcnew Jacobi::Vst::Core::VstMidiProgramCategory();
 				progCat->CurrentCategoryIndex = pProgCat->thisCategoryIndex;
-				result = _commandStub->GetMidiProgramCategory(progCat, index);
+				result = _commandStub->Commands->GetMidiProgramCategory(progCat, index);
 				TypeConverter::ToUnmanagedMidiProgramCategory(pProgCat, progCat);
 			}	break;
 			case Vst2PluginCommands::MidiProgramsChanged:
-				result = _commandStub->HasMidiProgramsChanged(index) ? 1 : 0;
+				result = _commandStub->Commands->HasMidiProgramsChanged(index) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::MidiKeyGetName:
 			{
@@ -279,14 +279,14 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				Jacobi::Vst::Core::VstMidiKeyName^ midiKeyName = gcnew Jacobi::Vst::Core::VstMidiKeyName();
 				midiKeyName->CurrentProgramIndex = pKeyName->thisProgramIndex;
 				midiKeyName->CurrentKeyNumber = pKeyName->thisKeyNumber;
-				result = _commandStub->GetMidiKeyName(midiKeyName, index);
+				result = _commandStub->Commands->GetMidiKeyName(midiKeyName, index);
 				TypeConverter::StringToChar(midiKeyName->Name, pKeyName->keyName, Vst2MaxNameLen);
 			}	break;
 			case Vst2PluginCommands::BeginSetProgram:
-				result = _commandStub->BeginSetProgram() ? 1 : 0;
+				result = _commandStub->Commands->BeginSetProgram() ? 1 : 0;
 				break;
 			case Vst2PluginCommands::EndSetProgram:
-				result = _commandStub->EndSetProgram() ? 1 : 0;
+				result = _commandStub->Commands->EndSetProgram() ? 1 : 0;
 				break;
 			case Vst2PluginCommands::GetSpeakerArrangement:
 			{
@@ -298,7 +298,7 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 				Jacobi::Vst::Core::VstSpeakerArrangement^ inputArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
 				Jacobi::Vst::Core::VstSpeakerArrangement^ outputArr = gcnew Jacobi::Vst::Core::VstSpeakerArrangement();
 				// let plugin fill the input and output speaker arrangements
-				result = _commandStub->GetSpeakerArrangement(inputArr, outputArr) ? 1 : 0;
+				result = _commandStub->Commands->GetSpeakerArrangement(inputArr, outputArr) ? 1 : 0;
 				if(result)
 				{
 					// NOTE: register retvals with the memory tracker to be deleted later.
@@ -312,36 +312,36 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntPt
 			//case Vst2PluginCommands::ShellGetNextPlugin:
 				/*{
 				System::String^ str;
-				result = _commandStub->GetNextPlugin(str);
+				result = _commandStub->Commands->GetNextPlugin(str);
 				TypeConverter::StringToChar(str, (char*)ptr, Vst2MaxProductStrLen);
 				}*/
 				//break;
 			case Vst2PluginCommands::ProcessStart:
-				result = _commandStub->StartProcess();
+				result = _commandStub->Commands->StartProcess();
 				break;
 			case Vst2PluginCommands::ProcessStop:
-				result = _commandStub->StopProcess();
+				result = _commandStub->Commands->StopProcess();
 				break;
 			//case Vst2PluginCommands::SetTotalSampleToProcess:
-				//result = _commandStub->SetTotalSamplesToProcess(value);
+				//result = _commandStub->Commands->SetTotalSamplesToProcess(value);
 				//break;
 			case Vst2PluginCommands::SetPanLaw:
-				result = _commandStub->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;
+				result = _commandStub->Commands->SetPanLaw(safe_cast<Jacobi::Vst::Core::VstPanLaw>(value), opt) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::BeginLoadBank:
-				result = safe_cast<int32_t>(_commandStub->BeginLoadBank(TypeConverter::ToManagedPatchChunkInfo((::Vst2PatchChunkInfo*)ptr)));
+				result = safe_cast<int32_t>(_commandStub->Commands->BeginLoadBank(TypeConverter::ToManagedPatchChunkInfo((::Vst2PatchChunkInfo*)ptr)));
 				break;
 			case Vst2PluginCommands::BeginLoadProgram:
-				result = safe_cast<int32_t>(_commandStub->BeginLoadProgram(TypeConverter::ToManagedPatchChunkInfo((::Vst2PatchChunkInfo*)ptr)));
+				result = safe_cast<int32_t>(_commandStub->Commands->BeginLoadProgram(TypeConverter::ToManagedPatchChunkInfo((::Vst2PatchChunkInfo*)ptr)));
 				break;
 			case Vst2PluginCommands::SetProcessPrecision:
-				result = _commandStub->SetProcessPrecision(safe_cast<Jacobi::Vst::Core::VstProcessPrecision>(value)) ? 1 : 0;
+				result = _commandStub->Commands->SetProcessPrecision(safe_cast<Jacobi::Vst::Core::VstProcessPrecision>(value)) ? 1 : 0;
 				break;
 			case Vst2PluginCommands::MidiGetInputChannelCount:
-				result = _commandStub->GetNumberOfMidiInputChannels();
+				result = _commandStub->Commands->GetNumberOfMidiInputChannels();
 				break;
 			case Vst2PluginCommands::MidiGetOutputChannelCount:
-				result = _commandStub->GetNumberOfMidiOutputChannels();
+				result = _commandStub->Commands->GetNumberOfMidiOutputChannels();
 				break;
 			default:
 				result = DispatchLegacy(command, index, value, ptr, opt);
@@ -482,7 +482,7 @@ void PluginCommandProxy::Process(float** inputs, float** outputs, int32_t sample
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
 		array<Jacobi::Vst::Core::VstAudioBuffer^>^ outputBuffers = TypeConverter::ToManagedAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
-		_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
+		_commandStub->Commands->ProcessReplacing(inputBuffers, outputBuffers);
 	}
 	catch(System::Exception^ e)
 	{
@@ -503,7 +503,7 @@ void PluginCommandProxy::Process(double** inputs, double** outputs, int32_t samp
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ inputBuffers = TypeConverter::ToManagedAudioBufferArray(inputs, sampleFrames, numInputs, false);
 		array<Jacobi::Vst::Core::VstAudioPrecisionBuffer^>^ outputBuffers = TypeConverter::ToManagedAudioBufferArray(outputs, sampleFrames, numOutputs, true);
 
-		_commandStub->ProcessReplacing(inputBuffers, outputBuffers);
+		_commandStub->Commands->ProcessReplacing(inputBuffers, outputBuffers);
 	}
 	catch(System::Exception^ e)
 	{
@@ -521,7 +521,7 @@ void PluginCommandProxy::SetParameter(int32_t index, float value)
 
 	try
 	{
-		_commandStub->SetParameter(index, value);
+		_commandStub->Commands->SetParameter(index, value);
 	}
 	catch(System::Exception^ e)
 	{
@@ -539,7 +539,7 @@ float PluginCommandProxy::GetParameter(int32_t index)
 
 	try
 	{
-		float value = _commandStub->GetParameter(index);
+		float value = _commandStub->Commands->GetParameter(index);
 
 		_traceCtx->WriteGetParameterEnd(value);
 

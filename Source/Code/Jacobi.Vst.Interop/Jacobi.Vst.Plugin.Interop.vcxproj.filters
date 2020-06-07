@@ -13,6 +13,7 @@
     <ClInclude Include="UnmanagedString.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vst2400.h" />
+    <ClInclude Include="Plugin\HostCommandsImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -24,6 +25,7 @@
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Plugin\Jacobi.Vst.Interop.cpp" />
     <ClCompile Include="Properties\AssemblyInfo.Plugin.cpp" />
+    <ClCompile Include="Plugin\HostCommandsImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

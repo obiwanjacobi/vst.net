@@ -64,24 +64,24 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 			{
 			// version 1.0 commands
 			case Vst2HostCommands::Automate:
-				_hostCmdStub->SetParameterAutomated(index, opt);
+				_hostCmdStub->Commands->SetParameterAutomated(index, opt);
 				result = 1;
 				break;
 			case Vst2HostCommands::Version:
-				result = _hostCmdStub->GetVersion();
+				result = _hostCmdStub->Commands->GetVersion();
 				break;
 			case Vst2HostCommands::CurrentId:
-				result = _hostCmdStub->GetCurrentPluginID();
+				result = _hostCmdStub->Commands->GetCurrentPluginID();
 				break;
 			case Vst2HostCommands::Idle:
-				_hostCmdStub->ProcessIdle();
+				_hostCmdStub->Commands->ProcessIdle();
 				result = 1;
 				break;
 
 			// version 2.0 commands
 			case Vst2HostCommands::GetTime:
 			{
-				Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
+				Jacobi::Vst::Core::VstTimeInfo^ timeInfo = _hostCmdStub->Commands->GetTimeInfo(safe_cast<Jacobi::Vst::Core::VstTimeInfoFlags>(value));
 				if(timeInfo != nullptr)
 				{
 					TypeConverter::ToUnmanagedTimeInfo(_pTimeInfo, timeInfo);
@@ -89,77 +89,77 @@ Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, Vst2IntP
 				}
 			}	break;
 			case Vst2HostCommands::ProcessEvents:
-				_hostCmdStub->ProcessEvents(TypeConverter::ToManagedEventArray((::Vst2Events*)ptr));
+				_hostCmdStub->Commands->ProcessEvents(TypeConverter::ToManagedEventArray((::Vst2Events*)ptr));
 				result = 1;
 				break;
 			case Vst2HostCommands::IoChanged:
-				result = _hostCmdStub->IoChanged() ? 1 : 0;
+				result = _hostCmdStub->Commands->IoChanged() ? 1 : 0;
 				break;
 			case Vst2HostCommands::SizeWindow:
-				result = _hostCmdStub->SizeWindow(index, (::int32_t)value) ? 1 : 0;
+				result = _hostCmdStub->Commands->SizeWindow(index, (::int32_t)value) ? 1 : 0;
 				break;
 			case Vst2HostCommands::GetSampleRate:
-				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetSampleRate());
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->Commands->GetSampleRate());
 				break;
 			case Vst2HostCommands::GetBlockSize:
-				result = _hostCmdStub->GetBlockSize();
+				result = _hostCmdStub->Commands->GetBlockSize();
 				break;
 			case Vst2HostCommands::GetInputLatency:
-				result = _hostCmdStub->GetInputLatency();
+				result = _hostCmdStub->Commands->GetInputLatency();
 				break;
 			case Vst2HostCommands::GetOutputLatency:
-				result = _hostCmdStub->GetOutputLatency();
+				result = _hostCmdStub->Commands->GetOutputLatency();
 				break;
 			case Vst2HostCommands::GetCurrentProcessLevel:
-				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetProcessLevel());
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->Commands->GetProcessLevel());
 				break;
 			case Vst2HostCommands::GetAutomationState:
-				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetAutomationState());
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->Commands->GetAutomationState());
 				break;
 			case Vst2HostCommands::VendorGetString:
-				TypeConverter::StringToChar(_hostCmdStub->GetVendorString(), (char*)ptr, Vst2MaxVendorStrLen);
+				TypeConverter::StringToChar(_hostCmdStub->Commands->GetVendorString(), (char*)ptr, Vst2MaxVendorStrLen);
 				break;
 			case Vst2HostCommands::ProductGetString:
-				TypeConverter::StringToChar(_hostCmdStub->GetProductString(), (char*)ptr, Vst2MaxProductStrLen);
+				TypeConverter::StringToChar(_hostCmdStub->Commands->GetProductString(), (char*)ptr, Vst2MaxProductStrLen);
 				break;
 			case Vst2HostCommands::VendorGetVersion:
-				result = _hostCmdStub->GetVendorVersion();
+				result = _hostCmdStub->Commands->GetVendorVersion();
 				break;
 			case Vst2HostCommands::CanDo:
 			{
 				System::String^ cando = TypeConverter::CharToString((char*)ptr);
-				result = safe_cast<Vst2IntPtr>(_hostCmdStub->CanDo(cando));
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->Commands->CanDo(cando));
 			}	break;
 			case Vst2HostCommands::GetLanguage:
-				result = safe_cast<Vst2IntPtr>(_hostCmdStub->GetLanguage());
+				result = safe_cast<Vst2IntPtr>(_hostCmdStub->Commands->GetLanguage());
 				break;
 			case Vst2HostCommands::GetDirectory:
 				if(_directory == NULL)
 				{
-					_directory = TypeConverter::AllocateString(_hostCmdStub->GetDirectory());
+					_directory = TypeConverter::AllocateString(_hostCmdStub->Commands->GetDirectory());
 				}
 				// return cached value
 				result = (Vst2IntPtr)_directory;
 				break;
 			case Vst2HostCommands::UpdateDisplay:
-				result = _hostCmdStub->UpdateDisplay() ? 1 : 0;
+				result = _hostCmdStub->Commands->UpdateDisplay() ? 1 : 0;
 				break;
 			case Vst2HostCommands::EditBegin:
-				result = _hostCmdStub->BeginEdit(index) ? 1 : 0;
+				result = _hostCmdStub->Commands->BeginEdit(index) ? 1 : 0;
 				break;
 			case Vst2HostCommands::EditEnd:
-				result = _hostCmdStub->EndEdit(index) ? 1 : 0;
+				result = _hostCmdStub->Commands->EndEdit(index) ? 1 : 0;
 				break;
 			case Vst2HostCommands::FileSelectorOpen:
 			{
 				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::ToManagedFileSelect((::Vst2FileSelect*)ptr);
-				result = _hostCmdStub->OpenFileSelector(fileSelect) ? 1 : 0;
+				result = _hostCmdStub->Commands->OpenFileSelector(fileSelect) ? 1 : 0;
 				TypeConverter::AllocUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr, fileSelect);
 			}	break;
 			case Vst2HostCommands::FileSelectorClose:
 			{
 				Jacobi::Vst::Core::VstFileSelect^ fileSelect = TypeConverter::GetManagedFileSelect((::Vst2FileSelect*)ptr);
-				result = _hostCmdStub->CloseFileSelector(fileSelect) ? 1 : 0;
+				result = _hostCmdStub->Commands->CloseFileSelector(fileSelect) ? 1 : 0;
 				TypeConverter::DeleteUpdateUnmanagedFileSelect((::Vst2FileSelect*)ptr);
 			}	break;
 			default:

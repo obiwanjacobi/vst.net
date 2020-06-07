@@ -29,7 +29,7 @@
         /// </summary>
         public double SampleRate
         {
-            get { return _host.HostCommandStub.GetSampleRate(); }
+            get { return _host.HostCommandProxy.Commands.GetSampleRate(); }
         }
 
         /// <summary>
@@ -37,7 +37,7 @@
         /// </summary>
         public int BlockSize
         {
-            get { return _host.HostCommandStub.GetBlockSize(); }
+            get { return _host.HostCommandProxy.Commands.GetBlockSize(); }
         }
 
         /// <summary>
@@ -45,7 +45,7 @@
         /// </summary>
         public int InputLatency
         {
-            get { return _host.HostCommandStub.GetInputLatency(); }
+            get { return _host.HostCommandProxy.Commands.GetInputLatency(); }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@
         /// </summary>
         public int OutputLatency
         {
-            get { return _host.HostCommandStub.GetOutputLatency(); }
+            get { return _host.HostCommandProxy.Commands.GetOutputLatency(); }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@
         /// <returns>Returns time information but not necessarilly in the format specified by <paramref name="filterFlags"/>.</returns>
         public VstTimeInfo GetTime(VstTimeInfoFlags filterFlags)
         {
-            return _host.HostCommandStub.GetTimeInfo(filterFlags);
+            return _host.HostCommandProxy.Commands.GetTimeInfo(filterFlags);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@
         /// <returns>Returns true if the host supports changing plugin IO at runtime.</returns>
         public bool UpdatePluginIO()
         {
-            return _host.HostCommandStub.IoChanged();
+            return _host.HostCommandProxy.Commands.IoChanged();
         }
 
         #endregion

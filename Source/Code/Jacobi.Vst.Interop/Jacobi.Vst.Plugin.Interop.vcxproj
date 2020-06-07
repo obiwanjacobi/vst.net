@@ -223,6 +223,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Plugin\HostCommandStub.h" />
     <ClInclude Include="Plugin\PluginCommandProxy.h" />
+    <ClInclude Include="Plugin\HostCommandsImpl.h" />
     <ClInclude Include="Properties\Resources.h" />
     <ClInclude Include="Vst2400.h" />
     <ClInclude Include="TimeCriticalScope.h" />
@@ -239,6 +240,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Plugin\HostCommandsImpl.cpp" />
     <ClCompile Include="Plugin\HostCommandStub.cpp" />
     <ClCompile Include="Plugin\Jacobi.Vst.Interop.cpp" />
     <ClCompile Include="Plugin\PluginCommandProxy.cpp" />

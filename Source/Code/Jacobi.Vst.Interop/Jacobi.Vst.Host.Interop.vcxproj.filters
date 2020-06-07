@@ -20,6 +20,7 @@
     <ClInclude Include="Host\VstPluginCommandStub.h" />
     <ClInclude Include="Host\VstPluginContext.h" />
     <ClInclude Include="Host\VstUnmanagedPluginContext.h" />
+    <ClInclude Include="Host\VstPluginCommandsImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="Host\VstPluginContext.cpp" />
     <ClCompile Include="Host\VstUnmanagedPluginContext.cpp" />
     <ClCompile Include="Properties\AssemblyInfo.Host.cpp" />
+    <ClCompile Include="Host\VstPluginCommandsImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

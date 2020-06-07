@@ -27,12 +27,12 @@
 
         public bool UpdateDisplay()
         {
-            return _host.HostCommandStub.UpdateDisplay();
+            return _host.HostCommandProxy.Commands.UpdateDisplay();
         }
 
         public bool SizeWindow(int width, int height)
         {
-            return _host.HostCommandStub.SizeWindow(width, height);
+            return _host.HostCommandProxy.Commands.SizeWindow(width, height);
         }
 
         public CultureInfo? _culture;
@@ -46,7 +46,7 @@
             {
                 if (_culture == null)
                 {
-                    VstHostLanguage language = _host.HostCommandStub.GetLanguage();
+                    VstHostLanguage language = _host.HostCommandProxy.Commands.GetLanguage();
 
                     _culture = language switch
                     {
@@ -71,7 +71,7 @@
             {
                 if (_baseDir == null)
                 {
-                    _baseDir = _host.HostCommandStub.GetDirectory();
+                    _baseDir = _host.HostCommandProxy.Commands.GetDirectory();
                 }
 
                 return _baseDir;
@@ -110,7 +110,7 @@
                 _host = host;
                 _fileSelect = fileSelect;
 
-                if (!_host.HostCommandStub.OpenFileSelector(_fileSelect))
+                if (!_host.HostCommandProxy.Commands.OpenFileSelector(_fileSelect))
                 {
                     throw new InvalidOperationException(Properties.Resources.FileSelectorScope_OpenNotSupported);
                 }
@@ -126,7 +126,7 @@
             {
                 if (_host != null && _fileSelect != null)
                 {
-                    _host.HostCommandStub.CloseFileSelector(_fileSelect);
+                    _host.HostCommandProxy.Commands.CloseFileSelector(_fileSelect);
                     _host = null;
                     _fileSelect = null;
                 }

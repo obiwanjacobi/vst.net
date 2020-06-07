@@ -26,14 +26,14 @@
 
         public VstAutomationStates AutomationState
         {
-            get { return _host.HostCommandStub.GetAutomationState(); }
+            get { return _host.HostCommandProxy.Commands.GetAutomationState(); }
         }
 
         public IDisposable? BeginEditParameter(VstParameter parameter)
         {
             Throw.IfArgumentIsNull(parameter, nameof(parameter));
 
-            if (_host.HostCommandStub.BeginEdit(parameter.Index))
+            if (_host.HostCommandProxy.Commands.BeginEdit(parameter.Index))
             {
                 return new EditParameterScope(_host, parameter.Index);
             }
@@ -45,7 +45,7 @@
         {
             Throw.IfArgumentIsNull(parameter, nameof(parameter));
 
-            _host.HostCommandStub.SetParameterAutomated(parameter.Index, parameter.Value);
+            _host.HostCommandProxy.Commands.SetParameterAutomated(parameter.Index, parameter.Value);
         }
 
         #endregion
@@ -75,7 +75,7 @@
             {
                 if (_host != null)
                 {
-                    _host.HostCommandStub.EndEdit(_index);
+                    _host.HostCommandProxy.Commands.EndEdit(_index);
                     _host = null;
                 }
             }

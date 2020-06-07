@@ -64,7 +64,7 @@ namespace Interop {
 	{
 		if(PluginCommandStub != nullptr)
 		{
-			PluginCommandStub->Close();
+			PluginCommandStub->Commands->Close();
 		}
 
 		System::IDisposable^ disposable = nullptr;

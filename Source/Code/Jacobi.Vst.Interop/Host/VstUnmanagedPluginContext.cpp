@@ -132,7 +132,7 @@ namespace Interop {
 			PluginCommandStub->PluginContext = this;
 
 			// setup the plugin info
-			if(PluginCommandStub->GetVstVersion() < 2400)
+			if(PluginCommandStub->Commands->GetVstVersion() < 2400)
 			{
 				// use structure with extra legacy fields for older versions
 				PluginInfo = gcnew Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo();
