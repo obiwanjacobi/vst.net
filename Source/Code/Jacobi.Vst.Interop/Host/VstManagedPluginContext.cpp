@@ -46,8 +46,7 @@ namespace Interop {
 					pluginPath));
 		}
 
-		Jacobi::Vst::Core::Host::VstHostCommandAdapter^ hostAdapter = 
-			Jacobi::Vst::Core::Host::VstHostCommandAdapter::Create(HostCommandStub);
+		auto hostAdapter = gcnew Jacobi::Vst::Core::Host::VstHostCommandAdapter(HostCommandStub);
 
 		_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
 		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyPluginInfo = 
@@ -64,7 +63,7 @@ namespace Interop {
 
 		AcceptPluginInfoData(false);
 
-		PluginCommandStub = Jacobi::Vst::Core::Host::VstPluginCommandAdapter::Create(pluginCmdStub);
+		PluginCommandStub = gcnew Jacobi::Vst::Core::Host::VstPluginCommandAdapter(pluginCmdStub);
 		PluginCommandStub->PluginContext = this;
 
 		Set(VstPluginContext::PluginPathContextVar, pluginPath);
