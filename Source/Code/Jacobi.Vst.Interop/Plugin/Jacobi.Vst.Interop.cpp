@@ -14,38 +14,36 @@ namespace Interop {
 Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 
 // main exported method called by host to create the plugin
-Vst2Plugin* VSTPluginMain (Vst2HostCommand hostCommandHandler)
+Vst2Plugin* VSTPluginMain (::Vst2HostCommand hostCommandHandler)
 {
 	// create the host command stub (sends commands to host)
-	Jacobi::Vst::Plugin::Interop::HostCommandStub^ hostStub =
-		gcnew Jacobi::Vst::Plugin::Interop::HostCommandStub(hostCommandHandler);
+	auto hostStub = gcnew Jacobi::Vst::Plugin::Interop::HostCommandStub(hostCommandHandler);
 
 	try
 	{
 		// retrieve the current plugin file name (interop)
-		System::String^ interopAssemblyFileName = Utils::GetCurrentFileName();
+		auto interopAssemblyFileName = Utils::GetCurrentFileName();
 
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName);
+		auto commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName);
 		
 		if(commandStub != nullptr)
 		{
 			// retrieve the plugin info
-			Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo = commandStub->GetPluginInfo(hostStub);
+			auto pluginInfo = commandStub->GetPluginInfo(hostStub);
 
 			if(pluginInfo)
 			{
 				// create the native audio effect struct based on the plugin info
-				Vst2Plugin* pPlugin = CreateAudioEffectInfo(pluginInfo);
+				::Vst2Plugin* pPlugin = CreateAudioEffectInfo(pluginInfo);
 
 				// initialize host stub with plugin info
 				hostStub->Initialize(pPlugin);
 
 				// connect the plugin command stub to the command proxy and construct a handle
-				System::Runtime::InteropServices::GCHandle proxyHandle = 
-					System::Runtime::InteropServices::GCHandle::Alloc(
-						gcnew Jacobi::Vst::Plugin::Interop::PluginCommandProxy(commandStub), 
-						System::Runtime::InteropServices::GCHandleType::Normal);
+				auto proxyHandle = System::Runtime::InteropServices::GCHandle::Alloc(
+					gcnew Jacobi::Vst::Plugin::Interop::PluginCommandProxy(commandStub), 
+					System::Runtime::InteropServices::GCHandleType::Normal);
 
 				// maintain the proxy reference as part of the effect struct
 				pPlugin->user = System::Runtime::InteropServices::GCHandle::ToIntPtr(proxyHandle).ToPointer();
@@ -77,7 +75,7 @@ Vst2IntPtr DispatcherProc(Vst2Plugin* pluginInfo, Vst2PluginCommands command, in
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
+		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		return proxy->Dispatch(safe_cast<int32_t>(command), index, value, ptr, opt);
@@ -94,7 +92,7 @@ void Process32Proc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, int3
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
+		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->inputCount, pluginInfo->outputCount);
@@ -109,7 +107,7 @@ void Process64Proc(Vst2Plugin* pluginInfo, double** inputs, double** outputs, in
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
+		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->Process(inputs, outputs, sampleFrames, pluginInfo->inputCount, pluginInfo->outputCount);
@@ -121,7 +119,7 @@ void SetParameterProc(Vst2Plugin* pluginInfo, int32_t index, float value)
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
+		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->SetParameter(index, value);
@@ -133,7 +131,7 @@ float GetParameterProc(Vst2Plugin* pluginInfo, int32_t index)
 {
 	if(pluginInfo && pluginInfo->user)
 	{
-		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
+		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		return proxy->GetParameter(index);
@@ -150,7 +148,7 @@ void Process32AccProc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, i
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
 
-		Jacobi::Vst::Plugin::Interop::PluginCommandProxy^ proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
+		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
 
 		proxy->ProcessAcc(inputs, outputs, sampleFrames, pluginInfo->inputCount, pluginInfo->outputCount);
@@ -161,8 +159,8 @@ void Process32AccProc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, i
 Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo)
 {
 	// deleted in the Finalizer method of the HostCommandStub
-	Vst2Plugin* pEffect = new Vst2Plugin();
-	ZeroMemory(pEffect, sizeof(Vst2Plugin));
+	auto pEffect = new ::Vst2Plugin();
+	ZeroMemory(pEffect, sizeof(::Vst2Plugin));
 	pEffect->VstP = Vst2FourCharacterCode;
 
 	// assign function pointers
@@ -183,8 +181,7 @@ Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ plug
 	pEffect->version = pluginInfo->PluginVersion;
 
 	// check for legacy members
-	Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
-		dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(pluginInfo);
+	auto legacyInfo = dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(pluginInfo);
 
 	if(legacyInfo != nullptr)
 	{

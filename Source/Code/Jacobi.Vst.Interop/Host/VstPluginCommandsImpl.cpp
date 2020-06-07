@@ -85,7 +85,7 @@ namespace Interop {
 
 	System::Int32 VstPluginCommandsImpl::GetProgram()
 	{
-		return (::int32_t)CallDispatch(Vst2PluginCommands::ProgramGet, 0, 0, 0, 0);
+		return (int32_t)CallDispatch(Vst2PluginCommands::ProgramGet, 0, 0, 0, 0);
 	}
 
 	void VstPluginCommandsImpl::SetProgramName(System::String^ name)
@@ -198,7 +198,7 @@ namespace Interop {
 		// we don't own the memory passed to us
 		char* pBuffer = NULL;
 
-		int32_t length = (::int32_t)CallDispatch(Vst2PluginCommands::ChunkGet, isPreset ? 1 : 0, 0, &pBuffer, 0);
+		int32_t length = (int32_t)CallDispatch(Vst2PluginCommands::ChunkGet, isPreset ? 1 : 0, 0, &pBuffer, 0);
 
 		if (length > 0)
 		{

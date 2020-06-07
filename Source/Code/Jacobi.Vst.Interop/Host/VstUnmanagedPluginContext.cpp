@@ -34,8 +34,8 @@ namespace Interop {
 
 	VstPluginContext^ VstUnmanagedPluginContext::ShellCreate(Jacobi::Vst::Core::Host::IVstHostCommandStub^ hostCmdStub)
 	{
-		VstUnmanagedPluginContext^ newCtx = gcnew VstUnmanagedPluginContext(hostCmdStub);
-		System::String^ pluginPath = Find<System::String^>(VstPluginContext::PluginPathContextVar);
+		auto newCtx = gcnew VstUnmanagedPluginContext(hostCmdStub);
+		auto pluginPath = Find<System::String^>(VstPluginContext::PluginPathContextVar);
 
 		try
 		{
@@ -122,8 +122,7 @@ namespace Interop {
 						pluginPath));
 			}
 
-			System::Runtime::InteropServices::GCHandle ctxHandle = 
-					System::Runtime::InteropServices::GCHandle::Alloc(this);
+			auto ctxHandle = System::Runtime::InteropServices::GCHandle::Alloc(this);
 
 			// maintain the context reference as part of the effect struct
 			_pEffect->reserved1 = (Vst2IntPtr)System::Runtime::InteropServices::GCHandle::ToIntPtr(ctxHandle).ToPointer();

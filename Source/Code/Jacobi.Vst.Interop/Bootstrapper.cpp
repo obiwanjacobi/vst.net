@@ -11,8 +11,7 @@
 Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugin(System::String^ pluginPath)
 {
 	// create the plugin (command stub) factory
-	Jacobi::Vst::Core::Plugin::ManagedPluginFactory^ factory = 
-		gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
+	auto factory = gcnew Jacobi::Vst::Core::Plugin::ManagedPluginFactory();
 	
 	// load the managed plugin assembly by its default name
 	factory->LoadAssemblyByDefaultName(pluginPath);
@@ -22,11 +21,14 @@ Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ Bootstrapper::LoadManagedPlugi
 	
 	if(commandStub != nullptr)
 	{
-		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
+		auto basePath = System::IO::Path::GetDirectoryName(pluginPath);
+		auto name = System::IO::Path::GetFileNameWithoutExtension(pluginPath);
 
 		auto builder = gcnew Microsoft::Extensions::Configuration::ConfigurationBuilder();
 		Microsoft::Extensions::Configuration::FileConfigurationExtensions::SetBasePath(builder, basePath);
-		Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(builder, "vstsettings.json", true);
+		Microsoft::Extensions::Configuration::JsonConfigurationExtensions::AddJsonFile(
+			builder, name + ".appsettings.json", /*optional*/ true);
+		
 		// assign config to commandStub
 		commandStub->PluginConfiguration = builder->Build();
 	}

@@ -53,7 +53,7 @@ namespace Interop {
 				Jacobi::Vst::Interop::Properties::Resources::VstAudioBufferManager_InvalidBufferSize, "buffer");
 		}
 		
-		Jacobi::Vst::Core::IDirectBufferAccess64^ directBuf = (Jacobi::Vst::Core::IDirectBufferAccess64^)buffer;
+		auto directBuf = (Jacobi::Vst::Core::IDirectBufferAccess64^)buffer;
 
 		double* lowerBound = _unmanagedBuffers.GetArray();
 		double* upperBound = lowerBound + (_bufferSize * _bufferCount);

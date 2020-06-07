@@ -28,9 +28,8 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 * [DevOps] automate CI build on github
     => Interop cannot find its package dependencies: https://github.com/dotnet/sdk/issues/11922
 * [UnitTest] Use FluentAssertions.
-* [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
-* [Interop] Start vstsettings.json with the plugin (host?) name.
+* [Interop] Start vstsettings.json with the plugin/host name.
 * [Interop/Core] Hookup tracing again. Use ILogger<> API.
 * [CLI/Interop] Add CRT to output bins and let CLI publish them?
     => adds **a lot** of extra dll's, most of which are not needed...?

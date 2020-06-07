@@ -33,10 +33,8 @@ namespace Interop {
 	{
 		Jacobi::Vst::Core::Throw::IfArgumentIsNullOrEmpty(pluginPath, "pluginPath");
 
-		System::String^ basePath = System::IO::Path::GetDirectoryName(pluginPath);
-
-		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ pluginCmdStub = 
-			Bootstrapper::LoadManagedPlugin(pluginPath);
+		auto basePath = System::IO::Path::GetDirectoryName(pluginPath);
+		auto pluginCmdStub = Bootstrapper::LoadManagedPlugin(pluginPath);
 
 		if(pluginCmdStub == nullptr)
 		{
@@ -71,14 +69,9 @@ namespace Interop {
 
 	void VstManagedPluginContext::AcceptPluginInfoData(System::Boolean raiseEvents)
 	{
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInfo =
-			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
-
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyInternalInfo =
-			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
-
-		System::Collections::Generic::List<System::String^>^ changedPropNames = 
-			gcnew System::Collections::Generic::List<System::String^>();
+		auto legacyInfo = dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(PluginInfo);
+		auto legacyInternalInfo = dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
+		auto changedPropNames = gcnew System::Collections::Generic::List<System::String^>();
 
 		if(raiseEvents)
 		{

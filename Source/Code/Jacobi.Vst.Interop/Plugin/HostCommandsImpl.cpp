@@ -76,7 +76,7 @@ void HostCommandsImpl::SetParameterAutomated(System::Int32 index, System::Single
 
 System::Int32 HostCommandsImpl::GetVersion()
 {
-	int32_t version = (::int32_t)CallHost(Vst2HostCommands::Version, 0, 0, 0, 0);
+	int32_t version = (int32_t)CallHost(Vst2HostCommands::Version, 0, 0, 0, 0);
 
 	if(version == 0)	// old host
 		version = 1;
@@ -86,7 +86,7 @@ System::Int32 HostCommandsImpl::GetVersion()
 
 System::Int32 HostCommandsImpl::GetCurrentPluginID()
 {
-	return (::int32_t)CallHost(Vst2HostCommands::CurrentId, 0, 0, 0, 0);
+	return (int32_t)CallHost(Vst2HostCommands::CurrentId, 0, 0, 0, 0);
 }
 
 void HostCommandsImpl::ProcessIdle()
@@ -101,8 +101,8 @@ Jacobi::Vst::Core::VstTimeInfo^ HostCommandsImpl::GetTimeInfo(Jacobi::Vst::Core:
 {
 	ThrowIfNotInitialized();
 
-	::Vst2TimeInfo* pTimeInfo = (::Vst2TimeInfo*)
-		CallHost(Vst2HostCommands::GetTime, 0, safe_cast<int32_t>(filterFlags), 0, 0);
+	auto pTimeInfo = (::Vst2TimeInfo*)CallHost(
+		Vst2HostCommands::GetTime, 0, safe_cast<int32_t>(filterFlags), 0, 0);
 
 	TypeConverter::ToManagedTimeInfo(_timeInfo, pTimeInfo);
 
@@ -280,7 +280,7 @@ System::Boolean HostCommandsImpl::CloseFileSelector(Jacobi::Vst::Core::VstFileSe
 {
 	ThrowIfNotInitialized();
 
-	::Vst2FileSelect* pFileSelect = (::Vst2FileSelect*)fileSelect->Reserved.ToPointer();
+	auto pFileSelect = (::Vst2FileSelect*)fileSelect->Reserved.ToPointer();
 
 	if(pFileSelect == NULL)
 	{
@@ -423,8 +423,8 @@ System::String^ HostCommandsImpl::GetChunkFile()
 
 Jacobi::Vst::Core::VstSpeakerArrangement^ HostCommandsImpl::GetInputSpeakerArrangement()
 {
-	::Vst2SpeakerArrangement* pArrangement = (::Vst2SpeakerArrangement*)
-		CallHost(Vst2HostCommands::GetInputSpeakerArrangement, 0, 0, 0, 0);
+	auto pArrangement = (::Vst2SpeakerArrangement*)CallHost(
+		Vst2HostCommands::GetInputSpeakerArrangement, 0, 0, 0, 0);
 
 	return TypeConverter::ToManagedSpeakerArrangement(pArrangement);
 }
