@@ -29,7 +29,6 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
     => Interop cannot find its package dependencies: https://github.com/dotnet/sdk/issues/11922
 * [UnitTest] Use FluentAssertions.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
-* [Interop] Start vstsettings.json with the plugin/host name.
 * [Interop/Core] Hookup tracing again. Use ILogger<> API.
 * [CLI/Interop] Add CRT to output bins and let CLI publish them?
     => adds **a lot** of extra dll's, most of which are not needed...?

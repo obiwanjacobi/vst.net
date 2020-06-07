@@ -115,7 +115,7 @@ namespace Jacobi.Vst.CLI
             File.WriteAllText(runtimeConfig, reader.ReadToEnd());
             ConsoleOutput.Progress($"Creating {runtimeConfig}");
 
-            CopySettings(path);
+            CopySettings(path, name);
         }
 
         private void PublishHost(string hostPath)
@@ -133,15 +133,18 @@ namespace Jacobi.Vst.CLI
             targetPath = Path.Combine(DeployPath, $"{name}{RuntimeConfigJson}");
             File.Copy($"{sourceName}{RuntimeConfigJson}", targetPath, overwrite: true);
 
-            CopySettings(path);
+            CopySettings(path, name);
         }
 
-        private void CopySettings(string path)
+        private void CopySettings(string path, string name)
         {
             foreach (var settingsFile in Directory.EnumerateFiles(path, $"*settings.json"))
             {
                 var targetName = Path.GetFileName(settingsFile);
-                var targetFile = Path.Combine(DeployPath, targetName);
+                var targetFile =
+                    String.Compare(targetName, "appsettings.json", StringComparison.InvariantCultureIgnoreCase) == 0
+                    ? Path.Combine(DeployPath, $"{name}.{targetName}")
+                    : Path.Combine(DeployPath, targetName);
                 File.Copy(settingsFile, targetFile, overwrite: true);
                 ConsoleOutput.Progress($"Copy settings file: {settingsFile} => {targetFile}");
             }
