@@ -27,13 +27,11 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github
     => Interop cannot find its package dependencies: https://github.com/dotnet/sdk/issues/11922
-* [Core/Framework] Double check to see if Core and Framework need to be x86/x64 or could be AnyCPU?
 * [UnitTest] Use FluentAssertions.
 * [Core] Try to get rid of the Adapters that pass essentially the same interface between Host and Plugin.
-Requires a redesign.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
 * [Interop] Start vstsettings.json with the plugin (host?) name.
-* [Interop/Core] Hookup tracing again.
+* [Interop/Core] Hookup tracing again. Use ILogger<> API.
 * [CLI/Interop] Add CRT to output bins and let CLI publish them?
     => adds **a lot** of extra dll's, most of which are not needed...?
 
@@ -44,7 +42,7 @@ Requires a redesign.
 * Will not multitarget the projects to support both netFx and netCore. 
 Future seems to lie with netCore (.NET5) that will be VST.NET v2.
 Current v1.1 will continue to exist for current users but not be developed further (separate branch?).
-VST.NET1 = VST2/netFx, VST.NET2 = VST2/netCore, VST.NET3 = VST3/netCore (if we get it to work)
+VST.NET1 = VST2/netFx, VST.NET2 = VST2/netCore, VST.NET3 = VST3/netCore
 
 
 ## References
