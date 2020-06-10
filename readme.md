@@ -64,6 +64,6 @@ It is very much appreciated if you ...
 
 ---
 
-![](docs/_old/media/Home_VstLogoAlpha92x54.png) 
+![](docs/_old/media/Home_VSTLogoAlpha92x54.png) 
 
 VST is a trademark of Steinberg Media Technologies GmbH.
