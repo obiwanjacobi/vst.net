@@ -12,7 +12,9 @@ The dotnet-core version of VST.NET.
   Nuget package platform architecture issues:
   https://github.com/NuGet/docs.microsoft.com-nuget/issues/1083#issuecomment-597886840
   https://github.com/dotnet/roslyn/blob/master/docs/features/refout.md
-  
+  example of using nuget sdk to generate an AnyCPU definition-only assembly.
+  https://github.com/NuGet/Entropy/tree/master/nuget-sdk-usage/nuget-sdk-usage
+
   The VST.NET CLI can perform a publish of a plugin and gather all dependencies into folder.
   NuGet still gives problems with x86/x64 managed assemblies.
   https://github.com/dotnet/sdk/issues/10875

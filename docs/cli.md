@@ -1,6 +1,6 @@
 # Command Line Interface
 
-In the spririt of .NET core (`dotnet`) and Command Line Interface (cli) has been created to help with common tasks when working with VST.NET.
+In the spririt of .NET core (`dotnet`) a Command Line Interface (cli) has been created to help with common tasks when working with VST.NET.
 
 The following commands are available:
 

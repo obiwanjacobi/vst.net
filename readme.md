@@ -5,7 +5,7 @@
 ---
 ## New Version: `VST.NET` 2!
 
-`VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET Core 3.1. 
+`VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET Core 3.1.
 The new version is still Windows-only and supports the Steinberg VST 2.x API.
 
 This means that `VST.NET` (1) is phasing out and will not receive any more updates. 
@@ -14,10 +14,12 @@ Of course you can still ask questions about `VST.NET` (1), but no feature reques
 
 ## What is `VST.NET`
 
+VST stands for Virtual Studio Technology and is an API designed by Steinberg that allows Audio and Midi plugin to work together in a Digital Audio Workstation (DAW) host application.
+
 `VST.NET` allows VST Plugin developers to write Plugins for the Steinberg VST 2.x API. The interop layer makes the transition between the C++ and C# smooth and easy.
 The Framework built on top of the interop layer provides a clear and structured architecture accelerating development considerably.
 
-`VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Interop.Host) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications.
+`VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Host.Interop) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications.
 
 ## Documentation
 
@@ -39,7 +41,11 @@ Anyone can join and do not hesitate to ask a question or start a discussion.
 
 ![](docs/_old/media/Home_facebook_logo_48x48.jpg)
 
-[There is a Facebook page here.](http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174)
+There is a Facebook page [here](http://www.facebook.com/pages/Virtual-Studio-Technology-for-NET/150408134989174).
+
+### Contribute
+
+If you have a great idea for a new feature, have a suggestion or have found a bug, please create an issue on github. Use the appropriate template.
 
 ---
 
@@ -58,4 +64,6 @@ It is very much appreciated if you ...
 
 ---
 
-![](docs/_old/media/Home_VstLogoAlpha92x54.png) VST is a trademark of Steinberg Media Technologies GmbH.
+![](docs/_old/media/Home_VstLogoAlpha92x54.png) 
+
+VST is a trademark of Steinberg Media Technologies GmbH.
