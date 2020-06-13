@@ -15,3 +15,8 @@ Something is going on with setting the current directory..?
     - Error: Unit 001: Should be the Root Unit => id should be 000!! [XXXXXXX Failed]
     - Error: All Audio Processing fails.
     - Warning: Parameters Changes - No point at all has been read via IParameterChanges (more...).
+
+## Research
+
+COM (VST3)
+https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation

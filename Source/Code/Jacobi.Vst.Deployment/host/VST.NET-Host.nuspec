@@ -26,6 +26,7 @@
     <file src="readme.txt" target=""></file>
     <file src="VST.NET2-Host.targets" target="build"></file>
     <file src="VST.NET2-Host.props" target="build"></file>
+    <file src="..\VstNetDeploy.targets" target="build"></file>
     
     <file src="..\..\x86\Release\Host\Jacobi.Vst.Host.Interop.dll" target="lib\netcoreapp3.1\x86"></file>
     <file src="..\..\x86\Release\Host\Jacobi.Vst.Host.Interop.xml" target="lib\netcoreapp3.1\x86"></file>

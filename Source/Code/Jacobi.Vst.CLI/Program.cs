@@ -33,13 +33,13 @@ namespace Jacobi.Vst.CLI
                     }
                     else
                     {
-                        ConsoleOutput.Error("Command failed.");
+                        ConsoleOutput.Warning($"Command `vstnet {String.Join(" ", args)}` failed.");
                     }
                 }
                 catch (Exception e)
                 {
-                    ConsoleOutput.Error("Command failed.");
-                    ConsoleOutput.Error($"{e.Message}");
+                    ConsoleOutput.Error($"Command `vstnet {String.Join(" ", args)}` encountered an error.");
+                    ConsoleOutput.Error($"{e}");
                 }
             }
             else

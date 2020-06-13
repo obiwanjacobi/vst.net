@@ -19,16 +19,18 @@ The dotnet-core version of VST.NET.
   NuGet still gives problems with x86/x64 managed assemblies.
   https://github.com/dotnet/sdk/issues/10875
 
-* Add vstnet cli as build tool and add a publish command to the project.
-Then on a successful build a deployment will automatically be generated.
-https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
+
 * CLI does not detect dependencies of dependencies (interop)
+
+* CLI: Host deployment: dotnet core applications are dll's too. Need an extra switch?
 
 ## Refactor wishes
 
 * [Interop] look into the use tracked references (%^)
 * [DevOps] automate CI build on github
     => Interop cannot find its package dependencies: https://github.com/dotnet/sdk/issues/11922
+    => Interop project has hard coded paths to its managed nuget packages
+    => CI Build fails for this reason on GitHub-Actions.
 * [UnitTest] Use FluentAssertions.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
 * [Interop/Core] Hookup tracing again. Use ILogger<> API.
@@ -41,9 +43,8 @@ https://natemcmaster.com/blog/2017/11/11/build-tools-in-nuget/
 
 * Will not multitarget the projects to support both netFx and netCore. 
 Future seems to lie with netCore (.NET5) that will be VST.NET v2.
-Current v1.1 will continue to exist for current users but not be developed further (separate branch?).
+Current v1.1 will continue to exist for current users but not be developed further (separate branch).
 VST.NET1 = VST2/netFx, VST.NET2 = VST2/netCore, VST.NET3 = VST3/netCore
-
 
 ## References
 
@@ -53,12 +54,3 @@ https://docs.microsoft.com/en-us/dotnet/core/tutorials/creating-app-with-plugin-
 
 You can collect the native hosting trace - run the process with environment: COREHOST_TRACE=1 and COREHOST_TRACEFILE=t.txt.
 It should produce t.txt in the current directory with lot of info about the native hosting side.
-
-## Research
-
-COM (VST3)
-https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
-
-- `ISSUE`: ijwhost/clr loading does not work on a mixed assembly!?
-That means the plugin wont load in the unmanage host.
-https://github.com/dotnet/runtime/issues/37194
