@@ -1943,8 +1943,9 @@
         <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.#ctor(System.String,Jacobi.Vst.Plugin.Framework.VstProductInfo,Jacobi.Vst.Core.VstPluginCategory,Jacobi.Vst.Plugin.Framework.VstPluginCapabilities,System.Int32,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
+            DI container configuration. Configure and register services.
             Override to register the plugin interfaces and the class/types that implement them.
             </summary>
             <param name="services">Will never be null.</param>
@@ -1968,6 +1969,12 @@
             </summary>
             <typeparam name="T">The interface type.</typeparam>
             <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.ConfigureLogging(Microsoft.Extensions.Logging.ILoggingBuilder)">
+            <summary>
+            Override to configure LogProviders.
+            </summary>
+            <param name="logger">Is never null.</param>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Properties.Resources">
             <summary>

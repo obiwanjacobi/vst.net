@@ -12,13 +12,14 @@ namespace Jacobi.Vst.CLI
         // Manually maintain them here.
         private static readonly string[] InteropDependencies = new[]
         {
-            @"Microsoft.Extensions.Configuration\3.1.2\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.dll",
-            @"Microsoft.Extensions.Configuration.Abstractions\3.1.2\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll",
-            @"Microsoft.Extensions.Configuration.FileExtensions\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll",
-            @"Microsoft.Extensions.Configuration.Json\2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll",
-            @"Microsoft.Extensions.FileProviders.Physical\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
-            @"Microsoft.Extensions.FileProviders.Abstractions\3.1.1\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll",
-            @"microsoft.extensions.fileproviders.physical\3.1.4\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"Microsoft.Extensions.Configuration\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.dll",
+            @"Microsoft.Extensions.Configuration.Abstractions\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll",
+            @"Microsoft.Extensions.Configuration.FileExtensions\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll",
+            @"Microsoft.Extensions.Configuration.Json\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll",
+            @"Microsoft.Extensions.FileProviders.Physical\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"Microsoft.Extensions.FileProviders.Abstractions\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll",
+            @"Microsoft.Extensions.Primitives\3.1.5\lib\netcoreapp3.1\Microsoft.Extensions.Primitives.dll",
+            @"Microsoft.Extensions.FileSystemGlobbing\3.1.5\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
             @"newtonsoft.json\12.0.2\lib\netstandard2.0\Newtonsoft.Json.dll",
         };
 

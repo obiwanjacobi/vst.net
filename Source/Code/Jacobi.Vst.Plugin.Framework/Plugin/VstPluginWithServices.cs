@@ -1,6 +1,6 @@
 ﻿using Jacobi.Vst.Core;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace Jacobi.Vst.Plugin.Framework.Plugin
@@ -18,26 +18,11 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         { }
 
         /// <summary>
+        /// DI container configuration. Configure and register services.
         /// Override to register the plugin interfaces and the class/types that implement them.
         /// </summary>
         /// <param name="services">Will never be null.</param>
-        protected virtual void RegisterServices(IServiceCollection services) { }
-
-        private IServiceProvider GetServices()
-        {
-            if (Services == null)
-            {
-                var serviceCollection = new ServiceCollection();
-                if (Configuration != null)
-                {
-                    serviceCollection.AddSingleton<IConfiguration>(Configuration);
-                }
-                RegisterServices(serviceCollection);
-                Services = serviceCollection.BuildServiceProvider();
-            }
-
-            return Services;
-        }
+        protected abstract void ConfigureServices(IServiceCollection services);
 
         /// <summary>
         /// Provides access to all configured/registered services.
@@ -85,6 +70,41 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
             }
 
             return null;
+        }
+
+        private IServiceProvider GetServices()
+        {
+            if (Services == null)
+            {
+                var serviceCollection = new ServiceCollection();
+                if (Configuration != null)
+                {
+                    serviceCollection.AddSingleton(Configuration);
+                }
+
+                // TODO: do we need to setup a LoggerFactory?
+                ConfigureLogging(new LoggingBuilder(serviceCollection));
+                ConfigureServices(serviceCollection);
+                Services = serviceCollection.BuildServiceProvider();
+            }
+
+            return Services;
+        }
+
+        /// <summary>
+        /// Override to configure LogProviders.
+        /// </summary>
+        /// <param name="logger">Is never null.</param>
+        protected virtual void ConfigureLogging(ILoggingBuilder logger) { }
+
+        private sealed class LoggingBuilder : ILoggingBuilder
+        {
+            public LoggingBuilder(IServiceCollection services)
+            {
+                Services = services ?? throw new ArgumentNullException(nameof(services));
+            }
+
+            public IServiceCollection Services { get; }
         }
     }
 }
