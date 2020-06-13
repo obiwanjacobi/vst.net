@@ -21,7 +21,7 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
             NoteMap = new MapNoteItemList();
         }
 
-        protected override void RegisterServices(IServiceCollection services)
+        protected override void ConfigureServices(IServiceCollection services)
         {
             services.AddPluginComponent(new AudioProcessor(this));
             services.AddPluginComponent(new PluginEditor(this));

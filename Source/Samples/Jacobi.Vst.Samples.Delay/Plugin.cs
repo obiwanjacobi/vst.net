@@ -30,7 +30,7 @@ namespace Jacobi.Vst.Samples.Delay
         /// </summary>
         public PluginParameterFactory ParameterFactory { get; private set; }
 
-        protected override void RegisterServices(IServiceCollection services)
+        protected override void ConfigureServices(IServiceCollection services)
         {
             var audioProcessor = new AudioProcessor(this);
             services.AddPluginComponent(audioProcessor);

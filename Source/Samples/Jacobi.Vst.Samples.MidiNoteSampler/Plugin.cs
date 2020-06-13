@@ -24,7 +24,7 @@ namespace Jacobi.Vst.Samples.MidiNoteSampler
             SampleManager = new SampleManager();
         }
 
-        protected override void RegisterServices(IServiceCollection services)
+        protected override void ConfigureServices(IServiceCollection services)
         {
             services.AddPluginComponent(new AudioProcessor(this));
             services.AddPluginComponent(new MidiProcessor(this));
