@@ -1,4 +1,5 @@
 ﻿
+using FluentAssertions;
 using Jacobi.Vst.Core;
 using Jacobi.Vst.Host.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,17 +18,17 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
 
         private VstAudioBufferManager CreateNew()
         {
-            VstAudioBufferManager bufferMgr = new VstAudioBufferManager(_bufferCount, _bufferSize);
+            var bufferMgr = new VstAudioBufferManager(_bufferCount, _bufferSize);
 
-            Assert.AreEqual(_bufferCount, bufferMgr.BufferCount, "Buffer Count was not set correctly.");
-            Assert.AreEqual(_bufferSize, bufferMgr.BufferSize, "Buffer Size was not set correctly.");
+            bufferMgr.BufferCount.Should().Be(_bufferCount);
+            bufferMgr.BufferSize.Should().Be(_bufferSize);
 
             return bufferMgr;
         }
 
         private VstAudioBufferManager CreateNew(float value)
         {
-            VstAudioBufferManager bufferMgr = CreateNew();
+            var bufferMgr = CreateNew();
 
             foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
             {
@@ -52,14 +53,14 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         {
             for (int i = 0; i < buffer.SampleCount; i++)
             {
-                Assert.AreEqual(value, buffer[i]);
+                buffer[i].Should().Be(value);
             }
         }
 
         [TestMethod]
         public void Test_VstAudioBufferManager_Construction()
         {
-            VstAudioBufferManager bufferMgr = CreateNew(_testValue);
+            var bufferMgr = CreateNew(_testValue);
 
             AssertAllBuffersHasValue(bufferMgr, _testValue);
         }
@@ -67,7 +68,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         [TestMethod]
         public void Test_VstAudioBufferManager_ClearAllBuffers()
         {
-            VstAudioBufferManager bufferMgr = CreateNew(_testValue);
+            var bufferMgr = CreateNew(_testValue);
 
             AssertAllBuffersHasValue(bufferMgr, _testValue);
 
@@ -79,7 +80,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         [TestMethod]
         public void Test_VstAudioBufferManager_ClearIndividualBuffers()
         {
-            VstAudioBufferManager bufferMgr = CreateNew(_testValue);
+            var bufferMgr = CreateNew(_testValue);
 
             AssertAllBuffersHasValue(bufferMgr, _testValue);
 
@@ -94,7 +95,7 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
         [TestMethod]
         public void Test_VstAudioBufferManager_EnumerateBuffers()
         {
-            VstAudioBufferManager bufferMgr = CreateNew(_testValue);
+            var bufferMgr = CreateNew(_testValue);
 
             int counter = 0;
             foreach (VstAudioBuffer buffer in bufferMgr.Buffers)
@@ -102,7 +103,8 @@ namespace Jacobi.Vst.UnitTest.Interop.Host
                 counter++;
             }
 
-            Assert.AreEqual(_bufferCount, counter, "The number of buffers in the enumerator do not match.");
+            counter.Should().Be(_bufferCount);
+            bufferMgr.Buffers.Should().HaveCount(_bufferCount);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Jacobi.Vst.UnitTest.Core
             short detune = -24;
             byte noteOffVelocity = 64;
 
-            VstMidiEvent me = new VstMidiEvent(deltaFrames, noteLength, noteOffset, midiData, detune, noteOffVelocity);
+            var me = new VstMidiEvent(deltaFrames, noteLength, noteOffset, midiData, detune, noteOffVelocity);
             me.EventType.Should().Be(VstEventTypes.MidiEvent);
             me.DeltaFrames.Should().Be(deltaFrames);
             me.NoteLength.Should().Be(noteLength);
@@ -43,7 +43,7 @@ namespace Jacobi.Vst.UnitTest.Core
             int deltaFrames = 12;
             byte[] sysexData = new byte[] { 0x9C, 0x7F, 0x40 };
 
-            VstMidiSysExEvent me = new VstMidiSysExEvent(deltaFrames, sysexData);
+            var me = new VstMidiSysExEvent(deltaFrames, sysexData);
             me.EventType.Should().Be(VstEventTypes.MidiSysExEvent);
             me.DeltaFrames.Should().Be(deltaFrames);
             me.Data.Should().NotBeNull();

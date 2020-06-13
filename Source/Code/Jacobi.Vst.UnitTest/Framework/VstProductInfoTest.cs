@@ -1,4 +1,5 @@
-﻿using Jacobi.Vst.Plugin.Framework;
+﻿using FluentAssertions;
+using Jacobi.Vst.Plugin.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Framework
@@ -17,13 +18,13 @@ namespace Jacobi.Vst.UnitTest.Framework
             string vendor = "UnitTestVendor";
             int version = 1200;
 
-            VstProductInfo pi = new VstProductInfo(product, vendor, version);
+            var pi = new VstProductInfo(product, vendor, version);
 
-            Assert.IsTrue(pi.IsValid, "VstProductInfo.IsValid");
-            Assert.AreEqual(product, pi.Product, "VstProductInfo.Product");
-            Assert.AreEqual(vendor, pi.Vendor, "VstProductInfo.Vendor");
-            Assert.AreEqual(version, pi.Version, "VstProductInfo.Version");
-            Assert.AreEqual("1.2.0.0", pi.FormattedVersion, "VstProductInfo.FormattedVersion");
+            pi.IsValid.Should().BeTrue();
+            pi.Product.Should().Be(product);
+            pi.Vendor.Should().Be(vendor);
+            pi.Version.Should().Be(version);
+            pi.FormattedVersion.Should().Be("1.2.0.0");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Jacobi.Vst.UnitTest.Core
         [TestMethod()]
         public void Test_FourCharacterCode_Value()
         {
-            FourCharacterCode fcc = new FourCharacterCode
+            var fcc = new FourCharacterCode
             {
                 Value = "ABCD"
             };
@@ -25,21 +25,21 @@ namespace Jacobi.Vst.UnitTest.Core
         [TestMethod()]
         public void Test_FourCharacterCode_ToInt32()
         {
-            FourCharacterCode fcc = new FourCharacterCode("ABCD");
+            var fcc = new FourCharacterCode("ABCD");
             fcc.ToInt32().Should().Be(0x41424344);
         }
 
         [TestMethod()]
         public void Test_FourCharacterCode_ConstructChars()
         {
-            FourCharacterCode fcc = new FourCharacterCode('A', 'B', 'C', 'D');
+            var fcc = new FourCharacterCode('A', 'B', 'C', 'D');
             fcc.ToString().Should().Be("ABCD");
         }
 
         [TestMethod()]
         public void Test_FourCharacterCode_ConstructString()
         {
-            FourCharacterCode fcc = new FourCharacterCode("ABCD");
+            var fcc = new FourCharacterCode("ABCD");
             fcc.ToString().Should().Be("ABCD");
         }
     }

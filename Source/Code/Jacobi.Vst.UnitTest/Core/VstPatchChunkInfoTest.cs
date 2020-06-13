@@ -19,7 +19,7 @@ namespace Jacobi.Vst.UnitTest.Core
             int pluginVersion = 1234;
             int elementCount = 56;
 
-            VstPatchChunkInfo pci = new VstPatchChunkInfo(version, pluginId, pluginVersion, elementCount);
+            var pci = new VstPatchChunkInfo(version, pluginId, pluginVersion, elementCount);
 
             pci.Version.Should().Be(version);
             pci.PluginID.Should().Be(pluginId);
