@@ -33,7 +33,7 @@ Still a work in progress, but [here](https://obiwanjacobi.github.io/vst.net/inde
 
 ![](docs/_old/media/discord-logo.png)
 
-Discuss on the `VST.NET` Discord Server: https://discord.gg/rHBVGx
+Discuss on the `VST.NET` Discord Server: https://discord.gg/QyZqQDk
 
 Anyone can join and do not hesitate to ask a question or start a discussion.
 
