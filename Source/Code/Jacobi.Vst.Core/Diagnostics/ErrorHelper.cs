@@ -18,7 +18,7 @@
         /// <returns>Returns the error text for the specified <paramref name="e"/>xception and its <see cref="Exception.InnerException"/>s.</returns>
         public static string FormatException(Exception? e)
         {
-            StringBuilder text = new StringBuilder();
+            var text = new StringBuilder();
 
             while (e != null)
             {
