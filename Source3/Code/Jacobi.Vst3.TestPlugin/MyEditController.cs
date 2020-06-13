@@ -12,7 +12,7 @@ namespace Jacobi.Vst3.TestPlugin
     {
         public MyEditController()
         {
-            this.RootUnit = new Unit(1, "Root", null, null);
+            this.RootUnit = new Unit(0, "Root", null, null);
             this.Units.Add(this.RootUnit);
 
             var gainParam = new GainParameter(this.RootUnit.Info.Id);

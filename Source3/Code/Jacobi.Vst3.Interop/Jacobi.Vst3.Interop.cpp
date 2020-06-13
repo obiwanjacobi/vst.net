@@ -3,11 +3,11 @@
 #include <pluginterfaces/base/ipluginbase.h>
 
 
-bool InitDll()
+bool PLUGIN_API InitDll()
 {
     return true;
 }
-void ExitDll()
+void PLUGIN_API ExitDll()
 {
 
 }
@@ -16,8 +16,7 @@ Jacobi::Vst3::Core::IPluginFactory^ LoadPlugin()
 {
     auto interopPath = System::Reflection::Assembly::GetExecutingAssembly()->Location;
     auto pluginPath = System::IO::Path::GetDirectoryName(interopPath);
-    //auto pluginName = System::IO::Path::GetFileNameWithoutExtension(interopPath);
-    auto pluginName = gcnew System::String("Jacobi.Vst3.TestPlugin");
+    auto pluginName = System::IO::Path::GetFileNameWithoutExtension(interopPath);
 
     auto loader = gcnew Jacobi::Vst3::Core::Common::AssemblyLoader(pluginPath);
     auto pluginAssembly = loader->LoadPlugin(pluginName);
@@ -44,7 +43,7 @@ Jacobi::Vst3::Core::IPluginFactory^ LoadPlugin()
     return plugin;
 }
 
-Steinberg::IPluginFactory* GetPluginFactory()
+Steinberg::IPluginFactory* PLUGIN_API GetPluginFactory()
 {
     Jacobi::Vst3::Core::IPluginFactory^ pluginFactory = LoadPlugin();
     if (pluginFactory == nullptr) return nullptr;
