@@ -6,7 +6,7 @@
     /// <summary>
     /// Forwards the <see cref="IVstMidiProcessor"/> calls to the host stub.
     /// </summary>
-    internal class VstHostMidiProcessor : IVstMidiProcessor
+    internal sealed class VstHostMidiProcessor : IVstMidiProcessor
     {
         private readonly VstHost _host;
 

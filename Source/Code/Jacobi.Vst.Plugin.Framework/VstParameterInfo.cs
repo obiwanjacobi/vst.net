@@ -48,8 +48,7 @@
                 if (value != null && value.ParameterInfo != this)
                 {
                     throw new ArgumentException(
-                        Properties.Resources.VstParameterInfo_ParameterManagerNotLinked,
-                        nameof(ParameterManager));
+                        Properties.Resources.VstParameterInfo_ParameterManagerNotLinked, nameof(ParameterManager));
                 }
 
                 SetProperty(value, ref _paramMgr, nameof(ParameterManager));

@@ -12,7 +12,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <inheritdoc />
         protected override IVstPluginCommands24 CreatePluginCommands(VstPluginContext pluginCtx)
         {
-            return new VstPluginCommandsLegacy(pluginCtx);
+            return new VstPluginLegacyCommands(pluginCtx);
         }
     }
 }

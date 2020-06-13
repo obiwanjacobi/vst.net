@@ -10,6 +10,20 @@ namespace Jacobi.Vst.Plugin.Framework
     public class VstParameterCollection : ObservableKeyedCollection<string, VstParameter>, IActivatable
     {
         /// <summary>
+        /// Contructs an empty instance.
+        /// </summary>
+        public VstParameterCollection()
+        { }
+
+        /// <summary>
+        /// Constructs a prefilled instance.
+        /// </summary>
+        /// <param name="parameters">Must not be null.</param>
+        public VstParameterCollection(IEnumerable<VstParameter> parameters)
+            : base(parameters)
+        { }
+
+        /// <summary>
         /// Adds a range of <paramref name="parameters"/> to the collection.
         /// </summary>
         /// <param name="parameters">Must not be null.</param>

@@ -5,7 +5,7 @@
     /// <summary>
     /// Provides access to the sequencing functionality of the vst host.
     /// </summary>
-    internal class VstHostSequencer : IVstHostSequencer
+    internal sealed class VstHostSequencer : IVstHostSequencer
     {
         /// <summary>Reference to the root host object.</summary>
         private readonly VstHost _host;

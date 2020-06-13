@@ -16,7 +16,7 @@ namespace Interop {
 	/// unmanaged memory that backs up the buffers is coupled to the life time of the
 	/// VstAudioPrecisionBufferManager instance. Calling the <see cref="Dispose"/> method will free
 	/// the unmanaged memory.</remarks>
-	public ref class VstAudioPrecisionBufferManager : System::IDisposable
+	public ref class VstAudioPrecisionBufferManager sealed : System::IDisposable
 	{
 	public:
 		/// <summary>Constructs a new instance for the specified number and size of buffers.</summary>

@@ -9,7 +9,7 @@
     /// <remarks>
     /// Note that this type is defined as a structure. It is therefor a value-type.
     /// </remarks>
-    public struct FourCharacterCode
+    public readonly struct FourCharacterCode
     {
         /// <summary>
         /// Constructs a new instance based on four seperate characters.
@@ -20,7 +20,7 @@
         /// <param name="c4">Least significant character</param>
         public FourCharacterCode(char c1, char c2, char c3, char c4)
         {
-            _value = new string(new char[] { c1, c2, c3, c4 });
+            Value = new string(new char[] { c1, c2, c3, c4 });
         }
 
         /// <summary>
@@ -31,23 +31,13 @@
         {
             ThrowIfInvalidString(value, nameof(value));
 
-            _value = value;
+            Value = value;
         }
 
-        private string _value;
         /// <summary>
         /// Gets or sets the Four Character Code value as a string.
         /// </summary>
-        public string Value
-        {
-            get { return _value; }
-            set
-            {
-                ThrowIfInvalidString(value, nameof(value));
-
-                _value = value;
-            }
-        }
+        public string Value { get; }
 
         /// <summary>
         /// Retrieves the FCC as a string.

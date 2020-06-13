@@ -27,12 +27,12 @@ Vst2Plugin* VSTPluginMain (::Vst2HostCommand hostCommandHandler)
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
 		auto commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName);
 		
-		if(commandStub != nullptr)
+		if (commandStub != nullptr)
 		{
 			// retrieve the plugin info
 			auto pluginInfo = commandStub->GetPluginInfo(hostStub);
 
-			if(pluginInfo)
+			if (pluginInfo)
 			{
 				// create the native audio effect struct based on the plugin info
 				::Vst2Plugin* pPlugin = CreateAudioEffectInfo(pluginInfo);
@@ -73,7 +73,7 @@ Vst2Plugin* VSTPluginMain (::Vst2HostCommand hostCommandHandler)
 // Dispatcher Procedure called by the host
 Vst2IntPtr DispatcherProc(Vst2Plugin* pluginInfo, Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
 {
-	if(pluginInfo && pluginInfo->user)
+	if (pluginInfo && pluginInfo->user)
 	{
 		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
@@ -87,7 +87,7 @@ Vst2IntPtr DispatcherProc(Vst2Plugin* pluginInfo, Vst2PluginCommands command, in
 // Audio processing Procedure called by the host
 void Process32Proc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, int32_t sampleFrames)
 {
-	if(pluginInfo && pluginInfo->user)
+	if (pluginInfo && pluginInfo->user)
 	{
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
@@ -102,7 +102,7 @@ void Process32Proc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, int3
 // Audio precision processing Procedure called by the host
 void Process64Proc(Vst2Plugin* pluginInfo, double** inputs, double** outputs, int32_t sampleFrames)
 {
-	if(pluginInfo && pluginInfo->user)
+	if (pluginInfo && pluginInfo->user)
 	{
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
@@ -117,7 +117,7 @@ void Process64Proc(Vst2Plugin* pluginInfo, double** inputs, double** outputs, in
 // Parameter assignment Procedure called by the host
 void SetParameterProc(Vst2Plugin* pluginInfo, int32_t index, float value)
 {
-	if(pluginInfo && pluginInfo->user)
+	if (pluginInfo && pluginInfo->user)
 	{
 		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
@@ -129,7 +129,7 @@ void SetParameterProc(Vst2Plugin* pluginInfo, int32_t index, float value)
 // Parameter retrieval Procedure called by the host
 float GetParameterProc(Vst2Plugin* pluginInfo, int32_t index)
 {
-	if(pluginInfo && pluginInfo->user)
+	if (pluginInfo && pluginInfo->user)
 	{
 		auto proxy = (Jacobi::Vst::Plugin::Interop::PluginCommandProxy^)
 			System::Runtime::InteropServices::GCHandle::FromIntPtr(System::IntPtr(pluginInfo->user)).Target;
@@ -143,7 +143,7 @@ float GetParameterProc(Vst2Plugin* pluginInfo, int32_t index)
 // Audio processing (accumulating)  Procedure called by the host
 void Process32AccProc(Vst2Plugin* pluginInfo, float** inputs, float** outputs, int32_t sampleFrames)
 {
-	if(pluginInfo && pluginInfo->user)
+	if (pluginInfo && pluginInfo->user)
 	{
 		// Tell the GC we are doing real-time processing here
 		TimeCriticalScope scope;
@@ -183,13 +183,14 @@ Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ plug
 	// check for legacy members
 	auto legacyInfo = dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(pluginInfo);
 
-	if(legacyInfo != nullptr)
+	if (legacyInfo != nullptr)
 	{
 		// hook up the old accumulating process proc when legacy PluginInfo is passed in
 		pEffect->process = Jacobi::Vst::Interop::Process32AccProc;
 		pEffect->realQualities = legacyInfo->RealQualities;
 		pEffect->offQualities = legacyInfo->OfflineQualities;
 		pEffect->ioRatio = legacyInfo->IoRatio;
+		pEffect->flags = (Vst2PluginFlags)((int32_t)pEffect->flags | (int32_t)legacyInfo->LegacyFlags);
 	}
 
 	return pEffect;

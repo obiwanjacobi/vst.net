@@ -6,7 +6,7 @@
     /// <summary>
     /// Forwards the <see cref="IVstHostAutomation"/> calls to the host stub.
     /// </summary>
-    internal class VstHostAutomation : IVstHostAutomation
+    internal sealed class VstHostAutomation : IVstHostAutomation
     {
         private readonly VstHost _host;
 

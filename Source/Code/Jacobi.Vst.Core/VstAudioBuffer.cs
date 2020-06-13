@@ -6,7 +6,7 @@
     /// Represents an audio buffer (mono) passed to plugin by the host.
     /// </summary>
     /// <remarks>The VstAudioBuffer implements <see cref="IDirectBufferAccess32"/> for direct, unmanaged access to the buffer.</remarks>
-    public unsafe class VstAudioBuffer : IDirectBufferAccess32
+    public sealed class VstAudioBuffer : IDirectBufferAccess32
     {
         /// <summary>
         /// Constructs a new instance.
@@ -14,7 +14,7 @@
         /// <param name="buffer">The buffer as specified by the host. Must not be null.</param>
         /// <param name="length">The length of the <paramref name="buffer"/>.</param>
         /// <param name="canWrite">An indaction if the buffer content can be changed by plugin.</param>
-        public VstAudioBuffer(float* buffer, int length, bool canWrite)
+        public unsafe VstAudioBuffer(float* buffer, int length, bool canWrite)
         {
             Buffer = buffer;
             SampleCount = length;
@@ -25,15 +25,17 @@
         /// Gets the number of samples in the buffer.
         /// </summary>
         public int SampleCount { get; private set; }
+
         /// <summary>
         /// Gets an indication if the buffer is writable.
         /// </summary>
         /// <remarks>Writing to a read-only buffer will generate an exception.</remarks>
         public bool CanWrite { get; private set; }
+
         /// <summary>
         /// The raw buffer.
         /// </summary>
-        private float* Buffer { get; set; }
+        private unsafe float* Buffer { get; set; }
 
         /// <summary>
         /// Gets or sets (see remarks) the sample value at <paramref name="index"/>.

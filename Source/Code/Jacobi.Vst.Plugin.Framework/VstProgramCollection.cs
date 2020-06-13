@@ -10,6 +10,20 @@
     public class VstProgramCollection : ObservableCollection<VstProgram>
     {
         /// <summary>
+        /// Contructs an empty instance.
+        /// </summary>
+        public VstProgramCollection()
+        { }
+
+        /// <summary>
+        /// Constructs a prefilled instance.
+        /// </summary>
+        /// <param name="programs">Must not be null.</param>
+        public VstProgramCollection(IEnumerable<VstProgram> programs)
+            : base(programs)
+        { }
+
+        /// <summary>
         /// Adds a range of <see cref="VstProgram"/> instances to the collection.
         /// </summary>
         /// <param name="programs">Must not be null.</param>

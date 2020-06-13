@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -12,6 +13,26 @@ namespace Jacobi.Vst.Plugin.Framework.Common
     /// <typeparam name="ValueT">The type of collection items.</typeparam>
     public abstract class ObservableKeyedCollection<KeyT, ValueT> : KeyedCollection<KeyT, ValueT>, INotifyCollectionChanged
     {
+        /// <summary>
+        /// Contructs an empty instance.
+        /// </summary>
+        protected ObservableKeyedCollection()
+        { }
+
+        /// <summary>
+        /// Constructs a prefilled instance.
+        /// </summary>
+        /// <param name="items">Must not be null.</param>
+        protected ObservableKeyedCollection(IEnumerable<ValueT> items)
+        {
+            int i = 0;
+            foreach (var item in items)
+            {
+                SetItem(i, item);
+                i++;
+            }
+        }
+
         /// <inheritdoc/>
         protected override void ClearItems()
         {

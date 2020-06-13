@@ -10,14 +10,28 @@
     public class VstParameterInfoCollection : ObservableCollection<VstParameterInfo>
     {
         /// <summary>
+        /// Contructs an empty instance.
+        /// </summary>
+        public VstParameterInfoCollection()
+        { }
+
+        /// <summary>
+        /// Constructs a prefilled instance.
+        /// </summary>
+        /// <param name="parameterInfos">Must not be null.</param>
+        public VstParameterInfoCollection(IEnumerable<VstParameterInfo> parameterInfos)
+            : base(parameterInfos)
+        { }
+
+        /// <summary>
         /// Adds a range of <see cref="VstParameterInfo"/> instances to the collection.
         /// </summary>
-        /// <param name="enumerator">Must not be null.</param>
-        public void AddRange(IEnumerable<VstParameterInfo> enumerator)
+        /// <param name="parameterInfos">Must not be null.</param>
+        public void AddRange(IEnumerable<VstParameterInfo> parameterInfos)
         {
-            Throw.IfArgumentIsNull(enumerator, nameof(enumerator));
+            Throw.IfArgumentIsNull(parameterInfos, nameof(parameterInfos));
 
-            foreach (VstParameterInfo paramInfo in enumerator)
+            foreach (VstParameterInfo paramInfo in parameterInfos)
             {
                 Add(paramInfo);
             }

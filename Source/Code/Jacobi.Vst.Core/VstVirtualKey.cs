@@ -7,122 +7,122 @@
     /// </summary>
     public enum VstVirtualKey
     {
-        /// <summary>Null value.</summary>
-        VKEY_NONE,
+        /// <summary>Zero value.</summary>
+        None,
         /// <summary></summary>
-        VKEY_BACK,
+        Back,
         /// <summary></summary>
-        VKEY_TAB,
+        Tab,
         /// <summary></summary>
-        VKEY_CLEAR,
+        Clear,
         /// <summary></summary>
-        VKEY_RETURN,
+        Return,
         /// <summary></summary>
-        VKEY_PAUSE,
+        Pause,
         /// <summary></summary>
-        VKEY_ESCAPE,
+        Escape,
         /// <summary></summary>
-        VKEY_SPACE,
+        Space,
         /// <summary></summary>
-        VKEY_NEXT,
+        Next,
         /// <summary></summary>
-        VKEY_END,
+        End,
         /// <summary></summary>
-        VKEY_HOME,
+        Home,
         /// <summary></summary>
-        VKEY_LEFT,
+        Left,
         /// <summary></summary>
-        VKEY_UP,
+        Up,
         /// <summary></summary>
-        VKEY_RIGHT,
+        Right,
         /// <summary></summary>
-        VKEY_DOWN,
+        Down,
         /// <summary></summary>
-        VKEY_PAGEUP,
+        PageUp,
         /// <summary></summary>
-        VKEY_PAGEDOWN,
+        PageDown,
         /// <summary></summary>
-        VKEY_SELECT,
+        Select,
         /// <summary></summary>
-        VKEY_PRINT,
+        Print,
         /// <summary></summary>
-        VKEY_ENTER,
+        Enter,
         /// <summary></summary>
-        VKEY_SNAPSHOT,
+        Snapshot,
         /// <summary></summary>
-        VKEY_INSERT,
+        Insert,
         /// <summary></summary>
-        VKEY_DELETE,
+        Delete,
         /// <summary></summary>
-        VKEY_HELP,
+        Help,
         /// <summary></summary>
-        VKEY_NUMPAD0,
+        NumPad0,
         /// <summary></summary>
-        VKEY_NUMPAD1,
+        NumPad1,
         /// <summary></summary>
-        VKEY_NUMPAD2,
+        NumPad2,
         /// <summary></summary>
-        VKEY_NUMPAD3,
+        NumPad3,
         /// <summary></summary>
-        VKEY_NUMPAD4,
+        NumPad4,
         /// <summary></summary>
-        VKEY_NUMPAD5,
+        NumPad5,
         /// <summary></summary>
-        VKEY_NUMPAD6,
+        NumPad6,
         /// <summary></summary>
-        VKEY_NUMPAD7,
+        NumPad7,
         /// <summary></summary>
-        VKEY_NUMPAD8,
+        NumPad8,
         /// <summary></summary>
-        VKEY_NUMPAD9,
+        NumPad9,
         /// <summary></summary>
-        VKEY_MULTIPLY,
+        Multiply,
         /// <summary></summary>
-        VKEY_ADD,
+        Add,
         /// <summary></summary>
-        VKEY_SEPARATOR,
+        Separator,
         /// <summary></summary>
-        VKEY_SUBTRACT,
+        Subtract,
         /// <summary></summary>
-        VKEY_DECIMAL,
+        Decimal,
         /// <summary></summary>
-        VKEY_DIVIDE,
+        Divide,
         /// <summary></summary>
-        VKEY_F1,
+        F1,
         /// <summary></summary>
-        VKEY_F2,
+        F2,
         /// <summary></summary>
-        VKEY_F3,
+        F3,
         /// <summary></summary>
-        VKEY_F4,
+        F4,
         /// <summary></summary>
-        VKEY_F5,
+        F5,
         /// <summary></summary>
-        VKEY_F6,
+        F6,
         /// <summary></summary>
-        VKEY_F7,
+        F7,
         /// <summary></summary>
-        VKEY_F8,
+        F8,
         /// <summary></summary>
-        VKEY_F9,
+        F9,
         /// <summary></summary>
-        VKEY_F10,
+        F10,
         /// <summary></summary>
-        VKEY_F11,
+        F11,
         /// <summary></summary>
-        VKEY_F12,
+        F12,
         /// <summary></summary>
-        VKEY_NUMLOCK,
+        NumLock,
         /// <summary></summary>
-        VKEY_SCROLL,
+        Scroll,
         /// <summary></summary>
-        VKEY_SHIFT,
+        Shift,
         /// <summary></summary>
-        VKEY_CONTROL,
+        Control,
         /// <summary></summary>
-        VKEY_ALT,
+        Alt,
         /// <summary></summary>
-        VKEY_EQUALS
+        Equals
     }
 
     /// <summary>
@@ -132,12 +132,12 @@
     public enum VstModifierKeys
     {
         /// <summary>Shift</summary>
-        MODIFIER_SHIFT = 1 << 0,
+        Shift = 1 << 0,
         /// <summary>Alt</summary>
-        MODIFIER_ALTERNATE = 1 << 1,
+        Alternate = 1 << 1,
         /// <summary>Control on Mac</summary>
-        MODIFIER_COMMAND = 1 << 2,
+        Command = 1 << 2,
         /// <summary>Ctrl on PC, Apple on Mac</summary>
-        MODIFIER_CONTROL = 1 << 3
+        Control = 1 << 3
     }
 }

@@ -20,7 +20,7 @@
         /// <summary>Host will indicates the plug-in when something changes in plug-in´s routing/connections with #suspend/#resume/#setSpeakerArrangement.</summary>
         ReportConnectionChanges,
         /// <summary>Host supports <see cref="IVstHostCommands20.IoChanged"/>.</summary>
-        AcceptIOChanges,
+        AcceptIoChanges,
         /// <summary></summary>
         SizeWindow,
         /// <summary></summary>

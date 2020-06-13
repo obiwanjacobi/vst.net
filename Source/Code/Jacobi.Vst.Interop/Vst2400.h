@@ -701,7 +701,7 @@ struct Vst2FileType
     char mimeType2[128];
 };
 
-enum Vst2FileSelectCommand
+enum class Vst2FileSelectCommand
 {
     FileLoad,
     FileSave,

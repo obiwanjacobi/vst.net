@@ -1800,7 +1800,7 @@
         <member name="F:Jacobi.Vst.Core.VstHostCanDo.ReportConnectionChanges">
             <summary>Host will indicates the plug-in when something changes in plug-in´s routing/connections with #suspend/#resume/#setSpeakerArrangement.</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstHostCanDo.AcceptIOChanges">
+        <member name="F:Jacobi.Vst.Core.VstHostCanDo.AcceptIoChanges">
             <summary>Host supports <see cref="M:Jacobi.Vst.Core.IVstHostCommands20.IoChanged"/>.</summary>
         </member>
         <member name="F:Jacobi.Vst.Core.VstHostCanDo.SizeWindow">
@@ -3020,178 +3020,178 @@
             Platform-independent definition of Virtual Keys.
             </summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NONE">
-            <summary>Null value.</summary>
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.None">
+            <summary>Zero value.</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_BACK">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Back">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_TAB">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Tab">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_CLEAR">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Clear">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_RETURN">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Return">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_PAUSE">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Pause">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_ESCAPE">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Escape">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SPACE">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Space">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NEXT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Next">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_END">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.End">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_HOME">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Home">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_LEFT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Left">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_UP">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Up">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_RIGHT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Right">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_DOWN">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Down">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_PAGEUP">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.PageUp">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_PAGEDOWN">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.PageDown">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SELECT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Select">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_PRINT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Print">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_ENTER">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Enter">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SNAPSHOT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Snapshot">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_INSERT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Insert">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_DELETE">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Delete">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_HELP">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Help">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD0">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad0">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD1">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad1">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD2">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad2">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD3">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad3">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD4">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad4">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD5">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad5">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD6">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad6">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD7">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad7">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD8">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad8">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMPAD9">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumPad9">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_MULTIPLY">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Multiply">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_ADD">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Add">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SEPARATOR">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Separator">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SUBTRACT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Subtract">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_DECIMAL">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Decimal">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_DIVIDE">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Divide">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F1">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F1">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F2">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F2">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F3">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F3">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F4">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F4">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F5">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F5">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F6">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F6">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F7">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F7">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F8">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F8">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F9">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F9">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F10">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F10">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F11">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F11">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_F12">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.F12">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_NUMLOCK">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.NumLock">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SCROLL">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Scroll">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_SHIFT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Shift">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_CONTROL">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Control">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_ALT">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Alt">
             <summary></summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstVirtualKey.VKEY_EQUALS">
+        <member name="F:Jacobi.Vst.Core.VstVirtualKey.Equals">
             <summary></summary>
         </member>
         <member name="T:Jacobi.Vst.Core.VstModifierKeys">
@@ -3199,16 +3199,16 @@
             Platform-independent definition of modifier Keys
             </summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstModifierKeys.MODIFIER_SHIFT">
+        <member name="F:Jacobi.Vst.Core.VstModifierKeys.Shift">
             <summary>Shift</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstModifierKeys.MODIFIER_ALTERNATE">
+        <member name="F:Jacobi.Vst.Core.VstModifierKeys.Alternate">
             <summary>Alt</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstModifierKeys.MODIFIER_COMMAND">
+        <member name="F:Jacobi.Vst.Core.VstModifierKeys.Command">
             <summary>Control on Mac</summary>
         </member>
-        <member name="F:Jacobi.Vst.Core.VstModifierKeys.MODIFIER_CONTROL">
+        <member name="F:Jacobi.Vst.Core.VstModifierKeys.Control">
             <summary>Ctrl on PC, Apple on Mac</summary>
         </member>
     </members>

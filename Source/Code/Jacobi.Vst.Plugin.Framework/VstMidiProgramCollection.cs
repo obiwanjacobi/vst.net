@@ -3,6 +3,7 @@
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework.Common;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
 
     /// <summary>
@@ -10,6 +11,20 @@
     /// </summary>
     public class VstMidiProgramCollection : ObservableKeyedCollection<string, VstMidiProgram>
     {
+        /// <summary>
+        /// Contructs an empty instance.
+        /// </summary>
+        public VstMidiProgramCollection()
+        { }
+
+        /// <summary>
+        /// Constructs a prefilled instance.
+        /// </summary>
+        /// <param name="midiPrograms">Must not be null.</param>
+        public VstMidiProgramCollection(IEnumerable<VstMidiProgram> midiPrograms)
+            : base(midiPrograms)
+        { }
+
         /// <summary>
         /// Returns a unique key for the specified <paramref name="item"/>.
         /// </summary>

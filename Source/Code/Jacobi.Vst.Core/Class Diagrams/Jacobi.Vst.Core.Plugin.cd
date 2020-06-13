@@ -6,7 +6,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAAABAAAEAEAAAABACAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAAABAAAEAEAAAABAAAAAAAAAAIAAA=</HashCode>
       <FileName>Plugin\ManagedPluginFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,17 +17,10 @@
       <FileName>Plugin\VstPluginInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="Jacobi.Vst.Core.Plugin.IVstHostCommandStub">
-    <Position X="1.5" Y="7.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAA=</HashCode>
-      <FileName>Plugin\IVstHostCommandStub.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="Jacobi.Vst.Core.Plugin.IVstPluginCommandStub">
     <Position X="6.25" Y="16" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Plugin\IVstPluginCommandStub.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -39,7 +32,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="System.IDisposable">
-    <Position X="3.25" Y="5.75" Width="1.5" />
+    <Position X="3.5" Y="5.75" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Interface Name="Jacobi.Vst.Core.IVstHostCommands10">
@@ -83,6 +76,23 @@
       <HashCode>wBBAQAQEAAAAoAAIAAAAAAAAAAEAACABAAAQAACRAAA=</HashCode>
       <FileName>IVstPluginCommands.cs</FileName>
     </TypeIdentifier>
+  </Interface>
+  <Interface Name="Jacobi.Vst.Core.Plugin.IVstHostCommandProxy">
+    <Position X="3.25" Y="7.5" Width="2" />
+    <AssociationLine Name="Commands" Type="Jacobi.Vst.Core.IVstHostCommands20" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.25" Y="8.062" />
+        <Point X="1.312" Y="8.062" />
+        <Point X="1.312" Y="6.888" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Plugin\IVstHostCommandProxy.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Commands" />
+    </ShowAsAssociation>
   </Interface>
   <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>

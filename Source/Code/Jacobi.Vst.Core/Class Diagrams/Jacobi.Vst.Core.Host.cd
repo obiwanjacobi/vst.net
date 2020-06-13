@@ -6,7 +6,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAIUADCBAAAAAIgEBAAQCAAEQAkAIMEABBwAEBCA=</HashCode>
+      <HashCode>AAAAAgAAACAAgAAAAAEAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Host\VstHostCommandAdapter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -17,7 +17,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>yBRYQIQEAABAoMQICAwhAgKEAQFBgGAhQAAbAgqRQUA=</HashCode>
+      <HashCode>CAAAAgAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Host\VstPluginCommandAdapter.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -26,23 +26,32 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="Jacobi.Vst.Core.Host.IVstHostCommandStub" Collapsed="true">
-    <Position X="3" Y="7" Width="2" />
+    <Position X="3" Y="7.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Host\IVstHostCommandStub.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="PluginContext" />
+      <Property Name="Commands" />
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Jacobi.Vst.Core.Host.IVstPluginCommandStub" Collapsed="true">
-    <Position X="0.5" Y="11.75" Width="2" />
+    <Position X="3" Y="11.75" Width="2" />
+    <AssociationLine Name="Commands" Type="Jacobi.Vst.Core.IVstPluginCommands24" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="12.033" />
+        <Point X="1.438" Y="12.033" />
+        <Point X="1.438" Y="11.43" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Host\IVstPluginCommandStub.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="PluginContext" />
+      <Property Name="Commands" />
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Jacobi.Vst.Core.Host.IVstPluginContext">

@@ -14,10 +14,7 @@ namespace Jacobi.Vst.UnitTest.Core
         [TestMethod()]
         public void Test_FourCharacterCode_Value()
         {
-            var fcc = new FourCharacterCode
-            {
-                Value = "ABCD"
-            };
+            var fcc = new FourCharacterCode("ABCD");
             fcc.Value.Should().Be("ABCD");
             fcc.ToString().Should().Be("ABCD");
         }

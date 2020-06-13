@@ -23,7 +23,7 @@ namespace Jacobi.Vst.Plugin.Framework
         /// Constructs a readonly collection.
         /// </summary>
         /// <param name="events">Must not be null.</param>
-        public VstEventCollection(VstEvent[] events)
+        public VstEventCollection(IEnumerable<VstEvent> events)
             : base(events)
         {
             Throw.IfArgumentIsNull(events, nameof(events));

@@ -7,10 +7,10 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     /// <summary>
     /// Adds legacy commands implementation.
     /// </summary>
-    public class VstPluginCommandsLegacy : VstPluginCommands
+    public class VstPluginLegacyCommands : VstPluginCommands
     {
         /// <inheritdoc />
-        public VstPluginCommandsLegacy(VstPluginContext pluginCtx)
+        public VstPluginLegacyCommands(VstPluginContext pluginCtx)
             : base(pluginCtx)
         { }
 

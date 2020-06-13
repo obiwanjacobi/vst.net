@@ -104,6 +104,15 @@ namespace Jacobi.Vst.Plugin.Framework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A plugin cannot send events to the host when it does not implement IVstPluginMidiSource..
+        /// </summary>
+        internal static string VstHost_PluginRequiresMidiSource {
+            get {
+                return ResourceManager.GetString("VstHost_PluginRequiresMidiSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assigned VstParameterManager value is not linked to this VstParamaterInfo instance..
         /// </summary>
         internal static string VstParameterInfo_ParameterManagerNotLinked {

@@ -2,6 +2,7 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Core.Plugin;
+    using Jacobi.Vst.Plugin.Framework.Properties;
     using System;
 
     /// <summary>
@@ -84,7 +85,7 @@
                 if (_hostCapabilities == VstHostCapabilities.None)
                 {
                     // IVstHostSequencer.UpdatePluginIO works
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.AcceptIOChanges)) == VstCanDoResult.Yes)
+                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.AcceptIoChanges)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.AcceptIoChanges;
                     // IVstHostOfflineProcessor
                     if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.Offline)) == VstCanDoResult.Yes)
@@ -200,9 +201,7 @@
         {
             if (!Plugin.Supports<IVstPluginMidiSource>())
             {
-                // TODO: Resource?
-                throw new InvalidOperationException(
-                    "A plugin cannot send events to the host when it does not implement IVstPluginMidiSource.");
+                throw new InvalidOperationException(Resources.VstHost_PluginRequiresMidiSource);
             }
         }
     }

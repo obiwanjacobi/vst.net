@@ -16,6 +16,17 @@
             <typeparam name="KeyT">The type of collection item keys.</typeparam>
             <typeparam name="ValueT">The type of collection items.</typeparam>
         </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableKeyedCollection`2.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableKeyedCollection`2.#ctor(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="items">Must not be null.</param>
+        </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.Common.ObservableKeyedCollection`2.ClearItems">
             <inheritdoc/>
         </member>
@@ -1711,135 +1722,6 @@
             <param name="index">A zero-base index into the parameters collection.</param>
             <returns>Returns 0.0 when the plugin does not implement the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPluginParameters"/> interface.</returns>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy">
-            <summary>
-            Adds legacy commands implementation.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.#ctor(Jacobi.Vst.Plugin.Framework.Plugin.VstPluginContext)">
-            <inheritdoc />
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.GetProgramCategoriesCount">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns zero.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.CopyCurrentProgramTo(System.Int32)">
-            <summary>
-            Copies the parameter values of the current <see cref="T:Jacobi.Vst.Plugin.Framework.VstProgram"/> to the program indicated by <paramref name="programIndex"/>.
-            </summary>
-            <param name="programIndex">A zero-based index into the program collection.</param>
-            <returns>Returns true when the program parameter values were successfully copied.</returns>
-            <remarks>The name of the program itself is also copied.</remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.ConnectInput(System.Int32,System.Boolean)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="inputIndex">Not used.</param>
-            <param name="connected">Not used.</param>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.ConnectOutput(System.Int32,System.Boolean)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="outputIndex">Not used.</param>
-            <param name="connected">Not used.</param>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.GetCurrentPosition">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns zero.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.GetDestinationBuffer">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns null.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
-            <summary>
-            Assigns the <paramref name="blockSize"/> and <paramref name="sampleRate"/> to the audio processor.
-            </summary>
-            <param name="blockSize">The number of samples to be expected in each audio processing cycle.</param>
-            <param name="sampleRate">The nuumber of samples per second.</param>
-            <returns>Returns true when the information was assigned to the audio processor. 
-            When the plugin does not implement the audio processor, false is returned.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.GetErrorText">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns null.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.Idle">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.GetIcon">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns null.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.SetViewPosition(System.Drawing.Point@)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="position">Not used.</param>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.KeysRequired">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.GetVu">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns 0.0.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.EditorKey(System.Int32)">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="keycode">Not used.</param>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.EditorTop">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.EditorSleep">
-            <summary>
-            Not implemented.
-            </summary>
-            <returns>Always returns false.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.Identify">
-            <summary>
-            Identifies with 'NvEf'.
-            </summary>
-            <returns>Always returns the integer value for 'NvEf'.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsLegacy.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
-            <summary>
-            Not implemented.
-            </summary>
-            <param name="inputs">Not used.</param>
-            <param name="outputs">Not used.</param>
-            <remarks>Method does nothing.</remarks>
-        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginContext">
             <summary>
             Contains all root references in context of a plugin.
@@ -1858,6 +1740,135 @@
             <summary>
             Disposes all members, cascades the Dispose call.
             </summary>
+        </member>
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands">
+            <summary>
+            Adds legacy commands implementation.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.#ctor(Jacobi.Vst.Plugin.Framework.Plugin.VstPluginContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.GetProgramCategoriesCount">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns zero.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.CopyCurrentProgramTo(System.Int32)">
+            <summary>
+            Copies the parameter values of the current <see cref="T:Jacobi.Vst.Plugin.Framework.VstProgram"/> to the program indicated by <paramref name="programIndex"/>.
+            </summary>
+            <param name="programIndex">A zero-based index into the program collection.</param>
+            <returns>Returns true when the program parameter values were successfully copied.</returns>
+            <remarks>The name of the program itself is also copied.</remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.ConnectInput(System.Int32,System.Boolean)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="inputIndex">Not used.</param>
+            <param name="connected">Not used.</param>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.ConnectOutput(System.Int32,System.Boolean)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="outputIndex">Not used.</param>
+            <param name="connected">Not used.</param>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.GetCurrentPosition">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns zero.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.GetDestinationBuffer">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns null.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.SetBlockSizeAndSampleRate(System.Int32,System.Single)">
+            <summary>
+            Assigns the <paramref name="blockSize"/> and <paramref name="sampleRate"/> to the audio processor.
+            </summary>
+            <param name="blockSize">The number of samples to be expected in each audio processing cycle.</param>
+            <param name="sampleRate">The nuumber of samples per second.</param>
+            <returns>Returns true when the information was assigned to the audio processor. 
+            When the plugin does not implement the audio processor, false is returned.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.GetErrorText">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns null.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.Idle">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.GetIcon">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns null.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.SetViewPosition(System.Drawing.Point@)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="position">Not used.</param>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.KeysRequired">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.GetVu">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns 0.0.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.EditorKey(System.Int32)">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="keycode">Not used.</param>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.EditorTop">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.EditorSleep">
+            <summary>
+            Not implemented.
+            </summary>
+            <returns>Always returns false.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.Identify">
+            <summary>
+            Identifies with 'NvEf'.
+            </summary>
+            <returns>Always returns the integer value for 'NvEf'.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginLegacyCommands.ProcessAcc(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+            <summary>
+            Not implemented.
+            </summary>
+            <param name="inputs">Not used.</param>
+            <param name="outputs">Not used.</param>
+            <remarks>Method does nothing.</remarks>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase">
             <summary>
@@ -2001,6 +2012,11 @@
               Looks up a localized string similar to The VstEventCollection is read-only..
             </summary>
         </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.VstHost_PluginRequiresMidiSource">
+            <summary>
+              Looks up a localized string similar to A plugin cannot send events to the host when it does not implement IVstPluginMidiSource..
+            </summary>
+        </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.VstParameterInfo_ParameterManagerNotLinked">
             <summary>
               Looks up a localized string similar to Assigned VstParameterManager value is not linked to this VstParamaterInfo instance..
@@ -2043,6 +2059,17 @@
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstConnectionInfo"/> instances.
             </summary>
         </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstConnectionInfoCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstConnectionInfoCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstConnectionInfo})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="connectionInfos">Must not be null.</param>
+        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.VstEventCollection">
             <summary>
             Manages a collection of <see cref="T:Jacobi.Vst.Core.VstEvent"/> instances.
@@ -2054,7 +2081,7 @@
             Constructs a read/write collection
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.#ctor(Jacobi.Vst.Core.VstEvent[])">
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstEventCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Core.VstEvent})">
             <summary>
             Constructs a readonly collection.
             </summary>
@@ -2150,6 +2177,17 @@
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstMidiCategory"/> instances.
             </summary>
         </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiCategoryCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiCategoryCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstMidiCategory})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="midiCategories">Must not be null.</param>
+        </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiCategoryCollection.GetKeyForItem(Jacobi.Vst.Plugin.Framework.VstMidiCategory)">
             <summary>
             Returns a unique key for the specified <paramref name="item"/>.
@@ -2191,6 +2229,17 @@
             <summary>
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstMidiChannelInfo"/> instances.
             </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiChannelInfoCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiChannelInfoCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstMidiChannelInfo})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="channelInfos">Must not be null.</param>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.VstMidiProgram">
             <summary>
@@ -2240,6 +2289,17 @@
             <summary>
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstMidiProgram"/> instances.
             </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiProgramCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiProgramCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstMidiProgram})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="midiPrograms">Must not be null.</param>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstMidiProgramCollection.GetKeyForItem(Jacobi.Vst.Plugin.Framework.VstMidiProgram)">
             <summary>
@@ -2376,6 +2436,17 @@
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameterCategory"/> instances.
             </summary>
         </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterCategoryCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterCategoryCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstParameterCategory})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="parameterCategories">Must not be null.</param>
+        </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterCategoryCollection.GetKeyForItem(Jacobi.Vst.Plugin.Framework.VstParameterCategory)">
             <summary>
             Returns a unique key for the specified <paramref name="item"/>.
@@ -2393,6 +2464,17 @@
             <summary>
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameter"/> instances.
             </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstParameter})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="parameters">Must not be null.</param>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterCollection.AddRange(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstParameter})">
             <summary>
@@ -2580,11 +2662,22 @@
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameterInfo"/> instances.
             </summary>
         </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterInfoCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterInfoCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstParameterInfo})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="parameterInfos">Must not be null.</param>
+        </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterInfoCollection.AddRange(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstParameterInfo})">
             <summary>
             Adds a range of <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameterInfo"/> instances to the collection.
             </summary>
-            <param name="enumerator">Must not be null.</param>
+            <param name="parameterInfos">Must not be null.</param>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.VstParameterManager">
             <summary>
@@ -2827,6 +2920,17 @@
             <summary>
             Manages a collection of <see cref="T:Jacobi.Vst.Plugin.Framework.VstProgram"/> instances.
             </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstProgramCollection.#ctor">
+            <summary>
+            Contructs an empty instance.
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstProgramCollection.#ctor(System.Collections.Generic.IEnumerable{Jacobi.Vst.Plugin.Framework.VstProgram})">
+            <summary>
+            Constructs a prefilled instance.
+            </summary>
+            <param name="programs">Must not be null.</param>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.VstProgramCollection.AddRange(Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
             <summary>

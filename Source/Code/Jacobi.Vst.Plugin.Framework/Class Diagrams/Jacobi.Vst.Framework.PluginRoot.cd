@@ -10,17 +10,13 @@
       <FileName>VstProductInfo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Jacobi.Vst.Core.VstPluginCategory" Collapsed="true">
-    <Position X="1.5" Y="5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
   <Class Name="Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices">
     <Position X="4.25" Y="6" Width="2.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAAAAQCAAAAAAABAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>gAAAAAAQAAAAAAAQCAAAAAAABAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Plugin\VstPluginWithServices.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -41,7 +37,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEiAAIgAAAAAAAAQAFAAACCAIAAAAAAgADAA=</HashCode>
+      <HashCode>AAAAAAAAEiAAIgAAAAAAAAQAFAAACCAIgAAAAAgADAA=</HashCode>
       <FileName>Plugin\VstPlugin.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -49,6 +45,10 @@
       <Property Name="Capabilities" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Jacobi.Vst.Core.VstPluginCategory">
+    <Position X="1.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
   </Class>
   <Enum Name="Jacobi.Vst.Plugin.Framework.VstPluginCapabilities">
     <Position X="1.5" Y="1" Width="1.75" />

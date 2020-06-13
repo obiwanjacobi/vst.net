@@ -10,8 +10,6 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     /// </summary>
     public abstract class VstPluginWithServices : VstPlugin
     {
-        private IServiceProvider? _services;
-
         /// <inheritdoc/>
         protected VstPluginWithServices(string name, VstProductInfo productInfo,
             VstPluginCategory category, VstPluginCapabilities capabilities,
@@ -27,7 +25,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
 
         private IServiceProvider GetServices()
         {
-            if (_services == null)
+            if (Services == null)
             {
                 var serviceCollection = new ServiceCollection();
                 if (Configuration != null)
@@ -35,20 +33,17 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
                     serviceCollection.AddSingleton<IConfiguration>(Configuration);
                 }
                 RegisterServices(serviceCollection);
-                _services = serviceCollection.BuildServiceProvider();
+                Services = serviceCollection.BuildServiceProvider();
             }
 
-            return _services;
+            return Services;
         }
 
         /// <summary>
         /// Provides access to all configured/registered services.
         /// </summary>
         /// <remarks>Does not create the service provider if it does not exist, so may return null.</remarks>
-        public IServiceProvider? Services
-        {
-            get { return _services; }
-        }
+        public IServiceProvider? Services { get; private set; }
 
         /// <summary>
         /// Indicates if the interface <typeparamref name="T"/> is supported by the object.

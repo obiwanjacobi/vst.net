@@ -7,7 +7,7 @@
     /// <summary>
     /// Forwards the <see cref="IVstHostShell"/> methods to the host stub.
     /// </summary>
-    internal class VstHostShell : IVstHostShell
+    internal sealed class VstHostShell : IVstHostShell
     {
         private readonly VstHost _host;
 
@@ -46,7 +46,7 @@
             {
                 if (_culture == null)
                 {
-                    VstHostLanguage language = _host.HostCommandProxy.Commands.GetLanguage();
+                    var language = _host.HostCommandProxy.Commands.GetLanguage();
 
                     _culture = language switch
                     {

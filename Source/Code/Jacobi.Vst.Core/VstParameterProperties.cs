@@ -122,9 +122,7 @@
     /// Flags for the parameter properties.
     /// </summary>
     [Flags]
-#pragma warning disable S2344 // Enumeration type names should not have "Flags" or "Enum" suffixes
     public enum VstParameterPropertiesFlags
-#pragma warning restore S2344 // Enumeration type names should not have "Flags" or "Enum" suffixes
     {
         /// <summary>Parameter is a switch (on/off).</summary>
         ParameterIsSwitch = 1 << 0,
