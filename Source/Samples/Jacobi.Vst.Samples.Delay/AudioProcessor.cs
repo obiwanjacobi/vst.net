@@ -9,7 +9,6 @@ namespace Jacobi.Vst.Samples.Delay
     internal sealed class AudioProcessor : VstPluginAudioProcessor
     {
         private readonly Plugin _plugin;
-        private readonly Delay _delay;
 
         /// <summary>
         /// Constructs a new instance.
@@ -19,13 +18,13 @@ namespace Jacobi.Vst.Samples.Delay
             : base(1, 1, 0, noSoundInStop: true)
         {
             _plugin = plugin;
-            _delay = new Delay();
+            Delay = new Delay();
         }
 
         /// <summary>
         /// Gets the Delay effect.
         /// </summary>
-        public Delay Delay { get { return _delay; } }
+        public Delay Delay { get; }
 
         /// <summary>
         /// Gets or sets the sample rate.
@@ -33,8 +32,8 @@ namespace Jacobi.Vst.Samples.Delay
         /// <remarks>This property is a proxy for the <see cref="T:Jacobi.Vst.Samples.Delay.Delay.SampleRate"/> property.</remarks>
         public override float SampleRate
         {
-            get { return _delay.SampleRate; }
-            set { _delay.SampleRate = value; }
+            get { return Delay.SampleRate; }
+            set { Delay.SampleRate = value; }
         }
 
         /// <summary>

@@ -57,9 +57,11 @@
                 throw new ArgumentException(Properties.Resources.VstParameterNormalizationInfo_ParameterInfoInvalid, nameof(paramInfo));
             }
 
-            paramInfo.NormalizationInfo = new VstParameterNormalizationInfo();
-            paramInfo.NormalizationInfo.ScaleFactor = paramInfo.MaxInteger - paramInfo.MinInteger;
-            paramInfo.NormalizationInfo.NullOffset = -paramInfo.MinInteger;
+            paramInfo.NormalizationInfo = new VstParameterNormalizationInfo
+            {
+                ScaleFactor = paramInfo.MaxInteger - paramInfo.MinInteger,
+                NullOffset = -paramInfo.MinInteger
+            };
         }
     }
 }

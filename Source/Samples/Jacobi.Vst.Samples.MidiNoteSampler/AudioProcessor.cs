@@ -28,21 +28,7 @@
             }
             else // audio thru
             {
-                VstAudioBuffer input = inChannels[0];
-                VstAudioBuffer output = outChannels[0];
-
-                for (int index = 0; index < output.SampleCount; index++)
-                {
-                    output[index] = input[index];
-                }
-
-                input = inChannels[1];
-                output = outChannels[1];
-
-                for (int index = 0; index < output.SampleCount; index++)
-                {
-                    output[index] = input[index];
-                }
+                base.Process(inChannels, outChannels);
             }
 
             if (_plugin.SampleManager.IsRecording)

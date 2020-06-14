@@ -2702,6 +2702,25 @@
             </summary>
             <param name="parameterInfos">Must not be null.</param>
         </member>
+        <member name="T:Jacobi.Vst.Plugin.Framework.VstParameterInfoExtensions">
+            <summary>
+            Extension methods for VstParamaterInfo
+            </summary>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterInfoExtensions.Normalize(Jacobi.Vst.Plugin.Framework.VstParameterInfo)">
+            <summary>
+            Attaches a VstParameterNormalizationInfo instance to the parameter info.
+            </summary>
+            <param name="paramInfo">Must not be null.</param>
+            <returns>Returns <paramref name="paramInfo"/> for fluent syntax.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterInfoExtensions.ToManager(Jacobi.Vst.Plugin.Framework.VstParameterInfo)">
+            <summary>
+            Creates a <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameterManager"/> instance for the specified <paramref name="paramInfo"/> (this).
+            </summary>
+            <param name="paramInfo">Must not be null</param>
+            <returns>Never returns null.</returns>
+        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.VstParameterManager">
             <summary>
             catches parameter changes and communicates these back to the source component

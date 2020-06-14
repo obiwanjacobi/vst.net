@@ -39,7 +39,7 @@
             {
                 if (evnt.EventType == VstEventTypes.MidiEvent)
                 {
-                    VstMidiEvent midiEvent = (VstMidiEvent)evnt;
+                    var midiEvent = (VstMidiEvent)evnt;
 
                     // pass note on and note off to the sample manager
                     if ((midiEvent.Data[0] & 0xF0) == 0x80)

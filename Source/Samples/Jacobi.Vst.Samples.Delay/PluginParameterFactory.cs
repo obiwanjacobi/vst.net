@@ -7,8 +7,6 @@
     /// </summary>
     internal sealed class PluginParameterFactory
     {
-        // we bypass thread safety concerns for now...
-
         /// <summary>
         /// A collection of parameter categories.
         /// </summary>
@@ -46,8 +44,7 @@
                     paramInfo.Category = Categories[0];
                 }
 
-                VstParameter param = new VstParameter(paramInfo);
-
+                var param = new VstParameter(paramInfo);
                 parameters.Add(param);
             }
         }

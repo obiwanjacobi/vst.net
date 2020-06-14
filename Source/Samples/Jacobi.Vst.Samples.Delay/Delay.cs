@@ -40,8 +40,9 @@
                 StepFloat = 10.0f,
                 DefaultValue = 200f
             };
-            _delayTimeMgr = new VstParameterManager(paramInfo);
-            VstParameterNormalizationInfo.AttachTo(paramInfo);
+            _delayTimeMgr = paramInfo
+                .Normalize()
+                .ToManager();
 
             _paramInfos.Add(paramInfo);
 
@@ -57,8 +58,9 @@
                 StepFloat = 0.05f,
                 DefaultValue = 0.2f
             };
-            _feedbackMgr = new VstParameterManager(paramInfo);
-            VstParameterNormalizationInfo.AttachTo(paramInfo);
+            _feedbackMgr = paramInfo
+                .Normalize()
+                .ToManager();
 
             _paramInfos.Add(paramInfo);
 
@@ -74,8 +76,9 @@
                 StepFloat = 0.05f,
                 DefaultValue = 0.8f
             };
-            _dryLevelMgr = new VstParameterManager(paramInfo);
-            VstParameterNormalizationInfo.AttachTo(paramInfo);
+            _dryLevelMgr = paramInfo
+                .Normalize()
+                .ToManager();
 
             _paramInfos.Add(paramInfo);
 
@@ -91,8 +94,9 @@
                 StepFloat = 0.05f,
                 DefaultValue = 0.4f
             };
-            _wetLevelMgr = new VstParameterManager(paramInfo);
-            VstParameterNormalizationInfo.AttachTo(paramInfo);
+            _wetLevelMgr = paramInfo
+                .Normalize()
+                .ToManager();
 
             _paramInfos.Add(paramInfo);
 
@@ -103,7 +107,7 @@
 
         private void DelayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "CurrentValue")
+            if (e.PropertyName == nameof(VstParameterManager.CurrentValue))
             {
                 var paramMgr = (VstParameterManager)sender;
                 _bufferLength = (int)(paramMgr.CurrentValue * _sampleRate / 1000);

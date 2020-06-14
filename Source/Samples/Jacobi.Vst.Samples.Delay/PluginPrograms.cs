@@ -8,7 +8,7 @@
     /// </summary>
     internal sealed class PluginPrograms : VstPluginPrograms
     {
-        readonly Plugin _plugin;
+        private readonly Plugin _plugin;
 
         /// <summary>
         /// Constructs a new instance.
@@ -25,9 +25,9 @@
         /// <returns>A filled program collection.</returns>
         protected override VstProgramCollection CreateProgramCollection()
         {
-            VstProgramCollection programs = new VstProgramCollection();
+            var programs = new VstProgramCollection();
 
-            VstProgram prog = new VstProgram(_plugin.ParameterFactory.Categories)
+            var prog = new VstProgram(_plugin.ParameterFactory.Categories)
             {
                 Name = "Fx Program 1"
             };

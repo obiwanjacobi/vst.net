@@ -52,7 +52,7 @@
             {
                 if (evnt.EventType != VstEventTypes.MidiEvent) continue;
 
-                VstMidiEvent midiEvent = (VstMidiEvent)evnt;
+                var midiEvent = (VstMidiEvent)evnt;
                 VstMidiEvent mappedEvent = null;
 
                 if (((midiEvent.Data[0] & 0xF0) == 0x80 || (midiEvent.Data[0] & 0xF0) == 0x90))

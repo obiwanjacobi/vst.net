@@ -15,7 +15,7 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
         /// </summary>
         public Plugin()
             : base("VST.NET Midi Note Mapper", 0x30313233,
-                  new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
+                new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
                 VstPluginCategory.Synth)
         {
             NoteMap = new MapNoteItemList();

@@ -24,14 +24,14 @@
 
         public void ReadPrograms(Stream stream, VstProgramCollection programs)
         {
-            BinaryReader reader = new BinaryReader(stream, _encoding);
+            var reader = new BinaryReader(stream, _encoding);
 
             _plugin.NoteMap.Clear();
             int count = reader.ReadInt32();
 
             for (int n = 0; n < count; n++)
             {
-                MapNoteItem item = new MapNoteItem
+                var item = new MapNoteItem
                 {
                     KeyName = reader.ReadString(),
                     TriggerNoteNumber = reader.ReadByte(),
@@ -44,7 +44,7 @@
 
         public void WritePrograms(Stream stream, VstProgramCollection programs)
         {
-            BinaryWriter writer = new BinaryWriter(stream, _encoding);
+            var writer = new BinaryWriter(stream, _encoding);
 
             writer.Write(_plugin.NoteMap.Count);
 

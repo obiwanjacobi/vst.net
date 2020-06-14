@@ -40,7 +40,7 @@
 
             protected override VstProgram CreateProgram()
             {
-                VstProgram program = new VstProgram(_plugin.ParameterFactory.Categories);
+                var program = new VstProgram(_plugin.ParameterFactory.Categories);
 
                 _plugin.ParameterFactory.CreateParameters(program.Parameters);
 
