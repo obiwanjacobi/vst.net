@@ -20,7 +20,7 @@ namespace Jacobi.Vst.Samples.Delay
         {
             ParameterFactory = new PluginParameterFactory();
 
-            AudioProcessor audioProcessor = GetInstance<AudioProcessor>();
+            var audioProcessor = GetInstance<AudioProcessor>();
             // add delay parameters to factory
             ParameterFactory.ParameterInfos.AddRange(audioProcessor.Delay.ParameterInfos);
         }
@@ -32,9 +32,9 @@ namespace Jacobi.Vst.Samples.Delay
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll<AudioProcessor>();
-            services.AddSingletonAll<PluginPersistence>();
-            services.AddSingletonAll<PluginPrograms>();
+            services.AddSingletonAll(new AudioProcessor(this));
+            services.AddSingletonAll(new PluginPersistence(this));
+            services.AddSingletonAll(new PluginPrograms(this));
         }
     }
 }

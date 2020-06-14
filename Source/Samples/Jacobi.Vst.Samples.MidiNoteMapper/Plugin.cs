@@ -23,10 +23,10 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll<AudioProcessor>();
-            services.AddSingletonAll<PluginEditor>();
-            services.AddSingletonAll<MidiProcessor>();
-            services.AddSingletonAll<PluginPersistence>();
+            services.AddSingletonAll(new AudioProcessor(this));
+            services.AddSingletonAll(new PluginEditor(this));
+            services.AddSingletonAll(new MidiProcessor(this));
+            services.AddSingletonAll(new PluginPersistence(this));
         }
 
         #region IVstPluginMidiSource Members

@@ -23,8 +23,8 @@ namespace Jacobi.Vst.Samples.MidiNoteSampler
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll<AudioProcessor>();
-            services.AddSingletonAll<MidiProcessor>();
+            services.AddSingletonAll(new AudioProcessor(this));
+            services.AddSingletonAll(new MidiProcessor(this));
         }
 
         /// <summary>
