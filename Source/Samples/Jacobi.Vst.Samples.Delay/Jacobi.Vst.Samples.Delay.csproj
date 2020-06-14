@@ -8,6 +8,7 @@
     <Company>Jacobi Software</Company>
     <Product>VST.NET Samples</Product>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>An Effect Plugin that implements a Delay and supports Parameters and Programs.</Description>
   </PropertyGroup>
 
   <ItemGroup>

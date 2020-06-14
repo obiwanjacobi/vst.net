@@ -6,7 +6,7 @@
     /// <summary>
     /// Implements the audio processing of the plugin using the <see cref="SampleManager"/>.
     /// </summary>
-    internal sealed class AudioProcessor : VstPluginAudioProcessorBase
+    internal sealed class AudioProcessor : VstPluginAudioProcessor
     {
         private readonly Plugin _plugin;
 
@@ -15,7 +15,7 @@
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
         public AudioProcessor(Plugin plugin)
-            : base(2, 2, 0)
+            : base(2, 2, 0, noSoundInStop: true)
         {
             _plugin = plugin;
         }

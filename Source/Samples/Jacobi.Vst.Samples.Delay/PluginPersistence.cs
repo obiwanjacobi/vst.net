@@ -10,7 +10,7 @@
     /// <summary>
     /// This class manages custom persistence for all the plugin's programs and parameters.
     /// </summary>
-    internal sealed class PluginPersistence : VstPluginPersistenceBase
+    internal sealed class PluginPersistence : VstPluginPersistence
     {
         private readonly Plugin _plugin;
 
@@ -23,12 +23,12 @@
             _plugin = plugin;
         }
 
-        protected override VstProgramReaderBase CreateProgramReader(Stream input)
+        protected override VstProgramReader CreateProgramReader(Stream input)
         {
             return new DelayProgramReader(_plugin, input, Encoding);
         }
 
-        private sealed class DelayProgramReader : VstProgramReaderBase
+        private sealed class DelayProgramReader : VstProgramReader
         {
             private readonly Plugin _plugin;
 

@@ -6,7 +6,7 @@
     /// <summary>
     /// This class manages the plugin programs.
     /// </summary>
-    internal sealed class PluginPrograms : VstPluginProgramsBase
+    internal sealed class PluginPrograms : VstPluginPrograms
     {
         readonly Plugin _plugin;
 

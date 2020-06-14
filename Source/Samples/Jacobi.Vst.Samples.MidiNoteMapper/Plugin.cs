@@ -14,20 +14,19 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
-            : base("VST.NET Midi Note Mapper",
+            : base("VST.NET Midi Note Mapper", 0x30313233,
                   new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
-                VstPluginCategory.Synth, VstPluginCapabilities.NoSoundInStop, 0, 0x30313233)
+                VstPluginCategory.Synth)
         {
             NoteMap = new MapNoteItemList();
         }
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddPluginComponent(new AudioProcessor(this));
-            services.AddPluginComponent(new PluginEditor(this));
-            services.AddPluginComponent(new MidiProcessor(this));
-            services.AddPluginComponent(new PluginPersistence(this));
-            services.AddSingleton<IVstPluginMidiSource>(this);
+            services.AddSingletonAll<AudioProcessor>();
+            services.AddSingletonAll<PluginEditor>();
+            services.AddSingletonAll<MidiProcessor>();
+            services.AddSingletonAll<PluginPersistence>();
         }
 
         #region IVstPluginMidiSource Members
@@ -61,6 +60,5 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
         /// Gets the map where all the note map items are stored.
         /// </summary>
         public MapNoteItemList NoteMap { get; private set; }
-
     }
 }

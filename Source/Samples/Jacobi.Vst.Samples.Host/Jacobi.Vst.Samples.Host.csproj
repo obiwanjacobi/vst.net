@@ -9,6 +9,7 @@
     <Company>Jacobi Software</Company>
     <Product>VST.NET Samples</Product>
     <Platforms>x64;x86</Platforms>
+    <Description>A very simplistic Host that demonstrates the usage of the host interop objects.</Description>
   </PropertyGroup>
 
   <ItemGroup>

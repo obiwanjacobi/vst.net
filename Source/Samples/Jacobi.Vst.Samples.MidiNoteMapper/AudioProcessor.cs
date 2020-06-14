@@ -7,7 +7,7 @@
     /// <summary>
     /// A dummy audio processor only used for the timing of midi processing.
     /// </summary>
-    internal sealed class AudioProcessor : VstPluginAudioProcessorBase
+    internal sealed class AudioProcessor : VstPluginAudioProcessor
     {
         private readonly Plugin _plugin;
         private readonly MidiProcessor _midiProcessor;
@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
         public AudioProcessor(Plugin plugin)
-            : base(0, 0, 0)
+            : base(0, 0, 0, noSoundInStop: true)
         {
             _plugin = plugin;
 

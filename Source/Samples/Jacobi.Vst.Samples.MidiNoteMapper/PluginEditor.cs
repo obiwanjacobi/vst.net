@@ -11,8 +11,8 @@
     internal sealed class PluginEditor : IVstPluginEditor
     {
         private readonly Plugin _plugin;
-
-        private readonly WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper = new WinFormsControlWrapper<MidiNoteMapperUI>();
+        private readonly WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper =
+            new WinFormsControlWrapper<MidiNoteMapperUI>();
 
         /// <summary>
         /// Constructs a new instance.

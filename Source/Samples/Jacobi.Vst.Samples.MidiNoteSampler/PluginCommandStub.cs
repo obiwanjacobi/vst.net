@@ -6,7 +6,7 @@ namespace Jacobi.Vst.Samples.MidiNoteSampler
     /// <summary>
     /// The public Plugin Command Stub implementation derived from the framework provided <see cref="StdPluginCommandStub"/>.
     /// </summary>
-    public sealed class PluginCommandStub : StdPluginLegacyCommandStub
+    public sealed class PluginCommandStub : StdPluginCommandStub
     {
         /// <summary>
         /// Called by the framework to create the plugin root class.

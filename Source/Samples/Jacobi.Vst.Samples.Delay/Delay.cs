@@ -98,14 +98,14 @@
 
             #endregion
 
-            _delayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(_delayTimeMgr_PropertyChanged);
+            _delayTimeMgr.PropertyChanged += new PropertyChangedEventHandler(DelayTimeMgr_PropertyChanged);
         }
 
-        private void _delayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DelayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "CurrentValue")
             {
-                VstParameterManager paramMgr = (VstParameterManager)sender;
+                var paramMgr = (VstParameterManager)sender;
                 _bufferLength = (int)(paramMgr.CurrentValue * _sampleRate / 1000);
             }
         }

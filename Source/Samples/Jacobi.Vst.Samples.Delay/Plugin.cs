@@ -14,9 +14,9 @@ namespace Jacobi.Vst.Samples.Delay
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
-            : base("VST.NET Delay Plugin",
+            : base("VST.NET Delay Plugin", 0x3A3A3A3A,
                 new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
-                VstPluginCategory.RoomFx, VstPluginCapabilities.None, 0, 0x3A3A3A3A)
+                VstPluginCategory.RoomFx)
         {
             ParameterFactory = new PluginParameterFactory();
 
@@ -32,14 +32,9 @@ namespace Jacobi.Vst.Samples.Delay
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            var audioProcessor = new AudioProcessor(this);
-            services.AddPluginComponent(audioProcessor);
-
-            var persistence = new PluginPersistence(this);
-            services.AddPluginComponent(persistence);
-
-            var programs = new PluginPrograms(this);
-            services.AddPluginComponent(programs);
+            services.AddSingletonAll<AudioProcessor>();
+            services.AddSingletonAll<PluginPersistence>();
+            services.AddSingletonAll<PluginPrograms>();
         }
     }
 }
