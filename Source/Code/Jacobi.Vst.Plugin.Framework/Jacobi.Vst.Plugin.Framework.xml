@@ -1990,7 +1990,7 @@
             <summary>
             Override to configure LogProviders.
             </summary>
-            <param name="logger">Is never null.</param>
+            <param name="builder">Is never null.</param>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Properties.Resources">
             <summary>

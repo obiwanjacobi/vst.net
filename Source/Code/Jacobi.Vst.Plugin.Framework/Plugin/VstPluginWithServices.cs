@@ -82,10 +82,12 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
                     serviceCollection.AddSingleton(Configuration);
                 }
 
-                serviceCollection.AddSingletonAll(this);
+                serviceCollection
+                    .AddSingletonAll(this)
+                    .AddLogging(builder =>
+                    ConfigureLogging(builder)
+                );
 
-                // TODO: do we need to setup a LoggerFactory?
-                ConfigureLogging(new LoggingBuilder(serviceCollection));
                 ConfigureServices(serviceCollection);
                 Services = serviceCollection.BuildServiceProvider();
             }
@@ -96,18 +98,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <summary>
         /// Override to configure LogProviders.
         /// </summary>
-        /// <param name="logger">Is never null.</param>
-        protected virtual void ConfigureLogging(ILoggingBuilder logger)
+        /// <param name="builder">Is never null.</param>
+        protected virtual void ConfigureLogging(ILoggingBuilder builder)
         { }
-
-        private sealed class LoggingBuilder : ILoggingBuilder
-        {
-            public LoggingBuilder(IServiceCollection services)
-            {
-                Services = services ?? throw new ArgumentNullException(nameof(services));
-            }
-
-            public IServiceCollection Services { get; }
-        }
     }
 }
