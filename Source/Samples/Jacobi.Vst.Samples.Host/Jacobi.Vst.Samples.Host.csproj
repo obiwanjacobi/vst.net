@@ -12,4 +12,8 @@
     <Description>A very simplistic Host that demonstrates the usage of the host interop objects.</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="VST.NET2-Host" Version="2.0.0-beta" />
+  </ItemGroup>
+
 </Project>
