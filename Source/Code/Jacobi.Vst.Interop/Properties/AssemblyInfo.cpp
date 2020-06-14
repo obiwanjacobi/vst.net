@@ -19,7 +19,7 @@ using namespace System::Runtime::InteropServices;
 [assembly:AssemblyCopyright("Copyright © 2008-2020 Jacobi Software")] ;
 [assembly:AssemblyTrademark("obiwanjacobi")] ;
 
-[assembly:AssemblyInformationalVersionAttribute("2.0.0-beta")]
+[assembly:AssemblyInformationalVersionAttribute("2.0.0")]
 [assembly:AssemblyVersionAttribute("2.0.0.0")]
 [assembly:AssemblyFileVersionAttribute("2.0.0.0")]
 
