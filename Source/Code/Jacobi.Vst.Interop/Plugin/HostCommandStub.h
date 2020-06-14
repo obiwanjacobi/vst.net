@@ -31,7 +31,12 @@ namespace Interop {
         /// <remarks>When AudioInputCount, AudioOutputCount or InitialDelay have changed the IoChanged() method is called automatically.</remarks>
         virtual System::Boolean UpdatePluginInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ pluginInfo);
 
-        virtual property Jacobi::Vst::Core::IVstHostCommands20^ Commands;
+        /// <summary>
+        /// Access to the host commands. Can be null early in the initialization process.
+        /// </summary>
+        virtual property Jacobi::Vst::Core::IVstHostCommands20^ Commands { 
+            Jacobi::Vst::Core::IVstHostCommands20^ get() { return _commands; }
+        }
 
     internal:
         HostCommandStub(::Vst2HostCommand hostCommandHandler);

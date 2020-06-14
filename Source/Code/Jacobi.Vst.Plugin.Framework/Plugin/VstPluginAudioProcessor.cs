@@ -6,7 +6,7 @@
     /// The VstPluginAudioProcessorBase implements the <see cref="IVstPluginAudioProcessor"/> 
     /// interface and provides a basis for the Plugin implementation.
     /// </summary>
-    public abstract class VstPluginAudioProcessorBase : IVstPluginAudioProcessor
+    public abstract class VstPluginAudioProcessor : IVstPluginAudioProcessor
     {
         /// <summary>
         /// A default ctor for derived classes.
@@ -14,7 +14,7 @@
         /// <remarks>When using this constructor you have to set the 
         /// <see cref="InputCount"/>, <see cref="OutputCount"/> and <see cref="TailSize"/>
         /// properties or they will be zero.</remarks>
-        protected VstPluginAudioProcessorBase() { }
+        protected VstPluginAudioProcessor() { }
 
         /// <summary>
         /// Initialization ctor for derived classes.
@@ -23,11 +23,13 @@
         /// <param name="outputCount">The number of audio output channels.</param>
         /// <param name="tailSize">The number of samples the Audio Processor will produce
         /// after input has stopped. Typically used in reverbs, echos and delays.</param>
-        protected VstPluginAudioProcessorBase(int inputCount, int outputCount, int tailSize)
+        /// <param name="noSoundInStop">The plugin will not produce any sound when audio input is silence.</param>
+        protected VstPluginAudioProcessor(int inputCount, int outputCount, int tailSize, bool noSoundInStop)
         {
             InputCount = inputCount;
             OutputCount = outputCount;
             TailSize = tailSize;
+            NoSoundInStop = noSoundInStop;
         }
 
         #region IVstPluginAudioProcessor Members
@@ -40,6 +42,9 @@
 
         /// <inheritdoc />
         public int TailSize { get; protected set; }
+
+        /// <inheritdoc />
+        public bool NoSoundInStop { get; protected set; }
 
         /// <inheritdoc />
         public virtual float SampleRate { get; set; }

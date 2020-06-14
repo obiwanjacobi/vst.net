@@ -13,12 +13,12 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     /// This class must be derived and the abstract <see cref="CreateProgramReader"/> method
     /// must be implemented.
     /// </remarks>
-    public abstract class VstPluginPersistenceBase : IVstPluginPersistence
+    public abstract class VstPluginPersistence : IVstPluginPersistence
     {
         /// <summary>
         /// Initializes a new instance, assuming ASCII encoding for text.
         /// </summary>
-        protected VstPluginPersistenceBase()
+        protected VstPluginPersistence()
         {
             Encoding = Encoding.ASCII;
         }
@@ -33,7 +33,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <inheritdoc />
         public virtual void ReadPrograms(Stream stream, VstProgramCollection programs)
         {
-            VstProgramReaderBase reader = CreateProgramReader(stream);
+            VstProgramReader reader = CreateProgramReader(stream);
 
             reader.ReadPrograms(programs);
         }
@@ -59,6 +59,6 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// </summary>
         /// <param name="input">Contains the stream that was written by plugin. Must not be null.</param>
         /// <returns>Returns a new reader. Never returns null.</returns>
-        protected abstract VstProgramReaderBase CreateProgramReader(Stream input);
+        protected abstract VstProgramReader CreateProgramReader(Stream input);
     }
 }

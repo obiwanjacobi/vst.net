@@ -153,7 +153,8 @@
         /// <returns>Returns null when <typeparamref name="T"/> is not supported.</returns>
         public T? GetInstance<T>() where T : class
         {
-            if (HostCommandProxy is T refT) return refT;
+            if (HostCommandProxy is T proxy) return proxy;
+            if (HostCommandProxy.Commands is T cmds) return cmds;
 
             var type = typeof(T);
 

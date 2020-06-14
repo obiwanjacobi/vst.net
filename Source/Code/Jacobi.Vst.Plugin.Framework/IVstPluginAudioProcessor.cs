@@ -24,6 +24,10 @@ namespace Jacobi.Vst.Plugin.Framework
         /// <remarks>A delay, for instance, can still produce audio output when audio input has stopped.</remarks>
         int TailSize { get; }
         /// <summary>
+        /// The plugin will not produce any sound when audio input is silence.
+        /// </summary>
+        public bool NoSoundInStop { get; }
+        /// <summary>
         /// Gets or sets the sample rate that is used by the host.
         /// </summary>
         /// <remarks>The host will call into the plugin to set the sample rate (that call ends up here).

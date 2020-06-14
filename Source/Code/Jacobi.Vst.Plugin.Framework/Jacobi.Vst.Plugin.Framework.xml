@@ -591,6 +591,11 @@
             </summary>
             <remarks>A delay, for instance, can still produce audio output when audio input has stopped.</remarks>
         </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.IVstPluginAudioProcessor.NoSoundInStop">
+            <summary>
+            The plugin will not produce any sound when audio input is silence.
+            </summary>
+        </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.IVstPluginAudioProcessor.SampleRate">
             <summary>
             Gets or sets the sample rate that is used by the host.
@@ -862,7 +867,7 @@
             Called by the host just after a Program is set (activated).
             </summary>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase">
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader">
             <summary>
             The VstProgramReaderBase class provides a stream reader base class that reads
             Program and Parameter information.
@@ -872,14 +877,14 @@
             this data was written by the <see cref="T:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramWriter"/> class.
             </remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.#ctor(System.IO.Stream)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.#ctor(System.IO.Stream)">
             <summary>
             Constructs a new instancebased on the <paramref name="input"/> stream.
             </summary>
             <param name="input">A stream that contains data that was previously written by the 
             <see cref="T:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramWriter"/> class. Must not be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.#ctor(System.IO.Stream,System.Text.Encoding)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.#ctor(System.IO.Stream,System.Text.Encoding)">
             <summary>
             Constructs a new instancebased on the <paramref name="input"/> stream.
             </summary>
@@ -887,25 +892,25 @@
             <see cref="T:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramWriter"/> class. Must not be null.</param>
             <param name="encoding">Must not be null.</param>
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.Reader">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.Reader">
             <summary>
             Gets the reader that derived classes can use to perform custom reads.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.CreateProgram">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.CreateProgram">
             <summary>
             The derived class implements this method to create an empty -default- 
             Progarm containing all Plugin Parameters.
             </summary>
             <returns>Never returns null.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.ReadPrograms(Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.ReadPrograms(Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
             <summary>
             Reads the stream and fills the <paramref name="programs"/> colllection with programs.
             </summary>
             <param name="programs">The collection does not have to be empty. Must not be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.ReadProgram">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.ReadProgram">
             <summary>
             Returns a new Program instance initialized with the values read from the stream.
             </summary>
@@ -914,13 +919,13 @@
             The Parameters are also read.
             </remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.ReadParameters(Jacobi.Vst.Plugin.Framework.VstParameterCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.ReadParameters(Jacobi.Vst.Plugin.Framework.VstParameterCollection)">
             <summary>
             Fills the <paramref name="parameters"/> collection with Parameters.
             </summary>
             <param name="parameters">Must not be null.</param>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.OnParameterNotFound(Jacobi.Vst.Plugin.Framework.VstParameterCollection,System.String,System.Single)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.OnParameterNotFound(Jacobi.Vst.Plugin.Framework.VstParameterCollection,System.String,System.Single)">
             <summary>
             Called when a Parameter could not be found by name.
             </summary>
@@ -928,14 +933,14 @@
             <param name="name">The name of the parameter.</param>
             <param name="value">The value of the parameter.</param>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.ReadProgramHeader(Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.ReadProgramHeader(Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
             <summary>
             Reads a Program header from the stream.
             </summary>
             <param name="programs">Must not be null.</param>
             <returns>Returns the number of Programs expected after the header.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReaderBase.ReadParameterHeader(Jacobi.Vst.Plugin.Framework.VstParameterCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.IO.VstProgramReader.ReadParameterHeader(Jacobi.Vst.Plugin.Framework.VstParameterCollection)">
             <summary>
             Reads the Parameter header from the stream.
             </summary>
@@ -1010,12 +1015,19 @@
             ServiceCollection helpers
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.ServiceCollectionExtensions.AddPluginComponent(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Object)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.ServiceCollectionExtensions.AddSingletonAll(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Object)">
             <summary>
             Adds all interfaces and the class type of <paramref name="instance"/> to <paramref name="services"/>.
             </summary>
             <param name="services">Must not be null.</param>
             <param name="instance">Does nothing if null.</param>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.ServiceCollectionExtensions.AddSingletonAll``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds all interfaces and the class type of <typeparamref name="T"/> to <paramref name="services"/>.
+            </summary>
+            <typeparam name="T">The implementation Type.</typeparam>
+            <param name="services">Must not be null.</param>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub">
             <summary>
@@ -1035,7 +1047,7 @@
             <summary>
             Called by the Interop loader to retrieve the plugin information.
             </summary>
-            <param name="hostCmdStub">Must not be null.</param>
+            <param name="hostCmdProxy">Must not be null.</param>
             <returns>Returns a fully populated <see cref="T:Jacobi.Vst.Core.Plugin.VstPluginInfo"/> instance. Never returns null.</returns>
             <remarks>Override <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub.CreatePluginInfo(Jacobi.Vst.Plugin.Framework.IVstPlugin)"/> to change the default behavior of how the plugin info is built.</remarks>
         </member>
@@ -1086,7 +1098,7 @@
             <remarks>Derive your plugin root class from this base class to gain a 
             default implementation of the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPlugin"/> interface.</remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPlugin.#ctor(System.String,Jacobi.Vst.Plugin.Framework.VstProductInfo,Jacobi.Vst.Core.VstPluginCategory,Jacobi.Vst.Plugin.Framework.VstPluginCapabilities,System.Int32,System.Int32)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPlugin.#ctor(System.String,System.Int32,Jacobi.Vst.Plugin.Framework.VstProductInfo,Jacobi.Vst.Core.VstPluginCategory,System.Int32,Jacobi.Vst.Plugin.Framework.VstPluginCapabilities)">
             <summary>
             To be called from the default constructor of the derived plugin class
             to initialize the base class.
@@ -1195,36 +1207,36 @@
             </summary>
             <param name="disposing">If false only dispose unmanaged resourcses, otherwise also dispose managed resources.</param>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessorBase">
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessor">
             <summary>
             The VstPluginAudioPrecisionProcessorBase implements the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPluginAudioPrecisionProcessor"/> 
             interface and provides a basis for the Plugin implementation.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessorBase.#ctor">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessor.#ctor">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessorBase.#ctor(System.Int32,System.Int32,System.Int32)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessor.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessorBase.Process(Jacobi.Vst.Core.VstAudioPrecisionBuffer[],Jacobi.Vst.Core.VstAudioPrecisionBuffer[])">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioPrecisionProcessor.Process(Jacobi.Vst.Core.VstAudioPrecisionBuffer[],Jacobi.Vst.Core.VstAudioPrecisionBuffer[])">
             <inheritdoc />
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase">
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor">
             <summary>
             The VstPluginAudioProcessorBase implements the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPluginAudioProcessor"/> 
             interface and provides a basis for the Plugin implementation.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.#ctor">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.#ctor">
             <summary>
             A default ctor for derived classes.
             </summary>
             <remarks>When using this constructor you have to set the 
-            <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.InputCount"/>, <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.OutputCount"/> and <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.TailSize"/>
+            <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.InputCount"/>, <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.OutputCount"/> and <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.TailSize"/>
             properties or they will be zero.</remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.#ctor(System.Int32,System.Int32,System.Int32)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean)">
             <summary>
             Initialization ctor for derived classes.
             </summary>
@@ -1232,26 +1244,30 @@
             <param name="outputCount">The number of audio output channels.</param>
             <param name="tailSize">The number of samples the Audio Processor will produce
             after input has stopped. Typically used in reverbs, echos and delays.</param>
+            <param name="noSoundInStop">The plugin will not produce any sound when audio input is silence.</param>
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.InputCount">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.InputCount">
             <inheritdoc />
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.OutputCount">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.OutputCount">
             <inheritdoc />
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.TailSize">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.TailSize">
             <inheritdoc />
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.SampleRate">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.NoSoundInStop">
             <inheritdoc />
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.BlockSize">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.SampleRate">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.Process(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.BlockSize">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessorBase.SetPanLaw(Jacobi.Vst.Core.VstPanLaw,System.Single)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.Process(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginAudioProcessor.SetPanLaw(Jacobi.Vst.Core.VstPanLaw,System.Single)">
             <inheritdoc />
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommands">
@@ -1870,67 +1886,67 @@
             <param name="outputs">Not used.</param>
             <remarks>Method does nothing.</remarks>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase">
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence">
             <summary>
             The VstPluginPersistenceBase class implements the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPluginPersistence"/>\
             interface for custom persistence.
             </summary>
             <remarks>
-            This class must be derived and the abstract <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.CreateProgramReader(System.IO.Stream)"/> method
+            This class must be derived and the abstract <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.CreateProgramReader(System.IO.Stream)"/> method
             must be implemented.
             </remarks>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.#ctor">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.#ctor">
             <summary>
             Initializes a new instance, assuming ASCII encoding for text.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.Encoding">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.Encoding">
             <summary>
             Gets or sets the encoding that is used for text.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.ReadPrograms(System.IO.Stream,Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.ReadPrograms(System.IO.Stream,Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.WritePrograms(System.IO.Stream,Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.WritePrograms(System.IO.Stream,Jacobi.Vst.Plugin.Framework.VstProgramCollection)">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.CanLoadChunk(Jacobi.Vst.Core.VstPatchChunkInfo)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.CanLoadChunk(Jacobi.Vst.Core.VstPatchChunkInfo)">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistenceBase.CreateProgramReader(System.IO.Stream)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPersistence.CreateProgramReader(System.IO.Stream)">
             <summary>
             Creates a reader for reading the <paramref name="input"/> stream.
             </summary>
             <param name="input">Contains the stream that was written by plugin. Must not be null.</param>
             <returns>Returns a new reader. Never returns null.</returns>
         </member>
-        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase">
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms">
             <summary>
             The VstPluginProgramsBase class implements the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPluginPrograms"/>
             interface and provides a basis for implementing Programs in a plugin.
             </summary>
             <remarks>
-            The class must be derived and the abstract <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.CreateProgramCollection"/>
+            The class must be derived and the abstract <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.CreateProgramCollection"/>
             method must be implemented.
             </remarks>
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.Programs">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.Programs">
             <inheritdoc />
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.ActiveProgram">
+        <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.ActiveProgram">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.BeginSetProgram">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.BeginSetProgram">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.EndSetProgram">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.EndSetProgram">
             <inheritdoc />
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.CreateProgramCollection">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.CreateProgramCollection">
             <summary>
-            Called on first access on the <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginProgramsBase.Programs"/> property and returns
+            Called on first access on the <see cref="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginPrograms.Programs"/> property and returns
             a completely filled collection of Programs.
             </summary>
             <returns>Never returns null.</returns>
@@ -1940,7 +1956,7 @@
             Provides a Plugin base class that uses DI for registering plugin object interfaces.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.#ctor(System.String,Jacobi.Vst.Plugin.Framework.VstProductInfo,Jacobi.Vst.Core.VstPluginCategory,Jacobi.Vst.Plugin.Framework.VstPluginCapabilities,System.Int32,System.Int32)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.#ctor(System.String,System.Int32,Jacobi.Vst.Plugin.Framework.VstProductInfo,Jacobi.Vst.Core.VstPluginCategory,System.Int32,Jacobi.Vst.Plugin.Framework.VstPluginCapabilities)">
             <inheritdoc/>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
@@ -2801,9 +2817,6 @@
         </member>
         <member name="F:Jacobi.Vst.Plugin.Framework.VstPluginCapabilities.None">
             <summary>The plugin has no extra capabilities to report to the host.</summary>
-        </member>
-        <member name="F:Jacobi.Vst.Plugin.Framework.VstPluginCapabilities.NoSoundInStop">
-            <summary>The plugin will not produce any sound when audio input is silence.</summary>
         </member>
         <member name="F:Jacobi.Vst.Plugin.Framework.VstPluginCapabilities.ReceiveTimeInfo">
             <summary>Indicates to the host that the plugin will request Time Information.</summary>

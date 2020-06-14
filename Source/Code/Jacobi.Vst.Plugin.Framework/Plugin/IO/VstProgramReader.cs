@@ -12,14 +12,14 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
     /// The way the Program and Parameter information is read is dependent on the way
     /// this data was written by the <see cref="VstProgramWriter"/> class.
     /// </remarks>
-    public abstract class VstProgramReaderBase
+    public abstract class VstProgramReader
     {
         /// <summary>
         /// Constructs a new instancebased on the <paramref name="input"/> stream.
         /// </summary>
         /// <param name="input">A stream that contains data that was previously written by the 
         /// <see cref="VstProgramWriter"/> class. Must not be null.</param>
-        protected VstProgramReaderBase(Stream input)
+        protected VstProgramReader(Stream input)
         {
             Reader = new BinaryReader(input);
         }
@@ -30,7 +30,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
         /// <param name="input">A stream that contains data that was previously written by the 
         /// <see cref="VstProgramWriter"/> class. Must not be null.</param>
         /// <param name="encoding">Must not be null.</param>
-        protected VstProgramReaderBase(Stream input, Encoding encoding)
+        protected VstProgramReader(Stream input, Encoding encoding)
         {
             Reader = new BinaryReader(input, encoding);
         }
@@ -115,7 +115,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin.IO
         protected virtual void OnParameterNotFound(VstParameterCollection parameters, string name, float value)
         {
             System.Diagnostics.Debug.WriteLine(
-                String.Format("Parameter '{0}' was not found.", name), nameof(VstProgramReaderBase));
+                String.Format("Parameter '{0}' was not found.", name), nameof(VstProgramReader));
         }
 
         /// <summary>

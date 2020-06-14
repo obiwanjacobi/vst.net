@@ -6,16 +6,16 @@
     /// The VstPluginAudioPrecisionProcessorBase implements the <see cref="IVstPluginAudioPrecisionProcessor"/> 
     /// interface and provides a basis for the Plugin implementation.
     /// </summary>
-    public class VstPluginAudioPrecisionProcessorBase : VstPluginAudioProcessorBase, IVstPluginAudioPrecisionProcessor
+    public class VstPluginAudioPrecisionProcessor : VstPluginAudioProcessor, IVstPluginAudioPrecisionProcessor
     {
         /// <inheritdoc />
-        protected VstPluginAudioPrecisionProcessorBase()
+        protected VstPluginAudioPrecisionProcessor()
             : base()
         { }
 
         /// <inheritdoc />
-        protected VstPluginAudioPrecisionProcessorBase(int inputCount, int outputCount, int tailSize)
-            : base(inputCount, outputCount, tailSize)
+        protected VstPluginAudioPrecisionProcessor(int inputCount, int outputCount, int tailSize, bool noSoundOnStop)
+            : base(inputCount, outputCount, tailSize, noSoundOnStop)
         { }
 
         #region IVstPluginAudioPrecisionProcessor Members

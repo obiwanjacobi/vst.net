@@ -8,7 +8,7 @@
     /// The class must be derived and the abstract <see cref="CreateProgramCollection"/>
     /// method must be implemented.
     /// </remarks>
-    public abstract class VstPluginProgramsBase : IVstPluginPrograms
+    public abstract class VstPluginPrograms : IVstPluginPrograms
     {
         #region IVstPluginPrograms Members
 

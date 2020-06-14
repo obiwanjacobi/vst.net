@@ -24,9 +24,9 @@
         /// <param name="pluginID">The unique Id of the plugin. <seealso cref="PluginID"/></param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="productInfo"/> or <paramref name="name"/> is not set to an instance of an object.</exception>
         /// <exception cref="System.ArgumentException">Thrown when <paramref name="name"/> is an empty string.</exception>
-        protected VstPlugin(string name, VstProductInfo productInfo,
-            VstPluginCategory category, VstPluginCapabilities capabilities,
-            int initialDelay, int pluginID)
+        protected VstPlugin(string name, int pluginID,
+            VstProductInfo productInfo, VstPluginCategory category,
+            int initialDelay = 0, VstPluginCapabilities capabilities = VstPluginCapabilities.None)
         {
             Throw.IfArgumentIsNull(productInfo, nameof(productInfo));
             Throw.IfArgumentIsNullOrEmpty(name, nameof(name));

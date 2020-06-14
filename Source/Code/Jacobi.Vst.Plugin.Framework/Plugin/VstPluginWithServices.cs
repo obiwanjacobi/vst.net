@@ -11,10 +11,10 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     public abstract class VstPluginWithServices : VstPlugin
     {
         /// <inheritdoc/>
-        protected VstPluginWithServices(string name, VstProductInfo productInfo,
-            VstPluginCategory category, VstPluginCapabilities capabilities,
-            int initialDelay, int pluginID)
-            : base(name, productInfo, category, capabilities, initialDelay, pluginID)
+        protected VstPluginWithServices(string name, int pluginID,
+            VstProductInfo productInfo, VstPluginCategory category,
+            int initialDelay = 0, VstPluginCapabilities capabilities = VstPluginCapabilities.None)
+            : base(name, pluginID, productInfo, category, initialDelay, capabilities)
         { }
 
         /// <summary>
@@ -82,6 +82,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
                     serviceCollection.AddSingleton(Configuration);
                 }
 
+                serviceCollection.AddSingletonAll(this);
+
                 // TODO: do we need to setup a LoggerFactory?
                 ConfigureLogging(new LoggingBuilder(serviceCollection));
                 ConfigureServices(serviceCollection);
@@ -95,7 +97,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to configure LogProviders.
         /// </summary>
         /// <param name="logger">Is never null.</param>
-        protected virtual void ConfigureLogging(ILoggingBuilder logger) { }
+        protected virtual void ConfigureLogging(ILoggingBuilder logger)
+        { }
 
         private sealed class LoggingBuilder : ILoggingBuilder
         {

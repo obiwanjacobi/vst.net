@@ -27,10 +27,10 @@
         /// <summary>
         /// Called by the Interop loader to retrieve the plugin information.
         /// </summary>
-        /// <param name="hostCmdStub">Must not be null.</param>
+        /// <param name="hostCmdProxy">Must not be null.</param>
         /// <returns>Returns a fully populated <see cref="VstPluginInfo"/> instance. Never returns null.</returns>
         /// <remarks>Override <see cref="CreatePluginInfo"/> to change the default behavior of how the plugin info is built.</remarks>
-        public VstPluginInfo? GetPluginInfo(IVstHostCommandProxy hostCmdStub)
+        public VstPluginInfo? GetPluginInfo(IVstHostCommandProxy hostCmdProxy)
         {
             IVstPlugin plugin = CreatePluginInstance();
 
@@ -42,7 +42,7 @@
                 }
 
                 _pluginCtx = new VstPluginContext(
-                    plugin, new Host.VstHost(hostCmdStub, plugin), CreatePluginInfo(plugin));
+                    plugin, new Host.VstHost(hostCmdProxy, plugin), CreatePluginInfo(plugin));
 
                 Commands = CreatePluginCommands(_pluginCtx);
 
@@ -102,7 +102,7 @@
                 pluginInfo.Flags |= VstPluginFlags.ProgramChunks;
             if (audioProcessor != null && plugin.Supports<IVstMidiProcessor>())
                 pluginInfo.Flags |= VstPluginFlags.IsSynth;
-            if ((plugin.Capabilities & VstPluginCapabilities.NoSoundInStop) > 0)
+            if (audioProcessor != null && audioProcessor.NoSoundInStop)
                 pluginInfo.Flags |= VstPluginFlags.NoSoundInStop;
 
             // basic plugin info
