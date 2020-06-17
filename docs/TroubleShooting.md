@@ -33,3 +33,7 @@ You just need to test if the plugin loads (File->New Plugin...).
 For some hosts the loading of .NET core does not work at all. It is unclear what the problem is, but copying over the `Ijwhost.dll` file into the same folder the host's .exe is located usually solves the issue.
 
 Clearly this is a workaround and the problem is under investigation.
+
+---
+
+> Back to [Index](index)
