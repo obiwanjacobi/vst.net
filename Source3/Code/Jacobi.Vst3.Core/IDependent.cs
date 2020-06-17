@@ -16,11 +16,11 @@ namespace Jacobi.Vst3.Core
     // IDependent.Update messages
     public enum ChangeMessages
     {
-        kWillChange,
-        kChanged,
-        kDestroyed,
-        kWillDestroy,
+        WillChange,
+        Changed,
+        Destroyed,
+        WillDestroy,
 
-        kStdChangeMessageLast = kWillDestroy
+        StdChangeMessageLast = WillDestroy
     }
 }

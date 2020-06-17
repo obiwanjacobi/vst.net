@@ -10,12 +10,12 @@ namespace Jacobi.Vst3.Core
         public UInt32 framesPerSecond;		// frame rate
 
         [MarshalAs(UnmanagedType.U4)]
-        public FrameRateFlags flags;				// flags #FrameRateFlags
+        public FrameRateFlags flags;    	// flags #FrameRateFlags
 
         public enum FrameRateFlags
         {
-            kPullDownRate = 1 << 0, // for ex. HDTV: 23.976 fps with 24 as frame rate
-            kDropRate = 1 << 1	// for ex. 29.97 fps drop with 30 as frame rate
+            PullDownRate = 1 << 0,      // for ex. HDTV: 23.976 fps with 24 as frame rate
+            DropRate = 1 << 1	        // for ex. 29.97 fps drop with 30 as frame rate
         }
     }
 }

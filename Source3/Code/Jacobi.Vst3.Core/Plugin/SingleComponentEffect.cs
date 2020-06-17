@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Jacobi.Vst3.Plugin
+﻿namespace Jacobi.Vst3.Plugin
 {
+    /// <summary>
+    /// Plugin Component and Controller in one class.
+    /// </summary>
     class SingleComponentEffect
     {
     }

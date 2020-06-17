@@ -1,9 +1,5 @@
 ﻿using Jacobi.Vst3.Common;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
 namespace Jacobi.Vst3.Plugin
 {
@@ -15,7 +11,7 @@ namespace Jacobi.Vst3.Plugin
         public Parameter(ParameterValueInfo paramValueInfo)
         {
             ValueInfo = paramValueInfo;
-            
+
             SetValue(this.ValueInfo.ParameterInfo.DefaultNormalizedValue, null, false);
         }
 

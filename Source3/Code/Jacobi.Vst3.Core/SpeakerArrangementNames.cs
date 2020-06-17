@@ -1,6 +1,6 @@
 ﻿namespace Jacobi.Vst3.Core
 {
-    public static class SpeakerArrangementNamess
+    public static class SpeakerArrangementNames
     {
         public const string StringEmpty = "";
         public const string StringMono = "Mono";

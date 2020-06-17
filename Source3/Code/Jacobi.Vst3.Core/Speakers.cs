@@ -1,5 +1,8 @@
-﻿namespace Jacobi.Vst3.Core
+﻿using System;
+
+namespace Jacobi.Vst3.Core
 {
+    [Flags]
     public enum Speakers : ulong
     {
         SpeakerL = 1 << 0,

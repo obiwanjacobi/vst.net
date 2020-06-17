@@ -16,7 +16,7 @@ namespace Jacobi.Vst3.Core
         public Double Maximum;			// maximum normalized value [0,1]
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 StepCount;						// number of discrete steps (0: continuous, 1: toggle, discrete value otherwise - see \ref vst3parameterIntro)
+        public Int32 StepCount;			// number of discrete steps (0: continuous, 1: toggle, discrete value otherwise - see \ref vst3parameterIntro)
 
     }
 }
