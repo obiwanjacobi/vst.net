@@ -22,4 +22,4 @@ It also copies over any `settings.json` files that may be next to your primary p
 
 ---
 
-> Back to [Index](index)
+> Back to [Index](index.md)

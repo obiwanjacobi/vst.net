@@ -1,11 +1,11 @@
 # VST.NET 2
 
-> **`Currently in Beta.`**
+> **`Currently in RC1.`**
 
 Welcome to VST.NET version 2 built on .NET core.
 
 This library supports building Steinberg's VST2 plugins and host applications.
 
-- [Getting Started](GettingStarted)
-- [Trouble Shooting](TroubleShooting)
-- [Command Line Interface](cli)
+- [Getting Started](GettingStarted.md)
+- [Trouble Shooting](TroubleShooting.md)
+- [Command Line Interface](cli.md)

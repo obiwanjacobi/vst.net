@@ -34,9 +34,9 @@ For both the plugin Interop as well as the host Interop, you need to install the
 As of `2.0.0-RC1` the nuget packages for plugin and host both contain a build file to create a deployment after each successful build. The `deploy` folder is at the same location as the project binaries.
 For instance: `MyProject\bin\Debug\netcoreapp3.1\deploy`.
 
-If that doesn't work for you, you could use the [VST.NET Command Line Interface](cli) and use the `publish` command that can help you with deployment. The `vstnet.exe` is located in the nuget package cache folder. For instance for the plugin nuget package: 
+If that doesn't work for you, you could use the [VST.NET Command Line Interface](cli) and use the `publish` command that can help you with deployment. The `vstnet.exe` is located in the nuget package cache folder. For instance for the plugin nuget package:
 `C:\Users\[me]\.nuget\packages\vst.net2-plugin\2.0.0[-rc1]\tools\netcoreapp3.1`
 
 ---
 
-> Back to [Index](index)
+> Back to [Index](index.md)
