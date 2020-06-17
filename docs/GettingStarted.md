@@ -29,9 +29,13 @@ A good starting point for learning the VST.NET host API is the Host [Sample](htt
 
 ## Deployment
 
-The [VST.NET Command Line Interface](cli) has a `publish` command that can help you with deployment. This is for both plugin projects as well as host projects.
+For both the plugin Interop as well as the host Interop, you need to install the `C++ 2019 Redistributables` on the client machine. You need to match the Processor Architecture, either [32-bits](https://aka.ms/vs/16/release/VC_redist.x86.exe) or [64-bits](https://aka.ms/vs/16/release/VC_redist.x64.exe). If you have Visual Studio installed, these files are already present. But if you distribute your project made with VST.NET you need to install this on the client machine.
 
-For both the plugin Interop as well as the host Interop, you need to install the `C++ 2019 Redistributables` on the client machine. You need to match the Processor Architecture, either [32-bits](https://aka.ms/vs/16/release/VC_redist.x86.exe) or [64-bits](https://aka.ms/vs/16/release/VC_redist.x64.exe).
+As of `2.0.0-RC1` the nuget packages for plugin and host both contain a build file to create a deployment after each successful build. The `deploy` folder is at the same location as the project binaries.
+For instance: `MyProject\bin\Debug\netcoreapp3.1\deploy`.
+
+If that doesn't work for you, you could use the [VST.NET Command Line Interface](cli) and use the `publish` command that can help you with deployment. The `vstnet.exe` is located in the nuget package cache folder. For instance for the plugin nuget package: 
+`C:\Users\[me]\.nuget\packages\vst.net2-plugin\2.0.0[-rc1]\tools\netcoreapp3.1`
 
 ---
 

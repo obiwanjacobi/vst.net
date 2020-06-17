@@ -17,12 +17,14 @@ namespace Jacobi.Vst3.Plugin
         public const string ComponentControllerClassCategory = "Component Controller Class";
         public const string TestClassCategory = "Test Class";
 
+        public static readonly Version SdkVersion = new Version(3, 6, 14);
+
         public PluginClassFactory(string vendor, string email, string url)
             : this(vendor, email, url, PFactoryInfo.FactoryFlags.NoFlags)
         { }
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags)
-            : this(vendor, email, url, flags, new Version(3, 6, 0))
+            : this(vendor, email, url, flags, SdkVersion)
         { }
 
         public PluginClassFactory(string vendor, string email, string url, PFactoryInfo.FactoryFlags flags, Version sdkVersion)
