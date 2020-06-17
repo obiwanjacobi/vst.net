@@ -6,7 +6,7 @@ namespace VstNetAudioPlugin
     /// <summary>
     /// This object manages the Plugin programs and its parameters.
     /// </summary>
-    internal sealed class PluginPrograms : VstPluginProgramsBase
+    internal sealed class PluginPrograms : VstPluginPrograms
     {
         private readonly Plugin _plugin;
 

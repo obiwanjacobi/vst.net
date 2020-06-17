@@ -37,19 +37,19 @@ namespace VstNetMidiPlugin
         /// <summary>
         /// TODO: what can your plugin do?
         /// </summary>
-        private const VstPluginCapabilities PluginCapabilities = VstPluginCapabilities.NoSoundInStop;
+        private const VstPluginCapabilities PluginCapabilities = VstPluginCapabilities.None;
+        /// <summary>
+        /// The number of samples your plugin lags behind.
+        /// </summary>
+        private const int InitialDelayInSamples = 0;
 
         /// <summary>
         /// Initializes the one an only instance of the Plugin root object.
         /// </summary>
         public Plugin()
-            : base(PluginName,
-            new VstProductInfo(ProductName, VendorName, PluginVersion),
-                PluginCategory,
-                PluginCapabilities,
-                // initial delay: number of samples your plugin lags behind.
-                0,
-                UniquePluginId)
+            : base(PluginName, UniquePluginId,
+                new VstProductInfo(ProductName, VendorName, PluginVersion),
+                PluginCategory, InitialDelayInSamples, PluginCapabilities)
         { }
 
         /// <summary>
@@ -89,12 +89,12 @@ namespace VstNetMidiPlugin
         /// Add components for the IVstXxxx interfaces you want to support.
         /// </summary>
         /// <param name="services">Is never null.</param>
-        protected override void RegisterServices(IServiceCollection services)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddPluginComponent(new DummyAudioProcessor(this));
-            services.AddPluginComponent(new MidiProcessor(this));
-            services.AddPluginComponent(new PluginEditor(this));
-            services.AddPluginComponent(new PluginPrograms(this));
+            services.AddSingletonAll(new DummyAudioProcessor(this));
+            services.AddSingletonAll(new MidiProcessor(this));
+            services.AddSingletonAll(new PluginEditor(this));
+            services.AddSingletonAll(new PluginPrograms(this));
         }
     }
 }

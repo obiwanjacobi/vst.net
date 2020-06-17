@@ -6,7 +6,7 @@ namespace VstNetMidiPlugin
     /// <summary>
     /// This object manages the Plugin programs and its parameters.
     /// </summary>
-    internal sealed class PluginPrograms : VstPluginProgramsBase
+    internal sealed class PluginPrograms : VstPluginPrograms
     {
         private readonly Plugin _plugin;
 
@@ -51,8 +51,10 @@ namespace VstNetMidiPlugin
             }
 
             // create a new parameter category object
-            VstParameterCategory paramCategory = new VstParameterCategory();
-            paramCategory.Name = categoryName;
+            var paramCategory = new VstParameterCategory
+            {
+                Name = categoryName
+            };
 
             ParameterCategories.Add(paramCategory);
 
@@ -65,7 +67,7 @@ namespace VstNetMidiPlugin
         /// <returns>Never returns null or an empty collection.</returns>
         protected override VstProgramCollection CreateProgramCollection()
         {
-            VstProgramCollection programs = new VstProgramCollection();
+            var programs = new VstProgramCollection();
 
             // TODO: add a number of programs for your plugin.
 
@@ -79,7 +81,7 @@ namespace VstNetMidiPlugin
         // create a program with all parameters.
         private VstProgram CreateProgram(VstParameterInfoCollection parameterInfos)
         {
-            VstProgram program = new VstProgram(ParameterCategories);
+            var program = new VstProgram(ParameterCategories);
 
             CreateParameters(program.Parameters, parameterInfos);
 
@@ -98,8 +100,7 @@ namespace VstNetMidiPlugin
         // create one parameter
         private VstParameter CreateParameter(VstParameterInfo parameterInfo)
         {
-            VstParameter parameter = new VstParameter(parameterInfo);
-
+            var parameter = new VstParameter(parameterInfo);
             return parameter;
         }
     }

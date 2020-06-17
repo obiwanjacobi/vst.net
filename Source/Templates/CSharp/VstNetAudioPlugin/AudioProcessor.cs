@@ -8,7 +8,7 @@ namespace VstNetAudioPlugin
     /// <summary>
     /// This object performs audio processing for your plugin.
     /// </summary>
-    internal sealed class AudioProcessor : VstPluginAudioProcessorBase, IVstPluginBypass
+    internal sealed class AudioProcessor : VstPluginAudioProcessor, IVstPluginBypass
     {
         /// <summary>
         /// TODO: assign the input count.
@@ -31,7 +31,7 @@ namespace VstNetAudioPlugin
         /// Default constructor.
         /// </summary>
         public AudioProcessor(Plugin plugin)
-            : base(AudioInputCount, AudioOutputCount, InitialTailSize)
+            : base(AudioInputCount, AudioOutputCount, InitialTailSize, noSoundInStop: true)
         {
             _plugin = plugin;
 
