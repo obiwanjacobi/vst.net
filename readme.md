@@ -1,4 +1,4 @@
-# `VST.NET` 2 (Beta)
+# `VST.NET` 2 (RC1)
 
 ![VST.NET2 CI](https://github.com/obiwanjacobi/vst.net/workflows/VST.NET2%20CI/badge.svg)
 
