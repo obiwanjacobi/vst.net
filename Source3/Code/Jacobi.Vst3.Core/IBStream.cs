@@ -37,8 +37,8 @@ namespace Jacobi.Vst3.Core
 
     public enum StreamSeekMode
     {
-        SeekSet = 0, ///< set absolute seek position
-        SeekCur,     ///< set seek position relative to current position
-        SeekEnd      ///< set seek position relative to stream end
+        SeekSet = 0, // set absolute seek position
+        SeekCur,     // set seek position relative to current position
+        SeekEnd      // set seek position relative to stream end
     };
 }

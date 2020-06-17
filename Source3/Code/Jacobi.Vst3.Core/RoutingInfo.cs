@@ -7,12 +7,12 @@ namespace Jacobi.Vst3.Core
     public struct RoutingInfo
     {
         [MarshalAs(UnmanagedType.I4)]
-        public MediaTypes MediaType;	///< media type see \ref MediaTypes
+        public MediaTypes MediaType;	// media type see \ref MediaTypes
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 BusIndex;			///< bus index
+        public Int32 BusIndex;			// bus index
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 Channel;			///< channel (-1 for all channels)
+        public Int32 Channel;			// channel (-1 for all channels)
     }
 }

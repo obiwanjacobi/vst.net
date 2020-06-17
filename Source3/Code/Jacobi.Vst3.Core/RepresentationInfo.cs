@@ -7,13 +7,13 @@ namespace Jacobi.Vst3.Core
     public struct RepresentationInfo
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
-        public String Vendor;	///< Vendor name of the associated representation (remote) (eg. "Yamaha").
+        public String Vendor;	// Vendor name of the associated representation (remote) (eg. "Yamaha").
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
-        public String Name;		///< Representation (remote) Name (eg. "O2").
+        public String Name;		// Representation (remote) Name (eg. "O2").
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
-        public String Version;	///< Version of this "Remote" (eg. "1.0").
+        public String Version;	// Version of this "Remote" (eg. "1.0").
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeName)]
         public String Host;

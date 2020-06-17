@@ -21,6 +21,6 @@
         public const string EditorViewType = "editor";
 
         // IUnitHandler.NotifyProgramListChange
-        public const int AllProgramInvalid = -1;		///< all program information is invalid
+        public const int AllProgramInvalid = -1;		// all program information is invalid
     }
 }

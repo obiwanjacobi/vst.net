@@ -7,10 +7,10 @@ namespace Jacobi.Vst3.Core
     public struct Chord
     {
         [MarshalAs(UnmanagedType.U1)]
-        public Byte keyNote;		///< key note in chord
+        public Byte keyNote;		// key note in chord
 
         [MarshalAs(UnmanagedType.U1)]
-        public Byte rootNote;		///< lowest note in chord
+        public Byte rootNote;		// lowest note in chord
 
         /** Bitmask of a chord.
             1st bit set: minor second; 2nd bit set: major second, and so on. \n
@@ -25,8 +25,8 @@ namespace Jacobi.Vst3.Core
 
         public enum Masks
         {
-            ChordMask = 0x0FFF,	    ///< mask for chordMask 
-            ReservedMask = 0xF000	///< reserved for future use
+            ChordMask = 0x0FFF,	    // mask for chordMask 
+            ReservedMask = 0xF000	// reserved for future use
         }
     }
 }

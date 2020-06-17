@@ -7,14 +7,14 @@ namespace Jacobi.Vst3.Plugin
 {
     public class AudioBusAccessor
     {
-        private static int SizeOfAudioBusBuffers = Marshal.SizeOf(typeof(AudioBusBuffers));
-        private static int SizeOfSinglePtr = Marshal.SizeOf(typeof(Single*));
-        private static int SizeOfDoublePtr = Marshal.SizeOf(typeof(Double*));
+        private static readonly int SizeOfAudioBusBuffers = Marshal.SizeOf(typeof(AudioBusBuffers));
+        private static readonly int SizeOfSinglePtr = Marshal.SizeOf(typeof(Single*));
+        private static readonly int SizeOfDoublePtr = Marshal.SizeOf(typeof(Double*));
 
-        private SymbolicSampleSizes _sampleSize;
+        private readonly SymbolicSampleSizes _sampleSize;
+        private readonly BusDirections _busDir;
+        private readonly int _numSamples;
         private AudioBusBuffers _audioBuffers;
-        private BusDirections _busDir;
-        private int _numSamples;
 
         public AudioBusAccessor(ref ProcessData processData, BusDirections busDir, int busIndex)
         {

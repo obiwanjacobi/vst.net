@@ -7,16 +7,16 @@ namespace Jacobi.Vst3.Core
     public struct NoteExpressionValueDescription
     {
         [MarshalAs(UnmanagedType.R8)]
-        public Double DefaultValue;		///< default normalized value [0,1]
+        public Double DefaultValue;		// default normalized value [0,1]
 
         [MarshalAs(UnmanagedType.R8)]
-        public Double Minimum;			///< minimum normalized value [0,1]
+        public Double Minimum;			// minimum normalized value [0,1]
 
         [MarshalAs(UnmanagedType.R8)]
-        public Double Maximum;			///< maximum normalized value [0,1]
+        public Double Maximum;			// maximum normalized value [0,1]
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 StepCount;						///< number of discrete steps (0: continuous, 1: toggle, discrete value otherwise - see \ref vst3parameterIntro)
+        public Int32 StepCount;						// number of discrete steps (0: continuous, 1: toggle, discrete value otherwise - see \ref vst3parameterIntro)
 
     }
 }

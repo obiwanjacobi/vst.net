@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Jacobi.Vst3.Plugin
 {
-    public abstract class EditController : ComponentBase, IEditController, IEditController2
+    public abstract class EditController : ConnectionPoint, IEditController, IEditController2
     {
         protected EditController()
         {

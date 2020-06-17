@@ -7,15 +7,15 @@ namespace Jacobi.Vst3.Core
     public struct ProcessSetup
     {
         [MarshalAs(UnmanagedType.I4)]
-        public ProcessModes ProcessMode;			///< \ref ProcessModes
+        public ProcessModes ProcessMode;			// \ref ProcessModes
 
         [MarshalAs(UnmanagedType.I4)]
-        public SymbolicSampleSizes SymbolicSampleSize;	///< \ref SymbolicSampleSizes
+        public SymbolicSampleSizes SymbolicSampleSize;	// \ref SymbolicSampleSizes
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 MaxSamplesPerBlock;	///< maximum number of samples per audio block
+        public Int32 MaxSamplesPerBlock;	// maximum number of samples per audio block
 
         [MarshalAs(UnmanagedType.R8)]
-        public Double SampleRate;		///< sample rate
+        public Double SampleRate;		// sample rate
     }
 }

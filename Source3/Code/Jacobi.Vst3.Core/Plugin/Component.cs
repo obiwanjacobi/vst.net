@@ -3,7 +3,7 @@ using System;
 
 namespace Jacobi.Vst3.Plugin
 {
-    public abstract class Component : ComponentBase, IComponent, IPluginBase
+    public abstract class Component : ConnectionPoint, IComponent
     {
         protected abstract BusCollection GetBusCollection(MediaTypes mediaType, BusDirections busDir);
 

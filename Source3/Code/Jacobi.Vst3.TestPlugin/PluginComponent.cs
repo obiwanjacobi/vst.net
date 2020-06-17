@@ -45,19 +45,18 @@ namespace Jacobi.Vst3.TestPlugin
         private int ProcessInParameters(ref ProcessData data)
         {
             // TODO: Parameter handling
-
             var paramChanges = data.GetInputParameterChanges();
-            if (paramChanges == null) return TResult.E_Pointer;
-
-            var paramCount = paramChanges.GetParameterCount();
-            //var paramCount = data.InputEvents.GetEventCount();
-            //var paramCount = data.OutputEvents.GetEventCount();
-
-            if (paramCount > 0)
+            if (paramChanges != null)
             {
-                System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: InputParameterChanges.GetParameterCount() = " + paramCount);
-            }
+                var paramCount = paramChanges.GetParameterCount();
+                //var paramCount = data.InputEvents.GetEventCount();
+                //var paramCount = data.OutputEvents.GetEventCount();
 
+                if (paramCount > 0)
+                {
+                    System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: InputParameterChanges.GetParameterCount() = " + paramCount);
+                }
+            }
             return TResult.S_OK;
         }
 
@@ -82,51 +81,24 @@ namespace Jacobi.Vst3.TestPlugin
                 return TResult.S_False;
             }
 
-            // hard-coded on one stereo input and one stereo output bus
+            // hard-coded on one stereo input and one stereo output bus (see ctor)
             var inputBus = new AudioBusAccessor(ref data, BusDirections.Input, 0);
             var outputBus = new AudioBusAccessor(ref data, BusDirections.Output, 0);
 
             unsafe
             {
-                // can return null!
-                var inputLeft = inputBus.GetUnsafeBuffer32(0);
-                //var inputRight = inputBus.GetUnsafeBuffer32(1);
-                // TODO: check max num channels
-                float* inputRight = null;
-
-                var outputLeft = outputBus.GetUnsafeBuffer32(0);
-                //var outputRight = outputBus.GetUnsafeBuffer32(1);
-                // TODO: check max num channels
-                float* outputRight = null;
-
-                // silent inputs result in silent outputs
-                outputBus.SetChannelSilent(0, inputLeft == null);
-                outputBus.SetChannelSilent(1, inputRight == null);
-
-                if (outputLeft != null && inputLeft != null &&
-                    outputRight != null && inputRight != null)
+                for (int c = 0; c < inputBus.ChannelCount; c++)
                 {
-                    // copy samples
-                    for (int i = 0; i < outputBus.SampleCount; i++)
+                    var input = inputBus.GetUnsafeBuffer32(c);
+                    var output = outputBus.GetUnsafeBuffer32(c);
+                    outputBus.SetChannelSilent(0, input == null);
+
+                    if (input != null && output != null)
                     {
-                        outputLeft[i] = inputLeft[i];
-                        outputRight[i] = inputRight[i];
-                    }
-                }
-                else if (outputLeft != null && inputLeft != null)
-                {
-                    // copy samples
-                    for (int i = 0; i < outputBus.SampleCount; i++)
-                    {
-                        outputLeft[i] = inputLeft[i];
-                    }
-                }
-                else if (outputRight != null && inputRight != null)
-                {
-                    // copy samples
-                    for (int i = 0; i < outputBus.SampleCount; i++)
-                    {
-                        outputRight[i] = inputRight[i];
+                        for (int i = 0; i < outputBus.SampleCount; i++)
+                        {
+                            output[i] = input[i];
+                        }
                     }
                 }
             }

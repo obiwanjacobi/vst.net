@@ -4,11 +4,11 @@ using System;
 
 namespace Jacobi.Vst3.Plugin
 {
-    public abstract class ComponentBase : ObservableObject, IPluginBase, IConnectionPoint, IServiceContainerSite
+    public abstract class ConnectionPoint : ObservableObject, IPluginBase, IConnectionPoint, IServiceContainerSite
     {
         private IConnectionPoint _peer;
 
-        protected ComponentBase()
+        protected ConnectionPoint()
         {
             ServiceContainer = new ServiceContainer();
         }

@@ -10,13 +10,24 @@ The managed plugin exposes a public `PluginFactory` derived from the `PluginClas
 - Ijwhost.dll may have to be copied to the [host].exe location. Both the validator.exe and the VST3PluginTestHost.exe did not load the plugin otherwise.
 Something is going on with setting the current directory..?
 `vsthost.exe` (Hermann Seib) does load the .vst3 plugin correctly without having to copy over Ijwhost.dll...
-- Does 64 bit build expects also 64 bit (double) audio processing?? Currently the TestPlugin AudioProcessor is hardcoded to 32 bit.
-- The validator.exe points out a few errors:
-    - Error: Unit 001: Should be the Root Unit => id should be 000!! [XXXXXXX Failed]
-    - Error: All Audio Processing fails.
+- The validator.exe points out a few issues:
     - Warning: Parameters Changes - No point at all has been read via IParameterChanges (more...).
 
 ## Research
 
 COM (VST3)
 https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activation.md#NET-Framework-Class-COM-Activation
+(we don't need activation)
+
+COM Interop Best Practices
+https://docs.microsoft.com/en-us/dotnet/standard/native-interop/best-practices
+
+
+## TODOs
+
+- remove methods from interop structs and make them extension methods.
+- add default by-pass parameter to audio effects (otherwise it might be interpretted as an instrument)
+- Research if TResult return values can be typed instead of `int`. Will `struct TResult { int value; }` work?
+- Decide if the API is to be naked (PreserveSig) with all the TResults (as int's) and out/ref parameters? 
+    Or that we remove these - the COM wrapper interop can handle that.
+- No bools in structs!

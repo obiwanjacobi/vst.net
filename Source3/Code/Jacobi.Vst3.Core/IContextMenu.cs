@@ -42,21 +42,21 @@ namespace Jacobi.Vst3.Core
     public struct ContextMenuItem
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
-        public String Name;									///< Name of the item
+        public String Name;									// Name of the item
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 Tag;										///< Identifier tag of the item
+        public Int32 Tag;										// Identifier tag of the item
 
         [MarshalAs(UnmanagedType.I4)]
-        public ItemFlags Flags;									///< Flags of the item
+        public ItemFlags Flags;									// Flags of the item
 
         public enum ItemFlags
         {
-            kIsSeparator = 1 << 0,					///< Item is a separator
-            kIsDisabled = 1 << 1,					///< Item is disabled
-            kIsChecked = 1 << 2,					///< Item is checked
-            kIsGroupStart = 1 << 3 | kIsDisabled,		///< Item is a group start (like sub folder)
-            kIsGroupEnd = 1 << 4 | kIsSeparator,	///< Item is a group end
+            kIsSeparator = 1 << 0,					// Item is a separator
+            kIsDisabled = 1 << 1,					// Item is disabled
+            kIsChecked = 1 << 2,					// Item is checked
+            kIsGroupStart = 1 << 3 | kIsDisabled,		// Item is a group start (like sub folder)
+            kIsGroupEnd = 1 << 4 | kIsSeparator,	// Item is a group end
         }
     }
 }

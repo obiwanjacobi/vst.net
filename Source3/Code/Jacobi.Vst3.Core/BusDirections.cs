@@ -2,7 +2,7 @@
 {
     public enum BusDirections
     {
-        Input = 0,		///< input bus
-        Output			///< output bus
+        Input = 0,		// input bus
+        Output			// output bus
     }
 }

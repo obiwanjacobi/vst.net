@@ -7,17 +7,17 @@ namespace Jacobi.Vst3.Core
     public struct DataEvent
     {
         [MarshalAs(UnmanagedType.U4)]
-        public UInt32 Size;			///< size of the bytes
+        public UInt32 Size;			// size of the bytes
 
         [MarshalAs(UnmanagedType.U4)]
-        public DataTypes Type;			///< type of this data block (see \ref DataTypes)
+        public DataTypes Type;			// type of this data block (see \ref DataTypes)
 
         [MarshalAs(UnmanagedType.SysInt)]
-        public IntPtr Bytes;		///< pointer to the data block
+        public IntPtr Bytes;		// pointer to the data block
 
         public enum DataTypes
         {
-            MidiSysEx = 0		///< for MIDI system exclusive message
+            MidiSysEx = 0		// for MIDI system exclusive message
         };
     }
 }

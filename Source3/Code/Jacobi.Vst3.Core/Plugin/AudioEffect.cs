@@ -2,7 +2,7 @@
 
 namespace Jacobi.Vst3.Plugin
 {
-    public abstract class AudioEffect : Component, IAudioProcessor, IComponent, IPluginBase
+    public abstract class AudioEffect : Component, IAudioProcessor, IComponent
     {
         public bool IsProcessing { get; set; }
 

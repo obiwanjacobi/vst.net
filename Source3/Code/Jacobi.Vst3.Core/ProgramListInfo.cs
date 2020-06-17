@@ -7,12 +7,12 @@ namespace Jacobi.Vst3.Core
     public struct ProgramListInfo
     {
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 Id;				///< program list identifier
+        public Int32 Id;				// program list identifier
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.Fixed128)]
-        public String Name;					///< name of program list
+        public String Name;					// name of program list
 
         [MarshalAs(UnmanagedType.I4)]
-        public Int32 ProgramCount;				///< number of programs in this list
+        public Int32 ProgramCount;				// number of programs in this list
     }
 }
