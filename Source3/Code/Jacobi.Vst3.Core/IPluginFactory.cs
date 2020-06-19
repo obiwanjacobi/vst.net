@@ -17,11 +17,6 @@ namespace Jacobi.Vst3.Core
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IPluginFactory
     {
-        /// <summary>
-        /// Fill a PFactoryInfo structure with information about the Plug-in vendor.
-        /// </summary>
-        /// <param name="info">A reference to the <see cref="PFactoryInfo"/> structure.</param>
-        /// <returns>Returns a standard result code.</returns>
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 GetFactoryInfo(

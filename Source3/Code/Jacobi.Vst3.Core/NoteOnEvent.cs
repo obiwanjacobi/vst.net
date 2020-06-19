@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct NoteOnEvent
     {
+        public static readonly int Size = Marshal.SizeOf<NoteOnEvent>();
+
         [MarshalAs(UnmanagedType.I2)]
         public Int16 Channel;			// channel index in event bus
 

@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst3.UnitTests", "Jacobi.Vst3.UnitTests\Jacobi.Vst3.UnitTests.csproj", "{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,18 @@ Global
 		{761DDFE4-5A7E-425F-8729-1DD7644CDC0E}.Release|x64.Build.0 = Release|x64
 		{761DDFE4-5A7E-425F-8729-1DD7644CDC0E}.Release|x86.ActiveCfg = Release|Win32
 		{761DDFE4-5A7E-425F-8729-1DD7644CDC0E}.Release|x86.Build.0 = Release|Win32
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Debug|x64.ActiveCfg = Debug|x64
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Debug|x64.Build.0 = Debug|x64
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Debug|x86.ActiveCfg = Debug|x86
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Debug|x86.Build.0 = Debug|x86
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Release|x64.Build.0 = Release|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{A404C4E7-C2D9-45AA-BAAD-0BFCB338F5F7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

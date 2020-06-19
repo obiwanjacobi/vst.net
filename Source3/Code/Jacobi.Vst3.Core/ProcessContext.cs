@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, Pack = Platform.StructurePack)]
     public struct ProcessContext
     {
+        public static readonly int Size = Marshal.SizeOf<ProcessContext>();
+
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 State;					// a combination of the values from \ref StatesAndFlags
 

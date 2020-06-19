@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, Pack = Platform.StructurePack)]
     public struct ProcessData
     {
+        public static readonly int Size = Marshal.SizeOf<ProcessData>();
+
         [MarshalAs(UnmanagedType.I4)]
         public ProcessModes ProcessMode;			// processing mode - value of \ref ProcessModes
 
@@ -36,23 +38,6 @@ namespace Jacobi.Vst3.Core
         [MarshalAs(UnmanagedType.SysInt)]
         public IntPtr InputParameterChangesPtr;
 
-        public IParameterChanges GetInputParameterChanges()
-        {
-            if (InputParameterChangesPtr == IntPtr.Zero) return null;
-            var unknown = Marshal.GetObjectForIUnknown(InputParameterChangesPtr);
-
-            //if (unknown is IMarshal)
-            //{
-            //    System.Diagnostics.Trace.WriteLine("Proxy!");
-            //}
-            //else
-            //{
-            //    System.Diagnostics.Trace.WriteLine("Apartment State: " + Thread.CurrentThread.GetApartmentState());
-            //}
-
-            return unknown as IParameterChanges;
-        }
-
         [MarshalAs(UnmanagedType.Interface)]
         public IParameterChanges OutputParameterChanges;	// outgoing parameter changes for this block (optional)
 
@@ -65,10 +50,5 @@ namespace Jacobi.Vst3.Core
         // ProcessContext pointer
         [MarshalAs(UnmanagedType.SysInt)]
         public IntPtr ProcessContext;			// processing context (optional, but most welcome)
-
-        public ProcessContext GetProcessContext()
-        {
-            return (ProcessContext)Marshal.PtrToStructure(ProcessContext, typeof(ProcessContext));
-        }
     }
 }

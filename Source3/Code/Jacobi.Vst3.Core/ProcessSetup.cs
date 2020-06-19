@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, Pack = Platform.StructurePack)]
     public struct ProcessSetup
     {
+        public static readonly int Size = Marshal.SizeOf<ProcessSetup>();
+
         [MarshalAs(UnmanagedType.I4)]
         public ProcessModes ProcessMode;			// \ref ProcessModes
 

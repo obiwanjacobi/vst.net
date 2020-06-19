@@ -8,6 +8,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
     public struct PClassInfo
     {
+        public static readonly int Size = Marshal.SizeOf<PClassInfo>();
+
         public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
 
         [MarshalAs(UnmanagedType.Struct)]
@@ -27,6 +29,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
     public struct PClassInfo2
     {
+        public static readonly int Size = Marshal.SizeOf<PClassInfo2>();
+
         public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
 
         [MarshalAs(UnmanagedType.Struct)]
@@ -70,6 +74,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = Platform.StructurePack)]
     public struct PClassInfoW
     {
+        public static readonly int Size = Marshal.SizeOf<PClassInfoW>();
+
         public const int ClassCardinalityManyInstances = 0x7FFFFFFF;
 
         [MarshalAs(UnmanagedType.Struct)]

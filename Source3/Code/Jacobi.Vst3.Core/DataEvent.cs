@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct DataEvent
     {
+        public static readonly int TypeSize = Marshal.SizeOf<DataEvent>();
+
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 Size;			// size of the bytes
 

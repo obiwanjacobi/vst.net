@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct NoteExpressionTextEvent
     {
+        public static readonly int TypeSize = Marshal.SizeOf<NoteExpressionTextEvent>();
+
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 TypeId;	                	// see \ref NoteExpressionTypeID (kTextTypeID or kPhoneticTypeID)
 

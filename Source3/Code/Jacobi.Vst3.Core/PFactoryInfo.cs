@@ -8,6 +8,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = Platform.StructurePack)]
     public struct PFactoryInfo
     {
+        public static readonly int Size = Marshal.SizeOf<PFactoryInfo>();
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeVendor)]
         public String Vendor;
 

@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = Platform.StructurePack)]
     public struct BusInfo
     {
+        public static readonly int Size = Marshal.SizeOf<BusInfo>();
+
         [MarshalAs(UnmanagedType.I4)]
         public MediaTypes MediaType;		// Media type - has to be a value of \ref MediaTypes
 
@@ -16,7 +18,7 @@ namespace Jacobi.Vst3.Core
         public Int32 ChannelCount;			// number of channels (if used then need to be recheck after \ref IAudioProcessor::setBusArrangements is called)
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Constants.MaxSizeBusName)]
-        public string Name;				    // name of the bus
+        public String Name;				    // name of the bus
 
         [MarshalAs(UnmanagedType.I4)]
         public BusTypes BusType;			// main or aux - has to be a value of \ref BusTypes

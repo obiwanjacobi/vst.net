@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct PolyPressureEvent
     {
+        public static readonly int Size = Marshal.SizeOf<PolyPressureEvent>();
+
         [MarshalAs(UnmanagedType.I2)]
         public Int16 Channel;			// channel index in event bus
 

@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct NoteExpressionTypeInfo
     {
+        public static readonly int Size = Marshal.SizeOf<NoteExpressionTypeInfo>();
+
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 TypeId;			            // unique identifier of this note Expression type
 

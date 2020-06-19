@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct Chord
     {
+        public static readonly int Size = Marshal.SizeOf<Chord>();
+
         [MarshalAs(UnmanagedType.U1)]
         public Byte KeyNote;		// key note in chord
 

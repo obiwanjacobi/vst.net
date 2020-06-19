@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = Platform.StructurePack)]
     public struct ParameterInfo
     {
+        public static readonly int Size = Marshal.SizeOf<ParameterInfo>();
+
         [MarshalAs(UnmanagedType.U4)]
         public UInt32 ParamId;
 

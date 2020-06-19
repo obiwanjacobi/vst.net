@@ -6,6 +6,8 @@ namespace Jacobi.Vst3.Core
     [StructLayout(LayoutKind.Sequential, CharSet = Platform.CharacterSet, Pack = Platform.StructurePack)]
     public struct KeyswitchInfo
     {
+        public static readonly int Size = Marshal.SizeOf<KeyswitchInfo>();
+
         [MarshalAs(UnmanagedType.U4)]
         public KeyswitchTypeIDs TypeId;					// see KeyswitchTypeID
 
@@ -23,7 +25,7 @@ namespace Jacobi.Vst3.Core
 
         [MarshalAs(UnmanagedType.I4)]
         public Int32 KeyRemapped;						/** optional remapped key switch (default -1), the Plug-in could provide one remapped 
-											key for a key switch (allowing better location on the keyboard of the key switches) */
+                                            key for a key switch (allowing better location on the keyboard of the key switches) */
 
         [MarshalAs(UnmanagedType.I4)]
         public Int32 UnitId;							// id of unit this key switch belongs to (see \ref vst3UnitsIntro), -1 means no unit used.
