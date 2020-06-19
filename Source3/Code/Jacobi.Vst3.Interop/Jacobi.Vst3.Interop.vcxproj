@@ -149,6 +149,7 @@
       <CLRThreadAttribute>
       </CLRThreadAttribute>
       <ModuleDefinitionFile>dllexports.def</ModuleDefinitionFile>
+      <DelayLoadDLLs>Ijwhost.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -177,6 +178,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Jacobi.Vst3.Interop.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

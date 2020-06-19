@@ -8,6 +8,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="usediids.cpp" />
     <ClCompile Include="Jacobi.Vst3.Interop.cpp" />
+    <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dllexports.def" />

@@ -1,24 +1,47 @@
 #include "pch.h"
+#include <delayimp.h>
 
-HMODULE g_hModule;
+//HMODULE g_hModule;
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-                     )
+//char buffer[MAX_PATH + 1];
+// Get full path to ijwhost.dll based on current module path
+//auto res = GetModuleFileNameA(g_hModule, buffer, MAX_PATH + 1);
+
+#pragma unmanaged
+
+extern "C"
 {
-    switch (ul_reason_for_call)
+    /*BOOL APIENTRY DllMain(HMODULE hModule,
+        DWORD  ul_reason_for_call,
+        LPVOID lpReserved)
     {
-    case DLL_PROCESS_ATTACH:
-        g_hModule = hModule;
-        break;
-    case DLL_THREAD_ATTACH:
-    case DLL_THREAD_DETACH:
-        break;
-    case DLL_PROCESS_DETACH:
-        g_hModule = nullptr;
-        break;
+        switch (ul_reason_for_call)
+        {
+        case DLL_PROCESS_ATTACH:
+            g_hModule = hModule;
+            break;
+        case DLL_PROCESS_DETACH:
+            g_hModule = NULL;
+            break;
+        }
+        return TRUE;
+    }*/
+
+    FARPROC WINAPI delayLoadFailureHook(unsigned dliNotify, PDelayLoadInfo pdli)
+    {
+        if (dliNotify != dliFailLoadLib ||
+            _strcmpi(pdli->szDll, "ijwhost.dll") != 0) {
+            return NULL;
+        }
+
+
+        ::OutputDebugStringA("Loading Ijwhost.dll");
+
+        const char* path = "C:\\Users\\marc\\Documents\\MyProjects\\public\\Jacobi\\Public\\GitHub\\vst.net\\Source3\\Code\\x64\\Debug\\Ijwhost.dll";
+        return (FARPROC)::LoadLibraryA(path);
     }
-    return TRUE;
+
+    const PfnDliHook __pfnDliFailureHook2 = delayLoadFailureHook;
 }
 
+#pragma managed
