@@ -32,27 +32,27 @@ namespace Jacobi.Vst3.Core
 
         [FieldOffset(FieldOffset_Union)]
         [MarshalAs(UnmanagedType.Struct)]
-        public NoteOnEvent NoteOn;                      // type == kNoteOnEvent
+        public NoteOnEvent NoteOn;                              // type == NoteOnEvent
 
         [FieldOffset(FieldOffset_Union)]
         [MarshalAs(UnmanagedType.Struct)]
-        public NoteOffEvent NoteOff;							// type == kNoteOffEvent
+        public NoteOffEvent NoteOff;							// type == NoteOffEvent
 
         [FieldOffset(FieldOffset_Union)]
         [MarshalAs(UnmanagedType.Struct)]
-        public DataEvent Data;									// type == kDataEvent
+        public DataEvent Data;									// type == DataEvent
 
         [FieldOffset(FieldOffset_Union)]
         [MarshalAs(UnmanagedType.Struct)]
-        public PolyPressureEvent PolyPressure;					// type == kPolyPressureEvent
+        public PolyPressureEvent PolyPressure;					// type == PolyPressureEvent
 
         [FieldOffset(FieldOffset_Union)]
         [MarshalAs(UnmanagedType.Struct)]
-        public NoteExpressionValueEvent NoteExpressionValue;	// type == kNoteExpressionValueEvent
+        public NoteExpressionValueEvent NoteExpressionValue;	// type == NoteExpressionValueEvent
 
         [FieldOffset(FieldOffset_Union)]
         [MarshalAs(UnmanagedType.Struct)]
-        public NoteExpressionTextEvent NoteExpressionText;		// type == kNoteExpressionTextEvent
+        public NoteExpressionTextEvent NoteExpressionText;		// type == NoteExpressionTextEvent
 
         public enum EventFlags
         {
@@ -64,12 +64,12 @@ namespace Jacobi.Vst3.Core
 
         public enum EventTypes
         {
-            NoteOnEvent = 0,			// is \ref NoteOnEvent
-            NoteOffEvent,				// is \ref NoteOffEvent
-            DataEvent,					// is \ref DataEvent
-            PolyPressureEvent,			// is \ref PolyPressureEvent
-            NoteExpressionValueEvent,	// is \ref NoteExpressionValueEvent
-            NoteExpressionTextEvent	    // is \ref NoteExpressionTextEvent
+            NoteOnEvent = 0,
+            NoteOffEvent,
+            DataEvent,
+            PolyPressureEvent,
+            NoteExpressionValueEvent,
+            NoteExpressionTextEvent
         };
 
 #if X86

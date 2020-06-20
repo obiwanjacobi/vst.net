@@ -35,11 +35,16 @@
         public const string INoteExpressionController = "B7F8F859-4123-4872-9116-95814F3721A3";
         public const string IKeyswitchController = "1F2F76D3-BFFB-4B96-B995-27A55EBCCEF4";
         public const string IXmlRepresentationController = "A81A0471-48C3-4DC4-AC30-C9E13C8393D5";
+        public const string IAutomationState = "B4E8287F-1BB3-46AA-83A4-666768937BAB";
+        public const string IInfoListener = "0F194781-8D98-4ADA-BBA0-C1EFC011D8D0";
+        public const string IComponentHandlerBusActivation = "067D02C1-5B4E-274D-A92D-90FD6EAF7240";
+        public const string IMidiLearn = "6B2449CC-4197-40B5-AB3C-79DAC5FE5C86";
 
         // messaging interfaces
         public const string IConnectionPoint = "70A4156F-6E6E-4026-9891-48BFAA60D8D1";
         public const string IMessage = "936F033B-C6C0-47DB-BB08-82F813C1E613";
         public const string IAttributeList = "1E5F0AEB-CC7F-4533-A254-401138AD5EE4";
+        public const string IStreamAttributes = "D6CE2FFC-EFAF-4B8C-9E74-F1BB12DA44B4";
 
         // UI interfaces
         public const string IPlugView = "5BC32507-D060-49EA-A615-1B522B755B29";
@@ -55,9 +60,11 @@
         public const string IUnitHandler = "4B5147F8-4654-486B-8DAB-30BA163A3C56";
         public const string IUpdateHandler = "F5246D56-8654-4d60-B026-AFB57B697B37";
 
-        // marker interfaces
+        // wrapper interfaces
         public const string IVst3ToVst2Wrapper = "29633AEC-1D1C-47E2-BB85-B97BD36EAC61";
         public const string IVst3ToAUWrapper = "A3B8C6C5-C095-4688-B091-6F0BB697AA44";
+        public const string IVst3ToAAXWrapper = "6D319DC6-60C5-6242-B32C-951B93BEF4C6";
+        public const string IVst3WrapperMPESupport = "44149067-42CF-4BF9-8800-B750F7359FE3";
 
         // test interfaces
         public const string ITestW = "FE64FC19-9568-4F53-AAA7-8DC87228338E";

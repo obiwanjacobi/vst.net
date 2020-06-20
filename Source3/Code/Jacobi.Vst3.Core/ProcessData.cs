@@ -38,14 +38,20 @@ namespace Jacobi.Vst3.Core
         [MarshalAs(UnmanagedType.SysInt)]
         public IntPtr InputParameterChangesPtr;
 
-        [MarshalAs(UnmanagedType.Interface)]
-        public IParameterChanges OutputParameterChanges;	// outgoing parameter changes for this block (optional)
+        //[MarshalAs(UnmanagedType.Interface)]
+        //public IParameterChanges OutputParameterChanges;	// outgoing parameter changes for this block (optional)
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr OutputParameterChanges;
 
-        [MarshalAs(UnmanagedType.Interface)]
-        public IEventList InputEvents;				// incoming events for this block (optional)
+        //[MarshalAs(UnmanagedType.Interface)]
+        //public IEventList InputEvents;				// incoming events for this block (optional)
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr InputEvents;
 
-        [MarshalAs(UnmanagedType.Interface)]
-        public IEventList OutputEvents;				// outgoing events for this block (optional)
+        //[MarshalAs(UnmanagedType.Interface)]
+        //public IEventList OutputEvents;				// outgoing events for this block (optional)
+        [MarshalAs(UnmanagedType.SysInt)]
+        public IntPtr OutputEvents;
 
         // ProcessContext pointer
         [MarshalAs(UnmanagedType.SysInt)]

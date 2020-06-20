@@ -5,20 +5,30 @@ using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.Plugin
 {
+    [Flags]
+    public enum StreamAccessMode
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        ReadWrite = 3,
+    }
+
     public sealed class BStream : Stream
     {
-        private IBStream _bStream;
-        private int _unmanagedBufferSize;
+        private readonly StreamAccessMode _mode;
+        private readonly int _unmanagedBufferSize;
         private IntPtr _unmanagedBuffer;
 
-        public BStream(IBStream streamToWrap)
-        {
-            _bStream = streamToWrap;
-        }
+        public BStream(IBStream streamToWrap, StreamAccessMode mode)
+            : this(streamToWrap, mode, 0)
+        { }
 
-        public BStream(IBStream streamToWrap, int unmanagedBufferSize)
+        public BStream(IBStream streamToWrap, StreamAccessMode mode, int unmanagedBufferSize)
         {
-            _bStream = streamToWrap;
+            BaseStream = streamToWrap;
+            SizeableStream = streamToWrap as ISizeableStream;
+            _mode = mode;
 
             if (unmanagedBufferSize > 0)
             {
@@ -28,14 +38,12 @@ namespace Jacobi.Vst3.Plugin
             }
         }
 
-        public IBStream BaseStream
-        {
-            get { return _bStream; }
-        }
+        public IBStream BaseStream { get; private set; }
+        public ISizeableStream SizeableStream { get; private set; }
 
         public override bool CanRead
         {
-            get { return true; }
+            get { return (_mode & StreamAccessMode.Read) > 0; }
         }
 
         public override bool CanSeek
@@ -45,7 +53,7 @@ namespace Jacobi.Vst3.Plugin
 
         public override bool CanWrite
         {
-            get { return true; }
+            get { return (_mode & StreamAccessMode.Write) > 0; }
         }
 
         public override void Flush()
@@ -55,7 +63,17 @@ namespace Jacobi.Vst3.Plugin
 
         public override long Length
         {
-            get { throw new NotSupportedException(); }
+            get
+            {
+                if (SizeableStream != null)
+                {
+                    long size = 0;
+                    TResult.ThrowIfFailed(SizeableStream.GetStreamSize(ref size));
+                    return size;
+                }
+
+                throw new NotSupportedException();
+            }
         }
 
         public override long Position
@@ -91,6 +109,11 @@ namespace Jacobi.Vst3.Plugin
 
         public override void SetLength(long value)
         {
+            if (SizeableStream != null)
+            {
+                TResult.ThrowIfFailed(SizeableStream.SetStreamSize(value));
+                return;
+            }
             throw new NotSupportedException();
         }
 
@@ -132,7 +155,8 @@ namespace Jacobi.Vst3.Plugin
                 }
 
                 int writtenBytes = 0;
-                BaseStream.Write(unmanaged, count, ref writtenBytes);
+                int result = BaseStream.Write(unmanaged, count, ref writtenBytes);
+                TResult.ThrowIfFailed(result);
             }
             finally
             {
@@ -165,17 +189,13 @@ namespace Jacobi.Vst3.Plugin
 
         private StreamSeekMode SeekOriginSeekMode(SeekOrigin seekOrigin)
         {
-            switch (seekOrigin)
+            return seekOrigin switch
             {
-                case SeekOrigin.Begin:
-                    return StreamSeekMode.SeekSet;
-                case SeekOrigin.Current:
-                    return StreamSeekMode.SeekCur;
-                case SeekOrigin.End:
-                    return StreamSeekMode.SeekEnd;
-            }
-
-            return StreamSeekMode.SeekSet;
+                SeekOrigin.Begin => StreamSeekMode.SeekSet,
+                SeekOrigin.Current => StreamSeekMode.SeekCur,
+                SeekOrigin.End => StreamSeekMode.SeekEnd,
+                _ => StreamSeekMode.SeekSet,
+            };
         }
 
         protected override void Dispose(bool disposing)
@@ -187,10 +207,9 @@ namespace Jacobi.Vst3.Plugin
                     Marshal.FreeHGlobal(_unmanagedBuffer);
                     GC.RemoveMemoryPressure(_unmanagedBufferSize);
                     _unmanagedBuffer = IntPtr.Zero;
-                    _unmanagedBufferSize = 0;
                 }
 
-                _bStream = null;
+                BaseStream = null;
             }
             finally
             {

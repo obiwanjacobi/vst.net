@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jacobi.Vst3.Core.Common;
+using System;
 
 namespace Jacobi.Vst3.Core
 {
@@ -38,6 +39,14 @@ namespace Jacobi.Vst3.Core
         public static bool IsFalse(int result)
         {
             return result == S_False;
+        }
+
+        public static void ThrowIfFailed(int result)
+        {
+            if (Failed(result))
+            {
+                throw new VstException(result);
+            }
         }
     }
 }

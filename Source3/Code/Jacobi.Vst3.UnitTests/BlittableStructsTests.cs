@@ -34,12 +34,10 @@ namespace Jacobi.Vst3.UnitTests
             AssertIsBlittable(new NoteOnEvent());
             AssertIsBlittable(new PolyPressureEvent());
             AssertIsBlittable(new ProcessContext());
+            AssertIsBlittable(new ProcessData());
             AssertIsBlittable(new ProcessSetup());
             AssertIsBlittable(new RoutingInfo());
             AssertIsBlittable(new ViewRect());
-
-            // contains interfaces refs
-            //AssertIsBlittable(new ProcessData());
 
             // contains string
             //AssertIsBlittable(new BusInfo());

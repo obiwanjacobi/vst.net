@@ -43,9 +43,7 @@ namespace Jacobi.Vst3.Core
         [Flags]
         public enum FactoryFlags
         {
-            /// <summary>
-            /// Nothing
-            /// </summary>
+            /// <summary>Nothing</summary>
             NoFlags = 0,
 
             /// <summary>
@@ -61,14 +59,10 @@ namespace Jacobi.Vst3.Core
             /// </summary>
             LicenseCheck = 1 << 1,
 
-            /// <summary>
-            /// Component won't be unloaded until process exit.
-            /// </summary>
+            /// <summary>Component won't be unloaded until process exit.</summary>
             ComponentNonDiscardable = 1 << 3,
 
-            /// <summary>
-            /// Components have entirely unicode encoded strings. (True for VST 3 Plug-ins so far)
-            /// </summary>
+            /// <summary>Components have entirely unicode encoded strings. (True for VST 3 Plug-ins so far)</summary>
             Unicode = 1 << 4
         }
     }
