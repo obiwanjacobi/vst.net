@@ -16,4 +16,11 @@
       </Reference>
     </ItemGroup>
   </Target>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\runtimes\win10-$(Platform)\native\ijwhost.dll">
+      <Link>Ijwhost.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

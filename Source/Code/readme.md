@@ -19,31 +19,12 @@ The dotnet-core 3.1 version of VST.NET.
   NuGet still gives problems with x86/x64 managed assemblies.
   https://github.com/dotnet/sdk/issues/10875
 
-
 * CLI does not detect dependencies of dependencies (interop)
-* CLI: Host deployment: dotnet core applications are dll's too. Need an extra switch?
+* CLI: Host deployment: triggers plugin logic because a dotnet-core exe has/is also a dll.
+    => Nuget deployment is wrong. Ijwhost is missing from build-bin folder (of Samples.Host).
 
 * Some Host DAWs need to have the ijwhost.dll next to their .exe in order to load the plugin
     (Also the case for VST3).
-
-Resources.Designer.cs:
-```
-<ItemGroup>
-    <Compile Update="ExtraInformationSql.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ExtraInformationSql.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="ExtraInformationSql.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExtraInformationSql.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-```
 
 ## Refactor wishes
 

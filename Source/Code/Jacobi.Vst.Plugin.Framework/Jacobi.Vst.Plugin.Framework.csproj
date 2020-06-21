@@ -56,18 +56,17 @@
     </Compile>
   </ItemGroup>
 
-  <!-- Still complains about being specified multiple times (warning CS2002) -->
   <ItemGroup>
-    <None Remove="Properties\Resources.Designer.cs" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <StronglyTypedFileName>Properties\Resources.Designer.cs</StronglyTypedFileName>
-      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
-      <StronglyTypedNamespace>Jacobi.Vst.Plugin.Framework.Properties</StronglyTypedNamespace>
-      <StronglyTypedClassName>Resources</StronglyTypedClassName>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
