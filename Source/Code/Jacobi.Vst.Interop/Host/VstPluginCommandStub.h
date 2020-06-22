@@ -28,7 +28,7 @@ public:
     }
     !VstPluginCommandStub()
     {
-        delete _cmdImpl;
+        delete _commands;
     }
 
     // IVstPluginCommandStub
@@ -37,14 +37,16 @@ public:
     /// </summary>
     virtual property Jacobi::Vst::Core::Host::IVstPluginContext^ PluginContext;
 
-    virtual property Jacobi::Vst::Core::IVstPluginCommands24^ Commands;
+    virtual property Jacobi::Vst::Core::IVstPluginCommands24^ Commands {
+        Jacobi::Vst::Core::IVstPluginCommands24^ get() { return _commands; }
+    }
 
 internal:
     /// <summary>Constructs a new instance based on an <b>Vst2Plugin</b> structure.</summary>
     VstPluginCommandStub(::Vst2Plugin* pPlugin);
 
 private:
-    Jacobi::Vst::Host::Interop::VstPluginCommandsImpl^ _cmdImpl;
+    Jacobi::Vst::Host::Interop::VstPluginCommandsImpl^ _commands;
 };
 
 }}}} // Jacobi::Vst::Host::Interop

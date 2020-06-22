@@ -78,6 +78,14 @@ namespace Interop {
 
 			if(_hLib == NULL)
 			{
+				if (::GetLastError() == 193)	// bad file format
+				{
+					throw gcnew System::BadImageFormatException(
+						System::String::Format(
+							Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_LoadPluginFailed,
+							pluginPath));
+				}
+
 				throw gcnew System::ArgumentException(
 					System::String::Format(
 						Jacobi::Vst::Interop::Properties::Resources::VstUnmanagedPluginContext_LoadPluginFailed,

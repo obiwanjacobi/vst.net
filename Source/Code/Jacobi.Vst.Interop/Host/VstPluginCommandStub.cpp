@@ -18,7 +18,7 @@ VstPluginCommandStub::VstPluginCommandStub(::Vst2Plugin* plugin)
 		throw gcnew System::ArgumentNullException("plugin");
 	}
 
-	_cmdImpl = gcnew Jacobi::Vst::Host::Interop::VstPluginCommandsImpl(plugin);
+	_commands = gcnew Jacobi::Vst::Host::Interop::VstPluginCommandsImpl(plugin);
 }
 
 
