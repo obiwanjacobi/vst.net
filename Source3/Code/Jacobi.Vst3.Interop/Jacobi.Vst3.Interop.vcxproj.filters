@@ -13,4 +13,7 @@
   <ItemGroup>
     <None Include="dllexports.def" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="manifest.xml" />
+  </ItemGroup>
 </Project>
