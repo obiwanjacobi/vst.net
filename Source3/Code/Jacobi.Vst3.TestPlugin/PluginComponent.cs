@@ -49,14 +49,30 @@ namespace Jacobi.Vst3.TestPlugin
             if (paramChanges != null)
             {
                 var paramCount = paramChanges.GetParameterCount();
-                //var paramCount = data.InputEvents.GetEventCount();
-                //var paramCount = data.OutputEvents.GetEventCount();
 
                 if (paramCount > 0)
                 {
                     System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: InputParameterChanges.GetParameterCount() = " + paramCount);
+
+                    for (int i = 0; i < paramCount; i++)
+                    {
+                        //    var paramValue = paramChanges.GetParameterData(i);
+                        //    Marshal.ChangeWrapperHandleStrength(paramValue, fIsWeak: true);
+
+                        //    for (int p = 0; p < paramValue.GetPointCount(); p++)
+                        //    {
+                        //        int sampleOffset = 0;
+                        //        double val = 0;
+
+                        //        paramValue.GetPoint(p, ref sampleOffset, ref val);
+                        //    }
+                    }
                 }
             }
+
+            //var paramCount = data.InputEvents.GetEventCount();
+            //var paramCount = data.OutputEvents.GetEventCount();
+
             return TResult.S_OK;
         }
 

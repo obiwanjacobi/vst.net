@@ -54,6 +54,7 @@ namespace Jacobi.Vst3.UnitTests
             //AssertIsBlittable(new UnitInfo());
 
             // structs with unions: won't load
+            // => Because a string cannot overlap with primitive types (ints etc)
             //AssertIsBlittable(new Event());
             //AssertIsBlittable(new FVariant());
         }
