@@ -34,4 +34,7 @@
     <None Include="readme.md" />
     <None Include="Plugin\Jacobi.Vst.Interop.def" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="manifest.xml" />
+  </ItemGroup>
 </Project>
