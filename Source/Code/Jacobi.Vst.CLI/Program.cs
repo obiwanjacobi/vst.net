@@ -44,6 +44,10 @@ namespace Jacobi.Vst.CLI
             }
             else
             {
+                if (args.Length > 0)
+                {
+                    ConsoleOutput.Warning($"Command `vstnet {String.Join(" | ", args)}` could not be interpreted. The '|' are inserted to indicate how the command line was split into arguments.");
+                }
                 CommandLineArgs.Help();
             }
         }
@@ -52,7 +56,7 @@ namespace Jacobi.Vst.CLI
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            ConsoleOutput.Information($"VST.NET Command Line Interface. Version {assembly.GetName().Version.ToString()}.");
+            ConsoleOutput.Information($"VST.NET Command Line Interface. Version {assembly.GetName().Version}.");
             ConsoleOutput.Information("Copyright © 2008-2020 Jacobi Software.");
             ConsoleOutput.NewLine();
         }

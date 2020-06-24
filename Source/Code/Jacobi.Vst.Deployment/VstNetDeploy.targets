@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <Target Name="DeployVstNet" AfterTargets="AfterBuild">
-    <Exec Command="$(VstNetCliExe) publish $(TargetPath) -o $(DeployOutput)" />
+    <Exec Command="$(VstNetCliExe) publish &quot;$(TargetPath)&quot; -o $(DeployOutput)" />
   </Target>
 </Project>

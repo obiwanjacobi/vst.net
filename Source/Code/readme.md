@@ -26,6 +26,8 @@ The dotnet-core 3.1 version of VST.NET.
 * Some Host DAWs need to have the ijwhost.dll next to their .exe in order to load the plugin
     (Also the case for VST3).
 
+* VS clean (target) should also delete the 'deploy' folder.
+
 ## Refactor wishes
 
 * [Interop] look into the use tracked references (%^)
