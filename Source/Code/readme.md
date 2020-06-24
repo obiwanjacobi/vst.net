@@ -27,6 +27,7 @@ The dotnet-core 3.1 version of VST.NET.
     (Also the case for VST3).
 
 * VS clean (target) should also delete the 'deploy' folder.
+* VS Deploy (Configuration Manager): can we switch on that for vstnet deploy?
 
 ## Refactor wishes
 
