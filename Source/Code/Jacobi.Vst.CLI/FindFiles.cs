@@ -24,10 +24,12 @@ namespace Jacobi.Vst.CLI
         };
 
         private readonly string _nugetPath;
+        private readonly string _binPath;
 
-        public FindFiles(string nugetPath)
+        public FindFiles(string nugetPath, string binPath)
         {
             _nugetPath = nugetPath ?? throw new ArgumentNullException(nameof(nugetPath));
+            _binPath = binPath ?? throw new ArgumentNullException(nameof(binPath));
         }
 
         public ProcessorArchitecture ProcessorArchitecture { get; set; }
@@ -42,11 +44,18 @@ namespace Jacobi.Vst.CLI
                 {
                     foreach (var depInfo in kvp.Value.Runtime)
                     {
-                        if (!depInfo.Key.StartsWith("Jacobi.Vst.") &&   // nuget package troubles
-                            (depInfo.Value.AssemblyVersion != null ||
-                            depInfo.Value.FileVersion != null))
+                        if (!depInfo.Key.StartsWith("Jacobi.Vst."))   // nuget package troubles
                         {
-                            paths.Add(Path.Combine(_nugetPath, kvp.Key, depInfo.Key));
+                            if (depInfo.Value.AssemblyVersion != null ||
+                                depInfo.Value.FileVersion != null)
+                            {
+                                paths.Add(Path.Combine(_nugetPath, kvp.Key, depInfo.Key));
+                            }
+
+                            if (!depInfo.Key.StartsWith("lib"))
+                            {
+                                paths.Add(Path.Combine(_binPath, depInfo.Key));
+                            }
                         }
                     }
                 }

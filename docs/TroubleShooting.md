@@ -4,7 +4,7 @@ Hopefully some helpful tips when things don't work right away.
 
 ## Not all dependencies were found after successful build
 
-As a workaround to another problem with using NuGet packages in a mixed assmebly project, the dependencies for the interop library are hard-coded in the vstnet cli.
+As a workaround to another problem with using NuGet packages in a mixed assembly project, the dependencies for the interop library are hard-coded in the vstnet cli.
 
 Because of that, the final step after a successful build may display warnings that certain dependencies were not found at the NuGet package cache location (`C:\Users\[me]\.nuget\packages\`).
 
@@ -25,7 +25,7 @@ Make sure that the plugin matches the processor architecture of the host. That m
 
 In order to eliminate problem areas, you should check if you plugin is correct and has all the required files in its folder.
 
-During development of VST.NET itself the [vsthost](https://www.hermannseib.com/english/vsthost.htm) is used as a test host. If you plugin does not load in this host you know that you are missing files.
+During development of VST.NET itself the [vsthost](https://www.hermannseib.com/english/vsthost.htm) is used as a test host. If your plugin does not load in this host you know that you are missing files.
 You just need to test if the plugin loads (File->New Plugin...).
 
 ### Copy `Ijwhost.dll` into host .exe's folder
@@ -33,6 +33,10 @@ You just need to test if the plugin loads (File->New Plugin...).
 For some hosts the loading of .NET core does not work at all. It is unclear what the problem is, but copying over the `Ijwhost.dll` file into the same folder the host's .exe is located usually solves the issue.
 
 Clearly this is a workaround and the problem is under investigation.
+
+### Debugging
+
+If all else fails, you may have to attach the debugger, explained [here](Debugging.md).
 
 ---
 

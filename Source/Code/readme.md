@@ -22,6 +22,7 @@ The dotnet-core 3.1 version of VST.NET.
 * CLI does not detect dependencies of dependencies (interop)
 * CLI: Host deployment: triggers plugin logic because a dotnet-core exe has/is also a dll.
     => Nuget deployment is wrong. Ijwhost is missing from build-bin folder (of Samples.Host).
+* CLI: does not include project references in publish.
 
 * Some Host DAWs need to have the ijwhost.dll next to their .exe in order to load the plugin
     (Also the case for VST3).

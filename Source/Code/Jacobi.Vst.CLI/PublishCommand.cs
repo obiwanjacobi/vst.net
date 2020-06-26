@@ -62,7 +62,7 @@ namespace Jacobi.Vst.CLI
             using var stream = File.OpenRead(depsFile);
             var json = Parse(stream);
 
-            var finder = new FindFiles(NuGetPath)
+            var finder = new FindFiles(NuGetPath, Path.GetDirectoryName(FilePath))
             {
                 ProcessorArchitecture = processorArchitecture
             };

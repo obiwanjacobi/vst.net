@@ -3,12 +3,13 @@
 ![VST.NET2 CI](https://github.com/obiwanjacobi/vst.net/workflows/VST.NET2%20CI/badge.svg)
 
 ---
-## New Version: `VST.NET` 2!
+
+## New Version: `VST.NET` 2
 
 `VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET Core 3.1.
 The new version is still Windows-only and supports the Steinberg VST 2.x API.
 
-This means that `VST.NET` (1) is phasing out and will not receive any more updates. 
+This means that `VST.NET` (1) is phasing out and will not receive any more updates.
 If you are looking for the old `VST.NET` (1) code, its in the branch called [`vstnet1`](https://github.com/obiwanjacobi/vst.net/tree/vstnet1).
 Of course you can still ask questions about `VST.NET` (1), but no feature requests or bug fixes will be applied.
 
@@ -45,7 +46,7 @@ There is a Facebook page [here](http://www.facebook.com/pages/Virtual-Studio-Tec
 
 ### Contribute
 
-If you have a great idea for a new feature, have a suggestion or have found a bug, please create an issue on github. Use the appropriate template.
+If you have a great idea for a new feature, have a suggestion or have found a bug, please [create an issue on github](https://github.com/obiwanjacobi/vst.net/issues). Use the appropriate template.
 
 ---
 
