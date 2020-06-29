@@ -8,4 +8,11 @@
   <Target Name="DeployVstNet" AfterTargets="AfterBuild">
     <Exec Command="$(VstNetCliExe) publish &quot;$(TargetPath)&quot; -o $(DeployOutput)" />
   </Target>
+  
+  <Target Name="CleanDeployVstNet" DependsOnTargets="Clean">
+    <Message Text="Cleaning VST.NET deploy folder." />
+    <ItemGroup>
+      <FilesToDelete Include="$(DeployOutput)\*"/>
+    </ItemGroup>
+  </Target>
 </Project>

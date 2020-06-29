@@ -17,11 +17,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{7CBB90A0-0CBB-4380-AC6D-B9686CC17724}"
 	ProjectSection(SolutionItems) = preProject
 		Jacobi.Vst.Deployment\.gitignore = Jacobi.Vst.Deployment\.gitignore
+		Jacobi.Vst.Deployment\buildall.cmd = Jacobi.Vst.Deployment\buildall.cmd
 		Jacobi.Vst.Deployment\pack.cmd = Jacobi.Vst.Deployment\pack.cmd
 		Jacobi.Vst.Deployment\push-nuget.cmd = Jacobi.Vst.Deployment\push-nuget.cmd
 		Jacobi.Vst.Deployment\push-test.cmd = Jacobi.Vst.Deployment\push-test.cmd
-		Jacobi.Vst.Deployment\VstNetDeploy.targets = Jacobi.Vst.Deployment\VstNetDeploy.targets
 		Jacobi.Vst.Deployment\readme.md = Jacobi.Vst.Deployment\readme.md
+		Jacobi.Vst.Deployment\VstNetDeploy.targets = Jacobi.Vst.Deployment\VstNetDeploy.targets
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.CLI", "Jacobi.Vst.CLI\Jacobi.Vst.CLI.csproj", "{CFBE0FBA-4AFA-4F3C-8247-464463312CD9}"
