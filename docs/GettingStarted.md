@@ -35,7 +35,7 @@ As of `2.0.0-RC1` the nuget packages for plugin and host both contain a build fi
 For instance: `MyProject\bin\Debug\netcoreapp3.1\deploy`.
 
 If that doesn't work for you, you could use the [VST.NET Command Line Interface](cli) and use the `publish` command that can help you with deployment. The `vstnet.exe` is located in the nuget package cache folder. For instance for the plugin nuget package:
-`C:\Users\[me]\.nuget\packages\vst.net2-plugin\2.0.0[-rc1]\tools\netcoreapp3.1`
+`C:\Users\[me]\.nuget\packages\vst.net2-plugin\2.0.0[-rc2]\tools\netcoreapp3.1`
 
 ---
 
