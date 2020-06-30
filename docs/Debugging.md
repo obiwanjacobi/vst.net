@@ -31,7 +31,7 @@ That can be found on the `Debug => Windows => Exception Settings...` menu. Look 
 
 Because you are building a managed host, debugging it is a simple matter of making a debug build and hitting F5.
 
-If you have their source code you should even be able to step into plugin as well.
+You should even be able to step into plugins, if you have the source code, as well.
 
 ## VST.NET
 
