@@ -56,22 +56,21 @@ namespace Jacobi.Vst3.TestPlugin
 
                     for (int i = 0; i < paramCount; i++)
                     {
-                        //    var paramValue = paramChanges.GetParameterData(i);
-                        //    Marshal.ChangeWrapperHandleStrength(paramValue, fIsWeak: true);
+                        var paramValue = paramChanges.GetParameterValue(i);
 
-                        //    for (int p = 0; p < paramValue.GetPointCount(); p++)
-                        //    {
-                        //        int sampleOffset = 0;
-                        //        double val = 0;
+                        for (int p = 0; p < paramValue.GetPointCount(); p++)
+                        {
+                            int sampleOffset = 0;
+                            double val = 0;
 
-                        //        paramValue.GetPoint(p, ref sampleOffset, ref val);
-                        //    }
+                            paramValue.GetPoint(p, ref sampleOffset, ref val);
+                        }
                     }
                 }
             }
 
-            //var paramCount = data.InputEvents.GetEventCount();
-            //var paramCount = data.OutputEvents.GetEventCount();
+            //var eventCount = data.InputEvents.GetEventCount();
+            //var eventCount = data.OutputEvents.GetEventCount();
 
             return TResult.S_OK;
         }

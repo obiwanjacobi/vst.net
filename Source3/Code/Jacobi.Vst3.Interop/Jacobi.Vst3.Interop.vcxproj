@@ -155,6 +155,9 @@
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>
     </Manifest>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) $(SolutionDir)$(PlatformName)\$(ConfigurationName)\Jacobi.Vst3.TestPlugin.vst3</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

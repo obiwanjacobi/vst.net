@@ -23,6 +23,10 @@ COM Interop Best Practices
 https://docs.microsoft.com/en-us/dotnet/standard/native-interop/best-practices
 
 
+https://jpassing.com/2009/03/26/rcw-reference-counting-rules-com-reference-counting-rules/
+http://dotnetdebug.net/2005/07/07/marshalreleasecomobject-and-cpu-spinning/
+
+
 ## TODOs
 
 - remove methods from interop structs and make them extension methods.
