@@ -64,7 +64,7 @@ namespace Jacobi.Vst3.Plugin
                 if (_selectedUnit != value)
                 {
                     _selectedUnit = value;
-                    OnPropertyChanged("SelectedUnit");
+                    OnPropertyChanged(nameof(SelectedUnit));
 
                     if (UnitHandler != null)
                     {

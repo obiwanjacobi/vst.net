@@ -12,24 +12,23 @@ namespace Jacobi.Vst3.TestPlugin
     {
         public MyEditController()
         {
-            this.RootUnit = new Unit(UnitInfo.RootUnitId, "Root", null, null);
-            this.Units.Add(this.RootUnit);
+            RootUnit = new Unit(UnitInfo.RootUnitId, "Root", null, null);
+            Units.Add(RootUnit);
 
-            var gainParam = new GainParameter(this.RootUnit.Info.Id);
-
-            Parameters.Add(gainParam);
+            Parameters.Add(new ByPassParameter(RootUnit.Info.Id, 1));
+            Parameters.Add(new GainParameter(RootUnit.Info.Id, 2));
         }
     }
 
     public class GainParameter : Parameter
     {
-        public GainParameter(int unitId)
+        public GainParameter(int unitId, uint paramId)
         {
             var valueInfo = new ParameterValueInfo();
 
             valueInfo.ParameterInfo.DefaultNormalizedValue = 0.45;
             valueInfo.ParameterInfo.Flags = ParameterInfo.ParameterFlags.CanAutomate;
-            valueInfo.ParameterInfo.ParamId = 1;
+            valueInfo.ParameterInfo.ParamId = paramId;
             valueInfo.ParameterInfo.ShortTitle = "Gain";
             valueInfo.ParameterInfo.StepCount = 0;
             valueInfo.ParameterInfo.Title = "Gain";
@@ -40,7 +39,7 @@ namespace Jacobi.Vst3.TestPlugin
             valueInfo.MaxValue = 10.0;
             valueInfo.Precision = 2;
 
-            this.ValueInfo = valueInfo;
+            ValueInfo = valueInfo;
         }
     }
 }

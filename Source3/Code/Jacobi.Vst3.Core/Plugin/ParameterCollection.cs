@@ -11,5 +11,10 @@ namespace Jacobi.Vst3.Plugin
 
             return item.Id;
         }
+
+        public Parameter GetAt(int index)
+        {
+            return Items[index];
+        }
     }
 }

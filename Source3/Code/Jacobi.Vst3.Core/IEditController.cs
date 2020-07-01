@@ -79,7 +79,7 @@ namespace Jacobi.Vst3.Core
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Error)]
         Int32 SetParamNormalized(
-            [MarshalAs(UnmanagedType.I4), In] Int32 paramIndex,
+            [MarshalAs(UnmanagedType.I4), In] UInt32 paramId,
             [MarshalAs(UnmanagedType.R8), In] Double value);
 
         [PreserveSig]

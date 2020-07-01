@@ -28,7 +28,7 @@ namespace Jacobi.Vst3.Plugin
         protected override void RemoveItem(int index)
         {
             // detach from parent
-            var unit = this.GetAt(index);
+            var unit = GetAt(index);
             unit.Parent = null;
 
             base.RemoveItem(index);

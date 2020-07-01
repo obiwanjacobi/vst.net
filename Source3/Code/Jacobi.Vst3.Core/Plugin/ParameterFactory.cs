@@ -6,7 +6,7 @@ namespace Jacobi.Vst3.Plugin
     {
         public virtual Parameter Create(ParameterValueInfo paramValueInfo)
         {
-            Parameter param = null;
+            Parameter param;
 
             if ((paramValueInfo.ParameterInfo.Flags & ParameterInfo.ParameterFlags.IsBypass) > 0)
             {

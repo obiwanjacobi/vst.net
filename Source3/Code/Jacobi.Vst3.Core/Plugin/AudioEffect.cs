@@ -88,7 +88,7 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IAudioProcessor.SetupProcessing");
 
-            if (this.IsActive)
+            if (IsActive)
             {
                 return TResult.E_Unexpected;
             }
@@ -97,10 +97,10 @@ namespace Jacobi.Vst3.Plugin
                 return TResult.S_False;
             }
 
-            this.MaxSamplesPerBlock = setup.MaxSamplesPerBlock;
-            this.ProcessMode = setup.ProcessMode;
-            this.SampleRate = setup.SampleRate;
-            this.SampleSize = setup.SymbolicSampleSize;
+            MaxSamplesPerBlock = setup.MaxSamplesPerBlock;
+            ProcessMode = setup.ProcessMode;
+            SampleRate = setup.SampleRate;
+            SampleSize = setup.SymbolicSampleSize;
 
             return TResult.S_True;
         }
@@ -109,12 +109,12 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IAudioProcessor.SetProcessing(" + state + ")");
 
-            if (!this.IsActive)
+            if (!IsActive)
             {
                 return TResult.E_Unexpected;
             }
 
-            this.IsProcessing = state;
+            IsProcessing = state;
 
             return TResult.S_OK;
         }

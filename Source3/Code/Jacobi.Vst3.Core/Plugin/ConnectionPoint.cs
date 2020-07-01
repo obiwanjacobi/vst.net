@@ -34,7 +34,7 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IPluginBase.Terminate");
 
-            this._peer = null;
+            _peer = null;
 
             ServiceContainer.Dispose();
 
@@ -69,7 +69,7 @@ namespace Jacobi.Vst3.Plugin
 
             if (_peer != null && _peer == other)
             {
-                this._peer = null;
+                _peer = null;
 
                 return TResult.S_OK;
             }
@@ -98,14 +98,14 @@ namespace Jacobi.Vst3.Plugin
 
             if (_peer == null) return false;
 
-            var host = this.ServiceContainer.GetService<IHostApplication>();
+            var host = ServiceContainer.GetService<IHostApplication>();
             var msg = host.CreateMessage();
 
             if (msg != null)
             {
                 funcBeforeSend(msg);
 
-                var result = this._peer.Notify(msg);
+                var result = _peer.Notify(msg);
 
                 return TResult.Succeeded(result);
             }

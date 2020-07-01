@@ -12,21 +12,21 @@ namespace Jacobi.Vst3.Plugin
         {
             ValueInfo = paramValueInfo;
 
-            SetValue(this.ValueInfo.ParameterInfo.DefaultNormalizedValue, null, false);
+            SetValue(ValueInfo.ParameterInfo.DefaultNormalizedValue, null, false);
         }
 
         public ParameterValueInfo ValueInfo { get; protected set; }
 
         public uint Id
         {
-            get { return this.ValueInfo.ParameterInfo.ParamId; }
+            get { return ValueInfo.ParameterInfo.ParamId; }
         }
 
         public bool IsReadOnly { get; set; }
 
         public bool ResetToDefaultValue()
         {
-            return SetValue(this.ValueInfo.ParameterInfo.DefaultNormalizedValue, null, true);
+            return SetValue(ValueInfo.ParameterInfo.DefaultNormalizedValue, null, true);
         }
 
         protected bool SetValue(double? normValue, double? plainValue, bool notify)
@@ -92,7 +92,7 @@ namespace Jacobi.Vst3.Plugin
 
         private bool SetPlainValue(double value)
         {
-            value = Crop(value, this.ValueInfo.MinValue, this.ValueInfo.MaxValue);
+            value = Crop(value, ValueInfo.MinValue, ValueInfo.MaxValue);
 
             if (_plainValue != value)
             {
@@ -105,10 +105,10 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual double ToNormalized(double plainValue)
         {
-            plainValue = Crop(plainValue, this.ValueInfo.MinValue, this.ValueInfo.MaxValue);
+            plainValue = Crop(plainValue, ValueInfo.MinValue, ValueInfo.MaxValue);
 
-            var scale = this.ValueInfo.MaxValue - this.ValueInfo.MinValue;
-            var offset = -this.ValueInfo.MinValue;
+            var scale = ValueInfo.MaxValue - ValueInfo.MinValue;
+            var offset = -ValueInfo.MinValue;
 
             return (plainValue + offset) / scale;
         }
@@ -117,8 +117,8 @@ namespace Jacobi.Vst3.Plugin
         {
             normValue = Crop(normValue, 0.0, 1.0);
 
-            var scale = this.ValueInfo.MaxValue - this.ValueInfo.MinValue;
-            var offset = -this.ValueInfo.MinValue;
+            var scale = ValueInfo.MaxValue - ValueInfo.MinValue;
+            var offset = -ValueInfo.MinValue;
 
             return (normValue * scale) - offset;
         }
@@ -139,9 +139,9 @@ namespace Jacobi.Vst3.Plugin
 
             var value = ToPlain(normValue);
 
-            if (this.ValueInfo.Precision > 0)
+            if (ValueInfo.Precision > 0)
             {
-                string format = new string('#', this.ValueInfo.Precision);
+                string format = new string('#', ValueInfo.Precision);
 
                 return value.ToString("0." + format);
             }

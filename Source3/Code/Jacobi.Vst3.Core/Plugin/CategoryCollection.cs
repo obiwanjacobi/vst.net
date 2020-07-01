@@ -58,7 +58,7 @@ namespace Jacobi.Vst3.Plugin
 
         public override string ToString()
         {
-            return string.Join("|", this.ToArray());
+            return String.Join("|", this.ToArray());
         }
     }
 }

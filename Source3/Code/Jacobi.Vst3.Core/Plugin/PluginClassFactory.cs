@@ -118,7 +118,7 @@ namespace Jacobi.Vst3.Plugin
 
             if (site != null && site.ServiceContainer != null)
             {
-                site.ServiceContainer.ParentContainer = this.ServiceContainer;
+                site.ServiceContainer.ParentContainer = ServiceContainer;
             }
 
             return instance;
@@ -140,7 +140,7 @@ namespace Jacobi.Vst3.Plugin
 
             if (String.IsNullOrEmpty(registration.Vendor))
             {
-                registration.Vendor = this.Vendor;
+                registration.Vendor = Vendor;
             }
 
             if (registration.Version == null)
@@ -297,11 +297,11 @@ namespace Jacobi.Vst3.Plugin
 
         protected virtual void Dispose(bool disposeAll)
         {
-            this._registrations.Clear();
+            _registrations.Clear();
 
-            if (this.ServiceContainer != null)
+            if (ServiceContainer != null)
             {
-                this.ServiceContainer.Dispose();
+                ServiceContainer.Dispose();
             }
         }
 

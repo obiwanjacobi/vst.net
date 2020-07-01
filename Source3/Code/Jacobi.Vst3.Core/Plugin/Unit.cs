@@ -6,10 +6,10 @@ namespace Jacobi.Vst3.Plugin
     {
         protected Unit(int id, string name, int parentId, int programListId)
         {
-            this.Info.Id = id;
-            this.Info.Name = name;
-            this.Info.ParentUnitId = parentId;
-            this.Info.ProgramListId = programListId;
+            Info.Id = id;
+            Info.Name = name;
+            Info.ParentUnitId = parentId;
+            Info.ProgramListId = programListId;
         }
 
         public Unit(int id, string name, Unit parent, ProgramList programList)
@@ -19,7 +19,7 @@ namespace Jacobi.Vst3.Plugin
         {
             if (parent != null)
             {
-                //this.Parent = parent; // collection takes care of this
+                //Parent = parent; // collection takes care of this
                 parent.Children.Add(this);
             }
 

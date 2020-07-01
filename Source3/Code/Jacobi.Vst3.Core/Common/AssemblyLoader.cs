@@ -14,7 +14,7 @@ namespace Jacobi.Vst3.Core.Common
         {
             _basePath = basePath;
 
-            _context = AssemblyLoadContext.GetLoadContext(this.GetType().Assembly);
+            _context = AssemblyLoadContext.GetLoadContext(GetType().Assembly);
             _context.Resolving += LoadContext_ResolvingAssembly;
         }
 
