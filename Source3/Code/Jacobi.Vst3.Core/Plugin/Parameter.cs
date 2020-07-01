@@ -1,4 +1,5 @@
 ﻿using Jacobi.Vst3.Common;
+using Jacobi.Vst3.Core;
 using System;
 
 namespace Jacobi.Vst3.Plugin
@@ -50,12 +51,12 @@ namespace Jacobi.Vst3.Plugin
 
             if (normChanged && notify)
             {
-                OnPropertyChanged("NormalizedValue");
+                OnPropertyChanged(nameof(NormalizedValue));
             }
 
             if (plainChanged && notify)
             {
-                OnPropertyChanged("PlainValue");
+                OnPropertyChanged(nameof(PlainValue));
             }
 
             return normChanged || plainChanged;
@@ -71,7 +72,7 @@ namespace Jacobi.Vst3.Plugin
 
         private bool SetNormalizedValue(double value)
         {
-            value = Crop(value, 0.0, 1.0);
+            value = value.Crop(0.0, 1.0);
 
             if (_normalizedValue != value)
             {
@@ -92,7 +93,7 @@ namespace Jacobi.Vst3.Plugin
 
         private bool SetPlainValue(double value)
         {
-            value = Crop(value, ValueInfo.MinValue, ValueInfo.MaxValue);
+            value = value.Crop(ValueInfo.MinValue, ValueInfo.MaxValue);
 
             if (_plainValue != value)
             {
@@ -105,7 +106,7 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual double ToNormalized(double plainValue)
         {
-            plainValue = Crop(plainValue, ValueInfo.MinValue, ValueInfo.MaxValue);
+            plainValue = plainValue.Crop(ValueInfo.MinValue, ValueInfo.MaxValue);
 
             var scale = ValueInfo.MaxValue - ValueInfo.MinValue;
             var offset = -ValueInfo.MinValue;
@@ -115,7 +116,7 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual double ToPlain(double normValue)
         {
-            normValue = Crop(normValue, 0.0, 1.0);
+            normValue = normValue.Crop(0.0, 1.0);
 
             var scale = ValueInfo.MaxValue - ValueInfo.MinValue;
             var offset = -ValueInfo.MinValue;
@@ -152,21 +153,6 @@ namespace Jacobi.Vst3.Plugin
         public virtual bool TryParse(string displayValue, out double normValue)
         {
             return Double.TryParse(displayValue, out normValue);
-        }
-
-        protected static double Crop(double value, double min, double max)
-        {
-            if (value > max)
-            {
-                value = max;
-            }
-
-            if (value < min)
-            {
-                value = min;
-            }
-
-            return value;
         }
     }
 }

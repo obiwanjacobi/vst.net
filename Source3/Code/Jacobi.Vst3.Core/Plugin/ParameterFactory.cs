@@ -14,7 +14,7 @@ namespace Jacobi.Vst3.Plugin
             }
             else if ((paramValueInfo.ParameterInfo.Flags & ParameterInfo.ParameterFlags.IsProgramChange) > 0)
             {
-                param = new ProgramParameter(paramValueInfo);
+                param = new ProgramChangeParameter(paramValueInfo);
             }
             else if ((paramValueInfo.ParameterInfo.Flags & ParameterInfo.ParameterFlags.IsList) > 0)
             {

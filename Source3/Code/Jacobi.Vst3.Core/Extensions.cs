@@ -70,5 +70,21 @@ namespace Jacobi.Vst3.Core
             var unknown = Marshal.GetObjectForIUnknown(unknownPtr);
             return unknown as T;
         }
+
+        public static T Crop<T>(this T value, T min, T max)
+            where T : IComparable<T>
+        {
+            if (value.CompareTo(max) > 0)
+            {
+                value = max;
+            }
+
+            if (value.CompareTo(min) < 0)
+            {
+                value = min;
+            }
+
+            return value;
+        }
     }
 }

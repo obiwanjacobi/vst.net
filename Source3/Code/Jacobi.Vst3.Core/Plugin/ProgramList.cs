@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace Jacobi.Vst3.Plugin
 {
@@ -33,8 +32,4 @@ namespace Jacobi.Vst3.Plugin
             return program;
         }
     }
-
-    
-
-    
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Jacobi.Vst3.Plugin
 {
@@ -14,7 +11,7 @@ namespace Jacobi.Vst3.Plugin
 
         public string Name { get; private set; }
 
-        private Dictionary<string, string> _attrValues = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _attrValues = new Dictionary<string, string>();
 
         public IDictionary<string, string> AttributeValues
         {
