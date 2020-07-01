@@ -12,13 +12,17 @@ namespace Jacobi.Vst3.TestPlugin
     {
         private readonly BusCollection _audioInputs = new BusCollection(MediaTypes.Audio, BusDirections.Input);
         private readonly BusCollection _audioOutputs = new BusCollection(MediaTypes.Audio, BusDirections.Output);
+        private readonly BusCollection _eventInputs = new BusCollection(MediaTypes.Event, BusDirections.Input);
+        private readonly BusCollection _eventOutputs = new BusCollection(MediaTypes.Event, BusDirections.Output);
 
         public PluginComponent()
         {
             ControlledClassId = typeof(MyEditController).GUID;
 
-            _audioInputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Input", BusTypes.Main));
-            _audioOutputs.Add(new AudioBus(SpeakerArrangement.ArrStereo, "Main Output", BusTypes.Main));
+            _audioInputs.Add(new AudioBus("Main Input", SpeakerArrangement.ArrStereo));
+            _audioOutputs.Add(new AudioBus("Main Output", SpeakerArrangement.ArrStereo));
+            _eventInputs.Add(new EventBus("Input Events", 1));
+            _eventOutputs.Add(new EventBus("Output Events", 1));
         }
 
         public override int CanProcessSampleSize(SymbolicSampleSizes symbolicSampleSize)
@@ -39,12 +43,22 @@ namespace Jacobi.Vst3.TestPlugin
                 return result;
             }
 
-            return ProcessAudio(ref data);
+            result = ProcessAudio(ref data);
+
+            try
+            {
+                return ProcessEvents(ref data);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Trace.WriteLine(e.ToString());
+            }
+            return TResult.E_Fail;
         }
 
         private int ProcessInParameters(ref ProcessData data)
         {
-            // TODO: Parameter handling
+
             var paramChanges = data.GetInputParameterChanges();
             if (paramChanges != null)
             {
@@ -78,7 +92,7 @@ namespace Jacobi.Vst3.TestPlugin
         private int ProcessAudio(ref ProcessData data)
         {
             // flushing parameters
-            if (data.NumInputs == 0 || data.NumOutputs == 0)
+            if (data.NumInputs == 0 || data.NumOutputs == 0 || data.NumSamples == 0)
             {
                 return TResult.S_OK;
             }
@@ -121,13 +135,36 @@ namespace Jacobi.Vst3.TestPlugin
             return TResult.S_OK;
         }
 
+        private int ProcessEvents(ref ProcessData data)
+        {
+            var inputs = data.GetInputEvents();
+            var outputs = data.GetOutputEvents();
+
+            if (inputs != null && outputs != null)
+            {
+                var count = inputs.GetEventCount();
+                var evnt = new Event();
+
+                for (int i = 0; i < count; i++)
+                {
+                    inputs.GetEvent(i, ref evnt);
+                    outputs.AddEvent(evnt);
+                }
+            }
+
+            return TResult.S_OK;
+        }
+
         protected override BusCollection GetBusCollection(MediaTypes mediaType, BusDirections busDir)
         {
             if (mediaType == MediaTypes.Audio)
             {
                 return busDir == BusDirections.Input ? _audioInputs : _audioOutputs;
             }
-
+            if (mediaType == MediaTypes.Event)
+            {
+                return busDir == BusDirections.Input ? _eventInputs : _eventOutputs;
+            }
             return null;
         }
     }

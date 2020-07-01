@@ -11,13 +11,29 @@ namespace Jacobi.Vst3.Core
 
         public static IParameterChanges GetInputParameterChanges(this ref ProcessData processData)
         {
-            return processData.InputParameterChangesPtr.Cast<IParameterChanges>();
+            return processData.InputParameterChanges.Cast<IParameterChanges>();
         }
 
-        public static ProcessContext GetProcessContext(this ref ProcessData processData)
+        public static IParameterChanges GetOutputParameterChanges(this ref ProcessData processData)
         {
-            return Marshal.PtrToStructure<ProcessContext>(processData.ProcessContext);
-            //return (ProcessContext)processData.ProcessContext.ToPointer();
+            return processData.OutputParameterChanges.Cast<IParameterChanges>();
+        }
+
+        public static IEventList GetInputEvents(this ref ProcessData processData)
+        {
+            return processData.InputEvents.Cast<IEventList>();
+        }
+
+        public static IEventList GetOutputEvents(this ref ProcessData processData)
+        {
+            return processData.OutputEvents.Cast<IEventList>();
+        }
+
+        public static bool TryGetProcessContext(this ref ProcessData processData, ref ProcessContext processContext)
+        {
+            if (processData.ProcessContext == IntPtr.Zero) return false;
+            Marshal.PtrToStructure(processData.ProcessContext, processContext);
+            return true;
         }
 
         //

@@ -1,4 +1,5 @@
 ﻿using Jacobi.Vst3.Core;
+using System;
 using System.Collections.ObjectModel;
 
 namespace Jacobi.Vst3.Plugin
@@ -21,6 +22,26 @@ namespace Jacobi.Vst3.Plugin
             if (item == null) return null;
 
             return item.Name;
+        }
+
+        protected override void InsertItem(int index, Bus item)
+        {
+            ThrowIfNotOfMediaType(item);
+            base.InsertItem(index, item);
+        }
+
+        protected override void SetItem(int index, Bus item)
+        {
+            ThrowIfNotOfMediaType(item);
+            base.SetItem(index, item);
+        }
+
+        private void ThrowIfNotOfMediaType(Bus item)
+        {
+            if (item != null && item.MediaType != MediaType)
+            {
+                throw new ArgumentException("The MediaType for the item does not match the collection.", nameof(item));
+            }
         }
     }
 }

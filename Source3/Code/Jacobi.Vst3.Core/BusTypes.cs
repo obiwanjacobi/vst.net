@@ -3,6 +3,6 @@
     public enum BusTypes
     {
         Main = 0,		// main bus
-        Aux			// auxilliary bus (sidechain)
+        Aux			    // auxilliary bus (sidechain)
     }
 }

@@ -30,7 +30,7 @@ namespace Jacobi.Vst3.Core
         public enum BusFlags
         {
             None = 0,
-            DefaultActive = 1 << 0	// bus active per default
+            DefaultActive = 1 << 0	        // bus active per default
         };
     }
 }

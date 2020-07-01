@@ -4,15 +4,18 @@ namespace Jacobi.Vst3.Plugin
 {
     public class AudioBus : Bus
     {
-        public AudioBus(SpeakerArrangement speakerArr, string name, BusTypes busType)
-            : base(name, busType, BusInfo.BusFlags.DefaultActive)
-        {
-            SpeakerArrangement = speakerArr;
-        }
+        public AudioBus(string name, SpeakerArrangement speakerArr)
+            : this(name, speakerArr, BusTypes.Main, BusInfo.BusFlags.DefaultActive)
+        { }
 
-        public AudioBus(SpeakerArrangement speakerArr, string name, BusTypes busType, BusInfo.BusFlags flags)
+        public AudioBus(string name, SpeakerArrangement speakerArr, BusTypes busType)
+            : this(name, speakerArr, busType, BusInfo.BusFlags.DefaultActive)
+        { }
+
+        public AudioBus(string name, SpeakerArrangement speakerArr, BusTypes busType, BusInfo.BusFlags flags)
             : base(name, busType, flags)
         {
+            MediaType = MediaTypes.Audio;
             SpeakerArrangement = speakerArr;
         }
 
@@ -20,10 +23,8 @@ namespace Jacobi.Vst3.Plugin
 
         public override bool GetInfo(ref BusInfo info)
         {
-            info.MediaType = MediaTypes.Audio;
-            // current definition is within 32 bits
+            // current definition of SpeakerArrangement is within 32 bits
             info.ChannelCount = (int)VstExtensions.NumberOfSetBits((uint)SpeakerArrangement);
-
             return base.GetInfo(ref info);
         }
     }

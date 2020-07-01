@@ -25,6 +25,7 @@ namespace Jacobi.Vst3.Plugin
 
         public virtual bool GetInfo(ref BusInfo info)
         {
+            info.MediaType = MediaType;
             info.BusType = BusType;
             info.Flags = Flags;
             info.Name = Name;

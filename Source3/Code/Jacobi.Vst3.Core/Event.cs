@@ -50,9 +50,9 @@ namespace Jacobi.Vst3.Core
         [MarshalAs(UnmanagedType.Struct)]
         public NoteExpressionValueEvent NoteExpressionValue;	// type == NoteExpressionValueEvent
 
-        [FieldOffset(FieldOffset_Union)]
-        [MarshalAs(UnmanagedType.Struct)]
-        public NoteExpressionTextEvent NoteExpressionText;		// type == NoteExpressionTextEvent
+        //[FieldOffset(FieldOffset_Union)]
+        //[MarshalAs(UnmanagedType.Struct)]
+        //public NoteExpressionTextEvent NoteExpressionText;		// type == NoteExpressionTextEvent
 
         public enum EventFlags
         {
