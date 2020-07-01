@@ -99,6 +99,7 @@ namespace Jacobi.Vst3.Plugin
             if (_peer == null) return false;
 
             var host = ServiceContainer.GetService<IHostApplication>();
+            if (host == null) return false;
             var msg = host.CreateMessage();
 
             if (msg != null)

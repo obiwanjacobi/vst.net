@@ -12,6 +12,9 @@ Something is going on with setting the current directory..?
 `vsthost.exe` (Hermann Seib) does load the .vst3 plugin correctly without having to copy over Ijwhost.dll...
 - The validator.exe points out a few issues:
     - Warning: Parameters Changes - No point at all has been read via IParameterChanges (more...).
+    - BUG? IEditController::setState passes in a IBStream that is at the end. https://sdk.steinberg.net/viewtopic.php?f=4&t=818
+
+
 
 ## Research
 

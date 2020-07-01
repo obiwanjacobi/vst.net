@@ -1,4 +1,5 @@
 ﻿using Jacobi.Vst3.Core;
+using Jacobi.Vst3.Core.Plugin;
 using System.Text;
 
 namespace Jacobi.Vst3.Plugin
@@ -40,14 +41,20 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IEditController.SetState");
 
-            return TResult.E_NotImplemented;
+            var serializer = new ParameterSerializer(state, StreamAccessMode.Read);
+            serializer.Load(Parameters);
+
+            return TResult.S_OK;
         }
 
         public virtual int GetState(IBStream state)
         {
             System.Diagnostics.Trace.WriteLine("IEditController.GetState");
 
-            return TResult.E_NotImplemented;
+            var serializer = new ParameterSerializer(state, StreamAccessMode.Write);
+            serializer.Save(Parameters);
+            
+            return TResult.S_OK;
         }
 
         public virtual int GetParameterCount()
