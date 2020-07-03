@@ -4,14 +4,18 @@ The thin Interop layer that loads the plugin factory seems to work nicely. **Win
 
 The managed plugin exposes a public `PluginFactory` derived from the `PluginClassFactory` in Core.
 
+The aim of this library is to be as close to the original C++ API as possible in order for the official docs to apply to `VST.NET3`.
+
+Go here for the official VST3 documentation: https://steinbergmedia.github.io/vst3_doc/
+
+For questions about the VST3 API itself, use the Steinberg forum (just remember they think you're talking C++): https://sdk.steinberg.net/index.php
+
 ## Issues
 
 - Do not include the [plugin].deps.json in the deployment. Loading will report seeing the same module with different extensions.
-- Ijwhost.dll may have to be copied to the [host].exe location. Both the validator.exe and the VST3PluginTestHost.exe did not load the plugin otherwise.
 Something is going on with setting the current directory..?
 `vsthost.exe` (Hermann Seib) does load the .vst3 plugin correctly without having to copy over Ijwhost.dll...
 - The validator.exe points out a few issues:
-    - Warning: Parameters Changes - No point at all has been read via IParameterChanges (more...).
     - BUG? IEditController::setState passes in a IBStream that is at the end. https://sdk.steinberg.net/viewtopic.php?f=4&t=818
 
 

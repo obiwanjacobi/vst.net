@@ -37,23 +37,18 @@ namespace Jacobi.Vst3.TestPlugin
             //System.Diagnostics.Trace.WriteLine("IAudioProcessor.Process: numSamples=" + data.NumSamples);
 
             int result = ProcessInParameters(ref data);
-
             if (TResult.Failed(result))
             {
                 return result;
             }
 
             result = ProcessAudio(ref data);
+            if (TResult.Failed(result))
+            {
+                return result;
+            }
 
-            try
-            {
-                return ProcessEvents(ref data);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Trace.WriteLine(e.ToString());
-            }
-            return TResult.E_Fail;
+            return ProcessEvents(ref data);
         }
 
         private int ProcessInParameters(ref ProcessData data)
@@ -82,9 +77,6 @@ namespace Jacobi.Vst3.TestPlugin
                     }
                 }
             }
-
-            //var eventCount = data.InputEvents.GetEventCount();
-            //var eventCount = data.OutputEvents.GetEventCount();
 
             return TResult.S_OK;
         }
@@ -157,15 +149,12 @@ namespace Jacobi.Vst3.TestPlugin
 
         protected override BusCollection GetBusCollection(MediaTypes mediaType, BusDirections busDir)
         {
-            if (mediaType == MediaTypes.Audio)
+            return mediaType switch
             {
-                return busDir == BusDirections.Input ? _audioInputs : _audioOutputs;
-            }
-            if (mediaType == MediaTypes.Event)
-            {
-                return busDir == BusDirections.Input ? _eventInputs : _eventOutputs;
-            }
-            return null;
+                MediaTypes.Audio => busDir == BusDirections.Input ? _audioInputs : _audioOutputs,
+                MediaTypes.Event => busDir == BusDirections.Input ? _eventInputs : _eventOutputs,
+                _ => null
+            };
         }
     }
 }

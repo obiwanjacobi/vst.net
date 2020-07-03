@@ -56,4 +56,11 @@ namespace Jacobi.Vst3.Plugin
 
         public ProgramList ProgramList { get; protected set; }
     }
+
+    public class RootUnit : Unit
+    {
+        public RootUnit(string name, ProgramList programList)
+            : base(UnitInfo.RootUnitId, name, null, programList)
+        { }
+    }
 }

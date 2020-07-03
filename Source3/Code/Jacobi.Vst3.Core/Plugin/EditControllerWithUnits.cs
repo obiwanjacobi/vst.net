@@ -1,5 +1,6 @@
 ﻿using Jacobi.Vst3.Common;
 using Jacobi.Vst3.Core;
+using System;
 using System.Text;
 
 namespace Jacobi.Vst3.Plugin
@@ -10,7 +11,7 @@ namespace Jacobi.Vst3.Plugin
         {
             UnitHandler = handler as IUnitHandler;
 
-            return base.SetComponentHandler(handler); ;
+            return base.SetComponentHandler(handler);
         }
 
         private ProgramListCollection _programLists;
@@ -53,7 +54,21 @@ namespace Jacobi.Vst3.Plugin
             }
         }
 
-        public Unit RootUnit { get; protected set; }
+        private Unit _rootUnit;
+        public Unit RootUnit
+        {
+            get { return _rootUnit; }
+            protected set
+            {
+                if (value != null && value.Info.Id != UnitInfo.RootUnitId)
+                {
+                    throw new ArgumentException(
+                        $"The Id of the RootUnit must be {UnitInfo.RootUnitId}.", nameof(value));
+                }
+
+                _rootUnit = value;
+            }
+        }
 
         private Unit _selectedUnit;
         public Unit SelectedUnit
@@ -73,6 +88,8 @@ namespace Jacobi.Vst3.Plugin
                 }
             }
         }
+
+        #region IUnitInfo members
 
         public virtual int GetUnitCount()
         {
@@ -170,7 +187,7 @@ namespace Jacobi.Vst3.Plugin
                 {
                     var program = programList[programIndex];
 
-                    return program is ProgramWithPitchNames ? TResult.S_OK : TResult.S_False;
+                    return program is ProgramWithPitchNames ? TResult.S_True : TResult.S_False;
                 }
             }
 
@@ -185,16 +202,12 @@ namespace Jacobi.Vst3.Plugin
 
                 if (programIndex >= 0 && programIndex < programList.Count)
                 {
-                    var program = programList[programIndex] as ProgramWithPitchNames;
-
-                    if (program != null)
+                    if (programList[programIndex] is ProgramWithPitchNames program &&
+                        program.PitchNames.ContainsKey(midiPitch))
                     {
-                        if (program.PitchNames.ContainsKey(midiPitch))
-                        {
-                            name.Append(program.PitchNames[midiPitch]);
+                        name.Append(program.PitchNames[midiPitch]);
 
-                            return TResult.S_OK;
-                        }
+                        return TResult.S_OK;
                     }
 
                     return TResult.S_False;
@@ -235,6 +248,8 @@ namespace Jacobi.Vst3.Plugin
         {
             return TResult.E_NotImplemented;
         }
+
+        #endregion
 
         // ---------------------------------------------------------------------
 

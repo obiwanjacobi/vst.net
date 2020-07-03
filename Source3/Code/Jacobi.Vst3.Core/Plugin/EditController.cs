@@ -1,5 +1,4 @@
 ﻿using Jacobi.Vst3.Core;
-using Jacobi.Vst3.Core.Plugin;
 using System.Text;
 
 namespace Jacobi.Vst3.Plugin
@@ -41,8 +40,8 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IEditController.SetState");
 
-            var serializer = new ParameterSerializer(state, StreamAccessMode.Read);
-            serializer.Load(Parameters);
+            var reader = new VstStreamReader(state);
+            reader.ReadParameters(Parameters);
 
             return TResult.S_OK;
         }
@@ -51,9 +50,9 @@ namespace Jacobi.Vst3.Plugin
         {
             System.Diagnostics.Trace.WriteLine("IEditController.GetState");
 
-            var serializer = new ParameterSerializer(state, StreamAccessMode.Write);
-            serializer.Save(Parameters);
-            
+            var writer = new VstStreamWriter(state);
+            writer.WriteParameters(Parameters);
+
             return TResult.S_OK;
         }
 

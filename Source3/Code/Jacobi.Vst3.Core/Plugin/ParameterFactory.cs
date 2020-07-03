@@ -18,7 +18,7 @@ namespace Jacobi.Vst3.Plugin
             }
             else if ((paramValueInfo.ParameterInfo.Flags & ParameterInfo.ParameterFlags.IsList) > 0)
             {
-                param = new ListParameter<string>((ListParameterValueInfo<string>)paramValueInfo);
+                param = new ListParameter<string>(paramValueInfo);
             }
             else
             {

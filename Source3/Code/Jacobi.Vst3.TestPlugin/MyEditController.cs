@@ -12,7 +12,7 @@ namespace Jacobi.Vst3.TestPlugin
     {
         public MyEditController()
         {
-            RootUnit = new Unit(UnitInfo.RootUnitId, "Root", null, null);
+            RootUnit = new RootUnit("Root", null);
             Units.Add(RootUnit);
 
             Parameters.Add(new ByPassParameter(RootUnit.Info.Id, 1));
