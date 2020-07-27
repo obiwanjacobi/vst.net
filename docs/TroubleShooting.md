@@ -44,6 +44,10 @@ but copying over the `Ijwhost.dll` file into the same folder the host's .exe is 
 
 If all else fails, you may have to attach the debugger, explained [here](Debugging.md).
 
+### System.BadImageFormatException
+
+This almost always means that you are mixing 64-bit (x64) code with 32-bit (x86) code. It could be that not all your dependencies are for the same system architecture (x86/x64) or that you are trying to load 32-bit plugins into a 64-bit host application (or visa versa).
+
 ---
 
 > Back to [Index](index.md)
