@@ -16,14 +16,21 @@ Currently the simplest way around this is to add the missing NuGet dependencies 
 
 Depending on the host, a plugin may not load into the DAW. First things you should try:
 
+- Add a path to your plugin deploy folder to the DAW.
 - Clear plugin caches the host may have.
 - Let the host rescan for plugins.
+
+Typically a DAW scans for plugins on either specific file locations or using a configurable list of paths.
 
 ### Match processor architecture
 
 Make sure that the plugin matches the processor architecture of the host.
 That means if the host is 64-bits, your plugin needs to be build for `x64` and the same goes for 32-bits (`x86`) of course.
 Most application these days are 64 bits but not all!
+
+### System.BadImageFormatException
+
+This almost always means that you are mixing 64-bit (x64) code with 32-bit (x86) code. It could be that not all your dependencies are for the same system architecture (x86/x64) or that you are trying to load 32-bit plugins into a 64-bit host application (or visa versa).
 
 ### Verify your plugin is correct
 
@@ -43,10 +50,6 @@ but copying over the `Ijwhost.dll` file into the same folder the host's .exe is 
 ### Debugging
 
 If all else fails, you may have to attach the debugger, explained [here](Debugging.md).
-
-### System.BadImageFormatException
-
-This almost always means that you are mixing 64-bit (x64) code with 32-bit (x86) code. It could be that not all your dependencies are for the same system architecture (x86/x64) or that you are trying to load 32-bit plugins into a 64-bit host application (or visa versa).
 
 ---
 
