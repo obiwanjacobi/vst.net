@@ -24,7 +24,7 @@ The dotnet-core 3.1 version of VST.NET.
     => Nuget deployment is wrong. Ijwhost is missing from build-bin folder (of Samples.Host).
 
 * Some Host DAWs need to have the ijwhost.dll next to their .exe in order to load the plugin
-    (Also the case for VST3).
+    TODO: Test if the Interop-manifest works. (Also the case for VST3).
 
 * VS clean (target) should also delete the 'deploy' folder.
 * VS Deploy (Configuration Manager): can we switch on that for vstnet deploy?
