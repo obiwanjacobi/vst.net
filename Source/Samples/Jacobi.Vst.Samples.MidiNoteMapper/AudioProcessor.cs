@@ -10,7 +10,7 @@
     internal sealed class AudioProcessor : VstPluginAudioProcessor
     {
         private readonly Plugin _plugin;
-        private readonly MidiProcessor _midiProcessor;
+        private MidiProcessor _midiProcessor;
         private IVstMidiProcessor _hostProcessor;
 
         /// <summary>
@@ -21,18 +21,14 @@
             : base(0, 0, 0, noSoundInStop: true)
         {
             _plugin = plugin;
-
-            _midiProcessor = plugin.GetInstance<MidiProcessor>();
         }
 
         /// <inheritdoc />
         /// <remarks>This method is used to push midi events to the host.</remarks>
         public override void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
-            if (_hostProcessor == null)
-            {
-                _hostProcessor = _plugin.Host.GetInstance<IVstMidiProcessor>();
-            }
+            EnsureMidiProcessor();
+            EnsureHostProcessor();
 
             if (_midiProcessor != null && _hostProcessor != null &&
                 _midiProcessor.Events.Count > 0)
@@ -43,6 +39,22 @@
 
             // perform audio-through
             base.Process(inChannels, outChannels);
+        }
+
+        private void EnsureMidiProcessor()
+        {
+            if (_midiProcessor == null)
+            {
+                _midiProcessor = _plugin.GetInstance<MidiProcessor>();
+            }
+        }
+
+        private void EnsureHostProcessor()
+        {
+            if (_hostProcessor == null)
+            {
+                _hostProcessor = _plugin.Host.GetInstance<IVstMidiProcessor>();
+            }
         }
     }
 }
