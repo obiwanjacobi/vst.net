@@ -13,11 +13,11 @@ namespace VstNetMidiPlugin
         /// <summary>
         /// TODO: assign a unique plugin.
         /// </summary>
-        private static readonly int UniquePluginId = new FourCharacterCode("1234").ToInt32();
+        private static readonly int UniquePluginId = new FourCharacterCode("2345").ToInt32();
         /// <summary>
         /// TODO: assign a plugin name.
         /// </summary>
-        private const string PluginName = "MyPluginName";
+        private const string PluginName = "MyMidiPluginName";
         /// <summary>
         /// TODO: assign a product name.
         /// </summary>

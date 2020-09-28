@@ -17,7 +17,7 @@ namespace VstNetAudioPlugin
         /// <summary>
         /// TODO: assign a plugin name.
         /// </summary>
-        private const string PluginName = "MyPluginName";
+        private const string PluginName = "MyAudioPluginName";
         /// <summary>
         /// TODO: assign a product name.
         /// </summary>
