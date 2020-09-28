@@ -10,6 +10,13 @@
     <Product>VST.NET</Product>
     <Platforms>x64;x86</Platforms>
     <Nullable>enable</Nullable>
+    <Copyright>Jacobi Software © 2008-2020</Copyright>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/obiwanjacobi/vst.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>vst vstnet</PackageTags>
+    <Description>VST.NET 2 Core Library</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">
