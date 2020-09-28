@@ -7,32 +7,34 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VstNetAudioPlugin", "VstNet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VstNetMidiPlugin", "VstNetMidiPlugin\VstNetMidiPlugin.csproj", "{B9564665-112B-4FAE-9267-96FE5344B22A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26631435-433F-467C-B519-46AA61AD8423}"
-	ProjectSection(SolutionItems) = preProject
-		ReadMe.txt = ReadMe.txt
-		VstNetVS2019Templates.vscontent = VstNetVS2019Templates.vscontent
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Debug|x64.ActiveCfg = Debug|x64
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Debug|x64.Build.0 = Debug|x64
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Debug|x86.ActiveCfg = Debug|x86
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Debug|x86.Build.0 = Debug|x86
+		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Release|Any CPU.ActiveCfg = Release|x86
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Release|x64.ActiveCfg = Release|x64
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Release|x64.Build.0 = Release|x64
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Release|x86.ActiveCfg = Release|x86
 		{018BD11B-E0EF-475C-BDB0-2C1AD11D76E8}.Release|x86.Build.0 = Release|x86
+		{B9564665-112B-4FAE-9267-96FE5344B22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9564665-112B-4FAE-9267-96FE5344B22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Debug|x64.ActiveCfg = Debug|x64
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Debug|x64.Build.0 = Debug|x64
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Debug|x86.ActiveCfg = Debug|x86
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Debug|x86.Build.0 = Debug|x86
+		{B9564665-112B-4FAE-9267-96FE5344B22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9564665-112B-4FAE-9267-96FE5344B22A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Release|x64.ActiveCfg = Release|x64
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Release|x64.Build.0 = Release|x64
 		{B9564665-112B-4FAE-9267-96FE5344B22A}.Release|x86.ActiveCfg = Release|x86

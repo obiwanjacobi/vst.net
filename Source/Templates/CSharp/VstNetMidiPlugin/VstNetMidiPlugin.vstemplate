@@ -1,0 +1,40 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>VST.NET Midi Plugin</Name>
+    <Description>A complete VST.NET 2 project for a MIDI plugin implementing Note Transpose and Velocity Gain.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>VstNetMidiPlugin</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="VstNetMidiPlugin.csproj" File="VstNetMidiPlugin.csproj" ReplaceParameters="true">
+      <Folder Name="Dmp" TargetFolderName="Dmp">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Gain.cs">Gain.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="GainParameters.cs">GainParameters.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MidiHelper.cs">MidiHelper.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Transpose.cs">Transpose.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="TransposeParameters.cs">TransposeParameters.cs</ProjectItem>
+      </Folder>
+      <Folder Name="UI" TargetFolderName="UI">
+        <ProjectItem ReplaceParameters="true" TargetFileName="PluginEditorView.cs">PluginEditorView.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PluginEditorView.Designer.cs">PluginEditorView.Designer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PluginEditorView.resx">PluginEditorView.resx</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="DummyAudioProcessor.cs">DummyAudioProcessor.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MidiProcessor.cs">MidiProcessor.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Plugin.cs">Plugin.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="PluginCommandStub.cs">PluginCommandStub.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="PluginEditor.cs">PluginEditor.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="PluginParameters.cs">PluginParameters.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="PluginPrograms.cs">PluginPrograms.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
