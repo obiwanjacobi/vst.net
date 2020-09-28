@@ -6,35 +6,48 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Jacobi.Vst.Samples.Delay
 {
     /// <summary>
-    /// The Plugin root class.
+    /// The Plugin root object.
     /// </summary>
     internal sealed class Plugin : VstPluginWithServices
     {
+        /// <summary>A unique plugin id.</summary>
+        private static readonly int UniquePluginId = 0x3A3A3A3A;
+        /// <summary>The plugin name.</summary>
+        private const string PluginName = "VST.NET 2 Delay Sample Plugin";
+        /// <summary>The product name.</summary>
+        private const string ProductName = "VST.NET 2 Code Samples";
+        /// <summary>The vendor name.</summary>
+        private const string VendorName = "Jacobi Software © 2008-2020";
+        /// <summary>The plugin version.</summary>
+        private const int PluginVersion = 2000;
+        /// <summary>Delay => Room Effect</summary>
+        private const VstPluginCategory PluginCategory = VstPluginCategory.RoomFx;
+        /// <summary>Need nothing special.</summary>
+        private const VstPluginCapabilities PluginCapabilities = VstPluginCapabilities.None;
         /// <summary>
-        /// Constructs a new instance.
+        /// The number of samples the Delay plugin lags behind.
+        /// </summary>
+        private const int InitialDelayInSamples = 0;
+
+        /// <summary>
+        /// Initializes the one an only instance of the Plugin root object.
         /// </summary>
         public Plugin()
-            : base("VST.NET Delay Plugin", 0x3A3A3A3A,
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
-                VstPluginCategory.RoomFx)
-        {
-            ParameterFactory = new PluginParameterFactory();
-
-            var audioProcessor = GetInstance<AudioProcessor>();
-            // add delay parameters to factory
-            ParameterFactory.ParameterInfos.AddRange(audioProcessor.Delay.ParameterInfos);
-        }
+            : base(PluginName, UniquePluginId,
+                new VstProductInfo(ProductName, VendorName, PluginVersion),
+                PluginCategory, InitialDelayInSamples, PluginCapabilities)
+        { }
 
         /// <summary>
-        /// Gets the parameter factory.
+        /// Called once to get all the plugin components.
         /// </summary>
-        public PluginParameterFactory ParameterFactory { get; private set; }
-
+        /// <param name="services">Is never null.</param>
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll(new AudioProcessor(this));
-            services.AddSingletonAll(new PluginPersistence(this));
-            services.AddSingletonAll(new PluginPrograms(this));
+            services.AddSingletonAll<PluginParameters>();
+            services.AddSingletonAll<PluginPrograms>();
+            services.AddSingletonAll<AudioProcessor>();
+            services.AddSingletonAll<PluginEditor>();
         }
     }
 }

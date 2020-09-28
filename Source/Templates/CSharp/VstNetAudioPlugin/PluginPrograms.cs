@@ -30,19 +30,25 @@ namespace VstNetAudioPlugin
 
             // TODO: add a number of programs for your plugin.
 
-            VstProgram program = CreateProgram(_parameters.ParameterInfos);
-            program.Name = "Default";
+            var program = CreateProgram("Default");
             programs.Add(program);
 
             return programs;
         }
 
+        private VstProgram CreateProgram(string name)
+        {
+            var program = CreateProgram();
+            program.Name = name;
+            return program;
+        }
+
         // create a program with all parameters.
-        private VstProgram CreateProgram(VstParameterInfoCollection parameterInfos)
+        private VstProgram CreateProgram()
         {
             var program = new VstProgram(_parameters.Categories);
 
-            CreateParameters(program.Parameters, parameterInfos);
+            CreateParameters(program.Parameters, _parameters.ParameterInfos);
 
             return program;
         }

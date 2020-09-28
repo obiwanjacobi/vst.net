@@ -33,7 +33,7 @@ namespace VstNetAudioPlugin
         /// <summary>
         /// TODO: what type of plugin are your making?
         /// </summary>
-        private const VstPluginCategory PluginCategory = VstPluginCategory.Effect;
+        private const VstPluginCategory PluginCategory = VstPluginCategory.RoomFx;
         /// <summary>
         /// TODO: what can your plugin do?
         /// </summary>

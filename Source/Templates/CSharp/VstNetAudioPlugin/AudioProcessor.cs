@@ -33,17 +33,17 @@ namespace VstNetAudioPlugin
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public AudioProcessor(Plugin plugin, PluginParameters parameters)
+        public AudioProcessor(IVstPluginEvents pluginEvents, PluginParameters parameters)
             : base(AudioInputCount, AudioOutputCount, InitialTailSize, noSoundInStop: false)
         {
-            Throw.IfArgumentIsNull(plugin, nameof(plugin));
+            Throw.IfArgumentIsNull(pluginEvents, nameof(pluginEvents));
             Throw.IfArgumentIsNull(parameters, nameof(parameters));
 
             // one set of parameters is shared for both channels.
             Left = new Delay(parameters.DelayParameters);
             Right = new Delay(parameters.DelayParameters);
 
-            plugin.Opened += Plugin_Opened;
+            pluginEvents.Opened += Plugin_Opened;
         }
 
         internal Delay Left { get; private set; }
