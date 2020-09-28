@@ -1,5 +1,6 @@
 ﻿using Jacobi.Vst.Plugin.Framework;
 using Jacobi.Vst.Plugin.Framework.Plugin;
+using System;
 
 namespace VstNetAudioPlugin
 {
@@ -8,57 +9,15 @@ namespace VstNetAudioPlugin
     /// </summary>
     internal sealed class PluginPrograms : VstPluginPrograms
     {
-        private readonly Plugin _plugin;
+        private readonly PluginParameters _parameters;
 
         /// <summary>
-        /// Constructs a new instance.
+        /// Constructs an instance on the plugin parameter factory
         /// </summary>
-        /// <param name="plugin">A reference to the plugin root object.</param>
-        public PluginPrograms(Plugin plugin)
+        /// <param name="parameters">Must not be null.</param>
+        public PluginPrograms(PluginParameters parameters)
         {
-            _plugin = plugin;
-
-            ParameterCategories = new VstParameterCategoryCollection();
-            ParameterInfos = new VstParameterInfoCollection();
-        }
-
-        /// <summary>
-        /// Gets a collection of parameter categories.
-        /// </summary>
-        /// <remarks>
-        /// This is the central list that contains all parameter categories.
-        /// </remarks>
-        public VstParameterCategoryCollection ParameterCategories { get; private set; }
-
-        /// <summary>
-        /// Gets a collection of parameter definitions.
-        /// </summary>
-        /// <remarks>
-        /// This is the central list that contains all parameter definitions for the plugin.
-        /// </remarks>
-        public VstParameterInfoCollection ParameterInfos { get; private set; }
-
-        /// <summary>
-        /// Retrieves a parameter category object for the specified <paramref name="categoryName"/>.
-        /// </summary>
-        /// <param name="categoryName">The name of the parameter category. Typically the name of the Dsp component.</param>
-        /// <returns>Never returns null.</returns>
-        public VstParameterCategory GetParameterCategory(string categoryName)
-        {
-            if (ParameterCategories.Contains(categoryName))
-            {
-                return ParameterCategories[categoryName];
-            }
-
-            // create a new parameter category object
-            VstParameterCategory paramCategory = new VstParameterCategory
-            {
-                Name = categoryName
-            };
-
-            ParameterCategories.Add(paramCategory);
-
-            return paramCategory;
+            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
 
         /// <summary>
@@ -67,11 +26,11 @@ namespace VstNetAudioPlugin
         /// <returns>Never returns null or an empty collection.</returns>
         protected override VstProgramCollection CreateProgramCollection()
         {
-            VstProgramCollection programs = new VstProgramCollection();
+            var programs = new VstProgramCollection();
 
             // TODO: add a number of programs for your plugin.
 
-            VstProgram program = CreateProgram(ParameterInfos);
+            VstProgram program = CreateProgram(_parameters.ParameterInfos);
             program.Name = "Default";
             programs.Add(program);
 
@@ -81,7 +40,7 @@ namespace VstNetAudioPlugin
         // create a program with all parameters.
         private VstProgram CreateProgram(VstParameterInfoCollection parameterInfos)
         {
-            VstProgram program = new VstProgram(ParameterCategories);
+            var program = new VstProgram(_parameters.Categories);
 
             CreateParameters(program.Parameters, parameterInfos);
 
@@ -100,11 +59,8 @@ namespace VstNetAudioPlugin
         // create one parameter
         private VstParameter CreateParameter(VstParameterInfo parameterInfo)
         {
-            VstParameter parameter = new VstParameter(parameterInfo);
-
             // Advanced: you can derive from VstParameter and add your own properties and logic.
-
-            return parameter;
+            return new VstParameter(parameterInfo);
         }
     }
 }

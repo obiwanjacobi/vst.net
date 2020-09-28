@@ -7,7 +7,7 @@ namespace VstNetMidiPlugin
     /// This object receives all calls from the (unmanaged) host.
     /// </summary>
     /// <remarks>
-    /// An instance of this object is created automatically by the Jacobi.Vst.Interop assembly
+    /// An instance of this object is created automatically by the Jacobi.Vst.Plugin.Interop assembly
     /// when the plugin is loaded into the host. Interop marshals all calls from unmanaged C++
     /// to this object.
     /// </remarks>

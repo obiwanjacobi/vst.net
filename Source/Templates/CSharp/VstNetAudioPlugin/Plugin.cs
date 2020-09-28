@@ -11,7 +11,7 @@ namespace VstNetAudioPlugin
     internal sealed class Plugin : VstPluginWithServices
     {
         /// <summary>
-        /// TODO: assign a unique plugin.
+        /// TODO: assign a unique plugin id.
         /// </summary>
         private static readonly int UniquePluginId = new FourCharacterCode("1234").ToInt32();
         /// <summary>
@@ -53,39 +53,16 @@ namespace VstNetAudioPlugin
         { }
 
         /// <summary>
-        /// Gets the audio processor object.
-        /// </summary>
-        public AudioProcessor AudioProcessor
-        {
-            get { return GetInstance<AudioProcessor>(); }
-        }
-
-        /// <summary>
-        /// Gets the plugin editor object.
-        /// </summary>
-        public PluginEditor PluginEditor
-        {
-            get { return GetInstance<PluginEditor>(); }
-        }
-
-        /// <summary>
-        /// Gets the plugin programs object.
-        /// </summary>
-        public PluginPrograms PluginPrograms
-        {
-            get { return GetInstance<PluginPrograms>(); }
-        }
-
-        /// <summary>
         /// Called once to get all the plugin components.
         /// Add components for the IVstXxxx interfaces you want to support.
         /// </summary>
         /// <param name="services">Is never null.</param>
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll(new AudioProcessor(this));
-            services.AddSingletonAll(new PluginEditor(this));
-            services.AddSingletonAll(new PluginPrograms(this));
+            services.AddSingletonAll<PluginParameters>();
+            services.AddSingletonAll<PluginPrograms>();
+            services.AddSingletonAll<AudioProcessor>();
+            services.AddSingletonAll<PluginEditor>();
         }
     }
 }

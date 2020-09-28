@@ -21,7 +21,6 @@ The dotnet-core 3.1 version of VST.NET.
 
 * CLI does not detect dependencies of dependencies (interop)
 * CLI: Host deployment: triggers plugin logic because a dotnet-core exe has/is also a dll.
-    => Nuget deployment is wrong. Ijwhost is missing from build-bin folder (of Samples.Host).
 
 * Some Host DAWs need to have the ijwhost.dll next to their .exe in order to load the plugin
     TODO: Test if the Interop-manifest works. (Also the case for VST3).
@@ -43,6 +42,10 @@ The dotnet-core 3.1 version of VST.NET.
     => Host: will read own appsettings.json and create logger factory.
 * [CLI/Interop] Add CRT to output bins and let CLI publish them?
     => adds **a lot** of extra dll's, most of which are not needed...?
+* Look into System.Runtime.CompilerServices.Unsafe
+* Look into structs-by-ref (ref-structs?) to see if memory/performace optimizations can be made.
+* Look into Span<T>, System.Memory, System.Buffers
+* Add a plugin wrapper (plugin) that can hot-load (unload/load) a plugin under development for rapid roundtrips.
 
 ---
 

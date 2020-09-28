@@ -1,6 +1,8 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Plugin.Framework;
 using Jacobi.Vst.Plugin.Framework.Plugin;
+using System;
+using System.Diagnostics;
 using VstNetAudioPlugin.Dsp;
 
 namespace VstNetAudioPlugin
@@ -23,51 +25,52 @@ namespace VstNetAudioPlugin
         /// </summary>
         private const int InitialTailSize = 0;
 
-        private readonly Plugin _plugin;
-        private readonly VstTimeInfoFlags _defaultTimeInfoFlags;
-        private IVstHostSequencer _sequencer;
+        // TODO: change this to your specific needs.
+        private readonly VstTimeInfoFlags _defaultTimeInfoFlags = VstTimeInfoFlags.ClockValid;
+        // set after the plugin is opened
+        private IVstHostSequencer? _sequencer;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public AudioProcessor(Plugin plugin)
-            : base(AudioInputCount, AudioOutputCount, InitialTailSize, noSoundInStop: true)
+        public AudioProcessor(Plugin plugin, PluginParameters parameters)
+            : base(AudioInputCount, AudioOutputCount, InitialTailSize, noSoundInStop: false)
         {
-            _plugin = plugin;
+            Throw.IfArgumentIsNull(plugin, nameof(plugin));
+            Throw.IfArgumentIsNull(parameters, nameof(parameters));
 
-            // TODO: We use one delay object to process two audio channels.
-            // Typically you would use dedicated DSP objects for each channel.
-            Delay = new Delay(plugin);
+            // one set of parameters is shared for both channels.
+            Left = new Delay(parameters.DelayParameters);
+            Right = new Delay(parameters.DelayParameters);
 
-            // TODO: change this to your specific needs.
-            _defaultTimeInfoFlags = VstTimeInfoFlags.ClockValid;
+            plugin.Opened += Plugin_Opened;
         }
 
-        internal Delay Delay { get; private set; }
+        internal Delay Left { get; private set; }
+        internal Delay Right { get; private set; }
 
         /// <summary>
         /// Override the default implementation to pass it through to the delay.
         /// </summary>
         public override float SampleRate
         {
-            get { return Delay.SampleRate; }
-            set { Delay.SampleRate = value; }
+            get { return Left.SampleRate; }
+            set
+            {
+                Left.SampleRate = value;
+                Right.SampleRate = value;
+            }
         }
 
-        private VstTimeInfo _timeInfo;
+        private VstTimeInfo? _timeInfo;
         /// <summary>
         /// Gets the current time info.
         /// </summary>
         /// <remarks>The Time Info is refreshed with each call to Process.</remarks>
-        internal VstTimeInfo TimeInfo
+        internal VstTimeInfo? TimeInfo
         {
             get
             {
-                if (_sequencer == null && _plugin.Host != null)
-                {
-                    _sequencer = _plugin.Host.GetInstance<IVstHostSequencer>();
-                }
-
                 if (_timeInfo == null && _sequencer != null)
                 {
                     _timeInfo = _sequencer.GetTime(_defaultTimeInfoFlags);
@@ -75,6 +78,15 @@ namespace VstNetAudioPlugin
 
                 return _timeInfo;
             }
+        }
+
+        private void Plugin_Opened(object? sender, EventArgs e)
+        {
+            var plugin = (VstPlugin?)sender;
+
+            // A reference to the host is only available after 
+            // the plugin has been loaded and opened by the host.
+            _sequencer = plugin?.Host?.GetInstance<IVstHostSequencer>();
         }
 
         /// <summary>
@@ -89,16 +101,15 @@ namespace VstNetAudioPlugin
 
             if (!Bypass)
             {
+                // check assumptions
+                Debug.Assert(outChannels.Length == inChannels.Length);
+
                 // TODO: Implement your audio (effect) processing here.
 
-                int outCount = outChannels.Length;
-
-                for (int n = 0; n < outCount; n++)
+                for (int i = 0; i < outChannels.Length; i++)
                 {
-                    for (int i = 0; i < inChannels.Length && n < outCount; i++, n++)
-                    {
-                        Process(inChannels[i], outChannels[n]);
-                    }
+                    Process(i % 2 == 0 ? Left : Right,
+                        inChannels[i], outChannels[i]);
                 }
             }
             else
@@ -109,11 +120,11 @@ namespace VstNetAudioPlugin
         }
 
         // process a single audio channel
-        private void Process(VstAudioBuffer input, VstAudioBuffer output)
+        private void Process(Delay delay, VstAudioBuffer input, VstAudioBuffer output)
         {
             for (int i = 0; i < input.SampleCount; i++)
             {
-                output[i] = Delay.ProcessSample(input[i]);
+                output[i] = delay.ProcessSample(input[i]);
             }
         }
 

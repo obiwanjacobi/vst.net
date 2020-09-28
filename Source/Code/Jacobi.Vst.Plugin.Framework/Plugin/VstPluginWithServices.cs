@@ -10,6 +10,9 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     /// </summary>
     public abstract class VstPluginWithServices : VstPlugin
     {
+        // guard against recursion during init.
+        private bool _insideConfigServices;
+
         /// <inheritdoc/>
         protected VstPluginWithServices(string name, int pluginID,
             VstProductInfo productInfo, VstPluginCategory category,
@@ -23,6 +26,13 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// </summary>
         /// <param name="services">Will never be null.</param>
         protected abstract void ConfigureServices(IServiceCollection services);
+
+        /// <summary>
+        /// Override to configure LogProviders.
+        /// </summary>
+        /// <param name="builder">Is never null.</param>
+        protected virtual void ConfigureLogging(ILoggingBuilder builder)
+        { }
 
         /// <summary>
         /// Provides access to all configured/registered services.
@@ -47,6 +57,11 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
         public override T? GetInstance<T>() where T : class
         {
+            if (_insideConfigServices)
+            {
+                throw new InvalidOperationException(Properties.Resources.VstPluginWithServices_RecursionError);
+            }
+
             var services = GetServices();
             var service = services.GetService<T>();
             if (service != null)
@@ -76,6 +91,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         {
             if (Services == null)
             {
+                _insideConfigServices = true;
+
                 var serviceCollection = new ServiceCollection();
                 if (Configuration != null)
                 {
@@ -84,22 +101,15 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
 
                 serviceCollection
                     .AddSingletonAll(this)
-                    .AddLogging(builder =>
-                    ConfigureLogging(builder)
-                );
+                    .AddLogging(ConfigureLogging);
 
                 ConfigureServices(serviceCollection);
                 Services = serviceCollection.BuildServiceProvider();
+
+                _insideConfigServices = false;
             }
 
             return Services;
         }
-
-        /// <summary>
-        /// Override to configure LogProviders.
-        /// </summary>
-        /// <param name="builder">Is never null.</param>
-        protected virtual void ConfigureLogging(ILoggingBuilder builder)
-        { }
     }
 }

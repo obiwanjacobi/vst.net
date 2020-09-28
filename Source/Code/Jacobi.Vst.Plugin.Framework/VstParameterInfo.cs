@@ -1,13 +1,12 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework
 {
     using Jacobi.Vst.Core;
-    using Jacobi.Vst.Plugin.Framework.Common;
     using System;
 
     /// <summary>
     /// The VstParameterInfo contains the meta information for a parameter.
     /// </summary>
-    public class VstParameterInfo : ObservableObject
+    public class VstParameterInfo
     {
         /// <summary>
         /// Constructs a new instance and sets the <see cref="MaxInteger"/> property to 1.
@@ -300,6 +299,18 @@
             {
                 SetProperty(value, ref _largeStepFloat, nameof(LargeStepFloat));
             }
+        }
+
+        private void SetProperty<T>(T value, ref T storage, string propertyName)
+        {
+            if (_paramMgr != null)
+            {
+                throw new InvalidOperationException(
+                    String.Format(Properties.Resources.VstParameterInfo_ReadOnly,
+                        propertyName, Name));
+            }
+
+            storage = value;
         }
     }
 }

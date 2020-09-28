@@ -1,5 +1,6 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Plugin.Framework.Plugin;
+using System;
 
 namespace VstNetMidiPlugin
 {
@@ -13,15 +14,15 @@ namespace VstNetMidiPlugin
         private const int AudioOutputCount = 2;
         private const int InitialTailSize = 0;
 
-        private readonly Plugin _plugin;
+        private readonly MidiProcessor _midiProcessor;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public DummyAudioProcessor(Plugin plugin)
+        public DummyAudioProcessor(MidiProcessor midiProcessor)
             : base(AudioInputCount, AudioOutputCount, InitialTailSize, noSoundInStop: true)
         {
-            _plugin = plugin;
+            _midiProcessor = midiProcessor ?? throw new ArgumentNullException(nameof(midiProcessor));
         }
 
         /// <summary>
@@ -35,9 +36,9 @@ namespace VstNetMidiPlugin
             base.Process(inChannels, outChannels);
 
             // check to see if we need to output midi here
-            if (_plugin.MidiProcessor.SyncWithAudioProcessor)
+            if (_midiProcessor.SyncWithAudioProcessor)
             {
-                _plugin.MidiProcessor.ProcessCurrentEvents();
+                _midiProcessor.ProcessCurrentEvents();
             }
         }
     }

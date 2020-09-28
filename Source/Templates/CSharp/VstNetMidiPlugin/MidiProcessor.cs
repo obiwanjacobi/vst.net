@@ -1,5 +1,6 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Plugin.Framework;
+using Jacobi.Vst.Plugin.Framework.Plugin;
 using VstNetMidiPlugin.Dmp;
 
 namespace VstNetMidiPlugin
@@ -9,20 +10,29 @@ namespace VstNetMidiPlugin
     /// </summary>
     internal sealed class MidiProcessor : IVstMidiProcessor, IVstPluginMidiSource
     {
-        private readonly Plugin _plugin;
+        private IVstMidiProcessor? _midiHost;
 
         /// <summary>
         /// Constructs a new Midi Processor.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public MidiProcessor(Plugin plugin)
+        public MidiProcessor(IVstPluginEvents pluginEvents, PluginParameters parameters)
         {
-            _plugin = plugin;
-            Gain = new Gain(plugin);
-            Transpose = new Transpose(plugin);
+            Gain = new Gain(parameters.GainParameters);
+            Transpose = new Transpose(parameters.TransposeParameters);
 
             // for most hosts, midi output is expected during the audio processing cycle.
             SyncWithAudioProcessor = true;
+
+            pluginEvents.Opened += Plugin_Opened;
+        }
+
+        private void Plugin_Opened(object? sender, System.EventArgs e)
+        {
+            var plugin = (VstPlugin?)sender;
+
+            // a plugin must implement IVstPluginMidiSource or this call will throw an exception.
+            _midiHost = plugin?.Host?.GetInstance<IVstMidiProcessor>();
         }
 
         internal Gain Gain { get; private set; }
@@ -61,17 +71,15 @@ namespace VstNetMidiPlugin
         }
 
         // cache of events (for when syncing up with the AudioProcessor).
-        public VstEventCollection CurrentEvents { get; private set; }
+        public VstEventCollection? CurrentEvents { get; private set; }
 
         public void ProcessCurrentEvents()
         {
-            if (CurrentEvents == null || CurrentEvents.Count == 0) return;
-
-            // a plugin must implement IVstPluginMidiSource or this call will throw an exception.
-            IVstMidiProcessor midiHost = _plugin.Host.GetInstance<IVstMidiProcessor>();
+            if (CurrentEvents == null || CurrentEvents.Count == 0)
+                return;
 
             // always expect some hosts not to support this.
-            if (midiHost != null)
+            if (_midiHost != null)
             {
                 VstEventCollection outEvents = new VstEventCollection();
 
@@ -95,7 +103,7 @@ namespace VstNetMidiPlugin
                     }
                 }
 
-                midiHost.Process(outEvents);
+                _midiHost.Process(outEvents);
             }
 
             // Clear the cache, we've processed the events.

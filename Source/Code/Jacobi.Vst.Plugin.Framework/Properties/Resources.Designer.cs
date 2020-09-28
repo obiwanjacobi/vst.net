@@ -61,29 +61,11 @@ namespace Jacobi.Vst.Plugin.Framework.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The property is already set to an instance of an object. Reset to null before assigning a new object instance..
-        /// </summary>
-        public static string ExtensibleInterfaceRef_InstanceAlreadySet {
-            get {
-                return ResourceManager.GetString("ExtensibleInterfaceRef_InstanceAlreadySet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Host does not implement OpenFileSelector..
         /// </summary>
         public static string FileSelectorScope_OpenNotSupported {
             get {
                 return ResourceManager.GetString("FileSelectorScope_OpenNotSupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The HostCommandStub has not been initialized..
-        /// </summary>
-        public static string StdPluginCommandStub_HostNotInitialized {
-            get {
-                return ResourceManager.GetString("StdPluginCommandStub_HostNotInitialized", resourceCulture);
             }
         }
         
@@ -124,6 +106,15 @@ namespace Jacobi.Vst.Plugin.Framework.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The property {0} cannot be set because the VstParameterInfo {1} is linked to a VstParameterManager and is therefor read-only..
+        /// </summary>
+        public static string VstParameterInfo_ReadOnly {
+            get {
+                return ResourceManager.GetString("VstParameterInfo_ReadOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified VstParameterInfo instance already has a VstParameterNormalizationInfo instance attached..
         /// </summary>
         public static string VstParameterNormalizationInfo_AlreadyAttached {
@@ -138,6 +129,15 @@ namespace Jacobi.Vst.Plugin.Framework.Properties {
         public static string VstParameterNormalizationInfo_ParameterInfoInvalid {
             get {
                 return ResourceManager.GetString("VstParameterNormalizationInfo_ParameterInfoInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recursion has been detected during service configuration. This is an indication of cyclic dependencies..
+        /// </summary>
+        public static string VstPluginWithServices_RecursionError {
+            get {
+                return ResourceManager.GetString("VstPluginWithServices_RecursionError", resourceCulture);
             }
         }
     }
