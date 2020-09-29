@@ -13,11 +13,11 @@ namespace VstNetMidiPlugin
         /// <summary>
         /// TODO: assign a unique plugin.
         /// </summary>
-        private static readonly int UniquePluginId = new FourCharacterCode("1234").ToInt32();
+        private static readonly int UniquePluginId = new FourCharacterCode("2345").ToInt32();
         /// <summary>
         /// TODO: assign a plugin name.
         /// </summary>
-        private const string PluginName = "MyPluginName";
+        private const string PluginName = "MyMidiPluginName";
         /// <summary>
         /// TODO: assign a product name.
         /// </summary>
@@ -53,48 +53,17 @@ namespace VstNetMidiPlugin
         { }
 
         /// <summary>
-        /// Gets the audio processor object.
-        /// </summary>
-        public DummyAudioProcessor AudioProcessor
-        {
-            get { return GetInstance<DummyAudioProcessor>(); }
-        }
-
-        /// <summary>
-        /// Gets the midi processor object.
-        /// </summary>
-        public MidiProcessor MidiProcessor
-        {
-            get { return GetInstance<MidiProcessor>(); }
-        }
-
-        /// <summary>
-        /// Gets the plugin editor object.
-        /// </summary>
-        public PluginEditor PluginEditor
-        {
-            get { return GetInstance<PluginEditor>(); }
-        }
-
-        /// <summary>
-        /// Gets the plugin programs object.
-        /// </summary>
-        public PluginPrograms PluginPrograms
-        {
-            get { return GetInstance<PluginPrograms>(); }
-        }
-
-        /// <summary>
         /// Called once to get all the plugin components.
         /// Add components for the IVstXxxx interfaces you want to support.
         /// </summary>
         /// <param name="services">Is never null.</param>
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll(new DummyAudioProcessor(this));
-            services.AddSingletonAll(new MidiProcessor(this));
-            services.AddSingletonAll(new PluginEditor(this));
-            services.AddSingletonAll(new PluginPrograms(this));
+            services.AddSingleton<PluginParameters>()
+                .AddSingletonAll<AudioProcessor>()
+                .AddSingletonAll<MidiProcessor>()
+                .AddSingletonAll<PluginEditor>()
+                .AddSingletonAll<PluginPrograms>();
         }
     }
 }

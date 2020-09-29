@@ -3,26 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Jacobi.Vst.Samples.MidiNoteMapper
+namespace Jacobi.Vst.Samples.MidiNoteMapper.UI
 {
     /// <summary>
     /// The plugin custom editor UI.
     /// </summary>
-    internal sealed partial class MidiNoteMapperUI : UserControl
+    internal sealed partial class MidiNoteMapperView : UserControl
     {
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public MidiNoteMapperUI()
+        public MidiNoteMapperView()
         {
             InitializeComponent();
         }
 
-        private MapNoteItemList _noteMap;
+        private MapNoteItemList? _noteMap;
         /// <summary>
         /// Gets or sets the list of note map items that are shown in the editor.
         /// </summary>
-        public MapNoteItemList NoteMap
+        public MapNoteItemList? NoteMap
         {
             get { return _noteMap; }
             set { _noteMap = value; FillList(); }
@@ -31,14 +31,15 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
         /// <summary>
         /// Contains a queue with note-on note numbers currently playing.
         /// </summary>
-        public Queue<byte> NoteOnEvents { get; set; }
+        public Queue<byte>? NoteOnEvents { get; set; }
 
         /// <summary>
         /// Updates the UI with the <see cref="NoteOnEvents"/>.
         /// </summary>
         public void ProcessIdle()
         {
-            if (NoteOnEvents.Count > 0)
+            if (NoteOnEvents != null &&
+                NoteOnEvents.Count > 0)
             {
                 byte noteNo;
 
@@ -63,13 +64,14 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
 
         private void FillList()
         {
-            if (!this.Created || NoteMap == null) return;
+            if (!this.Created || NoteMap == null)
+                return;
 
-            MapNoteItem selectedItem = null;
+            MapNoteItem? selectedItem = null;
 
             if (MapListVw.SelectedItems.Count > 0)
             {
-                selectedItem = (MapNoteItem)MapListVw.SelectedItems[0].Tag;
+                selectedItem = (MapNoteItem?)MapListVw.SelectedItems[0].Tag;
             }
 
             MapListVw.Items.Clear();
@@ -86,17 +88,18 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
                 MapListVw.Items.Add(lvItem);
             }
 
-            if (selectedItem == null || MapListVw.SelectedItems.Count == 0)
+            if ((selectedItem == null || MapListVw.SelectedItems.Count == 0)
+                && MapListVw.Items.Count > 0)
             {
-                if (MapListVw.Items.Count > 0)
-                {
-                    MapListVw.Items[0].Selected = true;
-                }
+                MapListVw.Items[0].Selected = true;
             }
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
+            if (NoteMap == null)
+                return;
+
             MapNoteDetails dlg = new MapNoteDetails
             {
                 MapNoteItem = new MapNoteItem()
@@ -121,6 +124,9 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
+            if (NoteMap == null)
+                return;
+
             if (MapListVw.SelectedItems.Count > 0)
             {
                 MapNoteDetails dlg = new MapNoteDetails
@@ -137,6 +143,9 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
+            if (NoteMap == null)
+                return;
+
             if (MapListVw.SelectedItems.Count > 0)
             {
                 MapNoteItem item = (MapNoteItem)MapListVw.SelectedItems[0].Tag;
@@ -154,6 +163,9 @@ namespace Jacobi.Vst.Samples.MidiNoteMapper
 
         private void MapListVw_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (NoteMap == null)
+                return;
+
             ListViewHitTestInfo hitInfo = MapListVw.HitTest(e.Location);
 
             if (hitInfo.Item != null)

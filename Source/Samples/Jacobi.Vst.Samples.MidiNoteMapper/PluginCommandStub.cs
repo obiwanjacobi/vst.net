@@ -9,7 +9,7 @@
     public sealed class PluginCommandStub : StdPluginCommandStub
     {
         /// <summary>
-        /// Called by the framework to create the plugin root class.
+        /// Called by the framework to create the plugin root object.
         /// </summary>
         /// <returns>Never returns null.</returns>
         protected override IVstPlugin CreatePluginInstance()

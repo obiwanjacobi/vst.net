@@ -1,6 +1,6 @@
-﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
+﻿namespace Jacobi.Vst.Samples.MidiNoteMapper.UI
 {
-    partial class MidiNoteMapperUI
+    partial class MidiNoteMapperView
     {
         /// <summary> 
         /// Required designer variable.

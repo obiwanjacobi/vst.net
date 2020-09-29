@@ -4,16 +4,23 @@ using Jacobi.Vst.Plugin.Framework.Plugin;
 namespace Jacobi.Vst.Samples.Delay
 {
     /// <summary>
-    /// The public Plugin Command Stub implementation derived from the framework provided <see cref="StdPluginCommandStub"/>.
+    /// This object receives all calls from the (unmanaged) host.
     /// </summary>
-    public sealed class PluginCommandStub : StdPluginCommandStub
+    /// <remarks>
+    /// An instance of this object is created automatically by the Jacobi.Vst.Plugin.Interop assembly
+    /// when the plugin is loaded into the host. Interop marshals all calls from unmanaged C++
+    /// to this object.
+    /// </remarks>
+    public class PluginCommandStub : StdPluginCommandStub
     {
         /// <summary>
-        /// Called by the framework to create the plugin root class.
+        /// Returns an instance of the VST.NET Plugin root object.
         /// </summary>
-        /// <returns>Never returns null.</returns>
+        /// <returns>Must never return null.</returns>
         protected override IVstPlugin CreatePluginInstance()
         {
+            // StdPluginCommandStub implements all the VST2 methods,
+            // all you have to do is give the Framework your plugin root.
             return new Plugin();
         }
     }

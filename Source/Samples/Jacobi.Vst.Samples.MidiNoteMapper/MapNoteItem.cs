@@ -1,5 +1,6 @@
 ﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
 {
+    using System;
     using System.Collections.ObjectModel;
 
     /// <summary>
@@ -10,7 +11,7 @@
         /// <summary>
         /// Gets or sets a readable name for this mapping item.
         /// </summary>
-        public string KeyName { get; set; }
+        public string KeyName { get; set; } = String.Empty;
 
         /// <summary>
         /// Gets or sets the note number that triggers this mapping item.

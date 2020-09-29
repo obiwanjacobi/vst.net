@@ -1,57 +1,74 @@
-﻿namespace Jacobi.Vst.Samples.Delay
-{
-    using Jacobi.Vst.Plugin.Framework;
-    using Jacobi.Vst.Plugin.Framework.Plugin;
+﻿using Jacobi.Vst.Plugin.Framework;
+using Jacobi.Vst.Plugin.Framework.Plugin;
+using System;
 
+namespace Jacobi.Vst.Samples.Delay
+{
     /// <summary>
-    /// This class manages the plugin programs.
+    /// This object manages the Plugin programs and its parameters.
     /// </summary>
     internal sealed class PluginPrograms : VstPluginPrograms
     {
-        private readonly Plugin _plugin;
+        private readonly PluginParameters _parameters;
 
         /// <summary>
-        /// Constructs a new instance.
+        /// Constructs an instance on the plugin parameter factory
         /// </summary>
-        /// <param name="plugin">Must not be null.</param>
-        public PluginPrograms(Plugin plugin)
+        /// <param name="parameters">Must not be null.</param>
+        public PluginPrograms(PluginParameters parameters)
         {
-            _plugin = plugin;
+            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
 
         /// <summary>
-        /// Initializes the plugin program collection.
+        /// Called to initialize the collection of programs for the plugin.
         /// </summary>
-        /// <returns>A filled program collection.</returns>
+        /// <returns>Never returns null or an empty collection.</returns>
         protected override VstProgramCollection CreateProgramCollection()
         {
             var programs = new VstProgramCollection();
 
-            var prog = new VstProgram(_plugin.ParameterFactory.Categories)
-            {
-                Name = "Fx Program 1"
-            };
-            _plugin.ParameterFactory.CreateParameters(prog.Parameters);
-
+            var prog = CreateProgram("Program 1");
             programs.Add(prog);
-
-            prog = new VstProgram(_plugin.ParameterFactory.Categories)
-            {
-                Name = "Fx Program 2"
-            };
-            _plugin.ParameterFactory.CreateParameters(prog.Parameters);
-
+            prog = CreateProgram("Program 2");
             programs.Add(prog);
-
-            prog = new VstProgram(_plugin.ParameterFactory.Categories)
-            {
-                Name = "Fx Program 3"
-            };
-            _plugin.ParameterFactory.CreateParameters(prog.Parameters);
-
+            prog = CreateProgram("Program 3");
             programs.Add(prog);
 
             return programs;
+        }
+
+        private VstProgram CreateProgram(string name)
+        {
+            var program = CreateProgram();
+            program.Name = name;
+            return program;
+        }
+
+        // create a program with all parameters.
+        private VstProgram CreateProgram()
+        {
+            var program = new VstProgram(_parameters.Categories);
+
+            CreateParameters(program.Parameters, _parameters.ParameterInfos);
+
+            return program;
+        }
+
+        // create all parameters
+        private void CreateParameters(VstParameterCollection desitnation, VstParameterInfoCollection parameterInfos)
+        {
+            foreach (VstParameterInfo paramInfo in parameterInfos)
+            {
+                desitnation.Add(CreateParameter(paramInfo));
+            }
+        }
+
+        // create one parameter
+        private VstParameter CreateParameter(VstParameterInfo parameterInfo)
+        {
+            // Advanced: you can derive from VstParameter and add your own properties and logic.
+            return new VstParameter(parameterInfo);
         }
     }
 }

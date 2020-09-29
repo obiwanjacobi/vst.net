@@ -10,6 +10,13 @@
     <Version>2.0.0</Version>
     <Platforms>x64;x86</Platforms>
     <Nullable>enable</Nullable>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/obiwanjacobi/vst.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>vst vstnet</PackageTags>
+    <Copyright>Copyright © 2008-2020 Jacobi Software</Copyright>
+    <Description>VST.NET 2 Plugin Framework</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">

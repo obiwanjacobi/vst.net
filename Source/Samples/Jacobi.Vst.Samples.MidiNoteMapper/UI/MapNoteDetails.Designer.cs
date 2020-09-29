@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
+﻿namespace Jacobi.Vst.Samples.MidiNoteMapper.UI
 {
     partial class MapNoteDetails
     {

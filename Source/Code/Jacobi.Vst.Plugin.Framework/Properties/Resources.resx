@@ -117,16 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ExtensibleInterfaceRef_InstanceAlreadySet" xml:space="preserve">
-    <value>The property is already set to an instance of an object. Reset to null before assigning a new object instance.</value>
-    <comment>Exception text.</comment>
-  </data>
   <data name="FileSelectorScope_OpenNotSupported" xml:space="preserve">
     <value>The Host does not implement OpenFileSelector.</value>
-    <comment>Exception text.</comment>
-  </data>
-  <data name="StdPluginCommandStub_HostNotInitialized" xml:space="preserve">
-    <value>The HostCommandStub has not been initialized.</value>
     <comment>Exception text.</comment>
   </data>
   <data name="StdPluginCommandStub_StringTooLong" xml:space="preserve">
@@ -145,12 +137,20 @@
     <value>Assigned VstParameterManager value is not linked to this VstParamaterInfo instance.</value>
     <comment>Exception text.</comment>
   </data>
+  <data name="VstParameterInfo_ReadOnly" xml:space="preserve">
+    <value>The property {0} cannot be set because the VstParameterInfo {1} is linked to a VstParameterManager and is therefor read-only.</value>
+    <comment>Exception text.</comment>
+  </data>
   <data name="VstParameterNormalizationInfo_AlreadyAttached" xml:space="preserve">
     <value>The specified VstParameterInfo instance already has a VstParameterNormalizationInfo instance attached.</value>
     <comment>Exception text.</comment>
   </data>
   <data name="VstParameterNormalizationInfo_ParameterInfoInvalid" xml:space="preserve">
     <value>The specified VstParameterInfo does not have a valid value range set.</value>
+    <comment>Exception text.</comment>
+  </data>
+  <data name="VstPluginWithServices_RecursionError" xml:space="preserve">
+    <value>Recursion has been detected during service configuration. This is an indication of cyclic dependencies.</value>
     <comment>Exception text.</comment>
   </data>
 </root>

@@ -10,17 +10,19 @@
     /// </summary>
     internal sealed class PluginEditor : IVstPluginEditor
     {
-        private readonly Plugin _plugin;
-        private readonly WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper =
-            new WinFormsControlWrapper<MidiNoteMapperUI>();
+        private readonly MidiProcessor _midiProcessor;
+        private readonly MapNoteItemList _noteMap;
+        private readonly WinFormsControlWrapper<UI.MidiNoteMapperView> _uiWrapper =
+            new WinFormsControlWrapper<UI.MidiNoteMapperView>();
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public PluginEditor(Plugin plugin)
+        public PluginEditor(MidiProcessor midiProcessor, MapNoteItemList noteMap)
         {
-            _plugin = plugin;
+            _midiProcessor = midiProcessor ?? throw new ArgumentNullException(nameof(midiProcessor));
+            _noteMap = noteMap ?? throw new ArgumentNullException(nameof(noteMap));
         }
 
         #region IVstPluginEditor Members
@@ -51,8 +53,8 @@
 
         public void Open(IntPtr hWnd)
         {
-            _uiWrapper.SafeInstance.NoteMap = _plugin.NoteMap;
-            _uiWrapper.SafeInstance.NoteOnEvents = _plugin.GetInstance<MidiProcessor>().NoteOnEvents;
+            _uiWrapper.SafeInstance.NoteMap = _noteMap;
+            _uiWrapper.SafeInstance.NoteOnEvents = _midiProcessor.NoteOnEvents;
             _uiWrapper.Open(hWnd);
         }
 

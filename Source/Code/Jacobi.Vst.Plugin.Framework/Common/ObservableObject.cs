@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace Jacobi.Vst.Plugin.Framework.Common
 {
     /// <summary>
-    /// A base class for class that implement the <see cref="INotifyPropertyChanged"/> interface.
+    /// A base class for class that implements the <see cref="INotifyPropertyChanged"/> interface.
     /// </summary>
     public abstract class ObservableObject : INotifyPropertyChanged
     {

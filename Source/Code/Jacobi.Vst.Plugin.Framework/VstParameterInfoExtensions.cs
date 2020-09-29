@@ -25,5 +25,19 @@
         {
             return new VstParameterManager(paramInfo);
         }
+
+        /// <summary>
+        /// Creates a <see cref="VstParameterManager"/> instance for the specified <paramref name="paramInfo"/> (this).
+        /// </summary>
+        /// <param name="paramInfo">Must not be null</param>
+        /// <param name="hostAutomation">Can be null</param>
+        /// <returns>Never returns null.</returns>
+        public static VstParameterManager ToManager(this VstParameterInfo paramInfo, IVstHostAutomation hostAutomation)
+        {
+            return new VstParameterManager(paramInfo)
+            {
+                HostAutomation = hostAutomation
+            };
+        }
     }
 }

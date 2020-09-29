@@ -2,8 +2,8 @@
 using Jacobi.Vst.Plugin.Framework;
 using Jacobi.Vst.Plugin.Framework.Common;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using VstNetMidiPlugin.UI;
 
 namespace VstNetMidiPlugin
@@ -17,12 +17,12 @@ namespace VstNetMidiPlugin
     /// </remarks>
     internal sealed class PluginEditor : IVstPluginEditor
     {
-        private Plugin _plugin;
-        private WinFormsControlWrapper<PluginEditorView> _view;
+        private readonly PluginParameters _parameters;
+        private readonly WinFormsControlWrapper<PluginEditorView> _view;
 
-        public PluginEditor(Plugin plugin)
+        public PluginEditor(PluginParameters parameters)
         {
-            _plugin = plugin;
+            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _view = new WinFormsControlWrapper<PluginEditorView>();
         }
 
@@ -53,11 +53,10 @@ namespace VstNetMidiPlugin
         public void Open(IntPtr hWnd)
         {
             // make a list of parameters to pass to the dlg.
-            var paramList = new List<VstParameterManager>()
-                {
-                    _plugin.MidiProcessor.Gain.GainMgr,
-                    _plugin.MidiProcessor.Transpose.TransposeMgr,
-                };
+            var paramList = _parameters.ParameterInfos
+                .Where(p => p.ParameterManager != null)
+                .Select(p => p.ParameterManager!)
+                .ToList();
 
             _view.SafeInstance.InitializeParameters(paramList);
 

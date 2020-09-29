@@ -10,7 +10,7 @@
     /// </summary>
     /// <remarks>Derive your plugin root class from this base class to gain a 
     /// default implementation of the <see cref="IVstPlugin"/> interface.</remarks>
-    public abstract class VstPlugin : IVstPlugin, IConfigurable
+    public abstract class VstPlugin : IVstPlugin, IVstPluginEvents, IConfigurable
     {
         /// <summary>
         /// To be called from the default constructor of the derived plugin class

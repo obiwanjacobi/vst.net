@@ -2,8 +2,8 @@
 using Jacobi.Vst.Plugin.Framework;
 using Jacobi.Vst.Plugin.Framework.Common;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using VstNetAudioPlugin.UI;
 
 namespace VstNetAudioPlugin
@@ -17,12 +17,12 @@ namespace VstNetAudioPlugin
     /// </remarks>
     internal sealed class PluginEditor : IVstPluginEditor
     {
-        private readonly Plugin _plugin;
+        private readonly PluginParameters _parameters;
         private readonly WinFormsControlWrapper<PluginEditorView> _view;
 
-        public PluginEditor(Plugin plugin)
+        public PluginEditor(PluginParameters parameters)
         {
-            _plugin = plugin;
+            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _view = new WinFormsControlWrapper<PluginEditorView>();
         }
 
@@ -53,13 +53,10 @@ namespace VstNetAudioPlugin
         public void Open(IntPtr hWnd)
         {
             // make a list of parameters to pass to the dlg.
-            var paramList = new List<VstParameterManager>()
-                {
-                    _plugin.AudioProcessor.Delay.DelayTimeMgr,
-                    _plugin.AudioProcessor.Delay.FeedbackMgr,
-                    _plugin.AudioProcessor.Delay.DryLevelMgr,
-                    _plugin.AudioProcessor.Delay.WetLevelMgr
-                };
+            var paramList = _parameters.ParameterInfos
+                .Where(p => p.ParameterManager != null)
+                .Select(p => p.ParameterManager!)
+                .ToList();
 
             _view.SafeInstance.InitializeParameters(paramList);
 

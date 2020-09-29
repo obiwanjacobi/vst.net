@@ -60,7 +60,7 @@
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Common.ObservableObject">
             <summary>
-            A base class for class that implement the <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface.
+            A base class for class that implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> interface.
             </summary>
         </member>
         <member name="E:Jacobi.Vst.Plugin.Framework.Common.ObservableObject.PropertyChanged">
@@ -755,6 +755,16 @@
             <returns>Returns true if the key is handled.</returns>
             <remarks>Typically this method requires no implementation when using WinForms.</remarks>
         </member>
+        <member name="T:Jacobi.Vst.Plugin.Framework.IVstPluginEvents">
+            <summary>
+            Events for the plugin root object.
+            </summary>
+        </member>
+        <member name="E:Jacobi.Vst.Plugin.Framework.IVstPluginEvents.Opened">
+            <summary>
+            Is triggered when the plugin is openend.
+            </summary>
+        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.IVstPluginMidiPrograms">
             <summary>
             This interface is implemented by a plugin that supports Midi and wants the enable Midi Programs.
@@ -1021,6 +1031,20 @@
             </summary>
             <param name="services">Must not be null.</param>
             <param name="instance">Does nothing if null.</param>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.ServiceCollectionExtensions.AddSingletonAll``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds all interfaces and the class type of <typeparamref name="T"/> to <paramref name="services"/>.
+            </summary>
+            <typeparam name="T">The class type.</typeparam>
+            <param name="services">Must not be null.</param>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.ServiceCollectionExtensions.AddSingletonAll(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type)">
+            <summary>
+            Adds all interfaces and the class type of <paramref name="classType"/> to <paramref name="services"/>.
+            </summary>
+            <param name="services">Must not be null.</param>
+            <param name="classType">The Type of the class.</param>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub">
             <summary>
@@ -1959,6 +1983,12 @@
             </summary>
             <param name="services">Will never be null.</param>
         </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.ConfigureLogging(Microsoft.Extensions.Logging.ILoggingBuilder)">
+            <summary>
+            Override to configure LogProviders.
+            </summary>
+            <param name="builder">Is never null.</param>
+        </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.Services">
             <summary>
             Provides access to all configured/registered services.
@@ -1979,12 +2009,6 @@
             <typeparam name="T">The interface type.</typeparam>
             <returns>Returns null when the <typeparamref name="T"/> is not supported.</returns>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginWithServices.ConfigureLogging(Microsoft.Extensions.Logging.ILoggingBuilder)">
-            <summary>
-            Override to configure LogProviders.
-            </summary>
-            <param name="builder">Is never null.</param>
-        </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -2001,19 +2025,9 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.ExtensibleInterfaceRef_InstanceAlreadySet">
-            <summary>
-              Looks up a localized string similar to The property is already set to an instance of an object. Reset to null before assigning a new object instance..
-            </summary>
-        </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.FileSelectorScope_OpenNotSupported">
             <summary>
               Looks up a localized string similar to The Host does not implement OpenFileSelector..
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.StdPluginCommandStub_HostNotInitialized">
-            <summary>
-              Looks up a localized string similar to The HostCommandStub has not been initialized..
             </summary>
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.StdPluginCommandStub_StringTooLong">
@@ -2036,6 +2050,11 @@
               Looks up a localized string similar to Assigned VstParameterManager value is not linked to this VstParamaterInfo instance..
             </summary>
         </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.VstParameterInfo_ReadOnly">
+            <summary>
+              Looks up a localized string similar to The property {0} cannot be set because the VstParameterInfo {1} is linked to a VstParameterManager and is therefor read-only..
+            </summary>
+        </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.VstParameterNormalizationInfo_AlreadyAttached">
             <summary>
               Looks up a localized string similar to The specified VstParameterInfo instance already has a VstParameterNormalizationInfo instance attached..
@@ -2044,6 +2063,11 @@
         <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.VstParameterNormalizationInfo_ParameterInfoInvalid">
             <summary>
               Looks up a localized string similar to The specified VstParameterInfo does not have a valid value range set..
+            </summary>
+        </member>
+        <member name="P:Jacobi.Vst.Plugin.Framework.Properties.Resources.VstPluginWithServices_RecursionError">
+            <summary>
+              Looks up a localized string similar to Recursion has been detected during service configuration. This is an indication of cyclic dependencies..
             </summary>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.VstConnectionInfo">
@@ -2710,6 +2734,14 @@
             Creates a <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameterManager"/> instance for the specified <paramref name="paramInfo"/> (this).
             </summary>
             <param name="paramInfo">Must not be null</param>
+            <returns>Never returns null.</returns>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.VstParameterInfoExtensions.ToManager(Jacobi.Vst.Plugin.Framework.VstParameterInfo,Jacobi.Vst.Plugin.Framework.IVstHostAutomation)">
+            <summary>
+            Creates a <see cref="T:Jacobi.Vst.Plugin.Framework.VstParameterManager"/> instance for the specified <paramref name="paramInfo"/> (this).
+            </summary>
+            <param name="paramInfo">Must not be null</param>
+            <param name="hostAutomation">Can be null</param>
             <returns>Never returns null.</returns>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.VstParameterManager">

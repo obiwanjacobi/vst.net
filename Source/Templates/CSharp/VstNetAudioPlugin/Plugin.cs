@@ -11,13 +11,13 @@ namespace VstNetAudioPlugin
     internal sealed class Plugin : VstPluginWithServices
     {
         /// <summary>
-        /// TODO: assign a unique plugin.
+        /// TODO: assign a unique plugin id.
         /// </summary>
         private static readonly int UniquePluginId = new FourCharacterCode("1234").ToInt32();
         /// <summary>
         /// TODO: assign a plugin name.
         /// </summary>
-        private const string PluginName = "MyPluginName";
+        private const string PluginName = "MyAudioPluginName";
         /// <summary>
         /// TODO: assign a product name.
         /// </summary>
@@ -33,7 +33,7 @@ namespace VstNetAudioPlugin
         /// <summary>
         /// TODO: what type of plugin are your making?
         /// </summary>
-        private const VstPluginCategory PluginCategory = VstPluginCategory.Effect;
+        private const VstPluginCategory PluginCategory = VstPluginCategory.RoomFx;
         /// <summary>
         /// TODO: what can your plugin do?
         /// </summary>
@@ -53,39 +53,16 @@ namespace VstNetAudioPlugin
         { }
 
         /// <summary>
-        /// Gets the audio processor object.
-        /// </summary>
-        public AudioProcessor AudioProcessor
-        {
-            get { return GetInstance<AudioProcessor>(); }
-        }
-
-        /// <summary>
-        /// Gets the plugin editor object.
-        /// </summary>
-        public PluginEditor PluginEditor
-        {
-            get { return GetInstance<PluginEditor>(); }
-        }
-
-        /// <summary>
-        /// Gets the plugin programs object.
-        /// </summary>
-        public PluginPrograms PluginPrograms
-        {
-            get { return GetInstance<PluginPrograms>(); }
-        }
-
-        /// <summary>
         /// Called once to get all the plugin components.
         /// Add components for the IVstXxxx interfaces you want to support.
         /// </summary>
         /// <param name="services">Is never null.</param>
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll(new AudioProcessor(this));
-            services.AddSingletonAll(new PluginEditor(this));
-            services.AddSingletonAll(new PluginPrograms(this));
+            services.AddSingleton<PluginParameters>()
+                .AddSingletonAll<PluginPrograms>()
+                .AddSingletonAll<AudioProcessor>()
+                .AddSingletonAll<PluginEditor>();
         }
     }
 }
