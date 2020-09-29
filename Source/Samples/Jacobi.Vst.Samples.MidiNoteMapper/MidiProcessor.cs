@@ -11,15 +11,15 @@
     /// </summary>
     internal sealed class MidiProcessor : IVstMidiProcessor, IVstPluginMidiSource
     {
-        private readonly Plugin _plugin;
+        private readonly MapNoteItemList _noteMap;
 
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
         /// <param name="plugin">Must not be null.</param>
-        public MidiProcessor(Plugin plugin)
+        public MidiProcessor(MapNoteItemList noteMap)
         {
-            _plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));
+            _noteMap = noteMap ?? throw new ArgumentNullException(nameof(noteMap));
         }
 
         /// <summary>
@@ -55,11 +55,11 @@
 
                 if (((midiEvent.Data[0] & 0xF0) == 0x80 || (midiEvent.Data[0] & 0xF0) == 0x90))
                 {
-                    if (_plugin.NoteMap.Contains(midiEvent.Data[1]))
+                    if (_noteMap.Contains(midiEvent.Data[1]))
                     {
                         byte[] midiData = new byte[4];
                         midiData[0] = midiEvent.Data[0];
-                        midiData[1] = _plugin.NoteMap[midiEvent.Data[1]].OutputNoteNumber;
+                        midiData[1] = _noteMap[midiEvent.Data[1]].OutputNoteNumber;
                         midiData[2] = midiEvent.Data[2];
 
                         var mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames,

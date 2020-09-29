@@ -14,22 +14,16 @@ namespace Jacobi.Vst.Samples.MidiNoteSampler
         /// Constructs a new instance.
         /// </summary>
         public Plugin()
-            : base("VST.NET Midi Note Sampler", 36373435,
-                new VstProductInfo("VST.NET Code Samples", "Jacobi Software © 2008-2020", 2000),
+            : base("VST.NET 2 Midi Note Sampler", 36373435,
+                new VstProductInfo("VST.NET 2 Code Samples", "Jacobi Software © 2008-2020", 2000),
                 VstPluginCategory.Synth)
-        {
-            SampleManager = new SampleManager();
-        }
+        { }
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll(new AudioProcessor(this));
-            services.AddSingletonAll(new MidiProcessor(this));
+            services.AddSingleton<SampleManager>()
+                .AddSingletonAll<AudioProcessor>()
+                .AddSingletonAll<MidiProcessor>();
         }
-
-        /// <summary>
-        /// Gets the sample manager.
-        /// </summary>
-        public SampleManager SampleManager { get; private set; }
     }
 }

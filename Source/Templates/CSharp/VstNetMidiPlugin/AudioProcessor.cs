@@ -7,7 +7,7 @@ namespace VstNetMidiPlugin
     /// <summary>
     /// This object is a dummy AudioProcessor only to be able to output Midi during the Audio processing cycle.
     /// </summary>
-    internal sealed class DummyAudioProcessor : VstPluginAudioProcessor
+    internal sealed class AudioProcessor : VstPluginAudioProcessor
     {
         // TODO: set some defaults
         private const int AudioInputCount = 2;
@@ -19,7 +19,7 @@ namespace VstNetMidiPlugin
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public DummyAudioProcessor(MidiProcessor midiProcessor)
+        public AudioProcessor(MidiProcessor midiProcessor)
             : base(AudioInputCount, AudioOutputCount, InitialTailSize, noSoundInStop: true)
         {
             _midiProcessor = midiProcessor ?? throw new ArgumentNullException(nameof(midiProcessor));

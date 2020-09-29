@@ -44,10 +44,10 @@ namespace Jacobi.Vst.Samples.Delay
         /// <param name="services">Is never null.</param>
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll<PluginParameters>();
-            services.AddSingletonAll<PluginPrograms>();
-            services.AddSingletonAll<AudioProcessor>();
-            services.AddSingletonAll<PluginEditor>();
+            services.AddSingleton<PluginParameters>()
+                .AddSingletonAll<PluginPrograms>()
+                .AddSingletonAll<AudioProcessor>()
+                .AddSingletonAll<PluginEditor>();
         }
     }
 }

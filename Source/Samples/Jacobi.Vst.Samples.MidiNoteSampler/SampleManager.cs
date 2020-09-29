@@ -33,8 +33,6 @@
         /// <param name="noteNo">The midi note number.</param>
         public void ProcessNoteOffEvent(byte noteNo)
         {
-            System.Diagnostics.Debug.WriteLine("Note Off event for note:" + noteNo, "VST.NET");
-
             if (_recorder != null && _recorder.Buffer.NoteNo == noteNo)
             {
                 _noteMap.Add(noteNo, _recorder.Buffer);
@@ -47,7 +45,7 @@
             }
         }
 
-        private SampleRecorder _recorder;
+        private SampleRecorder? _recorder;
         /// <summary>
         /// Indicates if the current audio stream is being recorded.
         /// </summary>
@@ -62,13 +60,13 @@
         /// <param name="channels">Input buffers. Must not be null.</param>
         public void RecordAudio(VstAudioBuffer[] channels)
         {
-            if (IsRecording)
+            if (_recorder != null)
             {
                 _recorder.Record(channels[0], channels[1]);
             }
         }
 
-        private SamplePlayer _player;
+        private SamplePlayer? _player;
         /// <summary>
         /// Indicates if a recorded sample buffer is being played back.
         /// </summary>
@@ -83,7 +81,7 @@
         /// <param name="channels">Output buffers. Must not be null.</param>
         public void PlayAudio(VstAudioBuffer[] channels)
         {
-            if (IsPlaying)
+            if (_player != null)
             {
                 _player.Play(channels[0], channels[1]);
 
@@ -140,7 +138,8 @@
 
             public void Play(VstAudioBuffer left, VstAudioBuffer right)
             {
-                if (IsFinished) return;
+                if (IsFinished)
+                    return;
 
                 int count = Math.Min(left.SampleCount, Buffer.LeftSamples.Count - _bufferIndex);
 

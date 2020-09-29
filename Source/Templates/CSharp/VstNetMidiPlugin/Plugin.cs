@@ -59,11 +59,11 @@ namespace VstNetMidiPlugin
         /// <param name="services">Is never null.</param>
         protected override void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingletonAll<PluginParameters>();
-            services.AddSingletonAll<DummyAudioProcessor>();
-            services.AddSingletonAll<MidiProcessor>();
-            services.AddSingletonAll<PluginEditor>();
-            services.AddSingletonAll<PluginPrograms>();
+            services.AddSingleton<PluginParameters>()
+                .AddSingletonAll<AudioProcessor>()
+                .AddSingletonAll<MidiProcessor>()
+                .AddSingletonAll<PluginEditor>()
+                .AddSingletonAll<PluginPrograms>();
         }
     }
 }
