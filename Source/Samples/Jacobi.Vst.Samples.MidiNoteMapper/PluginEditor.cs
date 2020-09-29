@@ -11,8 +11,8 @@
     internal sealed class PluginEditor : IVstPluginEditor
     {
         private readonly Plugin _plugin;
-        private readonly WinFormsControlWrapper<MidiNoteMapperUI> _uiWrapper =
-            new WinFormsControlWrapper<MidiNoteMapperUI>();
+        private readonly WinFormsControlWrapper<UI.MidiNoteMapperView> _uiWrapper =
+            new WinFormsControlWrapper<UI.MidiNoteMapperView>();
 
         /// <summary>
         /// Constructs a new instance.
@@ -52,7 +52,7 @@
         public void Open(IntPtr hWnd)
         {
             _uiWrapper.SafeInstance.NoteMap = _plugin.NoteMap;
-            _uiWrapper.SafeInstance.NoteOnEvents = _plugin.GetInstance<MidiProcessor>().NoteOnEvents;
+            _uiWrapper.SafeInstance.NoteOnEvents = _plugin.GetInstance<MidiProcessor>()!.NoteOnEvents;
             _uiWrapper.Open(hWnd);
         }
 

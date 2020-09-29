@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Jacobi.Vst.Samples.MidiNoteMapper
+namespace Jacobi.Vst.Samples.MidiNoteMapper.UI
 {
     /// <summary>
     /// A form that allows the user to edit the details of a note map item.

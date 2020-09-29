@@ -2,14 +2,14 @@
 {
     using Jacobi.Vst.Core;
     using Jacobi.Vst.Plugin.Framework;
-
+    using System;
     using System.Collections;
     using System.Collections.Generic;
 
     /// <summary>
     /// Implements the incoming Midi event handling for the plugin.
     /// </summary>
-    internal sealed class MidiProcessor : IVstMidiProcessor
+    internal sealed class MidiProcessor : IVstMidiProcessor, IVstPluginMidiSource
     {
         private readonly Plugin _plugin;
 
@@ -19,15 +19,13 @@
         /// <param name="plugin">Must not be null.</param>
         public MidiProcessor(Plugin plugin)
         {
-            _plugin = plugin;
-            Events = new VstEventCollection();
-            NoteOnEvents = new Queue<byte>();
+            _plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));
         }
 
         /// <summary>
         /// Gets the midi events that should be processed in the current cycle.
         /// </summary>
-        public VstEventCollection Events { get; private set; }
+        public VstEventCollection Events { get; } = new VstEventCollection();
 
         /// <summary>
         /// Gets or sets a value indicating wether non-mapped midi events should be passed to the output.
@@ -37,23 +35,23 @@
         /// <summary>
         /// The raw note on note numbers.
         /// </summary>
-        public Queue<byte> NoteOnEvents { get; private set; }
+        public Queue<byte> NoteOnEvents { get; } = new Queue<byte>();
 
         #region IVstMidiProcessor Members
 
         public int ChannelCount
         {
-            get { return _plugin.ChannelCount; }
+            get { return 16; }
         }
 
         public void Process(VstEventCollection events)
         {
             foreach (VstEvent evnt in events)
             {
-                if (evnt.EventType != VstEventTypes.MidiEvent) continue;
+                if (evnt.EventType != VstEventTypes.MidiEvent)
+                    continue;
 
                 var midiEvent = (VstMidiEvent)evnt;
-                VstMidiEvent mappedEvent = null;
 
                 if (((midiEvent.Data[0] & 0xF0) == 0x80 || (midiEvent.Data[0] & 0xF0) == 0x90))
                 {
@@ -64,7 +62,7 @@
                         midiData[1] = _plugin.NoteMap[midiEvent.Data[1]].OutputNoteNumber;
                         midiData[2] = midiEvent.Data[2];
 
-                        mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames,
+                        var mappedEvent = new VstMidiEvent(midiEvent.DeltaFrames,
                             midiEvent.NoteLength,
                             midiEvent.NoteOffset,
                             midiData,
@@ -84,9 +82,14 @@
                     }
                     else if (MidiThru)
                     {
-                        // add original event
+                        // add original note event
                         Events.Add(evnt);
                     }
+                }
+                else if (MidiThru)
+                {
+                    // add original (non-note) event
+                    Events.Add(evnt);
                 }
             }
         }
