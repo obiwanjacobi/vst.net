@@ -13,6 +13,25 @@ But you still want to setup proper platform definitions in the Configuration Man
 
 > You do **NOT** have to build the source code to get started!
 
+## Project
+
+To start of your first project, a couple of Visual Studio project templates are available for C#.
+
+These project templates demonstrate a possible way to structure your plugin.
+
+- VstNetAudioPlugin: Gives you a working audio effect plugin of a stereo delay.
+- VstNetMidiPlugin: Gives you a working Midi 'effect' plugin for Transposing notes and adjusting their Gain (velocity).
+
+> Eventually these project templates should be easily installable, but until I figure out how to do that the following procedure can be followed to get them on your machine.
+
+> => TODO: Add link to released zip files.
+
+Download the [released `.zip` files]() into your local folder on your machine at: '`C:\Users\[me]\Documents\Visual Studio 2019\My Exported Templates`'.
+
+An alternative is to open [the template solution](https://github.com/obiwanjacobi/vst.net/tree/master/Source/Templates/CSharp) in Visual Studio and choose `Export Template...` from the `Project` menu for each of the projects.
+
+After you've restarted Visual Studio the new `VST.NET` project templates should now be available in the 'Create New Project' dialog. Search for 'vst' to find them quickly.
+
 ## Plugin
 
 Add the `VST.NET2-Plugin` (PreRelease!) NuGet package to your project.
