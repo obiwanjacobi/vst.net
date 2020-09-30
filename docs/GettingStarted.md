@@ -24,9 +24,7 @@ These project templates demonstrate a possible way to structure your plugin.
 
 > Eventually these project templates should be easily installable, but until I figure out how to do that the following procedure can be followed to get them on your machine.
 
-> => TODO: Add link to released zip files.
-
-Download the [VstNetAudioPlugin.zip](./bin/VstNetAudioPlugin.zip) and/or the [VstNetMidiPlugin.zip](./bin/VstNetMidiPlugin.zip) files into your local folder on your machine at: '`C:\Users\[me]\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C#`'.
+Download the [VstNetAudioPlugin.zip](./media/VstNetAudioPlugin.zip) and/or the [VstNetMidiPlugin.zip](./media/VstNetMidiPlugin.zip) files into your local folder on your machine at: '`C:\Users\[me]\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C#`'.
 
 An alternative is to open [the template solution](https://github.com/obiwanjacobi/vst.net/tree/master/Source/Templates/CSharp) in Visual Studio and choose `Export Template...` from the `Project` menu for each of the projects.
 
