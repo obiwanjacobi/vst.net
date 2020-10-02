@@ -18,8 +18,6 @@ namespace Interop {
 		_emptyAudio64 = new double* [0];
 
 		_memoryTracker = gcnew Jacobi::Vst::Interop::MemoryTracker();
-
-		_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.PluginCommandStub", Jacobi::Vst::Core::Host::IVstPluginCommandStub::typeid);
 	}
 
 	void VstPluginCommandsImpl::ClearCurrentEvents()

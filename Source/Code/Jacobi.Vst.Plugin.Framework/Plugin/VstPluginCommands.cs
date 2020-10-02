@@ -10,6 +10,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
     public class VstPluginCommands : IVstPluginCommands24
     {
         private readonly VstPluginContext _pluginCtx;
+        private readonly IVstPlugin _plugin;
 
         /// <summary>
         /// Constructs a new instance.
@@ -19,6 +20,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         public VstPluginCommands(VstPluginContext pluginCtx)
         {
             _pluginCtx = pluginCtx ?? throw new ArgumentNullException(nameof(pluginCtx));
+            _plugin = pluginCtx.Plugin;
         }
 
         /// <summary>
@@ -41,10 +43,10 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
             switch (precision)
             {
                 case VstProcessPrecision.Process32:
-                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioProcessor>();
+                    canDo = _plugin.Supports<IVstPluginAudioProcessor>();
                     break;
                 case VstProcessPrecision.Process64:
-                    canDo = _pluginCtx.Plugin.Supports<IVstPluginAudioPrecisionProcessor>();
+                    canDo = _plugin.Supports<IVstPluginAudioPrecisionProcessor>();
                     break;
             }
 
@@ -59,7 +61,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual int GetNumberOfMidiInputChannels()
         {
-            var midiProcessor = _pluginCtx.Plugin.GetInstance<IVstMidiProcessor>();
+            var midiProcessor = _plugin.GetInstance<IVstMidiProcessor>();
 
             if (midiProcessor != null)
             {
@@ -77,7 +79,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual int GetNumberOfMidiOutputChannels()
         {
-            var midiSource = _pluginCtx.Plugin.GetInstance<IVstPluginMidiSource>();
+            var midiSource = _plugin.GetInstance<IVstPluginMidiSource>();
 
             if (midiSource != null)
             {
@@ -99,13 +101,12 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true when the plugin implements the <see cref="IVstPluginConnections"/> interfcace.</returns>
         public virtual bool GetSpeakerArrangement(out VstSpeakerArrangement? input, out VstSpeakerArrangement? output)
         {
-            var pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _plugin.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
                 input = pluginConnections.InputSpeakerArrangement;
                 output = pluginConnections.OutputSpeakerArrangement;
-
                 return true;
             }
 
@@ -132,7 +133,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns 0 (zero) when not supported. It is unclear what this return value represents.</returns>
         public virtual int StartProcess()
         {
-            var pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
+            var pluginProcess = _plugin.GetInstance<IVstPluginProcess>();
 
             if (pluginProcess != null)
             {
@@ -149,7 +150,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns 0 (zero) when not supported. It is unclear what this return value represents.</returns>
         public virtual int StopProcess()
         {
-            var pluginProcess = _pluginCtx.Plugin.GetInstance<IVstPluginProcess>();
+            var pluginProcess = _plugin.GetInstance<IVstPluginProcess>();
 
             if (pluginProcess != null)
             {
@@ -168,7 +169,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns false when not implemented.</returns>
         public virtual bool SetPanLaw(VstPanLaw type, float gain)
         {
-            var audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -187,7 +188,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
         {
-            var pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+            var pluginPersistence = _plugin.GetInstance<IVstPluginPersistence>();
 
             if (pluginPersistence != null)
             {
@@ -206,7 +207,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual VstCanDoResult BeginLoadProgram(VstPatchChunkInfo chunkInfo)
         {
-            var pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
+            var pluginPersistence = _plugin.GetInstance<IVstPluginPersistence>();
 
             if (pluginPersistence != null)
             {
@@ -230,7 +231,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual bool EditorKeyDown(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -251,7 +252,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual bool EditorKeyUp(byte ascii, VstVirtualKey virtualKey, VstModifierKeys modifers)
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -268,7 +269,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true when the mode was set on the plugin editor.</returns>
         public virtual bool SetEditorKnobMode(VstKnobMode mode)
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -289,7 +290,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         {
             Throw.IfArgumentIsNull(midiProgramName, nameof(midiProgramName));
 
-            var midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _plugin.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -325,7 +326,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         {
             Throw.IfArgumentIsNull(midiProgramName, nameof(midiProgramName));
 
-            var midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _plugin.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -372,7 +373,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns the total number of Midi program categories.</returns>
         public virtual int GetMidiProgramCategory(VstMidiProgramCategory midiCat, int channel)
         {
-            var midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _plugin.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -402,7 +403,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true if the Midi Program has changed, otherwise false is returned.</returns>
         public virtual bool HasMidiProgramsChanged(int channel)
         {
-            var midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _plugin.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -427,7 +428,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true when the <paramref name="midiKeyName"/>.Name was filled.</returns>
         public virtual bool GetMidiKeyName(VstMidiKeyName midiKeyName, int channel)
         {
-            var midiPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginMidiPrograms>();
+            var midiPrograms = _plugin.GetInstance<IVstPluginMidiPrograms>();
 
             if (midiPrograms != null)
             {
@@ -447,7 +448,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true when the call was forwarded to the plugin's <see cref="IVstPluginPrograms"/> implementation.</returns>
         public virtual bool BeginSetProgram()
         {
-            var pluginProgram = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginProgram = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginProgram != null)
             {
@@ -464,7 +465,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true when the call was forwarded to the plugin's <see cref="IVstPluginPrograms"/> implementation.</returns>
         public virtual bool EndSetProgram()
         {
-            var pluginProgram = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginProgram = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginProgram != null)
             {
@@ -486,7 +487,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns true when the call was forwarded to the plugin.</returns>
         public virtual bool ProcessEvents(VstEvent[] events)
         {
-            var midiProcessor = _pluginCtx.Plugin.GetInstance<IVstMidiProcessor>();
+            var midiProcessor = _plugin.GetInstance<IVstMidiProcessor>();
 
             if (midiProcessor != null)
             {
@@ -505,7 +506,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// or false if the plugin does not support parameters.</returns>
         public virtual bool CanParameterBeAutomated(int index)
         {
-            var pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -525,7 +526,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Returns false when the plugin does not implement parameters.</returns>
         public virtual bool String2Parameter(int index, string str)
         {
-            var pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -543,7 +544,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns null when the plugin does not implement Programs.</returns>
         public virtual string GetProgramNameIndexed(int index)
         {
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null)
             {
@@ -561,7 +562,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns null when the plugin does not implement <see cref="IVstPluginConnections"/>.</returns>
         public virtual VstPinProperties? GetInputProperties(int index)
         {
-            var pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _plugin.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -588,7 +589,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns null when the plugin does not implement <see cref="IVstPluginConnections"/>.</returns>
         public virtual VstPinProperties? GetOutputProperties(int index)
         {
-            var pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _plugin.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -614,7 +615,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns the <see cref="IVstPlugin.Category"/> value.</returns>
         public virtual VstPluginCategory GetCategory()
         {
-            return _pluginCtx.Plugin.Category;
+            return _plugin.Category;
         }
 
         /// <summary>
@@ -625,7 +626,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns false if the plugin does not implement <see cref="IVstPluginConnections"/>.</returns>
         public virtual bool SetSpeakerArrangement(VstSpeakerArrangement saInput, VstSpeakerArrangement saOutput)
         {
-            var pluginConnections = _pluginCtx.Plugin.GetInstance<IVstPluginConnections>();
+            var pluginConnections = _plugin.GetInstance<IVstPluginConnections>();
 
             if (pluginConnections != null)
             {
@@ -642,7 +643,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns false when the plugin does not implement the <see cref="IVstPluginBypass"/> interface.</returns>
         public virtual bool SetBypass(bool bypass)
         {
-            var pluginBypass = _pluginCtx.Plugin.GetInstance<IVstPluginBypass>();
+            var pluginBypass = _plugin.GetInstance<IVstPluginBypass>();
 
             if (pluginBypass != null)
             {
@@ -661,7 +662,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <exception cref="InvalidOperationException">Thrown when the name exceeds 31 characters.</exception>
         public virtual string GetEffectName()
         {
-            var name = _pluginCtx.Plugin.Name;
+            var name = _plugin.Name;
 
             if (name != null && name.Length > Core.Constants.MaxEffectNameLength)
             {
@@ -679,7 +680,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns <see cref="IVstPlugin.ProductInfo"/>.Vendor.</returns>
         public virtual string GetVendorString()
         {
-            return _pluginCtx.Plugin.ProductInfo.Vendor ?? String.Empty;
+            return _plugin.ProductInfo.Vendor ?? String.Empty;
         }
 
         /// <summary>
@@ -688,7 +689,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns <see cref="IVstPlugin.ProductInfo"/>.Product.</returns>
         public virtual string GetProductString()
         {
-            return _pluginCtx.Plugin.ProductInfo.Product ?? String.Empty;
+            return _plugin.ProductInfo.Product ?? String.Empty;
         }
 
         /// <summary>
@@ -697,7 +698,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns <see cref="IVstPlugin.ProductInfo"/>.Version.</returns>
         public virtual int GetVendorVersion()
         {
-            return _pluginCtx.Plugin.ProductInfo.Version;
+            return _plugin.ProductInfo.Version;
         }
 
         /// <summary>
@@ -716,7 +717,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
 
             VstCanDoResult Supports<T>() where T : class
             {
-                var yes = _pluginCtx.Plugin.Supports<T>();
+                var yes = _plugin.Supports<T>();
                 return yes ? VstCanDoResult.Yes : VstCanDoResult.No;
             }
 
@@ -736,7 +737,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
                     result = Supports<IVstMidiProcessor>();
                     break;
                 case VstPluginCanDo.ReceiveVstTimeInfo:
-                    result = ((_pluginCtx.Plugin.Capabilities & VstPluginCapabilities.ReceiveTimeInfo) > 0) ? VstCanDoResult.Yes : VstCanDoResult.No;
+                    result = ((_plugin.Capabilities & VstPluginCapabilities.ReceiveTimeInfo) > 0) ? VstCanDoResult.Yes : VstCanDoResult.No;
                     break;
                 case VstPluginCanDo.SendVstEvents:
                 case VstPluginCanDo.SendVstMidiEvent:
@@ -753,7 +754,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns <see cref="IVstPluginAudioProcessor.TailSize"/> or zero if not implemented by the plugin.</returns>
         public virtual int GetTailSize()
         {
-            var audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -773,7 +774,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// to fill the <see cref="VstParameterProperties"/> instance.</remarks>
         public virtual VstParameterProperties? GetParameterProperties(int index)
         {
-            var pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -863,7 +864,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <exception cref="InvalidOperationException">Thrown when the HostCommandStub has not been initialized.</exception>
         public virtual void Open()
         {
-            _pluginCtx.Plugin.Open(_pluginCtx.Host);
+            _plugin.Open(_pluginCtx.Host);
         }
 
         /// <summary>
@@ -881,7 +882,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <param name="programNumber">A zero-based program number (index).</param>
         public virtual void SetProgram(int programNumber)
         {
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null)
             {
@@ -897,7 +898,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// or no active program was set; <see cref="IVstPluginPrograms.ActiveProgram"/> returns null.</returns>
         public virtual int GetProgram()
         {
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms != null &&
                 pluginPrograms.ActiveProgram != null)
@@ -918,7 +919,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// </remarks>
         public virtual void SetProgramName(string name)
         {
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms?.ActiveProgram != null &&
                 !pluginPrograms.ActiveProgram.IsReadOnly)
@@ -935,7 +936,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <remarks>The implementation uses the <see cref="IVstPluginPrograms.ActiveProgram"/> to get the name.</remarks>
         public virtual string GetProgramName()
         {
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPrograms?.ActiveProgram != null)
             {
@@ -953,7 +954,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// or when <see cref="VstParameterInfo.ShortLabel"/> was not set.</returns>
         public virtual string GetParameterLabel(int index)
         {
-            var pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -972,7 +973,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// or when <see cref="VstParameter.DisplayValue"/> was not set.</returns>
         public virtual string GetParameterDisplay(int index)
         {
-            var pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -991,7 +992,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// or when <see cref="VstParameterInfo.Name"/> was not set.</returns>
         public virtual string GetParameterName(int index)
         {
-            var pluginParameters = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParameters = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParameters != null)
             {
@@ -1009,7 +1010,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <remarks>The implementation uses the <see cref="IVstPluginAudioProcessor"/> interface. Override to change behavior.</remarks>
         public virtual void SetSampleRate(float sampleRate)
         {
-            var audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1024,7 +1025,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <remarks>The implementation uses the <see cref="IVstPluginAudioProcessor"/> interface. Override to change behavior.</remarks>
         public virtual void SetBlockSize(int blockSize)
         {
-            var audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1038,17 +1039,13 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <param name="onoff">True when on, False when off.</param>
         public virtual void MainsChanged(bool onoff)
         {
-            var plugin = _pluginCtx?.Plugin;
-            if (plugin != null)
+            if (onoff)
             {
-                if (onoff)
-                {
-                    plugin.Resume();
-                }
-                else
-                {
-                    plugin.Suspend();
-                }
+                _plugin.Resume();
+            }
+            else
+            {
+                _plugin.Suspend();
             }
         }
 
@@ -1060,7 +1057,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Returns false when the plugin does not implement the <see cref="IVstPluginEditor"/> interface.</returns>
         public virtual bool EditorGetRect(out System.Drawing.Rectangle rect)
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1079,7 +1076,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns false when the plugin does not implement the <see cref="IVstPluginEditor"/> interface.</returns>
         public virtual bool EditorOpen(IntPtr hWnd)
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1097,7 +1094,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// Override to change this behavior.</remarks>
         public virtual void EditorClose()
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1111,7 +1108,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <remarks>Keep your processing short.</remarks>
         public virtual void EditorIdle()
         {
-            var pluginEditor = _pluginCtx.Plugin.GetInstance<IVstPluginEditor>();
+            var pluginEditor = _plugin.GetInstance<IVstPluginEditor>();
 
             if (pluginEditor != null)
             {
@@ -1128,8 +1125,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// and/or <see cref="IVstPluginPrograms"/> interfaces.</returns>
         public virtual byte[] GetChunk(bool isPreset)
         {
-            var pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPersistence = _plugin.GetInstance<IVstPluginPersistence>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPersistence != null)
             {
@@ -1181,8 +1178,8 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// and/or <see cref="IVstPluginPrograms"/> interfaces.</returns>
         public virtual int SetChunk(byte[] data, bool isPreset)
         {
-            var pluginPersistence = _pluginCtx.Plugin.GetInstance<IVstPluginPersistence>();
-            var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+            var pluginPersistence = _plugin.GetInstance<IVstPluginPersistence>();
+            var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
             if (pluginPersistence != null)
             {
@@ -1266,7 +1263,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <remarks>The implementation calls the <see cref="IVstPluginAudioProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioBuffer[] inputs, VstAudioBuffer[] outputs)
         {
-            var audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioProcessor>();
+            var audioProcessor = _plugin.GetInstance<IVstPluginAudioProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1282,7 +1279,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <remarks>The implementation calls the <see cref="IVstPluginAudioPrecisionProcessor"/> interface.</remarks>
         public virtual void ProcessReplacing(VstAudioPrecisionBuffer[] inputs, VstAudioPrecisionBuffer[] outputs)
         {
-            var audioProcessor = _pluginCtx.Plugin.GetInstance<IVstPluginAudioPrecisionProcessor>();
+            var audioProcessor = _plugin.GetInstance<IVstPluginAudioPrecisionProcessor>();
 
             if (audioProcessor != null)
             {
@@ -1300,11 +1297,11 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// </remarks>
         public virtual void SetParameter(int index, float value)
         {
-            var pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParams = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParams != null)
             {
-                var pluginPrograms = _pluginCtx.Plugin.GetInstance<IVstPluginPrograms>();
+                var pluginPrograms = _plugin.GetInstance<IVstPluginPrograms>();
 
                 if (pluginPrograms != null &&
                     pluginPrograms.ActiveProgram != null &&
@@ -1327,7 +1324,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
         /// <returns>Returns 0.0 when the plugin does not implement the <see cref="IVstPluginParameters"/> interface.</returns>
         public virtual float GetParameter(int index)
         {
-            var pluginParams = _pluginCtx.Plugin.GetInstance<IVstPluginParameters>();
+            var pluginParams = _plugin.GetInstance<IVstPluginParameters>();
 
             if (pluginParams != null)
             {

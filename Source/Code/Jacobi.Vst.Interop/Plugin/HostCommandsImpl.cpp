@@ -17,8 +17,6 @@ HostCommandsImpl::HostCommandsImpl(::Vst2HostCommand hostCommand, Vst2Plugin* pl
 	_pluginInfo = pluginInfo;
 
 	_timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
-	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext(
-		Utils::GetPluginName() + ".Plugin.HostCommandProxy", Jacobi::Vst::Core::Plugin::IVstHostCommandProxy::typeid);
 }
 
 // destructor. See Finalizer
@@ -269,8 +267,7 @@ System::Boolean HostCommandsImpl::OpenFileSelector(Jacobi::Vst::Core::VstFileSel
 	{
 		TypeConverter::DeleteUnmanagedFileSelect(pFileSelect);
 
-		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Error, 
-			"Error in Jacobi.Vst.Interop.Plugin.HostCommandStub.OpenFileSelector.");
+		throw;
 	}
 
 	return false;

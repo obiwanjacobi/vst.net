@@ -19,11 +19,6 @@
         public int RealQualities { get; set; }
 
         /// <summary>
-        /// Number of offline qualities (0: realtime only).
-        /// </summary>
-        public int OfflineQualities { get; set; }
-
-        /// <summary>
         /// Input samplerate to output samplerate ratio, not used yet.
         /// </summary>
         public float IoRatio { get; set; }

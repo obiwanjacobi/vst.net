@@ -1,25 +1,23 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework.Host
 {
     using Jacobi.Vst.Core;
+    using System;
 
     /// <summary>
     /// Provides access to the sequencing functionality of the vst host.
     /// </summary>
     internal sealed class VstHostSequencer : IVstHostSequencer
     {
-        /// <summary>Reference to the root host object.</summary>
-        private readonly VstHost _host;
+        private readonly IVstHostCommands20 _commands;
 
         /// <summary>
         /// Constructs a new instance based on a root <paramref name="host"/> object.
         /// </summary>
-        /// <param name="host">Must not be null.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
-        public VstHostSequencer(VstHost host)
+        /// <param name="commands">Must not be null.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>
+        public VstHostSequencer(IVstHostCommands20 commands)
         {
-            Throw.IfArgumentIsNull(host, nameof(host));
-
-            _host = host;
+            _commands = commands ?? throw new ArgumentNullException(nameof(commands));
         }
 
         #region IVstHostSequencer Members
@@ -29,7 +27,7 @@
         /// </summary>
         public double SampleRate
         {
-            get { return _host.HostCommandProxy.Commands.GetSampleRate(); }
+            get { return _commands.GetSampleRate(); }
         }
 
         /// <summary>
@@ -37,7 +35,7 @@
         /// </summary>
         public int BlockSize
         {
-            get { return _host.HostCommandProxy.Commands.GetBlockSize(); }
+            get { return _commands.GetBlockSize(); }
         }
 
         /// <summary>
@@ -45,7 +43,7 @@
         /// </summary>
         public int InputLatency
         {
-            get { return _host.HostCommandProxy.Commands.GetInputLatency(); }
+            get { return _commands.GetInputLatency(); }
         }
 
         /// <summary>
@@ -53,7 +51,7 @@
         /// </summary>
         public int OutputLatency
         {
-            get { return _host.HostCommandProxy.Commands.GetOutputLatency(); }
+            get { return _commands.GetOutputLatency(); }
         }
 
         /// <summary>
@@ -63,7 +61,7 @@
         /// <returns>Returns time information but not necessarilly in the format specified by <paramref name="filterFlags"/>.</returns>
         public VstTimeInfo GetTime(VstTimeInfoFlags filterFlags)
         {
-            return _host.HostCommandProxy.Commands.GetTimeInfo(filterFlags);
+            return _commands.GetTimeInfo(filterFlags);
         }
 
         /// <summary>
@@ -72,7 +70,7 @@
         /// <returns>Returns true if the host supports changing plugin IO at runtime.</returns>
         public bool UpdatePluginIO()
         {
-            return _host.HostCommandProxy.Commands.IoChanged();
+            return _commands.IoChanged();
         }
 
         #endregion

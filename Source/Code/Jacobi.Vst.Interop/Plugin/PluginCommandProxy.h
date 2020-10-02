@@ -55,12 +55,11 @@ namespace Interop {
 		Vst2IntPtr DispatchLegacy(Vst2PluginCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
 
 		Jacobi::Vst::Core::Plugin::IVstPluginCommandStub^ _commandStub;
-		Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^ _legacyCmdStub;
+		Jacobi::Vst::Core::IVstPluginCommands24^ _commands;
+		Jacobi::Vst::Core::Legacy::IVstPluginCommandsLegacy20^ _legacyCommands;
 
 		Jacobi::Vst::Interop::MemoryTracker^ _memTracker;
 		Vst2Rectangle* _pEditorRect;
-
-		Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 	};
 
 }}}} // Jacobi::Vst::Plugin::Interop

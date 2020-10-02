@@ -10,6 +10,7 @@
     /// </summary>
     internal sealed class VstHost : IVstHost, IDisposable
     {
+        private readonly IVstHostCommands20 _commands;
         private readonly IVstHostAutomation _automation;
         private readonly IVstHostSequencer _sequencer;
         private readonly IVstHostShell _shell;
@@ -29,18 +30,20 @@
             Throw.IfArgumentIsNull(plugin, nameof(plugin));
 
             HostCommandProxy = hostCmdProxy;
+            _commands = hostCmdProxy.Commands;
             Plugin = plugin;
 
-            _automation = new VstHostAutomation(this);
-            _sequencer = new VstHostSequencer(this);
+            _automation = new VstHostAutomation(_commands);
+            _sequencer = new VstHostSequencer(_commands);
             _shell = new VstHostShell(this);
-            _midiProcessor = new VstHostMidiProcessor(this);
+            _midiProcessor = new VstHostMidiProcessor(_commands);
         }
 
         /// <summary>
-        /// Gets the Host Command Stub (Interop).
+        /// Gets the Host Command Proxy (Interop).
         /// </summary>
         public IVstHostCommandProxy HostCommandProxy { get; private set; }
+
         /// <summary>
         /// Gets the current Plugin instance.
         /// </summary>
@@ -62,9 +65,9 @@
                 if (_productInfo == null)
                 {
                     _productInfo = new VstProductInfo(
-                        HostCommandProxy.Commands.GetProductString(),
-                        HostCommandProxy.Commands.GetVendorString(),
-                        HostCommandProxy.Commands.GetVendorVersion());
+                        _commands.GetProductString(),
+                        _commands.GetVendorString(),
+                        _commands.GetVendorVersion());
                 }
 
                 return _productInfo;
@@ -85,37 +88,37 @@
                 if (_hostCapabilities == VstHostCapabilities.None)
                 {
                     // IVstHostSequencer.UpdatePluginIO works
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.AcceptIoChanges)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.AcceptIoChanges)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.AcceptIoChanges;
                     // IVstHostOfflineProcessor
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.Offline)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.Offline)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.Offline;
                     // IVstHostShell.OpenFileSelector
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.OpenFileSelector)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.OpenFileSelector)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.OpenFileSelector;
                     // IVstMidiProcessor implemented on Host
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.ReceiveMidiEvents;
                     // will call IVstPluginConnections
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReportConnectionChanges)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReportConnectionChanges)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.ReportConnectionChanges;
                     // will call IVstMidiProcessor implemented on plugin
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstMidiEvent)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstMidiEvent)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.SendMidiEvents;
                     // Realtime flag set in VstMidiEvent
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstMidiEventFlagIsRealtime)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstMidiEventFlagIsRealtime)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.RealtimeMidiFlag;
                     // GetTimeInfo works?
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstTimeInfo)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SendVstTimeInfo)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.SendTimeInfo;
                     // will call IVstPluginHost
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ShellCategory)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ShellCategory)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.PluginHost;
                     // IVstHostShell.SizeWindow works
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SizeWindow)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.SizeWindow)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.SizeWindow;
                     // will call IVstPluginProcess
-                    if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.StartStopProcess)) == VstCanDoResult.Yes)
+                    if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.StartStopProcess)) == VstCanDoResult.Yes)
                         _hostCapabilities |= VstHostCapabilities.StartStopProcess;
                 }
 
@@ -128,7 +131,7 @@
         /// </summary>
         public VstProcessLevels ProcessLevel
         {
-            get { return HostCommandProxy.Commands.GetProcessLevel(); }
+            get { return _commands.GetProcessLevel(); }
         }
 
         #endregion
@@ -142,7 +145,8 @@
         /// <returns>Returns true when the type <typeparamref name="T"/> is supported.</returns>
         public bool Supports<T>() where T : class
         {
-            if (HostCommandProxy is T) return true;
+            if (HostCommandProxy is T)
+                return true;
             return GetInstance<T>() != null;
         }
 
@@ -153,8 +157,10 @@
         /// <returns>Returns null when <typeparamref name="T"/> is not supported.</returns>
         public T? GetInstance<T>() where T : class
         {
-            if (HostCommandProxy is T proxy) return proxy;
-            if (HostCommandProxy.Commands is T cmds) return cmds;
+            if (HostCommandProxy is T proxy)
+                return proxy;
+            if (_commands is T cmds)
+                return cmds;
 
             var type = typeof(T);
 
@@ -175,7 +181,7 @@
                 CheckMidiSource();
 
                 // does host support MIDI?
-                if (HostCommandProxy.Commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) != VstCanDoResult.No)
+                if (_commands.CanDo(VstCanDoHelper.ToString(VstHostCanDo.ReceiveVstMidiEvent)) != VstCanDoResult.No)
                 {
                     return (T)_midiProcessor;
                 }

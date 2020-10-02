@@ -596,13 +596,7 @@ namespace Interop {
         {
             if (_pPlugin && _pPlugin->command)
             {
-                _traceCtx->WriteDispatchBegin(safe_cast<System::Int32>(command), index, System::IntPtr(value), System::IntPtr(ptr), opt);
-
-                ::Vst2IntPtr result = _pPlugin->command(_pPlugin, command, index, value, ptr, opt);
-
-                _traceCtx->WriteDispatchEnd(System::IntPtr(result));
-
-                return result;
+                return _pPlugin->command(_pPlugin, command, index, value, ptr, opt);
             }
 
             return 0;
@@ -611,8 +605,6 @@ namespace Interop {
         {
             if (_pPlugin && _pPlugin->replace)
             {
-                _traceCtx->WriteProcess(_pPlugin->inputCount, _pPlugin->outputCount, sampleFrames, sampleFrames);
-
                 _pPlugin->replace(_pPlugin, inputs, outputs, sampleFrames);
             }
         }
@@ -620,8 +612,6 @@ namespace Interop {
         {
             if (_pPlugin && _pPlugin->replaceDouble)
             {
-                _traceCtx->WriteProcess(_pPlugin->inputCount, _pPlugin->inputCount, sampleFrames, sampleFrames);
-
                 _pPlugin->replaceDouble(_pPlugin, inputs, outputs, sampleFrames);
             }
         }
@@ -629,8 +619,6 @@ namespace Interop {
         {
             if (_pPlugin && _pPlugin->parameterSet)
             {
-                _traceCtx->WriteSetParameter(index, parameter);
-
                 _pPlugin->parameterSet(_pPlugin, index, parameter);
             }
         }
@@ -638,13 +626,7 @@ namespace Interop {
         {
             if (_pPlugin && _pPlugin->parameterGet)
             {
-                _traceCtx->WriteGetParameterBegin(index);
-
-                float result = _pPlugin->parameterGet(_pPlugin, index);
-
-                _traceCtx->WriteGetParameterEnd(result);
-
-                return result;
+                return _pPlugin->parameterGet(_pPlugin, index);
             }
 
             return 0.0f;
@@ -655,14 +637,11 @@ namespace Interop {
         {
             if (_pPlugin && _pPlugin->process)
             {
-                _traceCtx->WriteProcess(_pPlugin->inputCount, _pPlugin->outputCount, sampleFrames, sampleFrames);
-
                 _pPlugin->process(_pPlugin, inputs, outputs, sampleFrames);
             }
         }
 
         Jacobi::Vst::Interop::MemoryTracker^ _memoryTracker;
-        Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
     };
 
 }}}} // Jacobi::Vst::Host::Interop

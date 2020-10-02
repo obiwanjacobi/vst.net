@@ -9,8 +9,8 @@
     /// </summary>
     internal sealed class VstHostShell : IVstHostShell
     {
-        private readonly VstHost _host;
-
+        private readonly IVstHostCommands20 _commands;
+        private readonly IVstHost _host;
         /// <summary>
         /// Constructs an instance on the host proxy.
         /// </summary>
@@ -18,21 +18,20 @@
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
         public VstHostShell(VstHost host)
         {
-            Throw.IfArgumentIsNull(host, nameof(host));
-
-            _host = host;
+            _host = host ?? throw new ArgumentNullException(nameof(host));
+            _commands = host.HostCommandProxy.Commands;
         }
 
         #region IVstHostShell Members
 
         public bool UpdateDisplay()
         {
-            return _host.HostCommandProxy.Commands.UpdateDisplay();
+            return _commands.UpdateDisplay();
         }
 
         public bool SizeWindow(int width, int height)
         {
-            return _host.HostCommandProxy.Commands.SizeWindow(width, height);
+            return _commands.SizeWindow(width, height);
         }
 
         public CultureInfo? _culture;
@@ -46,7 +45,7 @@
             {
                 if (_culture == null)
                 {
-                    var language = _host.HostCommandProxy.Commands.GetLanguage();
+                    var language = _commands.GetLanguage();
 
                     _culture = language switch
                     {
@@ -71,7 +70,7 @@
             {
                 if (_baseDir == null)
                 {
-                    _baseDir = _host.HostCommandProxy.Commands.GetDirectory();
+                    _baseDir = _commands.GetDirectory();
                 }
 
                 return _baseDir;
@@ -79,7 +78,7 @@
         }
 
         /// <summary>
-        /// Under construction!
+        /// Make the host show an open file dialog - if supported.
         /// </summary>
         /// <returns>Returns null when the host does not support opening a file selector.</returns>
         public IDisposable? OpenFileSelector(VstFileSelect fileSelect)
@@ -87,7 +86,7 @@
             // check capability of the host
             if ((_host.Capabilities & VstHostCapabilities.OpenFileSelector) > 0)
             {
-                return new FileSelectorScope(_host, fileSelect);
+                return new FileSelectorScope(_commands, fileSelect);
             }
 
             return null;
@@ -102,17 +101,18 @@
         /// </summary>
         private sealed class FileSelectorScope : IDisposable
         {
-            private VstHost? _host;
+            private IVstHostCommands20? _commands;
             private VstFileSelect? _fileSelect;
 
-            public FileSelectorScope(VstHost host, VstFileSelect fileSelect)
+            public FileSelectorScope(IVstHostCommands20 commands, VstFileSelect fileSelect)
             {
-                _host = host;
+                _commands = commands;
                 _fileSelect = fileSelect;
 
-                if (!_host.HostCommandProxy.Commands.OpenFileSelector(_fileSelect))
+                if (!_commands.OpenFileSelector(_fileSelect))
                 {
-                    throw new InvalidOperationException(Properties.Resources.FileSelectorScope_OpenNotSupported);
+                    throw new InvalidOperationException(
+                        Properties.Resources.FileSelectorScope_OpenNotSupported);
                 }
             }
 
@@ -124,10 +124,10 @@
             /// <remarks>We do not check wheter or not the host supports closing the file selector...</remarks>
             public void Dispose()
             {
-                if (_host != null && _fileSelect != null)
+                if (_commands != null && _fileSelect != null)
                 {
-                    _host.HostCommandProxy.Commands.CloseFileSelector(_fileSelect);
-                    _host = null;
+                    _commands.CloseFileSelector(_fileSelect);
+                    _commands = null;
                     _fileSelect = null;
                 }
             }
