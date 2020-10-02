@@ -77,148 +77,6 @@
             <param name="text">The <see cref="T:System.Text.StringBuilder"/> that receives the text.</param>
             <param name="rtle">A reference to the specialized exception. Can be null.</param>
         </member>
-        <member name="T:Jacobi.Vst.Core.Diagnostics.TraceContext">
-            <summary>
-            This class represents the context that is used during tracing debug messages.
-            </summary>
-            <remarks>
-            Internally this class uses the <see cref="T:System.Diagnostics.TraceSource"/> class to output its trace messages. \
-            Therefor you can configure its options in a standard config file.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.#ctor(System.String,System.Type)">
-            <summary>
-            Consrtucts a new instance using the <paramref name="contextName"/> and specified <paramref name="commandInterface"/>.
-            </summary>
-            <param name="contextName">The name of the context by which it can be referenced in the config file. Must not be null or empty.</param>
-            <param name="commandInterface">An optional indication of what command interface this instance traces for. 
-            This parameter is also used to translate the <b>opcode</b> parameter of the <see cref="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteDispatchBegin(System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Single)"/> method.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.ShouldTrace(System.Diagnostics.TraceEventType)">
-            <summary>
-            Indicates if the specified <paramref name="eventType"/> is enable and should produce a trace.
-            </summary>
-            <param name="eventType">An indication of the type of trace event.</param>
-            <returns>Returns true when the specified <paramref name="eventType"/> should produce a trace.</returns>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteDispatchBegin(System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.Single)">
-            <summary>
-            Writes a start trace of the Dispatch method.
-            </summary>
-            <param name="opcode">The dispatched opcode.</param>
-            <param name="index">Optional dispatch paremeter.</param>
-            <param name="value">Optional dispatch paremeter.</param>
-            <param name="ptr">Optional dispatch paremeter.</param>
-            <param name="opt">Optional dispatch paremeter.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Verbose"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteDispatchEnd(System.IntPtr)">
-            <summary>
-            Writes an end trace of the Dispatch method.
-            </summary>
-            <param name="result">The value returned from the Dispatch method.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Verbose"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteError(System.Exception)">
-            <summary>
-            Writes an error trace for the <paramref name="exception"/>.
-            </summary>
-            <param name="exception">Must not be null.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Error"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteProcess(System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Writes a trace for the Process method.
-            </summary>
-            <param name="inputBufferCount">The number of input buffers.</param>
-            <param name="outputBufferCount">The number of output buffers.</param>
-            <param name="inputSampleCount">The number of samples in the input buffers.</param>
-            <param name="outputSampleCount">The number of samples in the output buffers.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Verbose"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteGetParameterBegin(System.Int32)">
-            <summary>
-            Writes a start trace for the GetParameters method.
-            </summary>
-            <param name="parameterIndex">The index of the parameter requested.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Verbose"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteGetParameterEnd(System.Single)">
-            <summary>
-            Writes the end trace for the GetParameter method.
-            </summary>
-            <param name="value">The parameter value that will be returned from the GetParameter method.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Verbose"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteSetParameter(System.Int32,System.Single)">
-            <summary>
-            Writes a trace for the SetParameter method.
-            </summary>
-            <param name="parameterIndex">The index of the parameter.</param>
-            <param name="value">The value for the paremeter.</param>
-            <remarks>
-            The trace text is output as a <see cref="F:System.Diagnostics.TraceEventType.Verbose"/> event type.
-            </remarks>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteEvent(System.Diagnostics.TraceEventType,System.String)">
-            <summary>
-            Writes a generic trace containing the specified <paramref name="message"/>.
-            </summary>
-            <param name="eventType">The type of trace event.</param>
-            <param name="message">The trace message text.</param>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.WriteEvent(System.Diagnostics.TraceEventType,System.String,System.Object[])">
-            <summary>
-            Writes a generic trace containing the <paramref name="format"/>ted string containing the <paramref name="parameters"/>.
-            </summary>
-            <param name="eventType">The type of trace event.</param>
-            <param name="format">A string formatter.</param>
-            <param name="parameters">Variable arguments used in the <paramref name="format"/> string.</param>
-        </member>
-        <member name="T:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo">
-            <summary>
-            A private class that contains information on a dispatcher opcode.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo.#ctor(System.String,System.Boolean)">
-            <summary>
-            Constructs a new instance.
-            </summary>
-            <param name="description">The human readable description of the opcode.</param>
-            <param name="legacy">An indication if the opcode is legacy.</param>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo.Description">
-            <summary>
-            Gets the opcode description.
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo.Legacy">
-            <summary>
-            Gets an indication if the opcode is legacy.
-            </summary>
-        </member>
-        <member name="M:Jacobi.Vst.Core.Diagnostics.TraceContext.OpcodeInfo.FormatArguments(System.Int32,System.IntPtr,System.IntPtr,System.Single)">
-            <summary>
-            Formats the dispatcher method parameters into a text string.
-            </summary>
-            <param name="index">Optional dispatcher parameter.</param>
-            <param name="value">Optional dispatcher parameter.</param>
-            <param name="ptr">Optional dispatcher parameter.</param>
-            <param name="opt">Optional dispatcher parameter.</param>
-            <returns>Returns the formatted text containing the optional dispatcher method parameters.</returns>
-        </member>
         <member name="T:Jacobi.Vst.Core.FourCharacterCode">
             <summary>
             This structure encapsulates a Four Character Code as a string.
@@ -281,7 +139,6 @@
             The IVstPluginCommandStub interface is implemented by the command stub for the Plugin commands
             in the Interop assembly.
             </summary>
-            <remarks>The interfaces derives from <see cref="T:Jacobi.Vst.Core.IVstPluginCommands24"/>.</remarks>
         </member>
         <member name="P:Jacobi.Vst.Core.Host.IVstPluginCommandStub.PluginContext">
             <summary>
@@ -1340,11 +1197,6 @@
         <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.RealQualities">
             <summary>
             Number of realtime qualities (0: realtime).
-            </summary>
-        </member>
-        <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.OfflineQualities">
-            <summary>
-            Number of offline qualities (0: realtime only).
             </summary>
         </member>
         <member name="P:Jacobi.Vst.Core.Legacy.VstPluginLegacyInfo.IoRatio">

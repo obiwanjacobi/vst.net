@@ -141,7 +141,7 @@
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Host.VstHost.HostCommandProxy">
             <summary>
-            Gets the Host Command Stub (Interop).
+            Gets the Host Command Proxy (Interop).
             </summary>
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Host.VstHost.Plugin">
@@ -194,7 +194,7 @@
             Forwards the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstHostAutomation"/> calls to the host stub.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostAutomation.#ctor(Jacobi.Vst.Plugin.Framework.Host.VstHost)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostAutomation.#ctor(Jacobi.Vst.Core.IVstHostCommands20)">
             <summary>
             Constructs an instance on the host proxy.
             </summary>
@@ -216,7 +216,7 @@
             Forwards the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstMidiProcessor"/> calls to the host stub.
             </summary>
         </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostMidiProcessor.#ctor(Jacobi.Vst.Plugin.Framework.Host.VstHost)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostMidiProcessor.#ctor(Jacobi.Vst.Core.IVstHostCommands20)">
             <summary>
             Constructs an instance on the host proxy.
             </summary>
@@ -240,15 +240,12 @@
             Provides access to the sequencing functionality of the vst host.
             </summary>
         </member>
-        <member name="F:Jacobi.Vst.Plugin.Framework.Host.VstHostSequencer._host">
-            <summary>Reference to the root host object.</summary>
-        </member>
-        <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostSequencer.#ctor(Jacobi.Vst.Plugin.Framework.Host.VstHost)">
+        <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostSequencer.#ctor(Jacobi.Vst.Core.IVstHostCommands20)">
             <summary>
             Constructs a new instance based on a root <paramref name="host"/> object.
             </summary>
-            <param name="host">Must not be null.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
+            <param name="commands">Must not be null.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Host.VstHostSequencer.SampleRate">
             <summary>
@@ -303,7 +300,7 @@
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostShell.OpenFileSelector(Jacobi.Vst.Core.VstFileSelect)">
             <summary>
-            Under construction!
+            Make the host show an open file dialog - if supported.
             </summary>
             <returns>Returns null when the host does not support opening a file selector.</returns>
         </member>
@@ -1051,9 +1048,12 @@
             The StdPluginCommandStub class provides a default implementation for adapting the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> 
             interface calls to the framework.
             </summary>
-            <remarks>Each plugin must implement a public class the implements the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> interface.
+            <remarks>
+            Each plugin must implement a public class the implements the <see cref="T:Jacobi.Vst.Core.Plugin.IVstPluginCommandStub"/> interface.
             Plugins that use the framework can just derive from this class and override the <see cref="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub.CreatePluginInstance"/> method
-            to create their plugin root object.</remarks>
+            to create their plugin root object.
+            Also note that by default the <see cref="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached"/> handler is used.
+            </remarks>
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub.Plugin">
             <summary>
@@ -1089,6 +1089,7 @@
             </summary>
             <param name="pluginCtx">Plugin and Host info. Is never null.</param>
             <returns>Never returns null.</returns>
+            <remarks>By default the VstPluginCommandsCached is used.</remarks>
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.StdPluginCommandStub.CreatePluginInfo(Jacobi.Vst.Plugin.Framework.IVstPlugin)">
             <summary>
@@ -1754,6 +1755,37 @@
             </summary>
             <param name="index">A zero-base index into the parameters collection.</param>
             <returns>Returns 0.0 when the plugin does not implement the <see cref="T:Jacobi.Vst.Plugin.Framework.IVstPluginParameters"/> interface.</returns>
+        </member>
+        <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached">
+            <summary>
+            Implements a slightly optimized command handler by 
+            caching references to the interfaces for methods called at realtime.
+            </summary>
+            <remarks>
+            This does mean that these interfaces cannot be 'visible/invisible' dynamically anymore.
+            That feature is mainly used in wrapper plugins.
+            </remarks>
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.#ctor(Jacobi.Vst.Plugin.Framework.Plugin.VstPluginContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.Open">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.ProcessEvents(Jacobi.Vst.Core.VstEvent[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.ProcessReplacing(Jacobi.Vst.Core.VstAudioBuffer[],Jacobi.Vst.Core.VstAudioBuffer[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.ProcessReplacing(Jacobi.Vst.Core.VstAudioPrecisionBuffer[],Jacobi.Vst.Core.VstAudioPrecisionBuffer[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.SetParameter(System.Int32,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginCommandsCached.GetParameter(System.Int32)">
+            <inheritdoc />
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Plugin.VstPluginContext">
             <summary>
