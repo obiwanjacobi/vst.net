@@ -40,8 +40,6 @@ private:
 	::Vst2SpeakerArrangement* _pArrangement;
 
 	Vst2IntPtr DispatchLegacy(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt);
-
-	Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
 };
 
 }}}} // Jacobi::Vst::Host::Interop

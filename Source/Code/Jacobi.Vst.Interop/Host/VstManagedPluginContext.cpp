@@ -45,9 +45,8 @@ namespace Interop {
 		}
 
 		auto hostAdapter = gcnew Jacobi::Vst::Core::Host::VstHostCommandAdapter(HostCommandStub);
-
 		_internalPluginInfo = pluginCmdStub->GetPluginInfo(hostAdapter);
-		Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^ legacyPluginInfo = 
+		auto legacyPluginInfo = 
 			dynamic_cast<Jacobi::Vst::Core::Legacy::VstPluginLegacyInfo^>(_internalPluginInfo);
 
 		if(legacyPluginInfo != nullptr)
@@ -127,11 +126,6 @@ namespace Interop {
 					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
-				if(legacyInfo->OfflineQualities != legacyInternalInfo->OfflineQualities)
-				{
-					changedPropNames->Add("PluginInfo.OfflineQualities");
-				}
-
 				if(legacyInfo->IoRatio != legacyInternalInfo->IoRatio)
 				{
 					changedPropNames->Add("PluginInfo.IoRatio");
@@ -154,7 +148,6 @@ namespace Interop {
 		{
 			legacyInfo->LegacyFlags = legacyInternalInfo->LegacyFlags;
 			legacyInfo->RealQualities = legacyInternalInfo->RealQualities;
-			legacyInfo->OfflineQualities = legacyInternalInfo->OfflineQualities;
 			legacyInfo->IoRatio = legacyInternalInfo->IoRatio;
 		}
 

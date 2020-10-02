@@ -231,11 +231,6 @@ namespace Interop {
 					changedPropNames->Add("PluginInfo.RealQualities");
 				}
 
-				if(legacyInfo->OfflineQualities != _pEffect->offQualities)
-				{
-					changedPropNames->Add("PluginInfo.OfflineQualities");
-				}
-
 				if(legacyInfo->IoRatio != _pEffect->ioRatio)
 				{
 					changedPropNames->Add("PluginInfo.IoRatio");
@@ -257,7 +252,6 @@ namespace Interop {
 		if(legacyInfo != nullptr)
 		{
 			legacyInfo->RealQualities = _pEffect->realQualities;
-			legacyInfo->OfflineQualities = _pEffect->offQualities;
 			legacyInfo->IoRatio = _pEffect->ioRatio;
 		}
 

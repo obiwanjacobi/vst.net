@@ -8,9 +8,12 @@
     /// The StdPluginCommandStub class provides a default implementation for adapting the <see cref="IVstPluginCommandStub"/> 
     /// interface calls to the framework.
     /// </summary>
-    /// <remarks>Each plugin must implement a public class the implements the <see cref="IVstPluginCommandStub"/> interface.
+    /// <remarks>
+    /// Each plugin must implement a public class the implements the <see cref="IVstPluginCommandStub"/> interface.
     /// Plugins that use the framework can just derive from this class and override the <see cref="CreatePluginInstance"/> method
-    /// to create their plugin root object.</remarks>
+    /// to create their plugin root object.
+    /// Also note that by default the <see cref="VstPluginCommandsCached"/> handler is used.
+    /// </remarks>
     public abstract class StdPluginCommandStub : IVstPluginCommandStub
     {
         private VstPluginContext? _pluginCtx;
@@ -34,22 +37,20 @@
         {
             IVstPlugin plugin = CreatePluginInstance();
 
-            if (plugin != null)
+            if (plugin == null)
+                return null;
+
+            if (plugin is IConfigurable config)
             {
-                if (plugin is IConfigurable config)
-                {
-                    config.Configuration = this.PluginConfiguration;
-                }
-
-                _pluginCtx = new VstPluginContext(
-                    plugin, new Host.VstHost(hostCmdProxy, plugin), CreatePluginInfo(plugin));
-
-                Commands = CreatePluginCommands(_pluginCtx);
-
-                return _pluginCtx.PluginInfo;
+                config.Configuration = this.PluginConfiguration;
             }
 
-            return null;
+            _pluginCtx = new VstPluginContext(
+                plugin, new Host.VstHost(hostCmdProxy, plugin), CreatePluginInfo(plugin));
+
+            Commands = CreatePluginCommands(_pluginCtx);
+
+            return _pluginCtx.PluginInfo;
         }
 
         /// <summary>
@@ -74,9 +75,10 @@
         /// </summary>
         /// <param name="pluginCtx">Plugin and Host info. Is never null.</param>
         /// <returns>Never returns null.</returns>
+        /// <remarks>By default the VstPluginCommandsCached is used.</remarks>
         protected virtual IVstPluginCommands24 CreatePluginCommands(VstPluginContext pluginCtx)
         {
-            return new VstPluginCommands(pluginCtx);
+            return new VstPluginCommandsCached(pluginCtx);
         }
 
         /// <summary>
@@ -87,7 +89,7 @@
         /// <remarks>Override to add or change behavior.</remarks>
         protected virtual VstPluginInfo CreatePluginInfo(IVstPlugin plugin)
         {
-            VstPluginInfo pluginInfo = new VstPluginInfo();
+            var pluginInfo = new VstPluginInfo();
 
             var audioProcessor = plugin.GetInstance<IVstPluginAudioProcessor>();
 

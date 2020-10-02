@@ -8,34 +8,32 @@
     /// </summary>
     internal sealed class VstHostAutomation : IVstHostAutomation
     {
-        private readonly VstHost _host;
+        private readonly IVstHostCommands20 _commands;
 
         /// <summary>
         /// Constructs an instance on the host proxy.
         /// </summary>
         /// <param name="host">Must not be null.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
-        public VstHostAutomation(VstHost host)
+        public VstHostAutomation(IVstHostCommands20 commands)
         {
-            Throw.IfArgumentIsNull(host, nameof(host));
-
-            _host = host;
+            _commands = commands ?? throw new ArgumentNullException(nameof(commands));
         }
 
         #region IVstHostAutomation Members
 
         public VstAutomationStates AutomationState
         {
-            get { return _host.HostCommandProxy.Commands.GetAutomationState(); }
+            get { return _commands.GetAutomationState(); }
         }
 
         public IDisposable? BeginEditParameter(VstParameter parameter)
         {
             Throw.IfArgumentIsNull(parameter, nameof(parameter));
 
-            if (_host.HostCommandProxy.Commands.BeginEdit(parameter.Index))
+            if (_commands.BeginEdit(parameter.Index))
             {
-                return new EditParameterScope(_host, parameter.Index);
+                return new EditParameterScope(_commands, parameter.Index);
             }
 
             return null;
@@ -45,7 +43,7 @@
         {
             Throw.IfArgumentIsNull(parameter, nameof(parameter));
 
-            _host.HostCommandProxy.Commands.SetParameterAutomated(parameter.Index, parameter.Value);
+            _commands.SetParameterAutomated(parameter.Index, parameter.Value);
         }
 
         #endregion
@@ -57,12 +55,12 @@
         /// </summary>
         private sealed class EditParameterScope : IDisposable
         {
-            private VstHost? _host;
+            private IVstHostCommands20? _commands;
             private readonly int _index;
 
-            public EditParameterScope(VstHost host, int index)
+            public EditParameterScope(IVstHostCommands20 commands, int index)
             {
-                _host = host;
+                _commands = commands ?? throw new ArgumentNullException(nameof(commands));
                 _index = index;
             }
 
@@ -73,10 +71,10 @@
             /// </summary>
             public void Dispose()
             {
-                if (_host != null)
+                if (_commands != null)
                 {
-                    _host.HostCommandProxy.Commands.EndEdit(_index);
-                    _host = null;
+                    _commands.EndEdit(_index);
+                    _commands = null;
                 }
             }
 

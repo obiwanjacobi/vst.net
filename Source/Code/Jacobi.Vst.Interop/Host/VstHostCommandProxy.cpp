@@ -19,8 +19,6 @@ VstHostCommandProxy::VstHostCommandProxy(Jacobi::Vst::Core::Host::IVstHostComman
 	_pTimeInfo = new ::Vst2TimeInfo();
 	_directory = NULL;
 	_pArrangement = new ::Vst2SpeakerArrangement();
-
-	_traceCtx = gcnew Jacobi::Vst::Core::Diagnostics::TraceContext("Host.HostCommandProxy", Jacobi::Vst::Core::Host::IVstHostCommandStub::typeid);
 }
 
 VstHostCommandProxy::~VstHostCommandProxy()
@@ -52,8 +50,6 @@ VstHostCommandProxy::!VstHostCommandProxy()
 ::Vst2IntPtr VstHostCommandProxy::Dispatch(int32_t opcode, int32_t index, ::Vst2IntPtr value, void* ptr, float opt)
 {
 	::Vst2IntPtr result = 0;
-
-	_traceCtx->WriteDispatchBegin(opcode, index, System::IntPtr(value), System::IntPtr(ptr), opt);
 
 	if(_hostCmdStub != nullptr)
 	{
@@ -169,17 +165,9 @@ VstHostCommandProxy::!VstHostCommandProxy()
 		}
 		catch(System::Exception^ e)
 		{
-			_traceCtx->WriteError(e);
-
 			Utils::ShowError(e);
 		}
 	}
-	else
-	{
-		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Warning, "The Host Command Stub was not set.");
-	}
-
-	_traceCtx->WriteDispatchEnd(System::IntPtr(result));
 
 	return result;
 }
@@ -261,16 +249,8 @@ VstHostCommandProxy::!VstHostCommandProxy()
 		}	break;
 		default:
 			// unknown command
-			_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, 
-				System::String::Format("Unhandled dispatcher opcode: {0}.", safe_cast<System::Int32>(command)));
 			break;
 		}
-	}
-	else
-	{
-		// unhandled command
-		_traceCtx->WriteEvent(System::Diagnostics::TraceEventType::Information, 
-			System::String::Format("Unhandled dispatcher opcode: {0}.", safe_cast<System::Int32>(command)));
 	}
 
 	return result;

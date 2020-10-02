@@ -1,6 +1,7 @@
 ﻿namespace Jacobi.Vst.Plugin.Framework.Host
 {
     using Jacobi.Vst.Core;
+    using System;
     using System.Linq;
 
     /// <summary>
@@ -8,18 +9,16 @@
     /// </summary>
     internal sealed class VstHostMidiProcessor : IVstMidiProcessor
     {
-        private readonly VstHost _host;
+        private readonly IVstHostCommands20 _commands;
 
         /// <summary>
         /// Constructs an instance on the host proxy.
         /// </summary>
         /// <param name="host">Must not be null.</param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
-        public VstHostMidiProcessor(VstHost host)
+        public VstHostMidiProcessor(IVstHostCommands20 commands)
         {
-            Throw.IfArgumentIsNull(host, nameof(host));
-
-            _host = host;
+            _commands = commands ?? throw new ArgumentNullException(nameof(commands));
         }
 
         #region IVstMidiProcessor Members
@@ -42,7 +41,7 @@
         {
             Throw.IfArgumentIsNull(events, nameof(events));
 
-            _host.HostCommandProxy.Commands.ProcessEvents(events.ToArray());
+            _commands.ProcessEvents(events.ToArray());
         }
 
         #endregion

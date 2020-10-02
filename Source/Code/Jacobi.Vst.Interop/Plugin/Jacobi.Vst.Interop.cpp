@@ -188,7 +188,7 @@ Vst2Plugin* CreateAudioEffectInfo(Jacobi::Vst::Core::Plugin::VstPluginInfo^ plug
 		// hook up the old accumulating process proc when legacy PluginInfo is passed in
 		pEffect->process = Jacobi::Vst::Interop::Process32AccProc;
 		pEffect->realQualities = legacyInfo->RealQualities;
-		pEffect->offQualities = legacyInfo->OfflineQualities;
+		pEffect->offQualities = 0;	// offline not supported
 		pEffect->ioRatio = legacyInfo->IoRatio;
 		pEffect->flags = (Vst2PluginFlags)((int32_t)pEffect->flags | (int32_t)legacyInfo->LegacyFlags);
 	}

@@ -10,7 +10,6 @@
     {
         /// <inheritdoc />
         protected VstPluginAudioPrecisionProcessor()
-            : base()
         { }
 
         /// <inheritdoc />

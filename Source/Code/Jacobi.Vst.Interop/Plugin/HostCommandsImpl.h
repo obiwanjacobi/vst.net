@@ -289,17 +289,10 @@ namespace Interop {
         void ThrowIfNotInitialized();
         Vst2IntPtr CallHost(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
         {
-            _traceCtx->WriteDispatchBegin(System::Int32(command), index, System::IntPtr(value), System::IntPtr(ptr), opt);
-
-            Vst2IntPtr result = _hostCommand(_pluginInfo, command, index, value, ptr, opt);
-
-            _traceCtx->WriteDispatchEnd(System::IntPtr(result));
-
-            return result;
+            return _hostCommand(_pluginInfo, command, index, value, ptr, opt);
         }
 
         Jacobi::Vst::Core::VstTimeInfo^ _timeInfo;
-        Jacobi::Vst::Core::Diagnostics::TraceContext^ _traceCtx;
     };
 
 }}}} // Jacobi::Vst::Plugin::Interop

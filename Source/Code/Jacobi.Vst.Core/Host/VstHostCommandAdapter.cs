@@ -40,7 +40,11 @@ namespace Jacobi.Vst.Core.Host
         /// <inheritdoc />
         public IVstHostCommands20 Commands
         {
-            get { return _hostCmdStub!.Commands; }
+            get
+            {
+                ThrowIfDisposed();
+                return _hostCmdStub!.Commands;
+            }
         }
 
         #endregion
