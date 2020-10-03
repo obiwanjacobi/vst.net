@@ -13,8 +13,8 @@
         /// <summary>
         /// Constructs an instance on the host proxy.
         /// </summary>
-        /// <param name="host">Must not be null.</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
+        /// <param name="commands">Must not be null.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>
         public VstHostAutomation(IVstHostCommands20 commands)
         {
             _commands = commands ?? throw new ArgumentNullException(nameof(commands));

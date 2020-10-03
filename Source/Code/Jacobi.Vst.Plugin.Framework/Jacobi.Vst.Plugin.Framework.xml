@@ -198,8 +198,8 @@
             <summary>
             Constructs an instance on the host proxy.
             </summary>
-            <param name="host">Must not be null.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
+            <param name="commands">Must not be null.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>
         </member>
         <member name="T:Jacobi.Vst.Plugin.Framework.Host.VstHostAutomation.EditParameterScope">
             <summary>
@@ -220,8 +220,8 @@
             <summary>
             Constructs an instance on the host proxy.
             </summary>
-            <param name="host">Must not be null.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="host"/> is not set to an instance of an object.</exception>
+            <param name="commands">Must not be null.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>
         </member>
         <member name="P:Jacobi.Vst.Plugin.Framework.Host.VstHostMidiProcessor.ChannelCount">
             <summary>
@@ -242,7 +242,7 @@
         </member>
         <member name="M:Jacobi.Vst.Plugin.Framework.Host.VstHostSequencer.#ctor(Jacobi.Vst.Core.IVstHostCommands20)">
             <summary>
-            Constructs a new instance based on a root <paramref name="host"/> object.
+            Constructs a new instance based on a <paramref name="commands"/> object.
             </summary>
             <param name="commands">Must not be null.</param>
             <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>

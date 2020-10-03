@@ -11,6 +11,7 @@
     {
         private readonly IVstHostCommands20 _commands;
         private readonly IVstHost _host;
+
         /// <summary>
         /// Constructs an instance on the host proxy.
         /// </summary>

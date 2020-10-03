@@ -11,7 +11,7 @@
         private readonly IVstHostCommands20 _commands;
 
         /// <summary>
-        /// Constructs a new instance based on a root <paramref name="host"/> object.
+        /// Constructs a new instance based on a <paramref name="commands"/> object.
         /// </summary>
         /// <param name="commands">Must not be null.</param>
         /// <exception cref="System.ArgumentNullException">Thrown when <paramref name="commands"/> is not set to an instance of an object.</exception>
