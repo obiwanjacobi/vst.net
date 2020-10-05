@@ -33,6 +33,7 @@
   <ItemGroup>
     <None Include="readme.md" />
     <None Include="Plugin\Jacobi.Vst.Interop.def" />
+    <None Include="PackageDependencies.props" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="manifest.xml" />

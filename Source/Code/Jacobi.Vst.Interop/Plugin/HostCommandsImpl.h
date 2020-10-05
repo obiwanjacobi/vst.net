@@ -278,17 +278,20 @@ namespace Interop {
         virtual Jacobi::Vst::Core::VstSpeakerArrangement^ GetInputSpeakerArrangement();
 
     internal:
-        HostCommandsImpl(::Vst2HostCommand hostCommandHandler, Vst2Plugin* pluginInfo);
+        HostCommandsImpl(::Vst2HostCommand hostCommandHandler);
 
+        void Initialize(Vst2Plugin* pluginInfo) { _pluginInfo = pluginInfo; }
         bool IsInitialized() { return (_pluginInfo != NULL); }
 
     private:
         Vst2Plugin* _pluginInfo;
         Vst2HostCommand _hostCommand;
 
-        void ThrowIfNotInitialized();
-        Vst2IntPtr CallHost(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
+        void HostCommandsImpl::ThrowIfNotInitialized();
+
+        inline Vst2IntPtr CallHost(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
         {
+            ThrowIfNotInitialized();
             return _hostCommand(_pluginInfo, command, index, value, ptr, opt);
         }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="PackageDependencies.props" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -108,7 +109,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
-      <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>$(PackageDependencies);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
@@ -139,7 +140,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MinimalRebuild>false</MinimalRebuild>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
-      <AdditionalUsingDirectories>$(FrameworkPathOverride);$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>$(PackageDependencies);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
@@ -171,7 +172,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
-      <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>$(PackageDependencies);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -205,7 +206,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <DisableSpecificWarnings>4691</DisableSpecificWarnings>
-      <AdditionalUsingDirectories>$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.abstractions\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.json\2.1.0\lib\netstandard2.0;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration\3.1.2\lib\netcoreapp3.1;$(USERPROFILE)\.nuget\packages\microsoft.extensions.configuration.fileextensions\3.1.1\lib\netcoreapp3.1;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>$(PackageDependencies);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
@@ -264,6 +265,7 @@
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="PackageDependencies.props" />
     <None Include="Plugin\Jacobi.Vst.Interop.def" />
     <None Include="readme.md" />
   </ItemGroup>

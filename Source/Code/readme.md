@@ -45,6 +45,7 @@ The dotnet-core 3.1 version of VST.NET.
 * Look into System.Runtime.CompilerServices.Unsafe
 * Look into structs-by-ref (ref-structs?) to see if memory/performace optimizations can be made.
 * Look into Span<T>, System.Memory, System.Buffers
+    Span<T> in VstAudioBuffer?
 * Add a plugin wrapper (plugin) that can hot-load (unload/load) a plugin under development for rapid roundtrips.
 
 ---

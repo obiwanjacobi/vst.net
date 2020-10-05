@@ -780,10 +780,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
             {
                 VstParameter parameter = pluginParameters.Parameters[index];
 
-                // clear the normalization info for this parameter
-                parameter.Info.NormalizationInfo = null;
-
-                VstParameterProperties paramProps = new VstParameterProperties
+                var paramProps = new VstParameterProperties
                 {
                     // labels
                     Label = parameter.Info.Label,

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" />
+    <None Include="PackageDependencies.props" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="manifest.xml" />

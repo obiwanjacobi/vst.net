@@ -11,11 +11,10 @@ namespace Plugin {
 namespace Interop {
 
 // Creates a new instance based on a native callback function pointer.
-HostCommandsImpl::HostCommandsImpl(::Vst2HostCommand hostCommand, Vst2Plugin* pluginInfo)
+HostCommandsImpl::HostCommandsImpl(::Vst2HostCommand hostCommand)
 {
+	_pluginInfo = NULL;
 	_hostCommand = hostCommand;
-	_pluginInfo = pluginInfo;
-
 	_timeInfo = gcnew Jacobi::Vst::Core::VstTimeInfo();
 }
 
@@ -67,8 +66,6 @@ System::Boolean HostCommandsImpl::UpdatePluginInfo(Jacobi::Vst::Core::Plugin::Vs
 // IVstHostCommands10
 void HostCommandsImpl::SetParameterAutomated(System::Int32 index, System::Single value)
 {
-	ThrowIfNotInitialized();
-
 	CallHost(Vst2HostCommands::Automate, index, 0, 0, value);
 }
 
@@ -89,16 +86,12 @@ System::Int32 HostCommandsImpl::GetCurrentPluginID()
 
 void HostCommandsImpl::ProcessIdle()
 {
-	ThrowIfNotInitialized();
-
 	CallHost(Vst2HostCommands::Idle, 0, 0, 0, 0);
 }
 
 // IVstHostCommands20
 Jacobi::Vst::Core::VstTimeInfo^ HostCommandsImpl::GetTimeInfo(Jacobi::Vst::Core::VstTimeInfoFlags filterFlags)
 {
-	ThrowIfNotInitialized();
-
 	auto pTimeInfo = (::Vst2TimeInfo*)CallHost(
 		Vst2HostCommands::GetTime, 0, safe_cast<int32_t>(filterFlags), 0, 0);
 
@@ -109,8 +102,6 @@ Jacobi::Vst::Core::VstTimeInfo^ HostCommandsImpl::GetTimeInfo(Jacobi::Vst::Core:
 
 System::Boolean HostCommandsImpl::ProcessEvents(array<Jacobi::Vst::Core::VstEvent^>^ events)
 {
-	ThrowIfNotInitialized();
-
 	::Vst2Events* pEvents = TypeConverter::AllocUnmanagedEvents(events);
 
 	try
@@ -220,29 +211,21 @@ System::String^ HostCommandsImpl::GetDirectory()
 
 System::Boolean HostCommandsImpl::UpdateDisplay()
 {
-	ThrowIfNotInitialized();
-
 	return (CallHost(Vst2HostCommands::UpdateDisplay, 0, 0, 0, 0) != 0);
 }
 
 System::Boolean HostCommandsImpl::BeginEdit(System::Int32 index)
 {
-	ThrowIfNotInitialized();
-	
 	return (CallHost(Vst2HostCommands::EditBegin, index, 0, 0, 0) != 0);
 }
 
 System::Boolean HostCommandsImpl::EndEdit(System::Int32 index)
 {
-	ThrowIfNotInitialized();
-	
 	return (CallHost(Vst2HostCommands::EditEnd, index, 0, 0, 0) != 0);
 }
 
 System::Boolean HostCommandsImpl::OpenFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
 {
-	ThrowIfNotInitialized();
-
 	if(fileSelect->Reserved != System::IntPtr::Zero)
 	{
 		throw gcnew System::InvalidOperationException(
@@ -275,8 +258,6 @@ System::Boolean HostCommandsImpl::OpenFileSelector(Jacobi::Vst::Core::VstFileSel
 
 System::Boolean HostCommandsImpl::CloseFileSelector(Jacobi::Vst::Core::VstFileSelect^ fileSelect)
 {
-	ThrowIfNotInitialized();
-
 	auto pFileSelect = (::Vst2FileSelect*)fileSelect->Reserved.ToPointer();
 
 	if(pFileSelect == NULL)

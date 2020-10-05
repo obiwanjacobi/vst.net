@@ -43,7 +43,7 @@ namespace Interop {
         void Initialize(::Vst2Plugin* pluginInfo) 
         {
             if(pluginInfo == NULL) { throw gcnew System::ArgumentNullException("pluginInfo"); } 
-            _commands = gcnew Jacobi::Vst::Plugin::Interop::HostCommandsImpl(_hostCommand, pluginInfo);
+            _commands->Initialize(pluginInfo);
         }
 
         bool IsInitialized() { return (_commands != nullptr); }

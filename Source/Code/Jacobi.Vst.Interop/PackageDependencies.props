@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Maintain packages manual -->
+    <PackageDir>$(USERPROFILE)\.nuget\packages\</PackageDir>
+    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\3.1.8\lib\netcoreapp3.1</MsExtConfig>
+    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\3.1.8\lib\netcoreapp3.1</MsExtConfigAbstr>
+    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\3.1.8\lib\netcoreapp3.1</MsExtConfigFileExt>
+    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\3.1.8\lib\netcoreapp3.1</MsExtConfigJson>
+    <PackageDependencies>$(MsExtConfig);$(MsExtConfigAbstr);$(MsExtConfigJson);$(MsExtConfigFileExt)</PackageDependencies>
+  </PropertyGroup>
+</Project>

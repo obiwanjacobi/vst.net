@@ -19,7 +19,7 @@ HostCommandStub::HostCommandStub(::Vst2HostCommand hostCommand)
 	}
 
 	_hostCommand = hostCommand;
-	_commands = nullptr;
+	_commands = gcnew Jacobi::Vst::Plugin::Interop::HostCommandsImpl(_hostCommand);
 }
 
 // destructor. See Finalizer

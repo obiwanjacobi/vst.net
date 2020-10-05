@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildThisFileDirectory)/VstNetDeploy.targets" />
   
   <Target Name="PlatformCheck" BeforeTargets="InjectReference" Condition="(('$(Platform)' != 'x86') and ('$(Platform)' != 'x64'))">
-    <Error  Text="$(MSBuildThisFileName) is not built for the '$(Platform)' platform. You need to specify either platform x86 or x64." />
+    <Error  Text="$(MSBuildThisFileName) is not built for '$(Platform)'. You need to specify either platform x86 or x64." />
   </Target>
   <Target Name="InjectReference" BeforeTargets="ResolveAssemblyReferences">
     <!--<ItemGroup Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'x64') and '$(TargetFramework)'=='netcoreapp3.1'">-->
