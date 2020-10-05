@@ -59,7 +59,7 @@
             }
             set
             {
-                if (!CanWrite) throw new InvalidOperationException(Properties.Resources.VstAudioBuffer_BufferNotWritable);
+                ThrowIfNotWritable();
                 Throw.IfArgumentNotInRange(index, 0, SampleCount - 1, nameof(index));
 
                 unsafe
@@ -67,6 +67,26 @@
                     Buffer[index] = value;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns a Span for direct buffer access.
+        /// </summary>
+        /// <returns>Never returns null.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when used on a read-only buffer (<see cref="CanWrite"/> is false).</exception>
+        public unsafe Span<float> AsSpan()
+        {
+            ThrowIfNotWritable();
+            return new Span<float>(Buffer, SampleCount);
+        }
+
+        /// <summary>
+        /// Returns a read-only Span for direct buffer access.
+        /// </summary>
+        /// <returns>Never returns null.</returns>
+        public unsafe ReadOnlySpan<float> AsReadOnlySpan()
+        {
+            return new ReadOnlySpan<float>(Buffer, SampleCount);
         }
 
         #region IDirectBufferAccess32 Members
@@ -105,6 +125,12 @@
                     outputBuffer[i] = inputBuffer[i];
                 }
             }
+        }
+
+        private void ThrowIfNotWritable()
+        {
+            if (!CanWrite)
+                throw new InvalidOperationException(Properties.Resources.VstAudioBuffer_BufferNotWritable);
         }
     }
 }

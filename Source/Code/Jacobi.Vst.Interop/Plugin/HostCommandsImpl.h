@@ -287,7 +287,7 @@ namespace Interop {
         Vst2Plugin* _pluginInfo;
         Vst2HostCommand _hostCommand;
 
-        void HostCommandsImpl::ThrowIfNotInitialized();
+        void ThrowIfNotInitialized();
 
         inline Vst2IntPtr CallHost(Vst2HostCommands command, int32_t index, Vst2IntPtr value, void* ptr, float opt)
         {

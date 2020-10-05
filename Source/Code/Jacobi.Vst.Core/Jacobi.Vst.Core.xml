@@ -1541,6 +1541,19 @@
             or equal to zero or it was greater or equal to <see cref="P:Jacobi.Vst.Core.VstAudioBuffer.SampleCount"/>.</exception>
             <exception cref="T:System.InvalidOperationException">Thrown when the setter was used on a read-only buffer (<see cref="P:Jacobi.Vst.Core.VstAudioBuffer.CanWrite"/> is false).</exception>
         </member>
+        <member name="M:Jacobi.Vst.Core.VstAudioBuffer.AsSpan">
+            <summary>
+            Returns a Span for direct buffer access.
+            </summary>
+            <returns>Never returns null.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when used on a read-only buffer (<see cref="P:Jacobi.Vst.Core.VstAudioBuffer.CanWrite"/> is false).</exception>
+        </member>
+        <member name="M:Jacobi.Vst.Core.VstAudioBuffer.AsReadOnlySpan">
+            <summary>
+            Returns a read-only Span for direct buffer access.
+            </summary>
+            <returns>Never returns null.</returns>
+        </member>
         <member name="P:Jacobi.Vst.Core.VstAudioBuffer.Jacobi#Vst#Core#IDirectBufferAccess32#Buffer">
             <summary>
             Unsafe access to the raw sample buffer.
@@ -1592,6 +1605,19 @@
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the specified <paramref name="index"/> was not greater 
             or equal to zero or it was greater or equal to <see cref="P:Jacobi.Vst.Core.VstAudioPrecisionBuffer.SampleCount"/>.</exception>
             <exception cref="T:System.InvalidOperationException">Thrown when the setter was used on a read-only buffer (<see cref="P:Jacobi.Vst.Core.VstAudioPrecisionBuffer.CanWrite"/> is false).</exception>
+        </member>
+        <member name="M:Jacobi.Vst.Core.VstAudioPrecisionBuffer.AsSpan">
+            <summary>
+            Returns a Span for direct buffer access.
+            </summary>
+            <returns>Never returns null.</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when used on a read-only buffer (<see cref="P:Jacobi.Vst.Core.VstAudioPrecisionBuffer.CanWrite"/> is false).</exception>
+        </member>
+        <member name="M:Jacobi.Vst.Core.VstAudioPrecisionBuffer.AsReadOnlySpan">
+            <summary>
+            Returns a read-only Span for direct buffer access.
+            </summary>
+            <returns>Never returns null.</returns>
         </member>
         <member name="P:Jacobi.Vst.Core.VstAudioPrecisionBuffer.Jacobi#Vst#Core#IDirectBufferAccess64#Buffer">
             <summary>

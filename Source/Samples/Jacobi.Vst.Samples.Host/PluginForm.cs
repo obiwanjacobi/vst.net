@@ -169,11 +169,13 @@ namespace Jacobi.Vst.Samples.Host
             foreach (VstAudioBuffer buffer in inputMgr.Buffers)
             {
                 Random rnd = new Random((int)DateTime.Now.Ticks);
+                var span = buffer.AsSpan();
 
                 for (int i = 0; i < blockSize; i++)
                 {
                     // generate a value between -1.0 and 1.0
-                    buffer[i] = (float)((rnd.NextDouble() * 2.0) - 1.0);
+                    //buffer[i] = (float)((rnd.NextDouble() * 2.0) - 1.0);
+                    span[i] = (float)((rnd.NextDouble() * 2.0) - 1.0);
                 }
             }
 
