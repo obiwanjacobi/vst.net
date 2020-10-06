@@ -7,6 +7,7 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper.Host
 {
     public class HostCommandStubAdapter : IVstHostCommandStub
     {
+        // hot-reload plugin info (cannot do much on its own)
         private readonly VstPluginInfo _pluginInfo = new VstPluginInfo
         {
             Flags = VstPluginFlags.HasEditor | VstPluginFlags.CanReplacing,
@@ -46,7 +47,8 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper.Host
             UnloadPlugin();
             LoadedPluginContext = VstPluginContext.Create(pluginPath, this);
 
-            _hostCmdProxy.UpdatePluginInfo(PluginInfo);
+            // update plugin info to loaded plugin
+            _hostCmdProxy.UpdatePluginInfo(LoadedPluginContext.PluginInfo);
         }
 
         public void UnloadPlugin()
@@ -57,7 +59,8 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper.Host
                 LoadedPluginContext = null;
                 PluginContext = null;
 
-                _hostCmdProxy.UpdatePluginInfo(PluginInfo);
+                // restore the hot-reload plugin info
+                _hostCmdProxy.UpdatePluginInfo(_pluginInfo);
             }
         }
 

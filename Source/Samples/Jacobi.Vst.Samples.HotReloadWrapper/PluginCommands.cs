@@ -10,7 +10,9 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper
         private readonly WinFormsControlWrapper<UI.PluginFrame> _uiWrapper =
             new WinFormsControlWrapper<UI.PluginFrame>();
 
+        // commands to the loaded plugin
         private IVstPluginCommands24? _commands;
+        // path of the loaded plugin
         private string _pluginPath = String.Empty;
 
         public delegate IVstPluginCommands24 LoadPlugin(string pluginPath);
@@ -22,18 +24,18 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper
 
         private void Plugin_OnReload(string pluginPath)
         {
-            _pluginPath = pluginPath;
-
             if (OnLoadPlugin != null)
             {
                 _commands = OnLoadPlugin(pluginPath);
                 if (_commands != null)
                 {
+                    _pluginPath = pluginPath;
                     _commands.EditorOpen(_uiWrapper.SafeInstance.PluginWnd);
                 }
             }
         }
 
+        // callback to trigger plugin load logic
         public LoadPlugin? OnLoadPlugin { get; set; }
 
         public VstCanDoResult BeginLoadBank(VstPatchChunkInfo chunkInfo)
