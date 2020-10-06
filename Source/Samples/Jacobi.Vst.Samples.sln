@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.MidiNote
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.MidiNoteSampler", "Jacobi.Vst.Samples.MidiNoteSampler\Jacobi.Vst.Samples.MidiNoteSampler.csproj", "{6F384536-57BF-423E-99C5-CB9A5D83E3CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.WrapperPlugin", "Jacobi.Vst.Samples.WrapperPlugin\Jacobi.Vst.Samples.WrapperPlugin.csproj", "{A228357F-A392-44C6-B975-1CF9B59E1646}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.Host", "Jacobi.Vst.Samples.Host\Jacobi.Vst.Samples.Host.csproj", "{16759AE9-2128-42D7-88CB-34C6B36F13FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jacobi.Vst.Samples.Delay", "Jacobi.Vst.Samples.Delay\Jacobi.Vst.Samples.Delay.csproj", "{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.Delay", "Jacobi.Vst.Samples.Delay\Jacobi.Vst.Samples.Delay.csproj", "{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.HotReloadWrapper", "Jacobi.Vst.Samples.HotReloadWrapper\Jacobi.Vst.Samples.HotReloadWrapper.csproj", "{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +37,6 @@ Global
 		{6F384536-57BF-423E-99C5-CB9A5D83E3CF}.Release|x64.Build.0 = Release|x64
 		{6F384536-57BF-423E-99C5-CB9A5D83E3CF}.Release|x86.ActiveCfg = Release|x86
 		{6F384536-57BF-423E-99C5-CB9A5D83E3CF}.Release|x86.Build.0 = Release|x86
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Debug|x64.ActiveCfg = Debug|x64
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Debug|x64.Build.0 = Debug|x64
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Debug|x86.ActiveCfg = Debug|x86
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Debug|x86.Build.0 = Debug|x86
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Release|x64.ActiveCfg = Release|x64
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Release|x64.Build.0 = Release|x64
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Release|x86.ActiveCfg = Release|x86
-		{A228357F-A392-44C6-B975-1CF9B59E1646}.Release|x86.Build.0 = Release|x86
 		{16759AE9-2128-42D7-88CB-34C6B36F13FE}.Debug|x64.ActiveCfg = Debug|x64
 		{16759AE9-2128-42D7-88CB-34C6B36F13FE}.Debug|x64.Build.0 = Debug|x64
 		{16759AE9-2128-42D7-88CB-34C6B36F13FE}.Debug|x86.ActiveCfg = Debug|x86
@@ -61,6 +53,14 @@ Global
 		{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}.Release|x64.Build.0 = Release|x64
 		{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}.Release|x86.ActiveCfg = Release|x86
 		{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}.Release|x86.Build.0 = Release|x86
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x64.ActiveCfg = Debug|x64
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x64.Build.0 = Debug|x64
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x86.ActiveCfg = Debug|x86
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x86.Build.0 = Debug|x86
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x64.ActiveCfg = Release|x64
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x64.Build.0 = Release|x64
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x86.ActiveCfg = Release|x86
+		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

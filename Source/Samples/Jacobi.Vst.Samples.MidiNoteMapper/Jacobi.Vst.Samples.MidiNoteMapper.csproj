@@ -9,6 +9,7 @@
     <Platforms>x64;x86</Platforms>
     <Description>A MIDI Plugin that maps incoming note numbers to outgoing note numbers.</Description>
     <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>

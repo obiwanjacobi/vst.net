@@ -9,6 +9,7 @@
     <Platforms>x64;x86</Platforms>
     <Description>A VSTi (instrument) Plugin that implements a sampler.</Description>
     <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
