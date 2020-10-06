@@ -39,7 +39,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Jacobi.Vst.Plugin.Interop",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugin", "plugin", "{67D3B2B3-4BE2-421D-B4B5-78B886222864}"
 	ProjectSection(SolutionItems) = preProject
-		Jacobi.Vst.Deployment\plugin\readme.txt = Jacobi.Vst.Deployment\plugin\readme.txt
 		Jacobi.Vst.Deployment\plugin\VST.NET-Plugin.nuspec = Jacobi.Vst.Deployment\plugin\VST.NET-Plugin.nuspec
 		Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.props = Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.props
 		Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.targets = Jacobi.Vst.Deployment\plugin\VST.NET2-Plugin.targets
@@ -47,7 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugin", "plugin", "{67D3B2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{0E8BB654-76C3-4C1F-B192-475DA4F581F8}"
 	ProjectSection(SolutionItems) = preProject
-		Jacobi.Vst.Deployment\host\readme.txt = Jacobi.Vst.Deployment\host\readme.txt
 		Jacobi.Vst.Deployment\host\VST.NET-Host.nuspec = Jacobi.Vst.Deployment\host\VST.NET-Host.nuspec
 		Jacobi.Vst.Deployment\host\VST.NET2-Host.props = Jacobi.Vst.Deployment\host\VST.NET2-Host.props
 		Jacobi.Vst.Deployment\host\VST.NET2-Host.targets = Jacobi.Vst.Deployment\host\VST.NET2-Host.targets

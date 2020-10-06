@@ -24,7 +24,6 @@
     </dependencies>
   </metadata>
   <files>
-    <!--<file src="readme.txt" target=""></file>-->
     <file src="VST.NET2-Host.targets" target="build"></file>
     <file src="VST.NET2-Host.props" target="build"></file>
     <file src="..\VstNetDeploy.targets" target="build"></file>
