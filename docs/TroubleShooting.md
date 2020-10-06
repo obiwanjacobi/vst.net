@@ -19,6 +19,7 @@ Depending on the host, a plugin may not load into the DAW. First things you shou
 - Add a path to your plugin deploy folder to the DAW.
 - Clear plugin caches the host may have.
 - Let the host rescan for plugins.
+- Restart the host application (to make sure these new settings are honoured).
 
 Typically a DAW scans for plugins on either specific file locations or using a configurable list of paths.
 
@@ -34,7 +35,7 @@ This almost always means that you are mixing 64-bit (x64) code with 32-bit (x86)
 
 ### Verify your plugin is correct
 
-In order to eliminate problem areas, you should check if you plugin is correct and has all the required files in its folder.
+In order to eliminate problem areas, you should check if your plugin is correct and has all the required files in its deploy folder.
 
 During development of VST.NET itself the [vsthost](https://www.hermannseib.com/english/vsthost.htm) is used as a test host.
 If your plugin does not load in this host you know that you are missing files.
@@ -42,10 +43,10 @@ You just need to test if the plugin loads (File->New Plugin...).
 
 ### Copy `Ijwhost.dll` into host .exe's folder
 
-For some hosts the loading of .NET core does not work at all. It is unclear what the problem is,
-but copying over the `Ijwhost.dll` file into the same folder the host's .exe is located usually solves the issue.
+> This problem should have been fixed in RC3 - but I leave it here if anybody may need it. Please report an issue if you do.
 
-> This problem should have been fixed in RC2 - but I leave it here if anybody may need it. Please report an issue if you do.
+For some hosts the loading of .NET core does not work at all. It is unclear what the problem is,
+but copying over the `Ijwhost.dll` file into the same folder the host's .exe is located usually solves the issue. The Ijwhost.dll can be found in de 'deploy' folder.
 
 ### Debugging
 

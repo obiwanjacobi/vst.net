@@ -1,4 +1,4 @@
-# `VST.NET` 2 (RC2)
+# `VST.NET` 2 (RC3)
 
 ![VST.NET2 CI](https://github.com/obiwanjacobi/vst.net/workflows/VST.NET2%20CI/badge.svg)
 
@@ -20,7 +20,7 @@ VST stands for Virtual Studio Technology and is an API designed by Steinberg tha
 `VST.NET` allows VST Plugin developers to write Plugins for the Steinberg VST 2.x API. The interop layer makes the transition between the C++ and C# smooth and easy.
 The Framework built on top of the interop layer provides a clear and structured architecture accelerating development considerably.
 
-`VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Host.Interop) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications.
+`VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Host.Interop) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications. But any ideas on this are welcome.
 
 ## Documentation
 

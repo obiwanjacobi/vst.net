@@ -1,6 +1,6 @@
 # VST.NET 2
 
-> **`Currently in RC2.`**
+> **`Currently in RC3.`**
 
 Welcome to VST.NET version 2 built on .NET core.
 

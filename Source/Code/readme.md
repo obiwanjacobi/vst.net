@@ -37,10 +37,7 @@ The dotnet-core 3.1 version of VST.NET.
     => CI Build fails for this reason on GitHub-Actions.
 * [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
     => need to build in dev with Debug and use Release for Deployment. Will not be transparent!
-* [Interop/Core] Hookup tracing again. Use ILogger<> API: https://stackify.com/net-core-loggerfactory-use-correctly/
-    => Plugin: will read local plugin.appsetting.json and creates a logger factory.
-    => Host: will read own appsettings.json and create logger factory.
-* [CLI/Interop] Add CRT to output bins and let CLI publish them?
+* [CLI/Interop] Add CRT (C-runtime) to output bins and let CLI publish them?
     => adds **a lot** of extra dll's, most of which are not needed...?
 * Look into System.Runtime.CompilerServices.Unsafe
 * Look into structs-by-ref (ref-structs?) to see if memory/performace optimizations can be made.
