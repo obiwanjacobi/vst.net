@@ -9,8 +9,8 @@
     <Error Text="VST.NET2 targets .NET Core (3.1) only." Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
     <Exec Command="$(VstNetCliExe) publish &quot;$(TargetPath)&quot; -o $(DeployOutput)" />
   </Target>
-  
-  <Target Name="CleanDeployVstNet" DependsOnTargets="Clean" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
+
+  <Target Name="CleanDeployVstNet" BeforeTargets="CoreClean" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Message Text="Cleaning VST.NET deploy folder." />
     <ItemGroup>
       <FilesToDelete Include="$(DeployOutput)\*"/>

@@ -22,10 +22,7 @@ The dotnet-core 3.1 version of VST.NET.
 * CLI does not detect dependencies of dependencies (interop)
 * CLI: Host deployment: triggers plugin logic because a dotnet-core exe has/is also a dll.
 
-* Some Host DAWs need to have the ijwhost.dll next to their .exe in order to load the plugin
-    TODO: Test if the Interop-manifest works. (Also the case for VST3).
-
-* VS clean (target) should also delete the 'deploy' folder.
+* VS clean (target) should also delete the 'deploy' folder. Current task does not work.
 * VS Deploy (Configuration Manager): can we switch on that for vstnet deploy?
 
 ## Refactor wishes
@@ -42,7 +39,7 @@ The dotnet-core 3.1 version of VST.NET.
 * Look into System.Runtime.CompilerServices.Unsafe
 * Look into structs-by-ref (ref-structs?) to see if memory/performace optimizations can be made.
 * Look into Span<T>, System.Memory, System.Buffers
-    Span<T> in VstAudioBuffer?
+    Span<T> in VstAudioBuffer => Done.
 * Add a plugin wrapper (plugin) that can hot-load (unload/load) a plugin under development for rapid roundtrips.
 
 ---
