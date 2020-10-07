@@ -9,7 +9,6 @@
     <Platforms>x64;x86</Platforms>
     <Description>An stereo audio delay plugin.</Description>
     <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>

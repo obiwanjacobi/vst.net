@@ -1,4 +1,4 @@
-﻿namespace Jacobi.Vst.Samples.HotReloadWrapper.UI
+﻿namespace Jacobi.Vst.Samples.WrapperPlugin.UI
 {
     partial class PluginFrame
     {
@@ -32,7 +32,6 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.PluginPath = new System.Windows.Forms.TextBox();
             this.Browse = new System.Windows.Forms.Button();
-            this.Reload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PluginPanel
@@ -54,9 +53,9 @@
             // 
             this.PluginPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PluginPath.Location = new System.Drawing.Point(112, 8);
+            this.PluginPath.Location = new System.Drawing.Point(13, 8);
             this.PluginPath.Name = "PluginPath";
-            this.PluginPath.Size = new System.Drawing.Size(437, 27);
+            this.PluginPath.Size = new System.Drawing.Size(536, 27);
             this.PluginPath.TabIndex = 2;
             // 
             // Browse
@@ -71,24 +70,11 @@
             this.Browse.UseVisualStyleBackColor = true;
             this.Browse.Click += new System.EventHandler(this.Browse_Click);
             // 
-            // Reload
-            // 
-            this.Reload.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.Reload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Reload.Location = new System.Drawing.Point(12, 6);
-            this.Reload.Name = "Reload";
-            this.Reload.Size = new System.Drawing.Size(94, 29);
-            this.Reload.TabIndex = 4;
-            this.Reload.Text = "Reload";
-            this.Reload.UseVisualStyleBackColor = false;
-            this.Reload.Click += new System.EventHandler(this.Reload_Click);
-            // 
             // PluginFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.Controls.Add(this.Reload);
             this.Controls.Add(this.Browse);
             this.Controls.Add(this.PluginPath);
             this.Controls.Add(this.PluginPanel);
@@ -105,6 +91,5 @@
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
         private System.Windows.Forms.TextBox PluginPath;
         private System.Windows.Forms.Button Browse;
-        private System.Windows.Forms.Button Reload;
     }
 }

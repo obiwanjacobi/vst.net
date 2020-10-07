@@ -2,7 +2,7 @@
 using Jacobi.Vst.Core.Plugin;
 using Microsoft.Extensions.Configuration;
 
-namespace Jacobi.Vst.Samples.HotReloadWrapper
+namespace Jacobi.Vst.Samples.WrapperPlugin
 {
     public class PluginCommandStubAdapter : IVstPluginCommandStub
     {

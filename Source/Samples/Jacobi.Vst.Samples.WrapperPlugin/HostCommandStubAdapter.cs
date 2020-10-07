@@ -3,7 +3,7 @@ using Jacobi.Vst.Core.Host;
 using Jacobi.Vst.Core.Plugin;
 using Jacobi.Vst.Host.Interop;
 
-namespace Jacobi.Vst.Samples.HotReloadWrapper.Host
+namespace Jacobi.Vst.Samples.WrapperPlugin.Host
 {
     public class HostCommandStubAdapter : IVstHostCommandStub
     {
@@ -22,10 +22,10 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper.Host
             _hostCmdProxy = hostCmdProxy;
         }
 
-        public IVstPluginCommands24 OnLoadPlugin(string pluginPath)
+        public IVstPluginCommands24? OnLoadPlugin(string pluginPath)
         {
             LoadPlugin(pluginPath);
-            return PluginContext!.PluginCommandStub.Commands;
+            return PluginContext?.PluginCommandStub.Commands;
         }
 
         public VstPluginInfo PluginInfo
@@ -44,24 +44,10 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper.Host
 
         public void LoadPlugin(string pluginPath)
         {
-            UnloadPlugin();
             LoadedPluginContext = VstPluginContext.Create(pluginPath, this);
 
             // update plugin info to loaded plugin
             _hostCmdProxy.UpdatePluginInfo(LoadedPluginContext.PluginInfo);
-        }
-
-        public void UnloadPlugin()
-        {
-            if (LoadedPluginContext != null)
-            {
-                LoadedPluginContext.Dispose();
-                LoadedPluginContext = null;
-                PluginContext = null;
-
-                // restore the hot-reload plugin info
-                _hostCmdProxy.UpdatePluginInfo(_pluginInfo);
-            }
         }
 
         #region IVstHostCommandStub Members

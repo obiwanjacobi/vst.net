@@ -7,7 +7,7 @@
     <Company>Jacobi Software</Company>
     <Product>VST.NET Samples</Product>
     <Platforms>x64;x86</Platforms>
-    <Description>A Hot-Reload Plugin Wrapper - for Plugin Development.</Description>
+    <Description>A Wrapper Plugin with UI.</Description>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>

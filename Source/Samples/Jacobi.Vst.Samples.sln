@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.Host", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.Delay", "Jacobi.Vst.Samples.Delay\Jacobi.Vst.Samples.Delay.csproj", "{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.HotReloadWrapper", "Jacobi.Vst.Samples.HotReloadWrapper\Jacobi.Vst.Samples.HotReloadWrapper.csproj", "{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Samples.WrapperPlugin", "Jacobi.Vst.Samples.WrapperPlugin\Jacobi.Vst.Samples.WrapperPlugin.csproj", "{3C8ABEF6-B338-4C57-B087-C62D154B715B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,14 +53,14 @@ Global
 		{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}.Release|x64.Build.0 = Release|x64
 		{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}.Release|x86.ActiveCfg = Release|x86
 		{F80A8E95-ACD4-4DBF-81CF-06A141FECA5F}.Release|x86.Build.0 = Release|x86
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x64.ActiveCfg = Debug|x64
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x64.Build.0 = Debug|x64
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x86.ActiveCfg = Debug|x86
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Debug|x86.Build.0 = Debug|x86
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x64.ActiveCfg = Release|x64
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x64.Build.0 = Release|x64
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x86.ActiveCfg = Release|x86
-		{78E9EBE9-8336-4F01-95CD-2F7BDA79D9DC}.Release|x86.Build.0 = Release|x86
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Debug|x64.ActiveCfg = Debug|x64
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Debug|x64.Build.0 = Debug|x64
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Debug|x86.ActiveCfg = Debug|x86
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Debug|x86.Build.0 = Debug|x86
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Release|x64.ActiveCfg = Release|x64
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Release|x64.Build.0 = Release|x64
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Release|x86.ActiveCfg = Release|x86
+		{3C8ABEF6-B338-4C57-B087-C62D154B715B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

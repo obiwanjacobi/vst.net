@@ -3,7 +3,7 @@ using Jacobi.Vst.Plugin.Framework.Common;
 using System;
 using System.Drawing;
 
-namespace Jacobi.Vst.Samples.HotReloadWrapper
+namespace Jacobi.Vst.Samples.WrapperPlugin
 {
     internal class PluginCommands : IVstPluginCommands24
     {
@@ -19,17 +19,18 @@ namespace Jacobi.Vst.Samples.HotReloadWrapper
 
         public PluginCommands()
         {
-            _uiWrapper.SafeInstance.OnReload += Plugin_OnReload;
+            _uiWrapper.SafeInstance.OnLoadPlugin += Plugin_OnLoadPlugin;
         }
 
-        private void Plugin_OnReload(string pluginPath)
+        private void Plugin_OnLoadPlugin(string pluginPath)
         {
+            _pluginPath = pluginPath;
+
             if (OnLoadPlugin != null)
             {
                 _commands = OnLoadPlugin(pluginPath);
                 if (_commands != null)
                 {
-                    _pluginPath = pluginPath;
                     _commands.EditorOpen(_uiWrapper.SafeInstance.PluginWnd);
                 }
             }
