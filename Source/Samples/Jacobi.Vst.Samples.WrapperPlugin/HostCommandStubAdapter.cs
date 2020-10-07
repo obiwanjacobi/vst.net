@@ -7,7 +7,7 @@ namespace Jacobi.Vst.Samples.WrapperPlugin.Host
 {
     public class HostCommandStubAdapter : IVstHostCommandStub
     {
-        // hot-reload plugin info (cannot do much on its own)
+        // wrapper plugin info (cannot do much on its own)
         private readonly VstPluginInfo _pluginInfo = new VstPluginInfo
         {
             Flags = VstPluginFlags.HasEditor | VstPluginFlags.CanReplacing,
