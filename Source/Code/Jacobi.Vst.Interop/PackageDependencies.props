@@ -3,10 +3,10 @@
   <PropertyGroup>
     <!-- Maintain packages manually -->
     <PackageDir>$(USERPROFILE)\.nuget\packages\</PackageDir>
-    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\3.1.8\lib\netcoreapp3.1</MsExtConfig>
-    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\3.1.8\lib\netcoreapp3.1</MsExtConfigAbstr>
-    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\3.1.8\lib\netcoreapp3.1</MsExtConfigFileExt>
-    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\3.1.8\lib\netcoreapp3.1</MsExtConfigJson>
+    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\5.0.0\lib\netstandard2.0</MsExtConfig>
+    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\5.0.0\lib\netstandard2.0</MsExtConfigAbstr>
+    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\5.0.0\lib\netstandard2.0</MsExtConfigFileExt>
+    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\5.0.0\lib\netstandard2.1</MsExtConfigJson>
     <PackageDependencies>$(MsExtConfig);$(MsExtConfigAbstr);$(MsExtConfigJson);$(MsExtConfigFileExt)</PackageDependencies>
   </PropertyGroup>
 </Project>

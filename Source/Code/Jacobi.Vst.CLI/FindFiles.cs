@@ -12,14 +12,14 @@ namespace Jacobi.Vst.CLI
         // Manually maintain them here.
         private static readonly string[] InteropDependencies = new[]
         {
-            @"Microsoft.Extensions.Configuration\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.dll",
-            @"Microsoft.Extensions.Configuration.Abstractions\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll",
-            @"Microsoft.Extensions.Configuration.FileExtensions\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll",
-            @"Microsoft.Extensions.Configuration.Json\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll",
-            @"Microsoft.Extensions.FileProviders.Physical\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll",
-            @"Microsoft.Extensions.FileProviders.Abstractions\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll",
-            @"Microsoft.Extensions.Primitives\3.1.8\lib\netcoreapp3.1\Microsoft.Extensions.Primitives.dll",
-            @"Microsoft.Extensions.FileSystemGlobbing\3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
+            @"Microsoft.Extensions.Configuration\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll",
+            @"Microsoft.Extensions.Configuration.Abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll",
+            @"Microsoft.Extensions.Configuration.FileExtensions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
+            @"Microsoft.Extensions.Configuration.Json\5.0.0\lib\netstandard2.1\Microsoft.Extensions.Configuration.Json.dll",
+            @"Microsoft.Extensions.FileProviders.Physical\5.0.0\lib\net5.0\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"Microsoft.Extensions.FileProviders.Abstractions\5.0.0\lib\net5.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
+            @"Microsoft.Extensions.Primitives\5.0.0\lib\net5.0\Microsoft.Extensions.Primitives.dll",
+            @"Microsoft.Extensions.FileSystemGlobbing\5.0.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
             @"newtonsoft.json\12.0.2\lib\netstandard2.0\Newtonsoft.Json.dll",
         };
 
@@ -64,8 +64,8 @@ namespace Jacobi.Vst.CLI
                     var platform = ToString(ProcessorArchitecture);
 
                     // TODO: detect if the assemblies are at 'lib' or 'processor architecture' level 
-                    // TODO: tfm from params (netcoreapp3.1)
-                    var path = Path.Combine(_nugetPath, kvp.Key, "lib", "netcoreapp3.1", platform);
+                    // TODO: tfm from params (net5.0)
+                    var path = Path.Combine(_nugetPath, kvp.Key, "lib", "net5.0", platform);
                     paths.AddRange(Directory.EnumerateFiles(path, "*.dll"));
 
                     var rt = kvp.Value.RuntimeTargets?.Keys.FirstOrDefault(rt => rt.Contains(platform));
