@@ -1,39 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<IsPackable>false</IsPackable>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<Version>2.0.0</Version>
+		<Authors>Marc Jacobi</Authors>
+		<Company>Jacobi Software</Company>
+		<Product>VST.NET</Product>
+		<Platforms>x64;x86</Platforms>
+	</PropertyGroup>
 
-    <IsPackable>false</IsPackable>
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="5.10.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+		<PackageReference Include="coverlet.collector" Version="1.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-
-    <Version>2.0.0</Version>
-
-    <Authors>Marc Jacobi</Authors>
-
-    <Company>Jacobi Software</Company>
-
-    <Product>VST.NET</Product>
-
-    <Platforms>x64;x86</Platforms>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-    <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
-    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Host.Interop.vcxproj" />
-    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Plugin.Interop.vcxproj" />
-    <ProjectReference Include="..\Jacobi.Vst.Plugin.Framework\Jacobi.Vst.Plugin.Framework.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
+		<ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Host.Interop.vcxproj" />
+		<ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Plugin.Interop.vcxproj" />
+		<ProjectReference Include="..\Jacobi.Vst.Plugin.Framework\Jacobi.Vst.Plugin.Framework.csproj" />
+	</ItemGroup>
 
 </Project>
