@@ -45,7 +45,7 @@ There are several plugin [Samples](https://github.com/obiwanjacobi/vst.net/tree/
 ### Loading a Plugin
 
 After you have compiled a sample -or your own- plugin it is time to load it into a host application.
-If the build was successful you should have a deploy folder at `[MyProject]\bin\[x64|x86]\[Debug|Release]\netcoreapp3.1\deploy`.
+If the build was successful you should have a deploy folder at `[MyProject]\bin\[x64|x86]\[Debug|Release]\net5.0\deploy`.
 
 > The **Deploy** folder contains everything needed to load the plugin into a host application.
 
@@ -77,7 +77,7 @@ If you have Visual Studio installed, these files are already present.
 But if you distribute your project made with VST.NET you need to install this on the client machine.
 
 As of `2.0.0-RC1` the nuget packages for plugin and host both contain a build file to create a deployment after each successful build.
-The `deploy` folder is at the same location as the project binaries: `[MyProject]\bin\[x64|x86]\[Debug|Release]\netcoreapp3.1\deploy`.
+The `deploy` folder is at the same location as the project binaries: `[MyProject]\bin\[x64|x86]\[Debug|Release]\net5.0\deploy`.
 
 ---
 
