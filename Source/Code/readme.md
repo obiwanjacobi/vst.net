@@ -25,6 +25,9 @@ The dotnet-core 3.1 version of VST.NET.
 * VS clean (target) should also delete the 'deploy' folder. Current task does not work.
 * VS Deploy (Configuration Manager): can we switch on that for vstnet deploy?
 
+* Resize UI window/controls when host-frame resizes.
+* Plugin without Replacing crashes vsthost tring to call accumulating the plugin does not implement.
+
 ## Refactor wishes
 
 * [Interop] look into the use tracked references (%^)

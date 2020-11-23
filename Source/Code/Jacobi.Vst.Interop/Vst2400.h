@@ -257,6 +257,7 @@ struct Vst2Rectangle
 
 enum class Vst2EventKind
 {
+    None,
     Midi,
     Audio,
     Video,
