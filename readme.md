@@ -1,12 +1,8 @@
 # `VST.NET` 2
 
-![VST.NET2 CI](https://github.com/obiwanjacobi/vst.net/workflows/VST.NET2%20CI/badge.svg)
-
----
-
 ## New Version: `VST.NET` 2
 
-`VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET Core 3.1.
+`VST.NET` 2 builds on the basis of `VST.NET` (1) and is completely built with .NET 5.
 The new version is still Windows-only and supports the Steinberg VST 2.x API.
 
 This means that `VST.NET` (1) is phasing out and will not receive any more updates.
