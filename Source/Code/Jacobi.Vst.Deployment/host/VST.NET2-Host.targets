@@ -6,13 +6,13 @@
     <Error  Text="$(MSBuildThisFileName) is not built for '$(Platform)'. You need to specify either platform x86 or x64." />
   </Target>
   <Target Name="InjectReference" BeforeTargets="ResolveAssemblyReferences">
-    <!--<ItemGroup Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'x64') and '$(TargetFramework)'=='netcoreapp3.1'">-->
+    <!--<ItemGroup Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'x64') and '$(TargetFramework)'=='net5.0'">-->
     <ItemGroup Condition="'$(Platform)' == 'x86' or '$(Platform)' == 'x64'">
       <Reference Include="Jacobi.Vst.Core">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\netcoreapp3.1\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\net5.0\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
       </Reference>
       <Reference Include="Jacobi.Vst.Host.Interop">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\netcoreapp3.1\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\net5.0\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
       </Reference>
     </ItemGroup>
   </Target>

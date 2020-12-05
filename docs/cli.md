@@ -1,5 +1,7 @@
 # Command Line Interface
 
+> Note that the `VST.NET` NuGet packages inject calling the CLI into the standard build process. You should not have to call this manually in most scenarios.
+
 In the spirit of .NET core (`dotnet`) a Command Line Interface (cli) has been created to help with common tasks when working with VST.NET.
 
 The following commands are available:
