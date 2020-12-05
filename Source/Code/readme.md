@@ -18,6 +18,7 @@ The dotnet-core 3.1 version of VST.NET.
   The VST.NET CLI can perform a publish of a plugin and gather all dependencies into folder.
   NuGet still gives problems with x86/x64 managed assemblies.
   https://github.com/dotnet/sdk/issues/10875
+  https://www.jerriepelser.com/blog/analyze-dotnet-project-dependencies-part-1/
 
 * CLI does not detect dependencies of dependencies (interop)
 * CLI: Host deployment: triggers plugin logic because a dotnet-core exe has/is also a dll.
@@ -27,6 +28,7 @@ The dotnet-core 3.1 version of VST.NET.
 
 * Resize UI window/controls when host-frame resizes.
 * Plugin without Replacing crashes vsthost tring to call accumulating the plugin does not implement.
+* Reported: Adding NAudio to a plugin fails to produce a deploy folder?
 
 ## Refactor wishes
 
