@@ -63,43 +63,34 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, ::Vst2Int
 			break;
 		case Vst2PluginCommands::ProgramSet:
 			_commands->SetProgram(safe_cast<System::Int32>(value));
-			result = 1;
 			break;
 		case Vst2PluginCommands::ProgramGet:
 			result = _commands->GetProgram();
 			break;
 		case Vst2PluginCommands::ProgramSetName:
 			_commands->SetProgramName(TypeConverter::CharToString((char*)ptr));
-			result = 1;
 			break;
 		case Vst2PluginCommands::ProgramGetName:
 			TypeConverter::StringToChar(_commands->GetProgramName(), (char*)ptr, Vst2MaxProgNameLen);
-			result = 1;
 			break;
 		case Vst2PluginCommands::ParameterGetLabel:
 			TypeConverter::StringToChar(_commands->GetParameterLabel(index), (char*)ptr, Vst2MaxParamStrLen);
-			result = 1;
 			break;
 		case Vst2PluginCommands::ParameterGetDisplay:
 			TypeConverter::StringToChar(_commands->GetParameterDisplay(index), (char*)ptr, Vst2MaxParamStrLen);
-			result = 1;
 			break;
 		case Vst2PluginCommands::ParameterGetName:
 			TypeConverter::StringToChar(_commands->GetParameterName(index), (char*)ptr, Vst2MaxParamStrLen);
-			result = 1;
 			break;
 		case Vst2PluginCommands::SampleRateSet:
 			_commands->SetSampleRate(opt);
-			result = 1;
 			break;
 		case Vst2PluginCommands::BlockSizeSet:
 			_commands->SetBlockSize(safe_cast<System::Int32>(value));
-			result = 1;
 			break;
 		case Vst2PluginCommands::OnOff:
 			_memTracker->ClearAll(); // safe to delete allocated memory during suspend/resume
 			_commands->MainsChanged(value != 0);
-			result = 1;
 			break;
 		case Vst2PluginCommands::EditorGetRectangle:
 		{
@@ -112,15 +103,13 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, ::Vst2Int
 			}
 		}	break;
 		case Vst2PluginCommands::EditorOpen:
-			result = _commands->EditorOpen(System::IntPtr(ptr));
+			result = _commands->EditorOpen(System::IntPtr(ptr)) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::EditorClose:
 			_commands->EditorClose();
-			result = 1;
 			break;
 		case Vst2PluginCommands::EditorIdle:
 			_commands->EditorIdle();
-			result = 1;
 			break;
 		case Vst2PluginCommands::ChunkGet:
 		{
@@ -128,19 +117,18 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, ::Vst2Int
 			if(buffer != nullptr)
 			{
 				*(void**)ptr = TypeConverter::ByteArrayToPtr(buffer);
-				
 				_memTracker->RegisterArray(*(void**)ptr);
-
 				result = buffer->Length;
 			}
 		}	break;
 		case Vst2PluginCommands::ChunkSet:
 		{
 			auto buffer = TypeConverter::PtrToByteArray((char*)ptr, safe_cast<System::Int32>(value));
+			// TODO: unclear if the length-written is to be returned
 			result = _commands->SetChunk(buffer, index != 0) ? 1 : 0;
 		}	break;
 		case Vst2PluginCommands::ProcessEvents:
-			result = _commands->ProcessEvents(TypeConverter::ToManagedEventArray((Vst2Events*)ptr)) ? 1 : 0;
+			_commands->ProcessEvents(TypeConverter::ToManagedEventArray((Vst2Events*)ptr));
 			break;
 		case Vst2PluginCommands::ParameterCanBeAutomated:
 			result = _commands->CanParameterBeAutomated(index) ? 1 : 0;
@@ -179,8 +167,9 @@ Vst2IntPtr PluginCommandProxy::Dispatch(int32_t opcode, int32_t index, ::Vst2Int
 			result = safe_cast<int32_t>(_commands->GetCategory());
 			break;
 		case Vst2PluginCommands::SetSpeakerArrangement:
-			result = _commands->SetSpeakerArrangement(TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)value),
-				TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)ptr));
+			result = _commands->SetSpeakerArrangement(
+				TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)value),
+				TypeConverter::ToManagedSpeakerArrangement((::Vst2SpeakerArrangement*)ptr)) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::SetBypass:
 			result = _commands->SetBypass(value != 0) ? 1 : 0;
@@ -378,10 +367,10 @@ Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_
 			result = _legacyCommands->EditorKey(safe_cast<System::Int32>(value)) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::EditorTop:
-			result = _legacyCommands->EditorTop() ? 1 : 0;
+			_legacyCommands->EditorTop();
 			break;
 		case Vst2PluginCommands::EditorSleep:
-			result = _legacyCommands->EditorSleep() ? 1 : 0;
+			_legacyCommands->EditorSleep();
 			break;
 		case Vst2PluginCommands::Identify:
 			result = _legacyCommands->Identify();
@@ -392,13 +381,15 @@ Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_
 			result = _legacyCommands->GetProgramCategoriesCount();
 			break;
 		case Vst2PluginCommands::ProgramCopy:
-			result = _legacyCommands->CopyCurrentProgramTo(index);
+			result = _legacyCommands->CopyCurrentProgramTo(index) ? 1 : 0;
 			break;
 		case Vst2PluginCommands::ConnectInput:
-			result = _legacyCommands->ConnectInput(index, value != 0) ? 1 : 0;
+			_legacyCommands->ConnectInput(index, value != 0);
+			result = 1;
 			break;
 		case Vst2PluginCommands::ConnectOutput:
-			result = _legacyCommands->ConnectOutput(index, value != 0) ? 1 : 0;
+			_legacyCommands->ConnectOutput(index, value != 0);
+			result = 1;
 			break;
 		case Vst2PluginCommands::GetCurrentPosition:
 			result = _legacyCommands->GetCurrentPosition();
@@ -424,7 +415,7 @@ Vst2IntPtr PluginCommandProxy::DispatchLegacy(Vst2PluginCommands command, int32_
 			}
 		}	break;
 		case Vst2PluginCommands::Idle:
-			result = _legacyCommands->Idle() ? 1 : 0;
+			_legacyCommands->Idle();
 			break;
 		case Vst2PluginCommands::GetIcon:
 		{
