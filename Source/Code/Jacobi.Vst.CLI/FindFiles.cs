@@ -22,6 +22,22 @@ namespace Jacobi.Vst.CLI
             @"Microsoft.Extensions.FileSystemGlobbing\5.0.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
         };
 
+        // scan dependency files for these framework monikers. [hack]
+        private static readonly string[] TargetFrameworkMonikers =
+            {
+                "net5.0",
+                "netcoreapp3.1",
+                "netstandard2.1",
+                "netstandard2.0",
+                "netstandard1.6",
+                "netstandard1.5",
+                "netstandard1.4",
+                "netstandard1.3",
+                "netstandard1.2",
+                "netstandard1.1",
+                "netstandard1.0"
+            };
+
         private readonly string _nugetPath;
         private readonly string _binPath;
 
@@ -61,11 +77,8 @@ namespace Jacobi.Vst.CLI
                 else
                 {
                     var platform = ToString(ProcessorArchitecture);
-
-                    // TODO: detect if the assemblies are at 'lib' or 'processor architecture' level 
-                    // TODO: tfm from params (net5.0)
-                    var path = Path.Combine(_nugetPath, kvp.Key, "lib", "net5.0", platform);
-                    paths.AddRange(Directory.EnumerateFiles(path, "*.dll"));
+                    var dependencies = FindDependencyFiles(kvp.Key, platform);
+                    paths.AddRange(dependencies);
 
                     var rt = kvp.Value.RuntimeTargets?.Keys.FirstOrDefault(rt => rt.Contains(platform));
                     if (rt != null)
@@ -79,6 +92,34 @@ namespace Jacobi.Vst.CLI
                 .Select(dep => Path.Combine(_nugetPath, dep)));
 
             return paths.Select(p => p.Replace("/", "\\")).Distinct();
+        }
+
+        private IEnumerable<string> FindDependencyFiles(string dependency, string platform)
+        {
+            const string fileExt = "*.dll";
+            var pathTemplate = Path.Combine(_nugetPath, dependency, "lib", "{0}");
+
+            foreach (var tfm in TargetFrameworkMonikers)
+            {
+                var path = String.Format(pathTemplate, tfm);
+                if (Directory.Exists(path))
+                {
+                    var files = Directory.EnumerateFiles(path, fileExt);
+                    if (files.Any())
+                        return files;
+                }
+                path = Path.Combine(path, platform);
+                if (Directory.Exists(path))
+                {
+                    var files = Directory.EnumerateFiles(path, fileExt);
+                    if (files.Any())
+                        return files;
+                }
+            }
+
+            ConsoleOutput.Warning(
+                $"No library files (*.dll) could be found for: {dependency}!");
+            return Enumerable.Empty<string>();
         }
 
         private static string ToString(ProcessorArchitecture processorArchitecture)

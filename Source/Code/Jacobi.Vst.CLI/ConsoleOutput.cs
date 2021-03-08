@@ -8,7 +8,7 @@ namespace Jacobi.Vst.CLI
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(error);
+            Console.WriteLine($"Error: {error}");
             Console.ForegroundColor = color;
         }
 
@@ -16,7 +16,7 @@ namespace Jacobi.Vst.CLI
         {
             var color = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(warning);
+            Console.WriteLine($"Warning: {warning}");
             Console.ForegroundColor = color;
         }
 

@@ -4,12 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>vstnet</AssemblyName>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
     <Description>VST.NET 2 Command Line Interface</Description>
-    <Copyright>Copyright © 2008-2020 Jacobi Software</Copyright>
+    <Copyright>Copyright © 2008-2021 Jacobi Software</Copyright>
     <PackageTags>vst vstnet cli</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
