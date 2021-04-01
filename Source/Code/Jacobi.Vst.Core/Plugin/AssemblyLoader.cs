@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
@@ -8,7 +9,7 @@ namespace Jacobi.Vst.Core.Plugin
     /// <summary>
     /// The AssemblyLoader class manages loading assemblies from non-standard probe paths.
     /// </summary>
-    public class AssemblyLoader
+    public sealed class AssemblyLoader
     {
         private readonly AssemblyLoadContext _loadContext;
 
@@ -36,10 +37,9 @@ namespace Jacobi.Vst.Core.Plugin
         /// </summary>
         public static AssemblyLoader Current { get { return _current; } }
 
-        /// <summary>
-        /// The root path to look for loading assemblies.
-        /// </summary>
         public string BasePath { get; set; }
+
+        public List<string> ProbePaths { get; } = new List<string>();
 
         /// <summary>
         /// Attempts to load an assembly using the <paramref name="fileName"/> and the <paramref name="extension"/>.
@@ -50,15 +50,36 @@ namespace Jacobi.Vst.Core.Plugin
         public Assembly? LoadAssembly(string fileName, string extension)
         {
             Throw.IfArgumentIsNullOrEmpty(extension, nameof(extension));
+            var fileNameExt = $"{fileName}{extension}";
 
-            string filePath = Path.Combine(BasePath, $"{fileName}{extension}");
-
-            if (!String.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            foreach (var path in GetProbePaths())
             {
-                return _loadContext.LoadFromAssemblyPath(filePath);
+                var filePath = Path.Combine(path, fileNameExt);
+
+                if (File.Exists(filePath))
+                {
+                    return _loadContext.LoadFromAssemblyPath(filePath);
+                }
+            }
+            return null;
+        }
+
+        private IEnumerable<string> GetProbePaths()
+        {
+            var paths = new List<string>
+            {
+                BasePath
+            };
+
+            foreach (var path in ProbePaths)
+            {
+                if (!Path.IsPathRooted(path))
+                    paths.Add(Path.Combine(BasePath, path));
+                else
+                    paths.Add(path);
             }
 
-            return null;
+            return paths;
         }
     }
 }

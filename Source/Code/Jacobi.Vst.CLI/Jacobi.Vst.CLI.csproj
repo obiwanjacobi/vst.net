@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>vstnet</AssemblyName>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>

@@ -13,12 +13,24 @@
     /// The managed plugin assembly must have the same name but with a .net.dll or a .net.vstdll file extension.
     /// The managed assembly must expose a public class that implements the IVstPluginCommandStub interface.
     /// </remarks>
-    public class ManagedPluginFactory
+    public sealed class ManagedPluginFactory
     {
         private Assembly? _assembly;
 
         /// <summary>.net.vst2</summary>
         public const string DefaultManagedExtension = ".net.vst2";
+
+        public ManagedPluginFactory(string separatedPaths)
+        {
+            if (!String.IsNullOrEmpty(separatedPaths))
+            {
+                var paths = separatedPaths.Split(";",
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+                AssemblyLoader.Current.ProbePaths.Clear();
+                AssemblyLoader.Current.ProbePaths.AddRange(paths);
+            }
+        }
 
         /// <summary>
         /// Loads the managed plugin assembly with the same name as the specified <paramref name="interopAssemblyPath"/>.
@@ -28,7 +40,7 @@
         /// <exception cref="ArgumentException">Thrown when the <paramref name="interopAssemblyPath"/> is empty.</exception>
         /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
         /// <remarks>Note that the managed plugin assembly must be named exactly the same as the <paramref name="interopAssemblyPath"/>
-        /// but with a <b>.net.dll</b> or a <b>.net.vstdll</b> extension.</remarks>
+        /// but with a <b>.net.vst2</b> extension.</remarks>
         public void LoadAssemblyByDefaultName(string interopAssemblyPath)
         {
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, nameof(interopAssemblyPath));

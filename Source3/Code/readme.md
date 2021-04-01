@@ -33,6 +33,9 @@ https://docs.microsoft.com/en-us/dotnet/standard/native-interop/best-practices
 https://jpassing.com/2009/03/26/rcw-reference-counting-rules-com-reference-counting-rules/
 http://dotnetdebug.net/2005/07/07/marshalreleasecomobject-and-cpu-spinning/
 
+Cross Platform COM interop
+https://github.com/Const-me/ComLightInterop
+
 
 ## TODOs
 

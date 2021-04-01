@@ -1239,11 +1239,6 @@
             Gets the current (and only) instance of the AssemblyLoader class.
             </summary>
         </member>
-        <member name="P:Jacobi.Vst.Core.Plugin.AssemblyLoader.BasePath">
-            <summary>
-            The root path to look for loading assemblies.
-            </summary>
-        </member>
         <member name="M:Jacobi.Vst.Core.Plugin.AssemblyLoader.LoadAssembly(System.String,System.String)">
             <summary>
             Attempts to load an assembly using the <paramref name="fileName"/> and the <paramref name="extension"/>.
@@ -1316,7 +1311,7 @@
             <exception cref="T:System.ArgumentException">Thrown when the <paramref name="interopAssemblyPath"/> is empty.</exception>
             <exception cref="T:System.IO.FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
             <remarks>Note that the managed plugin assembly must be named exactly the same as the <paramref name="interopAssemblyPath"/>
-            but with a <b>.net.dll</b> or a <b>.net.vstdll</b> extension.</remarks>
+            but with a <b>.net.vst2</b> extension.</remarks>
         </member>
         <member name="M:Jacobi.Vst.Core.Plugin.ManagedPluginFactory.LoadAssembly(System.String)">
             <summary>
