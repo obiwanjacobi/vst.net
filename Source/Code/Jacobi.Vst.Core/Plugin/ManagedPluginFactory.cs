@@ -15,40 +15,45 @@
     /// </remarks>
     public sealed class ManagedPluginFactory
     {
-        private Assembly? _assembly;
-
         /// <summary>.net.vst2</summary>
         public const string DefaultManagedExtension = ".net.vst2";
-
-        public ManagedPluginFactory(string separatedPaths)
-        {
-            if (!String.IsNullOrEmpty(separatedPaths))
-            {
-                var paths = separatedPaths.Split(";",
-                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-
-                AssemblyLoader.Current.ProbePaths.Clear();
-                AssemblyLoader.Current.ProbePaths.AddRange(paths);
-            }
-        }
 
         /// <summary>
         /// Loads the managed plugin assembly with the same name as the specified <paramref name="interopAssemblyPath"/>.
         /// </summary>
         /// <param name="interopAssemblyPath">The full file path to the interop assembly. Must not be null or empty.</param>
+        /// <returns>Returns an instance of the PluginCommandStub.</returns>
         /// <exception cref="ArgumentNullException">Thrown when the <paramref name="interopAssemblyPath"/> is null.</exception>
         /// <exception cref="ArgumentException">Thrown when the <paramref name="interopAssemblyPath"/> is empty.</exception>
         /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
         /// <remarks>Note that the managed plugin assembly must be named exactly the same as the <paramref name="interopAssemblyPath"/>
         /// but with a <b>.net.vst2</b> extension.</remarks>
-        public void LoadAssemblyByDefaultName(string interopAssemblyPath)
+        public IVstPluginCommandStub LoadAssemblyByDefaultName(string interopAssemblyPath)
         {
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, nameof(interopAssemblyPath));
 
-            string fileName = Path.GetFileNameWithoutExtension(interopAssemblyPath);
-            AssemblyLoader.Current.BasePath = Path.GetDirectoryName(interopAssemblyPath) ?? String.Empty;
+            var fileName = Path.GetFileNameWithoutExtension(interopAssemblyPath);
+            var basePath = Path.GetDirectoryName(interopAssemblyPath) ?? String.Empty;
+            AssemblyLoader.Current.BasePath = basePath;
+            AssemblyLoader.Current.ProbePaths.Clear();
+            AssemblyLoader.Current.ProbePaths.Add("bin");
 
-            LoadAssembly(fileName);
+            var config = PluginConfiguration.CreateFrom(basePath, fileName);
+
+            var probePaths = config["vstnetProbePaths"];
+            if (!String.IsNullOrEmpty(probePaths))
+            {
+                var paths = probePaths.Split(";",
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+                AssemblyLoader.Current.ProbePaths.AddRange(paths);
+            }
+
+            var assembly = LoadPluginAssembly(fileName);
+            var cmdStub = CreatePluginCommandStub(assembly);
+
+            cmdStub.PluginConfiguration = config;
+            return cmdStub;
         }
 
         /// <summary>
@@ -56,11 +61,11 @@
         /// </summary>
         /// <param name="assemblyName">The name of the assembly, without a path indication or file extension. Must not be null or empty.</param>
         /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
-        public void LoadAssembly(string assemblyName)
+        private Assembly LoadPluginAssembly(string assemblyName)
         {
             Throw.IfArgumentIsNullOrEmpty(assemblyName, nameof(assemblyName));
 
-            _assembly = AssemblyLoader.Current.LoadAssembly(assemblyName, DefaultManagedExtension)
+            return AssemblyLoader.Current.LoadAssembly(assemblyName, DefaultManagedExtension)
                 ?? throw new FileNotFoundException(Properties.Resources.ManagedPluginFactory_FileNotFound, assemblyName);
         }
 
@@ -70,16 +75,11 @@
         /// <returns>Returns an instance of the PluginCommandStub.</returns>
         /// <exception cref="InvalidOperationException">Thrown when no public class could be found 
         /// that implemented the <see cref="IVstPluginCommandStub"/> interface.</exception>
-        public IVstPluginCommandStub CreatePluginCommandStub()
+        private IVstPluginCommandStub CreatePluginCommandStub(Assembly assembly)
         {
-            if (_assembly == null)
-            {
-                throw new InvalidOperationException(Properties.Resources.ManagedPluginFactory_NoAssemblyLoaded);
-            }
-
-            Type pluginType = LocateTypeByInterface(typeof(IVstPluginCommandStub))
+            Type pluginType = LocateTypeByInterface(assembly, typeof(IVstPluginCommandStub))
                 ?? throw new InvalidOperationException(
-                    String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, _assembly.FullName));
+                    String.Format(Properties.Resources.ManagedPluginFactory_NoPublicStub, assembly.FullName));
 
             var cmdStub = (IVstPluginCommandStub?)Activator.CreateInstance(pluginType)
                 ?? throw new InvalidOperationException(
@@ -88,9 +88,9 @@
             return cmdStub;
         }
 
-        private Type? LocateTypeByInterface(Type typeOfInterface)
+        private Type? LocateTypeByInterface(Assembly assembly, Type typeOfInterface)
         {
-            foreach (Type type in _assembly!.GetTypes())
+            foreach (Type type in assembly!.GetTypes())
             {
                 if (type.IsPublic)
                 {

@@ -167,13 +167,15 @@ namespace Jacobi.Vst.CLI
 
         private static string GetFileByExtension(string baseFile, string extension)
         {
-            if (baseFile.EndsWith(extension)) return baseFile;
+            if (baseFile.EndsWith(extension))
+                return baseFile;
 
             var name = Path.GetFileNameWithoutExtension(baseFile);
             var path = Path.GetDirectoryName(baseFile);
             var file = Path.Combine(path, $"{name}{extension}");
 
-            if (File.Exists(file)) { return file; }
+            if (File.Exists(file))
+            { return file; }
 
             return null;
         }

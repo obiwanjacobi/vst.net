@@ -32,7 +32,7 @@ Vst2Plugin* VSTPluginMain (::Vst2HostCommand hostCommandHandler)
 			// retrieve the plugin info
 			auto pluginInfo = commandStub->GetPluginInfo(hostStub);
 
-			if (pluginInfo)
+			if (pluginInfo != nullptr)
 			{
 				// create the native audio effect struct based on the plugin info
 				::Vst2Plugin* pPlugin = CreateAudioEffectInfo(pluginInfo);
