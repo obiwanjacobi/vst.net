@@ -23,10 +23,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Jacobi.Vst.CLI\Jacobi.Vst.CLI.csproj" />
     <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
     <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Host.Interop.vcxproj" />
     <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Plugin.Interop.vcxproj" />
     <ProjectReference Include="..\Jacobi.Vst.Plugin.Framework\Jacobi.Vst.Plugin.Framework.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="CLI\TestNuGet.config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

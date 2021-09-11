@@ -33,4 +33,7 @@
     <EmbeddedResource Include="runtimeconfig.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+  </ItemGroup>
 </Project>
