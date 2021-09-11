@@ -88,7 +88,7 @@
             return cmdStub;
         }
 
-        private Type? LocateTypeByInterface(Assembly assembly, Type typeOfInterface)
+        private static Type? LocateTypeByInterface(Assembly assembly, Type typeOfInterface)
         {
             foreach (Type type in assembly!.GetTypes())
             {

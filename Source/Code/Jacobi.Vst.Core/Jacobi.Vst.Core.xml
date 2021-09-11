@@ -1307,20 +1307,21 @@
             Loads the managed plugin assembly with the same name as the specified <paramref name="interopAssemblyPath"/>.
             </summary>
             <param name="interopAssemblyPath">The full file path to the interop assembly. Must not be null or empty.</param>
+            <returns>Returns an instance of the PluginCommandStub.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="interopAssemblyPath"/> is null.</exception>
             <exception cref="T:System.ArgumentException">Thrown when the <paramref name="interopAssemblyPath"/> is empty.</exception>
             <exception cref="T:System.IO.FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
             <remarks>Note that the managed plugin assembly must be named exactly the same as the <paramref name="interopAssemblyPath"/>
             but with a <b>.net.vst2</b> extension.</remarks>
         </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.ManagedPluginFactory.LoadAssembly(System.String)">
+        <member name="M:Jacobi.Vst.Core.Plugin.ManagedPluginFactory.LoadPluginAssembly(System.String)">
             <summary>
             Attempts to load the assembly by the <paramref name="assemblyName"/>.
             </summary>
             <param name="assemblyName">The name of the assembly, without a path indication or file extension. Must not be null or empty.</param>
             <exception cref="T:System.IO.FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
         </member>
-        <member name="M:Jacobi.Vst.Core.Plugin.ManagedPluginFactory.CreatePluginCommandStub">
+        <member name="M:Jacobi.Vst.Core.Plugin.ManagedPluginFactory.CreatePluginCommandStub(System.Reflection.Assembly)">
             <summary>
             Creates the public Plugin command stub.
             </summary>

@@ -99,7 +99,7 @@ namespace Jacobi.Vst.CLI
             File.Delete(interop);
             ConsoleOutput.Progress($"Creating unmanged plugin: {interop} => {entry}");
 
-            // copy in all other plugin related file (Debug?)
+            // copy in all other plugin related files (Debug?)
             //foreach (var sourceFile in Directory.EnumerateFiles(path, $"{name}.*"))
             //{
             //    var targetName = Path.GetFileName(sourceFile);
@@ -187,7 +187,6 @@ namespace Jacobi.Vst.CLI
                 AllowTrailingCommas = true,
                 IgnoreNullValues = true,
                 PropertyNameCaseInsensitive = true,
-
             };
             var reader = new StreamReader(stream);
             return JsonSerializer.Deserialize<DepsJson>(reader.ReadToEnd(), options);
