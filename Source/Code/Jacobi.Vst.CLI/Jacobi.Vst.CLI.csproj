@@ -17,6 +17,8 @@
     <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>VST.NET2-CLI</PackageId>
+    <AssemblyVersion>2.0.3.0</AssemblyVersion>
+    <FileVersion>2.0.3.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">

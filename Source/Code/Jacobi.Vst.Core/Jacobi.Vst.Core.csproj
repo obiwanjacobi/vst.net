@@ -10,7 +10,7 @@
     <Product>VST.NET</Product>
     <Platforms>x64;x86</Platforms>
     <Nullable>enable</Nullable>
-    <Copyright>Jacobi Software © 2008-2020</Copyright>
+    <Copyright>Jacobi Software © 2008-2021</Copyright>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/obiwanjacobi/vst.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>

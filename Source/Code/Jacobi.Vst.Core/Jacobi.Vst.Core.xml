@@ -1300,7 +1300,7 @@
             <remarks>
             The problem of what CLR assembly to load can be solved with a convention.
             The interop dll that is needed for each managed plugin is renamed to the name of the plugin. 
-            The managed plugin assembly must have the same name but with a .net.dll or a .net.vstdll file extension.
+            The managed plugin assembly must have the same name but with a .net.vst2 file extension.
             The managed assembly must expose a public class that implements the IVstPluginCommandStub interface.
             </remarks>
         </member>

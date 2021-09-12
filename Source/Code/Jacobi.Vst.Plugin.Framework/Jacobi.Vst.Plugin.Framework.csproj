@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>vst vstnet</PackageTags>
-    <Copyright>Copyright © 2008-2020 Jacobi Software</Copyright>
+    <Copyright>Copyright © 2008-2021 Jacobi Software</Copyright>
     <Description>VST.NET 2 Plugin Framework</Description>
   </PropertyGroup>
 

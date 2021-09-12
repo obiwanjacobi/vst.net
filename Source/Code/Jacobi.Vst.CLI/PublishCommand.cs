@@ -12,6 +12,12 @@ namespace Jacobi.Vst.CLI
 
         public bool Execute()
         {
+            if (!File.Exists(FilePath))
+            {
+                ConsoleOutput.Error($"File {FilePath} does not exist.");
+                return false;
+            }
+
             if (String.IsNullOrEmpty(NuGetPath))
             {
                 NuGetPath = FileExtensions.GetNuGetLocation();
@@ -21,6 +27,8 @@ namespace Jacobi.Vst.CLI
                 DeployPath = @".\deploy";
             }
             FileExtensions.EnsureDirectoryExists(DeployPath);
+            DeployBinPath = Path.Combine(DeployPath, "bin");
+            FileExtensions.EnsureDirectoryExists(DeployBinPath);
 
             var depsFile = GetDepsFile();
             if (depsFile == null)
@@ -34,16 +42,16 @@ namespace Jacobi.Vst.CLI
 
             var assemblyName = AssemblyName.GetAssemblyName(plugin ?? host);
 
-            CopyDependencies(depsFile, assemblyName.ProcessorArchitecture);
-
             if (host != null)
             {
+                CopyDependencies(depsFile, DeployPath, assemblyName.ProcessorArchitecture);
                 PublishHost(host);
                 return true;
             }
 
             if (plugin != null)
             {
+                CopyDependencies(depsFile, DeployBinPath, assemblyName.ProcessorArchitecture);
                 PublishPlugin(plugin);
                 return true;
             }
@@ -54,11 +62,12 @@ namespace Jacobi.Vst.CLI
 
         public string NuGetPath { get; set; }
         public string DeployPath { get; set; }
+        public string DeployBinPath { get; set; }
         public string FilePath { get; set; }
 
-        private void CopyDependencies(string depsFile, ProcessorArchitecture processorArchitecture)
+        private void CopyDependencies(string depsFile, string deployPath, ProcessorArchitecture processorArchitecture)
         {
-            ConsoleOutput.Progress($"Copying dependencies to: {DeployPath}");
+            ConsoleOutput.Progress($"Copying dependencies to: {deployPath}");
             using var stream = File.OpenRead(depsFile);
             var json = Parse(stream);
 
@@ -73,7 +82,7 @@ namespace Jacobi.Vst.CLI
                 if (File.Exists(path))
                 {
                     ConsoleOutput.Progress(path);
-                    File.Copy(path, Path.Combine(DeployPath, Path.GetFileName(path)), overwrite: true);
+                    File.Copy(path, Path.Combine(deployPath, Path.GetFileName(path)), overwrite: true);
                 }
                 else
                 {
@@ -86,6 +95,8 @@ namespace Jacobi.Vst.CLI
         {
             var name = Path.GetFileNameWithoutExtension(pluginPath);
             var path = Path.GetDirectoryName(pluginPath);
+
+            EnsureVstAssemblies();
 
             var managed = Path.Combine(DeployPath, $"{name}.net.vst2");
             // copy over and rename the managed plugin dll.
@@ -116,6 +127,19 @@ namespace Jacobi.Vst.CLI
             ConsoleOutput.Progress($"Creating {runtimeConfig}");
 
             CopySettings(path, name);
+        }
+
+        // All Jacobi.Vst.* assemblies need to be next to plugin
+        private void EnsureVstAssemblies()
+        {
+            var files = Directory.GetFiles(DeployBinPath, "Jacobi.Vst.*");
+            foreach (var file in files)
+            {
+                File.Move(file, Path.Combine(DeployPath, Path.GetFileName(file)), overwrite: true);
+            }
+
+            const string ijwhost = "ijwhost.dll";
+            File.Move(Path.Combine(DeployBinPath, ijwhost), Path.Combine(DeployPath, ijwhost), overwrite: true);
         }
 
         private void PublishHost(string hostPath)
@@ -167,13 +191,15 @@ namespace Jacobi.Vst.CLI
 
         private static string GetFileByExtension(string baseFile, string extension)
         {
-            if (baseFile.EndsWith(extension)) return baseFile;
+            if (baseFile.EndsWith(extension))
+                return baseFile;
 
             var name = Path.GetFileNameWithoutExtension(baseFile);
             var path = Path.GetDirectoryName(baseFile);
             var file = Path.Combine(path, $"{name}{extension}");
 
-            if (File.Exists(file)) { return file; }
+            if (File.Exists(file))
+            { return file; }
 
             return null;
         }

@@ -19,11 +19,14 @@ Vst2Plugin* VSTPluginMain (::Vst2HostCommand hostCommandHandler)
 	// create the host command stub (sends commands to host)
 	auto hostStub = gcnew Jacobi::Vst::Plugin::Interop::HostCommandStub(hostCommandHandler);
 
+	// retrieve the current plugin file name (interop)
+	auto interopAssemblyFileName = Utils::GetCurrentFileName();
+
+	System::String^ basePath = System::IO::Path::GetDirectoryName(interopAssemblyFileName);
+	auto bootstrapper = gcnew Bootstrapper(basePath);
+
 	try
 	{
-		// retrieve the current plugin file name (interop)
-		auto interopAssemblyFileName = Utils::GetCurrentFileName();
-
 		// create the managed type that implements the Plugin Command Stub interface (sends commands to plugin)
 		auto commandStub = Bootstrapper::LoadManagedPlugin(interopAssemblyFileName);
 		
@@ -65,6 +68,10 @@ Vst2Plugin* VSTPluginMain (::Vst2HostCommand hostCommandHandler)
 		delete hostStub;
 
 		Utils::ShowError(exc);
+	}
+	finally
+	{
+		delete bootstrapper;
 	}
 
 	return NULL;

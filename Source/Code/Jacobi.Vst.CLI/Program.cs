@@ -57,7 +57,7 @@ namespace Jacobi.Vst.CLI
             var assembly = Assembly.GetExecutingAssembly();
 
             ConsoleOutput.Information($"VST.NET Command Line Interface. Version {assembly.GetName().Version}.");
-            ConsoleOutput.Information("Copyright © 2008-2020 Jacobi Software.");
+            ConsoleOutput.Information("Copyright © 2008-2021 Jacobi Software.");
             ConsoleOutput.NewLine();
         }
     }
