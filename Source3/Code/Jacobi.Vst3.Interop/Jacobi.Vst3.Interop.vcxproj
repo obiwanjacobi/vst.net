@@ -24,7 +24,7 @@
     <ProjectGuid>{761ddfe4-5a7e-425f-8729-1dd7644cdc0e}</ProjectGuid>
     <RootNamespace>JacobiVstInterop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <ProjectName>Jacobi.Vst3.Interop</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
