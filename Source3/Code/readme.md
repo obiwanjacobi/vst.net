@@ -28,10 +28,12 @@ https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activatio
 
 COM Interop Best Practices
 https://docs.microsoft.com/en-us/dotnet/standard/native-interop/best-practices
-
+https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net-5-0/#comwrappers
 
 https://jpassing.com/2009/03/26/rcw-reference-counting-rules-com-reference-counting-rules/
 http://dotnetdebug.net/2005/07/07/marshalreleasecomobject-and-cpu-spinning/
+
+https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net-5-0/
 
 
 ## TODOs
