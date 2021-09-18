@@ -1,4 +1,5 @@
 ﻿using Jacobi.Vst3.Core;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Jacobi.Vst3.TestPlugin
@@ -6,9 +7,10 @@ namespace Jacobi.Vst3.TestPlugin
     public static class PublicExport
     {
         [UnmanagedCallersOnly]
-        public static bool InitDll()
+        public static int InitDll()
         {
-            return true;
+            // 0 = failure, 1 = success
+            return 1;
         }
 
         [UnmanagedCallersOnly]
@@ -17,10 +19,11 @@ namespace Jacobi.Vst3.TestPlugin
             // no-op
         }
 
+        // singleton
+        private static PluginFactory _factory = new PluginFactory();
+
         [UnmanagedCallersOnly]
-        public static IPluginFactory GetPluginFactory()
-        {
-            return new PluginFactory();
-        }
+        public static IntPtr GetPluginFactory()
+            => Marshal.GetComInterfaceForObject(_factory, typeof(IPluginFactory));
     }
 }

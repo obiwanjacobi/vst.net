@@ -17,6 +17,7 @@ Something is going on with setting the current directory..?
 `vsthost.exe` (Hermann Seib) does load the .vst3 plugin correctly without having to copy over Ijwhost.dll...
 - The validator.exe points out a few issues:
     - BUG? IEditController::setState passes in a IBStream that is at the end. https://sdk.steinberg.net/viewtopic.php?f=4&t=818
+    - BUG? ERROR: The bypass parameter is not in sync in the controller!
 
 
 
@@ -28,13 +29,18 @@ https://github.com/dotnet/runtime/blob/master/docs/design/features/COM-activatio
 
 COM Interop Best Practices
 https://docs.microsoft.com/en-us/dotnet/standard/native-interop/best-practices
-https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net-5-0/#comwrappers
-
 https://jpassing.com/2009/03/26/rcw-reference-counting-rules-com-reference-counting-rules/
 http://dotnetdebug.net/2005/07/07/marshalreleasecomobject-and-cpu-spinning/
 
 https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net-5-0/
 
+COM on Linux
+https://github.com/dotnet/runtime/issues/36582
+https://github.com/Const-me/ComLightInterop
+
+COM wrappers (optimization)
+https://docs.microsoft.com/en-us/dotnet/standard/native-interop/tutorial-comwrappers
+https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net-5-0/#comwrappers
 
 ## TODOs
 
@@ -44,3 +50,8 @@ https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net
 - Decide if the API is to be naked (PreserveSig) with all the TResults (as int's) and out/ref parameters? 
     Or that we remove these - the COM wrapper interop can handle that.
 - No bools in structs!
+
+## Validator / Debugging
+
+Open `C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\build\vstsdk.sln`
+

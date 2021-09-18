@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Platforms>x64;x86</Platforms>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -22,6 +21,16 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <DnneNativeBinaryName>TestPlugin.vst3</DnneNativeBinaryName>
+    <DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DNNE" Version="1.0.23" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Jacobi.Vst3.Core\Jacobi.Vst3.Core.csproj" />
   </ItemGroup>
