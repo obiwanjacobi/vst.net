@@ -1,5 +1,3 @@
-#pragma unmanaged
-
 #include "pch.h"
 
 HMODULE g_hModule;
@@ -22,5 +20,3 @@ extern "C"
         return TRUE;
     }
 }
-
-#pragma managed

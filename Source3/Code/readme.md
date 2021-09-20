@@ -6,9 +6,12 @@ The managed plugin exposes a public `PluginFactory` derived from the `PluginClas
 
 The aim of this library is to be as close to the original C++ API as possible in order for the official docs to apply to `VST.NET3`.
 
-Go here for the official VST3 documentation: https://steinbergmedia.github.io/vst3_doc/
+Go here for the official VST3 documentation: https://steinbergmedia.github.io/vst3_doc/ or here https://developer.steinberg.help/display/VST/Technical+Documentation
 
 For questions about the VST3 API itself, use the Steinberg forum (just remember they think you're talking C++): https://sdk.steinberg.net/index.php
+
+https://github.com/steinbergmedia/vst3sdk
+https://github.com/steinbergmedia/vst3_public_sdk
 
 ## Issues
 
@@ -40,7 +43,13 @@ https://github.com/Const-me/ComLightInterop
 
 COM wrappers (optimization)
 https://docs.microsoft.com/en-us/dotnet/standard/native-interop/tutorial-comwrappers
+https://github.com/dotnet/samples/blob/main/core/interop/comwrappers/Tutorial/Program.cs
 https://devblogs.microsoft.com/dotnet/improvements-in-native-code-interop-in-net-5-0/#comwrappers
+(interception) https://stackoverflow.com/questions/2223147/is-it-possible-to-intercept-or-be-aware-of-com-reference-counting-on-clr-objec
+
+-ComWrapper will be cross-platform in .NET6.
+-They take a whole lot of code to setup - but that can all be written in C#.
+    Perhaps even automated/generated most of the way?
 
 ## TODOs
 
