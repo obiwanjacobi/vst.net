@@ -11,6 +11,8 @@ namespace ComLightPlugin
         private static PluginFactory _factory = new PluginFactory();
 
         [UnmanagedCallersOnly()]
+        // DNNE does not like this (return type must be blittable)
+        //[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Marshaler<IPluginFactory>))]
         public static IntPtr GetPluginFactory()
             => ManagedWrapper.wrap<IPluginFactory>(_factory, addRef: true);
 

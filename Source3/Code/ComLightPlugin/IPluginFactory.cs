@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ComLight;
+using System;
 using System.Runtime.InteropServices;
 
 namespace ComLightPlugin
 {
     [Guid(Interfaces.IPluginFactory)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComInterface(Interfaces.IPluginFactory)]
     public interface IPluginFactory
     {
         [PreserveSig]
