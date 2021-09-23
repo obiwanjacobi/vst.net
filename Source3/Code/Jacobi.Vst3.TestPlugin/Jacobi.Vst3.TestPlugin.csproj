@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DNNE" Version="1.0.23" />
+    <PackageReference Include="DNNE" Version="1.0.24" />
   </ItemGroup>
   
   <ItemGroup>

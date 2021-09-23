@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 
 namespace ComLightPlugin
 {
-    //[ComImport]
     [Guid(Interfaces.IPluginFactory)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IPluginFactory

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComLight;
+using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -9,15 +10,9 @@ namespace ComLightPlugin
         // singleton
         private static PluginFactory _factory = new PluginFactory();
 
-        [SupportedOSPlatform("windows")]
-        //[UnmanagedCallersOnly(EntryPoint = "GetPluginFactory")]
-        public static IntPtr GetPluginFactory_Win()
-            => Marshal.GetComInterfaceForObject(_factory, typeof(IPluginFactory));
-
-        [SupportedOSPlatform("linux")]
-        [UnmanagedCallersOnly(EntryPoint = "GetPluginFactory")]
-        public static IntPtr GetPluginFactory_Lnx()
-            => IntPtr.Zero;
+        [UnmanagedCallersOnly()]
+        public static IntPtr GetPluginFactory()
+            => ManagedWrapper.wrap<IPluginFactory>(_factory, addRef: true);
 
         [SupportedOSPlatform("windows")]
         [UnmanagedCallersOnly]
