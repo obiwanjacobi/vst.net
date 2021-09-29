@@ -41,6 +41,7 @@ Fix:
 
 Problem:
 
+```
 Severity	Code	Description	Project	File	Line	Suppression State
 Error	MSB4018	The "GenerateCSharp" task failed unexpectedly.
 System.OverflowException: Value was either too large or too small for an Int32.
@@ -57,7 +58,7 @@ System.OverflowException: Value was either too large or too small for an Int32.
    at SharpGenTools.Sdk.Tasks.GenerateCSharp.Execute()
    at Microsoft.Build.BackEnd.TaskExecutionHost.Microsoft.Build.BackEnd.ITaskExecutionHost.Execute()
    at Microsoft.Build.BackEnd.TaskBuilder.<ExecuteInstantiatedTask>d__26.MoveNext()	SharpGenToolsTest	C:\Users\marc\.nuget\packages\sharpgentools.sdk\1.2.1\build\SharpGenTools.Sdk.targets	259	
-
+```
 
 Fix:
 
