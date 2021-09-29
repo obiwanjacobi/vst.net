@@ -2,23 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Platforms>x64;x86</Platforms>
+    <Platforms>AnyCpu;x64;x86</Platforms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <DnneNativeBinaryName>ComLightPlugin.vst3</DnneNativeBinaryName>
+    <DnneNativeBinaryName>ComWrappersPlugin.vst3</DnneNativeBinaryName>
     <DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="ComLightInterop" Version="1.3.7" />
-    <PackageReference Include="DNNE" Version="1.0.24" />
+    <PackageReference Include="DNNE" Version="1.0.23" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="obj\x64\Debug\net5.0\dnne/bin/ComLightPlugin.vst3.dll" />
+    <None Remove="obj\x64\Debug\net5.0\dnne/bin/ComWrappersPlugin.vst3.dll" />
   </ItemGroup>
-
 </Project>
