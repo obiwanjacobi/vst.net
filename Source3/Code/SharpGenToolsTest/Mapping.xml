@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config id="JacobiVst3" xmlns="urn:SharpGen.Config">
+	<assembly>SharpGenToolsTest</assembly>
+	<namespace>SharpGenToolsTest.Interfaces</namespace>
+	<depends>SharpGen.Runtime</depends>
+
+	<sdk name="StdLib" />
+	<sdk name="WindowsSdk" />
+	
+	<!--<var name="VstSdk" value="C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK" />-->
+	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK</include-dir>
+	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces</include-dir>
+	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\base</include-dir>
+	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\gui</include-dir>
+	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\test</include-dir>
+	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\vst</include-dir>
+
+	<!-- base -->
+	<include file="conststringtable.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="doc.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<!--<include file="falignpop.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="falignpush.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<include file="fplatform.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="fstrdefs.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="ftypes.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="funknown.h" namespace="SharpGenToolsTest.Interfaces">
+		<attach>FUnknown</attach>
+	</include>
+	<include file="futils.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="fvariant.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="geoconstants.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="ibstream.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="icloneable.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ierrorcontext.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ipersistent.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ipluginbase.h" namespace="SharpGenToolsTest.Interfaces">
+		<attach>IPluginBase</attach>
+		<attach>PFactoryInfo</attach>
+		<attach>PClassInfo</attach>
+		<attach>IPluginFactory</attach>
+		<attach>PClassInfo2</attach>
+		<attach>IPluginFactory2</attach>
+		<attach>PClassInfoW</attach>
+		<attach>IPluginFactory3</attach>
+	</include>
+	<include file="istringresult.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="iupdatehandler.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="keycodes.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="pluginbasefwd.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="smartpointer.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="typesizecheck.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="ucolorspec.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="ustring.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+
+	<!-- gui -->
+	<include file="iplugview.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="iplugviewcontentscalesupport.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	
+	<!-- test -->
+	<include file="itest.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	
+	<!-- vst -->
+	<include file="ivstattributes.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstaudioprocessor.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstautomationstate.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstchannelcontextinfo.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstcomponent.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstcontextmenu.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivsteditcontroller.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstevents.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivsthostapplication.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstinterappaudio.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstmessage.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstmidicontrollers.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstmidilearn.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstnoteexpression.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstparameterchanges.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstphysicalui.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstpluginterfacesupport.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstplugview.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstprefetchablesupport.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstprocesscontext.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstrepresentation.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivsttestplugprovider.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="ivstunits.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="vstpresetkeys.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="vstpshpack4.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<include file="vstspeaker.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+	<include file="vsttypes.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
+
+	
+	<extension>
+		<!--<define interface="SharpGenToolsTest.Interfaces.IUnknown" />-->
+	</extension>
+
+	<bindings>
+		<bind from="long" to="System.Int32" />
+		<bind from="unsigned long" to="System.UInt32" />
+		
+		<bind from="FUID" to="System.Guid" />
+	
+		<!--<bind from="FUnknown" to="SharpGenToolsTest.Interfaces.IUnknown" />-->
+	</bindings>
+	
+	<mapping>
+		<map interface="FUnknown" name="IUnknown" />
+		
+		<remove field="FVariant::string8" />
+		<remove field="FVariant::string16" />
+		<remove field="FVariant::object" />
+	
+		<remove field="AudioBusBuffers::channelBuffers32" />
+	
+		<remove field="Event::data" />
+		<remove field="Event::noteExpressionText" />
+		<remove field="Event::chord" />
+		<remove field="Event::scale" />
+
+		<remove enum-item="kInvalidTypeID" />
+	
+		<remove struct="sizeofCheckViewRect.*" />
+	</mapping>
+	
+</config>

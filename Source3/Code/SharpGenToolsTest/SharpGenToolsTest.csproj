@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="SharpGen.Runtime" Version="1.2.1" />
+	  <PackageReference Include="SharpGen.Runtime.COM" Version="1.2.0" />
+	  <PackageReference Include="SharpGenTools.Sdk" Version="1.2.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<CastXmlPath>C:\My Program Files\castxml\bin\castxml.exe</CastXmlPath>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<SharpGenMapping Include="Mapping.xml" />
+	</ItemGroup>
+
+</Project>

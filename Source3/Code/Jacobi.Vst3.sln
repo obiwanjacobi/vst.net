@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30104.148
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst3.Core", "Jacobi.Vst3.Core\Jacobi.Vst3.Core.csproj", "{56FB1E03-B0C4-4074-9A93-7787E07B58BC}"
 EndProject
@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComLightPlugin", "ComLightP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComWrapperGen", "ComWrapperGen\ComWrapperGen.csproj", "{1BB2D92C-337E-45FF-9217-419960182B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComWrappersPlugin", "ComWrappersPlugin\ComWrappersPlugin.csproj", "{A097D6C3-B584-457D-9B2B-13E8EDCD074A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComWrappersPlugin", "ComWrappersPlugin\ComWrappersPlugin.csproj", "{A097D6C3-B584-457D-9B2B-13E8EDCD074A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGenToolsTest", "SharpGenToolsTest\SharpGenToolsTest.csproj", "{B3D08801-5B00-4308-8D53-CA6DC2A83767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +108,18 @@ Global
 		{A097D6C3-B584-457D-9B2B-13E8EDCD074A}.Release|x64.Build.0 = Release|x64
 		{A097D6C3-B584-457D-9B2B-13E8EDCD074A}.Release|x86.ActiveCfg = Release|x86
 		{A097D6C3-B584-457D-9B2B-13E8EDCD074A}.Release|x86.Build.0 = Release|x86
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Debug|x64.Build.0 = Debug|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Debug|x86.Build.0 = Debug|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Release|x64.ActiveCfg = Release|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Release|x64.Build.0 = Release|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Release|x86.ActiveCfg = Release|Any CPU
+		{B3D08801-5B00-4308-8D53-CA6DC2A83767}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
