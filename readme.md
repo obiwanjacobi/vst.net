@@ -14,9 +14,9 @@ Of course you can still ask questions about `VST.NET` (1), but no feature reques
 VST stands for Virtual Studio Technology and is an API designed by Steinberg that allows Audio and Midi plugin to work together in a Digital Audio Workstation (DAW) host application.
 
 `VST.NET` allows VST Plugin developers to write Plugins for the Steinberg VST 2.x API. The interop layer makes the transition between the C++ and C# smooth and easy.
-The Framework built on top of the interop layer provides a clear and structured architecture accelerating development considerably.
-
-`VST.NET` also allows developers to write a managed VST2 Host application. The VstPluginContext class (Host.Interop) allows you to load and communicate with unmanaged (and managed) VST Plugins. At this time there is no Framework for Host applications. But any ideas on this are welcome.
+Rámec postavený na vrstve interoperability poskytuje jasnú a štruktúrovanú architektúru, ktorá výrazne urýchľuje vývoj.
+gg
+`VST.NET` tiež umožňuje vývojárom písať spravovanú aplikáciu VST2 Host. Trieda VstPluginContext (Host.Interop) vám umožňuje načítať a komunikovať s nespravovanými (a spravovanými) VST pluginmi. V súčasnosti neexistuje rámec pre hostiteľské aplikácie. Ale akékoľvek nápady na túto tému sú vítanégggf.
 
 ## Documentation
 
