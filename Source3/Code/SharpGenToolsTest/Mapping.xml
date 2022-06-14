@@ -16,19 +16,19 @@
 	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\vst</include-dir>
 
 	<!-- base -->
-	<include file="conststringtable.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="doc.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<!--<include file="falignpop.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="falignpush.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
-	<include file="fplatform.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="fstrdefs.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="ftypes.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<!--<include file="conststringtable.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="doc.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="falignpop.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="falignpush.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="fplatform.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="fstrdefs.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="ftypes.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
 	<include file="funknown.h" namespace="SharpGenToolsTest.Interfaces">
 		<attach>FUnknown</attach>
 	</include>
-	<include file="futils.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<!--<include file="futils.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
 	<include file="fvariant.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
-	<include file="geoconstants.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<!--<include file="geoconstants.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
 	<include file="ibstream.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
 	<include file="icloneable.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
 	<include file="ierrorcontext.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
@@ -46,11 +46,11 @@
 	<include file="istringresult.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
 	<include file="iupdatehandler.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
 	<include file="keycodes.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />
-	<include file="pluginbasefwd.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="smartpointer.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="typesizecheck.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="ucolorspec.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
-	<include file="ustring.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />
+	<!--<include file="pluginbasefwd.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="smartpointer.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="typesizecheck.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="ucolorspec.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
+	<!--<include file="ustring.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->
 
 	<!-- gui -->
 	<include file="iplugview.h" namespace="SharpGenToolsTest.Interfaces" attach="true" />

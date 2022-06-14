@@ -8,6 +8,14 @@ Requires Custom Layout / Marshalling
 - AudioBusBuffers
 - Event
 
+TOOD:
+
+- How to use generated code in project
+- Pure C# interfaces - to be implemented by unmanaged wrappers and to be used for managed wrappers to call into.
+- two-way (native) Marshaling support
+- No SharpGen Runtime - include all necessary code in gen'ed project
+- reuse SharpGen's icall assembly fixer.
+
 ---
 
 Problem:
@@ -36,13 +44,14 @@ Parameter name: input
 Fix:
 
 ??
+Seems to come and go.
+
 
 ---
 
 Problem:
 
 ```
-Severity	Code	Description	Project	File	Line	Suppression State
 Error	MSB4018	The "GenerateCSharp" task failed unexpectedly.
 System.OverflowException: Value was either too large or too small for an Int32.
    at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
