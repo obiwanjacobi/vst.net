@@ -7,13 +7,13 @@
 	<sdk name="StdLib" />
 	<sdk name="WindowsSdk" />
 	
-	<!--<var name="VstSdk" value="C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK" />-->
-	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK</include-dir>
-	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces</include-dir>
-	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\base</include-dir>
-	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\gui</include-dir>
-	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\test</include-dir>
-	<include-dir override="false">C:\Users\marc\Documents\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\vst</include-dir>
+	<!--<var name="VstSdk" value="C:\My\MyProjects\_libs\VST_SDK\VST3_SDK" />-->
+	<include-dir override="false">C:\My\MyProjects\_libs\VST_SDK\VST3_SDK</include-dir>
+	<include-dir override="false">C:\My\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces</include-dir>
+	<include-dir override="false">C:\My\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\base</include-dir>
+	<include-dir override="false">C:\My\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\gui</include-dir>
+	<include-dir override="false">C:\My\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\test</include-dir>
+	<include-dir override="false">C:\My\MyProjects\_libs\VST_SDK\VST3_SDK\pluginterfaces\vst</include-dir>
 
 	<!-- base -->
 	<!--<include file="conststringtable.h" namespace="SharpGenToolsTest.Interfaces" attach="false" />-->

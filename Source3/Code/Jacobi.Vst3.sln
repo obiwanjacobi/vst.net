@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComWrapperGen", "ComWrapper
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComWrappersPlugin", "ComWrappersPlugin\ComWrappersPlugin.csproj", "{A097D6C3-B584-457D-9B2B-13E8EDCD074A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGenToolsTest", "SharpGenToolsTest\SharpGenToolsTest.csproj", "{B3D08801-5B00-4308-8D53-CA6DC2A83767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpGenToolsTest", "SharpGenToolsTest\SharpGenToolsTest.csproj", "{B3D08801-5B00-4308-8D53-CA6DC2A83767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
