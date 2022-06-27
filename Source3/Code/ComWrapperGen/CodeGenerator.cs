@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using ComWrapperGen.Meta;
 
 namespace ComWrapperGen
 {
@@ -16,13 +17,13 @@ namespace ComWrapperGen
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void GenerateInterfaceVtable(Type intf)
+        public void GenerateInterfaceVtable(InterfaceInfo intf)
         {
             var vtables = new VTableGenerator(_vtables, _context);
             vtables.GenInterface(intf);
         }
 
-        public void GenerateABI(Type intf)
+        public void GenerateABI(InterfaceInfo intf)
         {
 
         }

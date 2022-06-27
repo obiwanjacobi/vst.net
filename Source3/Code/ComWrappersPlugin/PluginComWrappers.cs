@@ -35,7 +35,7 @@ namespace ComWrappersPlugin
             vtable[idx++] = (IntPtr)(delegate* unmanaged<IntPtr, Int32, IntPtr, Int32>)&ABI.IPluginFactoryManagedWrapper.GetClassInfo;
             vtable[idx++] = (IntPtr)(delegate* unmanaged<IntPtr, Guid, Guid, IntPtr, Int32>)&ABI.IPluginFactoryManagedWrapper.CreateInstance;
 
-            // PluginFactory object vtables
+            // PluginFactory interface-vtable map
             var entries = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(
                 typeof(PluginComWrappers), sizeof(ComInterfaceEntry) * 1);
 

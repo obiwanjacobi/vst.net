@@ -9,7 +9,7 @@ https://github.com/dotnet/samples/blob/main/core/interop/comwrappers/Tutorial/Pr
 
 Attempt to auto generate all the code for implementing COM wrappers for a set of annotated managed COM interface representations.
 
-When the code works, we'll make a Roslyn Source Generator.
+When the code works, we'll make a Roslyn Source Generator. (what is a common model?)
 
 There are several parts that make up a COM wrappers implementation.
 
@@ -94,6 +94,14 @@ a special mechanism is used: `DynamicInterfaceCastable`.
 
 - Scan public interfaces for a custom code attribute (something like ComInterface(IID)).
 - scan public classes that implement one or more of these interfaces.
-- generate vtable construction code for each interface
-- generate an ABI for each interface (marshaling)
-- generate wrapper code for each class
+unmanaged -> managed (managed wrapper)
+- generate vtable construction code for each interface (IUnknown + interface members)
+- list all interfaces each managed class supports (ComInterfaceEntry)
+- generate an ABI (unmanaged) entry points for each interface's methods (marshaling)
+managed -> unmanaged (native wrapper)
+- generate a dynamic native wrapper for com classes and the interfaces they implement (how generic can this be?).
+
+---
+
+https://github.com/dotnet/runtime/issues/66674
+https://github.com/dotnet/runtime/blob/main/docs/design/features/source-generator-com.md

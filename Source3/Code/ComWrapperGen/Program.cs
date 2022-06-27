@@ -17,7 +17,7 @@ namespace ComWrapperGen
             }
 #endif
 
-            var scanner = new Scanner();
+            var scanner = new AssemblyScanner();
             if (args.Length == 0)
                 scanner.Scan(Assembly.GetExecutingAssembly());
             else

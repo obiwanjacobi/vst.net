@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using ComWrapperGen.Meta;
 
 namespace ComWrapperGen
 {
@@ -10,6 +11,7 @@ namespace ComWrapperGen
         {
             private readonly StringBuilder _code;
             private readonly Context _context;
+            // TODO: track dependent assemblies for generating 'usings'
 
             public VTableGenerator(StringBuilder code, Context context)
             {
@@ -17,31 +19,30 @@ namespace ComWrapperGen
                 _context = context ?? throw new ArgumentNullException(nameof(context));
             }
 
-            public void GenInterface(Type intf)
+            public void GenInterface(InterfaceInfo intf)
             {
-                var methods = intf.GetMethods();
-
                 int i = 0;
-                // allocate vtable memory: one IntPtr for each method (add 3 extra slots for IUnknown)
-                _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName} = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof({_context.ComWrapperClassName}), IntPtr.Size * {methods.Length + 3}");
-                // IUnknown method ptrs
-                _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.QueryInterfaceVarName};");
-                _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.AddRefVarName};");
-                _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.ReleaseVarName};");
+                // allocate vtable memory: one IntPtr for each method (add 3 extra slots for IUnknown
+                _code.AppendLine($"{_context.Tabs}var {Naming.VTableVarName} = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof({_context.ComWrapperClassName}), IntPtr.Size * {intf.Methods.Count + 3});")
+                    // IUnknown method ptrs
+                    .AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.QueryInterfaceVarName};")
+                    .AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.AddRefVarName};")
+                    .AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.ReleaseVarName};")
+                ;
 
-                foreach (var method in methods)
+                foreach (var method in intf.Methods)
                 {
                     var abiName = $"{_context.AbiNamespace}.{intf.Name}{Naming.ManagedWrapper}.{method.Name}";
-                    var abiParams = String.Join(", ", method.GetParameters().Select(p => ToInteropTypeName(p.ParameterType)));
-                    _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = (IntPtr)(delegate* unmanaged<IntPtr, {abiParams}Int32>)&{abiName};");
+                    var abiParams = String.Join(", ", method.Parameters.Select(p => ToInteropTypeName(p.TypeInfo)));
+                    _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = (IntPtr)(delegate* unmanaged<IntPtr, {abiParams}, Int32>)&{abiName};");
                 }
             }
 
-            private string ToInteropTypeName(Type type)
+            private static string ToInteropTypeName(TypeInfo typeInfo)
             {
-                if (!type.IsValueType)
+                if (!typeInfo.IsValueType)
                     return "IntPtr";
-                return type.Name;
+                return typeInfo.Name.Name;
             }
         }
     }
