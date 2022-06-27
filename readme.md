@@ -53,6 +53,8 @@ Yes please!
 It is very much appreciated if you ...
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=HTE6LFLSC8RPL&lc=US&item_name=Jacobi%20Software&item_number=VST%2eNET&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
+Or with [Ko-Fi](https://ko-fi.com/obiwanjacobi) (requires a Ko-Fi account)
+
 ---
 
 ## License
