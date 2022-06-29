@@ -9,6 +9,7 @@ using MethodInfo = ComWrapperGen.Meta.MethodInfo;
 using ParameterInfo = ComWrapperGen.Meta.ParameterInfo;
 using TypeInfo = ComWrapperGen.Meta.TypeInfo;
 using NameInfo = ComWrapperGen.Meta.NameInfo;
+using System.Runtime.InteropServices;
 
 namespace ComWrapperGen;
 
@@ -62,7 +63,8 @@ internal class AssemblyScanner
                             IsInterface = method.ReturnType.IsInterface,
                             IsValueType = method.ReturnType.IsValueType,
                             IsBlittable = IsBlittable(method.ReturnType)
-                        }
+                        },
+                        PreserveSignature = PreserveSignature(method)
                     };
 
                     intf.Methods.Add(mthd);
@@ -122,6 +124,9 @@ internal class AssemblyScanner
             }
         }
     }
+
+    private bool PreserveSignature(System.Reflection.MethodInfo method)
+        => method.GetCustomAttribute<PreserveSigAttribute>() != null;
 
     private InterfaceInfo FindInterface(string fullName)
         => _interfaces.FirstOrDefault(i => i.Name.FullName == fullName);

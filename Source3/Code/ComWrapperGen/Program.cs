@@ -31,7 +31,6 @@ namespace ComWrapperGen
 
             var context = new Context
             {
-                AbiNamespace = "ABI",
                 ComWrapperClassName = "DebugTestComWrappers",
                 Namespace = "Test",
             };
@@ -42,6 +41,8 @@ namespace ComWrapperGen
                 gen.GenerateInterfaceVtable(intf);
                 gen.GenerateABI(intf);
             }
+
+            Console.WriteLine(gen.ToString());
         }
     }
 }

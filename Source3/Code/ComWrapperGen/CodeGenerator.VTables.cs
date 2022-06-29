@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using ComWrapperGen.Meta;
+using static System.Runtime.InteropServices.ComWrappers;
 
 namespace ComWrapperGen
 {
@@ -9,6 +10,8 @@ namespace ComWrapperGen
     {
         private class VTableGenerator
         {
+            private const int IUnknownMethodCount = 3;
+
             private readonly StringBuilder _code;
             private readonly Context _context;
             // TODO: track dependent assemblies for generating 'usings'
@@ -22,20 +25,26 @@ namespace ComWrapperGen
             public void GenInterface(InterfaceInfo intf)
             {
                 int i = 0;
-                // allocate vtable memory: one IntPtr for each method (add 3 extra slots for IUnknown
-                _code.AppendLine($"{_context.Tabs}var {Naming.VTableVarName} = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof({_context.ComWrapperClassName}), IntPtr.Size * {intf.Methods.Count + 3});")
+                _code.AppendLine($"{_context.Indent()}{{")
+                    // allocate vtable memory: one IntPtr for each method (add 3 extra slots for IUnknown)
+                    .AppendLine($"{_context.Indent(1)}var vTable = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof({_context.ComWrapperClassName}), IntPtr.Size * {intf.Methods.Count + IUnknownMethodCount});")
                     // IUnknown method ptrs
-                    .AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.QueryInterfaceVarName};")
-                    .AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.AddRefVarName};")
-                    .AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = {Naming.ReleaseVarName};")
+                    .AppendLine($"{_context.Indent()}vTable[{i++}] = {Naming.QueryInterfaceVarName};")
+                    .AppendLine($"{_context.Indent()}vTable[{i++}] = {Naming.AddRefVarName};")
+                    .AppendLine($"{_context.Indent()}vTable[{i++}] = {Naming.ReleaseVarName};")
                 ;
 
                 foreach (var method in intf.Methods)
                 {
-                    var abiName = $"{_context.AbiNamespace}.{intf.Name}{Naming.ManagedWrapper}.{method.Name}";
-                    var abiParams = String.Join(", ", method.Parameters.Select(p => ToInteropTypeName(p.TypeInfo)));
-                    _code.AppendLine($"{_context.Tabs}{Naming.VTableVarName}[{i++}] = (IntPtr)(delegate* unmanaged<IntPtr, {abiParams}, Int32>)&{abiName};");
+                    var abiName = $"{_context.AbiNamespace}.{intf.Name.Name}{Naming.ManagedWrapper}.{method.Name}";
+                    var abiParamTypes = String.Join(", ", method.Parameters.Select(p => ToInteropTypeName(p.TypeInfo)));
+                    _code.AppendLine($"{_context.Indent()}vTable[{i++}] = (IntPtr)(delegate* unmanaged<IntPtr, {abiParamTypes}, Int32>)&{abiName};");
                 }
+
+                _code
+                    .AppendLine()
+                    .AppendLine($"{_context.Indent()}{Naming.InterfacesProp}.Add(\"{intf.IID}\", vTable);")
+                    .AppendLine($"{_context.Indent(-1)}}}");
             }
 
             private static string ToInteropTypeName(TypeInfo typeInfo)
