@@ -38,14 +38,14 @@ namespace ComWrapperGen
                     // TODO: gen method impl.
                     if (method.PreserveSignature)
                     {
-                        var methodDecl = $"public static {method.ReturnType.Name} {method.Name}(System.IntPtr self, {string.Join(", ", method.Parameters.Select(p => $"{p.TypeInfo.Name} {p.Name}"))})";
+                        var methodDecl = $"public static {ToUnmanagedTypeName(method.ReturnType)} {method.Name}(System.IntPtr self, {string.Join(", ", method.Parameters.Select(p => $"{ToUnmanagedTypeName(p.TypeInfo)} {p.Name}"))})";
 
                         _abi.AppendLine($"{_context.Indent()}{methodDecl}")
                             .AppendLine($"{_context.Indent()}{{");
                     }
                     else
                     {
-                        var methodDecl = $"public static System.Int32 {method.Name}(System.IntPtr self, {string.Join(", ", method.Parameters.Select(p => $"{p.TypeInfo.Name} {p.Name}"))}, System.IntPtr result)";
+                        var methodDecl = $"public static System.Int32 {method.Name}(System.IntPtr self, {string.Join(", ", method.Parameters.Select(p => $"{ToUnmanagedTypeName(p.TypeInfo)} {p.Name}"))}, ref {ToUnmanagedTypeName(method.ReturnType)} result)";
 
                         _abi.AppendLine($"{_context.Indent()}{methodDecl}")
                             .AppendLine($"{_context.Indent()}{{");
@@ -58,6 +58,9 @@ namespace ComWrapperGen
                 _abi.AppendLine($"{_context.Indent(-1)}}}")
                 ;
             }
+
+            private static string ToUnmanagedTypeName(TypeInfo typeInfo)
+                => typeInfo.IsValueType ? typeInfo.Name.FullName : "System.IntPr";
         }
     }
 }

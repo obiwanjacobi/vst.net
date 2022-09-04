@@ -9,6 +9,6 @@ namespace ComWrapperGen
     {
         [PreserveSig]
         Int32 Method1(String name, Int32 count);
-        String Method2(String name);
+        String Method2(ref Guid iid, String name);
     }
 }
