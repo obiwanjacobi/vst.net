@@ -74,7 +74,7 @@ namespace Jacobi.Vst.Plugin.Framework.Plugin
             // special case for the AudioProcessor: IVstPluginAudioprecisionProcessor could also provide the IVstPluginAudioProcessor.
             if (type.Equals(typeof(IVstPluginAudioProcessor)))
             {
-                return (T)services.GetService<IVstPluginAudioPrecisionProcessor>();
+                return (T?)services.GetService<IVstPluginAudioPrecisionProcessor>();
             }
 
             // special case for parameters: can be on the active program

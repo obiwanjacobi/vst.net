@@ -117,7 +117,7 @@
 
         #endregion
 
-        private void Parameters_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Parameters_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (Categories == null) return;
 

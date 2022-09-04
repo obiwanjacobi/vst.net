@@ -45,7 +45,7 @@ There are several plugin [Samples](https://github.com/obiwanjacobi/vst.net/tree/
 ### Loading a Plugin
 
 After you have compiled a sample -or your own- plugin it is time to load it into a host application.
-If the build was successful you should have a deploy folder at `[MyProject]\bin\[x64|x86]\[Debug|Release]\net5.0\deploy`.
+If the build was successful you should have a deploy folder at `[MyProject]\bin\[x64|x86]\[Debug|Release]\net6.0\deploy`.
 
 > The **Deploy** folder contains everything needed to load the plugin into a host application.
 
@@ -56,9 +56,9 @@ Refer to the [Trouble Shooting](TroubleShooting.md) section for more info on pro
 
 ## Host
 
-Add the `VST.NET2-Host` (PreRelease!) NuGet package to your project.
+Add the `VST.NET2-Host` NuGet package to your project.
 
-This gives you two references:
+This gives you these references:
 
 - Jacobi.Vst.Core
 - Jacobi.Vst.Host.Interop
@@ -71,13 +71,13 @@ A good starting point for learning the VST.NET host API is the Host [Sample](htt
 ## Deployment
 
 For both the plugin Interop as well as the host Interop,
-you need to install the `C++ 2019 Redistributables` on the client machine.
-You need to match the Processor Architecture, either [32-bits](https://aka.ms/vs/16/release/VC_redist.x86.exe) or [64-bits](https://aka.ms/vs/16/release/VC_redist.x64.exe).
+you need to install the `C++ 2022 Redistributables` on the client machine.
+You need to match the Processor Architecture, either [32-bits](https://aka.ms/vs/17/release/VC_redist.x86.exe) or [64-bits](https://aka.ms/vs/17/release/VC_redist.x64.exe).
 If you have Visual Studio installed, these files are already present.
-But if you distribute your project made with VST.NET you need to install this on the client machine.
+But if you distribute your project made with VST.NET you need to install this on the client machine where your software will be running.
 
 As of `2.0.0-RC1` the nuget packages for plugin and host both contain a build file to create a deployment after each successful build.
-The `deploy` folder is at the same location as the project binaries: `[MyProject]\bin\[x64|x86]\[Debug|Release]\net5.0\deploy`.
+The `deploy` folder is at the same location as the project binaries: `[MyProject]\bin\[x64|x86]\[Debug|Release]\net6.0\deploy`.
 
 ---
 

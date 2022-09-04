@@ -28,7 +28,7 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="PluginEditorView.Designer.cs">PluginEditorView.Designer.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="PluginEditorView.resx">PluginEditorView.resx</ProjectItem>
       </Folder>
-      <ProjectItem ReplaceParameters="true" TargetFileName="DummyAudioProcessor.cs">DummyAudioProcessor.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="AudioProcessor.cs">AudioProcessor.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="MidiProcessor.cs">MidiProcessor.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Plugin.cs">Plugin.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="PluginCommandStub.cs">PluginCommandStub.cs</ProjectItem>

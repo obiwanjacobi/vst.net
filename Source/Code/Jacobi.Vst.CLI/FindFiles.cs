@@ -12,19 +12,20 @@ namespace Jacobi.Vst.CLI
         // Manually maintain them here.
         private static readonly string[] InteropDependencies = new[]
         {
-            @"Microsoft.Extensions.Configuration\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll",
-            @"Microsoft.Extensions.Configuration.Abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll",
-            @"Microsoft.Extensions.Configuration.FileExtensions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
-            @"Microsoft.Extensions.Configuration.Json\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll",
-            @"Microsoft.Extensions.FileProviders.Physical\5.0.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll",
-            @"Microsoft.Extensions.FileProviders.Abstractions\5.0.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
-            @"Microsoft.Extensions.Primitives\5.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll",
-            @"Microsoft.Extensions.FileSystemGlobbing\5.0.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
+            @"Microsoft.Extensions.Configuration\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll",
+            @"Microsoft.Extensions.Configuration.Abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll",
+            @"Microsoft.Extensions.Configuration.FileExtensions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
+            @"Microsoft.Extensions.Configuration.Json\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll",
+            @"Microsoft.Extensions.FileProviders.Physical\6.0.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"Microsoft.Extensions.FileProviders.Abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
+            @"Microsoft.Extensions.Primitives\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll",
+            @"Microsoft.Extensions.FileSystemGlobbing\6.0.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
         };
 
         // scan dependency files for these framework monikers. [hack]
         private static readonly string[] TargetFrameworkMonikers =
             {
+                "net6.0",
                 "net5.0",
                 "netcoreapp3.1",
                 "netstandard2.1",

@@ -116,7 +116,7 @@
             item.PropertyChanged -= new PropertyChangedEventHandler(CollectionItem_PropertyChanged);
         }
 
-        private void CollectionItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void CollectionItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             HasChanged = true;
         }
@@ -153,7 +153,7 @@
                 return items;
             }
 
-            private void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            private void Collection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
             {
                 if (e.NewItems != null)
                 {

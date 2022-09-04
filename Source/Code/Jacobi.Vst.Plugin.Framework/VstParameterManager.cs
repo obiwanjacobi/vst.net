@@ -105,7 +105,7 @@
             }
         }
 
-        private void Parameter_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Parameter_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (!(sender is VstParameter currentParameter)) return;
 

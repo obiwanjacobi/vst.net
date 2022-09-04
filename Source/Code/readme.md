@@ -1,6 +1,6 @@
-# VST.NET 2 for .NET core 3.1
+# VST.NET 2 for .NET 6
 
-The dotnet-core 3.1 version of VST.NET.
+The dotnet 6 version of VST.NET.
 
 ## Issues
 
@@ -25,14 +25,13 @@ The dotnet-core 3.1 version of VST.NET.
 
 * VS clean (target) should also delete the 'deploy' folder. Current task does not work.
 * VS Deploy (Configuration Manager): can we switch on that for vstnet deploy?
-* VS Project Template automate creation of zip. 
+* VS Project Template automate creation of zip.
     https://github.com/sayedihashimi/template-sample
     https://www.youtube.com/watch?v=GDNcxU0_OuE
     https://www.youtube.com/watch?v=rZFIbbxsGmc
 
-
 * Resize UI window/controls when host-frame resizes.
-* Plugin without Replacing crashes vsthost tring to call accumulating the plugin does not implement.
+* Plugin without Replacing crashes vsthost ?tring to call accumulating the plugin does not implement.
 * Reported: Adding NAudio to a plugin fails to produce a deploy folder?
 
 ## Refactor wishes
@@ -42,7 +41,7 @@ The dotnet-core 3.1 version of VST.NET.
     => Interop cannot find its package dependencies: https://github.com/dotnet/sdk/issues/11922
     => Interop project has hard coded paths to its managed nuget packages
     => CI Build fails for this reason on GitHub-Actions.
-* [Release] have conditionals to ommit debugging/trace and checks from release builds (perf).
+* [Release] have conditionals to omit debugging/trace and checks from release builds (perf).
     => need to build in dev with Debug and use Release for Deployment. Will not be transparent!
 * [CLI/Interop] Add CRT (C-runtime) to output bins and let CLI publish them?
     => adds **a lot** of extra dll's, most of which are not needed...?
@@ -57,7 +56,7 @@ The dotnet-core 3.1 version of VST.NET.
 ## Decisions
 
 * Will not multitarget the projects to support both netFx and netCore. 
-Future seems to lie with netCore (.NET5) that will be VST.NET v2.
+Future seems to lie with netCore (.NET5/.NET6) that will be VST.NET v2.
 Current v1.1 will continue to exist for current users but not be developed further (separate branch).
 VST.NET1 = VST2/netFx, VST.NET2 = VST2/netCore, VST.NET3 = VST3/netCore
 

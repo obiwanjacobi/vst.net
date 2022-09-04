@@ -110,9 +110,10 @@
         }
 
         //// event handler that receives Changed events from the VstMidiProgram instances.
-        private void VstMidiProgram_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void VstMidiProgram_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(VstMidiProgram.Name))
+            if (sender is not null &&
+                e.PropertyName == nameof(VstMidiProgram.Name))
             {
                 OnMidiProgramNameChanged(sender);
             }

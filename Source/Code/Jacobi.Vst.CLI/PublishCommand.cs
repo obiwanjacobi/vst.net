@@ -209,7 +209,7 @@ namespace Jacobi.Vst.CLI
             var options = new JsonSerializerOptions
             {
                 AllowTrailingCommas = true,
-                IgnoreNullValues = true,
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
                 PropertyNameCaseInsensitive = true,
 
             };

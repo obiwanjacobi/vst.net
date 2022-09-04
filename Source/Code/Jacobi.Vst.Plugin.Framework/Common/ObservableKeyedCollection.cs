@@ -12,6 +12,7 @@ namespace Jacobi.Vst.Plugin.Framework.Common
     /// <typeparam name="KeyT">The type of collection item keys.</typeparam>
     /// <typeparam name="ValueT">The type of collection items.</typeparam>
     public abstract class ObservableKeyedCollection<KeyT, ValueT> : KeyedCollection<KeyT, ValueT>, INotifyCollectionChanged
+        where KeyT : notnull
     {
         /// <summary>
         /// Contructs an empty instance.
@@ -107,9 +108,11 @@ namespace Jacobi.Vst.Plugin.Framework.Common
             {
                 NotifyCollectionChangedAction.Add => new NotifyCollectionChangedEventArgs(action, newItems),
                 NotifyCollectionChangedAction.Remove => new NotifyCollectionChangedEventArgs(action, oldItems),
-                NotifyCollectionChangedAction.Replace => new NotifyCollectionChangedEventArgs(action, newItems, oldItems),
+                NotifyCollectionChangedAction.Replace => newItems is not null && oldItems is not null 
+                    ? new NotifyCollectionChangedEventArgs(action, newItems, oldItems)
+                    : throw new ArgumentNullException($"For a Replace action both {nameof(newItems)} and {nameof(oldItems)} must be non-null."),
                 NotifyCollectionChangedAction.Reset => new NotifyCollectionChangedEventArgs(action),
-                _ => throw new NotSupportedException()
+                _ => throw new NotSupportedException($"Notify Collection Changed Action {action.ToString()} is not supported.")
             };
             CollectionChanged?.Invoke(this, args);
         }

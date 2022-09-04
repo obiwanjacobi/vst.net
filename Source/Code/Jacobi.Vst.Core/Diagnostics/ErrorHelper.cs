@@ -106,7 +106,7 @@
                 {
                     text.AppendLine("Loaded Types ----------------------------");
 
-                    foreach (Type loadedType in rtle.Types)
+                    foreach (Type? loadedType in rtle.Types)
                     {
                         if (loadedType != null)
                         {

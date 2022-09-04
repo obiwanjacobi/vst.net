@@ -51,7 +51,7 @@ namespace Jacobi.Vst.UnitTest.Framework
             target.CollectionChanged += (sender, e) =>
                 {
                     e.Action.Should().Be(NotifyCollectionChangedAction.Add);
-                    e.NewItems.Should().NotBeNullOrEmpty();
+                    e.NewItems.Should().NotBeNull(); //.NotBeNullOrEmpty();
                     e.NewItems[0].Should().NotBeNull();
 
                     callCount++;
@@ -79,7 +79,7 @@ namespace Jacobi.Vst.UnitTest.Framework
             target.CollectionChanged += (sender, e) =>
             {
                 e.Action.Should().Be(NotifyCollectionChangedAction.Remove);
-                e.OldItems.Should().NotBeNullOrEmpty();
+                e.OldItems.Should().NotBeNull();    //OrEmpty();
                 e.OldItems[0].Should().NotBeNull();
 
                 callCount++;
@@ -108,9 +108,9 @@ namespace Jacobi.Vst.UnitTest.Framework
             target.CollectionChanged += (sender, e) =>
             {
                 e.Action.Should().Be(NotifyCollectionChangedAction.Replace);
-                e.NewItems.Should().NotBeNullOrEmpty();
+                e.NewItems.Should().NotBeNull();    //OrEmpty();
                 e.NewItems[0].Should().NotBeNull();
-                e.OldItems.Should().NotBeNullOrEmpty();
+                e.OldItems.Should().NotBeNull();    //OrEmpty();
                 e.OldItems[0].Should().NotBeNull();
 
                 callCount++;
