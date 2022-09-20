@@ -2,27 +2,25 @@ name: VST.NET2 CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
-    - uses: microsoft/setup-msbuild@v1.0.0
-    - uses: nuget/setup-nuget@v1
-      with:
-        nuget-version: latest
-    - name: Restore Dependencies
-#      run: nuget restore Source/Code/Jacobi.Vst.sln
-      run: msbuild Source/Code/Jacobi.Vst.sln /t:restore
-    - name: Build VST.NET x64
-      run: msbuild Source/Code/Jacobi.Vst.sln /t:Rebuild /p:Configuration=Release /p:Platform=x64
-    - name: Build VST.NET x86
-      run: msbuild Source/Code/Jacobi.Vst.sln /t:Rebuild /p:Configuration=Release /p:Platform=x86
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: latest
+      - name: Restore Dependencies
+        run: dotnet restore Source/Code/Jacobi.Vst.sln
+      - name: Build VST.NET
+        run: dotnet build Source/Code/Jacobi.Vst.sln --configuration Release /p:Platform=x64
+      - name: Build VST.NET x86
+        run: dotnet build Source/Code/Jacobi.Vst.sln --configuration Release /p:Platform=x86
