@@ -8,3 +8,7 @@ This library supports building Steinberg's VST2 plugins and host applications.
 - [Trouble Shooting](TroubleShooting.md)
 - [Debugging](Debugging.md)
 - [Command Line Interface](cli.md)
+
+---
+
+- [Made with VST.NET](MadeWithVstNet.md)
