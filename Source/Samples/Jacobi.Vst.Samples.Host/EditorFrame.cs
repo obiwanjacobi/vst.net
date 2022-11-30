@@ -31,7 +31,9 @@ namespace Jacobi.Vst.Samples.Host
             this.Text = PluginCommandStub.Commands.GetEffectName();
             PluginCommandStub.Commands.EditorOpen(this.Handle);
 
-            return base.ShowDialog(owner);
+            //return base.ShowDialog(owner);
+            base.Show(owner);
+            return DialogResult.OK;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

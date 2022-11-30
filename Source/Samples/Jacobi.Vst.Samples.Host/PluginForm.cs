@@ -1,6 +1,7 @@
 ﻿using Jacobi.Vst.Core;
 using Jacobi.Vst.Host.Interop;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -209,6 +210,60 @@ namespace Jacobi.Vst.Samples.Host
             MessageBox.Show(this, "The plugin has passed the audio unchanged to its outputs.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void GenerateMidiBtn_Click(object sender, EventArgs e)
+        {
+            // plugin does not support processing midi
+            if (PluginContext.PluginCommandStub.Commands.CanDo(
+                VstCanDoHelper.ToString(VstPluginCanDo.ReceiveVstMidiEvent)) != VstCanDoResult.Yes)
+            {
+                MessageBox.Show(this, "This plugin does not process any midi.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            var noteCount = 10;
+            var midiNoteOns = 
+                Enumerable.Range(60, noteCount).Select(n => new byte[] { 0x81, (byte)n, 100 });
+            var midiNoteOffs =
+                Enumerable.Range(60, noteCount).Select(n => new byte[] { 0x80, (byte)n, 0 });
+
+            int inputCount = PluginContext.PluginInfo.AudioInputCount;
+            int outputCount = PluginContext.PluginInfo.AudioOutputCount;
+            int blockSize = 256;
+
+            using var inputMgr = new VstAudioBufferManager(inputCount, blockSize);
+            using var outputMgr = new VstAudioBufferManager(outputCount, blockSize);
+
+            PluginContext.PluginCommandStub.Commands.SetBlockSize(blockSize);
+            PluginContext.PluginCommandStub.Commands.SetSampleRate(44100f);
+
+            VstAudioBuffer[] inputBuffers = inputMgr.Buffers.ToArray();
+            VstAudioBuffer[] outputBuffers = outputMgr.Buffers.ToArray();
+
+            PluginContext.PluginCommandStub.Commands.MainsChanged(true);
+            PluginContext.PluginCommandStub.Commands.StartProcess();
+
+            var events = midiNoteOns.Select(note => new VstMidiEvent(0, 20, 0, note, 0, 0));
+
+            if (!PluginContext.PluginCommandStub.Commands.ProcessEvents(events.ToArray()))
+                MessageBox.Show(this, "The plugin returned false on ProcessEvents of note-on messages.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            
+            // Most MIDI plugins also implement a (dummy) audio processor.
+            PluginContext.PluginCommandStub.Commands.ProcessReplacing(inputBuffers, outputBuffers);
+
+            events = midiNoteOffs.Select(note => new VstMidiEvent(0, 0, 0, note, 0, 0));
+
+
+            if (!PluginContext.PluginCommandStub.Commands.ProcessEvents(events.ToArray()))
+                MessageBox.Show(this, "The plugin returned false on ProcessEvents of note-off messages.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            
+            PluginContext.PluginCommandStub.Commands.ProcessReplacing(inputBuffers, outputBuffers);
+
+            PluginContext.PluginCommandStub.Commands.StopProcess();
+            PluginContext.PluginCommandStub.Commands.MainsChanged(false);
+
+            MessageBox.Show(this, "The plugin has processed the midi events.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void EditorBtn_Click(object sender, EventArgs e)
         {
             var dlg = new EditorFrame
@@ -220,6 +275,5 @@ namespace Jacobi.Vst.Samples.Host
             dlg.ShowDialog(this);
             PluginContext.PluginCommandStub.Commands.MainsChanged(false);
         }
-
     }
 }
