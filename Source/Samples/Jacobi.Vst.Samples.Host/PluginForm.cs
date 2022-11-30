@@ -230,6 +230,8 @@ namespace Jacobi.Vst.Samples.Host
             int outputCount = PluginContext.PluginInfo.AudioOutputCount;
             int blockSize = 256;
 
+            // Most MIDI plugins also implement a (dummy) audio processor.
+            // So we allocate (dummy) audio buffers too...
             using var inputMgr = new VstAudioBufferManager(inputCount, blockSize);
             using var outputMgr = new VstAudioBufferManager(outputCount, blockSize);
 
@@ -247,11 +249,9 @@ namespace Jacobi.Vst.Samples.Host
             if (!PluginContext.PluginCommandStub.Commands.ProcessEvents(events.ToArray()))
                 MessageBox.Show(this, "The plugin returned false on ProcessEvents of note-on messages.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             
-            // Most MIDI plugins also implement a (dummy) audio processor.
             PluginContext.PluginCommandStub.Commands.ProcessReplacing(inputBuffers, outputBuffers);
 
             events = midiNoteOffs.Select(note => new VstMidiEvent(0, 0, 0, note, 0, 0));
-
 
             if (!PluginContext.PluginCommandStub.Commands.ProcessEvents(events.ToArray()))
                 MessageBox.Show(this, "The plugin returned false on ProcessEvents of note-off messages.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
