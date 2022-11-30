@@ -28,7 +28,7 @@
         /// <exception cref="ArgumentException">Thrown when the <paramref name="interopAssemblyPath"/> is empty.</exception>
         /// <exception cref="FileNotFoundException">Thrown when no suitable managed Plugin assembly could be found.</exception>
         /// <remarks>Note that the managed plugin assembly must be named exactly the same as the <paramref name="interopAssemblyPath"/>
-        /// but with a <b>.net.dll</b> or a <b>.net.vstdll</b> extension.</remarks>
+        /// but with a <b>.net.vst2</b> extension.</remarks>
         public void LoadAssemblyByDefaultName(string interopAssemblyPath)
         {
             Throw.IfArgumentIsNullOrEmpty(interopAssemblyPath, nameof(interopAssemblyPath));

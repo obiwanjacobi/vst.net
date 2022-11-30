@@ -78,7 +78,7 @@ namespace Jacobi.Vst.Samples.Host
 
         private void AddProperty(string propName, string propValue)
         {
-            ListViewItem lvItem = new ListViewItem(propName);
+            var lvItem = new ListViewItem(propName);
             lvItem.SubItems.Add(propValue);
 
             PluginPropertyListVw.Items.Add(lvItem);
@@ -117,7 +117,7 @@ namespace Jacobi.Vst.Samples.Host
 
         private void AddParameter(string paramName, string paramValue, string label, string shortLabel)
         {
-            ListViewItem lvItem = new ListViewItem(paramName);
+            var lvItem = new ListViewItem(paramName);
             lvItem.SubItems.Add(paramValue);
             lvItem.SubItems.Add(label);
             lvItem.SubItems.Add(shortLabel);
@@ -163,14 +163,14 @@ namespace Jacobi.Vst.Samples.Host
             int blockSize = 1024;
 
             // wrap these in using statements to automatically call Dispose and cleanup the unmanaged memory.
-            using VstAudioBufferManager inputMgr = new VstAudioBufferManager(inputCount, blockSize);
-            using VstAudioBufferManager outputMgr = new VstAudioBufferManager(outputCount, blockSize);
+            using var inputMgr = new VstAudioBufferManager(inputCount, blockSize);
+            using var outputMgr = new VstAudioBufferManager(outputCount, blockSize);
+
+            var rnd = new Random((int)DateTime.Now.Ticks);
 
             foreach (VstAudioBuffer buffer in inputMgr.Buffers)
             {
-                Random rnd = new Random((int)DateTime.Now.Ticks);
                 var span = buffer.AsSpan();
-
                 for (int i = 0; i < blockSize; i++)
                 {
                     // generate a value between -1.0 and 1.0
@@ -211,7 +211,7 @@ namespace Jacobi.Vst.Samples.Host
 
         private void EditorBtn_Click(object sender, EventArgs e)
         {
-            EditorFrame dlg = new EditorFrame
+            var dlg = new EditorFrame
             {
                 PluginCommandStub = PluginContext.PluginCommandStub
             };

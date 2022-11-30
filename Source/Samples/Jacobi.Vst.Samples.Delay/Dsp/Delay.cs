@@ -26,7 +26,7 @@ namespace Jacobi.Vst.Samples.Delay.Dsp
             _parameters.DelayTimeMgr.PropertyChanged += DelayTimeMgr_PropertyChanged;
         }
 
-        private void DelayTimeMgr_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DelayTimeMgr_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (Object.ReferenceEquals(_parameters.DelayTimeMgr, sender))
             {

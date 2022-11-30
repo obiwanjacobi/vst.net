@@ -6,16 +6,18 @@ namespace Jacobi.Vst.Samples.Host
 {
     /// <summary>
     /// The HostCommandStub class represents the part of the host that a plugin can call.
+    /// This is a dummy implementation that simply logs each call to a delegate.
     /// </summary>
-    class HostCommandStub : IVstHostCommandStub
+    internal sealed class DummyHostCommandStub : IVstHostCommandStub
     {
-        public HostCommandStub()
+        public DummyHostCommandStub()
         {
-            Commands = new HostCommands(this);
+            Commands = new DummyHostCommands(this);
         }
 
         /// <summary>
-        /// Raised when one of the methods is called.
+        /// Only there to show a log on the screen.
+        /// You would not normally do this, instead handle each call directly.
         /// </summary>
         public event EventHandler<PluginCalledEventArgs> PluginCalled;
 
@@ -33,11 +35,11 @@ namespace Jacobi.Vst.Samples.Host
 
         #endregion
 
-        private class HostCommands : IVstHostCommands20
+        private sealed class DummyHostCommands : IVstHostCommands20
         {
-            private readonly HostCommandStub _cmdStub;
+            private readonly DummyHostCommandStub _cmdStub;
 
-            public HostCommands(HostCommandStub cmdStub)
+            public DummyHostCommands(DummyHostCommandStub cmdStub)
             {
                 _cmdStub = cmdStub;
             }
@@ -48,7 +50,6 @@ namespace Jacobi.Vst.Samples.Host
             public bool BeginEdit(int index)
             {
                 _cmdStub.RaisePluginCalled("BeginEdit(" + index + ")");
-
                 return false;
             }
 
@@ -227,7 +228,7 @@ namespace Jacobi.Vst.Samples.Host
     }
 
     /// <summary>
-    /// Event arguments used when one of the mehtods is called.
+    /// Event arguments used when one of the methods is called.
     /// </summary>
     class PluginCalledEventArgs : EventArgs
     {

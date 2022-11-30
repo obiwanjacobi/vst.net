@@ -22,7 +22,7 @@ namespace Jacobi.Vst.Samples.Host
 
             foreach (VstPluginContext ctx in _plugins)
             {
-                ListViewItem lvItem = new ListViewItem(ctx.PluginCommandStub.Commands.GetEffectName());
+                var lvItem = new ListViewItem(ctx.PluginCommandStub.Commands.GetEffectName());
                 lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetProductString());
                 lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorString());
                 lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorVersion().ToString());
@@ -37,10 +37,10 @@ namespace Jacobi.Vst.Samples.Host
         {
             try
             {
-                HostCommandStub hostCmdStub = new HostCommandStub();
+                var hostCmdStub = new DummyHostCommandStub();
                 hostCmdStub.PluginCalled += new EventHandler<PluginCalledEventArgs>(HostCmdStub_PluginCalled);
 
-                VstPluginContext ctx = VstPluginContext.Create(pluginPath, hostCmdStub);
+                var ctx = VstPluginContext.Create(pluginPath, hostCmdStub);
 
                 // add custom data to the context
                 ctx.Set("PluginPath", pluginPath);
@@ -85,7 +85,7 @@ namespace Jacobi.Vst.Samples.Host
 
         private void HostCmdStub_PluginCalled(object sender, PluginCalledEventArgs e)
         {
-            HostCommandStub hostCmdStub = (HostCommandStub)sender;
+            var hostCmdStub = (DummyHostCommandStub)sender;
 
             // can be null when called from inside the plugin main entry point.
             if (hostCmdStub.PluginContext.PluginInfo != null)
@@ -127,7 +127,7 @@ namespace Jacobi.Vst.Samples.Host
 
         private void ViewPluginBtn_Click(object sender, EventArgs e)
         {
-            PluginForm dlg = new PluginForm
+            var dlg = new PluginForm
             {
                 PluginContext = SelectedPluginContext
             };

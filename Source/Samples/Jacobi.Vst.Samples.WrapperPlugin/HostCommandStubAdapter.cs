@@ -22,10 +22,10 @@ namespace Jacobi.Vst.Samples.WrapperPlugin.Host
             _hostCmdProxy = hostCmdProxy;
         }
 
-        public IVstPluginCommands24? OnLoadPlugin(string pluginPath)
+        public IVstPluginCommands24 OnLoadPlugin(string pluginPath)
         {
             LoadPlugin(pluginPath);
-            return PluginContext?.PluginCommandStub.Commands;
+            return PluginContext.PluginCommandStub.Commands;
         }
 
         public VstPluginInfo PluginInfo
@@ -52,7 +52,7 @@ namespace Jacobi.Vst.Samples.WrapperPlugin.Host
 
         #region IVstHostCommandStub Members
 
-        public IVstPluginContext? PluginContext { get; set; }
+        public IVstPluginContext PluginContext { get; set; }
 
         public IVstHostCommands20 Commands
         {

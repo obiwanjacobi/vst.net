@@ -11,7 +11,7 @@ namespace Jacobi.Vst.Samples.Delay.Dsp
         private const string ParameterCategoryName = "Delay";
 
         /// <summary>
-        /// Initializes the paramaters for the Delay component.
+        /// Initializes the parameters for the Delay component.
         /// </summary>
         /// <param name="parameters"></param>
         public DelayParameters(PluginParameters parameters)
