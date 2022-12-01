@@ -26,6 +26,16 @@ namespace Jacobi.Vst.Samples.Host
             PluginCalled?.Invoke(this, new PluginCalledEventArgs(message));
         }
 
+        /// <summary>
+        /// Attached to the EditorFrame for a plugin.
+        /// </summary>
+        public event EventHandler<SizeWindowEventArgs> SizeWindow;
+
+        private void RaiseSizeWindow(int width, int height)
+        {
+            SizeWindow?.Invoke(this, new SizeWindowEventArgs(width, height));
+        }
+
         #region IVstHostCommandsStub Members
 
         /// <inheritdoc />
@@ -183,6 +193,7 @@ namespace Jacobi.Vst.Samples.Host
             public bool SizeWindow(int width, int height)
             {
                 _cmdStub.RaisePluginCalled("SizeWindow(" + width + ", " + height + ")");
+                _cmdStub.RaiseSizeWindow(width, height);
                 return false;
             }
 
@@ -230,7 +241,7 @@ namespace Jacobi.Vst.Samples.Host
     /// <summary>
     /// Event arguments used when one of the methods is called.
     /// </summary>
-    class PluginCalledEventArgs : EventArgs
+    internal sealed class PluginCalledEventArgs : EventArgs
     {
         /// <summary>
         /// Constructs a new instance with a <paramref name="message"/>.
@@ -245,5 +256,24 @@ namespace Jacobi.Vst.Samples.Host
         /// Gets the message.
         /// </summary>
         public string Message { get; private set; }
+    }
+
+    /// <summary>
+    /// Event arguments used when the SizeWindow method is called.
+    /// </summary>
+    internal sealed class SizeWindowEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Constructs a new instance with a <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message"></param>
+        public SizeWindowEventArgs(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public int Width { get; }
+        public int Height { get; }
     }
 }

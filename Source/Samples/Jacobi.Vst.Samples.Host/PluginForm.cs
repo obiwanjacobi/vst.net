@@ -268,12 +268,15 @@ namespace Jacobi.Vst.Samples.Host
         {
             var dlg = new EditorFrame
             {
-                PluginCommandStub = PluginContext.PluginCommandStub
+                PluginCommandStub = PluginContext.PluginCommandStub,
+                HostCommandStub = (DummyHostCommandStub)PluginContext.HostCommandStub
             };
 
-            PluginContext.PluginCommandStub.Commands.MainsChanged(true);
+            
+
+            //PluginContext.PluginCommandStub.Commands.MainsChanged(true);
             dlg.ShowDialog(this);
-            PluginContext.PluginCommandStub.Commands.MainsChanged(false);
+            //PluginContext.PluginCommandStub.Commands.MainsChanged(false);
         }
     }
 }
