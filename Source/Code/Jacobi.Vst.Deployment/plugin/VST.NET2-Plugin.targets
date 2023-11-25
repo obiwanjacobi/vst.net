@@ -8,13 +8,13 @@
   <Target Name="InjectReference" BeforeTargets="ResolveAssemblyReferences">
     <ItemGroup Condition="'$(Platform)' == 'x86' or '$(Platform)' == 'x64'">
       <Reference Include="Jacobi.Vst.Core">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\net6.0\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
       </Reference>
       <Reference Include="Jacobi.Vst.Plugin.Framework">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\net6.0\$(Platform)\Jacobi.Vst.Plugin.Framework.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Plugin.Framework.dll</HintPath>
       </Reference>
       <Reference Include="Jacobi.Vst.Plugin.Interop">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\net6.0\$(Platform)\Jacobi.Vst.Plugin.Interop.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Plugin.Interop.dll</HintPath>
       </Reference>
     </ItemGroup>
   </Target>

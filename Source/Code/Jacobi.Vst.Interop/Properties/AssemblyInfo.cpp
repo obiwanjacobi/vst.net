@@ -16,7 +16,7 @@ using namespace System::Runtime::InteropServices;
 
 // legal stuff
 [assembly:AssemblyCompany("Jacobi Software")];
-[assembly:AssemblyCopyright("Copyright © 2008-2021 Jacobi Software")] ;
+[assembly:AssemblyCopyright("Copyright © 2008-2024 Jacobi Software")] ;
 [assembly:AssemblyTrademark("obiwanjacobi")] ;
 
 [assembly:AssemblyInformationalVersionAttribute("2.0.3")]

@@ -25,7 +25,8 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>JacobiVstInterop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <TargetFramework>.NET6.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <WindowsTargetPlatformMinVersion>7.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,6 +125,8 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
       <CLRImageType />
+      <Version>
+      </Version>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>
@@ -154,6 +157,8 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
       <CLRImageType />
+      <Version>
+      </Version>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>
@@ -191,6 +196,8 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+      <Version>
+      </Version>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>
@@ -228,6 +235,8 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+      <Version>
+      </Version>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>

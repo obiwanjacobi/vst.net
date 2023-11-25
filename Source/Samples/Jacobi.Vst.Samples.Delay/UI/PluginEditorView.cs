@@ -1,9 +1,11 @@
 ﻿using Jacobi.Vst.Plugin.Framework;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.Delay.UI
 {
+    [SupportedOSPlatform("windows")]
     public partial class PluginEditorView : UserControl
     {
         public PluginEditorView()

@@ -2,12 +2,14 @@
 {
     using System;
     using System.Drawing;
+    using System.Runtime.Versioning;
     using System.Windows.Forms;
 
     /// <summary>
     /// This wrapper class makes it easy to use a WinForms (User) Control as an Editor UI.
     /// </summary>
     /// <typeparam name="T">The type of WinForms (User) Control.</typeparam>
+    [SupportedOSPlatform("windows")]
     public sealed class WinFormsControlWrapper<T> : IDisposable
         where T : Control, new()
     {

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Jacobi.Vst.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Core
 {
@@ -8,10 +7,9 @@ namespace Jacobi.Vst.UnitTest.Core
     ///This is a test class for VstCanDoHelperTest and is intended
     ///to contain all VstCanDoHelperTest Unit Tests
     ///</summary>
-    [TestClass()]
     public class VstCanDoHelperTest
     {
-        [TestMethod()]
+        [Fact]
         public void Test_VstCanDoHelper_HostCanDo_ToString()
         {
             VstHostCanDo cando = VstHostCanDo.EditFile;
@@ -23,7 +21,7 @@ namespace Jacobi.Vst.UnitTest.Core
             actual.Should().Be("supplyIdle");
         }
 
-        [TestMethod()]
+        [Fact]
         public void Test_VstCanDoHelper_PluginCanDo_ToString()
         {
             VstPluginCanDo cando = VstPluginCanDo.Bypass;
@@ -35,7 +33,7 @@ namespace Jacobi.Vst.UnitTest.Core
             actual.Should().Be("1in1out");
         }
 
-        [TestMethod()]
+        [Fact]
         public void Test_VstCanDoHelper_ParsePluginCanDo()
         {
             string cando = "1in1out";
@@ -47,7 +45,7 @@ namespace Jacobi.Vst.UnitTest.Core
             actual.Should().Be(VstPluginCanDo.Bypass);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Test_VstCanDoHelper_ParseHostCanDo()
         {
             string cando = "editFile";

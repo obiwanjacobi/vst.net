@@ -121,6 +121,8 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
       <CLRImageType />
+      <Version>
+      </Version>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -152,6 +154,8 @@
       <EmbedManagedResourceFile>Properties\Resources.resx;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
       <CLRImageType />
+      <Version>
+      </Version>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -190,6 +194,8 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+      <Version>
+      </Version>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>
@@ -224,6 +230,8 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
       <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+      <Version>
+      </Version>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>manifest.xml</AdditionalManifestFiles>

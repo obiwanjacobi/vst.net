@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <VstNetCliExe Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">"$(MSBuildThisFileDirectory)/../tools/net6.0/vstnet.exe"</VstNetCliExe>
+    <VstNetCliExe Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">"$(MSBuildThisFileDirectory)/../tools/$(TargetFrameworkVersion)/vstnet.exe"</VstNetCliExe>
     <DeployOutput>"$(TargetDir)deploy"</DeployOutput>
   </PropertyGroup>
 
   <Target Name="DeployVstNet" AfterTargets="AfterBuild">
-    <Error Text="VST.NET2 targets .NET 6 only." Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
-    <Exec Command="$(VstNetCliExe) publish &quot;$(TargetPath)&quot; -o $(DeployOutput)" />
+    <Error Text="VST.NET2 targets .NET 6, 7 or 8 for windows only." Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
+    <Exec Command="$(VstNetCliExe) publish &quot;$(TargetPath)&quot; -o $(DeployOutput) -p $(Platform)" />
   </Target>
 
   <Target Name="CleanDeployVstNet" BeforeTargets="CoreClean" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
