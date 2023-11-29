@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="VST.NET2-Host" Version="2.1.1" />
+    <PackageReference Include="VST.NET2-Plugin" Version="2.1.1" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 
 namespace Jacobi.Vst.CLI
@@ -27,7 +26,8 @@ namespace Jacobi.Vst.CLI
                 DeployPath = @".\deploy";
             }
             FileExtensions.EnsureDirectoryExists(DeployPath);
-            DeployBinPath = Path.Combine(DeployPath, "bin");
+            //DeployBinPath = Path.Combine(DeployPath, "bin");
+            DeployBinPath = DeployPath;
             FileExtensions.EnsureDirectoryExists(DeployBinPath);
 
             var depsFile = GetDepsFile();

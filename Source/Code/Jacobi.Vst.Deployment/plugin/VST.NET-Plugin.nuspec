@@ -11,7 +11,7 @@
     <repository type="git" url="https://github.com/obiwanjacobi/vst.net" />
     <!--<icon></icon>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>VST.NET dotnet 6, 7 and 8 primary assemblies for building a VST2 plugin.</description>
+    <description>VST.NET dotnet 6, 7 and 8 primary assemblies for building a VST2 plugin in Windows.</description>
     <releaseNotes>
     </releaseNotes>
     <copyright>Copyright © 2008-2024 Jacobi Software</copyright>
@@ -39,8 +39,8 @@
     <file src="VST.NET2-Plugin.props" target="build"></file>
     <file src="..\VstNetDeploy.targets" target="build"></file>
 
-    <file src="..\..\x86\Release\Plugin\ijwhost.dll" target="runtimes\win10-x86\native"></file>
-    <file src="..\..\x64\Release\Plugin\ijwhost.dll" target="runtimes\win10-x64\native"></file>
+    <file src="..\..\x86\Release\Plugin\ijwhost.dll" target="runtimes\win-x86\native"></file>
+    <file src="..\..\x64\Release\Plugin\ijwhost.dll" target="runtimes\win-x64\native"></file>
     
     <!-- dotnet 6 -->
     <file src="..\..\x86\Release\Plugin\Jacobi.Vst.Plugin.Interop.dll" target="lib\net6.0-windows\x86"></file>
@@ -57,9 +57,9 @@
     <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net6.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net6.0-windows\x64"></file>
     <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net6.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net6.0-windows\x64"></file>
 
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net6.0\vstnet.exe" target="tools\net6.0"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net6.0\vstnet.dll" target="tools\net6.0"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net6.0\vstnet.runtimeconfig.json" target="tools\net6.0"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net6.0-windows\vstnet.exe" target="tools\net6.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net6.0-windows\vstnet.dll" target="tools\net6.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net6.0-windows\vstnet.runtimeconfig.json" target="tools\net6.0-windows"></file>
 
     <!-- dotnet 7 -->
     <file src="..\..\x86\Release\Plugin\Jacobi.Vst.Plugin.Interop.dll" target="lib\net7.0-windows\x86"></file>
@@ -76,9 +76,9 @@
     <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net7.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net7.0-windows\x64"></file>
     <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net7.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net7.0-windows\x64"></file>
 
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net7.0\vstnet.exe" target="tools\net7.0"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net7.0\vstnet.dll" target="tools\net7.0"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net7.0\vstnet.runtimeconfig.json" target="tools\net7.0"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net7.0-windows\vstnet.exe" target="tools\net7.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net7.0-windows\vstnet.dll" target="tools\net7.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net7.0-windows\vstnet.runtimeconfig.json" target="tools\net7.0-windows"></file>
 
     <!-- dotnet 8 -->
     <file src="..\..\x86\Release\Plugin\Jacobi.Vst.Plugin.Interop.dll" target="lib\net8.0-windows\x86"></file>
@@ -95,8 +95,8 @@
     <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net8.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net8.0-windows\x64"></file>
     <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net8.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net8.0-windows\x64"></file>
 
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net8.0\vstnet.exe" target="tools\net8.0"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net8.0\vstnet.dll" target="tools\net8.0"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net8.0\vstnet.runtimeconfig.json" target="tools\net8.0"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net8.0-windows\vstnet.exe" target="tools\net8.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net8.0-windows\vstnet.dll" target="tools\net8.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net8.0-windows\vstnet.runtimeconfig.json" target="tools\net8.0-windows"></file>
   </files>
 </package>

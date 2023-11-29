@@ -17,7 +17,7 @@ namespace Jacobi.Vst.Samples.Delay
         /// <summary>The product name.</summary>
         private const string ProductName = "VST.NET 2 Code Samples";
         /// <summary>The vendor name.</summary>
-        private const string VendorName = "Jacobi Software © 2008-2020";
+        private const string VendorName = "Jacobi Software © 2008-2024";
         /// <summary>The plugin version.</summary>
         private const int PluginVersion = 2000;
         /// <summary>Delay => Room Effect</summary>

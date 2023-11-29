@@ -15,7 +15,7 @@ namespace Jacobi.Vst.Samples.MidiNoteSampler
         /// </summary>
         public Plugin()
             : base("VST.NET 2 Midi Note Sampler", 36373435,
-                new VstProductInfo("VST.NET 2 Code Samples", "Jacobi Software © 2008-2020", 2000),
+                new VstProductInfo("VST.NET 2 Code Samples", "Jacobi Software © 2008-2024", 2000),
                 VstPluginCategory.Synth)
         { }
 

@@ -25,9 +25,9 @@ namespace Jacobi.Vst.CLI
         // scan dependency files for these framework monikers. [hack]
         private static readonly string[] TargetFrameworkMonikers =
             {
-                "net8.0",
-                "net7.0",
-                "net6.0",
+                "net8.0-windows",
+                "net7.0-windows",
+                "net6.0-windows",
                 //"net5.0",
                 //"netcoreapp3.1",
                 "netstandard2.1",
@@ -85,7 +85,9 @@ namespace Jacobi.Vst.CLI
                     var rt = kvp.Value.RuntimeTargets?.Keys.FirstOrDefault(rt => rt.Contains(Platform));
                     if (rt != null)
                     {
-                        paths.Add(Path.Combine(_nugetPath, kvp.Key, rt));
+                        var path = Path.Combine(_nugetPath, kvp.Key, rt);
+                        if (File.Exists(path))
+                            paths.Add(path);
                     }
                 }
             }
