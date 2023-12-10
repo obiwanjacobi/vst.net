@@ -7,7 +7,6 @@
   </Target>
   <Target Name="InjectReferenceHost" BeforeTargets="ResolveAssemblyReferences">
     <Message Text="Adding VST.NET host assemblies for $(Platform)." />
-    <!--<ItemGroup Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'x64')">-->
       <ItemGroup>
       <Reference Include="Jacobi.Vst.Core">
         <HintPath>$(MSBuildThisFileDirectory)..\lib\$$(TargetFramework)\$(Platform)\Jacobi.Vst.Core.dll</HintPath>

@@ -7,7 +7,6 @@
   </Target>
   <Target Name="InjectReferencePlugin" BeforeTargets="ResolveAssemblyReferences">
     <Message Importance="high" Text="Adding VST.NET plugin assemblies for $(Platform)." />
-    <!--<ItemGroup Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'x64')">-->
     <ItemGroup>
       <Reference Include="Jacobi.Vst.Core">
         <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Core.dll</HintPath>

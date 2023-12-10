@@ -1,20 +1,19 @@
-﻿namespace Jacobi.Vst.Samples.MidiNoteMapper
-{
-    using Jacobi.Vst.Plugin.Framework;
-    using Jacobi.Vst.Plugin.Framework.Plugin;
+﻿namespace Jacobi.Vst.Samples.MidiNoteMapper;
 
+using Jacobi.Vst.Plugin.Framework;
+using Jacobi.Vst.Plugin.Framework.Plugin;
+
+/// <summary>
+/// The public Plugin Command Stub implementation derived from the framework provided <see cref="StdPluginCommandStub"/>.
+/// </summary>
+public sealed class PluginCommandStub : StdPluginCommandStub
+{
     /// <summary>
-    /// The public Plugin Command Stub implementation derived from the framework provided <see cref="StdPluginCommandStub"/>.
+    /// Called by the framework to create the plugin root object.
     /// </summary>
-    public sealed class PluginCommandStub : StdPluginCommandStub
+    /// <returns>Never returns null.</returns>
+    protected override IVstPlugin CreatePluginInstance()
     {
-        /// <summary>
-        /// Called by the framework to create the plugin root object.
-        /// </summary>
-        /// <returns>Never returns null.</returns>
-        protected override IVstPlugin CreatePluginInstance()
-        {
-            return new Plugin();
-        }
+        return new Plugin();
     }
 }

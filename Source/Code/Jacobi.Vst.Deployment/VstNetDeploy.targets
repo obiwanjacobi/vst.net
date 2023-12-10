@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <Target Name="DeployVstNet" AfterTargets="AfterBuild">
-    <Error Text="VST.NET2 targets .NET 6, 7 or 8 for windows only." Condition="('$(TargetFrameworkIdentifier)' != '.NETCoreApp' or '$(OS)' != 'Windows_NT')" />
+    <Error Text="VST.NET2 targets .NET 6, 7 or 8 for Windows only." Condition="('$(TargetFrameworkIdentifier)' != '.NETCoreApp' or '$(OS)' != 'Windows_NT')" />
     <Exec Command="$(VstNetCliExe) publish &quot;$(TargetPath)&quot; -o $(DeployOutput) -p $(Platform)" />
   </Target>
 

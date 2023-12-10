@@ -1,6 +1,6 @@
-# VST.NET 2 for .NET 6
+# VST.NET 2 for .NET 6, 7 and 8
 
-The dotnet 6 version of VST.NET.
+The dotnet 6, 7 and 8 version of VST.NET.
 
 ## Issues
 
