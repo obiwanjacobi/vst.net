@@ -25,30 +25,32 @@ namespace Jacobi.Vst.CLI
         // scan dependency files for these framework monikers. [hack]
         private static readonly string[] TargetFrameworkMonikers =
             {
-                "net6.0",
-                "net5.0",
-                "netcoreapp3.1",
+                "net8.0-windows",
+                "net7.0-windows",
+                "net6.0-windows",
+                //"net5.0",
+                //"netcoreapp3.1",
                 "netstandard2.1",
                 "netstandard2.0",
-                "netstandard1.6",
-                "netstandard1.5",
-                "netstandard1.4",
-                "netstandard1.3",
-                "netstandard1.2",
-                "netstandard1.1",
-                "netstandard1.0"
+                //"netstandard1.6",
+                //"netstandard1.5",
+                //"netstandard1.4",
+                //"netstandard1.3",
+                //"netstandard1.2",
+                //"netstandard1.1",
+                //"netstandard1.0"
             };
 
         private readonly string _nugetPath;
         private readonly string _binPath;
+
+        public string Platform { get; set; }
 
         public FindFiles(string nugetPath, string binPath)
         {
             _nugetPath = nugetPath ?? throw new ArgumentNullException(nameof(nugetPath));
             _binPath = binPath ?? throw new ArgumentNullException(nameof(binPath));
         }
-
-        public ProcessorArchitecture ProcessorArchitecture { get; set; }
 
         public IEnumerable<string> GetFilePaths(TargetName targetName)
         {
@@ -77,14 +79,15 @@ namespace Jacobi.Vst.CLI
                 }
                 else
                 {
-                    var platform = ToString(ProcessorArchitecture);
-                    var dependencies = FindDependencyFiles(kvp.Key, platform);
+                    var dependencies = FindDependencyFiles(kvp.Key, Platform);
                     paths.AddRange(dependencies);
 
-                    var rt = kvp.Value.RuntimeTargets?.Keys.FirstOrDefault(rt => rt.Contains(platform));
+                    var rt = kvp.Value.RuntimeTargets?.Keys.FirstOrDefault(rt => rt.Contains(Platform));
                     if (rt != null)
                     {
-                        paths.Add(Path.Combine(_nugetPath, kvp.Key, rt));
+                        var path = Path.Combine(_nugetPath, kvp.Key, rt);
+                        if (File.Exists(path))
+                            paths.Add(path);
                     }
                 }
             }
@@ -109,29 +112,22 @@ namespace Jacobi.Vst.CLI
                     if (files.Any())
                         return files;
                 }
-                path = Path.Combine(path, platform);
-                if (Directory.Exists(path))
+
+                if (!String.IsNullOrEmpty(platform))
                 {
-                    var files = Directory.EnumerateFiles(path, fileExt);
-                    if (files.Any())
-                        return files;
+                    path = Path.Combine(path, platform);
+                    if (Directory.Exists(path))
+                    {
+                        var files = Directory.EnumerateFiles(path, fileExt);
+                        if (files.Any())
+                            return files;
+                    }
                 }
             }
 
             ConsoleOutput.Warning(
-                $"No library files (*.dll) could be found for: {dependency}!");
+                $"No library files (*.dll) could be found for: '{dependency}' ({platform})!");
             return Enumerable.Empty<string>();
-        }
-
-        private static string ToString(ProcessorArchitecture processorArchitecture)
-        {
-            return processorArchitecture switch
-            {
-                ProcessorArchitecture.Amd64 => "x64",
-                ProcessorArchitecture.X86 => "x86",
-                ProcessorArchitecture.MSIL => "AnyCPU",
-                _ => string.Empty
-            };
         }
     }
 }

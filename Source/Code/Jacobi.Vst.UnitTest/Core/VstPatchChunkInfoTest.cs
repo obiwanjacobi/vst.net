@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Jacobi.Vst.Core;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Jacobi.Vst.UnitTest.Core
 {
@@ -8,16 +7,15 @@ namespace Jacobi.Vst.UnitTest.Core
     ///This is a test class for VstPatchChunkInfoTest and is intended
     ///to contain all VstPatchChunkInfoTest Unit Tests
     ///</summary>
-    [TestClass()]
     public class VstPatchChunkInfoTest
     {
-        [TestMethod()]
+        [Fact]
         public void Test_VstPatchChunkInfoConstructor()
         {
-            int version = 1000;
-            int pluginId = 0x41424344;
-            int pluginVersion = 1234;
-            int elementCount = 56;
+            const int version = 1000;
+            const int pluginId = 0x41424344;
+            const int pluginVersion = 1234;
+            const int elementCount = 56;
 
             var pci = new VstPatchChunkInfo(version, pluginId, pluginVersion, elementCount);
 

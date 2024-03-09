@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <AssemblyName>vstnet</AssemblyName>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
     <Description>VST.NET 2 Command Line Interface</Description>
-    <Copyright>Copyright © 2008-2021 Jacobi Software</Copyright>
+    <Copyright>Copyright © 2008-2024 Jacobi Software</Copyright>
     <PackageTags>vst vstnet cli</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
@@ -19,6 +20,7 @@
     <PackageId>VST.NET2-CLI</PackageId>
     <AssemblyVersion>2.0.3.0</AssemblyVersion>
     <FileVersion>2.0.3.0</FileVersion>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">

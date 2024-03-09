@@ -2,62 +2,61 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Jacobi.Vst.Samples.WrapperPlugin.UI
+namespace Jacobi.Vst.Samples.WrapperPlugin.UI;
+
+internal partial class PluginFrame : UserControl
 {
-    internal partial class PluginFrame : UserControl
+    public delegate void LoadEvent(string pluginPath);
+
+    public event LoadEvent? OnLoadPlugin;
+
+    public IntPtr PluginWnd { get; internal set; }
+
+    public PluginFrame()
     {
-        public delegate void LoadEvent(string pluginPath);
+        InitializeComponent();
 
-        public event LoadEvent? OnLoadPlugin;
+        PluginWnd = PluginPanel.Handle;
+    }
 
-        public IntPtr PluginWnd { get; internal set; }
-
-        public PluginFrame()
+    private void Browse_Click(object sender, EventArgs e)
+    {
+        if (OpenFileDialog.ShowDialog(this) == DialogResult.OK)
         {
-            InitializeComponent();
-
-            PluginWnd = PluginPanel.Handle;
+            PluginPath.Text = OpenFileDialog.FileName;
+            RaiseOnReload();
         }
+    }
 
-        private void Browse_Click(object sender, EventArgs e)
+    public string LoadedPluginPath
+    {
+        get { return PluginPath.Text; }
+        set { PluginPath.Text = value; }
+    }
+
+    public void SizeForPlugin(ref Rectangle pluginRect)
+    {
+        SetBounds(0, 0, pluginRect.Width, pluginRect.Height, BoundsSpecified.Size);
+    }
+
+    public void DetachPluginUI()
+    {
+        PluginPanel.Controls.Clear();
+    }
+
+    private void RaiseOnReload()
+    {
+        try
         {
-            if (OpenFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                PluginPath.Text = OpenFileDialog.FileName;
-                RaiseOnReload();
-            }
+            OnLoadPlugin?.Invoke(PluginPath.Text);
         }
-
-        public string LoadedPluginPath
+        catch (Exception e)
         {
-            get { return PluginPath.Text; }
-            set { PluginPath.Text = value; }
-        }
-
-        public void SizeForPlugin(ref Rectangle pluginRect)
-        {
-            SetBounds(0, 0, pluginRect.Width, pluginRect.Height, BoundsSpecified.Size);
-        }
-
-        public void DetachPluginUI()
-        {
-            PluginPanel.Controls.Clear();
-        }
-
-        private void RaiseOnReload()
-        {
-            try
-            {
-                OnLoadPlugin?.Invoke(PluginPath.Text);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(this,
-                    e.ToString(),
-                    "VST.NET 2 Wrapper Plugin",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            MessageBox.Show(this,
+                e.ToString(),
+                "VST.NET 2 Wrapper Plugin",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
     }
 }

@@ -4,149 +4,148 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace Jacobi.Vst.Samples.Host
+namespace Jacobi.Vst.Samples.Host;
+
+partial class MainForm : Form
 {
-    partial class MainForm : Form
+    private List<VstPluginContext> _plugins = new List<VstPluginContext>();
+
+    public MainForm()
     {
-        private List<VstPluginContext> _plugins = new List<VstPluginContext>();
+        InitializeComponent();
+        Text = "VST.NET 2 Dummy Host Sample";
+    }
 
-        public MainForm()
+    private void FillPluginList()
+    {
+        PluginListVw.Items.Clear();
+
+        foreach (VstPluginContext ctx in _plugins)
         {
-            InitializeComponent();
-            Text = "VST.NET 2 Dummy Host Sample";
+            var lvItem = new ListViewItem(ctx.PluginCommandStub.Commands.GetEffectName());
+            lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetProductString());
+            lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorString());
+            lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorVersion().ToString());
+            lvItem.SubItems.Add(ctx.Find<string>("PluginPath"));
+            lvItem.Tag = ctx;
+
+            PluginListVw.Items.Add(lvItem);
+        }
+    }
+
+    private VstPluginContext OpenPlugin(string pluginPath)
+    {
+        try
+        {
+            var hostCmdStub = new DummyHostCommandStub();
+            hostCmdStub.PluginCalled += new EventHandler<PluginCalledEventArgs>(HostCmdStub_PluginCalled);
+
+            var ctx = VstPluginContext.Create(pluginPath, hostCmdStub);
+
+            // add custom data to the context
+            ctx.Set("PluginPath", pluginPath);
+            ctx.Set("HostCmdStub", hostCmdStub);
+
+            // actually open the plugin itself
+            ctx.PluginCommandStub.Commands.Open();
+
+            return ctx;
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(this, e.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void FillPluginList()
+        return null;
+    }
+
+    private void ReleaseAllPlugins()
+    {
+        foreach (VstPluginContext ctx in _plugins)
         {
-            PluginListVw.Items.Clear();
-
-            foreach (VstPluginContext ctx in _plugins)
-            {
-                var lvItem = new ListViewItem(ctx.PluginCommandStub.Commands.GetEffectName());
-                lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetProductString());
-                lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorString());
-                lvItem.SubItems.Add(ctx.PluginCommandStub.Commands.GetVendorVersion().ToString());
-                lvItem.SubItems.Add(ctx.Find<string>("PluginPath"));
-                lvItem.Tag = ctx;
-
-                PluginListVw.Items.Add(lvItem);
-            }
+            // dispose of all (unmanaged) resources
+            ctx.Dispose();
         }
 
-        private VstPluginContext OpenPlugin(string pluginPath)
+        _plugins.Clear();
+    }
+
+    private VstPluginContext SelectedPluginContext
+    {
+        get
         {
-            try
+            if (PluginListVw.SelectedItems.Count > 0)
             {
-                var hostCmdStub = new DummyHostCommandStub();
-                hostCmdStub.PluginCalled += new EventHandler<PluginCalledEventArgs>(HostCmdStub_PluginCalled);
-
-                var ctx = VstPluginContext.Create(pluginPath, hostCmdStub);
-
-                // add custom data to the context
-                ctx.Set("PluginPath", pluginPath);
-                ctx.Set("HostCmdStub", hostCmdStub);
-
-                // actually open the plugin itself
-                ctx.PluginCommandStub.Commands.Open();
-
-                return ctx;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(this, e.ToString(), Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return (VstPluginContext)PluginListVw.SelectedItems[0].Tag;
             }
 
             return null;
         }
+    }
 
-        private void ReleaseAllPlugins()
+    private void HostCmdStub_PluginCalled(object sender, PluginCalledEventArgs e)
+    {
+        var hostCmdStub = (DummyHostCommandStub)sender;
+
+        // can be null when called from inside the plugin main entry point.
+        if (hostCmdStub.PluginContext.PluginInfo != null)
         {
-            foreach (VstPluginContext ctx in _plugins)
-            {
-                // dispose of all (unmanaged) resources
-                ctx.Dispose();
-            }
-
-            _plugins.Clear();
+            Debug.WriteLine("Plugin " + hostCmdStub.PluginContext.PluginInfo.PluginID + " called:" + e.Message);
         }
-
-        private VstPluginContext SelectedPluginContext
+        else
         {
-            get
-            {
-                if (PluginListVw.SelectedItems.Count > 0)
-                {
-                    return (VstPluginContext)PluginListVw.SelectedItems[0].Tag;
-                }
-
-                return null;
-            }
+            Debug.WriteLine("The loading Plugin called:" + e.Message);
         }
+    }
 
-        private void HostCmdStub_PluginCalled(object sender, PluginCalledEventArgs e)
+    private void BrowseBtn_Click(object sender, EventArgs e)
+    {
+        OpenFileDlg.FileName = PluginPathTxt.Text;
+
+        if (OpenFileDlg.ShowDialog(this) == DialogResult.OK)
         {
-            var hostCmdStub = (DummyHostCommandStub)sender;
-
-            // can be null when called from inside the plugin main entry point.
-            if (hostCmdStub.PluginContext.PluginInfo != null)
-            {
-                Debug.WriteLine("Plugin " + hostCmdStub.PluginContext.PluginInfo.PluginID + " called:" + e.Message);
-            }
-            else
-            {
-                Debug.WriteLine("The loading Plugin called:" + e.Message);
-            }
+            PluginPathTxt.Text = OpenFileDlg.FileName;
         }
+    }
 
-        private void BrowseBtn_Click(object sender, EventArgs e)
+    private void AddBtn_Click(object sender, EventArgs e)
+    {
+        VstPluginContext ctx = OpenPlugin(PluginPathTxt.Text);
+
+        if (ctx != null)
         {
-            OpenFileDlg.FileName = PluginPathTxt.Text;
+            _plugins.Add(ctx);
 
-            if (OpenFileDlg.ShowDialog(this) == DialogResult.OK)
-            {
-                PluginPathTxt.Text = OpenFileDlg.FileName;
-            }
+            FillPluginList();
         }
+    }
 
-        private void AddBtn_Click(object sender, EventArgs e)
+    private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        ReleaseAllPlugins();
+    }
+
+    private void ViewPluginBtn_Click(object sender, EventArgs e)
+    {
+        var dlg = new PluginForm
         {
-            VstPluginContext ctx = OpenPlugin(PluginPathTxt.Text);
+            PluginContext = SelectedPluginContext
+        };
 
-            if (ctx != null)
-            {
-                _plugins.Add(ctx);
+        dlg.ShowDialog(this);
+    }
 
-                FillPluginList();
-            }
-        }
+    private void DeleteBtn_Click(object sender, EventArgs e)
+    {
+        VstPluginContext ctx = SelectedPluginContext;
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        if (ctx != null)
         {
-            ReleaseAllPlugins();
-        }
+            ctx.Dispose();
 
-        private void ViewPluginBtn_Click(object sender, EventArgs e)
-        {
-            var dlg = new PluginForm
-            {
-                PluginContext = SelectedPluginContext
-            };
+            _plugins.Remove(ctx);
 
-            dlg.ShowDialog(this);
-        }
-
-        private void DeleteBtn_Click(object sender, EventArgs e)
-        {
-            VstPluginContext ctx = SelectedPluginContext;
-
-            if (ctx != null)
-            {
-                ctx.Dispose();
-
-                _plugins.Remove(ctx);
-
-                FillPluginList();
-            }
+            FillPluginList();
         }
     }
 }

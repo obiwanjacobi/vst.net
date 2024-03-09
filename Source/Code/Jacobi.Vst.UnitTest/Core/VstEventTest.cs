@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Jacobi.Vst.Core;
 using Jacobi.Vst.Core.Legacy;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace Jacobi.Vst.UnitTest.Core
@@ -10,10 +9,9 @@ namespace Jacobi.Vst.UnitTest.Core
     ///This is a test class for VstMidiEventTest and is intended
     ///to contain all VstMidiEventTest Unit Tests
     ///</summary>
-    [TestClass()]
     public class VstEventTest
     {
-        [TestMethod()]
+        [Fact]
         public void Test_VstMidiEvent_Constructor()
         {
             int deltaFrames = 12;
@@ -37,7 +35,7 @@ namespace Jacobi.Vst.UnitTest.Core
             me.NoteOffVelocity.Should().Be(noteOffVelocity);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Test_VstMidiSysExEvent_Constructor()
         {
             int deltaFrames = 12;
@@ -53,7 +51,7 @@ namespace Jacobi.Vst.UnitTest.Core
             me.Data[2].Should().Be(sysexData[2]);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Test_VstGenericEvent_Constructor()
         {
             var eventType = VstEventTypes.LegacyAudioEvent;
@@ -71,43 +69,40 @@ namespace Jacobi.Vst.UnitTest.Core
             ge.Data[2].Should().Be(data[2]);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void Test_VstGenericEvent_MidiEvent()
         {
             VstEventTypes eventType = VstEventTypes.MidiEvent;
             int deltaFrames = 12;
             byte[] data = new byte[] { 0x9C, 0x7F, 0x40 };
 
-            new VstGenericEvent(eventType, deltaFrames, data);
+            Action err = () => new VstGenericEvent(eventType, deltaFrames, data);
 
-            Assert.Fail("Should have thrown an excepction.");
+            err.Should().Throw<ArgumentException>();
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void Test_VstGenericEvent_MidiSysExEvent()
         {
             VstEventTypes eventType = VstEventTypes.MidiSysExEvent;
             int deltaFrames = 12;
             byte[] data = new byte[] { 0x9C, 0x7F, 0x40 };
 
-            new VstGenericEvent(eventType, deltaFrames, data);
+            Action err = () => new VstGenericEvent(eventType, deltaFrames, data);
 
-            Assert.Fail("Should have thrown an excepction.");
+            err.Should().Throw<ArgumentException>();
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(ArgumentException))]
+        [Fact]
         public void Test_VstGenericEvent_Unknown()
         {
             VstEventTypes eventType = VstEventTypes.Unknown;
             int deltaFrames = 12;
             byte[] data = new byte[] { 0x9C, 0x7F, 0x40 };
 
-            new VstGenericEvent(eventType, deltaFrames, data);
+            Action err = () => new VstGenericEvent(eventType, deltaFrames, data);
 
-            Assert.Fail("Should have thrown an excepction.");
+            err.Should().Throw<ArgumentException>();
         }
     }
 }

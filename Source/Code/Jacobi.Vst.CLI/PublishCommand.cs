@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 
 namespace Jacobi.Vst.CLI
@@ -27,7 +26,8 @@ namespace Jacobi.Vst.CLI
                 DeployPath = @".\deploy";
             }
             FileExtensions.EnsureDirectoryExists(DeployPath);
-            DeployBinPath = Path.Combine(DeployPath, "bin");
+            //DeployBinPath = Path.Combine(DeployPath, "bin");
+            DeployBinPath = DeployPath;
             FileExtensions.EnsureDirectoryExists(DeployBinPath);
 
             var depsFile = GetDepsFile();
@@ -40,18 +40,16 @@ namespace Jacobi.Vst.CLI
             var plugin = GetPluginFile();
             var host = GetHostFile();
 
-            var assemblyName = AssemblyName.GetAssemblyName(plugin ?? host);
-
             if (host != null)
             {
-                CopyDependencies(depsFile, DeployPath, assemblyName.ProcessorArchitecture);
+                CopyDependencies(depsFile, DeployPath);
                 PublishHost(host);
                 return true;
             }
 
             if (plugin != null)
             {
-                CopyDependencies(depsFile, DeployBinPath, assemblyName.ProcessorArchitecture);
+                CopyDependencies(depsFile, DeployBinPath);
                 PublishPlugin(plugin);
                 return true;
             }
@@ -64,8 +62,9 @@ namespace Jacobi.Vst.CLI
         public string DeployPath { get; set; }
         public string DeployBinPath { get; set; }
         public string FilePath { get; set; }
+        public string Platform { get; set; }
 
-        private void CopyDependencies(string depsFile, string deployPath, ProcessorArchitecture processorArchitecture)
+        private void CopyDependencies(string depsFile, string deployPath)
         {
             ConsoleOutput.Progress($"Copying dependencies to: {deployPath}");
             using var stream = File.OpenRead(depsFile);
@@ -73,7 +72,7 @@ namespace Jacobi.Vst.CLI
 
             var finder = new FindFiles(NuGetPath, Path.GetDirectoryName(FilePath))
             {
-                ProcessorArchitecture = processorArchitecture
+                Platform = Platform
             };
             var paths = finder.GetFilePaths(json.Targets.First().Value);
 

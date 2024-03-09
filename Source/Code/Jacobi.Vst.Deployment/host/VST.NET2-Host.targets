@@ -2,23 +2,23 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildThisFileDirectory)/VstNetDeploy.targets" />
   
-  <Target Name="PlatformCheck" BeforeTargets="InjectReference" Condition="(('$(Platform)' != 'x86') and ('$(Platform)' != 'x64'))">
+  <Target Name="PlatformCheckHost" BeforeTargets="InjectReferenceHost" Condition="('$(Platform)' != 'x86' and '$(Platform)' != 'x64')">
     <Error  Text="$(MSBuildThisFileName) is not built for '$(Platform)'. You need to specify either platform x86 or x64." />
   </Target>
-  <Target Name="InjectReference" BeforeTargets="ResolveAssemblyReferences">
-    <!--<ItemGroup Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'x64') and '$(TargetFramework)'=='net6.0'">-->
-    <ItemGroup Condition="'$(Platform)' == 'x86' or '$(Platform)' == 'x64'">
+  <Target Name="InjectReferenceHost" BeforeTargets="ResolveAssemblyReferences">
+    <Message Text="Adding VST.NET host assemblies for $(Platform)." />
+      <ItemGroup>
       <Reference Include="Jacobi.Vst.Core">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\net6.0\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
       </Reference>
       <Reference Include="Jacobi.Vst.Host.Interop">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\net6.0\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
       </Reference>
     </ItemGroup>
   </Target>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\runtimes\win10-$(Platform)\native\ijwhost.dll">
+    <None Include="$(MSBuildThisFileDirectory)..\runtimes\win-$(Platform)\native\ijwhost.dll">
       <Link>Ijwhost.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -3,190 +3,189 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Jacobi.Vst.Samples.MidiNoteMapper.UI
+namespace Jacobi.Vst.Samples.MidiNoteMapper.UI;
+
+/// <summary>
+/// The plugin custom editor UI.
+/// </summary>
+internal sealed partial class MidiNoteMapperView : UserControl
 {
     /// <summary>
-    /// The plugin custom editor UI.
+    /// Constructs a new instance.
     /// </summary>
-    internal sealed partial class MidiNoteMapperView : UserControl
+    public MidiNoteMapperView()
     {
-        /// <summary>
-        /// Constructs a new instance.
-        /// </summary>
-        public MidiNoteMapperView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private MapNoteItemList? _noteMap;
-        /// <summary>
-        /// Gets or sets the list of note map items that are shown in the editor.
-        /// </summary>
-        public MapNoteItemList? NoteMap
-        {
-            get { return _noteMap; }
-            set { _noteMap = value; FillList(); }
-        }
+    private MapNoteItemList? _noteMap;
+    /// <summary>
+    /// Gets or sets the list of note map items that are shown in the editor.
+    /// </summary>
+    public MapNoteItemList? NoteMap
+    {
+        get { return _noteMap; }
+        set { _noteMap = value; FillList(); }
+    }
 
-        /// <summary>
-        /// Contains a queue with note-on note numbers currently playing.
-        /// </summary>
-        public Queue<byte>? NoteOnEvents { get; set; }
+    /// <summary>
+    /// Contains a queue with note-on note numbers currently playing.
+    /// </summary>
+    public Queue<byte>? NoteOnEvents { get; set; }
 
-        /// <summary>
-        /// Updates the UI with the <see cref="NoteOnEvents"/>.
-        /// </summary>
-        public void ProcessIdle()
+    /// <summary>
+    /// Updates the UI with the <see cref="NoteOnEvents"/>.
+    /// </summary>
+    public void ProcessIdle()
+    {
+        if (NoteOnEvents != null &&
+            NoteOnEvents.Count > 0)
         {
-            if (NoteOnEvents != null &&
-                NoteOnEvents.Count > 0)
+            byte noteNo;
+
+            lock (((ICollection)NoteOnEvents).SyncRoot)
             {
-                byte noteNo;
-
-                lock (((ICollection)NoteOnEvents).SyncRoot)
-                {
-                    noteNo = NoteOnEvents.Dequeue();
-                }
-
-                SelectNoteMapItem(noteNo);
-            }
-        }
-
-        private void SelectNoteMapItem(byte noteNo)
-        {
-            MapListVw.SelectedIndices.Clear();
-
-            if (MapListVw.Items.ContainsKey(noteNo.ToString()))
-            {
-                MapListVw.Items[noteNo.ToString()].Selected = true;
-            }
-        }
-
-        private void FillList()
-        {
-            if (!this.Created || NoteMap == null)
-                return;
-
-            MapNoteItem? selectedItem = null;
-
-            if (MapListVw.SelectedItems.Count > 0)
-            {
-                selectedItem = (MapNoteItem?)MapListVw.SelectedItems[0].Tag;
+                noteNo = NoteOnEvents.Dequeue();
             }
 
-            MapListVw.Items.Clear();
+            SelectNoteMapItem(noteNo);
+        }
+    }
 
-            foreach (MapNoteItem item in NoteMap)
-            {
-                ListViewItem lvItem = new ListViewItem(item.TriggerNoteNumber.ToString());
-                lvItem.SubItems.Add(item.KeyName);
-                lvItem.SubItems.Add(item.OutputNoteNumber.ToString());
-                lvItem.Tag = item;
-                lvItem.Selected = (selectedItem == item);
-                lvItem.Name = item.TriggerNoteNumber.ToString();
+    private void SelectNoteMapItem(byte noteNo)
+    {
+        MapListVw.SelectedIndices.Clear();
 
-                MapListVw.Items.Add(lvItem);
-            }
+        if (MapListVw.Items.ContainsKey(noteNo.ToString()))
+        {
+            MapListVw.Items[noteNo.ToString()].Selected = true;
+        }
+    }
 
-            if ((selectedItem == null || MapListVw.SelectedItems.Count == 0)
-                && MapListVw.Items.Count > 0)
-            {
-                MapListVw.Items[0].Selected = true;
-            }
+    private void FillList()
+    {
+        if (!this.Created || NoteMap == null)
+            return;
+
+        MapNoteItem? selectedItem = null;
+
+        if (MapListVw.SelectedItems.Count > 0)
+        {
+            selectedItem = (MapNoteItem?)MapListVw.SelectedItems[0].Tag;
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
-        {
-            if (NoteMap == null)
-                return;
+        MapListVw.Items.Clear();
 
+        foreach (MapNoteItem item in NoteMap)
+        {
+            ListViewItem lvItem = new ListViewItem(item.TriggerNoteNumber.ToString());
+            lvItem.SubItems.Add(item.KeyName);
+            lvItem.SubItems.Add(item.OutputNoteNumber.ToString());
+            lvItem.Tag = item;
+            lvItem.Selected = (selectedItem == item);
+            lvItem.Name = item.TriggerNoteNumber.ToString();
+
+            MapListVw.Items.Add(lvItem);
+        }
+
+        if ((selectedItem == null || MapListVw.SelectedItems.Count == 0)
+            && MapListVw.Items.Count > 0)
+        {
+            MapListVw.Items[0].Selected = true;
+        }
+    }
+
+    private void AddBtn_Click(object sender, EventArgs e)
+    {
+        if (NoteMap == null)
+            return;
+
+        MapNoteDetails dlg = new MapNoteDetails
+        {
+            MapNoteItem = new MapNoteItem()
+            {
+                KeyName = "New Note Map",
+                TriggerNoteNumber = 64,
+                OutputNoteNumber = 64
+            }
+        };
+
+        if (dlg.ShowDialog(this) == DialogResult.OK)
+        {
+            if (NoteMap.Contains(dlg.MapNoteItem.TriggerNoteNumber))
+            {
+                NoteMap.Remove(NoteMap[dlg.MapNoteItem.TriggerNoteNumber]);
+            }
+
+            NoteMap.Add(dlg.MapNoteItem);
+            FillList();
+        }
+    }
+
+    private void EditBtn_Click(object sender, EventArgs e)
+    {
+        if (NoteMap == null)
+            return;
+
+        if (MapListVw.SelectedItems.Count > 0)
+        {
             MapNoteDetails dlg = new MapNoteDetails
             {
-                MapNoteItem = new MapNoteItem()
-                {
-                    KeyName = "New Note Map",
-                    TriggerNoteNumber = 64,
-                    OutputNoteNumber = 64
-                }
+                MapNoteItem = (MapNoteItem)MapListVw.SelectedItems[0].Tag
             };
 
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                if (NoteMap.Contains(dlg.MapNoteItem.TriggerNoteNumber))
-                {
-                    NoteMap.Remove(NoteMap[dlg.MapNoteItem.TriggerNoteNumber]);
-                }
-
-                NoteMap.Add(dlg.MapNoteItem);
                 FillList();
             }
         }
+    }
 
-        private void EditBtn_Click(object sender, EventArgs e)
+    private void DeleteBtn_Click(object sender, EventArgs e)
+    {
+        if (NoteMap == null)
+            return;
+
+        if (MapListVw.SelectedItems.Count > 0)
         {
-            if (NoteMap == null)
-                return;
+            MapNoteItem item = (MapNoteItem)MapListVw.SelectedItems[0].Tag;
 
-            if (MapListVw.SelectedItems.Count > 0)
+            if (MessageBox.Show(this,
+                String.Format("Are you sure you want to delete {0}.", item.KeyName),
+                "Delete a Note Map Item.",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                MapNoteDetails dlg = new MapNoteDetails
-                {
-                    MapNoteItem = (MapNoteItem)MapListVw.SelectedItems[0].Tag
-                };
-
-                if (dlg.ShowDialog(this) == DialogResult.OK)
-                {
-                    FillList();
-                }
+                NoteMap.Remove(item);
+                FillList();
             }
         }
+    }
 
-        private void DeleteBtn_Click(object sender, EventArgs e)
+    private void MapListVw_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+        if (NoteMap == null)
+            return;
+
+        ListViewHitTestInfo hitInfo = MapListVw.HitTest(e.Location);
+
+        if (hitInfo.Item != null)
         {
-            if (NoteMap == null)
-                return;
+            hitInfo.Item.Selected = true;
 
-            if (MapListVw.SelectedItems.Count > 0)
+            MapNoteDetails dlg = new MapNoteDetails
             {
-                MapNoteItem item = (MapNoteItem)MapListVw.SelectedItems[0].Tag;
+                MapNoteItem = (MapNoteItem)hitInfo.Item.Tag
+            };
 
-                if (MessageBox.Show(this,
-                    String.Format("Are you sure you want to delete {0}.", item.KeyName),
-                    "Delete a Note Map Item.",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    NoteMap.Remove(item);
-                    FillList();
-                }
+            if (dlg.ShowDialog(this) == DialogResult.OK)
+            {
+                FillList();
             }
         }
+    }
 
-        private void MapListVw_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (NoteMap == null)
-                return;
-
-            ListViewHitTestInfo hitInfo = MapListVw.HitTest(e.Location);
-
-            if (hitInfo.Item != null)
-            {
-                hitInfo.Item.Selected = true;
-
-                MapNoteDetails dlg = new MapNoteDetails
-                {
-                    MapNoteItem = (MapNoteItem)hitInfo.Item.Tag
-                };
-
-                if (dlg.ShowDialog(this) == DialogResult.OK)
-                {
-                    FillList();
-                }
-            }
-        }
-
-        private void MidiNoteMapperUI_Load(object sender, EventArgs e)
-        {
-            FillList();
-        }
+    private void MidiNoteMapperUI_Load(object sender, EventArgs e)
+    {
+        FillList();
     }
 }

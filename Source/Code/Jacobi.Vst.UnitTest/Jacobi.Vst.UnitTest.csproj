@@ -1,24 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <Version>2.0.0</Version>
-    <Authors>Marc Jacobi</Authors>
-    <Company>Jacobi Software</Company>
-    <Product>VST.NET</Product>
+    <IsTestProject>true</IsTestProject>
     <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.7.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.6.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
@@ -26,14 +25,7 @@
     <ProjectReference Include="..\Jacobi.Vst.CLI\Jacobi.Vst.CLI.csproj" />
     <ProjectReference Include="..\Jacobi.Vst.Core\Jacobi.Vst.Core.csproj" />
     <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Host.Interop.vcxproj" />
-    <ProjectReference Include="..\Jacobi.Vst.Interop\Jacobi.Vst.Plugin.Interop.vcxproj" />
     <ProjectReference Include="..\Jacobi.Vst.Plugin.Framework\Jacobi.Vst.Plugin.Framework.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Update="CLI\TestNuGet.config.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

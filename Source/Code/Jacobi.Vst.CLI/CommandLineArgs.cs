@@ -12,6 +12,7 @@ namespace Jacobi.Vst.CLI
                 Arguments = new[] {
                     new ArgumentInfo { Property = nameof(PublishCommand.FilePath), Description="The file to publish." },
                     new ArgumentInfo { Property = nameof(PublishCommand.DeployPath), Name = "-o", Description="The output directory that will receive all the files." },
+                    new ArgumentInfo { Property = nameof(PublishCommand.Platform), Name = "-p", Description="The CPU architecture platform (x64/x86)." },
                 }
             }
         };
