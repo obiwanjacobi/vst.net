@@ -9,10 +9,10 @@
     <Message Text="Adding VST.NET host assemblies for $(Platform)." />
       <ItemGroup>
       <Reference Include="Jacobi.Vst.Core">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\$$(TargetFramework)\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Core.dll</HintPath>
       </Reference>
       <Reference Include="Jacobi.Vst.Host.Interop">
-        <HintPath>$(MSBuildThisFileDirectory)..\lib\$$(TargetFramework)\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
+        <HintPath>$(MSBuildThisFileDirectory)..\lib\$(TargetFramework)\$(Platform)\Jacobi.Vst.Host.Interop.dll</HintPath>
       </Reference>
     </ItemGroup>
   </Target>
