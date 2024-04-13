@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <Version>2.1.0</Version>
     <Authors>Marc Jacobi</Authors>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VST.NET2-Host" Version="2.1.1" />
+    <PackageReference Include="VST.NET2-Host" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
