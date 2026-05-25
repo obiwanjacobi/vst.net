@@ -25,7 +25,8 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>JacobiVstInterop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <TargetFramework>.NET6.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
+    <CLRSupport>NetCore</CLRSupport>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -288,8 +289,8 @@
   <ItemGroup>
     <!-- Reference all of Windows Forms -->
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="manifest.xml" />

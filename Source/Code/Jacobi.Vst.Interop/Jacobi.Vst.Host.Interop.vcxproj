@@ -25,8 +25,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>JacobiVstInterop</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <TargetFramework>net6.0</TargetFramework>
-    <WindowsTargetPlatformMinVersion>7.0</WindowsTargetPlatformMinVersion>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

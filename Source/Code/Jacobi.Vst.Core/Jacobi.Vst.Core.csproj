@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;net7.0-windows;net8.0-windows;net9.0-windows</TargetFrameworks>
+    <TargetFrameworks>net9.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <AssemblyVersion>2.0.1.0</AssemblyVersion>
     <FileVersion>2.0.1.0</FileVersion>
@@ -18,6 +18,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>vst vstnet</PackageTags>
     <Description>VST.NET 2 Core Library</Description>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">
@@ -55,8 +56,9 @@
   <ItemGroup Condition="'$(TargetFramework)'=='net8.0-windows'">
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net9.0-windows'">
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
