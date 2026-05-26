@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AssemblyName>vstnet</AssemblyName>
-    <Version>2.0.3</Version>
+    <Version>2.1.10</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
     <Description>VST.NET 2 Command Line Interface</Description>
-    <Copyright>Copyright © 2008-2024 Jacobi Software</Copyright>
+    <Copyright>Copyright © 2008-2026 Jacobi Software</Copyright>
     <PackageTags>vst vstnet cli</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
@@ -18,8 +18,8 @@
     <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>VST.NET2-CLI</PackageId>
-    <AssemblyVersion>2.0.3.0</AssemblyVersion>
-    <FileVersion>2.0.3.0</FileVersion>
+    <AssemblyVersion>2.1.10.0</AssemblyVersion>
+    <FileVersion>2.1.10.0</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 

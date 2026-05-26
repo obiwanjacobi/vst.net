@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace Jacobi.Vst.CLI
 {
@@ -12,34 +11,23 @@ namespace Jacobi.Vst.CLI
         // Manually maintain them here.
         private static readonly string[] InteropDependencies = new[]
         {
-            @"Microsoft.Extensions.Configuration\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll",
-            @"Microsoft.Extensions.Configuration.Abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll",
-            @"Microsoft.Extensions.Configuration.FileExtensions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
-            @"Microsoft.Extensions.Configuration.Json\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll",
-            @"Microsoft.Extensions.FileProviders.Physical\6.0.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll",
-            @"Microsoft.Extensions.FileProviders.Abstractions\6.0.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
-            @"Microsoft.Extensions.Primitives\6.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll",
-            @"Microsoft.Extensions.FileSystemGlobbing\6.0.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll",
+            @"Microsoft.Extensions.Configuration\10.0.0\lib\net10.0\Microsoft.Extensions.Configuration.dll",
+            @"Microsoft.Extensions.Configuration.Abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll",
+            @"Microsoft.Extensions.Configuration.FileExtensions\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
+            @"Microsoft.Extensions.Configuration.Json\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.Json.dll",
+            @"Microsoft.Extensions.FileProviders.Abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
+            @"Microsoft.Extensions.FileProviders.Physical\10.0.8\lib\net10.0\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"Microsoft.Extensions.FileSystemGlobbing\10.0.8\lib\net10.0\Microsoft.Extensions.FileSystemGlobbing.dll",
+            @"Microsoft.Extensions.Primitives\10.0.8\lib\net10.0\Microsoft.Extensions.Primitives.dll",
         };
 
         // scan dependency files for these framework monikers. [hack]
         private static readonly string[] TargetFrameworkMonikers =
-            {
-                "net8.0-windows",
-                "net7.0-windows",
-                "net6.0-windows",
-                //"net5.0",
-                //"netcoreapp3.1",
-                "netstandard2.1",
-                "netstandard2.0",
-                //"netstandard1.6",
-                //"netstandard1.5",
-                //"netstandard1.4",
-                //"netstandard1.3",
-                //"netstandard1.2",
-                //"netstandard1.1",
-                //"netstandard1.0"
-            };
+        {
+            "net10.0-windows",
+            "netstandard2.1",
+            "netstandard2.0",
+        };
 
         private readonly string _nugetPath;
         private readonly string _binPath;

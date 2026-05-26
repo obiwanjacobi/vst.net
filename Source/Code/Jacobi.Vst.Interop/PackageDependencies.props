@@ -3,10 +3,11 @@
   <PropertyGroup>
     <!-- Maintain packages manually -->
     <PackageDir>$(USERPROFILE)\.nuget\packages\</PackageDir>
-    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\5.0.0\lib\netstandard2.0</MsExtConfig>
-    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\5.0.0\lib\netstandard2.0</MsExtConfigAbstr>
-    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\5.0.0\lib\netstandard2.0</MsExtConfigFileExt>
-    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\5.0.0\lib\netstandard2.1</MsExtConfigJson>
+    <MicrosoftExtensionsConfigurationVersion>10.0.8</MicrosoftExtensionsConfigurationVersion>
+    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfig>
+    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfigAbstr>
+    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfigFileExt>
+    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfigJson>
     <PackageDependencies>$(MsExtConfig);$(MsExtConfigAbstr);$(MsExtConfigJson);$(MsExtConfigFileExt)</PackageDependencies>
   </PropertyGroup>
 </Project>
