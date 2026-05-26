@@ -39,7 +39,7 @@ In order to eliminate problem areas, you should check if your plugin is correct 
 
 During development of VST.NET itself the [vsthost](https://www.hermannseib.com/english/vsthost.htm) is used as a test host.
 If your plugin does not load in this host you know that you are missing files.
-You just need to test if the plugin loads (File->New Plugin...).
+You only need to test if the plugin loads (File->New Plugin...).
 
 ### Copy `Ijwhost.dll` into host .exe's folder
 
