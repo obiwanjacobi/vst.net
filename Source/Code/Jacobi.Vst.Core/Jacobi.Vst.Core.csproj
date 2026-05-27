@@ -18,6 +18,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>vst vstnet</PackageTags>
     <Description>VST.NET 2 Core Library</Description>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('../../../../../../_keyfile/Jacobi.snk')">
@@ -28,12 +29,12 @@
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>Jacobi.Vst.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>Jacobi.Vst.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

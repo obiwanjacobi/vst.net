@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32804.467
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11819.183 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{78E1AA3A-44D0-4A1E-860A-0EF5048ED6F9}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jacobi.Vst.Core", "Jacobi.V
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{7CBB90A0-0CBB-4380-AC6D-B9686CC17724}"
 	ProjectSection(SolutionItems) = preProject
+		Jacobi.Vst.Deployment\buildall-debug.cmd = Jacobi.Vst.Deployment\buildall-debug.cmd
 		Jacobi.Vst.Deployment\buildall.cmd = Jacobi.Vst.Deployment\buildall.cmd
+		Jacobi.Vst.Deployment\pack-debug.cmd = Jacobi.Vst.Deployment\pack-debug.cmd
 		Jacobi.Vst.Deployment\pack.cmd = Jacobi.Vst.Deployment\pack.cmd
 		Jacobi.Vst.Deployment\push-nuget.cmd = Jacobi.Vst.Deployment\push-nuget.cmd
 		Jacobi.Vst.Deployment\push-test.cmd = Jacobi.Vst.Deployment\push-test.cmd

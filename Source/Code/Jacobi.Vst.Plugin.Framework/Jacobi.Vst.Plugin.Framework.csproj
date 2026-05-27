@@ -27,11 +27,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>Jacobi.Vst.Plugin.Framework.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>Jacobi.Vst.Plugin.Framework.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

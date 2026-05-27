@@ -29,26 +29,26 @@
     <file src="VST.NET2-Plugin.props" target="build"></file>
     <file src="..\VstNetDeploy.targets" target="build"></file>
 
-    <file src="..\..\x86\Release\Plugin\ijwhost.dll" target="runtimes\win-x86\native"></file>
-    <file src="..\..\x64\Release\Plugin\ijwhost.dll" target="runtimes\win-x64\native"></file>
+    <file src="..\..\x86\$config$\Plugin\ijwhost.dll" target="runtimes\win-x86\native"></file>
+    <file src="..\..\x64\$config$\Plugin\ijwhost.dll" target="runtimes\win-x64\native"></file>
     
     <!-- dotnet 10 -->
-    <file src="..\..\x86\Release\Plugin\Jacobi.Vst.Plugin.Interop.dll" target="lib\net10.0-windows\x86"></file>
-    <file src="..\..\x86\Release\Plugin\Jacobi.Vst.Plugin.Interop.xml" target="lib\net10.0-windows\x86"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x86\Release\net10.0-windows\Jacobi.Vst.Core.dll" target="lib\net10.0-windows\x86"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x86\Release\net10.0-windows\Jacobi.Vst.Core.xml" target="lib\net10.0-windows\x86"></file>
-    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x86\Release\net10.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net10.0-windows\x86"></file>
-    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x86\Release\net10.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net10.0-windows\x86"></file>
+    <file src="..\..\x86\$config$\Plugin\Jacobi.Vst.Plugin.Interop.dll" target="lib\net10.0-windows\x86"></file>
+    <file src="..\..\x86\$config$\Plugin\Jacobi.Vst.Plugin.Interop.xml" target="lib\net10.0-windows\x86"></file>
+    <file src="..\..\Jacobi.Vst.Core\bin\x86\$config$\net10.0-windows\Jacobi.Vst.Core.dll" target="lib\net10.0-windows\x86"></file>
+    <file src="..\..\Jacobi.Vst.Core\bin\x86\$config$\net10.0-windows\Jacobi.Vst.Core.xml" target="lib\net10.0-windows\x86"></file>
+    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x86\$config$\net10.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net10.0-windows\x86"></file>
+    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x86\$config$\net10.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net10.0-windows\x86"></file>
 
-    <file src="..\..\x64\Release\Plugin\Jacobi.Vst.PLugin.Interop.dll" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\x64\Release\Plugin\Jacobi.Vst.PLugin.Interop.xml" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\net10.0-windows\Jacobi.Vst.Core.dll" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\net10.0-windows\Jacobi.Vst.Core.xml" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net10.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\Release\net10.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\x64\$config$\Plugin\Jacobi.Vst.PLugin.Interop.dll" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\x64\$config$\Plugin\Jacobi.Vst.PLugin.Interop.xml" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\Jacobi.Vst.Core\bin\x64\$config$\net10.0-windows\Jacobi.Vst.Core.dll" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\Jacobi.Vst.Core\bin\x64\$config$\net10.0-windows\Jacobi.Vst.Core.xml" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\$config$\net10.0-windows\Jacobi.Vst.Plugin.Framework.dll" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\Jacobi.Vst.Plugin.Framework\bin\x64\$config$\net10.0-windows\Jacobi.Vst.Plugin.Framework.xml" target="lib\net10.0-windows\x64"></file>
 
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net10.0-windows\vstnet.exe" target="tools\net10.0-windows"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net10.0-windows\vstnet.dll" target="tools\net10.0-windows"></file>
-    <file src="..\..\Jacobi.Vst.CLI\bin\Release\net10.0-windows\vstnet.runtimeconfig.json" target="tools\net10.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\$config$\net10.0-windows\vstnet.exe" target="tools\net10.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\$config$\net10.0-windows\vstnet.dll" target="tools\net10.0-windows"></file>
+    <file src="..\..\Jacobi.Vst.CLI\bin\$config$\net10.0-windows\vstnet.runtimeconfig.json" target="tools\net10.0-windows"></file>
   </files>
 </package>
