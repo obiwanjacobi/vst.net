@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.MidiNoteMapper.UI;
@@ -19,6 +20,7 @@ internal sealed partial class MapNoteDetails : Form
     /// <summary>
     /// Gets or sets the note map item that is edited in the form.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public MapNoteItem? MapNoteItem { get; set; }
 
     private void EntityToForm()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,6 +11,7 @@ internal partial class PluginFrame : UserControl
 
     public event LoadEvent? OnLoadPlugin;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public IntPtr PluginWnd { get; internal set; }
 
     public PluginFrame()
@@ -28,6 +30,7 @@ internal partial class PluginFrame : UserControl
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string LoadedPluginPath
     {
         get { return PluginPath.Text; }

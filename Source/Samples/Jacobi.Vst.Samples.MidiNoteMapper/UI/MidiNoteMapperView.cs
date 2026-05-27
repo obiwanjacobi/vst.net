@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Jacobi.Vst.Samples.MidiNoteMapper.UI;
@@ -22,6 +23,7 @@ internal sealed partial class MidiNoteMapperView : UserControl
     /// <summary>
     /// Gets or sets the list of note map items that are shown in the editor.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public MapNoteItemList? NoteMap
     {
         get { return _noteMap; }
@@ -31,6 +33,7 @@ internal sealed partial class MidiNoteMapperView : UserControl
     /// <summary>
     /// Contains a queue with note-on note numbers currently playing.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Queue<byte>? NoteOnEvents { get; set; }
 
     /// <summary>

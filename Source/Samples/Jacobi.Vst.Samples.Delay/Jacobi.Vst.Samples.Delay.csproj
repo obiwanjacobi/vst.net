@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows</TargetFrameworks>
-    <Version>2.1.0</Version>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
+    <Version>2.1.10</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET Samples</Product>
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="VST.NET2-Plugin" Version="2.1.0" />
+    <PackageReference Include="VST.NET2-Plugin" Version="2.1.10" />
   </ItemGroup>
 
 </Project>

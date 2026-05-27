@@ -1,9 +1,9 @@
-﻿using Jacobi.Vst.Core;
-using Jacobi.Vst.Host.Interop;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Jacobi.Vst.Core;
+using Jacobi.Vst.Host.Interop;
 
 namespace Jacobi.Vst.Samples.Host;
 
@@ -14,6 +14,7 @@ partial class PluginForm : Form
         InitializeComponent();
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public VstPluginContext PluginContext { get; set; }
 
     private void DataToForm()
@@ -221,7 +222,7 @@ partial class PluginForm : Form
         }
 
         var noteCount = 10;
-        var midiNoteOns = 
+        var midiNoteOns =
             Enumerable.Range(60, noteCount).Select(n => new byte[] { 0x81, (byte)n, 100 });
         var midiNoteOffs =
             Enumerable.Range(60, noteCount).Select(n => new byte[] { 0x80, (byte)n, 0 });
@@ -248,14 +249,14 @@ partial class PluginForm : Form
 
         if (!PluginContext.PluginCommandStub.Commands.ProcessEvents(events.ToArray()))
             MessageBox.Show(this, "The plugin returned false on ProcessEvents of note-on messages.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        
+
         PluginContext.PluginCommandStub.Commands.ProcessReplacing(inputBuffers, outputBuffers);
 
         events = midiNoteOffs.Select(note => new VstMidiEvent(0, 0, 0, note, 0, 0));
 
         if (!PluginContext.PluginCommandStub.Commands.ProcessEvents(events.ToArray()))
             MessageBox.Show(this, "The plugin returned false on ProcessEvents of note-off messages.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        
+
         PluginContext.PluginCommandStub.Commands.ProcessReplacing(inputBuffers, outputBuffers);
 
         PluginContext.PluginCommandStub.Commands.StopProcess();
@@ -272,7 +273,7 @@ partial class PluginForm : Form
             HostCommandStub = (DummyHostCommandStub)PluginContext.HostCommandStub
         };
 
-        
+
 
         //PluginContext.PluginCommandStub.Commands.MainsChanged(true);
         dlg.ShowDialog(this);

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using Jacobi.Vst.Core.Host;
 
@@ -20,8 +21,10 @@ public partial class EditorFrame : Form
     /// <summary>
     /// Gets or sets the Plugin Command Stub.
     /// </summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public IVstPluginCommandStub PluginCommandStub { get; set; }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal DummyHostCommandStub HostCommandStub { get; set; }
 
     /// <summary>

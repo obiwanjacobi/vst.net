@@ -37,8 +37,8 @@
     
     <file src="..\..\x64\Release\Host\Jacobi.Vst.Host.Interop.dll" target="lib\net10.0-windows\x64"></file>
     <file src="..\..\x64\Release\Host\Jacobi.Vst.Host.Interop.xml" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\net8.0-windows\Jacobi.Vst.Core.dll" target="lib\net10.0-windows\x64"></file>
-    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\net8.0-windows\Jacobi.Vst.Core.xml" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\net10.0-windows\Jacobi.Vst.Core.dll" target="lib\net10.0-windows\x64"></file>
+    <file src="..\..\Jacobi.Vst.Core\bin\x64\Release\net10.0-windows\Jacobi.Vst.Core.xml" target="lib\net10.0-windows\x64"></file>
 
     <file src="..\..\Jacobi.Vst.CLI\bin\Release\net10.0-windows\vstnet.exe" target="tools\net10.0-windows"></file>
     <file src="..\..\Jacobi.Vst.CLI\bin\Release\net10.0-windows\vstnet.dll" target="tools\net10.0-windows"></file>
