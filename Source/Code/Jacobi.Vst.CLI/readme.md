@@ -40,5 +40,5 @@ This will result in `C:\deploy` containing the following files:
 - Microsoft.Extensions.Configuration.dll
 - < other dependent assemblies >
 - MyProject.MyPlugin.dll  (renamed from Jacobi.Vst.Interop.dll)
-- MyProject.MyPlugin.net.vstdll (renamed from the original MyProject.MyPlugin.dll)
+- MyProject.MyPlugin.net.vst2 (renamed from the original MyProject.MyPlugin.dll)
 - MyProject.MyPlugin.runtimeconfig.json
