@@ -3,11 +3,12 @@
   <PropertyGroup>
     <!-- Maintain packages manually -->
     <PackageDir>$(USERPROFILE)\.nuget\packages\</PackageDir>
-    <MicrosoftExtensionsConfigurationVersion>10.0.8</MicrosoftExtensionsConfigurationVersion>
-    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfig>
-    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfigAbstr>
-    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfigFileExt>
-    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\$(MicrosoftExtensionsConfigurationVersion)\lib\net10.0</MsExtConfigJson>
+    <DotNetVersion>net8.0</DotNetVersion>
+    <MicrosoftExtensionsConfigurationVersion>8.0.0</MicrosoftExtensionsConfigurationVersion>
+    <MsExtConfig>$(PackageDir)microsoft.extensions.configuration\$(MicrosoftExtensionsConfigurationVersion)\lib\$(DotNetVersion)</MsExtConfig>
+    <MsExtConfigAbstr>$(PackageDir)microsoft.extensions.configuration.abstractions\$(MicrosoftExtensionsConfigurationVersion)\lib\$(DotNetVersion)</MsExtConfigAbstr>
+    <MsExtConfigFileExt>$(PackageDir)microsoft.extensions.configuration.fileextensions\$(MicrosoftExtensionsConfigurationVersion)\lib\$(DotNetVersion)</MsExtConfigFileExt>
+    <MsExtConfigJson>$(PackageDir)microsoft.extensions.configuration.json\$(MicrosoftExtensionsConfigurationVersion)\lib\$(DotNetVersion)</MsExtConfigJson>
     <PackageDependencies>$(MsExtConfig);$(MsExtConfigAbstr);$(MsExtConfigJson);$(MsExtConfigFileExt)</PackageDependencies>
   </PropertyGroup>
 </Project>

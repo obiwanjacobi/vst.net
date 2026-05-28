@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net10.0-windows</TargetFrameworks>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>2.1.10</Version>
+    <Version>2.1.8</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET Samples</Product>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="VST.NET2-Host" Version="2.1.10" />
+    <PackageReference Include="VST.NET2-Host" Version="2.1.8" />
   </ItemGroup>
 
 </Project>

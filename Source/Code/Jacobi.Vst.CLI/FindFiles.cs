@@ -11,20 +11,20 @@ namespace Jacobi.Vst.CLI
         // Manually maintain them here.
         private static readonly string[] InteropDependencies = new[]
         {
-            @"Microsoft.Extensions.Configuration\10.0.0\lib\net10.0\Microsoft.Extensions.Configuration.dll",
-            @"Microsoft.Extensions.Configuration.Abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll",
-            @"Microsoft.Extensions.Configuration.FileExtensions\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
-            @"Microsoft.Extensions.Configuration.Json\10.0.8\lib\net10.0\Microsoft.Extensions.Configuration.Json.dll",
-            @"Microsoft.Extensions.FileProviders.Abstractions\10.0.8\lib\net10.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
-            @"Microsoft.Extensions.FileProviders.Physical\10.0.8\lib\net10.0\Microsoft.Extensions.FileProviders.Physical.dll",
-            @"Microsoft.Extensions.FileSystemGlobbing\10.0.8\lib\net10.0\Microsoft.Extensions.FileSystemGlobbing.dll",
-            @"Microsoft.Extensions.Primitives\10.0.8\lib\net10.0\Microsoft.Extensions.Primitives.dll",
+            @"Microsoft.Extensions.Configuration\10.0.0\lib\net8.0\Microsoft.Extensions.Configuration.dll",
+            @"Microsoft.Extensions.Configuration.Abstractions\10.0.8\lib\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll",
+            @"Microsoft.Extensions.Configuration.FileExtensions\10.0.8\lib\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll",
+            @"Microsoft.Extensions.Configuration.Json\10.0.8\lib\net8.0\Microsoft.Extensions.Configuration.Json.dll",
+            @"Microsoft.Extensions.FileProviders.Abstractions\10.0.8\lib\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll",
+            @"Microsoft.Extensions.FileProviders.Physical\10.0.8\lib\net8.0\Microsoft.Extensions.FileProviders.Physical.dll",
+            @"Microsoft.Extensions.FileSystemGlobbing\10.0.8\lib\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll",
+            @"Microsoft.Extensions.Primitives\10.0.8\lib\net8.0\Microsoft.Extensions.Primitives.dll",
         };
 
         // scan dependency files for these framework monikers. [hack]
         private static readonly string[] TargetFrameworkMonikers =
         {
-            "net10.0-windows",
+            "net8.0-windows",
             "netstandard2.1",
             "netstandard2.0",
         };

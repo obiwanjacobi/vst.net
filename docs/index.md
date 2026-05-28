@@ -1,6 +1,6 @@
 # VST.NET 2
 
-Welcome to VST.NET version 2 built on .NET 10.
+Welcome to VST.NET version 2 built on .NET 8.
 
 This library supports building Steinberg's VST2 plugins and host applications.
 
