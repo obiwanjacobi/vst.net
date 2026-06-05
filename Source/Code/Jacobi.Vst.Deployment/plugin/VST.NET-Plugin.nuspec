@@ -11,16 +11,16 @@
     <repository type="git" url="https://github.com/obiwanjacobi/vst.net" />
     <!--<icon></icon>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>VST.NET dotnet 10 primary assemblies for building a VST2 plugin in Windows.</description>
+    <description>VST.NET dotnet 8 primary assemblies for building a VST2 plugin in Windows.</description>
     <releaseNotes>
     </releaseNotes>
     <copyright>Copyright © 2008-2026 Jacobi Software</copyright>
     <tags>vst vstnet</tags>
     <dependencies>
       <group targetFramework="net8.0-windows">
-        <dependency id="Microsoft.Extensions.DependencyInjection" version="10.0.0" />
-        <dependency id="Microsoft.Extensions.Configuration.Json" version="10.0.0" />
-        <dependency id="Microsoft.Extensions.Logging" version="10.0.0" />
+        <dependency id="Microsoft.Extensions.DependencyInjection" version="8.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration.Json" version="8.0.1" />
+        <dependency id="Microsoft.Extensions.Logging" version="8.0.0" />
       </group>
     </dependencies>
   </metadata>
