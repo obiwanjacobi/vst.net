@@ -5,7 +5,7 @@
     <TargetFramework>net8.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
     <AssemblyName>vstnet</AssemblyName>
-    <Version>2.1.10</Version>
+    <Version>2.1.8</Version>
     <Authors>Marc Jacobi</Authors>
     <Company>Jacobi Software</Company>
     <Product>VST.NET</Product>
@@ -18,8 +18,8 @@
     <RepositoryUrl>https://github.com/obiwanjacobi/vst.net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>VST.NET2-CLI</PackageId>
-    <AssemblyVersion>2.1.10.0</AssemblyVersion>
-    <FileVersion>2.1.10.0</FileVersion>
+    <AssemblyVersion>2.1.8.0</AssemblyVersion>
+    <FileVersion>2.1.8.0</FileVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
